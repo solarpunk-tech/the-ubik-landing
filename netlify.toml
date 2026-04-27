@@ -1,5 +1,6 @@
 [build]
-  publish = "."
+  command = "pnpm build"
+  publish = "dist"
 
 [build.processing]
   skip_processing = false
@@ -16,3 +17,8 @@
   from = "/privacy"
   to = "/privacy-policy"
   status = 301
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

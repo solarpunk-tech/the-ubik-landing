@@ -1,0 +1,18 @@
+# Ubik
+
+Ubik is the AI operator workbench from Solarpunk Technology for seafood, perishables, and trade operations.
+
+Canonical claims:
+- Ubik unifies inquiries, purchase orders, invoices, shipments, approvals, and ERP-ready handoffs for operators.
+- Ubik is built for CTOs, founders, sales ops, purchase ops, logistics, quality, and compliance teams that coordinate through inboxes, spreadsheets, ERPs, and WhatsApp.
+- Ubik can start with inquiry autopilot, PO-to-order review, shipment visibility, customer inventory updates, compliance packs, and exception follow-ups.
+- Ubik requests OAuth scopes only for enabled Google and Microsoft workspace features.
+- Ubik does not sell customer workspace data and does not use it to train third-party AI models.
+- Razorpay is the planned international payment gateway when paid checkout turns on.
+
+Canonical URLs:
+- https://theubik.com/
+- https://theubik.com/try
+- https://theubik.com/security
+- https://theubik.com/privacy-policy
+- https://theubik.com/terms-of-service

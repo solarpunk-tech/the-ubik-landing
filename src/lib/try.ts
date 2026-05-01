@@ -8,7 +8,7 @@ export async function submitTry(values: { email: string; tier: string }) {
   if (tryTarget === "razorpay") {
     return {
       status: "queued" as const,
-      message: `Razorpay checkout is not live yet. ${values.email} is queued for ${values.tier}.`
+      message: `Paid access is not live yet. ${values.email} is queued for ${values.tier}.`
     };
   }
 

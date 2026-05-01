@@ -48,7 +48,7 @@ export default function Try() {
     <PageShell>
       <Seo
         title="Try Ubik — Early access"
-        description="Request early access to run one Ubik workflow first. Razorpay is the planned international gateway when paid checkout turns on."
+        description="Request early access to run one Ubik workflow above your existing CRM, programs, ERP, inbox, and sales stack."
         canonical="https://theubik.com/try"
       />
       <main className="relative overflow-hidden">
@@ -64,12 +64,12 @@ export default function Try() {
           <div className="flex flex-col gap-6">
             <Badge variant="secondary" className="w-fit">Try now</Badge>
             <h1 className="text-5xl font-semibold leading-tight">
-              Run one workflow first. Add checkout later.
+              Run one workflow above your current stack.
             </h1>
             <p className="text-lg leading-8 text-muted-foreground">
-              The v1 journey is an early-access request for teams that want to pilot inquiry
-              autopilot, PO-to-order review, shipment visibility, or a compliance pack before
-              expanding. Razorpay is the planned international gateway when paid access turns on.
+              The v1 journey is an early-access request for teams that want to pilot a sales
+              follow-up, PO review, shipment exception, approval packet, or ERP-ready handoff
+              before expanding.
             </p>
             <div className="grid gap-px bg-border sm:grid-cols-3">
               {tryTiers.map(({ name, title, copy }) => (

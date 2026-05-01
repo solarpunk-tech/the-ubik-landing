@@ -42,7 +42,9 @@ Future Vite rewrite target:
 VITE_TRY_TARGET=stub | razorpay | app
 ```
 
-Razorpay is the intended international payment gateway.
+Payment handoff remains internal until the paid flow is ready; the public site should only describe early-access workflow scoping.
+
+Missing integration logos can be added under `public/integrations/` and mapped once in `src/lib/landing-content.ts`.
 
 ## Local preview
 

@@ -55,14 +55,14 @@ const reviewChecklist = [
 export default function SecurityMemo() {
   function shareMemo() {
     void navigator.clipboard.writeText(window.location.href);
-    toast.success("Security memo link copied for your tech team.");
+    toast.success("Trust note copied for your tech team.");
   }
 
   return (
     <PageShell>
       <Seo
-        title="Ubik Security Memo for CTOs"
-        description="A CTO memo covering Ubik OAuth scopes, data boundaries, AI boundaries, human review, revocation, and security review posture."
+        title="Ubik Trust Note"
+        description="A trust note covering Ubik OAuth scopes, data boundaries, AI boundaries, human review, revocation, and security review posture."
         canonical="https://theubik.com/security"
       />
       <main className="relative overflow-hidden">
@@ -71,7 +71,7 @@ export default function SecurityMemo() {
           <div className="mx-auto max-w-6xl">
             <div className="mb-10 grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
               <div className="flex flex-col gap-5">
-                <Badge variant="secondary" className="w-fit">CTO memo</Badge>
+                <Badge variant="secondary" className="w-fit">Trust</Badge>
                 <h1 className="text-5xl font-semibold leading-tight sm:text-6xl">
                   Security posture for an AI operating layer.
                 </h1>

@@ -7,6 +7,9 @@ const Try = lazy(() => import("@/pages/Try"));
 const Privacy = lazy(() => import("@/pages/Privacy"));
 const Terms = lazy(() => import("@/pages/Terms"));
 const SecurityMemo = lazy(() => import("@/pages/SecurityMemo"));
+const HowItWorks = lazy(() => import("@/pages/HowItWorks"));
+const Blog = lazy(() => import("@/pages/Blog"));
+const Pricing = lazy(() => import("@/pages/Pricing"));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -37,6 +40,10 @@ export default function App() {
           <Route path="/terms-of-service" element={<Terms />} />
           <Route path="/terms-of-service.html" element={<Terms />} />
           <Route path="/security" element={<SecurityMemo />} />
+          <Route path="/how-it-works" element={<HowItWorks />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<Blog />} />
           <Route path="*" element={<Index />} />
         </Routes>
       </Suspense>

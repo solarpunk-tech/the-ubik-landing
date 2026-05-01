@@ -75,7 +75,7 @@ export function SourceLogoTile({ label, logo, meta, logoPath, compact = false, a
     <div
       className={cn(
         "flex items-center gap-3 border p-3",
-        active ? "border-primary-foreground/20 bg-primary-foreground/12 text-primary-foreground" : "border-border/70 bg-card shadow-sm",
+        active ? "border-primary-foreground bg-primary-foreground text-primary" : "border-border/70 bg-card shadow-sm",
         compact ? "min-w-0 px-2.5 py-2" : "",
       )}
     >

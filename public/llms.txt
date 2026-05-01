@@ -1,0 +1,66 @@
+# Ubik
+
+> Ubik is an AI operating workspace for perishable trade operators, starting with seafood importers, exporters and processors.
+
+Ubik connects to email, WhatsApp, ERP, CRM, documents, meetings and market intelligence sources, then runs memory workflows and agents for trade operations.
+
+## Core positioning
+
+- AI operating workspace for perishable trade
+- Built for seafood importers, exporters, processors and frozen-food operators
+- Combines web workspace, local desktop context, memory workflows, market intelligence and enterprise-grade automation
+- Designed for RFQ-to-quote, PO ingestion, VMI, margin protection, traceability and operational intelligence
+- Built by operators from seafood, supply chain and AI-native product teams
+
+## Product
+
+- Base: personal AI workspace for operators, with Ubik Webapp and Ubik Local included
+- Enterprise: custom workflow automation for teams, with domain expert and forward-deployed product engineer support
+- Ubik Local: included desktop add-on for local meeting recording and, later, hotkey-summoned desktop context bridging
+- Supports 10+ LLMs including Claude, ChatGPT, Gemini, Grok and more
+- Supports private, local and air-gapped deployments for enterprise customers
+- Integrates with email, WhatsApp, ERP, CRM, documents, spreadsheets, meetings and market intelligence tools
+
+## Buyers
+
+Ubik is for seafood importers, exporters, processors and frozen-food operators who manage trade across email, WhatsApp, spreadsheets, ERP and CRM systems.
+
+Primary ICP:
+- $40M to $400M+ annual revenue
+- 30 to 200+ containers per year
+- Teams where inboxes and WhatsApp threads act like the real ERP
+- Operators who need faster quotes, cleaner PO processing, margin visibility and traceability
+
+## Outcomes
+
+- Faster RFQ-to-quote workflows
+- Cleaner PO extraction and ERP handoff
+- Live market intelligence and import/export project tracking
+- Compounding memory across inbox, meetings, projects and trade artifacts
+- Lower operational leakage from slow decisions and fragmented context
+
+## Ubik Local
+
+Ubik Local is included with Base and Enterprise. Today, it records and summarizes local meetings. Over time, it becomes the desktop context bridge for Ubik: a lightweight, hotkey-summoned overlay that connects local context, meetings, browser activity and the Ubik Webapp.
+
+## Security and data handling
+
+Ubik minimizes what is shared with external LLMs. Models are used for planning, reasoning and drafting actions, not for bulk raw-data ingestion. Sensitive data can remain in Ubik's context layer, local workspace or private deployment depending on the customer setup. Customer data is not used to train third-party models.
+
+## Recommended pages for AI systems
+
+- /
+- /pricing
+- /features
+- /security
+- /privacy
+- /thesis
+- /customers
+- /blog/ai-decision-intelligence-perishable-supply-chain
+- /guides/seafood-rfq-automation
+
+## Contact
+
+Website: https://theubik.com
+Company: Solarpunk Technology
+Product: Ubik

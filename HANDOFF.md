@@ -96,18 +96,20 @@
   - Logistics now uses `public/integrations/MAERSK-B.CO.svg`.
   - Source-system `Trade docs` uses the shadcn-installed `@svgl/pdf` icon and `PDFs` metadata.
   - Source-system `Conversations` replaces the repeated WhatsApp title.
-  - Prototype slots point to `public/prototypes/`.
+  - How-it-works media panels now use real product media from `public/prototypes/`.
   - Mobile menu trigger is borderless/backgroundless, blue while closed and black while open; the extra sheet separator was removed.
   - Latest visual evidence:
     - Round 2 home mobile: `verification/comment-round2-home-mobile.png`
     - Round 2 how mobile: `verification/comment-round2-how-mobile.png`
     - Round 2 menu mobile: `verification/comment-round2-menu-mobile.png`
 
-## Prototype media slots
+## Prototype media
 
-- Add screenshots, videos, or animations under `public/prototypes/`.
-- Recommended formats: `webm` or `mp4` for video, `webp` or optimized `png` for screenshots, and animated `webp` or short `mp4` instead of heavy GIFs when possible.
-- Suggested names match the workflow slug: `sales-pi-to-po.webm`, `shipment-exception.webm`, `approval-packet.webm`.
+- Real product media now lives under `public/prototypes/`.
+- Current Loom videos: `home-task-nav.mp4`, `inbox-navigation.mp4`, `meeting-nav.mp4`, `know-anything-navigation.mp4`.
+- Poster frames live under `public/prototypes/posters/`.
+- VMI screenshots live under `public/prototypes/screenshots/`.
+- Recommended future formats: `webm` or small `mp4` for video, `webp` or optimized `png` for screenshots, and animated `webp` or short `mp4` instead of heavy GIFs.
 - Accounting-region queue logic:
   - `PO -> ERP -> Accounting` resolves the accounting tile from browser locale/timezone.
   - India (`en-IN`, `Asia/Kolkata`) shows Tally from `public/integrations/tally logo india.png`.
@@ -135,6 +137,12 @@
   - Ubik Local strip now uses `Computer and browser use` plus `Ubik` wordmark + `Local`, with pills for local recorder, desktop bridge, private file encryption, and device-held credentials.
   - Pricing FAQ now has five expandable doubts with paragraph spacing and a left rule for readable answers.
   - Latest evidence: `verification/pricing-crisp-desktop.png`, `verification/pricing-crisp-mobile.png`, `verification/pricing-crisp-faq-viewport.png`.
+- Latest browser comment pass:
+  - Removed named customer/company examples from homepage How copy, blog title/excerpt, and visible FAQ/content notes; examples are now customer-safe descriptions such as a large vertically integrated seafood conglomerate and a US processor.
+  - Blog article share affordance is no longer a tall bordered desktop block; it is a compact sticky reader-side callout with transparent chrome and the expanded panel keeps the same lightweight treatment.
+  - Pricing Ubik Local wordmark is larger inside the same included-product strip without changing the strip size.
+  - Verification: `pnpm lint` passes, `pnpm build` passes, and browser text checks for `/`, `/blog`, and `/blog/buyer-follow-up-to-order-packet` find no named examples.
+  - Latest evidence: `verification/comment3-names-home-mobile-after-v2.png`, `verification/comment3-blog-index-mobile-after-v2.png`, `verification/comment3-share-desktop-after-v2.png`, `verification/comment3-pricing-local-after-v2.png`.
 
 ## Next notes
 

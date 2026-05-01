@@ -274,7 +274,7 @@
   }
 
   .share-callout {
-    @apply inline-flex w-fit items-center gap-2 border border-border bg-background px-3 py-2 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/40 focus-visible:outline-none;
+    @apply inline-flex w-fit items-center gap-2 bg-transparent px-0 py-2 text-sm font-medium text-foreground transition-colors hover:text-primary focus-visible:ring-3 focus-visible:ring-ring/40 focus-visible:outline-none;
   }
 
   .share-callout svg {
@@ -283,7 +283,7 @@
   }
 
   .share-panel {
-    @apply w-fit max-w-full border border-border bg-shell p-4 text-foreground shadow-sm;
+    @apply w-fit max-w-full bg-transparent p-0 text-foreground;
   }
 
   .share-button {

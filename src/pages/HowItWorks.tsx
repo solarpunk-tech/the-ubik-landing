@@ -10,8 +10,8 @@ export default function HowItWorks() {
   return (
     <PageShell>
       <Seo
-        title="How Ubik works — Source signals to reviewed action"
-        description="See how Ubik captures work signals, assembles context, and prepares reviewed actions without replacing your systems."
+        title="How Ubik works — Real product journeys"
+        description="Watch Ubik move through operator home, inbox review, meeting memory, Know Anything, and VMI exception workflows."
       />
       <main className="overflow-hidden">
         <section className="relative border-b">
@@ -20,12 +20,12 @@ export default function HowItWorks() {
             <div>
               <p className="section-label">How it works</p>
               <h1 className="mt-4 text-5xl font-semibold leading-[1.02] sm:text-6xl">
-                From scattered work signals to one reviewed move.
+                Watch the operator loop in real product flows.
               </h1>
             </div>
             <div className="max-w-xl lg:justify-self-end">
               <p className="text-lg leading-8 text-muted-foreground">
-                Ubik watches authorized systems, builds a context packet, and keeps a human review point before the handoff.
+                Home, inbox, meetings, trade memory, and VMI exceptions all move through the same reviewed-action model.
               </p>
               <Button asChild className="mt-6">
                 <Link to="/try">

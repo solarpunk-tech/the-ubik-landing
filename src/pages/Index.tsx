@@ -125,7 +125,7 @@ export default function Index() {
                 See one workflow move through the loop.
               </h2>
               <p className="text-muted-foreground">
-                AZ Gems compressed RFQ cycles from 5-7 days to 6 hours. Channel Fish moved PO processing from manual to 30-second extraction. Each loop captures signal, matches context, prepares one reviewed action.
+                A large vertically integrated seafood conglomerate compressed RFQ cycles from 5-7 days to 6 hours. A US processor moved PO processing from manual work to 30-second extraction. Each loop captures signal, matches context, prepares one reviewed action.
               </p>
               <Button asChild variant="outline" className="w-fit">
                 <Link to="/how-it-works">

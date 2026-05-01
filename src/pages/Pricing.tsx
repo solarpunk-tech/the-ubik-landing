@@ -216,12 +216,12 @@ export default function Pricing() {
             <div className="grid gap-5 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
               <div>
                 <p className="section-label">Computer and browser use</p>
-                <h2 className="mt-2 flex flex-wrap items-center gap-3 text-2xl font-semibold">
+                <h2 className="mt-3 flex flex-wrap items-end gap-3 text-2xl font-semibold">
                   <picture>
-                    <source srcSet={brandAssets.markDark} media="(prefers-color-scheme: dark)" />
-                    <img src={brandAssets.markLight} alt="Ubik" className="size-14" />
+                    <source srcSet={brandAssets.wordmarkDark} media="(prefers-color-scheme: dark)" />
+                    <img src={brandAssets.wordmarkLight} alt="Ubik" className="h-auto w-20 sm:w-24" />
                   </picture>
-                  <span className="text-lg">Local</span>
+                  <span className="pb-1 text-xl leading-none sm:text-2xl">Local</span>
                 </h2>
               </div>
               <div>

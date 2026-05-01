@@ -17,7 +17,7 @@ export default function Blog() {
           <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
             <ArrowLeftIcon aria-hidden /> Journal
           </Link>
-          <article className="mt-10 grid gap-10 lg:grid-cols-[1fr_22rem]">
+          <article className="mt-10 grid gap-10 lg:grid-cols-[1fr_16rem] lg:items-start">
             <div className="max-w-3xl">
               <p className="section-label">
                 {selected.date} / {selected.category}
@@ -31,7 +31,9 @@ export default function Blog() {
                 </p>
               </div>
             </div>
-            <SharePostPanel title={selected.title} url={`https://theubik.com/blog/${selected.slug}`} />
+            <aside className="lg:sticky lg:top-24 lg:justify-self-start">
+              <SharePostPanel title={selected.title} url={`https://theubik.com/blog/${selected.slug}`} />
+            </aside>
           </article>
         </main>
       </PageShell>

@@ -93,25 +93,73 @@ export const bottomCallouts = [
 
 export const howWorkflows = [
   {
-    title: "Sales PI to PO",
+    title: "Operator home",
+    eyebrow: "Workspace",
+    outcome: "See margin, approvals, and tasks in one operating queue.",
+    media: {
+      type: "video",
+      src: "/prototypes/home-task-nav.mp4",
+      poster: "/prototypes/posters/home-task-nav.jpg",
+      alt: "Ubik home workspace showing operating metrics and execution queue"
+    },
+    steps: ["Read the morning brief", "Prioritize urgent tasks", "Open the work artifact"]
+  },
+  {
+    title: "Inbox to reviewed action",
     eyebrow: "Buyer desk",
-    outcome: "Turn a price indication, buyer reply, and stock check into one reviewed order packet.",
-    slot: "Drop Loom or prototype: sales-pi-to-po",
-    steps: ["Capture buyer signal", "Match ERP inventory", "Prepare reviewed packet"]
+    outcome: "Turn a blocked thread into a reply, task, or approval.",
+    media: {
+      type: "video",
+      src: "/prototypes/inbox-navigation.mp4",
+      poster: "/prototypes/posters/inbox-navigation.jpg",
+      alt: "Ubik inbox review surface showing a rate confirmation requiring approval"
+    },
+    steps: ["Read the thread", "Surface what changed", "Approve the reply"]
   },
   {
-    title: "Shipment exception",
-    eyebrow: "Cold chain",
-    outcome: "Catch ETA, partial shipment, and variance signals before the customer asks twice.",
-    slot: "Drop Loom or prototype: shipment-exception",
-    steps: ["Read logistics thread", "Attach variance context", "Route approval"]
+    title: "Meeting memory",
+    eyebrow: "Operator calls",
+    outcome: "Keep supplier and logistics calls searchable after the meeting ends.",
+    media: {
+      type: "video",
+      src: "/prototypes/meeting-nav.mp4",
+      poster: "/prototypes/posters/meeting-nav.jpg",
+      alt: "Ubik meetings view with supplier review and logistics sync calls"
+    },
+    steps: ["Capture the call", "Attach account context", "Recover the decision trail"]
   },
   {
-    title: "Approval packet",
-    eyebrow: "Finance + operations",
-    outcome: "Package the message, file, account state, and handoff before anything moves.",
-    slot: "Drop Loom or prototype: approval-packet",
-    steps: ["Assemble evidence", "Flag sign-off", "Push ERP-ready action"]
+    title: "Know Anything",
+    eyebrow: "Trade memory",
+    outcome: "Ask across projects, meetings, chats, and linked work.",
+    media: {
+      type: "video",
+      src: "/prototypes/know-anything-navigation.mp4",
+      poster: "/prototypes/posters/know-anything-navigation.jpg",
+      alt: "Ubik Know Anything search across meetings, chats, and project context"
+    },
+    steps: ["Search linked work", "Pull source context", "Return the action thread"]
+  },
+  {
+    title: "VMI exception",
+    eyebrow: "Customer inventory",
+    outcome: "Spot ETA shifts, inventory risk, and replenishment moves before the customer asks.",
+    media: {
+      type: "image",
+      src: "/prototypes/screenshots/vmi-dashboard-wide.png",
+      alt: "Ubik VMI dashboard showing container ETA auto-adjustment and inventory risk"
+    },
+    secondaryMedia: [
+      {
+        src: "/prototypes/screenshots/vmi-container-pipeline.png",
+        alt: "Container pipeline view across PO confirmed, production, inspection, on water, at port, and warehouse"
+      },
+      {
+        src: "/prototypes/screenshots/vmi-customer-email.png",
+        alt: "Customer email draft generated from inventory position"
+      }
+    ],
+    steps: ["Detect ETA movement", "Recalculate promise dates", "Draft customer update"]
   }
 ];
 
@@ -127,8 +175,8 @@ export const blogPosts = [
     slug: "buyer-follow-up-to-order-packet",
     date: "2026-04-29",
     category: "Workflow",
-    title: "From RFQ to reviewed quote in 6 hours: the AZ Gems playbook",
-    excerpt: "How a $1B+ US shrimp importer compressed inquiry-to-quote cycles from 5-7 days to 6 hours and recovered $200K in margin on a single account, in month one."
+    title: "From RFQ to reviewed quote in 6 hours",
+    excerpt: "How a large vertically integrated seafood conglomerate compressed inquiry-to-quote cycles from 5-7 days to 6 hours and recovered $200K in margin on a single account, in month one."
   },
   {
     slug: "human-in-loop-erp-handoffs",
@@ -175,11 +223,11 @@ export const securityCards = [
 export const faqs: Faq[] = [
   {
     question: "What is Ubik?",
-    answer: "Ubik is the personalised workspace for perishable trade, built for seafood importers, exporters, and processors. It connects your CRM, ERP, email, WhatsApp, and shared drives, then runs reviewed agent workflows that handle the work most teams hire 4 to 7 people to do: turning RFQs into quotes, processing POs, tracking transit, monitoring margin, and tracing lots from container to customer. Ubik is built by ex-operators from Captain Fresh and Aqua Exchange, not generalist AI engineers. It is in production with companies running $700M+ in combined annual revenue."
+    answer: "Ubik is the personalised workspace for perishable trade, built for seafood importers, exporters, and processors. It connects your CRM, ERP, email, WhatsApp, and shared drives, then runs reviewed agent workflows that handle the work most teams hire 4 to 7 people to do: turning RFQs into quotes, processing POs, tracking transit, monitoring margin, and tracing lots from container to customer. Ubik is built by ex-operators from seafood and aquaculture companies, not generalist AI engineers. It is in production with companies running $700M+ in combined annual revenue."
   },
   {
     question: "Who is Ubik for?",
-    answer: "Ubik is for seafood importers, exporters, and processors with $40M to $400M in annual revenue, typically family-owned or founder-led, moving frozen, chilled, or live seafood across borders. Active customers include AZ Gems (US, $1B+ revenue, second-largest US shrimp importer), Vanaka Seafood (France, top-5 French importer), Select Source (Canada, active pilot), Zala Fresh (India, 3-month contract), and Channel Fish (US, automated PO processing). If your team handles 30 to 200 containers a year and your inbox is the de facto ERP, you are our customer."
+    answer: "Ubik is for seafood importers, exporters, and processors with $40M to $400M in annual revenue, typically family-owned or founder-led, moving frozen, chilled, or live seafood across borders. Active deployments include US, French, Canadian, and Indian operators across importing, processing, pilots, and PO automation. If your team handles 30 to 200 containers a year and your inbox is the de facto ERP, you are our customer."
   },
   {
     question: "How is Ubik different from ChatGPT, Claude, or Gemini for business?",
@@ -187,11 +235,11 @@ export const faqs: Faq[] = [
   },
   {
     question: "Does Ubik replace my ERP or CRM?",
-    answer: "No. Ubik sits on top of your ERP and CRM and makes them useful. Most seafood operators run a stack of one ERP (Zoho, SAP, NetSuite, or a custom build), one CRM, plus 10 to 15 other tools. Ninety percent of trade still happens in email and WhatsApp, which never reach the ERP. Ubik unifies that into a single workspace where agents read across systems, trigger actions, and write back. AZ Gems keeps Zoho as their system of record. Ubik becomes the system of action."
+    answer: "No. Ubik sits on top of your ERP and CRM and makes them useful. Most seafood operators run a stack of one ERP (Zoho, SAP, NetSuite, or a custom build), one CRM, plus 10 to 15 other tools. Ninety percent of trade still happens in email and WhatsApp, which never reach the ERP. Ubik unifies that into a single workspace where agents read across systems, trigger actions, and write back. Customers keep their ERP as the system of record. Ubik becomes the system of action."
   },
   {
     question: "How fast can I get value from Ubik?",
-    answer: "Most customers see measurable outcomes within 4 weeks. Onboarding runs week 1 mapping your value chain, week 2 building your first agent playbooks, week 3 driving operator adoption, week 4 delivering measurable results: time saved, margin recovered, decisions taken faster. AZ Gems found $200K in recovered margin on a single account in month one. Channel Fish went from manual PO processing to 30-second extraction with ERP push. Tastematic surfaced lot traceability from container to retailer in under 3 minutes. If you do not see ROI in 90 days, we work for free until you do."
+    answer: "Most customers see measurable outcomes within 4 weeks. Onboarding runs week 1 mapping your value chain, week 2 building your first agent playbooks, week 3 driving operator adoption, week 4 delivering measurable results: time saved, margin recovered, decisions taken faster. One customer found $200K in recovered margin on a single account in month one. Another went from manual PO processing to 30-second extraction with ERP push. A third surfaced lot traceability from container to retailer in under 3 minutes. If you do not see ROI in 90 days, we work for free until you do."
   },
   {
     question: "What does Ubik cost?",
@@ -211,7 +259,7 @@ export const faqs: Faq[] = [
   },
   {
     question: "What workflows does Ubik run today?",
-    answer: "Ubik runs five workflow primitives in production. RFQ to quote: assembles inventory, COGS, past quotes, and margin targets, then drafts a quote with human approval (5-7 days to 6 hours at AZ Gems). PO ingestion: extracts line items from PDF emails, maps to internal SKUs, pushes to ERP, sends confirmation (Channel Fish, 30-second cycle). Transit-aware scheduling: when India to NJ shifts from 34 to 52 days, all downstream timelines auto-recalculate. VMI pull-rate dashboard: 90-day vs 120-day actuals, pricing-formula validation (Tastematic). Lot traceability: container number to retailer in under 3 minutes."
+    answer: "Ubik runs five workflow primitives in production. RFQ to quote: assembles inventory, COGS, past quotes, and margin targets, then drafts a quote with human approval, compressing 5-7 day cycles to 6 hours. PO ingestion: extracts line items from PDF emails, maps to internal SKUs, pushes to ERP, and sends confirmation in a 30-second cycle. Transit-aware scheduling: when India to NJ shifts from 34 to 52 days, all downstream timelines auto-recalculate. VMI pull-rate dashboard: 90-day vs 120-day actuals and pricing-formula validation. Lot traceability: container number to retailer in under 3 minutes."
   },
   {
     question: "Why seafood, why now?",
@@ -219,7 +267,7 @@ export const faqs: Faq[] = [
   },
   {
     question: "Where is Ubik live today?",
-    answer: "Ubik is in production with five paying customers across four countries. AZ Gems, the second-largest US shrimp importer, runs Ubik with 30 users and is expanding to 50. Vanaka Seafood is a top-5 French importer providing EU validation. Select Source is in active pilot in Canada. Zala Fresh runs Ubik on a 3-month contract in India. Channel Fish in the US is implementing PO automation. Active pipeline includes ITC Limited, Captain Fresh, Pelagic Provisions, Tastematic Foods, and Star Foods. Active operator count is 30+ across 4 companies."
+    answer: "Ubik is in production with five paying customers across four countries. Current customers include a large US shrimp importer, a top-5 French importer, a Canadian pilot, an Indian contract customer, and a US processor implementing PO automation. The active pipeline spans enterprise food, seafood, and perishables operators. Active operator count is 30+ across 4 companies."
   }
 ];
 

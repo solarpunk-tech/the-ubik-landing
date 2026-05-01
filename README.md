@@ -12,7 +12,7 @@ Built to satisfy Google OAuth verification requirements:
 
 ```
 index.html              Vite app shell
-src/                    React landing, try-now, legal, and security memo routes
+src/                    React landing, founder walkthrough, legal, and security memo routes
 src/index.css           Tailwind v4 + shadcn Mist tokens
 public/                 Logo, favicon, llms.txt, robots.txt, sitemap.xml
 vercel.json             Clean URL redirects and SPA fallback

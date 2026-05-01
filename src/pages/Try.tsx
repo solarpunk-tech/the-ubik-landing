@@ -47,7 +47,7 @@ export default function Try() {
   return (
     <PageShell>
       <Seo
-        title="Try Ubik — Early access"
+        title="Realise true value in 30 days — Ubik"
         description="Request early access to run one Ubik workflow above your existing CRM, programs, ERP, inbox, and sales stack."
         canonical="https://theubik.com/try"
       />
@@ -62,9 +62,9 @@ export default function Try() {
           </Button>
           <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="flex flex-col gap-6">
-            <Badge variant="secondary" className="w-fit">Try now</Badge>
+            <Badge variant="secondary" className="w-fit">Founder-led rollout</Badge>
             <h1 className="text-5xl font-semibold leading-tight">
-              Run one workflow above your current stack.
+              Realise true value in 30 days.
             </h1>
             <p className="text-lg leading-8 text-muted-foreground">
               The v1 journey is an early-access request for teams that want to pilot a sales
@@ -86,7 +86,7 @@ export default function Try() {
 
           <Card className="bg-card">
             <CardHeader>
-              <CardTitle>Request try-now access</CardTitle>
+              <CardTitle>Talk to founders</CardTitle>
               <CardDescription>We will reply within one business day.</CardDescription>
             </CardHeader>
             <CardContent>
@@ -127,7 +127,7 @@ export default function Try() {
                 </Tabs>
                 <Button type="submit" size="lg" disabled={isSubmitting}>
                   {isSubmitting ? <DotmCircular5 size={18} dotSize={3} aria-label="Submitting" /> : <CheckCircleIcon data-icon="inline-start" />}
-                  {isSubmitting ? "Submitting..." : "Request try-now access"}
+                  {isSubmitting ? "Submitting..." : "Request founder walkthrough"}
                 </Button>
               </form>
             </CardContent>

@@ -76,14 +76,12 @@ export default function Index() {
               </div>
               <div className="soft-blur-block flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg">
-                  <Link to="/try">
-                    Try now <ArrowRightIcon data-icon="inline-end" />
-                  </Link>
+                  <a href="mailto:shubhranshu@solarpunk.technology?subject=Ubik%20founder%20demo">
+                    Talk to founders <ArrowRightIcon data-icon="inline-end" />
+                  </a>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <a href="mailto:shubhranshu@solarpunk.technology?subject=Ubik%20founder%20demo">
-                    Talk to founders
-                  </a>
+                  <Link to="/try">Realise true value in 30 days</Link>
                 </Button>
               </div>
             </div>
@@ -209,10 +207,10 @@ export default function Index() {
               </div>
               <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
                 <Button asChild variant="secondary" size="lg">
-                  <Link to="/try">Try now</Link>
+                  <a href="mailto:shubhranshu@solarpunk.technology?subject=Ubik%20founder%20demo">Talk to founders</a>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="border-primary-foreground/35 bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                  <a href="mailto:shubhranshu@solarpunk.technology?subject=Ubik%20founder%20demo">Talk to founders</a>
+                  <Link to="/try">Realise true value in 30 days</Link>
                 </Button>
               </div>
             </CardContent>

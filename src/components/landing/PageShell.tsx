@@ -54,7 +54,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
               to="/try"
               className="nav-try-link inline-flex h-9 items-center justify-center border border-primary bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              Try now
+              Talk to founders
             </Link>
             <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger asChild>
@@ -82,7 +82,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
                     </Link>
                   ))}
                   <Button asChild onClick={() => setMenuOpen(false)}>
-                    <Link to="/try">Try now</Link>
+                    <Link to="/try">Realise true value in 30 days</Link>
                   </Button>
                 </div>
               </SheetContent>

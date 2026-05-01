@@ -17,7 +17,7 @@
 - Payment-gateway copy is intentionally kept out of public pages until the paid handoff is live.
 - Logo assets are centralized in `src/lib/brand.ts` and loaded from `public/`.
 - Desktop nav uses the wordmark; compact/mobile nav uses the favicon mark to preserve CTA/menu space.
-- Top nav is intentionally concise: Product, How it works, Journal, Trust, Try now. Privacy and Terms live in the footer only.
+- Top nav is intentionally concise: Product, How it works, Journal, Trust, Talk to founders. Privacy and Terms live in the footer only.
 - i18n JSON was migrated from root `locales/` to `src/locales/<lang>/common.json`.
 - GEO support files live in `public/llms.txt`, `public/robots.txt`, and `public/sitemap.xml`.
 - Landing copy now focuses on Ubik as the operator layer above CRM, programs, ERP, inbox, files, meetings, and the sales stack.
@@ -130,6 +130,10 @@
   - Main FAQ and pricing FAQ now include the requested `What data is shared with LLMs?` answer.
   - `public/llms.txt` was replaced with the supplied first-version LLM index, and `/pricing` was added to `public/sitemap.xml`.
   - Latest evidence: `verification/pricing-desktop.png`, `verification/pricing-mobile.png`, `verification/pricing-desktop-annual.png`, `verification/pricing-mobile-annual.png`.
+- Latest media/wordmark pass:
+  - Pricing `Computer and browser use` strip now uses the Ubik wordmark with a smaller `Local` suffix.
+  - Hero queue active row contrast was tightened so active copy and logo chips read clearly on blue.
+  - Visual evidence: `verification/media-pass-home-desktop-v2.png`, `verification/media-pass-how-full-v2.png`, `verification/media-pass-how-mobile-v2.png`, `verification/media-pass-pricing-full-v2.png`, `verification/media-pass-pricing-mobile-v2.png`.
 - Latest pricing cleanup:
   - Base and Enterprise cards now show 5 bullets each.
   - Enterprise no longer repeats the Ubik Local add-on bullet; it inherits through `Everything in Base`.
@@ -143,6 +147,12 @@
   - Pricing Ubik Local wordmark is larger inside the same included-product strip without changing the strip size.
   - Verification: `pnpm lint` passes, `pnpm build` passes, and browser text checks for `/`, `/blog`, and `/blog/buyer-follow-up-to-order-packet` find no named examples.
   - Latest evidence: `verification/comment3-names-home-mobile-after-v2.png`, `verification/comment3-blog-index-mobile-after-v2.png`, `verification/comment3-share-desktop-after-v2.png`, `verification/comment3-pricing-local-after-v2.png`.
+- Latest CTA/blog pass:
+  - Replaced visible `Try now` CTA language with `Talk to founders` and `Realise true value in 30 days` across the nav, homepage hero/CTA band, pricing Base CTA, how-it-works CTA, mobile menu, and `/try` page copy.
+  - Blog articles no longer use placeholder body copy. The three current posts now demonstrate distinct layouts in the Ubik style: metric bar infographic, RFQ workflow compression diagram, and AI-native trade thesis cards.
+  - Blog article copy avoids named customer/company references.
+  - Verification: `pnpm lint` passes, `pnpm build` passes, and browser text checks across `/`, `/try`, `/blog`, and all three blog posts find no old CTA wording or named customer examples.
+  - Latest evidence: `verification/cta-blog-pass-home-desktop.png`, `verification/cta-blog-pass-try-desktop.png`, `verification/cta-blog-pass-article-chart.png`, `verification/cta-blog-pass-article-workflow.png`, `verification/cta-blog-pass-article-thesis.png`, `verification/cta-blog-pass-article-mobile.png`.
 
 ## Next notes
 

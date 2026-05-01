@@ -29,7 +29,7 @@ export default function HowItWorks() {
               </p>
               <Button asChild className="mt-6">
                 <Link to="/try">
-                  Pick a workflow <ArrowRightIcon data-icon="inline-end" />
+                  Realise true value in 30 days <ArrowRightIcon data-icon="inline-end" />
                 </Link>
               </Button>
             </div>

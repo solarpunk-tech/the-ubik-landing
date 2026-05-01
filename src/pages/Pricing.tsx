@@ -177,7 +177,7 @@ export default function Pricing() {
                 <div className="grid gap-3">
                   <Button asChild variant="secondary" size="lg">
                     <Link to="/try">
-                      Start Base <ArrowRightIcon data-icon="inline-end" />
+                      Realise true value in 30 days <ArrowRightIcon data-icon="inline-end" />
                     </Link>
                   </Button>
                   <p className="text-sm text-primary-foreground/70">Built for one operator. Comes with Ubik Local included.</p>
@@ -219,9 +219,9 @@ export default function Pricing() {
                 <h2 className="mt-3 flex flex-wrap items-end gap-3 text-2xl font-semibold">
                   <picture>
                     <source srcSet={brandAssets.wordmarkDark} media="(prefers-color-scheme: dark)" />
-                    <img src={brandAssets.wordmarkLight} alt="Ubik" className="h-auto w-20 sm:w-24" />
+                    <img src={brandAssets.wordmarkLight} alt="Ubik" className="h-auto w-28 sm:w-32" />
                   </picture>
-                  <span className="pb-1 text-xl leading-none sm:text-2xl">Local</span>
+                  <span className="pb-1 text-xl leading-none">Local</span>
                 </h2>
               </div>
               <div>

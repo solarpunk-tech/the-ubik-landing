@@ -1,0 +1,223 @@
+:root {
+  --ubik-blue: #385fe8;
+  --ubik-blue-strong: #4d70f0;
+  --ubik-light-bg: #f7f9fc;
+  --ubik-light-surface: #ffffff;
+  --ubik-light-border: #d7dde8;
+  --ubik-light-text: #101725;
+  --ubik-light-muted: #5f6b7c;
+  --ubik-dark-bg: #0e1014;
+  --ubik-dark-surface: #14171d;
+  --ubik-dark-border: #2c313b;
+  --ubik-dark-text: #f0f4fa;
+  --ubik-dark-muted: #b2bac8;
+  --ubik-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html,
+body {
+  letter-spacing: 0;
+}
+
+#background-color {
+  background:
+    linear-gradient(90deg, rgba(16, 23, 37, 0.035) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(16, 23, 37, 0.035) 1px, transparent 1px),
+    var(--ubik-light-bg);
+  background-size: 64px 64px;
+}
+
+.dark #background-color {
+  background:
+    linear-gradient(90deg, rgba(240, 244, 250, 0.035) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(240, 244, 250, 0.035) 1px, transparent 1px),
+    var(--ubik-dark-bg);
+  background-size: 64px 64px;
+}
+
+#navbar,
+#sidebar,
+#table-of-contents-layout {
+  border-color: var(--ubik-light-border);
+}
+
+.dark #navbar,
+.dark #sidebar,
+.dark #table-of-contents-layout {
+  border-color: var(--ubik-dark-border);
+}
+
+#navbar,
+#mobile-nav-content {
+  background: color-mix(in srgb, var(--ubik-light-surface) 94%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+.dark #navbar,
+.dark #mobile-nav-content {
+  background: color-mix(in srgb, var(--ubik-dark-bg) 94%, transparent);
+}
+
+#page-title {
+  color: var(--ubik-light-text);
+  letter-spacing: 0;
+}
+
+.dark #page-title {
+  color: var(--ubik-dark-text);
+}
+
+eyebrow,
+sidebar-group-header,
+toc,
+breadcrumb-list,
+navbar-link,
+.ubik-label,
+.ubik-step {
+  font-family: var(--ubik-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+eyebrow,
+breadcrumb-list,
+toc {
+  color: var(--ubik-light-muted);
+}
+
+.dark eyebrow,
+.dark breadcrumb-list,
+.dark toc {
+  color: var(--ubik-dark-muted);
+}
+
+card,
+callout,
+accordion,
+step,
+.ubik-panel,
+.ubik-proof {
+  border-radius: 0 !important;
+  border-color: var(--ubik-light-border) !important;
+  background: var(--ubik-light-surface) !important;
+  box-shadow: none !important;
+}
+
+.dark card,
+.dark callout,
+.dark accordion,
+.dark step,
+.dark .ubik-panel,
+.dark .ubik-proof {
+  border-color: var(--ubik-dark-border) !important;
+  background: var(--ubik-dark-surface) !important;
+}
+
+#topbar-cta-button,
+button[data-component-name="primary-header-button"] {
+  border-radius: 0 !important;
+  font-family: var(--ubik-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+nav-logo img,
+#navbar img[alt="Ubik"] {
+  height: 1.35rem !important;
+  width: auto !important;
+}
+
+a {
+  text-underline-offset: 4px;
+}
+
+.ubik-hero {
+  border-top: 1px solid var(--ubik-light-text);
+  padding-top: 2rem;
+}
+
+.dark .ubik-hero {
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--ubik-light-text);
+  border-bottom: 1px solid var(--ubik-light-border);
+}
+
+.dark .ubik-proof-grid {
+  border-top-color: var(--ubik-dark-border);
+  border-bottom-color: var(--ubik-dark-border);
+}
+
+.ubik-proof {
+  padding: 1.25rem;
+  border-right: 1px solid var(--ubik-light-border);
+}
+
+.ubik-proof:last-child {
+  border-right: 0;
+}
+
+.dark .ubik-proof {
+  border-right-color: var(--ubik-dark-border);
+}
+
+.ubik-metric {
+  color: var(--ubik-blue);
+  font-family: var(--ubik-mono);
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 0.95;
+}
+
+.ubik-panel {
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+}
+
+.ubik-panel strong {
+  color: var(--ubik-blue);
+}
+
+.ubik-steps {
+  counter-reset: ubik-step;
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.ubik-step {
+  align-items: flex-start;
+  border-left: 2px solid var(--ubik-blue);
+  display: grid;
+  gap: 0.4rem;
+  letter-spacing: 0.08em;
+  padding: 0.75rem 0 0.75rem 1rem;
+}
+
+.ubik-step span {
+  color: var(--ubik-blue);
+}
+
+@media (max-width: 720px) {
+  .ubik-proof-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ubik-proof {
+    border-bottom: 1px solid var(--ubik-light-border);
+    border-right: 0;
+  }
+
+  .dark .ubik-proof {
+    border-bottom-color: var(--ubik-dark-border);
+  }
+
+  .ubik-proof:last-child {
+    border-bottom: 0;
+  }
+}

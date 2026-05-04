@@ -1,0 +1,36 @@
+---
+title: "Security and data"
+description: "Plain-language rules for handling sensitive trade, customer, supplier, pricing, and margin context."
+icon: "shield-check"
+---
+
+Ubik is designed for reviewed trade operations. Treat sensitive context with the same care you would apply inside ERP, finance, and customer communication systems.
+
+## Data handling principles
+
+- Keep ERP and CRM as systems of record.
+- Use Ubik as the reviewed system of action.
+- Approve sensitive replies and writebacks before they move.
+- Keep access least-privilege.
+- Use the activity trail to explain operational decisions.
+
+## How AI uses business context
+
+Ubik uses AI to plan, reason, summarize, and draft actions. It should not be treated as an unattended employee. Operators still review sensitive work before it moves.
+
+Ubik minimizes what is sent to external models. Sensitive context such as RFQs, supplier pricing, margins, customer names, and credentials stays in Ubik’s context layer, local workspace, or private deployment depending on setup.
+
+Customer data is not used to train third-party models.
+
+## What reviewers should check
+
+| Risk | Review behavior |
+| --- | --- |
+| Pricing exposure | Remove internal margin or supplier notes from buyer-facing text. |
+| Wrong account | Confirm source context and CRM account before approval. |
+| Stale data | Reject or assign if inventory, ETA, or pricing is not current. |
+| Overbroad access | Ask an admin to reduce scope or remove users who no longer need access. |
+
+## Reporting a security concern
+
+Send the affected workspace, timestamp, user, action, and source context to your admin or founder contact. Do not forward sensitive screenshots outside approved channels.

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { ArrowRightIcon, CheckCircleIcon } from "@phosphor-icons/react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
@@ -10,6 +9,7 @@ import { PageShell } from "@/components/landing/PageShell";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Seo } from "@/components/seo/Seo";
 import { brandAssets } from "@/lib/brand";
+import { externalLinks } from "@/lib/links";
 import { cn } from "@/lib/utils";
 
 const baseFeatures = [
@@ -176,9 +176,9 @@ export default function Pricing() {
                 <FeatureList features={baseFeatures} active />
                 <div className="grid gap-3">
                   <Button asChild variant="secondary" size="lg">
-                    <Link to="/try">
+                    <a href={externalLinks.app}>
                       Realise true value in 30 days <ArrowRightIcon data-icon="inline-end" />
-                    </Link>
+                    </a>
                   </Button>
                   <p className="text-sm text-primary-foreground/70">Built for one operator. Comes with Ubik Local included.</p>
                 </div>
@@ -202,7 +202,7 @@ export default function Pricing() {
                 <FeatureList features={enterpriseFeatures} />
                 <div className="grid gap-3">
                   <Button asChild size="lg">
-                    <a href="mailto:shubhranshu@solarpunk.technology?subject=Ubik%20Enterprise%20pricing">
+                    <a href={externalLinks.founderMeeting}>
                       Talk to founders <ArrowRightIcon data-icon="inline-end" />
                     </a>
                   </Button>
@@ -217,10 +217,8 @@ export default function Pricing() {
               <div>
                 <p className="section-label">Computer and browser use</p>
                 <h2 className="mt-3 flex flex-wrap items-end gap-3 text-2xl font-semibold">
-                  <picture>
-                    <source srcSet={brandAssets.wordmarkDark} media="(prefers-color-scheme: dark)" />
-                    <img src={brandAssets.wordmarkLight} alt="Ubik" className="h-auto w-28 sm:w-32" />
-                  </picture>
+                  <img src={brandAssets.wordmarkLight} alt="Ubik" className="h-auto w-28 dark:hidden sm:w-32" />
+                  <img src={brandAssets.wordmarkDark} alt="Ubik" className="hidden h-auto w-28 dark:block sm:w-32" />
                   <span className="pb-1 text-xl leading-none">Local</span>
                 </h2>
               </div>

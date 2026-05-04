@@ -27,7 +27,7 @@ export default function App() {
       <ScrollToTop />
       <Suspense
         fallback={
-          <div className="grid min-h-screen place-items-center bg-background text-foreground">
+          <div className="grid min-h-dvh place-items-center bg-background text-foreground">
             <DotmTriangle2 size={42} dotSize={5} aria-label="Loading page" />
           </div>
         }

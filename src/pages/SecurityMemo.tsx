@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import {
   ArrowRightIcon,
   ClipboardTextIcon,
@@ -15,6 +14,7 @@ import { Separator } from "@/components/ui/separator";
 import { MatrixField } from "@/components/landing/MatrixField";
 import { PageShell } from "@/components/landing/PageShell";
 import { Seo } from "@/components/seo/Seo";
+import { externalLinks } from "@/lib/links";
 
 const memoBlocks = [
   {
@@ -104,7 +104,7 @@ export default function SecurityMemo() {
                 Share this with your tech team
               </Button>
               <Button asChild variant="outline">
-                <a href="mailto:shubhranshu@solarpunk.technology?subject=Ubik%20security%20review">
+                <a href={externalLinks.founderMeeting}>
                   Request security review
                 </a>
               </Button>
@@ -155,9 +155,9 @@ export default function SecurityMemo() {
                   </p>
                 </div>
                 <Button asChild variant="secondary">
-                  <Link to="/try">
+                  <a href={externalLinks.app}>
                     Start review <ArrowRightIcon data-icon="inline-end" />
-                  </Link>
+                  </a>
                 </Button>
               </CardContent>
             </Card>

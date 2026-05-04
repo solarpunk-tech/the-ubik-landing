@@ -14,6 +14,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Seo } from "@/components/seo/Seo";
 import { PageShell } from "@/components/landing/PageShell";
 import { bottomCallouts, faqs, heroTickerItems, proofPoints, securityCards } from "@/lib/landing-content";
+import { externalLinks } from "@/lib/links";
 
 export default function Index() {
   return (
@@ -76,12 +77,12 @@ export default function Index() {
               </div>
               <div className="soft-blur-block flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg">
-                  <a href="mailto:shubhranshu@solarpunk.technology?subject=Ubik%20founder%20demo">
+                  <a href={externalLinks.founderMeeting}>
                     Talk to founders <ArrowRightIcon data-icon="inline-end" />
                   </a>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link to="/try">Realise true value in 30 days</Link>
+                  <a href={externalLinks.app}>Realise true value in 30 days</a>
                 </Button>
               </div>
             </div>
@@ -207,10 +208,10 @@ export default function Index() {
               </div>
               <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
                 <Button asChild variant="secondary" size="lg">
-                  <a href="mailto:shubhranshu@solarpunk.technology?subject=Ubik%20founder%20demo">Talk to founders</a>
+                  <a href={externalLinks.founderMeeting}>Talk to founders</a>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="border-primary-foreground/35 bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                  <Link to="/try">Realise true value in 30 days</Link>
+                  <a href={externalLinks.app}>Realise true value in 30 days</a>
                 </Button>
               </div>
             </CardContent>

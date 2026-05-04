@@ -6,11 +6,14 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { BrandLogo } from "./BrandLogo";
 import { SolarpunkCredit } from "./SolarpunkCredit";
+import { ThemeToggle } from "./ThemeToggle";
+import { externalLinks } from "@/lib/links";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { to: "/#product", label: "Product" },
   { to: "/how-it-works", label: "How it works" },
+  { href: externalLinks.docs, label: "Guide" },
   { to: "/pricing", label: "Pricing" },
   { to: "/blog", label: "Journal" },
   { to: "/security", label: "Trust" }
@@ -21,7 +24,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-dvh bg-background text-foreground">
       <header className="sticky top-0 z-40 border-b bg-background/94 backdrop-blur">
         <div className="container-page flex h-16 items-center justify-between gap-4">
           <Link to="/" aria-label="Ubik home" className="hidden min-[430px]:inline-flex">
@@ -31,11 +34,17 @@ export function PageShell({ children }: { children: React.ReactNode }) {
             <BrandLogo compact />
           </Link>
           <nav className="hidden items-center gap-4 text-sm text-muted-foreground lg:flex">
-            {navItems.map((item) => (
-              <NavLink key={item.to} to={item.to} className="hover:text-foreground">
-                {item.label}
-              </NavLink>
-            ))}
+            {navItems.map((item) =>
+              "href" in item ? (
+                <a key={item.href} href={item.href} className="hover:text-foreground">
+                  {item.label}
+                </a>
+              ) : (
+                <NavLink key={item.to} to={item.to} className="hover:text-foreground">
+                  {item.label}
+                </NavLink>
+              )
+            )}
           </nav>
           <div className="flex items-center gap-2">
             <select
@@ -50,12 +59,13 @@ export function PageShell({ children }: { children: React.ReactNode }) {
                 </option>
               ))}
             </select>
-            <Link
-              to="/try"
+            <ThemeToggle className="hidden sm:inline-flex" />
+            <a
+              href={externalLinks.founderMeeting}
               className="nav-try-link inline-flex h-9 items-center justify-center border border-primary bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               Talk to founders
-            </Link>
+            </a>
             <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger asChild>
                 <button
@@ -76,13 +86,23 @@ export function PageShell({ children }: { children: React.ReactNode }) {
                   </SheetTitle>
                 </SheetHeader>
                 <div className="mt-6 flex flex-col gap-1">
-                  {navItems.map((item) => (
-                    <Link key={item.to} to={item.to} onClick={() => setMenuOpen(false)} className="border-b py-4 text-sm font-medium">
-                      {item.label}
-                    </Link>
-                  ))}
+                  {navItems.map((item) =>
+                    "href" in item ? (
+                      <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)} className="border-b py-4 text-sm font-medium">
+                        {item.label}
+                      </a>
+                    ) : (
+                      <Link key={item.to} to={item.to} onClick={() => setMenuOpen(false)} className="border-b py-4 text-sm font-medium">
+                        {item.label}
+                      </Link>
+                    )
+                  )}
+                  <div className="border-b py-4">
+                    <p className="mb-3 text-xs font-medium uppercase text-muted-foreground">Theme</p>
+                    <ThemeToggle showLabels />
+                  </div>
                   <Button asChild onClick={() => setMenuOpen(false)}>
-                    <Link to="/try">Realise true value in 30 days</Link>
+                    <a href={externalLinks.app}>Realise true value in 30 days</a>
                   </Button>
                 </div>
               </SheetContent>
@@ -96,10 +116,11 @@ export function PageShell({ children }: { children: React.ReactNode }) {
           <BrandLogo />
           <SolarpunkCredit />
           <nav className="flex flex-wrap gap-4 text-sm text-muted-foreground md:justify-self-end">
+            <a href={externalLinks.docs}>Guide</a>
             <Link to="/privacy-policy">Privacy</Link>
             <Link to="/terms-of-service">Terms</Link>
             <Link to="/security">Trust</Link>
-            <a href="mailto:shubhranshu@solarpunk.technology?subject=Ubik%20founder%20demo">Talk to founders</a>
+            <a href={externalLinks.founderMeeting}>Talk to founders</a>
           </nav>
         </div>
       </footer>

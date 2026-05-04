@@ -1,0 +1,43 @@
+---
+title: "Inquiry to shipment"
+description: "Move from buyer inquiry to quote, approval, order packet, and shipment context."
+icon: "ship"
+---
+
+This workflow starts when a buyer asks for availability, pricing, quote readiness, partial shipment, or the next shipment window.
+
+## What Ubik checks for you
+
+- Buyer email or thread history
+- Inventory and availability
+- COGS and margin guardrails
+- Past quotes or account terms
+- Transit and promise-date context
+- Trade documents attached to the thread
+
+## How to work through it
+
+<div className="ubik-steps">
+  <div className="ubik-step"><span>01 · Capture</span> Ubik detects the inquiry and attaches the relevant source thread.</div>
+  <div className="ubik-step"><span>02 · Context</span> Inventory, COGS, margin, account state, and transit constraints are pulled together.</div>
+  <div className="ubik-step"><span>03 · Suggest</span> Ubik prepares the next reply, quote packet, or approval request.</div>
+  <div className="ubik-step"><span>04 · Review</span> An operator checks the source context and edits or approves the action.</div>
+  <div className="ubik-step"><span>05 · Handoff</span> The approved action moves to the buyer, ERP handoff, or internal owner.</div>
+</div>
+
+## Operator review checklist
+
+- Is the requested product, quantity, grade, and shipment timing clear?
+- Are inventory and promise dates current?
+- Does the margin fit the account guardrail?
+- Does the buyer reply need finance, logistics, or management approval?
+- Is the ERP or CRM writeback mapped to the right account and SKU?
+
+## Common exceptions
+
+| Exception | What to do |
+| --- | --- |
+| Partial shipment requested | Check account terms and logistics before approving the reply. |
+| ETA shifted | Review downstream promise dates before sending the buyer update. |
+| Margin variance | Send to finance review or edit the quote before release. |
+| Missing attachment | Ask the buyer or assign the item to the owner who has the document. |

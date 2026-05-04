@@ -1,0 +1,36 @@
+---
+title: "Connected tools"
+description: "Understand the tools Ubik can read from and update, without needing technical setup details."
+icon: "plug"
+---
+
+Connected tools give Ubik the context needed to recommend useful work. The exact tools depend on your onboarding scope and admin approval.
+
+## Common connected tools
+
+| Tool type | What operators usually need from it |
+| --- | --- |
+| Email | Buyer inquiries, supplier replies, attachments, approvals. |
+| ERP and accounting | Order state, inventory, invoice checks, SKU mapping. |
+| CRM | Account owner, opportunity, terms, relationship history. |
+| Documents | POs, PDFs, specs, shipment packets, shared-drive files. |
+| Chat | WhatsApp, Slack, and Teams context where operational decisions happen. |
+| Logistics and BI | ETA movement, dashboard variance, and downstream promise dates. |
+
+## What managers should review
+
+<div className="ubik-panel">
+  <strong>Principle:</strong> Ubik reads only what is needed for the approved workflow and writes back only through reviewed actions.
+</div>
+
+Before expanding an integration, confirm:
+
+- Which workflow needs the tool.
+- Which documents, fields, or messages are required.
+- Who approves access.
+- Whether the tool should be read-only or allow updates.
+- How failures should be surfaced to operators.
+
+## If a connected tool is stale
+
+Look for expired OAuth consent, changed permissions, renamed folders, moved fields, or provider downtime. Reconnect only after confirming the admin owner.

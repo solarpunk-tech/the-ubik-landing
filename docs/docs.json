@@ -1,0 +1,148 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "luma",
+  "name": "Ubik Guide",
+  "description": "A practical product guide for managers and operators using Ubik in perishable trade.",
+  "logo": {
+    "light": "/images/ubik-wordmark-light.png",
+    "dark": "/images/ubik-wordmark-dark.png",
+    "href": "https://theubik.com"
+  },
+  "favicon": {
+    "light": "/images/favicon-light.png",
+    "dark": "/images/favicon-dark.png"
+  },
+  "colors": {
+    "primary": "#385FE8",
+    "light": "#5F7EFF",
+    "dark": "#4D70F0"
+  },
+  "appearance": {
+    "default": "system",
+    "strict": false
+  },
+  "fonts": {
+    "heading": {
+      "family": "Montserrat",
+      "weight": 650
+    },
+    "body": {
+      "family": "Noto Sans",
+      "weight": 400
+    }
+  },
+  "icons": {
+    "library": "lucide"
+  },
+  "background": {
+    "color": {
+      "light": "#F7F9FC",
+      "dark": "#0E1014"
+    }
+  },
+  "styling": {
+    "eyebrows": "breadcrumbs",
+    "codeblocks": "dark"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Main site",
+        "href": "https://theubik.com"
+      },
+      {
+        "label": "Talk to founders",
+        "href": "https://calendar.app.google/frJjo2U6qdBdgZ1w9"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Open app",
+      "href": "https://app.theubik.com"
+    }
+  },
+  "footer": {
+    "links": [
+      {
+        "header": "Product",
+        "items": [
+          {
+            "label": "Main site",
+            "href": "https://theubik.com"
+          },
+          {
+            "label": "Pricing",
+            "href": "https://theubik.com/pricing"
+          },
+          {
+            "label": "Security",
+            "href": "https://theubik.com/security"
+          }
+        ]
+      },
+      {
+        "header": "Legal",
+        "items": [
+          {
+            "label": "Privacy",
+            "href": "https://theubik.com/privacy-policy"
+          },
+          {
+            "label": "Terms",
+            "href": "https://theubik.com/terms-of-service"
+          }
+        ]
+      }
+    ],
+    "socials": {
+      "website": "https://theubik.com",
+      "linkedin": "https://www.linkedin.com/company/solarpunk-technology"
+    }
+  },
+  "seo": {
+    "indexing": "navigable",
+    "metatags": {
+      "canonical": "https://docs.theubik.com"
+    }
+  },
+  "metadata": {
+    "timestamp": true
+  },
+  "navigation": {
+    "directory": "card",
+    "groups": [
+      {
+        "group": "Start",
+        "pages": [
+          "index",
+          "getting-started/sign-in",
+          "getting-started/workspace-basics",
+          "getting-started/how-ubik-ai-works"
+        ]
+      },
+      {
+        "group": "Workflows",
+        "pages": [
+          "workflows/inquiry-to-shipment",
+          "workflows/approvals",
+          "workflows/daily-operating-queue",
+          "workflows/ask-ubik"
+        ]
+      },
+      {
+        "group": "Admin",
+        "pages": [
+          "admin/users-and-access",
+          "admin/integrations",
+          "admin/security-and-data"
+        ]
+      },
+      {
+        "group": "Troubleshooting",
+        "pages": [
+          "troubleshooting/faq"
+        ]
+      }
+    ]
+  }
+}

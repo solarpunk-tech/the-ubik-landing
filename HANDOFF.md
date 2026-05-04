@@ -153,6 +153,128 @@
   - Blog article copy avoids named customer/company references.
   - Verification: `pnpm lint` passes, `pnpm build` passes, and browser text checks across `/`, `/try`, `/blog`, and all three blog posts find no old CTA wording or named customer examples.
   - Latest evidence: `verification/cta-blog-pass-home-desktop.png`, `verification/cta-blog-pass-try-desktop.png`, `verification/cta-blog-pass-article-chart.png`, `verification/cta-blog-pass-article-workflow.png`, `verification/cta-blog-pass-article-thesis.png`, `verification/cta-blog-pass-article-mobile.png`.
+- Latest theme-toggle/mobile contrast pass:
+  - Pulled `origin/main` into `jha-blue-version` with a fast-forward to the merged blue landing PR.
+  - Added a persisted light/dark theme toggle using existing `next-themes`; first visit still follows system theme, and explicit light/dark choices persist in local storage.
+  - Desktop/tablet header shows the compact icon toggle beside language and CTA; mobile exposes labelled Light/Dark controls inside the sheet menu.
+  - Brand and Solarpunk logo assets now switch from the active `.dark` class instead of `prefers-color-scheme`, so manual theme changes update imagery correctly.
+  - Dark-mode greys were lifted for readability: muted text, borders, inputs, wells, cards, and blue foreground contrast are clearer while preserving the Ubik blue accent.
+  - Mobile-safe wrappers now use `min-h-dvh` where touched; no `h-screen`/`min-h-screen` remains in `src`.
+  - Visual requirements from user screenshots:
+    - Layout: login or login-adjacent form content must stay reachable on mobile via vertical scroll.
+    - Spacing: mobile stacks brand, copy, proof/cards, and sign-in/request controls without clipping.
+    - Typography: dark-mode secondary text must not read as dull low-contrast grey.
+    - Color: keep Ubik blue as the active-state, metric, and CTA accent across both dark and light variants.
+    - Interactions: theme toggle is keyboard-accessible, labelled, and visibly indicates the active theme.
+  - Before/reference evidence: user-provided screenshots in the May 3 theme request plus existing local references `verification/heading-queue-pass-desktop-v2.png`, `verification/media-pass-home-desktop-v2.png`, and `verification/pricing-crisp-mobile.png`.
+  - After evidence: `verification/theme-toggle-home-desktop-light.png`, `verification/theme-toggle-home-desktop-dark.png`, `verification/theme-toggle-try-mobile-light.png`, `verification/theme-toggle-try-mobile-dark.png`, `verification/theme-toggle-menu-mobile-dark.png`.
+  - Verification: `pnpm lint` passes, `pnpm build` passes, Browser/IAB DOM interaction verified mobile sheet theme controls and dark pressed state, Playwright viewport screenshots verified `/`, `/pricing`, `/how-it-works`, `/blog`, and `/try` at 390px with no horizontal overflow and reachable vertical scroll.
+  - Remaining dependency: `app.theubik.com/login` is not present in this repo. Port this same theme contract into the app/login repo once that repo is pulled: persisted explicit light/dark, `min-h-dvh`, no clipped mobile login card, and no horizontal overflow at 360-430px.
+- Latest Mintlify user-guide pass:
+  - Added a Mintlify docs project under `docs/` with `docs.json`, `style.css`, cropped Ubik wordmark assets, and 12 editable MDX pages.
+  - The guide is intentionally a product/user guide for non-technical managers, operators, admins, and reviewers, not developer documentation.
+  - Information architecture:
+    - Start: `Ubik operator guide`, `Sign in`, `Workspace basics`, `How Ubik AI works`.
+    - Workflows: `Inquiry to shipment`, `Approving AI work`, `Daily operating queue`, `Ask Ubik`.
+    - Admin: `Users and access`, `Connected tools`, `Security and data`.
+    - Troubleshooting: `FAQ`.
+  - Visual requirements from the docs/user-guide request:
+    - Layout: readable Mintlify guide with left navigation, product-first content, and mobile pages that scroll without horizontal overflow.
+    - Spacing: maintain the Ubik analytical/editorial rhythm with hairline dividers, open white/dark space, and no marketing-card bloat.
+    - Typography: Montserrat headings, Noto Sans body, IBM Plex Mono labels/steps/metrics.
+    - Color: Ubik blue remains the active accent; dark mode uses stronger grey contrast and an accessible hover/dark blue token.
+    - Interactions: docs topbar links to main site, founder contact, and `app.theubik.com/login`; landing nav and mobile sheet include `Guide`.
+  - Landing integration:
+    - Desktop nav, mobile nav, and footer now link to `https://docs.theubik.com`.
+    - `netlify.toml` and `vercel.json` add `/guide` redirects to `https://docs.theubik.com` before the SPA fallback.
+  - Verification:
+    - `mint validate` passes.
+    - `mint broken-links` passes.
+    - `mint a11y` exits successfully; color checks pass minimum thresholds with AA-not-AAA warnings on the primary/light blue pair.
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - `git diff --check` passes.
+    - Playwright screenshots show no horizontal overflow at 390px mobile or 1440px desktop.
+  - Latest visual evidence:
+    - Docs desktop light: `verification/docs-guide-desktop-light.png`
+    - Docs desktop dark: `verification/docs-guide-desktop-dark.png`
+    - Docs mobile light: `verification/docs-guide-mobile-light.png`
+    - Docs mobile dark AI guide: `verification/docs-guide-mobile-dark.png`
+    - Landing desktop nav with Guide: `verification/landing-guide-nav-desktop.png`
+    - Landing mobile sheet with Guide: `verification/landing-guide-menu-mobile.png`
+  - Remaining dependency:
+    - Connect Mintlify to this repo’s `/docs` directory on `main`, configure `docs.theubik.com`, and confirm production TLS/DNS plus PR preview availability based on the Mintlify plan/credits.
+- Latest CTA destination pass:
+  - Added centralized external URL constants in `src/lib/links.ts`.
+  - All visible `Talk to founders` CTAs now point to `https://calendar.app.google/frJjo2U6qdBdgZ1w9`, including landing header, homepage hero, CTA band, pricing Enterprise, security review, workflow walkthrough, footer, and Mintlify docs topbar.
+  - All visible `Realise true value in 30 days` CTAs now point to `https://app.theubik.com`.
+  - `/try` now redirects to `https://app.theubik.com` in both `netlify.toml` and `vercel.json`, and `/try` was removed from `public/sitemap.xml` because it is no longer a canonical landing page.
+  - Mintlify docs topbar primary CTA now points to `https://app.theubik.com` instead of `/login`.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - `mint validate` passes.
+    - `mint broken-links` passes.
+    - `mint a11y` exits successfully with the existing AA-not-AAA color warnings only.
+    - `git diff --check` passes.
+    - Playwright verified homepage, mobile menu, pricing, and docs CTA hrefs resolve to the calendar or app URLs and have no horizontal overflow.
+  - Latest visual evidence:
+    - CTA home desktop: `verification/cta-links-home-desktop.png`
+    - CTA mobile menu: `verification/cta-links-home-mobile-menu.png`
+    - CTA pricing desktop: `verification/cta-links-pricing-desktop.png`
+    - CTA docs desktop: `verification/cta-links-docs-desktop.png`
+- Latest browser comment fix pass:
+  - Homepage FAQ answers now render as structured paragraphs and lightweight bullets while preserving the plain-text answer strings for FAQ schema.
+  - Header chrome now uses a translucent matrix-grid treatment so the hero background visually continues through the sticky nav.
+  - Theme switching is a single keyboard-accessible button. Desktop shows one icon button; the mobile sheet shows one labelled row with the current mode.
+  - Bottom three-column callouts now read `Agentify backend operations`, `Local-first data privacy approach`, and `Human approved -> autonomous and audited`.
+  - Before/reference evidence: user-provided browser comment screenshots for the FAQ text dump, `/how-it-works` header, and bottom proof callouts are attached in the current Codex thread; they were not local repo files.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - `git diff --check` passes.
+    - Playwright verified one visible desktop theme toggle button, successful toggle state change, and no horizontal overflow on `/` and `/how-it-works` at 1267px and 390px.
+  - Latest visual evidence:
+    - FAQ desktop: `verification/comment-faq-format-desktop.png`
+    - FAQ mobile: `verification/comment-faq-format-mobile.png`
+    - Header matrix and single toggle light: `verification/comment-header-matrix-toggle-light.png`
+    - Header matrix and single toggle dark: `verification/comment-header-matrix-toggle-dark.png`
+    - Bottom callout pillars: `verification/comment-bottom-pillars-desktop.png`
+- Latest header seam polish:
+  - Header chrome now uses a transparent/frosted layer instead of painting its own duplicate grid, so the actual hero matrix bleeds through and there is no second grid origin to drift.
+  - Removed the extra header bottom border that made the top nav read as a separate slab.
+  - Verification: `pnpm lint` passes, `pnpm build` passes, `git diff --check` passes, and Playwright verified no horizontal overflow on the homepage at 1267px.
+  - Latest visual evidence: `verification/comment-header-seam-through-light.png`.
+- Latest browser-language auto-routing pass:
+  - i18n now uses supported base locales from `src/locales/*`, resolves regional browser languages such as `pl-PL` to `pl`, and falls back to English for unsupported languages such as `ja-JP` and `ko-KR`.
+  - Automatic detector caching is disabled. Only an explicit language selector choice writes `ubik-lang` plus an explicit marker, so old automatic `ubik-lang=en` cache no longer blocks browser-language routing.
+  - The language selector now reflects `i18n.resolvedLanguage`, manual overrides persist after reload, and `<html lang>` updates to the resolved locale.
+  - The shared shell navigation/footer labels now use available locale keys with English fallback for labels without approved translations.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - `git diff --check` passes.
+    - Playwright verified `pl-PL -> pl`, `de-DE -> de`, `ja-JP -> en`, `ko-KR -> en`, stale non-explicit `ubik-lang=en` migration, manual `de` override persistence, and no 390px mobile overflow.
+  - Latest visual evidence:
+    - Polish desktop header: `verification/language-routing-pl-desktop.png`
+    - German desktop header: `verification/language-routing-de-desktop.png`
+    - Japanese fallback desktop header: `verification/language-routing-ja-fallback-desktop.png`
+    - German manual override mobile menu: `verification/language-routing-mobile-menu-de.png`
+- Latest client-facing trust page pass:
+  - `/security` has been rewritten from an internal CTO/vendor-review memo into a client-facing Trust page for seafood importers, exporters, processors, directors, operators, and admins.
+  - The page now explains admin approval, least-needed access, human review, revocation, and no third-party model training in plain language.
+  - The scary DWD/Domain-Wide Delegation phrasing is intentionally absent from visible page copy; admin approval is described as Google Workspace or Microsoft 365 app approval.
+  - Approved trust claims retained: SOC 2 Type 2, GDPR, ISO 27001, AES-256 at rest, TLS 1.3 in transit, and audit log on every action.
+  - CTAs use the existing founder meeting URL and copy/share trust note behavior.
+  - Before/reference evidence: the prior `/security` page copy in `src/pages/SecurityMemo.tsx` led with `Security posture for an AI operating layer` and was framed for technical reviewers.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - `git diff --check` passes.
+    - Playwright verified `/security` desktop and 390px mobile load without horizontal overflow, have the new hero, do not contain `Domain-Wide Delegation` or `DWD`, and do not contain the old internal memo phrases.
+  - Latest visual evidence:
+    - Trust desktop full page: `verification/trust-client-facing-desktop.png`
+    - Trust mobile full page: `verification/trust-client-facing-mobile.png`
 
 ## Next notes
 

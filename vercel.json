@@ -3,7 +3,9 @@
   "trailingSlash": false,
   "redirects": [
     { "source": "/terms", "destination": "/terms-of-service", "permanent": true },
-    { "source": "/privacy", "destination": "/privacy-policy", "permanent": true }
+    { "source": "/privacy", "destination": "/privacy-policy", "permanent": true },
+    { "source": "/guide", "destination": "https://docs.theubik.com", "permanent": false },
+    { "source": "/try", "destination": "https://app.theubik.com", "permanent": false }
   ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }

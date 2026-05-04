@@ -5,6 +5,7 @@ import { DotmSquare1 } from "@/components/ui/dotm-square-1";
 import { MatrixField } from "@/components/landing/MatrixField";
 import { usePrefersReducedMotion } from "@/lib/dotmatrix-hooks";
 import { howWorkflows } from "@/lib/landing-content";
+import { externalLinks } from "@/lib/links";
 import { cn } from "@/lib/utils";
 
 type HowWorkflowCarouselProps = {
@@ -106,7 +107,7 @@ export function HowWorkflowCarousel({ compact = false }: HowWorkflowCarouselProp
           </div>
           {!compact ? (
             <Button asChild className="mt-6">
-              <a href="mailto:shubhranshu@solarpunk.technology?subject=Ubik%20workflow%20walkthrough">
+              <a href={externalLinks.founderMeeting}>
                 Automate my workflows <ArrowRightIcon data-icon="inline-end" />
               </a>
             </Button>

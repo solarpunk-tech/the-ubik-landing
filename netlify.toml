@@ -19,6 +19,18 @@
   status = 301
 
 [[redirects]]
+  from = "/guide"
+  to = "https://docs.theubik.com"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/try"
+  to = "https://app.theubik.com"
+  status = 302
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

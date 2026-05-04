@@ -14,6 +14,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Seo } from "@/components/seo/Seo";
 import { PageShell } from "@/components/landing/PageShell";
 import { bottomCallouts, faqs, heroTickerItems, proofPoints, securityCards } from "@/lib/landing-content";
+import { externalLinks } from "@/lib/links";
 
 export default function Index() {
   return (
@@ -76,12 +77,12 @@ export default function Index() {
               </div>
               <div className="soft-blur-block flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg">
-                  <a href="mailto:shubhranshu@solarpunk.technology?subject=Ubik%20founder%20demo">
+                  <a href={externalLinks.founderMeeting}>
                     Talk to founders <ArrowRightIcon data-icon="inline-end" />
                   </a>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <Link to="/try">Realise true value in 30 days</Link>
+                  <a href={externalLinks.app}>Realise true value in 30 days</a>
                 </Button>
               </div>
             </div>
@@ -178,10 +179,27 @@ export default function Index() {
               </p>
             </div>
             <Accordion type="single" collapsible className="w-full">
-              {faqs.map(({ question, answer }) => (
+              {faqs.map(({ question, answer, paragraphs, bullets }) => (
                 <AccordionItem key={question} value={question}>
                   <AccordionTrigger>{question}</AccordionTrigger>
-                  <AccordionContent>{answer}</AccordionContent>
+                  <AccordionContent>
+                    <div className="max-w-3xl border-l border-border pl-4 text-sm leading-7 text-muted-foreground">
+                      <div className="grid gap-3 text-pretty">
+                        {(paragraphs ?? [answer]).map((paragraph) => (
+                          <p key={paragraph}>{paragraph}</p>
+                        ))}
+                      </div>
+                      {bullets?.length ? (
+                        <ul className="mt-4 grid gap-2 pl-4 text-pretty">
+                          {bullets.map((bullet) => (
+                            <li key={bullet} className="list-disc pl-1">
+                              {bullet}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </div>
+                  </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
@@ -207,10 +225,10 @@ export default function Index() {
               </div>
               <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
                 <Button asChild variant="secondary" size="lg">
-                  <a href="mailto:shubhranshu@solarpunk.technology?subject=Ubik%20founder%20demo">Talk to founders</a>
+                  <a href={externalLinks.founderMeeting}>Talk to founders</a>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="border-primary-foreground/35 bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                  <Link to="/try">Realise true value in 30 days</Link>
+                  <a href={externalLinks.app}>Realise true value in 30 days</a>
                 </Button>
               </div>
             </CardContent>
@@ -219,9 +237,10 @@ export default function Index() {
 
         <section className="container-page pb-16">
           <div className="grid gap-px bg-border md:grid-cols-3">
-            {bottomCallouts.map(({ title }) => (
+            {bottomCallouts.map(({ title }, index) => (
               <div key={title} className="bg-background p-5">
-                <h3 className="font-semibold">{title}</h3>
+                <p className="text-[10px] font-medium uppercase text-primary">0{index + 1}</p>
+                <h3 className="mt-3 max-w-xs text-lg font-semibold leading-snug text-pretty">{title}</h3>
               </div>
             ))}
           </div>

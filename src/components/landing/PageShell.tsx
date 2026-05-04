@@ -1,27 +1,40 @@
 import { Link, NavLink } from "react-router-dom";
 import { PlusIcon, XIcon } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { BrandLogo } from "./BrandLogo";
 import { SolarpunkCredit } from "./SolarpunkCredit";
 import { ThemeToggle } from "./ThemeToggle";
+import { persistExplicitLanguage, supportedLanguages } from "@/lib/i18n";
 import { externalLinks } from "@/lib/links";
 import { cn } from "@/lib/utils";
 
-const navItems = [
-  { to: "/#product", label: "Product" },
-  { to: "/how-it-works", label: "How it works" },
-  { href: externalLinks.docs, label: "Guide" },
-  { to: "/pricing", label: "Pricing" },
-  { to: "/blog", label: "Journal" },
-  { to: "/security", label: "Trust" }
-];
-
 export function PageShell({ children }: { children: React.ReactNode }) {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const resolvedLanguage = (i18n.resolvedLanguage ?? i18n.language ?? "en").split("-")[0];
+  const selectedLanguage = supportedLanguages.includes(resolvedLanguage)
+    ? resolvedLanguage
+    : "en";
+  const navItems = [
+    { to: "/#product", label: t("nav.product", { defaultValue: "Product" }) },
+    { to: "/how-it-works", label: t("nav.how-it-works", { defaultValue: "How it works" }) },
+    { href: externalLinks.docs, label: t("nav.guide", { defaultValue: "Guide" }) },
+    { to: "/pricing", label: t("nav.pricing", { defaultValue: "Pricing" }) },
+    { to: "/blog", label: t("nav.journal", { defaultValue: "Journal" }) },
+    { to: "/security", label: t("nav.trust", { defaultValue: "Trust" }) }
+  ];
+
+  function handleLanguageChange(language: string) {
+    persistExplicitLanguage(language);
+    void i18n.changeLanguage(language);
+  }
+
+  useEffect(() => {
+    document.documentElement.lang = selectedLanguage;
+  }, [selectedLanguage]);
 
   return (
     <div className="min-h-dvh bg-background text-foreground">
@@ -49,11 +62,11 @@ export function PageShell({ children }: { children: React.ReactNode }) {
           <div className="flex items-center gap-2">
             <select
               aria-label="Select language"
-              value={i18n.language.split("-")[0]}
-              onChange={(event) => void i18n.changeLanguage(event.target.value)}
+              value={selectedLanguage}
+              onChange={(event) => handleLanguageChange(event.target.value)}
               className="hidden h-8 border bg-background px-2 text-xs text-muted-foreground sm:block"
             >
-              {Object.keys(i18n.services.resourceStore.data).map((lang) => (
+              {supportedLanguages.map((lang) => (
                 <option key={lang} value={lang}>
                   {lang.toUpperCase()}
                 </option>
@@ -64,7 +77,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
               href={externalLinks.founderMeeting}
               className="nav-try-link inline-flex h-9 items-center justify-center border border-primary bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              Talk to founders
+              {t("footer.contact", { defaultValue: "Talk to founders" })}
             </a>
             <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger asChild>
@@ -101,7 +114,9 @@ export function PageShell({ children }: { children: React.ReactNode }) {
                     <ThemeToggle showLabels />
                   </div>
                   <Button asChild onClick={() => setMenuOpen(false)}>
-                    <a href={externalLinks.app}>Realise true value in 30 days</a>
+                    <a href={externalLinks.app}>
+                      {t("cta.realise-value", { defaultValue: "Realise true value in 30 days" })}
+                    </a>
                   </Button>
                 </div>
               </SheetContent>
@@ -115,11 +130,13 @@ export function PageShell({ children }: { children: React.ReactNode }) {
           <BrandLogo />
           <SolarpunkCredit />
           <nav className="flex flex-wrap gap-4 text-sm text-muted-foreground md:justify-self-end">
-            <a href={externalLinks.docs}>Guide</a>
-            <Link to="/privacy-policy">Privacy</Link>
-            <Link to="/terms-of-service">Terms</Link>
-            <Link to="/security">Trust</Link>
-            <a href={externalLinks.founderMeeting}>Talk to founders</a>
+            <a href={externalLinks.docs}>{t("nav.guide", { defaultValue: "Guide" })}</a>
+            <Link to="/privacy-policy">{t("nav.privacy", { defaultValue: "Privacy" })}</Link>
+            <Link to="/terms-of-service">{t("nav.terms", { defaultValue: "Terms" })}</Link>
+            <Link to="/security">{t("nav.trust", { defaultValue: "Trust" })}</Link>
+            <a href={externalLinks.founderMeeting}>
+              {t("footer.contact", { defaultValue: "Talk to founders" })}
+            </a>
           </nav>
         </div>
       </footer>

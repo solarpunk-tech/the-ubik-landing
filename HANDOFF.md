@@ -245,6 +245,21 @@
   - Removed the extra header bottom border that made the top nav read as a separate slab.
   - Verification: `pnpm lint` passes, `pnpm build` passes, `git diff --check` passes, and Playwright verified no horizontal overflow on the homepage at 1267px.
   - Latest visual evidence: `verification/comment-header-seam-through-light.png`.
+- Latest browser-language auto-routing pass:
+  - i18n now uses supported base locales from `src/locales/*`, resolves regional browser languages such as `pl-PL` to `pl`, and falls back to English for unsupported languages such as `ja-JP` and `ko-KR`.
+  - Automatic detector caching is disabled. Only an explicit language selector choice writes `ubik-lang` plus an explicit marker, so old automatic `ubik-lang=en` cache no longer blocks browser-language routing.
+  - The language selector now reflects `i18n.resolvedLanguage`, manual overrides persist after reload, and `<html lang>` updates to the resolved locale.
+  - The shared shell navigation/footer labels now use available locale keys with English fallback for labels without approved translations.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - `git diff --check` passes.
+    - Playwright verified `pl-PL -> pl`, `de-DE -> de`, `ja-JP -> en`, `ko-KR -> en`, stale non-explicit `ubik-lang=en` migration, manual `de` override persistence, and no 390px mobile overflow.
+  - Latest visual evidence:
+    - Polish desktop header: `verification/language-routing-pl-desktop.png`
+    - German desktop header: `verification/language-routing-de-desktop.png`
+    - Japanese fallback desktop header: `verification/language-routing-ja-fallback-desktop.png`
+    - German manual override mobile menu: `verification/language-routing-mobile-menu-de.png`
 
 ## Next notes
 

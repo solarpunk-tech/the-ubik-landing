@@ -179,10 +179,27 @@ export default function Index() {
               </p>
             </div>
             <Accordion type="single" collapsible className="w-full">
-              {faqs.map(({ question, answer }) => (
+              {faqs.map(({ question, answer, paragraphs, bullets }) => (
                 <AccordionItem key={question} value={question}>
                   <AccordionTrigger>{question}</AccordionTrigger>
-                  <AccordionContent>{answer}</AccordionContent>
+                  <AccordionContent>
+                    <div className="max-w-3xl border-l border-border pl-4 text-sm leading-7 text-muted-foreground">
+                      <div className="grid gap-3 text-pretty">
+                        {(paragraphs ?? [answer]).map((paragraph) => (
+                          <p key={paragraph}>{paragraph}</p>
+                        ))}
+                      </div>
+                      {bullets?.length ? (
+                        <ul className="mt-4 grid gap-2 pl-4 text-pretty">
+                          {bullets.map((bullet) => (
+                            <li key={bullet} className="list-disc pl-1">
+                              {bullet}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </div>
+                  </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
@@ -220,9 +237,10 @@ export default function Index() {
 
         <section className="container-page pb-16">
           <div className="grid gap-px bg-border md:grid-cols-3">
-            {bottomCallouts.map(({ title }) => (
+            {bottomCallouts.map(({ title }, index) => (
               <div key={title} className="bg-background p-5">
-                <h3 className="font-semibold">{title}</h3>
+                <p className="text-[10px] font-medium uppercase text-primary">0{index + 1}</p>
+                <h3 className="mt-3 max-w-xs text-lg font-semibold leading-snug text-pretty">{title}</h3>
               </div>
             ))}
           </div>

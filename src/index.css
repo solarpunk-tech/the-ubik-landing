@@ -181,6 +181,14 @@
     background-size: 38px 38px;
   }
 
+  .header-matrix {
+    background-color: hsl(var(--background) / 0.42);
+  }
+
+  .dark .header-matrix {
+    background-color: hsl(var(--background) / 0.52);
+  }
+
   .section-label {
     @apply text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground;
   }

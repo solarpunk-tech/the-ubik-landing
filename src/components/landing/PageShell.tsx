@@ -25,7 +25,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-dvh bg-background text-foreground">
-      <header className="sticky top-0 z-40 border-b bg-background/94 backdrop-blur">
+      <header className="header-matrix sticky top-0 z-40 backdrop-blur-xl">
         <div className="container-page flex h-16 items-center justify-between gap-4">
           <Link to="/" aria-label="Ubik home" className="hidden min-[430px]:inline-flex">
             <BrandLogo />
@@ -98,7 +98,6 @@ export function PageShell({ children }: { children: React.ReactNode }) {
                     )
                   )}
                   <div className="border-b py-4">
-                    <p className="mb-3 text-xs font-medium uppercase text-muted-foreground">Theme</p>
                     <ThemeToggle showLabels />
                   </div>
                   <Button asChild onClick={() => setMenuOpen(false)}>

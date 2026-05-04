@@ -223,6 +223,28 @@
     - CTA mobile menu: `verification/cta-links-home-mobile-menu.png`
     - CTA pricing desktop: `verification/cta-links-pricing-desktop.png`
     - CTA docs desktop: `verification/cta-links-docs-desktop.png`
+- Latest browser comment fix pass:
+  - Homepage FAQ answers now render as structured paragraphs and lightweight bullets while preserving the plain-text answer strings for FAQ schema.
+  - Header chrome now uses a translucent matrix-grid treatment so the hero background visually continues through the sticky nav.
+  - Theme switching is a single keyboard-accessible button. Desktop shows one icon button; the mobile sheet shows one labelled row with the current mode.
+  - Bottom three-column callouts now read `Agentify backend operations`, `Local-first data privacy approach`, and `Human approved -> autonomous and audited`.
+  - Before/reference evidence: user-provided browser comment screenshots for the FAQ text dump, `/how-it-works` header, and bottom proof callouts are attached in the current Codex thread; they were not local repo files.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - `git diff --check` passes.
+    - Playwright verified one visible desktop theme toggle button, successful toggle state change, and no horizontal overflow on `/` and `/how-it-works` at 1267px and 390px.
+  - Latest visual evidence:
+    - FAQ desktop: `verification/comment-faq-format-desktop.png`
+    - FAQ mobile: `verification/comment-faq-format-mobile.png`
+    - Header matrix and single toggle light: `verification/comment-header-matrix-toggle-light.png`
+    - Header matrix and single toggle dark: `verification/comment-header-matrix-toggle-dark.png`
+    - Bottom callout pillars: `verification/comment-bottom-pillars-desktop.png`
+- Latest header seam polish:
+  - Header chrome now uses a transparent/frosted layer instead of painting its own duplicate grid, so the actual hero matrix bleeds through and there is no second grid origin to drift.
+  - Removed the extra header bottom border that made the top nav read as a separate slab.
+  - Verification: `pnpm lint` passes, `pnpm build` passes, `git diff --check` passes, and Playwright verified no horizontal overflow on the homepage at 1267px.
+  - Latest visual evidence: `verification/comment-header-seam-through-light.png`.
 
 ## Next notes
 

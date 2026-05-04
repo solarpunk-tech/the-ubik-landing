@@ -260,6 +260,21 @@
     - German desktop header: `verification/language-routing-de-desktop.png`
     - Japanese fallback desktop header: `verification/language-routing-ja-fallback-desktop.png`
     - German manual override mobile menu: `verification/language-routing-mobile-menu-de.png`
+- Latest client-facing trust page pass:
+  - `/security` has been rewritten from an internal CTO/vendor-review memo into a client-facing Trust page for seafood importers, exporters, processors, directors, operators, and admins.
+  - The page now explains admin approval, least-needed access, human review, revocation, and no third-party model training in plain language.
+  - The scary DWD/Domain-Wide Delegation phrasing is intentionally absent from visible page copy; admin approval is described as Google Workspace or Microsoft 365 app approval.
+  - Approved trust claims retained: SOC 2 Type 2, GDPR, ISO 27001, AES-256 at rest, TLS 1.3 in transit, and audit log on every action.
+  - CTAs use the existing founder meeting URL and copy/share trust note behavior.
+  - Before/reference evidence: the prior `/security` page copy in `src/pages/SecurityMemo.tsx` led with `Security posture for an AI operating layer` and was framed for technical reviewers.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - `git diff --check` passes.
+    - Playwright verified `/security` desktop and 390px mobile load without horizontal overflow, have the new hero, do not contain `Domain-Wide Delegation` or `DWD`, and do not contain the old internal memo phrases.
+  - Latest visual evidence:
+    - Trust desktop full page: `verification/trust-client-facing-desktop.png`
+    - Trust mobile full page: `verification/trust-client-facing-mobile.png`
 
 ## Next notes
 

@@ -66,7 +66,7 @@ const reviewChecklist = [
 ];
 
 const trustBaselines = [
-  "SOC 2 Type 2",
+  "SOC 2 Type II audit in progress",
   "GDPR",
   "ISO 27001",
   "AES-256 at rest",
@@ -84,7 +84,7 @@ export default function SecurityMemo() {
     <PageShell>
       <Seo
         title="Ubik Trust Note for Seafood Operators"
-        description="A plain-language trust note for seafood importers, exporters, processors, and their customers."
+        description="A client-facing trust note for seafood importers, exporters, processors, and their customers."
         canonical="https://theubik.com/security"
       />
       <main className="relative overflow-hidden">
@@ -105,16 +105,16 @@ export default function SecurityMemo() {
               </div>
               <Card className="bg-card/95 backdrop-blur">
                 <CardHeader>
-                  <CardTitle>Plain-English position</CardTitle>
+                  <CardTitle>Operating position</CardTitle>
                 </CardHeader>
                 <CardContent className="grid gap-4 text-sm leading-6 text-muted-foreground">
                   <p>
-                    Start with one approved workflow. Give Ubik only the tool access needed for that
-                    workflow. Keep human approval on sensitive moves.
+                    Start with one approved workflow. Connect only the tools needed for that workflow.
+                    Keep human approval on commercial, customer-facing, and system-of-record actions.
                   </p>
                   <p>
-                    Expand only when your admin, operators, and customer reviewers are comfortable
-                    with the permissions, audit trail, and approval flow.
+                    Expand after the permissions, audit trail, and approval flow are reviewed by the
+                    right commercial owner, operator, and system admin.
                   </p>
                 </CardContent>
               </Card>
@@ -159,10 +159,11 @@ export default function SecurityMemo() {
             <section className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
               <div>
                 <Badge variant="outline" className="mb-4">Admin approval</Badge>
-                <h2 className="text-3xl font-semibold">What approval means.</h2>
+                <h2 className="text-3xl font-semibold">Access approval is scoped.</h2>
                 <p className="mt-3 text-muted-foreground">
-                  Admin approval is not a blank cheque. It is the step where your company reviews
-                  the app, the requested permissions, and the first workflow before access is granted.
+                  Your company reviews the app, requested permissions, and first workflow before
+                  access is granted. Access can be limited to the approved pilot and revoked through
+                  Google or Microsoft controls.
                 </p>
               </div>
               <div className="grid gap-px bg-border md:grid-cols-2">
@@ -190,10 +191,10 @@ export default function SecurityMemo() {
             <section className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr]">
               <div>
                 <Badge variant="outline" className="mb-4">Before going live</Badge>
-                <h2 className="text-3xl font-semibold">A simple review list.</h2>
+                <h2 className="text-3xl font-semibold">Production review.</h2>
                 <p className="mt-3 text-muted-foreground">
-                  Use this list with the director, operator, and admin before Ubik handles live
-                  replies, confirmations, or ERP-ready actions.
+                  Confirm scope, owners, approvals, revocation, and customer security expectations
+                  before Ubik handles live replies, confirmations, or ERP-ready actions.
                 </p>
               </div>
               <div className="grid gap-px bg-border">
@@ -212,8 +213,8 @@ export default function SecurityMemo() {
                 <div>
                   <h2 className="text-2xl font-semibold">Want to review access before onboarding?</h2>
                   <p className="mt-2 text-primary-foreground/85">
-                    We can walk your director, admin, and operator through the exact workflow before
-                    anything goes live.
+                    We can walk your commercial owner, system admin, and operating team through the
+                    exact workflow before anything goes live.
                   </p>
                 </div>
                 <Button asChild variant="secondary">

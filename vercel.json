@@ -1,6 +1,15 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/downloads/(.*)\\.exe",
+      "headers": [
+        { "key": "Content-Type", "value": "application/octet-stream" },
+        { "key": "Content-Disposition", "value": "attachment" }
+      ]
+    }
+  ],
   "redirects": [
     { "source": "/terms", "destination": "/terms-of-service", "permanent": true },
     { "source": "/privacy", "destination": "/privacy-policy", "permanent": true },

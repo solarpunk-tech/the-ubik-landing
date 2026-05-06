@@ -2,6 +2,12 @@
   command = "pnpm build"
   publish = "dist"
 
+[[headers]]
+  for = "/downloads/*.exe"
+  [headers.values]
+    Content-Type = "application/octet-stream"
+    Content-Disposition = "attachment"
+
 [build.processing]
   skip_processing = false
 

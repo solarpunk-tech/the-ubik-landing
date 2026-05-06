@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
-import { PlusIcon, XIcon } from "@phosphor-icons/react";
+import { AppleLogoIcon, PlusIcon, WindowsLogoIcon, XIcon } from "@phosphor-icons/react";
+import { useDetectedOS } from "@/lib/use-detected-os";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
@@ -14,6 +15,10 @@ import { cn } from "@/lib/utils";
 export function PageShell({ children }: { children: React.ReactNode }) {
   const { i18n, t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const detectedOS = useDetectedOS();
+  const downloadLabel = detectedOS === "windows" ? "Download for Windows" : "Download for Mac";
+  const downloadHref = `/download?os=${detectedOS}`;
+  const DownloadOSIcon = detectedOS === "windows" ? WindowsLogoIcon : AppleLogoIcon;
   const resolvedLanguage = (i18n.resolvedLanguage ?? i18n.language ?? "en").split("-")[0];
   const selectedLanguage = supportedLanguages.includes(resolvedLanguage)
     ? resolvedLanguage
@@ -73,6 +78,15 @@ export function PageShell({ children }: { children: React.ReactNode }) {
               ))}
             </select>
             <ThemeToggle className="hidden sm:inline-flex" />
+            <Link
+              to={downloadHref}
+              title="Download Ubik Meetings App"
+              aria-label="Download Ubik Meetings App"
+              className="hidden h-9 items-center justify-center gap-1.5 border border-border bg-background px-4 text-sm font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:inline-flex"
+            >
+              <DownloadOSIcon weight="fill" aria-hidden />
+              {downloadLabel}
+            </Link>
             <a
               href={externalLinks.founderMeeting}
               className="nav-try-link inline-flex h-9 items-center justify-center border border-primary bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -113,6 +127,12 @@ export function PageShell({ children }: { children: React.ReactNode }) {
                   <div className="border-b py-4">
                     <ThemeToggle showLabels />
                   </div>
+                  <Button asChild variant="outline" onClick={() => setMenuOpen(false)}>
+                    <Link to={downloadHref} title="Download Ubik Meetings App" aria-label="Download Ubik Meetings App">
+                      <DownloadOSIcon weight="fill" data-icon="inline-start" />
+                      {downloadLabel}
+                    </Link>
+                  </Button>
                   <Button asChild onClick={() => setMenuOpen(false)}>
                     <a href={externalLinks.app}>
                       {t("cta.realise-value", { defaultValue: "Realise true value in 30 days" })}

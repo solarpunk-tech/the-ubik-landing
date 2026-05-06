@@ -183,7 +183,7 @@ export const blogPosts = [
   {
     slug: "human-in-loop-erp-handoffs",
     date: "2026-04-29",
-    category: "Trust",
+    category: "Security",
     title: "Software today, trade operations tomorrow: the AI-native trade thesis",
     excerpt: "Vertical AI is misframed as 'AI for industry X.' The real opportunity is using AI to operate industries. A note from the founders on where Ubik is going."
   }

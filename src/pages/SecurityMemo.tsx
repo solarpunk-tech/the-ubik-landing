@@ -77,13 +77,13 @@ const trustBaselines = [
 export default function SecurityMemo() {
   function shareMemo() {
     void navigator.clipboard.writeText(window.location.href);
-    toast.success("Trust note link copied.");
+    toast.success("Security note link copied.");
   }
 
   return (
     <PageShell>
       <Seo
-        title="Ubik Trust Note for Seafood Operators"
+        title="Ubik Security Note for Seafood Operators"
         description="A client-facing trust note for seafood importers, exporters, processors, and their customers."
         canonical="https://theubik.com/security"
       />
@@ -93,9 +93,9 @@ export default function SecurityMemo() {
           <div className="mx-auto max-w-6xl">
             <div className="mb-10 grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
               <div className="flex flex-col gap-5">
-                <Badge variant="secondary" className="w-fit">Trust</Badge>
+                <Badge variant="secondary" className="w-fit">Security</Badge>
                 <h1 className="text-5xl font-semibold leading-tight sm:text-6xl">
-                  Trust for seafood operators and their customers.
+                  Security for seafood operators and their customers.
                 </h1>
                 <p className="max-w-3xl text-lg leading-8 text-muted-foreground">
                   Ubik connects to approved company tools so your team can prepare quotes, approvals,

@@ -218,6 +218,38 @@
     - `mint a11y` exits successfully with the existing AA-not-AAA color warnings only.
     - `git diff --check` passes.
     - Playwright verified homepage, mobile menu, pricing, and docs CTA hrefs resolve to the calendar or app URLs and have no horizontal overflow.
+- Latest CTA/nav rename pass:
+  - Browser comments requested: replace `Realise true value in 30 days` with `Try Ubik Now`, remove Product from top nav, rename Journal to Trade Notes, rename Trust to Security, add Ubik Local to top/mobile nav, and make Try Ubik Now primary while Talk to founders is secondary.
+  - Header CTA now reads `Try Ubik Now` and links to `https://app.theubik.com`.
+  - Homepage hero and lower CTA band now use `Try Ubik Now` as the primary app CTA and `Talk to founders` as secondary.
+  - Top/mobile nav now shows `How it works`, `Guide`, `Pricing`, `Trade Notes`, `Security`, and `Ubik Local`; Product is removed.
+  - `Ubik Local` routes to `/download?os=<detectedOS>` using the existing OS detection helper.
+  - Journal/Trust wording was also updated on the blog, security memo, and related visible surfaces.
+  - Visual requirements from user screenshots:
+    - Layout: preserve compact mobile header with logo, primary CTA, and plus-menu trigger.
+    - Spacing: mobile CTA labels must fit in the existing header/button widths.
+    - Typography: use exact requested CTA/nav labels, including `Try Ubik Now` casing.
+    - Color: app CTA is primary blue; founder CTA is secondary/outline where paired.
+    - Interactions: header Try Ubik Now opens `app.theubik.com`; Ubik Local opens the OS-specific download route.
+    - Responsive behavior: full desktop nav shows renamed items and Product removal; mobile sheet shows the same nav set.
+  - Evidence:
+    - Before in-app browser screenshot: `/tmp/ubik-landing-qa/before-home.png`
+    - After mobile/header screenshot: `/tmp/ubik-landing-qa/after-home-stable.png`
+    - After mobile menu screenshot: `/tmp/ubik-landing-qa/after-menu-stable.png`
+    - After desktop nav screenshot: `/tmp/ubik-landing-qa/after-desktop-settled.png`
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - Browser/IAB verified header CTA text `Try Ubik Now`, href `https://app.theubik.com`, Product link count `0`, mobile menu `Ubik Local`, `Trade Notes`, and `Security`, and no remaining `Realise true value in 30 days` text.
+    - Supplemental Playwright desktop screenshot verified the full-width nav and primary/secondary hero CTA color flip.
+  - Remaining known console noise:
+    - Existing React Router v7 future-flag warnings.
+    - Existing SVG property warnings from `src/components/landing/SourceLogoTile.tsx` (`font-family`, `paint-order`, `letter-spacing`, `word-spacing`); not introduced by this CTA/nav pass.
+- Latest nav hover pass:
+  - Desktop top nav links now use a shared `.nav-link` class.
+  - Hover/focus/active state turns the selected nav item Ubik blue with a white background and blue border.
+  - Evidence: `/tmp/ubik-landing-qa/nav-hover-playwright.png`.
+  - Verification: `pnpm lint`, `pnpm build`, and `git diff --check` pass; Playwright computed hover styles for `Trade Notes` as blue text, white background, and blue border.
   - Latest visual evidence:
     - CTA home desktop: `verification/cta-links-home-desktop.png`
     - CTA mobile menu: `verification/cta-links-home-mobile-menu.png`
@@ -306,6 +338,45 @@
   - Latest visual evidence:
     - Trust cleaner desktop full page: `verification/trust-cleaner-client-copy-desktop.png`
     - Trust cleaner mobile full page: `verification/trust-cleaner-client-copy-mobile.png`
+- Latest Ubik Local nav/download polish:
+  - Removed the duplicate standalone header and mobile-sheet `Ubik Local` download buttons; `Ubik Local` remains only as a normal nav item.
+  - Added `Ubik Local` to the footer between `Security` and `Talk to founders`, linked to the detected OS download route.
+  - Top nav hover/focus/press now uses a solid Ubik blue box with white text and blue border. Persistent route-active visual styling is removed, so `/download?os=mac` does not leave `Ubik Local` highlighted after selection.
+  - `/download` now adds the concise Ubik Local line below the Mac/Windows download buttons and a `Coming soon` section with three ICP-facing cards: spreadsheets without uploads, portal context reviewed, and documents into memory.
+  - Visual requirements from browser comments:
+    - Layout: desktop header must show only one `Ubik Local`; mobile menu must not duplicate it as a separate button.
+    - Spacing: footer keeps compact link row with `Ubik Local` included.
+    - Typography: download-page copy stays crisp and leadership-friendly.
+    - Color: nav hover/press is blue background with white font, not the inverse.
+    - Interactions: active route can keep semantic `active` class but must look neutral unless hovered/focused/pressed.
+    - Responsive behavior: new `/download` cards stack on mobile with no horizontal overflow.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - `git diff --check` passes.
+    - Playwright verified header duplicate count, footer `Ubik Local` href, neutral active `/download` nav styling, solid blue/white hover styling, all new copy/cards, and no mobile overflow.
+  - Latest evidence:
+    - Header no duplicate: `/tmp/ubik-landing-qa/header-no-duplicate.png`
+    - Footer Ubik Local: `/tmp/ubik-landing-qa/footer-ubik-local.png`
+    - Download local section desktop: `/tmp/ubik-landing-qa/download-local-section.png`
+    - Download local section mobile: `/tmp/ubik-landing-qa/download-local-section-mobile.png`
+    - Nav hover blue/white: `/tmp/ubik-landing-qa/nav-hover-blue-white.png`
+- Latest Ubik Local download comment pass:
+  - Top nav order now places `Ubik Local` in the middle: `How it works`, `Guide`, `Pricing`, `Ubik Local`, `Trade Notes`, `Security`; `Security` is the rightmost mid-nav item.
+  - Removed the section-level `Coming soon` badge above the Ubik Local heading. Individual cards still carry small `COMING SOON` labels.
+  - Download section heading now reads `Your local bridge for intelligence.`
+  - Supporting copy now fits on one desktop line: `Ubik Local captures useful computer context and sends only reviewed trade signals into Ubik.`
+  - Installer steps are collapsed by default and only render after a user clicks a Mac/Windows/manual download control. The existing automatic download behavior remains unchanged.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - `git diff --check` passes.
+    - Playwright verified nav order, no top `Coming soon` badge, one-line desktop copy, installer steps hidden before click, installer steps visible after download click, solid blue/white hover state, and no mobile horizontal overflow.
+  - Latest evidence:
+    - Collapsed local section: `/tmp/ubik-landing-qa/download-local-collapsed.png`
+    - Install guide after download click: `/tmp/ubik-landing-qa/download-local-install-guide.png`
+    - Collapsed local section mobile: `/tmp/ubik-landing-qa/download-local-collapsed-mobile.png`
+    - Nav hover blue/white: `/tmp/ubik-landing-qa/nav-hover-blue-white.png`
 
 ## Next notes
 

@@ -29,7 +29,7 @@ export default function HowItWorks() {
               </p>
               <Button asChild className="mt-6">
                 <a href={externalLinks.app}>
-                  Realise true value in 30 days <ArrowRightIcon data-icon="inline-end" />
+                  Try Ubik Now <ArrowRightIcon data-icon="inline-end" />
                 </a>
               </Button>
             </div>

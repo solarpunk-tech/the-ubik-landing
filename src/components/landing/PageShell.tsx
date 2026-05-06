@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { AppleLogoIcon, PlusIcon, WindowsLogoIcon, XIcon } from "@phosphor-icons/react";
+import { PlusIcon, XIcon } from "@phosphor-icons/react";
 import { useDetectedOS } from "@/lib/use-detected-os";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -16,20 +16,18 @@ export function PageShell({ children }: { children: React.ReactNode }) {
   const { i18n, t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
   const detectedOS = useDetectedOS();
-  const downloadLabel = detectedOS === "windows" ? "Download for Windows" : "Download for Mac";
   const downloadHref = `/download?os=${detectedOS}`;
-  const DownloadOSIcon = detectedOS === "windows" ? WindowsLogoIcon : AppleLogoIcon;
   const resolvedLanguage = (i18n.resolvedLanguage ?? i18n.language ?? "en").split("-")[0];
   const selectedLanguage = supportedLanguages.includes(resolvedLanguage)
     ? resolvedLanguage
     : "en";
   const navItems = [
-    { to: "/#product", label: t("nav.product", { defaultValue: "Product" }) },
     { to: "/how-it-works", label: t("nav.how-it-works", { defaultValue: "How it works" }) },
     { href: externalLinks.docs, label: t("nav.guide", { defaultValue: "Guide" }) },
     { to: "/pricing", label: t("nav.pricing", { defaultValue: "Pricing" }) },
-    { to: "/blog", label: t("nav.journal", { defaultValue: "Journal" }) },
-    { to: "/security", label: t("nav.trust", { defaultValue: "Trust" }) }
+    { to: downloadHref, label: "Ubik Local" },
+    { to: "/blog", label: t("nav.journal", { defaultValue: "Trade Notes" }) },
+    { to: "/security", label: t("nav.trust", { defaultValue: "Security" }) }
   ];
 
   function handleLanguageChange(language: string) {
@@ -54,11 +52,11 @@ export function PageShell({ children }: { children: React.ReactNode }) {
           <nav className="hidden items-center gap-4 text-sm text-muted-foreground lg:flex">
             {navItems.map((item) =>
               "href" in item ? (
-                <a key={item.href} href={item.href} className="hover:text-foreground">
+                <a key={item.href} href={item.href} className="nav-link">
                   {item.label}
                 </a>
               ) : (
-                <NavLink key={item.to} to={item.to} className="hover:text-foreground">
+                <NavLink key={item.to} to={item.to} className="nav-link">
                   {item.label}
                 </NavLink>
               )
@@ -78,20 +76,11 @@ export function PageShell({ children }: { children: React.ReactNode }) {
               ))}
             </select>
             <ThemeToggle className="hidden sm:inline-flex" />
-            <Link
-              to={downloadHref}
-              title="Download Ubik Meetings App"
-              aria-label="Download Ubik Meetings App"
-              className="hidden h-9 items-center justify-center gap-1.5 border border-border bg-background px-4 text-sm font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:inline-flex"
-            >
-              <DownloadOSIcon weight="fill" aria-hidden />
-              {downloadLabel}
-            </Link>
             <a
-              href={externalLinks.founderMeeting}
+              href={externalLinks.app}
               className="nav-try-link inline-flex h-9 items-center justify-center border border-primary bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              {t("footer.contact", { defaultValue: "Talk to founders" })}
+              Try Ubik Now
             </a>
             <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger asChild>
@@ -127,15 +116,9 @@ export function PageShell({ children }: { children: React.ReactNode }) {
                   <div className="border-b py-4">
                     <ThemeToggle showLabels />
                   </div>
-                  <Button asChild variant="outline" onClick={() => setMenuOpen(false)}>
-                    <Link to={downloadHref} title="Download Ubik Meetings App" aria-label="Download Ubik Meetings App">
-                      <DownloadOSIcon weight="fill" data-icon="inline-start" />
-                      {downloadLabel}
-                    </Link>
-                  </Button>
                   <Button asChild onClick={() => setMenuOpen(false)}>
                     <a href={externalLinks.app}>
-                      {t("cta.realise-value", { defaultValue: "Realise true value in 30 days" })}
+                      Try Ubik Now
                     </a>
                   </Button>
                 </div>
@@ -153,7 +136,8 @@ export function PageShell({ children }: { children: React.ReactNode }) {
             <a href={externalLinks.docs}>{t("nav.guide", { defaultValue: "Guide" })}</a>
             <Link to="/privacy-policy">{t("nav.privacy", { defaultValue: "Privacy" })}</Link>
             <Link to="/terms-of-service">{t("nav.terms", { defaultValue: "Terms" })}</Link>
-            <Link to="/security">{t("nav.trust", { defaultValue: "Trust" })}</Link>
+            <Link to="/security">{t("nav.trust", { defaultValue: "Security" })}</Link>
+            <Link to={downloadHref}>Ubik Local</Link>
             <a href={externalLinks.founderMeeting}>
               {t("footer.contact", { defaultValue: "Talk to founders" })}
             </a>

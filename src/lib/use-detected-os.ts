@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export type OS = "mac" | "windows";
 
@@ -11,9 +11,6 @@ export function detectOS(): OS {
 }
 
 export function useDetectedOS(): OS {
-  const [os, setOS] = useState<OS>("mac");
-  useEffect(() => {
-    setOS(detectOS());
-  }, []);
+  const [os] = useState<OS>(() => detectOS());
   return os;
 }

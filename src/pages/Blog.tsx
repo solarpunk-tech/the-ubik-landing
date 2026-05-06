@@ -214,10 +214,10 @@ export default function Blog() {
   if (selected) {
     return (
       <PageShell>
-        <Seo title={`${selected.title} — Ubik Journal`} description={selected.excerpt} />
+        <Seo title={`${selected.title} — Ubik Trade Notes`} description={selected.excerpt} />
         <main className="container-page section-y">
           <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
-            <ArrowLeftIcon aria-hidden /> Journal
+            <ArrowLeftIcon aria-hidden /> Trade Notes
           </Link>
           <article className="mt-10 grid gap-10 lg:grid-cols-[1fr_16rem] lg:items-start">
             <div className="max-w-3xl">
@@ -245,12 +245,12 @@ export default function Blog() {
   return (
     <PageShell>
       <Seo
-        title="Ubik Journal"
+        title="Ubik Trade Notes"
         description="Minimal notes on perishable operations, reviewed automation, and the operator layer above existing systems."
       />
       <main className="container-page section-y">
         <div className="grid gap-8 border-b pb-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <h1 className="text-5xl font-semibold leading-[1.05] sm:text-6xl">Ubik Journal</h1>
+          <h1 className="text-5xl font-semibold leading-[1.05] sm:text-6xl">Ubik Trade Notes</h1>
           <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
             Sparse notes on perishable operations, source systems, and the review loops that keep work moving.
           </p>

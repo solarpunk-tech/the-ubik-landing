@@ -177,7 +177,7 @@ export default function Pricing() {
                 <div className="grid gap-3">
                   <Button asChild variant="secondary" size="lg">
                     <a href={externalLinks.app}>
-                      Realise true value in 30 days <ArrowRightIcon data-icon="inline-end" />
+                      Try Ubik Now <ArrowRightIcon data-icon="inline-end" />
                     </a>
                   </Button>
                   <p className="text-sm text-primary-foreground/70">Built for one operator. Comes with Ubik Local included.</p>

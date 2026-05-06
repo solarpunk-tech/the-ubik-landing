@@ -498,3 +498,15 @@
   background-color: #05070d !important;
   color: #ffffff !important;
 }
+
+.nav-link {
+  @apply inline-flex h-8 items-center justify-center border border-transparent px-2.5 font-medium transition-colors;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible,
+.nav-link:active {
+  border-color: #345bea !important;
+  background-color: #345bea !important;
+  color: #ffffff !important;
+}

@@ -21,7 +21,7 @@ export default function Index() {
     <PageShell>
       <Seo
         title="Ubik — Personalised Workspace for Perishable Trade"
-        description="Ubik is a personalised workspace for seafood importers, exporters, and processors. $700M+ in customer aggregate revenue. 20x faster RFQ cycles. SOC 2 Type 2."
+        description="Ubik is a personalised workspace for seafood importers, exporters, and processors. $700M+ in customer aggregate revenue. 20x faster RFQ cycles. SOC 2 Type II audit in progress."
       />
       <JsonLd
         data={[
@@ -40,7 +40,7 @@ export default function Index() {
             applicationSubCategory: "Personalised workspace for perishable trade",
             operatingSystem: "Web",
             description:
-              "Personalised workspace for perishable trade. Built for seafood importers, exporters, and processors. Compresses RFQ cycles 20x, recovers margin from RFQ leakage, runs SOC 2 Type 2.",
+              "Personalised workspace for perishable trade. Built for seafood importers, exporters, and processors. Compresses RFQ cycles 20x, recovers margin from RFQ leakage, with SOC 2 Type II audit in progress.",
             offers: [
               { "@type": "Offer", name: "Base", price: "100", priceCurrency: "USD", description: "Monthly personal AI workspace with Ubik Local included" },
               { "@type": "Offer", name: "Base Annual", price: "85", priceCurrency: "USD", description: "Annual Base price per month, billed annually" },
@@ -147,7 +147,7 @@ export default function Index() {
                 Enterprise-grade trust. Operator-friendly defaults.
               </h2>
               <p className="text-muted-foreground">
-                SOC 2 Type 2, GDPR, ISO 27001. EU and APAC data residency. Your RFQs, supplier pricing, and margins never become training input for any third-party model.
+                SOC 2 Type II audit in progress, GDPR, ISO 27001. EU and APAC data residency. Your RFQs, supplier pricing, and margins never become training input for any third-party model.
               </p>
               <Button asChild variant="outline" className="w-fit">
                 <Link to="/security">

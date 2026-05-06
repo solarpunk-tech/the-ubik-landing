@@ -264,7 +264,7 @@
   - `/security` has been rewritten from an internal CTO/vendor-review memo into a client-facing Trust page for seafood importers, exporters, processors, directors, operators, and admins.
   - The page now explains admin approval, least-needed access, human review, revocation, and no third-party model training in plain language.
   - The scary DWD/Domain-Wide Delegation phrasing is intentionally absent from visible page copy; admin approval is described as Google Workspace or Microsoft 365 app approval.
-  - Approved trust claims retained: SOC 2 Type 2, GDPR, ISO 27001, AES-256 at rest, TLS 1.3 in transit, and audit log on every action.
+  - Approved trust claims retained: SOC 2 Type II audit in progress, GDPR, ISO 27001, AES-256 at rest, TLS 1.3 in transit, and audit log on every action.
   - CTAs use the existing founder meeting URL and copy/share trust note behavior.
   - Before/reference evidence: the prior `/security` page copy in `src/pages/SecurityMemo.tsx` led with `Security posture for an AI operating layer` and was framed for technical reviewers.
   - Verification:
@@ -275,9 +275,40 @@
   - Latest visual evidence:
     - Trust desktop full page: `verification/trust-client-facing-desktop.png`
     - Trust mobile full page: `verification/trust-client-facing-mobile.png`
+- Latest legal policy pass:
+  - `/privacy-policy` and `/privacy-policy.html` now render the supplied `Privacy Notice`, effective `2026-05-05`, for Solarpunk Technology Sdn Bhd operating as Ubik.
+  - The privacy page includes controller details, Malaysia tax ID and address, founders, public contact, public-website scope, processor distinction for customer-submitted data, subprocessors, international transfers, security safeguards, AI/LLM handling, retention TBDs, privacy rights, children, change notice, and contact blocks.
+  - Legal-copy safety adjustment: current LLM/API providers are named as OpenAI and Anthropic; hosting/infrastructure/API/database providers and formal subprocessor page remain TBD/as applicable.
+  - EU/UK representative and DPO are no longer shown as appointed named contacts; the page now says `not appointed unless legally required`.
+  - Cookie/tracking wording is explicit but reconciled with current site behavior: the page says no tracking cookies, web beacons, pixels, or advertising tracking technologies on `theubik.com`, while allowing strictly necessary browser storage for language and theme preferences.
+  - `/terms-of-service` and `/terms-of-service.html` now render a structured `Terms and Conditions` page, effective `2026-05-05`, covering B2B access, accounts, customer responsibilities, customer content, AI outputs, acceptable use, third-party services, fees, suspension/termination, confidentiality, privacy/DPA relationship, security, disclaimers, liability, indemnity, governing law, changes, and contact.
+  - Public SOC 2 wording has been softened site-wide to `SOC 2 Type II audit in progress` or `SOC 2 Type II report is not currently available while the audit is being completed`; no rendered page checked implies a completed report.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - `git diff --check` passes.
+    - Playwright verified `/privacy-policy` and `/terms-of-service` on desktop and 390px mobile with no horizontal overflow, expected SEO titles, required legal/company text, and audit-in-progress SOC 2 wording across `/`, `/security`, `/pricing`, `/privacy-policy`, and `/terms-of-service`.
+  - Latest visual evidence:
+    - Privacy desktop full page: `verification/legal-privacy-notice-desktop.png`
+    - Privacy mobile full page: `verification/legal-privacy-notice-mobile.png`
+    - Terms desktop full page: `verification/legal-terms-conditions-desktop.png`
+    - Terms mobile full page: `verification/legal-terms-conditions-mobile.png`
+  - Remaining legal dependency: final legal review is still needed before production reliance, especially retention TBDs, DPA/subprocessor page, governing-law wording, liability cap, EU/UK representative/DPO appointment requirements, and SOC 2 timing.
+- Latest trust/security copy polish:
+  - `/security` now avoids phrasing that talks down to import/export leadership: removed `Plain-English position`, `plain-language`, `A simple review list`, `blank cheque`, and DWD/Domain-Wide Delegation phrasing from the trust page.
+  - The trust page now uses cleaner headings: `Operating position`, `Access approval is scoped`, and `Production review`.
+  - The public integrations FAQ now describes Gmail/Outlook/Microsoft 365 as `admin-approved app access` instead of Domain-Wide Delegation.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - `git diff --check` passes.
+    - Playwright verified `/security`, `/privacy-policy`, and `/terms-of-service` on desktop and 390px mobile with no horizontal overflow, expected copy present, and no forbidden DWD/plain-English phrasing.
+  - Latest visual evidence:
+    - Trust cleaner desktop full page: `verification/trust-cleaner-client-copy-desktop.png`
+    - Trust cleaner mobile full page: `verification/trust-cleaner-client-copy-mobile.png`
 
 ## Next notes
 
-- Replace privacy and terms copy when the final legal text is shared.
+- Final legal review remains needed for the privacy/terms draft before relying on it in production.
 - If final logo filenames change, update only `src/lib/brand.ts`.
 - Browser plugin DOM verification and Playwright screenshot capture were used for the final comment pass.

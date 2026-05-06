@@ -207,8 +207,8 @@ export const processSteps = [
 export const securityCards = [
   {
     icon: ShieldCheckIcon,
-    title: "SOC 2 Type 2, GDPR, ISO 27001",
-    copy: "Annual audit, EU data residency, AES-256 at rest, TLS 1.3 in transit."
+    title: "SOC 2 Type II audit in progress",
+    copy: "GDPR, ISO 27001, EU data residency, AES-256 at rest, TLS 1.3 in transit."
   },
   {
     icon: LockKeyIcon,
@@ -250,7 +250,7 @@ export const faqs: Faq[] = [
   },
   {
     question: "How is Ubik different from ChatGPT, Claude, or Gemini for business?",
-    answer: "Ubik is built for one industry, with industry-specific memory and integrations, while ChatGPT, Claude, and Gemini are general-purpose. Three differences matter. First, Ubik understands seafood-native concepts out of the box: HSFCA, BOL, lot codes, cold chain, transit days, FDA holds. Second, Ubik connects to your stack (Outlook, Gmail, Zoho, SAP, WhatsApp) and acts inside it, rather than producing text you copy-paste. Third, your data does not become training data. Ubik is SOC 2 Type 2 with EU data residency. ChatGPT and Claude treat your RFQs and supplier pricing as input to their next model.",
+    answer: "Ubik is built for one industry, with industry-specific memory and integrations, while ChatGPT, Claude, and Gemini are general-purpose. Three differences matter. First, Ubik understands seafood-native concepts out of the box: HSFCA, BOL, lot codes, cold chain, transit days, FDA holds. Second, Ubik connects to your stack (Outlook, Gmail, Zoho, SAP, WhatsApp) and acts inside it, rather than producing text you copy-paste. Third, your data does not become training data. Ubik has a SOC 2 Type II audit in progress with EU data residency. ChatGPT and Claude treat your RFQs and supplier pricing as input to their next model.",
     paragraphs: [
       "Ubik is built for one industry, with industry-specific memory and integrations, while ChatGPT, Claude, and Gemini are general-purpose.",
       "Three differences matter."
@@ -258,7 +258,7 @@ export const faqs: Faq[] = [
     bullets: [
       "Ubik understands seafood-native concepts out of the box: HSFCA, BOL, lot codes, cold chain, transit days, FDA holds.",
       "Ubik connects to your stack (Outlook, Gmail, Zoho, SAP, WhatsApp) and acts inside it, rather than producing text you copy-paste.",
-      "Your data does not become training data. Ubik is SOC 2 Type 2 with EU data residency. ChatGPT and Claude treat your RFQs and supplier pricing as input to their next model."
+      "Your data does not become training data. Ubik has a SOC 2 Type II audit in progress with EU data residency. ChatGPT and Claude treat your RFQs and supplier pricing as input to their next model."
     ]
   },
   {
@@ -298,9 +298,9 @@ export const faqs: Faq[] = [
   },
   {
     question: "Is my data safe with Ubik?",
-    answer: "Yes. Ubik is SOC 2 Type 2 with annual audit, GDPR-compliant for EU customers, and ISO 27001 certified. Data is encrypted AES-256 at rest and TLS 1.3 in transit. Data residency is available in the US, EU, and APAC. LLM models are called only for planning and action steps, never for training. Role-based permissions, SSO with Okta, Azure AD, and Google Workspace, and audit logging on every action are standard. Your prompts, RFQs, supplier pricing, and margin data never become training input for any third-party model. Contractually guaranteed.",
+    answer: "Yes. Ubik has a SOC 2 Type II audit in progress, supports GDPR-compliant handling for EU customers, and is aligned to ISO 27001 controls. Data is encrypted AES-256 at rest and TLS 1.3 in transit. Data residency is available in the US, EU, and APAC. LLM models are called only for planning and action steps, never for training. Role-based permissions, SSO with Okta, Azure AD, and Google Workspace, and audit logging on every action are standard. Your prompts, RFQs, supplier pricing, and margin data never become training input for any third-party model. Contractually guaranteed.",
     paragraphs: [
-      "Yes. Ubik is SOC 2 Type 2 with annual audit, GDPR-compliant for EU customers, and ISO 27001 certified.",
+      "Yes. Ubik has a SOC 2 Type II audit in progress, supports GDPR-compliant handling for EU customers, and is aligned to ISO 27001 controls.",
       "Your prompts, RFQs, supplier pricing, and margin data never become training input for any third-party model. Contractually guaranteed."
     ],
     bullets: [
@@ -322,13 +322,13 @@ export const faqs: Faq[] = [
   },
   {
     question: "Which integrations does Ubik support?",
-    answer: "Ubik connects to over 800 apps. Email: Gmail, Outlook, Microsoft 365 with Domain-Wide Delegation. ERP and accounting: Zoho Books, Zoho Inventory, SAP, NetSuite, QuickBooks. CRM: Salesforce, HubSpot, Zoho CRM. Chat: WhatsApp Business, Slack, Microsoft Teams. Logistics and pricing intelligence: SeaRates, Expana, Maersk, custom carrier portals. Productivity: Google Drive, OneDrive, Dropbox, Notion. If a system has an API or a structured export, we connect it during onboarding. If it does not, our forward-deployed engineer builds the integration in week 2.",
+    answer: "Ubik connects to over 800 apps. Email: Gmail, Outlook, and Microsoft 365 with admin-approved app access. ERP and accounting: Zoho Books, Zoho Inventory, SAP, NetSuite, QuickBooks. CRM: Salesforce, HubSpot, Zoho CRM. Chat: WhatsApp Business, Slack, Microsoft Teams. Logistics and pricing intelligence: SeaRates, Expana, Maersk, custom carrier portals. Productivity: Google Drive, OneDrive, Dropbox, Notion. If a system has an API or a structured export, we connect it during onboarding. If it does not, our forward-deployed engineer builds the integration in week 2.",
     paragraphs: [
       "Ubik connects to over 800 apps.",
       "If a system has an API or a structured export, we connect it during onboarding. If it does not, our forward-deployed engineer builds the integration in week 2."
     ],
     bullets: [
-      "Email: Gmail, Outlook, Microsoft 365 with Domain-Wide Delegation.",
+      "Email: Gmail, Outlook, and Microsoft 365 with admin-approved app access.",
       "ERP and accounting: Zoho Books, Zoho Inventory, SAP, NetSuite, QuickBooks.",
       "CRM: Salesforce, HubSpot, Zoho CRM.",
       "Chat: WhatsApp Business, Slack, Microsoft Teams.",

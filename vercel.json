@@ -8,6 +8,13 @@
         { "key": "Content-Type", "value": "application/octet-stream" },
         { "key": "Content-Disposition", "value": "attachment" }
       ]
+    },
+    {
+      "source": "/downloads/(.*)\\.dmg",
+      "headers": [
+        { "key": "Content-Type", "value": "application/x-apple-diskimage" },
+        { "key": "Content-Disposition", "value": "attachment" }
+      ]
     }
   ],
   "redirects": [

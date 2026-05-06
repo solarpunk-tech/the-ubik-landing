@@ -6,3 +6,6 @@ dist/
 .env.local
 *.log
 *.tsbuildinfo
+
+# Mac installer is hosted externally (S3) — too large for GitHub
+public/downloads/**/*.dmg

@@ -8,6 +8,12 @@
     Content-Type = "application/octet-stream"
     Content-Disposition = "attachment"
 
+[[headers]]
+  for = "/downloads/*.dmg"
+  [headers.values]
+    Content-Type = "application/x-apple-diskimage"
+    Content-Disposition = "attachment"
+
 [build.processing]
   skip_processing = false
 

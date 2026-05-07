@@ -468,6 +468,30 @@
     - Status ticker mobile: `verification/security-status-ticker-mobile.png`
     - Admin logos mobile: `verification/security-admin-logos-mobile.png`
     - Check report: `verification/security-page-report.json`
+- Latest OS-aware Ubik Local nav CTA pass:
+  - Restored Rini's OS-aware download CTA as a dedicated top-nav button before `Try Ubik Now`.
+  - Center nav no longer includes `Ubik Local`; it now reads `How it works`, `Guide`, `Pricing`, `Trade Notes`, `Security`.
+  - Desktop CTA rests as `Ubik Local`; hover/focus swaps to the detected OS icon plus `Download App` without changing button width.
+  - Mobile sheet now includes an outline `Download App` action with the detected OS icon above the primary `Try Ubik Now` button.
+  - Footer keeps the plain `Ubik Local` link to `/download?os=<detected>`.
+  - Visual requirements:
+    - Layout: dedicated compact header button beside theme toggle, before the primary web-app CTA.
+    - Spacing: stable-width button to avoid header shift during hover text swap.
+    - Typography: short nav/action labels only; no `Ubik Meetings App` naming in nav.
+    - Color: hover/focus uses the existing blue/white nav action treatment.
+    - Responsive behavior: desktop-only header button; mobile sheet action with no 390px overflow.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - Browser plugin verified `/` page identity and the accessible `Download Ubik Local for Mac` link; Browser screenshot capture timed out, so Playwright was used for stable visual evidence.
+    - Playwright verified desktop rest/hover states, click-through to `/download?os=mac`, mobile sheet state, and no horizontal overflow at 1366px and 390px.
+    - Console messages include existing React Router future-flag warnings and previously noted SVG/Sheet warnings; no new app crash or framework overlay.
+  - Latest evidence:
+    - Desktop resting CTA: `verification/nav-local-download-desktop-rest.png`
+    - Desktop hover CTA: `verification/nav-local-download-desktop-hover.png`
+    - Mobile sheet CTA: `verification/nav-local-download-mobile-sheet.png`
+    - Download route reached: `verification/nav-local-download-route.png`
+    - Check report: `verification/nav-local-download-report.json`
 
 ## Next notes
 

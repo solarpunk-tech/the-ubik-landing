@@ -442,6 +442,32 @@
     - Installer guide under buttons desktop: `verification/download-install-guide-under-buttons-desktop.png`
     - Installer guide under buttons mobile: `verification/download-install-guide-under-buttons-mobile.png`
     - Check report: `verification/download-local-comment-report.json`
+- Latest security page comment pass:
+  - The SOC 2, GDPR, and ISO 27001 trust columns now render boxed yellow `In progress` status tickers with a pulsing square.
+  - Security copy was tightened in the hero, operating-position card, trust cards, memo blocks, admin approval, and workspace-admin note.
+  - Added a concise PostHog cookieless session telemetry note under the security memo blocks.
+  - Added SVGL-sourced Google and Microsoft marks to the Google Workspace and Microsoft 365 admin approval cards.
+  - Visual requirements from the user screenshot:
+    - Layout: keep the trust columns as a scannable grid and make status visible inside each compliance column.
+    - Spacing: copy should be shorter and not force dense paragraph blocks.
+    - Typography: yellow ticker uses mono uppercase status text consistent with the rest of the page's operational labels.
+    - Color: status uses the existing support/yellow token; admin logos keep their brand colors inside tokenized boxes.
+    - Responsive behavior: trust rows and admin cards stack cleanly on 390px with no horizontal overflow.
+  - Before evidence:
+    - User-attached in-app browser comment screenshot for `/security` in this thread; no local pre-change screenshot path exists in the repo.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - `git diff --check` passes.
+    - Browser plugin verified `/security` page identity, nonblank render, status/logos/PostHog text presence, and no framework overlay.
+    - Playwright verified desktop/mobile screenshots and no horizontal overflow at 1366px and 390px.
+    - Console messages are the existing React Router v7 future-flag warnings only.
+  - Latest evidence:
+    - Status ticker desktop: `verification/security-status-ticker-desktop.png`
+    - Admin logos desktop: `verification/security-admin-logos-desktop.png`
+    - Status ticker mobile: `verification/security-status-ticker-mobile.png`
+    - Admin logos mobile: `verification/security-admin-logos-mobile.png`
+    - Check report: `verification/security-page-report.json`
 
 ## Next notes
 

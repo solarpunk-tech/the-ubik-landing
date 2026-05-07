@@ -1,0 +1,119 @@
+[
+  {
+    "name": "desktop",
+    "navText": "How it works\nGuide\nPricing\nTrade Notes\nSecurity",
+    "centerNavHasUbikLocal": false,
+    "linkCount": 1,
+    "routeUrl": "http://127.0.0.1:5173/download?os=mac",
+    "checks": {
+      "url": "http://127.0.0.1:5173/download?os=mac",
+      "title": "Download Ubik",
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "hasHorizontalOverflow": false
+    },
+    "screenshots": {
+      "rest": "/Users/shubhranshujha/Codex/the-ubik-landing/verification/nav-local-download-desktop-rest.png",
+      "hover": "/Users/shubhranshujha/Codex/the-ubik-landing/verification/nav-local-download-desktop-hover.png",
+      "route": "/Users/shubhranshujha/Codex/the-ubik-landing/verification/nav-local-download-route.png"
+    },
+    "messages": [
+      {
+        "type": "warning",
+        "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+      },
+      {
+        "type": "warning",
+        "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+      },
+      {
+        "type": "error",
+        "text": "Warning: Invalid DOM property `%s`. Did you mean `%s`?%s font-family fontFamily \n    at path\n    at svg\n    at Pdf\n    at LogoMark (http://127.0.0.1:5173/src/components/landing/SourceLogoTile.tsx:29:21)\n    at div\n    at SourceLogoTile (http://127.0.0.1:5173/src/components/landing/SourceLogoTile.tsx:116:34)\n    at div\n    at section\n    at div\n    at CardContent (http://127.0.0.1:5173/src/components/ui/card.tsx:84:24)\n    at div\n    at Card (http://127.0.0.1:5173/src/components/ui/card.tsx:23:17)\n    at ProductSurface\n    at section\n    at main\n    at div\n    at PageShell (http://127.0.0.1:5173/src/components/landing/PageShell.tsx:35:29)\n    at Index\n    at RenderedRoute (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4131:5)\n    at Routes (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4601:5)\n    at Suspense\n    at App\n    at Provider4 (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:316:15)\n    at TooltipProvider (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:15280:5)\n    at TooltipProvider (http://127.0.0.1:5173/src/components/ui/tooltip.tsx:24:28)\n    at Router (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4544:15)\n    at BrowserRouter (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:5290:5)\n    at V (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:44:25)\n    at J (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:42:18)\n    at I18nextProvider (http://127.0.0.1:5173/node_modules/.vite/deps/react-i18next.js?v=ca5750dc:1426:3)"
+      },
+      {
+        "type": "error",
+        "text": "Warning: Invalid DOM property `%s`. Did you mean `%s`?%s paint-order paintOrder \n    at path\n    at svg\n    at Pdf\n    at LogoMark (http://127.0.0.1:5173/src/components/landing/SourceLogoTile.tsx:29:21)\n    at div\n    at SourceLogoTile (http://127.0.0.1:5173/src/components/landing/SourceLogoTile.tsx:116:34)\n    at div\n    at section\n    at div\n    at CardContent (http://127.0.0.1:5173/src/components/ui/card.tsx:84:24)\n    at div\n    at Card (http://127.0.0.1:5173/src/components/ui/card.tsx:23:17)\n    at ProductSurface\n    at section\n    at main\n    at div\n    at PageShell (http://127.0.0.1:5173/src/components/landing/PageShell.tsx:35:29)\n    at Index\n    at RenderedRoute (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4131:5)\n    at Routes (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4601:5)\n    at Suspense\n    at App\n    at Provider4 (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:316:15)\n    at TooltipProvider (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:15280:5)\n    at TooltipProvider (http://127.0.0.1:5173/src/components/ui/tooltip.tsx:24:28)\n    at Router (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4544:15)\n    at BrowserRouter (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:5290:5)\n    at V (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:44:25)\n    at J (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:42:18)\n    at I18nextProvider (http://127.0.0.1:5173/node_modules/.vite/deps/react-i18next.js?v=ca5750dc:1426:3)"
+      },
+      {
+        "type": "error",
+        "text": "Warning: Invalid DOM property `%s`. Did you mean `%s`?%s letter-spacing letterSpacing \n    at path\n    at svg\n    at Pdf\n    at LogoMark (http://127.0.0.1:5173/src/components/landing/SourceLogoTile.tsx:29:21)\n    at div\n    at SourceLogoTile (http://127.0.0.1:5173/src/components/landing/SourceLogoTile.tsx:116:34)\n    at div\n    at section\n    at div\n    at CardContent (http://127.0.0.1:5173/src/components/ui/card.tsx:84:24)\n    at div\n    at Card (http://127.0.0.1:5173/src/components/ui/card.tsx:23:17)\n    at ProductSurface\n    at section\n    at main\n    at div\n    at PageShell (http://127.0.0.1:5173/src/components/landing/PageShell.tsx:35:29)\n    at Index\n    at RenderedRoute (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4131:5)\n    at Routes (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4601:5)\n    at Suspense\n    at App\n    at Provider4 (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:316:15)\n    at TooltipProvider (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:15280:5)\n    at TooltipProvider (http://127.0.0.1:5173/src/components/ui/tooltip.tsx:24:28)\n    at Router (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4544:15)\n    at BrowserRouter (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:5290:5)\n    at V (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:44:25)\n    at J (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:42:18)\n    at I18nextProvider (http://127.0.0.1:5173/node_modules/.vite/deps/react-i18next.js?v=ca5750dc:1426:3)"
+      },
+      {
+        "type": "error",
+        "text": "Warning: Invalid DOM property `%s`. Did you mean `%s`?%s word-spacing wordSpacing \n    at path\n    at svg\n    at Pdf\n    at LogoMark (http://127.0.0.1:5173/src/components/landing/SourceLogoTile.tsx:29:21)\n    at div\n    at SourceLogoTile (http://127.0.0.1:5173/src/components/landing/SourceLogoTile.tsx:116:34)\n    at div\n    at section\n    at div\n    at CardContent (http://127.0.0.1:5173/src/components/ui/card.tsx:84:24)\n    at div\n    at Card (http://127.0.0.1:5173/src/components/ui/card.tsx:23:17)\n    at ProductSurface\n    at section\n    at main\n    at div\n    at PageShell (http://127.0.0.1:5173/src/components/landing/PageShell.tsx:35:29)\n    at Index\n    at RenderedRoute (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4131:5)\n    at Routes (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4601:5)\n    at Suspense\n    at App\n    at Provider4 (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:316:15)\n    at TooltipProvider (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:15280:5)\n    at TooltipProvider (http://127.0.0.1:5173/src/components/ui/tooltip.tsx:24:28)\n    at Router (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4544:15)\n    at BrowserRouter (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:5290:5)\n    at V (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:44:25)\n    at J (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:42:18)\n    at I18nextProvider (http://127.0.0.1:5173/node_modules/.vite/deps/react-i18next.js?v=ca5750dc:1426:3)"
+      }
+    ],
+    "routeSettledChecks": {
+      "url": "http://127.0.0.1:5173/download?os=mac",
+      "title": "Download Ubik",
+      "buttonText": "Ubik LocalDownload App",
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "hasHorizontalOverflow": false
+    },
+    "routeSettledMessages": [
+      {
+        "type": "warning",
+        "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+      },
+      {
+        "type": "warning",
+        "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+      }
+    ]
+  },
+  {
+    "name": "mobile",
+    "mobileDownloadCount": 1,
+    "visibleDownloadApp": 2,
+    "tryCount": 1,
+    "checks": {
+      "url": "http://127.0.0.1:5173/",
+      "title": "Ubik — Personalised Workspace for Perishable Trade",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "hasHorizontalOverflow": false
+    },
+    "screenshots": {
+      "sheet": "/Users/shubhranshujha/Codex/the-ubik-landing/verification/nav-local-download-mobile-sheet.png"
+    },
+    "messages": [
+      {
+        "type": "warning",
+        "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+      },
+      {
+        "type": "warning",
+        "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+      },
+      {
+        "type": "error",
+        "text": "Warning: Invalid DOM property `%s`. Did you mean `%s`?%s font-family fontFamily \n    at path\n    at svg\n    at Pdf\n    at LogoMark (http://127.0.0.1:5173/src/components/landing/SourceLogoTile.tsx:29:21)\n    at div\n    at SourceLogoTile (http://127.0.0.1:5173/src/components/landing/SourceLogoTile.tsx:116:34)\n    at div\n    at section\n    at div\n    at CardContent (http://127.0.0.1:5173/src/components/ui/card.tsx:84:24)\n    at div\n    at Card (http://127.0.0.1:5173/src/components/ui/card.tsx:23:17)\n    at ProductSurface\n    at section\n    at main\n    at div\n    at PageShell (http://127.0.0.1:5173/src/components/landing/PageShell.tsx:35:29)\n    at Index\n    at RenderedRoute (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4131:5)\n    at Routes (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4601:5)\n    at Suspense\n    at App\n    at Provider4 (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:316:15)\n    at TooltipProvider (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:15280:5)\n    at TooltipProvider (http://127.0.0.1:5173/src/components/ui/tooltip.tsx:24:28)\n    at Router (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4544:15)\n    at BrowserRouter (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:5290:5)\n    at V (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:44:25)\n    at J (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:42:18)\n    at I18nextProvider (http://127.0.0.1:5173/node_modules/.vite/deps/react-i18next.js?v=ca5750dc:1426:3)"
+      },
+      {
+        "type": "error",
+        "text": "Warning: Invalid DOM property `%s`. Did you mean `%s`?%s paint-order paintOrder \n    at path\n    at svg\n    at Pdf\n    at LogoMark (http://127.0.0.1:5173/src/components/landing/SourceLogoTile.tsx:29:21)\n    at div\n    at SourceLogoTile (http://127.0.0.1:5173/src/components/landing/SourceLogoTile.tsx:116:34)\n    at div\n    at section\n    at div\n    at CardContent (http://127.0.0.1:5173/src/components/ui/card.tsx:84:24)\n    at div\n    at Card (http://127.0.0.1:5173/src/components/ui/card.tsx:23:17)\n    at ProductSurface\n    at section\n    at main\n    at div\n    at PageShell (http://127.0.0.1:5173/src/components/landing/PageShell.tsx:35:29)\n    at Index\n    at RenderedRoute (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4131:5)\n    at Routes (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4601:5)\n    at Suspense\n    at App\n    at Provider4 (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:316:15)\n    at TooltipProvider (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:15280:5)\n    at TooltipProvider (http://127.0.0.1:5173/src/components/ui/tooltip.tsx:24:28)\n    at Router (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4544:15)\n    at BrowserRouter (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:5290:5)\n    at V (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:44:25)\n    at J (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:42:18)\n    at I18nextProvider (http://127.0.0.1:5173/node_modules/.vite/deps/react-i18next.js?v=ca5750dc:1426:3)"
+      },
+      {
+        "type": "error",
+        "text": "Warning: Invalid DOM property `%s`. Did you mean `%s`?%s letter-spacing letterSpacing \n    at path\n    at svg\n    at Pdf\n    at LogoMark (http://127.0.0.1:5173/src/components/landing/SourceLogoTile.tsx:29:21)\n    at div\n    at SourceLogoTile (http://127.0.0.1:5173/src/components/landing/SourceLogoTile.tsx:116:34)\n    at div\n    at section\n    at div\n    at CardContent (http://127.0.0.1:5173/src/components/ui/card.tsx:84:24)\n    at div\n    at Card (http://127.0.0.1:5173/src/components/ui/card.tsx:23:17)\n    at ProductSurface\n    at section\n    at main\n    at div\n    at PageShell (http://127.0.0.1:5173/src/components/landing/PageShell.tsx:35:29)\n    at Index\n    at RenderedRoute (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4131:5)\n    at Routes (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4601:5)\n    at Suspense\n    at App\n    at Provider4 (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:316:15)\n    at TooltipProvider (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:15280:5)\n    at TooltipProvider (http://127.0.0.1:5173/src/components/ui/tooltip.tsx:24:28)\n    at Router (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4544:15)\n    at BrowserRouter (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:5290:5)\n    at V (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:44:25)\n    at J (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:42:18)\n    at I18nextProvider (http://127.0.0.1:5173/node_modules/.vite/deps/react-i18next.js?v=ca5750dc:1426:3)"
+      },
+      {
+        "type": "error",
+        "text": "Warning: Invalid DOM property `%s`. Did you mean `%s`?%s word-spacing wordSpacing \n    at path\n    at svg\n    at Pdf\n    at LogoMark (http://127.0.0.1:5173/src/components/landing/SourceLogoTile.tsx:29:21)\n    at div\n    at SourceLogoTile (http://127.0.0.1:5173/src/components/landing/SourceLogoTile.tsx:116:34)\n    at div\n    at section\n    at div\n    at CardContent (http://127.0.0.1:5173/src/components/ui/card.tsx:84:24)\n    at div\n    at Card (http://127.0.0.1:5173/src/components/ui/card.tsx:23:17)\n    at ProductSurface\n    at section\n    at main\n    at div\n    at PageShell (http://127.0.0.1:5173/src/components/landing/PageShell.tsx:35:29)\n    at Index\n    at RenderedRoute (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4131:5)\n    at Routes (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4601:5)\n    at Suspense\n    at App\n    at Provider4 (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:316:15)\n    at TooltipProvider (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:15280:5)\n    at TooltipProvider (http://127.0.0.1:5173/src/components/ui/tooltip.tsx:24:28)\n    at Router (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4544:15)\n    at BrowserRouter (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:5290:5)\n    at V (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:44:25)\n    at J (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:42:18)\n    at I18nextProvider (http://127.0.0.1:5173/node_modules/.vite/deps/react-i18next.js?v=ca5750dc:1426:3)"
+      },
+      {
+        "type": "error",
+        "text": "Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?%s%s \n\nCheck the render method of `Primitive.div.SlotClone`. \n    at SheetOverlay (http://127.0.0.1:5173/src/components/ui/sheet.tsx:70:25)\n    at http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:118:13\n    at http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:95:13\n    at http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:208:13\n    at http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:2122:22\n    at Presence (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:1036:11)\n    at Provider4 (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:316:15)\n    at DialogPortal (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:3077:11)\n    at SheetPortal (http://127.0.0.1:5173/src/components/ui/sheet.tsx:59:27)\n    at SheetContent (http://127.0.0.1:5173/src/components/ui/sheet.tsx:82:25)\n    at Provider4 (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:316:15)\n    at Dialog (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:3017:5)\n    at Sheet (http://127.0.0.1:5173/src/components/ui/sheet.tsx:26:21)\n    at div\n    at div\n    at header\n    at div\n    at PageShell (http://127.0.0.1:5173/src/components/landing/PageShell.tsx:35:29)\n    at Index\n    at RenderedRoute (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4131:5)\n    at Routes (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4601:5)\n    at Suspense\n    at App\n    at Provider4 (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:316:15)\n    at TooltipProvider (http://127.0.0.1:5173/node_modules/.vite/deps/radix-ui.js?v=ca5750dc:15280:5)\n    at TooltipProvider (http://127.0.0.1:5173/src/components/ui/tooltip.tsx:24:28)\n    at Router (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:4544:15)\n    at BrowserRouter (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=ca5750dc:5290:5)\n    at V (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:44:25)\n    at J (http://127.0.0.1:5173/node_modules/.vite/deps/next-themes.js?v=ca5750dc:42:18)\n    at I18nextProvider (http://127.0.0.1:5173/node_modules/.vite/deps/react-i18next.js?v=ca5750dc:1426:3)"
+      },
+      {
+        "type": "warning",
+        "text": "Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}."
+      },
+      {
+        "type": "warning",
+        "text": "Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}."
+      }
+    ]
+  }
+]

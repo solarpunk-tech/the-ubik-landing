@@ -377,6 +377,57 @@
     - Install guide after download click: `/tmp/ubik-landing-qa/download-local-install-guide.png`
     - Collapsed local section mobile: `/tmp/ubik-landing-qa/download-local-collapsed-mobile.png`
     - Nav hover blue/white: `/tmp/ubik-landing-qa/nav-hover-blue-white.png`
+- Latest Origin Roulette blog pass:
+  - PR #5 branch now publishes one real Trade Notes article: `/blog/origin-roulette-2026-shrimp-sourcing`.
+  - The prior three placeholder/static article bodies were removed from the public blog list; reusable article chrome and template fallback remain in `src/pages/Blog.tsx`.
+  - Blog data for the new article lives in `src/lib/blog/origin-roulette.ts`, including the public post metadata, origin profiles, flow-map data, tariff cells, decision rows, and source notes.
+  - Added D3/TopoJSON map dependencies for the article-native Robinson flow map and tariff matrix: `d3-geo`, `d3-geo-projection`, `topojson-client`, and `world-atlas`, plus type dependencies.
+  - Added `src/components/blog/OriginRouletteVisuals.tsx` for:
+    - `OriginPortraitRail` with Phosphor `FishSimpleIcon` filter control and light/dark country portraits.
+    - `OriginFlowMap` with weighted origin-destination lines and tariff brackets.
+    - `TariffDifferentialMatrix` with pending-risk asterisks.
+    - `DecisionTreeTable` for forward-book origin choices.
+  - Article assets copied into `public/blog/origin-roulette/`:
+    - Header images: `header-light.png`, `header-dark.png`.
+    - Country portraits: `portraits/light_*.png`, `portraits/dark_*.png`.
+  - SEO/GEO updates:
+    - Article canonical, `og:type=article`, OG image, and JSON-LD `BlogPosting` are wired.
+    - `public/sitemap.xml` now lists the new article URL and removes old placeholder article URLs.
+    - `public/llms.txt` now includes an AI-readable Origin Roulette summary and key terms.
+  - Visual requirements from the blog request:
+    - Layout: one public Trade Notes feature card, consistent article chrome, sticky share panel on desktop, single-column mobile.
+    - Spacing: long article sections, charts, and tables stay contained; wide visuals use internal horizontal scrollers only.
+    - Typography: Ubik editorial heading/body/mono rhythm retained across article, matrix, map, and captions.
+    - Color: light/dark header and portrait variants switch with active theme; tariff matrix uses Ubik blue plus warning/support tones.
+    - Interactions: share panel expands, origin filters update the portrait/details panel, map lanes expose selected lane details.
+    - Responsive behavior: no document-level horizontal overflow at 390, 768, 1366, or 1728 px.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - Playwright verified `/blog` and `/blog/origin-roulette-2026-shrimp-sourcing`, light/dark screenshots, no horizontal overflow at 390/768/1366/1728 px, share expansion, origin filtering, canonical URL, OG image, `og:type=article`, and JSON-LD presence.
+  - Latest evidence:
+    - Blog index desktop light: `verification/origin-blog-index-desktop-light.png`
+    - Article desktop light: `verification/origin-article-desktop-light.png`
+    - Article desktop dark: `verification/origin-article-desktop-dark.png`
+    - Article mobile light: `verification/origin-article-mobile-light.png`
+    - Article mobile dark: `verification/origin-article-mobile-dark.png`
+    - Share/filter interaction: `verification/origin-article-interactions.png`
+    - Overflow report: `verification/origin-roulette-visual-report.json`
+- Latest blog feature comment pass:
+  - Homepage Trade Notes preview no longer uses the generic `Notes on perishable work...` heading or repeated left-column intro.
+  - Homepage preview now uses the Origin Roulette header image as the full-width feature lead, with one `Read Trade Notes` link above and a compact article metadata/copy strip below.
+  - `/blog` no longer renders the self-evident `Ubik Trade Notes` intro block; it starts directly with the featured article row.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - `git diff --check` passes.
+    - Playwright verified `/` and `/blog` at 1267px and 390px with no horizontal overflow.
+  - Latest evidence:
+    - Homepage feature desktop: `verification/comment-blog-feature-home-desktop.png`
+    - Blog index no intro desktop: `verification/comment-blog-index-no-intro-desktop.png`
+    - Homepage feature mobile: `verification/comment-blog-feature-home-mobile.png`
+    - Blog index no intro mobile: `verification/comment-blog-index-no-intro-mobile.png`
+    - Overflow report: `verification/comment-blog-feature-report.json`
 
 ## Next notes
 

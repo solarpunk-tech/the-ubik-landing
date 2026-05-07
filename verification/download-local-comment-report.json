@@ -1,0 +1,44 @@
+[
+  {
+    "name": "download-local-copy-up-desktop",
+    "viewport": {
+      "width": 1267,
+      "height": 753
+    },
+    "click": false,
+    "check": {
+      "overflow": false,
+      "localCopyTop": 162,
+      "installerCopyTop": -1,
+      "buttonsTop": 439
+    }
+  },
+  {
+    "name": "download-install-guide-under-buttons-desktop",
+    "viewport": {
+      "width": 1267,
+      "height": 753
+    },
+    "click": true,
+    "check": {
+      "overflow": false,
+      "localCopyTop": 162,
+      "installerCopyTop": 479,
+      "buttonsTop": 439
+    }
+  },
+  {
+    "name": "download-install-guide-under-buttons-mobile",
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "click": true,
+    "check": {
+      "overflow": false,
+      "localCopyTop": 31,
+      "installerCopyTop": 348,
+      "buttonsTop": 308
+    }
+  }
+]

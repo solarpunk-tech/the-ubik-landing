@@ -84,6 +84,10 @@ export default function Download() {
               Download started
             </Badge>
 
+            <p className="max-w-3xl text-base leading-7 text-foreground sm:text-lg">
+              Ubik Local captures meeting audio for notes today; next, it becomes the private desktop bridge for spreadsheets, portals, and trade documents.
+            </p>
+
             <div className="flex max-w-3xl flex-col gap-4">
               <h1 className="text-4xl font-semibold leading-[1.05] sm:text-5xl lg:text-6xl">
                 Thanks for downloading.
@@ -128,9 +132,19 @@ export default function Download() {
               </Button>
             </div>
 
-            <p className="max-w-3xl text-sm leading-6 text-muted-foreground sm:text-base">
-              Today, Ubik Local captures meeting audio for notes; next, it becomes the private desktop bridge for spreadsheets, portals, and trade documents.
-            </p>
+            {showInstallGuide ? (
+              <div className="grid w-full max-w-5xl gap-px bg-border text-left md:grid-cols-3">
+                {steps.map(({ n, title, copy }) => (
+                  <div key={n} className="bg-background p-5 sm:p-6">
+                    <div className="inline-flex size-8 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
+                      {n}
+                    </div>
+                    <h2 className="mt-4 text-lg font-semibold">{title}</h2>
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{copy}</p>
+                  </div>
+                ))}
+              </div>
+            ) : null}
 
             <p className="text-xs text-muted-foreground">
               Version {downloads.version} · Detected: {os === "mac" ? "macOS" : "Windows"}
@@ -154,19 +168,6 @@ export default function Download() {
               </div>
             ))}
           </div>
-          {showInstallGuide ? (
-            <div className="grid gap-px bg-border md:grid-cols-3">
-              {steps.map(({ n, title, copy }) => (
-                <div key={n} className="bg-background p-6">
-                  <div className="inline-flex size-8 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
-                    {n}
-                  </div>
-                  <h2 className="mt-4 text-lg font-semibold">{title}</h2>
-                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{copy}</p>
-                </div>
-              ))}
-            </div>
-          ) : null}
         </section>
       </main>
     </PageShell>

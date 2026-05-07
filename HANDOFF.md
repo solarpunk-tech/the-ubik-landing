@@ -428,6 +428,20 @@
     - Homepage feature mobile: `verification/comment-blog-feature-home-mobile.png`
     - Blog index no intro mobile: `verification/comment-blog-index-no-intro-mobile.png`
     - Overflow report: `verification/comment-blog-feature-report.json`
+- Latest Ubik Local download layout comment pass:
+  - The `Ubik Local captures meeting audio...` positioning copy moved above the main download headline so the page explains Ubik Local before the install action.
+  - The Mac/Windows install guide rows now render directly below the download buttons after a user clicks a download/manual link, instead of appearing below the `Coming soon` product cards.
+  - The lower `Your local bridge for intelligence` section now only carries the coming-soon capability cards.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - `git diff --check` passes.
+    - Playwright verified `/download?os=mac` at 1267px and 390px, with no horizontal overflow and installer steps appearing immediately after the buttons.
+  - Latest evidence:
+    - Local copy moved up: `verification/download-local-copy-up-desktop.png`
+    - Installer guide under buttons desktop: `verification/download-install-guide-under-buttons-desktop.png`
+    - Installer guide under buttons mobile: `verification/download-install-guide-under-buttons-mobile.png`
+    - Check report: `verification/download-local-comment-report.json`
 
 ## Next notes
 

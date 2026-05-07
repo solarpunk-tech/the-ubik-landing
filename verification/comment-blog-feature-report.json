@@ -1,0 +1,87 @@
+[
+  {
+    "name": "comment-blog-feature-home-desktop",
+    "path": "/",
+    "viewport": {
+      "width": 1267,
+      "height": 753
+    },
+    "theme": "light",
+    "overflow": false
+  },
+  {
+    "name": "comment-blog-index-no-intro-desktop",
+    "path": "/blog",
+    "viewport": {
+      "width": 1267,
+      "height": 753
+    },
+    "theme": "light",
+    "overflow": false
+  },
+  {
+    "name": "comment-blog-feature-home-mobile",
+    "path": "/",
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "theme": "light",
+    "overflow": false
+  },
+  {
+    "name": "comment-blog-index-no-intro-mobile",
+    "path": "/blog",
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "theme": "light",
+    "overflow": false
+  },
+  {
+    "name": "overflow-blog",
+    "path": "/blog",
+    "viewport": {
+      "width": 390,
+      "height": 753
+    },
+    "theme": "light",
+    "overflow": {
+      "width": 390,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "overflow": false
+    }
+  },
+  {
+    "name": "overflow-blog",
+    "path": "/blog",
+    "viewport": {
+      "width": 768,
+      "height": 753
+    },
+    "theme": "light",
+    "overflow": {
+      "width": 768,
+      "scrollWidth": 768,
+      "clientWidth": 768,
+      "overflow": false
+    }
+  },
+  {
+    "name": "overflow-blog",
+    "path": "/blog",
+    "viewport": {
+      "width": 1267,
+      "height": 753
+    },
+    "theme": "light",
+    "overflow": {
+      "width": 1267,
+      "scrollWidth": 1267,
+      "clientWidth": 1267,
+      "overflow": false
+    }
+  }
+]

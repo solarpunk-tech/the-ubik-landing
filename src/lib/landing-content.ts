@@ -1,4 +1,5 @@
 import { FingerprintIcon, LockKeyIcon, ShieldCheckIcon } from "@phosphor-icons/react";
+export { blogPosts } from "@/lib/blog/origin-roulette";
 
 export interface Faq {
   question: string;
@@ -162,30 +163,6 @@ export const howWorkflows = [
       }
     ],
     steps: ["Detect ETA movement", "Recalculate promise dates", "Draft customer update"]
-  }
-];
-
-export const blogPosts = [
-  {
-    slug: "operator-layer-for-perishables",
-    date: "2026-04-29",
-    category: "Operations",
-    title: "AI decision intelligence for perishable supply chains",
-    excerpt: "Seafood is the most traded, least digitized commodity on earth. Why ERPs fail, why generic AI fails, and what an operator-grade AI layer looks like in 2026."
-  },
-  {
-    slug: "buyer-follow-up-to-order-packet",
-    date: "2026-04-29",
-    category: "Workflow",
-    title: "From RFQ to reviewed quote in 6 hours",
-    excerpt: "How a large vertically integrated seafood conglomerate compressed inquiry-to-quote cycles from 5-7 days to 6 hours and recovered $200K in margin on a single account, in month one."
-  },
-  {
-    slug: "human-in-loop-erp-handoffs",
-    date: "2026-04-29",
-    category: "Trust",
-    title: "Software today, trade operations tomorrow: the AI-native trade thesis",
-    excerpt: "Vertical AI is misframed as 'AI for industry X.' The real opportunity is using AI to operate industries. A note from the founders on where Ubik is going."
   }
 ];
 

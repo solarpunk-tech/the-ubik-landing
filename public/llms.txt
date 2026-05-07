@@ -51,13 +51,21 @@ Ubik minimizes what is shared with external LLMs. Models are used for planning, 
 
 - /
 - /pricing
-- /features
 - /security
 - /privacy
-- /thesis
-- /customers
-- /blog/ai-decision-intelligence-perishable-supply-chain
-- /guides/seafood-rfq-automation
+- /how-it-works
+- /blog/origin-roulette-2026-shrimp-sourcing
+- https://docs.theubik.com
+
+## Trade Notes
+
+### Origin Roulette 2026
+
+Path: /blog/origin-roulette-2026-shrimp-sourcing
+
+Summary: A shrimp buyer strategy note for Q3 2026 and Q1 2027 forward books. It compares Ecuador, India, Vietnam, Indonesia, Thailand, China, Saudi Arabia and Bangladesh across landed-cost exposure, tariffs, ADD/CVD risk, EU CATCH documentation, FDA import certification, value-added processing capability, halal positioning and origin diversification.
+
+Key terms: shrimp sourcing strategy, warm-water shrimp tariffs, seafood buyer strategy, Ecuador shrimp exports, India shrimp EU FTA, Vietnam shrimp re-export, Indonesia shrimp FDA certification, Saudi shrimp halal, perishable trade AI.
 
 ## Contact
 

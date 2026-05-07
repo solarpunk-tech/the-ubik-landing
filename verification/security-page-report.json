@@ -1,0 +1,118 @@
+[
+  {
+    "name": "security-status-ticker-desktop.png",
+    "file": "/Users/shubhranshujha/Codex/the-ubik-landing/verification/security-status-ticker-desktop.png",
+    "viewport": {
+      "width": 1366,
+      "height": 900
+    },
+    "requestedScrollY": 520,
+    "actualScrollY": 520,
+    "checks": {
+      "statusCount": 3,
+      "hasPosthog": true,
+      "hasGoogle": true,
+      "hasMicrosoft": true,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "hasHorizontalOverflow": false
+    },
+    "messages": [
+      {
+        "type": "warning",
+        "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+      },
+      {
+        "type": "warning",
+        "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+      }
+    ]
+  },
+  {
+    "name": "security-admin-logos-desktop.png",
+    "file": "/Users/shubhranshujha/Codex/the-ubik-landing/verification/security-admin-logos-desktop.png",
+    "viewport": {
+      "width": 1366,
+      "height": 900
+    },
+    "requestedScrollY": 1400,
+    "actualScrollY": 1400,
+    "checks": {
+      "statusCount": 3,
+      "hasPosthog": true,
+      "hasGoogle": true,
+      "hasMicrosoft": true,
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "hasHorizontalOverflow": false
+    },
+    "messages": [
+      {
+        "type": "warning",
+        "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+      },
+      {
+        "type": "warning",
+        "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+      }
+    ]
+  },
+  {
+    "name": "security-status-ticker-mobile.png",
+    "file": "/Users/shubhranshujha/Codex/the-ubik-landing/verification/security-status-ticker-mobile.png",
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "requestedScrollY": 760,
+    "actualScrollY": 760,
+    "checks": {
+      "statusCount": 3,
+      "hasPosthog": true,
+      "hasGoogle": true,
+      "hasMicrosoft": true,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "hasHorizontalOverflow": false
+    },
+    "messages": [
+      {
+        "type": "warning",
+        "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+      },
+      {
+        "type": "warning",
+        "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+      }
+    ]
+  },
+  {
+    "name": "security-admin-logos-mobile.png",
+    "file": "/Users/shubhranshujha/Codex/the-ubik-landing/verification/security-admin-logos-mobile.png",
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "requestedScrollY": 2360,
+    "actualScrollY": 2360,
+    "checks": {
+      "statusCount": 3,
+      "hasPosthog": true,
+      "hasGoogle": true,
+      "hasMicrosoft": true,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "hasHorizontalOverflow": false
+    },
+    "messages": [
+      {
+        "type": "warning",
+        "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+      },
+      {
+        "type": "warning",
+        "text": "⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath."
+      }
+    ]
+  }
+]

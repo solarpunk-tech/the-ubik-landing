@@ -47,7 +47,7 @@ export default function Try() {
   return (
     <PageShell>
       <Seo
-        title="Realise true value in 30 days — Ubik"
+        title="Try Ubik Now — Ubik"
         description="Request early access to run one Ubik workflow above your existing CRM, programs, ERP, inbox, and sales stack."
         canonical="https://theubik.com/try"
       />
@@ -64,7 +64,7 @@ export default function Try() {
           <div className="flex flex-col gap-6">
             <Badge variant="secondary" className="w-fit">Founder-led rollout</Badge>
             <h1 className="text-5xl font-semibold leading-tight">
-              Realise true value in 30 days.
+              Try Ubik Now.
             </h1>
             <p className="text-lg leading-8 text-muted-foreground">
               The v1 journey is an early-access request for teams that want to pilot a sales

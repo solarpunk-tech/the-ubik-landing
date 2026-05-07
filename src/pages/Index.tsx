@@ -77,12 +77,12 @@ export default function Index() {
               </div>
               <div className="soft-blur-block flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg">
-                  <a href={externalLinks.founderMeeting}>
-                    Talk to founders <ArrowRightIcon data-icon="inline-end" />
+                  <a href={externalLinks.app}>
+                    Try Ubik Now <ArrowRightIcon data-icon="inline-end" />
                   </a>
                 </Button>
                 <Button asChild variant="outline" size="lg">
-                  <a href={externalLinks.app}>Realise true value in 30 days</a>
+                  <a href={externalLinks.founderMeeting}>Talk to founders</a>
                 </Button>
               </div>
             </div>
@@ -224,11 +224,13 @@ export default function Index() {
                 </p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-                <Button asChild variant="secondary" size="lg">
-                  <a href={externalLinks.founderMeeting}>Talk to founders</a>
+                <Button asChild variant="secondary" size="lg" className="text-primary">
+                  <a href={externalLinks.app}>
+                    Try Ubik Now <ArrowRightIcon data-icon="inline-end" />
+                  </a>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="border-primary-foreground/35 bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                  <a href={externalLinks.app}>Realise true value in 30 days</a>
+                  <a href={externalLinks.founderMeeting}>Talk to founders</a>
                 </Button>
               </div>
             </CardContent>

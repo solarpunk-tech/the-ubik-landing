@@ -126,7 +126,7 @@ export default function Try() {
                   </TabsContent>
                 </Tabs>
                 <Button type="submit" size="lg" disabled={isSubmitting}>
-                  {isSubmitting ? <DotmCircular5 size={18} dotSize={3} aria-label="Submitting" /> : <CheckCircleIcon data-icon="inline-start" />}
+                  {isSubmitting ? <DotmCircular5 size={18} dotSize={3} color="hsl(var(--primary-foreground))" aria-label="Submitting" /> : <CheckCircleIcon data-icon="inline-start" />}
                   {isSubmitting ? "Submitting..." : "Request founder walkthrough"}
                 </Button>
               </form>

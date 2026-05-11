@@ -492,6 +492,41 @@
     - Mobile sheet CTA: `verification/nav-local-download-mobile-sheet.png`
     - Download route reached: `verification/nav-local-download-route.png`
     - Check report: `verification/nav-local-download-report.json`
+- Latest homepage experience/backer pass:
+  - Hero lede now ends after `$300M+ a year` and only the category word cycles through seafood, dairy, meat, and frozen veggies.
+  - Product section copy now says `Connect trade sources, inventory, relationships, conversations, and more.` with a shorter ops-spanning description.
+  - Added `ExperienceTicker` below the proof stats, using non-Antler logos from `public/experience/` in a duplicated, responsive blue-monochrome ticker.
+  - Footer no longer shows the Ubik logo; the center group now shows `backed by` Antler from `public/experience/Antler_logo.svg` plus the existing Solarpunk credit.
+  - Dotmatrix loaders and matrix fields were tightened to explicit blue/white coloring without a full-site palette pass.
+  - Visual requirements from user screenshots:
+    - Layout: hero lede must be shorter and stop at `$300M+ a year`; experience logos sit after the proof band; footer center replaces the Ubik logo with Antler/Solarpunk.
+    - Spacing: mobile hero, ticker, product copy, and footer must wrap without horizontal overflow.
+    - Typography: only the category word animates inline; product section copy is simpler and shorter.
+    - Color: matrix/dot accents and experience logo treatment use blue/white rather than grey.
+    - Responsive behavior: logo ticker remains readable on mobile and pauses on hover/focus.
+  - Before evidence:
+    - Browser comment screenshots attached in the May 11 homepage experience/backer request.
+    - Local before screenshots: `verification/experience-before-mobile.png`, `verification/experience-before-desktop.png`.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - Playwright verified a single visible hero category word, 20 duplicated ticker tiles, updated product/footer text, and no horizontal overflow at 390px and 1440px.
+    - Console still reports pre-existing React Router future-flag warnings and existing PDF SVG attribute warnings; no new runtime crash or framework overlay.
+  - Latest evidence:
+    - Homepage experience mobile: `verification/experience-after-mobile.png`
+    - Homepage experience desktop: `verification/experience-after-desktop.png`
+- Latest homepage footer/comment polish:
+  - Hero category ticker now renders only the active word, so its width matches the current word instead of reserving the longest label width.
+  - Experience ticker logos now render in original asset colors instead of blue monochrome.
+  - Antler footer logo now renders in original red from `public/experience/Antler_logo.svg`.
+  - Footer links are split into left action links (`Talk to founders`, `User Guide`, `Ubik Local for Meetings`) and right legal links (`Privacy`, `Terms`, `Security`).
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes.
+    - Playwright verified no horizontal overflow, matching hero ticker/word widths, no CSS filters on Antler or experience logos, and the requested footer link groups at 390px and 1440px.
+  - Latest evidence:
+    - Footer polish mobile: `verification/footer-polish-mobile.png`
+    - Footer polish desktop: `verification/footer-polish-desktop.png`
 
 ## Next notes
 

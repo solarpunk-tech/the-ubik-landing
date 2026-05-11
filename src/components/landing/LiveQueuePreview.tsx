@@ -94,7 +94,7 @@ export function LiveQueuePreview() {
             <CardTitle>Live operating queue</CardTitle>
             <CardDescription>Signals spanning inbox, CRM, ERP, BI, and trade docs</CardDescription>
           </div>
-          <DotmSquare1 size={34} dotSize={4} aria-label="Queue sweep" />
+          <DotmSquare1 size={34} dotSize={4} color="hsl(var(--primary))" aria-label="Queue sweep" />
         </div>
       </CardHeader>
       <CardContent className="relative grid gap-px bg-border p-px">

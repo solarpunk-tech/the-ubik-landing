@@ -10,7 +10,40 @@ import { SolarpunkCredit } from "./SolarpunkCredit";
 import { ThemeToggle } from "./ThemeToggle";
 import { persistExplicitLanguage, supportedLanguages } from "@/lib/i18n";
 import { externalLinks } from "@/lib/links";
+import { brandAssets } from "@/lib/brand";
 import { cn } from "@/lib/utils";
+
+function FooterBackers() {
+  return (
+    <div className="footer-backers">
+      <a className="antler-credit" href="https://www.antler.co" target="_blank" rel="noreferrer">
+        <span>backed by</span>
+        <img src={brandAssets.antler} alt="Antler" />
+      </a>
+      <SolarpunkCredit />
+    </div>
+  );
+}
+
+function FooterActionLinks({ downloadHref }: { downloadHref: string }) {
+  return (
+    <nav className="footer-nav footer-nav-actions" aria-label="Footer primary links">
+      <a href={externalLinks.founderMeeting}>Talk to founders</a>
+      <a href={externalLinks.docs}>User Guide</a>
+      <Link to={downloadHref}>Ubik Local for Meetings</Link>
+    </nav>
+  );
+}
+
+function FooterLegalLinks() {
+  return (
+    <nav className="footer-nav footer-nav-legal" aria-label="Footer legal links">
+      <Link to="/privacy-policy">Privacy</Link>
+      <Link to="/terms-of-service">Terms</Link>
+      <Link to="/security">Security</Link>
+    </nav>
+  );
+}
 
 export function PageShell({ children }: { children: React.ReactNode }) {
   const { i18n, t } = useTranslation();
@@ -146,18 +179,9 @@ export function PageShell({ children }: { children: React.ReactNode }) {
       {children}
       <footer className="border-t bg-shell">
         <div className="container-page grid gap-8 py-10 md:grid-cols-[1fr_auto_1fr] md:items-center">
-          <BrandLogo />
-          <SolarpunkCredit />
-          <nav className="flex flex-wrap gap-4 text-sm text-muted-foreground md:justify-self-end">
-            <a href={externalLinks.docs}>{t("nav.guide", { defaultValue: "Guide" })}</a>
-            <Link to="/privacy-policy">{t("nav.privacy", { defaultValue: "Privacy" })}</Link>
-            <Link to="/terms-of-service">{t("nav.terms", { defaultValue: "Terms" })}</Link>
-            <Link to="/security">{t("nav.trust", { defaultValue: "Security" })}</Link>
-            <Link to={downloadHref}>Ubik Local</Link>
-            <a href={externalLinks.founderMeeting}>
-              {t("footer.contact", { defaultValue: "Talk to founders" })}
-            </a>
-          </nav>
+          <FooterActionLinks downloadHref={downloadHref} />
+          <FooterBackers />
+          <FooterLegalLinks />
         </div>
       </footer>
     </div>

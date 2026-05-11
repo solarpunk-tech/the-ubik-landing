@@ -5,6 +5,7 @@ export const brandAssets = {
   wordmarkDark: "/logo-wordmark-dark.png",
   faviconLight: "/favicon-light.png",
   faviconDark: "/favicon-dark.png",
+  antler: "/experience/Antler_logo.svg",
   solarpunkLight: "/solarpunk-logo-red.svg",
   solarpunkDark: "/solarpunk-logo-wbg.svg"
 };

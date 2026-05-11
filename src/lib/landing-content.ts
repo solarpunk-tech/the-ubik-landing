@@ -23,6 +23,19 @@ export const proofPoints = [
   }
 ];
 
+export const experienceLogos = [
+  { label: "AZ Gems", path: "/experience/AZ_Gems_logo dark mode.png" },
+  { label: "Bharti Airtel", path: "/experience/Bharti_Airtel_Logo.svg.png" },
+  { label: "Dr. Reddy's Laboratories", path: "/experience/Dr._Reddy's_Laboratories_logo.svg.png" },
+  { label: "Housing.com", path: "/experience/Housing.com_logo.svg.png" },
+  { label: "Ola", path: "/experience/Ola-Cabs-Logo.png" },
+  { label: "Udaan", path: "/experience/Udaan_Logo.png" },
+  { label: "AquaEx", path: "/experience/aquaexLogo.png" },
+  { label: "ClearTax", path: "/experience/clear-tax-logo.png" },
+  { label: "Sandhya Aqua", path: "/experience/sandhya-aqua-logo.png" },
+  { label: "Zalo Fresh", path: "/experience/zalo-fresh.png" }
+] as const;
+
 export const heroTickerItems = [
   "Live for Global Seafood",
   "Testing for Meat",

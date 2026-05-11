@@ -32,7 +32,7 @@ export function ProductSurface() {
               <p className="section-label">Your source systems</p>
               <h3 className="mt-2 text-xl font-semibold">Keep your stack.</h3>
             </div>
-            <DotmSquare6 size={32} dotSize={4} aria-label="Source systems scanning" />
+            <DotmSquare6 size={32} dotSize={4} color="hsl(var(--primary))" aria-label="Source systems scanning" />
           </div>
           <div className="mt-5 grid grid-cols-2 gap-2">
             {sourceSystems.map((system) => (
@@ -79,7 +79,7 @@ export function ProductSurface() {
               <p className="section-label">Reviewed output</p>
               <h3 className="mt-2 text-xl font-semibold">Review before it moves.</h3>
             </div>
-            <DotmCircular5 size={34} dotSize={4.5} aria-label="Reviewed output sweep" />
+            <DotmCircular5 size={34} dotSize={4.5} color="hsl(var(--primary))" aria-label="Reviewed output sweep" />
           </div>
           <div className="mt-5 grid gap-px bg-border">
             {reviewedOutputs.map((item, index) => (

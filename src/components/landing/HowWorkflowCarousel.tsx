@@ -89,7 +89,7 @@ export function HowWorkflowCarousel({ compact = false }: HowWorkflowCarouselProp
               <p className="section-label">Product journey</p>
               <h3 className="mt-2 text-2xl font-semibold">{active.title}</h3>
             </div>
-            <DotmSquare1 size={34} dotSize={4} aria-label="Product media accent" />
+            <DotmSquare1 size={34} dotSize={4} color="hsl(var(--primary))" aria-label="Product media accent" />
           </div>
           <WorkflowMedia workflow={active} compact={compact} />
         </section>

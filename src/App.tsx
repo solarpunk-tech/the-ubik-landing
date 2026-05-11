@@ -29,7 +29,7 @@ export default function App() {
       <Suspense
         fallback={
           <div className="grid min-h-dvh place-items-center bg-background text-foreground">
-            <DotmTriangle2 size={42} dotSize={5} aria-label="Loading page" />
+            <DotmTriangle2 size={42} dotSize={5} color="hsl(var(--primary))" aria-label="Loading page" />
           </div>
         }
       >

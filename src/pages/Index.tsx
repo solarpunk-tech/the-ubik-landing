@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
@@ -8,6 +9,7 @@ import { MatrixField } from "@/components/landing/MatrixField";
 import { ProductSurface } from "@/components/landing/ProductSurface";
 import { LiveQueuePreview } from "@/components/landing/LiveQueuePreview";
 import { VerticalTicker } from "@/components/landing/VerticalTicker";
+import { ExperienceTicker } from "@/components/landing/ExperienceTicker";
 import { HowWorkflowCarousel } from "@/components/landing/HowWorkflowCarousel";
 import { BlogPreview } from "@/components/landing/BlogPreview";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -15,6 +17,28 @@ import { Seo } from "@/components/seo/Seo";
 import { PageShell } from "@/components/landing/PageShell";
 import { bottomCallouts, faqs, heroTickerItems, proofPoints, securityCards } from "@/lib/landing-content";
 import { externalLinks } from "@/lib/links";
+
+const heroCategories = ["seafood", "dairy", "meat", "frozen veggies"];
+
+function HeroCategoryTicker() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % heroCategories.length);
+    }, 2000);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  return (
+    <span className="hero-category-ticker" aria-live="polite" aria-label={`Built for ${heroCategories[activeIndex]}`}>
+      <span key={heroCategories[activeIndex]} className="hero-category-word">
+        {heroCategories[activeIndex]}
+      </span>
+    </span>
+  );
+}
 
 export default function Index() {
   return (
@@ -70,9 +94,8 @@ export default function Index() {
                   Personalised <span className="text-primary">Workspace</span> for Perishable Trade
                 </h1>
                 <p className="soft-blur-block max-w-2xl text-lg leading-8 text-muted-foreground">
-                  Built for seafood importers, exporters, and processors moving{" "}
-                  <span className="font-medium text-primary">$300M+</span> a year. Ubik turns CRM, ERP,
-                  email, and WhatsApp into reviewed agent workflows.
+                  Built for <HeroCategoryTicker /> importers, exporters, and processors moving{" "}
+                  <span className="font-medium text-primary">$300M+</span> a year.
                 </p>
               </div>
               <div className="soft-blur-block flex flex-col gap-3 sm:flex-row">
@@ -102,14 +125,16 @@ export default function Index() {
           </div>
         </section>
 
+        <ExperienceTicker />
+
         <section id="product" className="container-page section-y">
           <div className="mb-10 flex max-w-3xl flex-col gap-3">
             <Badge variant="outline" className="w-fit">What Ubik does</Badge>
             <h2 className="text-3xl font-semibold sm:text-4xl">
-              The operator layer above your ERP, CRM, email, and WhatsApp.
+              Connect trade sources, inventory, relationships, conversations, and more.
             </h2>
             <p className="text-muted-foreground">
-              Five seafood-native workflow primitives in production: RFQ to quote, PO ingestion, transit-aware scheduling, VMI pull-rate, lot traceability. Every action human-reviewed before it moves.
+              Across trade, plant, finance, harvest, packaging, compliance, and sales ops, Ubik turns scattered signals into reviewed actions.
             </p>
           </div>
           <ProductSurface />

@@ -251,23 +251,29 @@ export function TariffDifferentialMatrix() {
   return (
     <section className="min-w-0 border bg-card">
       <div className="border-b p-5 sm:p-6">
-        <p className="section-label">Tariff differential matrix</p>
-        <h2 className="mt-2 text-3xl font-semibold">What each origin gives up versus the cheapest lane</h2>
+        <p className="section-label">Tariff matrix</p>
+        <h2 className="mt-2 text-3xl font-semibold">Effective tariff lanes by origin and market</h2>
       </div>
       <div className="w-full min-w-0 overflow-x-auto">
-        <table className="w-full min-w-[46rem] border-collapse text-sm">
+        <table className="w-full min-w-[58rem] table-fixed border-collapse text-sm">
+          <colgroup>
+            <col className="w-36" />
+            {destinations.map((destination) => (
+              <col key={destination} className="w-52" />
+            ))}
+          </colgroup>
           <thead>
             <tr className="bg-shell text-left">
-              <th className="border-b p-3 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">Origin</th>
+              <th className="border-b px-4 py-3 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">Origin</th>
               {destinations.map((destination) => (
-                <th key={destination} className="border-b p-3 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">{destination}</th>
+                <th key={destination} className="border-b px-4 py-3 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">{destination}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {origins.map((origin) => (
               <tr key={origin}>
-                <th className="border-b p-3 text-left font-medium">{origin}</th>
+                <th className="border-b px-4 py-4 text-left font-medium">{origin}</th>
                 {destinations.map((destination) => {
                   const cell = tariffCells.find((item) => item.origin === origin && item.destination === destination);
                   if (!cell) return <td key={destination} className="border-b p-3" />;
@@ -281,11 +287,10 @@ export function TariffDifferentialMatrix() {
                           ? "bg-support/25 text-foreground"
                           : "bg-destructive/15 text-foreground";
                   return (
-                    <td key={destination} className="border-b p-2 align-top">
-                      <div className={cn("min-h-20 p-3", tone)}>
-                        <p className="font-mono text-lg">{delta === 0 ? "Best" : `+${delta.toFixed(delta % 1 ? 1 : 0)} pts`}{cell.pending ? "*" : ""}</p>
-                        <p className="mt-2 text-xs opacity-80">Raw: {cell.effective}%</p>
-                        {cell.note ? <p className="mt-2 text-xs leading-4 opacity-80">{cell.note}</p> : null}
+                    <td key={destination} className="border-b p-3 align-top">
+                      <div className={cn("flex min-h-28 flex-col justify-between p-4", tone)}>
+                        <p className="font-mono text-2xl leading-none">{cell.effective}%</p>
+                        {cell.note ? <p className="mt-4 text-xs leading-5 opacity-80">{cell.note}</p> : null}
                       </div>
                     </td>
                   );
@@ -296,7 +301,7 @@ export function TariffDifferentialMatrix() {
         </table>
       </div>
       <p className="border-t p-4 text-xs leading-5 text-muted-foreground">
-        * Pending, suspended, or transition-risk cells. As of 7 May 2026; compiled from USITC/DataWeb-style tariff references, EU tariff/CATCH materials, Japan MAFF schedules, GCC common customs assumptions, and buyer-desk normalisation.
+        As of 7 May 2026; compiled from USITC/DataWeb-style tariff references, EU tariff/CATCH materials, Japan MAFF schedules, GCC common customs assumptions, and buyer-desk normalisation. U.S. cells show ADD/AD and CVD where provided.
       </p>
     </section>
   );

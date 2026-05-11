@@ -30,9 +30,9 @@ const asymmetricBets = [
       "If radiation certification, residue discipline, and ADD review outcomes stay clean, Indonesia can undercut Ecuador on certain U.S. HLSO books. Position it as a small tranche, not the core book."
   },
   {
-    title: "Saudi Arabia becomes a halal-EU option before most buyers price it in",
+    title: "30-count vs 60-count decides India vs Ecuador",
     copy:
-      "Saudi shrimp already has regional relevance. Multi-year offtake conversations in 2026 create optionality if EU and MENA retail buyers start valuing halal-origin simplicity more explicitly."
+      "For large 30-count raw material, Ecuador’s farm-gate advantage can be decisive when the India-Ecuador gap closes. On 60-count, the gap is tighter, so India can still compete when processors protect margin through forex, cooked yield, and value-added conversion."
   }
 ];
 
@@ -188,8 +188,8 @@ function OriginRouletteArticle() {
         <div className="grid min-w-0 bg-background p-5 sm:p-6">
           <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-px bg-border sm:grid-cols-3">
             {[
-              ["6M t", "Estimated global farmed shrimp supply in 2025"],
-              ["231K MT", "Ecuador to U.S. volume in 2025"],
+              ["~6 Million MT", "Estimated global farmed shrimp supply in 2025"],
+              ["~216k MT", "Ecuador to U.S. 2025 volume"],
               ["18%", "Post-reset U.S. reciprocal tariff noted for India"]
             ].map(([stat, label]) => (
               <div key={stat} className="bg-card p-4">
@@ -206,7 +206,7 @@ function OriginRouletteArticle() {
 
       <ArticleSection id="cold-open" title="What changed since January 2025">
         <p>
-          India’s U.S. shock forced a real pivot. Exports diversified toward Vietnam, China, and Europe while farmers consolidated after the late-2025 price crash. The February 2026 U.S.-India reset lowered the reciprocal tariff pressure, but it did not erase the memory of a book that can become uneconomic overnight.
+          India’s “U.S. shock” forced a real pivot. Exports diversified toward Vietnam, China, and Europe while farmers consolidated after the late-2025 price crash. The February 2026 U.S.-India reset lowered the reciprocal tariff pressure, but it did not erase the memory of a book that can become uneconomic overnight.
         </p>
         <p>
           Ecuador converted the disruption into structural share. Its cost base still makes it the HLSO anchor, but China’s domestic production and inventory cycles increasingly decide whether Ecuadorian surplus stays absorbed or hits the U.S. and EU spot market.
@@ -220,7 +220,7 @@ function OriginRouletteArticle() {
 
       <ArticleSection id="origin-map" title="Country-by-country origin map">
         <p>
-          Ecuador and India are the two anchors, but for different reasons. Ecuador wins raw HLSO landed cost; India is the swing bet in cooked and breaded products where tariff treatment and processing depth matter more than pond cost alone.
+          Ecuador and India are the two anchors, but for different reasons. Ecuador wins raw HLSO landed cost; India is the swing bet in cooked & value added products where tariff treatment and processing depth matter more than pond cost alone.
         </p>
         <p>
           Vietnam remains the processing desk’s best friend and the compliance desk’s hardest conversation. Indonesia is a small convexity tranche if radiation certification and residue controls keep holding. Thailand is premium processing with labour scrutiny. China is the demand-side price floor. Saudi Arabia and Bangladesh are optionality, not base load.

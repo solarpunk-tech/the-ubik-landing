@@ -47,9 +47,10 @@ export default function Try() {
   return (
     <PageShell>
       <Seo
-        title="Try Ubik Now — Ubik"
+        title="Try Ubik Now - Ubik"
         description="Request early access to run one Ubik workflow above your existing CRM, programs, ERP, inbox, and sales stack."
         canonical="https://theubik.com/try"
+        image="https://theubik.com/social/try-ubik.png"
       />
       <main className="relative overflow-hidden">
         <MatrixField variant="hero" density="medium" seed="try-workflow" />

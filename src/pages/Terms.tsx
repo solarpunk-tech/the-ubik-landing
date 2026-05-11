@@ -151,9 +151,10 @@ export default function Terms() {
   return (
     <PageShell>
       <Seo
-        title="Terms and Conditions — Ubik"
+        title="Terms and Conditions - Ubik"
         description="The terms governing access to and use of Ubik."
         canonical="https://theubik.com/terms-of-service"
+        image="https://theubik.com/social/terms.png"
       />
       <main className="container-page section-y">
         <article className="mx-auto max-w-4xl">

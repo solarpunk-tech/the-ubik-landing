@@ -74,6 +74,8 @@ export default function Download() {
       <Seo
         title="Download Ubik"
         description="Download Ubik for Mac or Windows. Your install will start automatically."
+        canonical="https://theubik.com/download"
+        image="https://theubik.com/social/ubik-local.png"
       />
       <main className="relative overflow-hidden">
         <section className="relative border-b">

@@ -10,7 +10,7 @@ export function ExperienceTicker() {
           <div>
             <p className="section-label text-primary">Our experience</p>
             <h2 className="mt-2 max-w-xl text-xl font-semibold leading-snug text-pretty sm:text-2xl">
-              Built from operating experience across global conglomerates and India's sharpest supply-chain teams.
+              Years of operational, technical, and domain expertise, with workflows and intelligence baked in.
             </h2>
           </div>
           <div className="experience-ticker" tabIndex={0} aria-label="Company experience logos">

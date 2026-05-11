@@ -91,7 +91,7 @@ export const originRoulettePost: BlogPost = {
   author: "Ubik field team",
   readingTime: "12 min read",
   template: "market-intelligence",
-  ogImage: "https://theubik.com/blog/origin-roulette/header-light.png",
+  ogImage: "https://theubik.com/social/origin-roulette.png",
   heroLightImage: "/blog/origin-roulette/header-light.png",
   heroDarkImage: "/blog/origin-roulette/header-dark.png"
 };

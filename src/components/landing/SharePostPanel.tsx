@@ -29,7 +29,7 @@ export function SharePostPanel({ title, url = "https://theubik.com/blog" }: Shar
     return () => window.clearTimeout(timer);
   }, [copied]);
 
-  const shareText = `${title} — ${url}`;
+  const shareText = `${title} - ${url}`;
 
   const copy = async () => {
     try {

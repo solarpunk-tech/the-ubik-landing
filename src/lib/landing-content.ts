@@ -197,17 +197,20 @@ export const processSteps = [
 export const securityCards = [
   {
     icon: ShieldCheckIcon,
-    title: "SOC 2 Type II audit in progress",
+    title: "SOC 2 Type II audit",
+    status: "In progress",
     copy: "GDPR, ISO 27001, EU data residency, AES-256 at rest, TLS 1.3 in transit."
   },
   {
     icon: LockKeyIcon,
     title: "Never trained on your data",
+    status: undefined,
     copy: "Your RFQs, supplier pricing, and margins never become input to any third-party model. Contractually guaranteed."
   },
   {
     icon: FingerprintIcon,
     title: "Human sign-off, every time",
+    status: undefined,
     copy: "Least-privilege OAuth scopes, revocable access, audit log on every action. Sensitive moves require review."
   }
 ];

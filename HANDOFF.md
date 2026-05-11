@@ -527,6 +527,22 @@
   - Latest evidence:
     - Footer polish mobile: `verification/footer-polish-mobile.png`
     - Footer polish desktop: `verification/footer-polish-desktop.png`
+- Latest copy/social preview pass:
+  - Homepage experience copy is shorter and no longer repeats `experience` in both the label and heading.
+  - Homepage How and Security intro copy was rewritten to read as a tighter narrative instead of disconnected examples or repeated card details.
+  - Homepage SOC 2 card now uses the yellow `In progress` status ticker pattern from the security page.
+  - Visible source strings outside localization files were scanned for em dashes and replaced with plain hyphen punctuation where needed.
+  - Added custom 1200x630 social preview PNGs under `public/social/` for homepage, how-it-works, pricing, download, try, security, trade notes, privacy, terms, and the Origin Roulette article.
+  - Build now runs `scripts/generate-static-meta.mjs` after Vite, generating route-specific `dist/**/index.html` files with crawler-visible title, description, canonical, `og:image`, and `twitter:image`.
+  - Verification:
+    - `pnpm lint` passes.
+    - `pnpm build` passes and writes route-specific metadata HTML.
+    - Static dist files verified for `/`, `/how-it-works`, `/security`, and `/blog/origin-roulette-2026-shrimp-sourcing` metadata.
+    - All generated social images verified at 1200x630.
+    - Playwright verified updated homepage copy, visible security status ticker, and no horizontal overflow at 390px and 1440px.
+  - Latest evidence:
+    - Copy/social pass mobile: `verification/copy-social-pass-mobile.png`
+    - Copy/social pass desktop: `verification/copy-social-pass-desktop.png`
 
 ## Next notes
 

@@ -31,7 +31,7 @@ const TRIANGLE_CELLS = new Set([
   "4,6"
 ]);
 
-/** Apex and the two base corners — the three natural vertices of the silhouette. */
+/** Apex and the two base corners - the three natural vertices of the silhouette. */
 const HUBS: ReadonlyArray<readonly [number, number]> = [
   [1, 3],
   [4, 0],
@@ -65,7 +65,7 @@ function falloffFromHub(row: number, col: number, hub: readonly [number, number]
 
 /**
  * Energy orbits the three triangle vertices (apex → left base → right base) on a continuous phase,
- * with soft Manhattan falloff — no lattice mod groups.
+ * with soft Manhattan falloff - no lattice mod groups.
  */
 function opacityForCell(row: number, col: number, phase: number): number {
   const t = phase * Math.PI * 2;

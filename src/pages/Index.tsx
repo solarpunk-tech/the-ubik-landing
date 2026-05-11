@@ -40,12 +40,22 @@ function HeroCategoryTicker() {
   );
 }
 
+function StatusTicker({ label }: { label: string }) {
+  return (
+    <span className="inline-flex w-fit items-center gap-2 border border-support/50 bg-support/15 px-2.5 py-1 font-mono text-[0.64rem] font-semibold uppercase tracking-[0.14em] text-support-foreground">
+      <span className="size-2 animate-pulse bg-support shadow-[0_0_12px_hsl(var(--support)/0.8)]" aria-hidden />
+      {label}
+    </span>
+  );
+}
+
 export default function Index() {
   return (
     <PageShell>
       <Seo
-        title="Ubik — Personalised Workspace for Perishable Trade"
-        description="Ubik is a personalised workspace for seafood importers, exporters, and processors. $700M+ in customer aggregate revenue. 20x faster RFQ cycles. SOC 2 Type II audit in progress."
+        title="Ubik - Personalised Workspace for Perishable Trade"
+        description="AI workflows for perishable trade teams moving RFQs, POs, inventory, approvals, and customer updates across existing systems."
+        image="https://theubik.com/social/home.png"
       />
       <JsonLd
         data={[
@@ -149,7 +159,7 @@ export default function Index() {
                 See one workflow move through the loop.
               </h2>
               <p className="text-muted-foreground">
-                A large vertically integrated seafood conglomerate compressed RFQ cycles from 5-7 days to 6 hours. A US processor moved PO processing from manual work to 30-second extraction. Each loop captures signal, matches context, prepares one reviewed action.
+                One loop captures the signal, checks system context, and prepares the next reviewed move. The same pattern powers faster RFQs, cleaner PO intake, and VMI exceptions before operators lose the thread.
               </p>
               <Button asChild variant="outline" className="w-fit">
                 <Link to="/how-it-works">
@@ -172,7 +182,7 @@ export default function Index() {
                 Enterprise-grade trust. Operator-friendly defaults.
               </h2>
               <p className="text-muted-foreground">
-                SOC 2 Type II audit in progress, GDPR, ISO 27001. EU and APAC data residency. Your RFQs, supplier pricing, and margins never become training input for any third-party model.
+                Trust is built into the workflow, not bolted on after go-live. Admins choose what Ubik can read, sensitive moves stay reviewed, and customer data is never used for model training.
               </p>
               <Button asChild variant="outline" className="w-fit">
                 <Link to="/security">
@@ -181,11 +191,12 @@ export default function Index() {
               </Button>
             </div>
             <div className="grid gap-px bg-border sm:grid-cols-3">
-              {securityCards.map(({ icon: Icon, title, copy }) => (
+              {securityCards.map(({ icon: Icon, title, copy, status }) => (
                 <Card key={title} className="border-0 bg-card/96 backdrop-blur">
                   <CardHeader>
                     <Icon className="text-primary" aria-hidden />
                     <CardTitle>{title}</CardTitle>
+                    {status ? <StatusTicker label={status} /> : null}
                   </CardHeader>
                   <CardContent className="text-sm leading-6 text-muted-foreground">{copy}</CardContent>
                 </Card>

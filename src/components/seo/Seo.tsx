@@ -8,12 +8,14 @@ type SeoProps = {
   type?: "website" | "article";
 };
 
+const defaultSocialImage = "https://theubik.com/social/home.png";
+
 function setMeta(selector: string, attr: string, value: string) {
   const el = document.querySelector(selector);
   if (el) el.setAttribute(attr, value);
 }
 
-export function Seo({ title, description, canonical = "https://theubik.com/", image, type = "website" }: SeoProps) {
+export function Seo({ title, description, canonical = "https://theubik.com/", image = defaultSocialImage, type = "website" }: SeoProps) {
   useEffect(() => {
     document.title = title;
     setMeta('meta[name="description"]', "content", description);
@@ -23,9 +25,8 @@ export function Seo({ title, description, canonical = "https://theubik.com/", im
     setMeta('meta[property="og:type"]', "content", type);
     setMeta('meta[name="twitter:title"]', "content", title);
     setMeta('meta[name="twitter:description"]', "content", description);
-    if (image) {
-      setMeta('meta[property="og:image"]', "content", image);
-    }
+    setMeta('meta[property="og:image"]', "content", image);
+    setMeta('meta[name="twitter:image"]', "content", image);
     document.querySelector('link[rel="canonical"]')?.setAttribute("href", canonical);
   }, [canonical, description, image, title, type]);
 

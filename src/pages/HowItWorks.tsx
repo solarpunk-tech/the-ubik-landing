@@ -10,8 +10,10 @@ export default function HowItWorks() {
   return (
     <PageShell>
       <Seo
-        title="How Ubik works — Real product journeys"
+        title="How Ubik works - Real product journeys"
         description="Watch Ubik move through operator home, inbox review, meeting memory, Know Anything, and VMI exception workflows."
+        canonical="https://theubik.com/how-it-works"
+        image="https://theubik.com/social/how-it-works.png"
       />
       <main className="overflow-hidden">
         <section className="relative border-b">

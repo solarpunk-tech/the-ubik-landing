@@ -143,9 +143,10 @@ export default function Privacy() {
   return (
     <PageShell>
       <Seo
-        title="Privacy Notice — Ubik"
+        title="Privacy Notice - Ubik"
         description="How Ubik collects, uses, discloses, and safeguards personal information."
         canonical="https://theubik.com/privacy-policy"
+        image="https://theubik.com/social/privacy.png"
       />
       <main className="container-page section-y">
         <article className="mx-auto max-w-4xl">

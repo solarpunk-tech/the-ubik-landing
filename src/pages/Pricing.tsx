@@ -98,9 +98,10 @@ export default function Pricing() {
   return (
     <PageShell>
       <Seo
-        title="Pricing — Ubik"
+        title="Pricing - Ubik"
         description="Choose Base for a personal AI workspace or Enterprise for trade workflows across teams, systems and geographies."
         canonical="https://theubik.com/pricing"
+        image="https://theubik.com/social/pricing.png"
       />
       <JsonLd
         data={{

@@ -97,7 +97,7 @@ function ArticleShell({ post, children }: ArticleShellProps) {
   return (
     <PageShell>
       <Seo
-        title={`${post.seoTitle} — Ubik Trade Notes`}
+        title={`${post.seoTitle} - Ubik Trade Notes`}
         description={post.seoDescription}
         canonical={post.canonical}
         image={post.ogImage}
@@ -323,6 +323,7 @@ export default function Blog() {
         title="Ubik Trade Notes"
         description="Buyer strategy notes on perishable operations, shrimp sourcing, reviewed automation, and the operator layer above existing systems."
         canonical="https://theubik.com/blog"
+        image="https://theubik.com/social/trade-notes.png"
       />
       <main className="container-page section-y">
         <div className="grid gap-px bg-border">

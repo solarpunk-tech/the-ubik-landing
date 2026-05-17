@@ -198,4 +198,6 @@ Set the output directory to `dist`.
 - Website: [theubik.com](https://theubik.com)
 - Product guide: [docs.theubik.com](https://docs.theubik.com)
 - Company: [Solarpunk Technology](https://solarpunk.technology)
-- Product: Ubik
+- Contact: [Talk to the founders](founders@theubik.com)
+
+Solarpunk is an AI Operations company working on fixing broken perishable food ecosystem. Our first product is ubik, personalised workspace for vertically integrated importers, exporters & distributors in perishable food.

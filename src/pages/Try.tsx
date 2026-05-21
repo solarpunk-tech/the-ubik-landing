@@ -15,6 +15,7 @@ import { PageShell } from "@/components/landing/PageShell";
 import { Seo } from "@/components/seo/Seo";
 import { tryTiers } from "@/lib/landing-content";
 import { submitTry } from "@/lib/try";
+import { trackEvent } from "@/lib/posthog";
 
 const schema = z.object({
   email: z.string().email("Use a valid work email"),
@@ -41,6 +42,7 @@ export default function Try() {
     const result = await submitTry(parsed.data);
     setSubmitting(false);
     toast.success(result.message);
+    trackEvent("try_requested", { tier: parsed.data.tier });
     setEmail("");
   }
 

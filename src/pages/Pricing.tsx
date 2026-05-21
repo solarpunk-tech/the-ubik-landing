@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowRightIcon, CheckCircleIcon } from "@phosphor-icons/react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +11,7 @@ import { Seo } from "@/components/seo/Seo";
 import { brandAssets } from "@/lib/brand";
 import { externalLinks } from "@/lib/links";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/posthog";
 
 const baseFeatures = [
   "Webapp + Local desktop add-on",
@@ -93,6 +94,10 @@ function FeatureList({ features, active = false }: { features: string[]; active?
 
 export default function Pricing() {
   const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
+
+  useEffect(() => {
+    trackEvent("pricing_viewed");
+  }, []);
   const basePrice = billing === "annual" ? "$85" : "$100";
 
   return (

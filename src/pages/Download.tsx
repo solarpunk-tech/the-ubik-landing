@@ -8,6 +8,7 @@ import { PageShell } from "@/components/landing/PageShell";
 import { Seo } from "@/components/seo/Seo";
 import { downloads } from "@/lib/links";
 import { detectOS, type OS } from "@/lib/use-detected-os";
+import { trackEvent } from "@/lib/posthog";
 
 function triggerDownload(href: string) {
   const anchor = document.createElement("a");
@@ -55,9 +56,11 @@ export default function Download() {
   const steps = os === "windows" ? windowsSteps : macSteps;
 
   function handleDownloadClick(nextOS?: OS) {
+    const resolvedOS = nextOS ?? os;
     if (nextOS) setOS(nextOS);
     fired.current = true;
     setShowInstallGuide(true);
+    trackEvent("download_clicked", { os: resolvedOS });
   }
 
   useEffect(() => {

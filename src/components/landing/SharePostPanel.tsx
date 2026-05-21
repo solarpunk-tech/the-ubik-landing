@@ -10,6 +10,7 @@ import {
   XLogoIcon
 } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/posthog";
 
 type SharePostPanelProps = {
   title: string;
@@ -31,20 +32,23 @@ export function SharePostPanel({ title, url = "https://theubik.com/blog" }: Shar
 
   const shareText = `${title} — ${url}`;
 
+  const track = (channel: string) => trackEvent("blog_shared", { channel, title, url });
+
   const copy = async () => {
     try {
       await navigator.clipboard?.writeText(shareText);
     } finally {
       setCopied(true);
+      track("copy_link");
     }
   };
 
   const items = [
     { label: "Copy link", icon: copied ? CheckIcon : CopyIcon, action: copy, active: copied },
-    { label: "Share on X", icon: XLogoIcon, href: `https://x.com/intent/tweet?text=${encodeURIComponent(shareText)}` },
-    { label: "Share on WhatsApp", icon: WhatsappLogoIcon, href: `https://wa.me/?text=${encodeURIComponent(shareText)}` },
-    { label: "Share on LinkedIn", icon: LinkedinLogoIcon, href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}` },
-    { label: "Share by email", icon: EnvelopeIcon, href: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(shareText)}` }
+    { label: "Share on X", icon: XLogoIcon, href: `https://x.com/intent/tweet?text=${encodeURIComponent(shareText)}`, channel: "x" },
+    { label: "Share on WhatsApp", icon: WhatsappLogoIcon, href: `https://wa.me/?text=${encodeURIComponent(shareText)}`, channel: "whatsapp" },
+    { label: "Share on LinkedIn", icon: LinkedinLogoIcon, href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, channel: "linkedin" },
+    { label: "Share by email", icon: EnvelopeIcon, href: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(shareText)}`, channel: "email" }
   ];
 
   if (!expanded) {
@@ -65,11 +69,11 @@ export function SharePostPanel({ title, url = "https://theubik.com/blog" }: Shar
         </button>
       </div>
       <div className="mt-4 flex flex-wrap gap-2">
-        {items.map(({ label, icon: Icon, href, action, active }) => {
+        {items.map(({ label, icon: Icon, href, action, active, channel }) => {
           const className = cn("share-button", active ? "share-button-active" : "");
           if (href) {
             return (
-              <a key={label} href={href} target="_blank" rel="noreferrer" className={className} aria-label={label}>
+              <a key={label} href={href} target="_blank" rel="noreferrer" className={className} aria-label={label} onClick={() => track(channel!)}>
                 <Icon aria-hidden />
               </a>
             );

@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { DotmTriangle2 } from "@/components/ui/dotm-triangle-2";
+import { trackEvent } from "@/lib/posthog";
 
 const Index = lazy(() => import("@/pages/Index"));
 const Try = lazy(() => import("@/pages/Try"));
@@ -22,10 +23,21 @@ function ScrollToTop() {
   return null;
 }
 
+function RouteChangeTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    trackEvent("$pageview", { $current_url: window.location.href, path: location.pathname });
+  }, [location.pathname]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <>
       <ScrollToTop />
+      <RouteChangeTracker />
       <Suspense
         fallback={
           <div className="grid min-h-dvh place-items-center bg-background text-foreground">

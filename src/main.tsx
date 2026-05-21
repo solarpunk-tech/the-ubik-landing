@@ -7,7 +7,10 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
 import App from "./App";
 import i18n from "./lib/i18n";
+import { initPostHog } from "./lib/posthog";
 import "./index.css";
+
+initPostHog();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

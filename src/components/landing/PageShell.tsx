@@ -18,7 +18,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
   const detectedOS = useDetectedOS();
   const downloadHref = `/download?os=${detectedOS}`;
   const DownloadOSIcon = detectedOS === "windows" ? WindowsLogoIcon : AppleLogoIcon;
-  const downloadAriaLabel = `Download Ubik Local for ${detectedOS === "windows" ? "Windows" : "Mac"}`;
+  const downloadAriaLabel = `Download Ubik Meetings for ${detectedOS === "windows" ? "Windows" : "Mac"}`;
   const resolvedLanguage = (i18n.resolvedLanguage ?? i18n.language ?? "en").split("-")[0];
   const selectedLanguage = supportedLanguages.includes(resolvedLanguage)
     ? resolvedLanguage
@@ -28,7 +28,8 @@ export function PageShell({ children }: { children: React.ReactNode }) {
     { href: externalLinks.docs, label: t("nav.guide", { defaultValue: "Guide" }) },
     { to: "/pricing", label: t("nav.pricing", { defaultValue: "Pricing" }) },
     { to: "/blog", label: t("nav.journal", { defaultValue: "Trade Notes" }) },
-    { to: "/security", label: t("nav.trust", { defaultValue: "Security" }) }
+    { to: "/security", label: t("nav.trust", { defaultValue: "Security" }) },
+    { to: downloadHref, label: "Ubik Meetings", download: true }
   ];
 
   function handleLanguageChange(language: string) {
@@ -56,6 +57,16 @@ export function PageShell({ children }: { children: React.ReactNode }) {
                 <a key={item.href} href={item.href} className="nav-link">
                   {item.label}
                 </a>
+              ) : item.download ? (
+                <NavLink key={item.to} to={item.to} aria-label={downloadAriaLabel} className="nav-meetings-link">
+                  <span className="nav-local-copy nav-local-rest" aria-hidden>
+                    {item.label}
+                  </span>
+                  <span className="nav-local-copy nav-local-action" aria-hidden>
+                    <DownloadOSIcon weight="fill" />
+                    Download
+                  </span>
+                </NavLink>
               ) : (
                 <NavLink key={item.to} to={item.to} className="nav-link">
                   {item.label}
@@ -77,15 +88,6 @@ export function PageShell({ children }: { children: React.ReactNode }) {
               ))}
             </select>
             <ThemeToggle className="hidden sm:inline-flex" />
-            <Link to={downloadHref} aria-label={downloadAriaLabel} className="nav-local-download group">
-              <span className="nav-local-copy nav-local-rest" aria-hidden>
-                Ubik Local
-              </span>
-              <span className="nav-local-copy nav-local-action" aria-hidden>
-                <DownloadOSIcon weight="fill" />
-                Download App
-              </span>
-            </Link>
             <a
               href={externalLinks.app}
               className="nav-try-link inline-flex h-9 items-center justify-center border border-primary bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -126,12 +128,6 @@ export function PageShell({ children }: { children: React.ReactNode }) {
                   <div className="border-b py-4">
                     <ThemeToggle showLabels />
                   </div>
-                  <Button asChild variant="outline" onClick={() => setMenuOpen(false)}>
-                    <Link to={downloadHref} aria-label={downloadAriaLabel}>
-                      <DownloadOSIcon weight="fill" data-icon="inline-start" />
-                      Download App
-                    </Link>
-                  </Button>
                   <Button asChild onClick={() => setMenuOpen(false)}>
                     <a href={externalLinks.app}>
                       Try Ubik Now
@@ -153,7 +149,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
             <Link to="/privacy-policy">{t("nav.privacy", { defaultValue: "Privacy" })}</Link>
             <Link to="/terms-of-service">{t("nav.terms", { defaultValue: "Terms" })}</Link>
             <Link to="/security">{t("nav.trust", { defaultValue: "Security" })}</Link>
-            <Link to={downloadHref}>Ubik Local</Link>
+            <Link to={downloadHref}>Ubik Meetings</Link>
             <a href={externalLinks.founderMeeting}>
               {t("footer.contact", { defaultValue: "Talk to founders" })}
             </a>

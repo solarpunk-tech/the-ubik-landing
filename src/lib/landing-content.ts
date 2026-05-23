@@ -263,13 +263,13 @@ export const faqs: Faq[] = [
   },
   {
     question: "What does Ubik cost?",
-    answer: "Ubik has two public plan types. Base is $100 per month, or $85 per month on annual billing, for one operator who wants a personal AI workspace with Ubik Webapp and Ubik Local included. Enterprise is custom for teams running mission-critical workflows across email, WhatsApp, ERP, CRM, market intelligence, and customers. Enterprise pricing is built around value recovered, private deployment needs, onboarding scope, and workflow automation depth.",
+    answer: "Ubik has two public plan types. Base is $100 per month, or $85 per month on annual billing, for one operator who wants a personal AI workspace with Ubik Webapp and Ubik Meetings included. Enterprise is custom for teams running mission-critical workflows across email, WhatsApp, ERP, CRM, market intelligence, and customers. Enterprise pricing is built around value recovered, private deployment needs, onboarding scope, and workflow automation depth.",
     paragraphs: [
       "Ubik has two public plan types.",
       "Enterprise pricing is built around value recovered, private deployment needs, onboarding scope, and workflow automation depth."
     ],
     bullets: [
-      "Base is $100 per month, or $85 per month on annual billing, for one operator who wants a personal AI workspace with Ubik Webapp and Ubik Local included.",
+      "Base is $100 per month, or $85 per month on annual billing, for one operator who wants a personal AI workspace with Ubik Webapp and Ubik Meetings included.",
       "Enterprise is custom for teams running mission-critical workflows across email, WhatsApp, ERP, CRM, market intelligence, and customers."
     ]
   },

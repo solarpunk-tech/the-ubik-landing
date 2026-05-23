@@ -3,6 +3,7 @@
 ## Current status
 
 - Repo path: `/Users/shubhranshujha/Codex/the-ubik-landing`.
+- Latest homepage pass rebased against `origin/main` on May 23, 2026; no remote delta was pending.
 - The old static HTML/CSS site has been rewritten as Vite + React 18 + TypeScript + Tailwind v4 + shadcn `radix-nova` / Mist.
 - shadcn preset is configured in `components.json`, with registries for `@svgl`, `@manifest`, and `@dotmatrix`.
 - Dotmatrix loaders are installed from the registry and imported through `src/components/dotmatrix-loader.css`.
@@ -11,6 +12,15 @@
 
 ## Implemented
 
+- Homepage browser-comment correction:
+  - hero keeps the Landing V2 layout/copy direction but uses the original matrix background seed,
+  - hero headline now highlights `Trade Operations`; hero lede now says `frozen food` and highlights `frozen food`, `$300M+`, and `20,000+ containers`,
+  - the over-copied Landing V2 `What Ubik does` primitives section was removed,
+  - the original compact homepage `How it works` section was restored above Security,
+  - Landing V2 `Wherever your work already lives` tools grid now sits below the restored `How it works` section,
+  - FAQ is followed by a moving company-logo strip for experienced supply-chain operators, builders, and ex-founders,
+  - header/download naming changed from `Ubik Local` to `Ubik Meetings`; the header item is now in the nav row with hover icon swap and no bordered secondary CTA treatment.
+- Tool/integration logos in the hero queue, tools grid, workflow evidence, and new company strip use Google favicon URLs (`https://www.google.com/s2/favicons?...`) to match the requested icon approach.
 - Landing page, `/try`, `/security`, `/privacy-policy`, and `/terms-of-service` are React routes.
 - `/security` is a CTO-specific memo with the CTA "Share this with your tech team".
 - `/try` remains a stub and uses `src/lib/try.ts` with `VITE_TRY_TARGET=stub | razorpay | app`.
@@ -34,6 +44,10 @@
 
 - `pnpm lint` passes.
 - `pnpm build` passes.
+- Latest browser-comment visual verification captured after this correction:
+  - `verification/landing-comments-desktop.png`
+  - `verification/landing-comments-mobile.png`
+  - `verification/landing-comments-fullpage.png`
 - Repository search for old gateway/CTA/color utility strings returns no matches.
 - Playwright screenshots were captured after a 2s route wait so lazy-loaded pages render beyond the fallback.
 - Visual evidence:
@@ -428,6 +442,36 @@
     - Homepage feature mobile: `verification/comment-blog-feature-home-mobile.png`
     - Blog index no intro mobile: `verification/comment-blog-index-no-intro-mobile.png`
     - Overflow report: `verification/comment-blog-feature-report.json`
+- Latest Origin Roulette fact-check refresh:
+  - `main` was fast-forwarded from `origin/main` at `77d5b35` before edits. Existing untracked `.claude/` directory was left untouched.
+  - Updated `/blog/origin-roulette-2026-shrimp-sourcing` against the 18 May 2026 fact-check:
+    - Removed dependence on the report authoring frame; no Manus AI attribution or report-workflow language is used in the article.
+    - Updated Ecuador U.S. 2025 volume from `~216k / 215,972 MT` to `231,804 MT`.
+    - Reframed U.S. tariff presentation from single country rates to duty-stack exposure: base MFN, Section 122/current surcharge status, trade-framework references, AD/CVD deposits, China Section 301, and product carveout status.
+    - Narrowed Vietnam / CATCH language so farmed vannamei is not treated as categorically subject to the wild-caught CATCH clock.
+    - Replaced the plain source-note list with linked source cards using publisher labels, favicons, and short notes for USITC, White House, ITA, Shrimp Insights, FAO GLOBEFISH, NOAA Fisheries, USITC China Tariffs, and European Commission.
+    - Updated `public/llms.txt` with the duty-stack / wild-caught CATCH framing.
+  - Visual requirements recorded for this pass:
+    - Layout: bottom source section should render as linked source cards with favicons and publisher hierarchy.
+    - Spacing: long duty-stack labels and source notes must not overflow on desktop or mobile.
+    - Typography: preserve the existing Ubik editorial article style; avoid importing fact-check-report voice.
+    - Color: source cards and matrix use existing tokenized shell/card/primary colors.
+    - Interactions: source cards are external links; article share and origin filter remain functional.
+    - Responsive behavior: article should have no document-level mobile horizontal overflow.
+  - Verification:
+    - `pnpm exec eslint src` passes.
+    - `pnpm build` passes.
+    - `git diff --check` passes.
+    - `pnpm lint` is blocked by unrelated untracked `.claude/worktrees/determined-engelbart-3f0718` files that ESLint scans; do not treat that as an app-source failure unless `.claude/` is intentionally brought under repo linting.
+    - Browser QA verified route identity, nonblank render, updated hero stats, duty-stack matrix labels, source-card DOM presence, source-card screenshot, and mobile width metrics with no document-level overflow.
+  - Latest evidence:
+    - Before/reference desktop article from prior pass: `verification/origin-article-desktop-light.png`
+    - Before/reference mobile article from prior pass: `verification/origin-article-mobile-light.png`
+    - After desktop top: `/tmp/ubik-origin-roulette-qa/after-desktop-top.png`
+    - After desktop matrix: `/tmp/ubik-origin-roulette-qa/after-desktop-matrix.png`
+    - After desktop source cards: `/tmp/ubik-origin-roulette-qa/after-desktop-sources.png`
+    - After mobile top: `/tmp/ubik-origin-roulette-qa/after-mobile-top.png`
+    - After mobile matrix/no-overflow: `/tmp/ubik-origin-roulette-qa/after-mobile-matrix.png`
 - Latest Ubik Local download layout comment pass:
   - The `Ubik Local captures meeting audio...` positioning copy moved above the main download headline so the page explains Ubik Local before the install action.
   - The Mac/Windows install guide rows now render directly below the download buttons after a user clicks a download/manual link, instead of appearing below the `Coming soon` product cards.
@@ -492,6 +536,32 @@
     - Mobile sheet CTA: `verification/nav-local-download-mobile-sheet.png`
     - Download route reached: `verification/nav-local-download-route.png`
     - Check report: `verification/nav-local-download-report.json`
+- Latest LinkedIn carousel pass:
+  - Created an 8-slide LinkedIn document carousel from `/blog/origin-roulette-2026-shrimp-sourcing` for the `theubik.com` launch ramp.
+  - Output folder: `social/origin-roulette-linkedin-carousel/`.
+  - Upload-ready PDF: `social/origin-roulette-linkedin-carousel/origin-roulette-linkedin-carousel.pdf`.
+  - Editable render source: `social/origin-roulette-linkedin-carousel/origin-roulette-linkedin-carousel.html`.
+  - Regeneration command: `node scripts/render-linkedin-carousel.mjs`.
+  - Visual requirements:
+    - Layout: square 1080 x 1080 LinkedIn slides with sparse editorial hierarchy and no nested-card treatment.
+    - Spacing: large feed-readable title blocks, compact proof/chip grids, and consistent 64px frame.
+    - Typography: Montserrat headings, Noto Sans body, IBM Plex Mono operational labels.
+    - Color: dark Ubik editorial background with primary blue structural bar and grid field.
+    - Writing style: concise trade-desk voice, preserving the origin-risk and operator-workflow framing.
+  - Before/style reference evidence:
+    - `verification/origin-article-desktop-dark.png`
+    - `verification/origin-article-desktop-light.png`
+  - After evidence:
+    - Cover: `social/origin-roulette-linkedin-carousel/slide-01.png`
+    - Origin roles: `social/origin-roulette-linkedin-carousel/slide-04.png`
+    - Decision rule: `social/origin-roulette-linkedin-carousel/slide-05.png`
+    - CTA: `social/origin-roulette-linkedin-carousel/slide-08.png`
+  - Verification:
+    - `node scripts/render-linkedin-carousel.mjs` passes and renders 8 PNGs plus one PDF.
+    - `pnpm exec eslint scripts/render-linkedin-carousel.mjs` passes.
+    - Rendered HTML has 8 footer links to `https://theubik.com`; generated PDF contains 8 URI annotations for `https://theubik.com/`.
+    - The decision-rule slide now says `SIMP, forced-labour issues, and CATCH decide durability` and contains no `Annex` mention.
+    - Full `pnpm lint` is currently blocked by unrelated existing `.claude/worktrees/determined-engelbart-3f0718` lint errors.
 
 ## Next notes
 

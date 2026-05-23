@@ -5,17 +5,71 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MatrixField } from "@/components/landing/MatrixField";
-import { ProductSurface } from "@/components/landing/ProductSurface";
-import { LiveQueuePreview } from "@/components/landing/LiveQueuePreview";
-import { VerticalTicker } from "@/components/landing/VerticalTicker";
+import { LandingV2Hero, LandingV2HowSection, LandingV2ToolsSection } from "@/components/landing/LandingV2Sections";
 import { HowWorkflowCarousel } from "@/components/landing/HowWorkflowCarousel";
 import { BlogPreview } from "@/components/landing/BlogPreview";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Seo } from "@/components/seo/Seo";
 import { PageShell } from "@/components/landing/PageShell";
-import { bottomCallouts, faqs, heroTickerItems, proofPoints, securityCards } from "@/lib/landing-content";
+import { bottomCallouts, faqs, proofPoints, securityCards } from "@/lib/landing-content";
 import { externalLinks } from "@/lib/links";
 import { trackEvent } from "@/lib/posthog";
+
+type TeamTickerCompany = {
+  label: string;
+  domain?: string;
+  logo?: string;
+};
+
+const teamTickerCompanies: TeamTickerCompany[] = [
+  { label: "AZ Gems", domain: "azgems.com" },
+  { label: "Sandhya Aqua", logo: "https://sandhyaaqua.com/wp-content/uploads/2020/07/SA-Logo.png" },
+  { label: "Dr. Reddy's", domain: "drreddys.com" },
+  { label: "Airtel", domain: "airtel.in" },
+  { label: "Udaan", domain: "udaan.com" },
+  { label: "Ola", domain: "olaelectric.com" },
+  { label: "AquaExchange", domain: "aquaexchange.com" },
+  { label: "ClearTax", domain: "cleartax.in" },
+  { label: "Arintra", domain: "arintra.com" },
+  { label: "Lumian", domain: "lumian.ai" },
+  { label: "Housing", domain: "housing.com" }
+] as const;
+
+function CompanyLogoTicker() {
+  const companies = [...teamTickerCompanies, ...teamTickerCompanies];
+  const logoSrc = (company: TeamTickerCompany) =>
+    company.logo ?? `https://www.google.com/s2/favicons?domain=${company.domain}&sz=64`;
+
+  return (
+    <section className="border-b bg-background py-10">
+      <div className="container-page">
+        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.4fr] lg:items-center">
+          <div>
+            <p className="section-label">Companies We have worked with</p>
+            <h2 className="mt-3 max-w-xl text-2xl font-semibold sm:text-3xl">
+              Small team of supply chain operators, builders & ex-founders.
+            </h2>
+          </div>
+          <div className="logo-ticker-fade overflow-hidden bg-background py-2">
+            <div className="logo-ticker-track flex w-max items-center gap-8">
+              {companies.map((company, index) => (
+                <div key={`${company.label}-${index}`} className="flex h-20 w-36 shrink-0 flex-col items-center justify-center gap-2 px-4">
+                  <img
+                    src={logoSrc(company)}
+                    alt=""
+                    className="size-8 object-contain"
+                    loading="lazy"
+                  />
+                  <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">{company.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function Index() {
   return (
@@ -43,7 +97,7 @@ export default function Index() {
             description:
               "Personalised workspace for perishable trade. Built for seafood importers, exporters, and processors. Compresses RFQ cycles 20x, recovers margin from RFQ leakage, with SOC 2 Type II audit in progress.",
             offers: [
-              { "@type": "Offer", name: "Base", price: "100", priceCurrency: "USD", description: "Monthly personal AI workspace with Ubik Local included" },
+              { "@type": "Offer", name: "Base", price: "100", priceCurrency: "USD", description: "Monthly personal AI workspace with Ubik Meetings included" },
               { "@type": "Offer", name: "Base Annual", price: "85", priceCurrency: "USD", description: "Annual Base price per month, billed annually" },
               { "@type": "Offer", name: "Enterprise", priceCurrency: "USD", description: "Custom workflow automation for teams" }
             ]
@@ -61,36 +115,7 @@ export default function Index() {
       />
 
       <main className="overflow-hidden">
-        <section className="relative min-h-[calc(100svh-4rem)] border-b">
-          <MatrixField variant="hero" density="high" seed="ubik-hero-po-to-order" />
-          <div className="container-page relative z-10 grid min-h-[calc(100svh-4rem)] items-center gap-10 py-14 lg:grid-cols-[0.92fr_1.08fr] lg:py-18">
-            <div className="flex max-w-3xl flex-col gap-7">
-              <VerticalTicker items={heroTickerItems} />
-              <div className="flex flex-col gap-5">
-                <h1 className="soft-blur-block text-5xl font-semibold leading-[1.02] sm:text-6xl lg:text-7xl">
-                  Personalised <span className="text-primary">Workspace</span> for Perishable Trade
-                </h1>
-                <p className="soft-blur-block max-w-2xl text-lg leading-8 text-muted-foreground">
-                  Built for seafood importers, exporters, and processors moving{" "}
-                  <span className="font-medium text-primary">$300M+</span> a year. Ubik turns CRM, ERP,
-                  email, and WhatsApp into reviewed agent workflows.
-                </p>
-              </div>
-              <div className="soft-blur-block flex flex-col gap-3 sm:flex-row">
-                <Button asChild size="lg">
-                  <a href={externalLinks.app} onClick={() => trackEvent("cta_clicked", { cta: "try_ubik", location: "hero" })}>
-                    Try Ubik Now <ArrowRightIcon data-icon="inline-end" />
-                  </a>
-                </Button>
-                <Button asChild variant="outline" size="lg">
-                  <a href={externalLinks.founderMeeting} onClick={() => trackEvent("cta_clicked", { cta: "talk_to_founders", location: "hero" })}>Talk to founders</a>
-                </Button>
-              </div>
-            </div>
-
-            <LiveQueuePreview />
-          </div>
-        </section>
+        <LandingV2Hero />
 
         <section className="border-b bg-shell">
           <div className="container-page grid gap-px bg-border py-px md:grid-cols-3">
@@ -103,39 +128,9 @@ export default function Index() {
           </div>
         </section>
 
-        <section id="product" className="container-page section-y">
-          <div className="mb-10 flex max-w-3xl flex-col gap-3">
-            <Badge variant="outline" className="w-fit">What Ubik does</Badge>
-            <h2 className="text-3xl font-semibold sm:text-4xl">
-              The operator layer above your ERP, CRM, email, and WhatsApp.
-            </h2>
-            <p className="text-muted-foreground">
-              Five seafood-native workflow primitives in production: RFQ to quote, PO ingestion, transit-aware scheduling, VMI pull-rate, lot traceability. Every action human-reviewed before it moves.
-            </p>
-          </div>
-          <ProductSurface />
-        </section>
+        <LandingV2HowSection />
 
-        <section id="how" className="relative border-y bg-shell">
-          <MatrixField variant="process" density="high" seed="process-band" />
-          <div className="container-page section-y relative z-10 grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
-            <div className="flex flex-col gap-4">
-              <Badge variant="secondary" className="w-fit">How it works</Badge>
-              <h2 className="text-3xl font-semibold sm:text-4xl">
-                See one workflow move through the loop.
-              </h2>
-              <p className="text-muted-foreground">
-                A large vertically integrated seafood conglomerate compressed RFQ cycles from 5-7 days to 6 hours. A US processor moved PO processing from manual work to 30-second extraction. Each loop captures signal, matches context, prepares one reviewed action.
-              </p>
-              <Button asChild variant="outline" className="w-fit">
-                <Link to="/how-it-works">
-                  Open full walkthrough <ArrowRightIcon data-icon="inline-end" />
-                </Link>
-              </Button>
-            </div>
-            <HowWorkflowCarousel compact />
-          </div>
-        </section>
+        <LandingV2ToolsSection />
 
         <section id="security" className="relative border-b">
           <MatrixField variant="security" density="medium" seed="security-matrix" />
@@ -167,6 +162,27 @@ export default function Index() {
                 </Card>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section id="workflow-overview" className="relative border-y bg-shell">
+          <MatrixField variant="process" density="high" seed="process-band" />
+          <div className="container-page section-y relative z-10 grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
+            <div className="flex flex-col gap-4">
+              <Badge variant="secondary" className="w-fit">How it works</Badge>
+              <h2 className="text-3xl font-semibold sm:text-4xl">
+                See one workflow move through the loop.
+              </h2>
+              <p className="text-muted-foreground">
+                A large vertically integrated seafood conglomerate compressed RFQ cycles from 5-7 days to 6 hours. A US processor moved PO processing from manual work to 30-second extraction. Each loop captures signal, matches context, prepares one reviewed action.
+              </p>
+              <Button asChild variant="outline" className="w-fit">
+                <Link to="/how-it-works">
+                  Open full walkthrough <ArrowRightIcon data-icon="inline-end" />
+                </Link>
+              </Button>
+            </div>
+            <HowWorkflowCarousel compact />
           </div>
         </section>
 
@@ -206,6 +222,8 @@ export default function Index() {
             </Accordion>
           </div>
         </section>
+
+        <CompanyLogoTicker />
 
         <BlogPreview />
 

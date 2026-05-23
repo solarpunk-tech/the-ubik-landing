@@ -75,8 +75,8 @@ export default function Download() {
   return (
     <PageShell>
       <Seo
-        title="Download Ubik"
-        description="Download Ubik for Mac or Windows. Your install will start automatically."
+        title="Download Ubik Meetings"
+        description="Download Ubik Meetings for Mac or Windows. Your install will start automatically."
       />
       <main className="relative overflow-hidden">
         <section className="relative border-b">
@@ -88,7 +88,7 @@ export default function Download() {
             </Badge>
 
             <p className="max-w-3xl text-base leading-7 text-foreground sm:text-lg">
-              Ubik Local captures meeting audio for notes today; next, it becomes the private desktop bridge for spreadsheets, portals, and trade documents.
+              Ubik Meetings captures meeting audio for notes today; next, it becomes the private desktop bridge for spreadsheets, portals, and trade documents.
             </p>
 
             <div className="flex max-w-3xl flex-col gap-4">
@@ -104,7 +104,7 @@ export default function Download() {
                   className="font-medium text-primary underline underline-offset-4 hover:no-underline"
                   onClick={() => handleDownloadClick()}
                 >
-                  download Ubik manually
+                  download Ubik Meetings manually
                 </a>
                 .
               </p>
@@ -119,7 +119,7 @@ export default function Download() {
               >
                 <a href={downloads.mac}>
                   <AppleLogoIcon weight="fill" data-icon="inline-start" />
-                  Download for Mac
+                  Download Ubik Meetings for Mac
                 </a>
               </Button>
               <Button
@@ -130,7 +130,7 @@ export default function Download() {
               >
                 <a href={downloads.windows}>
                   <WindowsLogoIcon weight="fill" data-icon="inline-start" />
-                  Download for Windows
+                  Download Ubik Meetings for Windows
                 </a>
               </Button>
             </div>
@@ -159,7 +159,7 @@ export default function Download() {
           <div className="mb-10 flex max-w-5xl flex-col gap-3">
             <h2 className="text-3xl font-semibold sm:text-4xl">Your local bridge for intelligence.</h2>
             <p className="text-muted-foreground lg:whitespace-nowrap">
-              Ubik Local captures useful computer context and sends only reviewed trade signals into Ubik.
+              Ubik Meetings captures useful computer context and sends only reviewed trade signals into Ubik.
             </p>
           </div>
           <div className="mb-12 grid gap-px bg-border md:grid-cols-3">

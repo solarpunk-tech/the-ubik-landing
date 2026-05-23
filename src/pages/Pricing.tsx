@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/posthog";
 
 const baseFeatures = [
-  "Webapp + Local desktop add-on",
+  "Webapp + Ubik Meetings desktop add-on",
   "Memory workflows for inbox, meetings, projects and ops",
   "10+ LLMs plus live trade artifacts",
   "Market intelligence projects + agentic browsing",
@@ -48,7 +48,7 @@ const pricingFaqs = [
   {
     question: "What does Base cover?",
     answer: [
-      "Base is the personal AI workspace for one operator. It includes the Ubik Webapp, Ubik Local, local meeting recording, memory workflows, market intelligence projects, live artifacts and agentic browsing.",
+      "Base is the personal AI workspace for one operator. It includes the Ubik Webapp, Ubik Meetings, local meeting recording, memory workflows, market intelligence projects, live artifacts and agentic browsing.",
       "It is built for individual trade, pricing, meeting and operations work before Ubik becomes a wider workflow layer for the team."
     ]
   },
@@ -62,7 +62,7 @@ const pricingFaqs = [
   {
     question: "How do credentials and private files work?",
     answer: [
-      "Credentials stay on-device. Private files are encrypted. Ubik Local is designed to bridge desktop context to the Webapp without turning your local machine into a public data lake.",
+      "Credentials stay on-device. Private files are encrypted. Ubik Meetings is designed to bridge desktop context to the Webapp without turning your local machine into a public data lake.",
       "Enterprise deployments can keep sensitive workflows in private, local or air-gapped environments depending on the security model."
     ]
   },
@@ -185,7 +185,7 @@ export default function Pricing() {
                       Try Ubik Now <ArrowRightIcon data-icon="inline-end" />
                     </a>
                   </Button>
-                  <p className="text-sm text-primary-foreground/70">Built for one operator. Comes with Ubik Local included.</p>
+                  <p className="text-sm text-primary-foreground/70">Built for one operator. Comes with Ubik Meetings included.</p>
                 </div>
               </CardContent>
             </Card>
@@ -224,7 +224,7 @@ export default function Pricing() {
                 <h2 className="mt-3 flex flex-wrap items-end gap-3 text-2xl font-semibold">
                   <img src={brandAssets.wordmarkLight} alt="Ubik" className="h-auto w-28 dark:hidden sm:w-32" />
                   <img src={brandAssets.wordmarkDark} alt="Ubik" className="hidden h-auto w-28 dark:block sm:w-32" />
-                  <span className="pb-1 text-xl leading-none">Local</span>
+                  <span className="pb-1 text-xl leading-none">Meetings</span>
                 </h2>
               </div>
               <div>

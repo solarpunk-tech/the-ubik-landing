@@ -17,11 +17,13 @@ The daily operating queue is the first page most operators should open. It reduc
 
 ## Priority signals
 
-- Buyer or supplier asks for a commitment.
-- ETA changes affect promise dates.
-- Margin or price variance needs review.
-- PO, invoice, or trade document is ready for extraction.
-- A task has no owner and could slip.
+| Signal | Typical state |
+| --- | --- |
+| Buyer or supplier asks for a commitment | <span className="ux-label is-primary">Now</span> |
+| ETA changes affect promise dates | <span className="ux-label is-support">Found</span> |
+| Margin or price variance needs review | <span className="ux-label is-destructive">Analyse</span> |
+| PO, invoice, or trade document is ready for extraction | <span className="ux-label is-success">Ready</span> |
+| A task has no owner and could slip | <span className="ux-label is-nudge">Try this</span> |
 
 ## Blocked work
 

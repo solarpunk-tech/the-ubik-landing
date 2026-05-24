@@ -380,12 +380,23 @@
   .matrix-field::before {
     content: "";
     position: absolute;
-    inset: 0;
+    inset: -1px;
     background-image:
-      linear-gradient(hsl(var(--primary) / 0.12) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--primary) / 0.1) 1px, transparent 1px);
+      linear-gradient(hsl(var(--primary) / 0.14) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / 0.12) 1px, transparent 1px);
     background-size: 42px 42px;
-    opacity: 0.38;
+    background-position: 0 0, 0 0;
+    opacity: 0.42;
+    animation: matrix-grid-drift 18s linear infinite;
+    will-change: background-position;
+  }
+
+  @keyframes matrix-grid-drift {
+    to {
+      background-position:
+        var(--matrix-drift-x, 42px) var(--matrix-drift-y, 0px),
+        var(--matrix-drift-x, 42px) var(--matrix-drift-y, 0px);
+    }
   }
 
   .matrix-field-interactive {
@@ -399,9 +410,9 @@
     width: clamp(3px, 0.42vw, 7px);
     aspect-ratio: 1;
     background: hsl(var(--primary));
-    opacity: calc(var(--mo) * 0.8);
+    opacity: 0;
     transform: translate(-50%, -50%) scale(var(--ms));
-    animation: matrix-pulse 6s ease-in-out infinite;
+    animation: matrix-pulse var(--mdur, 5s) steps(40, end) infinite;
     animation-delay: var(--md);
     box-shadow:
       0 0 0 1px hsl(var(--primary) / 0.1),
@@ -446,15 +457,33 @@
   @keyframes matrix-pulse {
     0%,
     100% {
-      opacity: calc(var(--mo) * 0.34);
-      transform: translate(-50%, -50%) scale(calc(var(--ms) * 0.82));
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(calc(var(--ms) * 0.55));
     }
-    45% {
-      opacity: var(--mo);
+    8% {
+      opacity: calc(var(--mo) * 0.85);
       transform: translate(-50%, -50%) scale(var(--ms));
     }
+    14% {
+      opacity: calc(var(--mo) * 0.18);
+    }
+    22% {
+      opacity: var(--mo);
+    }
+    34% {
+      opacity: calc(var(--mo) * 0.42);
+    }
+    48% {
+      opacity: calc(var(--mo) * 0.92);
+    }
     62% {
-      opacity: calc(var(--mo) * 0.58);
+      opacity: calc(var(--mo) * 0.15);
+    }
+    78% {
+      opacity: calc(var(--mo) * 0.55);
+    }
+    92% {
+      opacity: calc(var(--mo) * 0.05);
     }
   }
 
@@ -477,6 +506,10 @@
     }
 
     .matrix-dot {
+      animation: none;
+    }
+
+    .matrix-field::before {
       animation: none;
     }
 

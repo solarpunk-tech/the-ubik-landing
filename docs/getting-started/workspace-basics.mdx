@@ -17,15 +17,26 @@ The workspace is built around one question: what needs action before it slips?
 
 ## Queue states
 
-- `Now`: Review this before moving to lower-priority work.
-- `Found`: Ubik detected a change that may affect downstream plans.
-- `Analyse`: The item needs human review before a recommendation is safe.
-- `Ready`: The action is prepared and waiting for approval or assignment.
+| State | When you see it |
+| --- | --- |
+| <span className="ux-label is-primary">Now</span> | Review this before moving to lower-priority work. |
+| <span className="ux-label is-support">Found</span> | ubik detected a change that may affect downstream plans. |
+| <span className="ux-label is-destructive">Analyse</span> | The item needs human review before a recommendation is safe. |
+| <span className="ux-label is-success">Ready</span> | The action is prepared and waiting for approval or assignment. |
+
+## Handoff modes
+
+Every queue item carries a handoff chip that tells you who has the next move.
+
+<span className="ux-handoff is-human">Human → Review</span> &nbsp;
+<span className="ux-handoff is-agent">Agent → Drafting</span> &nbsp;
+<span className="ux-handoff is-system">System → ERP queue</span> &nbsp;
+<span className="ux-handoff is-final">Final → Committed</span>
 
 ## Good operator habits
 
 <div className="ubik-panel">
-  <strong>Do not approve from the headline alone.</strong> Open the source context, check the customer or margin impact, and edit the action if the recommendation is directionally right but operationally incomplete.
+  <strong>Bring ubik a wide variety of work.</strong> RFQs, PO chases, supplier follow-ups, margin checks, meeting recaps, vendor reviews — the more shapes you hand it, the richer your trade memory becomes across people, process, and technology. That is what lets agents catch deviations cleanly once you graduate them to run unattended.
 </div>
 
 ## Theme and readability

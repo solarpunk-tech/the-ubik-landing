@@ -514,8 +514,9 @@ export function LandingV2Hero() {
 
 export function LandingV2ToolsSection() {
   return (
-    <section className="border-b py-16">
-      <div className="container-page">
+    <section className="relative border-b bg-background py-16">
+      <MatrixField variant="subtle" density="medium" seed="tools-band" />
+      <div className="container-page relative z-10">
         <div className="mb-8 grid items-end gap-5 lg:grid-cols-2">
           <div>
             <SectionEyebrow>§ tools we read from</SectionEyebrow>
@@ -536,7 +537,7 @@ export function LandingV2ToolsSection() {
               <span className="font-mono text-[9px] uppercase tracking-[0.06em] text-muted-foreground">{label}</span>
             </div>
           ))}
-          <div className="flex items-center justify-center bg-shell px-3 py-4 font-mono text-[10px] text-muted-foreground">
+          <div className="flex items-center justify-center bg-card px-3 py-4 font-mono text-[10px] text-muted-foreground">
             + <b className="ml-1 text-foreground">120</b>
           </div>
         </div>
@@ -641,8 +642,9 @@ export function LandingV2HowSection() {
   }
 
   return (
-    <section id="how" className="border-b border-t bg-shell py-20">
-      <div className="container-page">
+    <section id="how" className="relative border-b border-t bg-background py-20">
+      <MatrixField variant="process" density="medium" seed="how-rail-band" />
+      <div className="container-page relative z-10">
         <div className="mb-10 grid items-end gap-5 lg:grid-cols-2">
           <div>
             <SectionEyebrow>§ how it works · tuesday 09:14–14:22</SectionEyebrow>

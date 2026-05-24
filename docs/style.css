@@ -12,6 +12,18 @@
   --ubik-dark-text: #f0f4fa;
   --ubik-dark-muted: #b2bac8;
   --ubik-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Design palette — mirrors the ubik-webapp tokens. Use these for status
+   * labels, handoff chips, and any tonal callouts. */
+  --palette-primary: hsl(227 81% 56%);
+  --palette-success: hsl(145 65% 40%);
+  --palette-support: hsl(47 100% 57%);
+  --palette-destructive: hsl(0 72% 51%);
+  --palette-foreground: hsl(227 65% 11%);
+  --palette-shell: hsl(227 50% 97%);
+  --palette-well: hsl(227 60% 96%);
+  --palette-muted: hsl(227 100% 98%);
+  --palette-border: hsl(0 0% 90%);
 }
 
 html,
@@ -220,4 +232,144 @@ a {
   .ubik-proof:last-child {
     border-bottom: 0;
   }
+}
+
+/* ---------------------------------------------------------------------------
+ * Status + handoff labels — mirrors the web app's UX vocabulary.
+ * Solid filled blocks for state, soft pills for nudges, outlined chips for
+ * handoff arrows. Use sparingly in docs to teach the system visually.
+ * ------------------------------------------------------------------------- */
+
+.ux-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.16rem 0.55rem;
+  font-family: var(--ubik-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  line-height: 1.4;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.ux-label.is-primary {
+  background: var(--palette-primary);
+  color: #ffffff;
+}
+
+.ux-label.is-success {
+  background: var(--palette-success);
+  color: #ffffff;
+}
+
+.ux-label.is-support {
+  background: var(--palette-support);
+  color: var(--palette-foreground);
+}
+
+.ux-label.is-destructive {
+  background: var(--palette-destructive);
+  color: #ffffff;
+}
+
+.ux-label.is-foreground {
+  background: var(--palette-foreground);
+  color: var(--ubik-light-bg);
+}
+
+.dark .ux-label.is-foreground {
+  background: var(--ubik-dark-text);
+  color: var(--palette-foreground);
+}
+
+.ux-label.is-soft {
+  background: color-mix(in srgb, var(--palette-primary) 14%, transparent);
+  color: var(--palette-primary);
+}
+
+.dark .ux-label.is-soft {
+  background: color-mix(in srgb, var(--palette-primary) 26%, transparent);
+  color: hsl(227 91% 72%);
+}
+
+.ux-label.is-nudge {
+  background: color-mix(in srgb, var(--palette-support) 32%, white);
+  color: var(--palette-foreground);
+}
+
+.dark .ux-label.is-nudge {
+  background: color-mix(in srgb, var(--palette-support) 26%, transparent);
+  color: var(--palette-support);
+}
+
+/* Outlined chips for handoff arrows */
+.ux-handoff {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.16rem 0.55rem;
+  font-family: var(--ubik-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1.5px solid var(--ubik-light-border);
+  color: var(--ubik-light-muted);
+  line-height: 1.4;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.dark .ux-handoff {
+  border-color: var(--ubik-dark-border);
+  color: var(--ubik-dark-muted);
+}
+
+.ux-handoff.is-human {
+  border-color: var(--palette-success);
+  color: var(--palette-success);
+}
+
+.dark .ux-handoff.is-human {
+  border-color: hsl(145 60% 55%);
+  color: hsl(145 60% 60%);
+}
+
+.ux-handoff.is-agent {
+  border-color: var(--palette-primary);
+  color: var(--palette-primary);
+}
+
+.dark .ux-handoff.is-agent {
+  border-color: hsl(227 91% 72%);
+  color: hsl(227 91% 72%);
+}
+
+.ux-handoff.is-system {
+  background: var(--palette-shell);
+  border-color: var(--palette-border);
+  color: var(--ubik-light-muted);
+}
+
+.dark .ux-handoff.is-system {
+  background: color-mix(in srgb, var(--ubik-dark-border) 50%, transparent);
+  border-color: var(--ubik-dark-border);
+  color: var(--ubik-dark-muted);
+}
+
+.ux-handoff.is-final {
+  background: var(--palette-foreground);
+  color: var(--ubik-light-bg);
+  border-color: var(--palette-foreground);
+}
+
+.dark .ux-handoff.is-final {
+  background: var(--ubik-dark-text);
+  color: var(--palette-foreground);
+  border-color: var(--ubik-dark-text);
 }

@@ -117,16 +117,38 @@
           "index",
           "getting-started/sign-in",
           "getting-started/workspace-basics",
-          "getting-started/how-ubik-ai-works"
+          "getting-started/how-ubik-ai-works",
+          "getting-started/vs-other-llms"
         ]
       },
       {
-        "group": "Workflows",
+        "group": "Features",
         "pages": [
-          "workflows/inquiry-to-shipment",
-          "workflows/approvals",
-          "workflows/daily-operating-queue",
-          "workflows/ask-ubik"
+          {
+            "group": "Surfaces",
+            "pages": [
+              "workflows/ask-ubik",
+              "workflows/inbox",
+              "workflows/meetings",
+              "workflows/tasks"
+            ]
+          },
+          {
+            "group": "Coming soon",
+            "pages": [
+              "workflows/workflows",
+              "workflows/projects",
+              "workflows/market-intel"
+            ]
+          },
+          {
+            "group": "Reference workflows",
+            "pages": [
+              "workflows/inquiry-to-shipment",
+              "workflows/approvals",
+              "workflows/daily-operating-queue"
+            ]
+          }
         ]
       },
       {

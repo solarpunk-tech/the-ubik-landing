@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import { ArrowRightIcon } from "@phosphor-icons/react";
+import { MatrixField } from "@/components/landing/MatrixField";
 import { blogPosts } from "@/lib/landing-content";
 
 export function BlogPreview() {
   const featured = blogPosts[0];
 
   return (
-    <section id="blog" className="border-b bg-background">
-      <div className="container-page section-y">
+    <section id="blog" className="relative border-b bg-background">
+      <MatrixField variant="subtle" density="low" seed="blog-band" />
+      <div className="container-page section-y relative z-10">
         <Link to="/blog" className="section-label inline-flex items-center gap-2 text-primary">
           Read Trade Notes <ArrowRightIcon aria-hidden />
         </Link>

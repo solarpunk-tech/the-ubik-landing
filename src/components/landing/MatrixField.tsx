@@ -56,14 +56,19 @@ export function MatrixField({
     const y = randomFrom(baseSeed, index + count);
     const pulse = randomFrom(baseSeed, index + count * 2);
     const scale = 0.64 + randomFrom(baseSeed, index + count * 3) * 1.45;
-    const opacity = 0.12 + randomFrom(baseSeed, index + count * 4) * 0.72;
+    const opacity = 0.18 + randomFrom(baseSeed, index + count * 4) * 0.78;
+    const durationRoll = randomFrom(baseSeed, index + count * 5);
+    // ~3× slower than the original 2.8–9.2s range (≈65% speed reduction).
+    const duration = 8 + durationRoll * 20;
+    const delay = pulse * -duration;
     return {
       style: {
         "--mx": `${(x * 100).toFixed(2)}%`,
         "--my": `${(y * 100).toFixed(2)}%`,
         "--ms": scale.toFixed(2),
         "--mo": opacity.toFixed(2),
-        "--md": `${(pulse * -5.5).toFixed(2)}s`
+        "--md": `${delay.toFixed(2)}s`,
+        "--mdur": `${duration.toFixed(2)}s`
       } as CSSProperties
     };
   });

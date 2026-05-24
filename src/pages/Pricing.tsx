@@ -25,7 +25,7 @@ const enterpriseFeatures = [
   "Everything in Base",
   "WhatsApp + email + ERP + CRM workflow automation",
   "RFQ, PO, VMI, margin and traceability playbooks",
-  "Domain expert + forward-deployed product engineer",
+  "A trade expert and a product engineer keep your playbooks and agents updated, models fine-tuned for your KPIs and OKRs — frontier intelligence at a fraction of token costs",
   "Private deployments, SSO, roles and audit logs"
 ];
 
@@ -56,7 +56,7 @@ const pricingFaqs = [
     question: "How does Enterprise expand Base?",
     answer: [
       "Enterprise starts with everything in Base, then adds cross-team workflow automation across WhatsApp, email, ERP, CRM, documents and customer-facing operations.",
-      "It includes domain expert support, forward-deployed product engineering, custom playbooks, SSO/SAML, role-based permissions, audit logs and private deployment options."
+      "A trade expert and a product engineer keep your playbooks and agents updated, models fine-tuned for your KPIs and OKRs — frontier intelligence at a fraction of token costs. Plus custom playbooks, SSO/SAML, role-based permissions, audit logs and private deployment options."
     ]
   },
   {

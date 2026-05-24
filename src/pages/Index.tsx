@@ -11,7 +11,7 @@ import { BlogPreview } from "@/components/landing/BlogPreview";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Seo } from "@/components/seo/Seo";
 import { PageShell } from "@/components/landing/PageShell";
-import { bottomCallouts, faqs, proofPoints, securityCards } from "@/lib/landing-content";
+import { bottomCallouts, compareBacklink, faqs, proofPoints, securityCards } from "@/lib/landing-content";
 import { externalLinks } from "@/lib/links";
 import { trackEvent } from "@/lib/posthog";
 
@@ -41,8 +41,9 @@ function CompanyLogoTicker() {
     company.logo ?? `https://www.google.com/s2/favicons?domain=${company.domain}&sz=64`;
 
   return (
-    <section className="border-b bg-background py-10">
-      <div className="container-page">
+    <section className="relative border-b bg-background py-10">
+      <MatrixField variant="subtle" density="low" seed="logo-ticker-band" />
+      <div className="container-page relative z-10">
         <div className="grid gap-6 lg:grid-cols-[0.9fr_1.4fr] lg:items-center">
           <div>
             <p className="section-label">Companies We have worked with</p>
@@ -117,10 +118,11 @@ export default function Index() {
       <main className="overflow-hidden">
         <LandingV2Hero />
 
-        <section className="border-b bg-shell">
-          <div className="container-page grid gap-px bg-border py-px md:grid-cols-3">
+        <section className="relative border-b bg-background">
+          <MatrixField variant="subtle" density="medium" seed="proof-points" />
+          <div className="container-page relative z-10 grid gap-px bg-border py-px md:grid-cols-3">
             {proofPoints.map(({ stat, label }) => (
-              <div key={stat} className="bg-shell p-6">
+              <div key={stat} className="bg-background p-6">
                 <p className="text-3xl font-semibold text-primary">{stat}</p>
                 <p className="mt-1 text-sm font-medium">{label}</p>
               </div>
@@ -165,7 +167,7 @@ export default function Index() {
           </div>
         </section>
 
-        <section id="workflow-overview" className="relative border-y bg-shell">
+        <section id="workflow-overview" className="relative border-y bg-background">
           <MatrixField variant="process" density="high" seed="process-band" />
           <div className="container-page section-y relative z-10 grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
             <div className="flex flex-col gap-4">
@@ -186,8 +188,33 @@ export default function Index() {
           </div>
         </section>
 
-        <section className="border-b bg-shell">
-          <div className="container-page section-y grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+        <section id="compare" className="relative border-y">
+          <MatrixField variant="process" density="low" seed="compare-backlink" />
+          <div className="container-page relative z-10 py-12 sm:py-14">
+            <a
+              href={compareBacklink.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackEvent("compare_backlink_clicked", { href: compareBacklink.href })}
+              className="group block"
+            >
+              <Badge variant="outline" className="mb-4">{compareBacklink.eyebrow}</Badge>
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
+                <h2 className="max-w-3xl text-2xl font-semibold tracking-tight sm:text-3xl">
+                  {compareBacklink.label}
+                  <span className="text-primary"> →</span>
+                </h2>
+                <p className="text-sm text-muted-foreground sm:max-w-xs sm:text-right">
+                  Different category. Picks the right model per task, fine-tuned for your ERPs, CRMs and workflows.
+                </p>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <section className="relative border-b">
+          <MatrixField variant="subtle" density="low" seed="faq-band" />
+          <div className="container-page section-y relative z-10 grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
               <Badge variant="secondary" className="mb-4">FAQ</Badge>
               <h2 className="text-3xl font-semibold">Answers for buyers, security reviewers, and investors.</h2>
@@ -196,7 +223,7 @@ export default function Index() {
               </p>
             </div>
             <Accordion type="single" collapsible className="w-full">
-              {faqs.map(({ question, answer, paragraphs, bullets }) => (
+              {faqs.map(({ question, answer, paragraphs, bullets, seeMore }) => (
                 <AccordionItem key={question} value={question}>
                   <AccordionTrigger>{question}</AccordionTrigger>
                   <AccordionContent>
@@ -214,6 +241,15 @@ export default function Index() {
                             </li>
                           ))}
                         </ul>
+                      ) : null}
+                      {seeMore ? (
+                        <a
+                          href={seeMore.href}
+                          onClick={() => trackEvent("faq_see_more_clicked", { question, href: seeMore.href })}
+                          className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+                        >
+                          {seeMore.label} <ArrowRightIcon data-icon="inline-end" />
+                        </a>
                       ) : null}
                     </div>
                   </AccordionContent>
@@ -256,14 +292,17 @@ export default function Index() {
           </Card>
         </section>
 
-        <section className="container-page pb-16">
-          <div className="grid gap-px bg-border md:grid-cols-3">
-            {bottomCallouts.map(({ title }, index) => (
-              <div key={title} className="bg-background p-5">
-                <p className="text-[10px] font-medium uppercase text-primary">0{index + 1}</p>
-                <h3 className="mt-3 max-w-xs text-lg font-semibold leading-snug text-pretty">{title}</h3>
-              </div>
-            ))}
+        <section className="relative pb-16">
+          <MatrixField variant="subtle" density="low" seed="bottom-callouts" />
+          <div className="container-page relative z-10">
+            <div className="grid gap-px bg-border md:grid-cols-3">
+              {bottomCallouts.map(({ title }, index) => (
+                <div key={title} className="bg-background p-5">
+                  <p className="text-[10px] font-medium uppercase text-primary">0{index + 1}</p>
+                  <h3 className="mt-3 max-w-xs text-lg font-semibold leading-snug text-pretty">{title}</h3>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </main>

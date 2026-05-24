@@ -6,7 +6,14 @@ export interface Faq {
   answer: string;
   paragraphs?: string[];
   bullets?: string[];
+  seeMore?: { label: string; href: string };
 }
+
+export const compareBacklink = {
+  eyebrow: "Different category",
+  label: "See how ubik is different from ChatGPT, Claude, Gemini and Perplexity",
+  href: "https://docs.theubik.com/getting-started/vs-other-llms"
+};
 
 export const proofPoints = [
   {
@@ -226,17 +233,13 @@ export const faqs: Faq[] = [
     ]
   },
   {
-    question: "How is Ubik different from ChatGPT, Claude, or Gemini for business?",
-    answer: "Ubik is built for one industry, with industry-specific memory and integrations, while ChatGPT, Claude, and Gemini are general-purpose. Three differences matter. First, Ubik understands seafood-native concepts out of the box: HSFCA, BOL, lot codes, cold chain, transit days, FDA holds. Second, Ubik connects to your stack (Outlook, Gmail, Zoho, SAP, WhatsApp) and acts inside it, rather than producing text you copy-paste. Third, your data does not become training data. Ubik has a SOC 2 Type II audit in progress with EU data residency. ChatGPT and Claude treat your RFQs and supplier pricing as input to their next model.",
+    question: "How is Ubik different from ChatGPT, Claude, Gemini or Perplexity?",
+    answer: "Different category. Ubik knows frozen food trade out of the box, runs inside your stack, makes the artifact (not just the text), remembers your meetings and suppliers, and never trains the model on your RFQs or pricing.",
     paragraphs: [
-      "Ubik is built for one industry, with industry-specific memory and integrations, while ChatGPT, Claude, and Gemini are general-purpose.",
-      "Three differences matter."
+      "Different category. Generic AI answers. Ubik carries the work.",
+      "ubik knows frozen food trade (HS codes, BOL, lot codes, cold chain, FDA holds), runs inside Gmail, Outlook, WhatsApp, Zoho, SAP, makes the artifact, remembers your trade, and never trains the model on your RFQs or pricing."
     ],
-    bullets: [
-      "Ubik understands seafood-native concepts out of the box: HSFCA, BOL, lot codes, cold chain, transit days, FDA holds.",
-      "Ubik connects to your stack (Outlook, Gmail, Zoho, SAP, WhatsApp) and acts inside it, rather than producing text you copy-paste.",
-      "Your data does not become training data. Ubik has a SOC 2 Type II audit in progress with EU data residency. ChatGPT and Claude treat your RFQs and supplier pricing as input to their next model."
-    ]
+    seeMore: { label: "See the full comparison", href: "https://docs.theubik.com/getting-started/vs-other-llms" }
   },
   {
     question: "Does Ubik replace my ERP or CRM?",

@@ -24,6 +24,7 @@
   "registries": {
     "@svgl": "https://svgl.app/r/{name}.json",
     "@manifest": "https://ui.manifest.build/r/{name}.json",
-    "@dotmatrix": "https://dotmatrix.zzzzshawn.cloud/r/{name}.json"
+    "@dotmatrix": "https://dotmatrix.zzzzshawn.cloud/r/{name}.json",
+    "@evilcharts": "https://evilcharts.com/r/{name}.json"
   }
 }

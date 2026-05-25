@@ -6,13 +6,14 @@ import {
   SealCheckIcon,
   WarningDiamondIcon
 } from "@phosphor-icons/react";
+import { AiMonitorLayerArticle } from "@/components/blog/AiMonitorLayerVisuals";
 import { MarginLeakArticle } from "@/components/blog/MarginLeakVisuals";
 import { DecisionTreeTable, OriginFlowMap, OriginPortraitRail, TariffDifferentialMatrix } from "@/components/blog/OriginRouletteVisuals";
 import { PageShell } from "@/components/landing/PageShell";
 import { SharePostPanel } from "@/components/landing/SharePostPanel";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Seo } from "@/components/seo/Seo";
-import { blogPosts, getBlogPostBySlug, marginLeakPost, originRoulettePost, type BlogPost } from "@/lib/blog";
+import { aiMonitorPost, blogPosts, getBlogPostBySlug, marginLeakPost, originRoulettePost, type BlogPost } from "@/lib/blog";
 import { sourceNotes } from "@/lib/blog/origin-roulette";
 
 type ArticleShellProps = {
@@ -52,7 +53,7 @@ const tripwires = [
   {
     title: "Where Vietnam re-export rules bite",
     copy:
-      "HS 1605 entries need raw-material origin certificates, not only processing-country paperwork. The importer owns the back-duty exposure if the chain is weak."
+      "HS 1605 entries need raw-material traceability, not only processing-country paperwork. The exact document set depends on whether the input is wild-caught or farmed."
   }
 ];
 
@@ -70,7 +71,7 @@ const wisdomChecks = [
   {
     claim: "Vietnam’s IUU yellow card does not matter for shrimp.",
     answer:
-      "It matters when the retail clock is tight. Frozen cooked shrimp can absorb paperwork delay; short replenishment programs cannot."
+      "It matters commercially for seafood-risk perception and wild-caught or processed wild inputs. For farmed vannamei, the tighter issues are residue control, establishment approvals, and raw-material traceability."
   }
 ];
 
@@ -127,17 +128,9 @@ function ArticleShell({ post, children }: ArticleShellProps) {
               </div>
             </header>
             {post.heroLightImage && post.heroDarkImage ? (
-              <figure className="mt-10 overflow-hidden border bg-shell">
-                <img
-                  src={post.heroLightImage}
-                  alt=""
-                  className="aspect-video w-full object-cover dark:hidden"
-                />
-                <img
-                  src={post.heroDarkImage}
-                  alt=""
-                  className="hidden aspect-video w-full object-cover dark:block"
-                />
+              <figure className="mt-10 aspect-[16/9] overflow-hidden border bg-shell sm:aspect-[2/1]">
+                <img src={post.heroLightImage} alt="" className="h-full w-full object-cover dark:hidden" />
+                <img src={post.heroDarkImage} alt="" className="hidden h-full w-full object-cover dark:block" />
               </figure>
             ) : null}
             {children}
@@ -188,9 +181,9 @@ function OriginRouletteArticle() {
         <div className="grid min-w-0 bg-background p-5 sm:p-6">
           <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-px bg-border sm:grid-cols-3">
             {[
-              ["~6 Million MT", "Estimated global farmed shrimp supply in 2025"],
-              ["~216k MT", "Ecuador to U.S. 2025 volume"],
-              ["18%", "Post-reset U.S. reciprocal tariff noted for India"]
+              ["~6 Million MT", "Rabobank estimate for 2025 farmed shrimp output, cited by FAO"],
+              ["231,804 MT", "Ecuador to U.S. 2025 volume"],
+              ["0% base", "Raw 0306.17 MFN duty; not the same as all-in landed duty"]
             ].map(([stat, label]) => (
               <div key={stat} className="bg-card p-4">
                 <p className="font-mono text-2xl text-primary">{stat}</p>
@@ -212,7 +205,10 @@ function OriginRouletteArticle() {
           Ecuador converted the disruption into structural share. Its cost base still makes it the HLSO anchor, but China’s domestic production and inventory cycles increasingly decide whether Ecuadorian surplus stays absorbed or hits the U.S. and EU spot market.
         </p>
         <p>
-          Certification moved from nice-to-have to table stakes. BAP, ASC, antibiotic-free discipline, CATCH documentation, SIMP traceability, import certification, and forced-labour readiness are now commercial variables, not compliance footnotes.
+          Certification moved from nice-to-have to table stakes. BAP, ASC, antibiotic-free discipline, SIMP traceability, establishment approvals, import certification, forced-labour readiness, and CATCH/Annex IV where wild-caught inputs are involved are now commercial variables, not compliance footnotes.
+        </p>
+        <p>
+          The U.S. tariff read now needs a stack, not a single country number. Base MFN duty for many raw frozen shrimp lines is 0%, but temporary surcharge treatment, trade-framework implementation, AD/CVD cash deposits, China Section 301 exposure, and product carveouts can still change the cash cost at entry.
         </p>
       </ArticleSection>
 
@@ -236,7 +232,7 @@ function OriginRouletteArticle() {
           For Q3 2026 spot, tariffs and landed cost dominate. Ecuador and India carry most of the book, with Indonesia used only as a certified diversifier and Vietnam reserved for processing-heavy lines.
         </p>
         <p>
-          For Q1 2027 forward books, the discriminator shifts to regulatory trajectory. EU CATCH, SIMP expansion, forced-labour readiness, ADD/CVD reviews, and origin verification matter more than a temporary spot discount.
+          For Q1 2027 forward books, the discriminator shifts to regulatory trajectory. Establishment approvals, residue control, SIMP expansion, forced-labour readiness, AD/CVD reviews, and CATCH or Annex IV documentation where wild-caught inputs are involved matter more than a temporary spot discount.
         </p>
       </ArticleSection>
 
@@ -276,7 +272,7 @@ function OriginRouletteArticle() {
         </div>
       </ArticleSection>
 
-      <section className="border bg-shell p-5 sm:p-6">
+      <section id="sources" className="scroll-mt-24 border bg-shell p-5 sm:p-6">
         <div className="flex items-center gap-2">
           <SealCheckIcon className="text-primary" aria-hidden />
           <p className="section-label">Source and limitation note</p>
@@ -284,20 +280,48 @@ function OriginRouletteArticle() {
         <p className="mt-4 max-w-3xl text-sm leading-6 text-muted-foreground">
           This note is a buyer-strategy synthesis, not legal advice or a live customs ruling. Tariffs, ADD/CVD cash deposits, import alerts, and certification requirements can change without matching the cadence of public trade articles.
         </p>
-        <ul className="mt-5 grid gap-2 text-sm leading-6 text-muted-foreground">
-          {sourceNotes.map((note) => (
-            <li key={note} className="flex gap-2">
-              <ArrowRightIcon className="mt-1 shrink-0 text-primary" aria-hidden />
-              <span>{note}</span>
-            </li>
+        <div className="mt-5 grid gap-px bg-border md:grid-cols-2">
+          {sourceNotes.map((source) => (
+            <a
+              key={source.url}
+              href={source.url}
+              target="_blank"
+              rel="noreferrer"
+              className="group grid min-w-0 grid-cols-[2.5rem_minmax(0,1fr)] gap-3 bg-background p-4 transition-colors hover:bg-card"
+            >
+              <span className="relative flex size-10 items-center justify-center border bg-shell">
+                <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-primary">{source.faviconLabel}</span>
+                <img
+                  src={source.favicon}
+                  alt=""
+                  className="absolute size-5"
+                  loading="lazy"
+                  onError={(event) => {
+                    event.currentTarget.hidden = true;
+                  }}
+                />
+              </span>
+              <span className="min-w-0">
+                <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-primary">{source.publisher}</span>
+                <span className="mt-1 flex items-start gap-2 text-sm font-medium text-foreground">
+                  <span className="min-w-0">{source.title}</span>
+                  <ArrowRightIcon className="mt-0.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-100" aria-hidden />
+                </span>
+                <span className="mt-2 block text-xs leading-5 text-muted-foreground">{source.note}</span>
+              </span>
+            </a>
           ))}
-        </ul>
+        </div>
       </section>
     </div>
   );
 }
 
 function ArticleBody({ post }: { post: BlogPost }) {
+  if (post.slug === aiMonitorPost.slug) {
+    return <AiMonitorLayerArticle />;
+  }
+
   if (post.slug === marginLeakPost.slug) {
     return <MarginLeakArticle />;
   }
@@ -374,9 +398,9 @@ export default function Blog() {
                 </span>
               </div>
               {post.heroLightImage && post.heroDarkImage ? (
-                <div className="flex min-h-64 items-center bg-shell p-3">
-                  <img src={post.heroLightImage} alt="" className="max-h-96 w-full object-contain dark:hidden" loading="lazy" />
-                  <img src={post.heroDarkImage} alt="" className="hidden max-h-96 w-full object-contain dark:block" loading="lazy" />
+                <div className="min-h-64 overflow-hidden bg-shell">
+                  <img src={post.heroLightImage} alt="" className="h-full min-h-64 w-full object-cover dark:hidden" loading="lazy" />
+                  <img src={post.heroDarkImage} alt="" className="hidden h-full min-h-64 w-full object-cover dark:block" loading="lazy" />
                 </div>
               ) : null}
             </Link>

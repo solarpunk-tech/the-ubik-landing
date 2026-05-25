@@ -1,0 +1,370 @@
+import { useEffect, useMemo, useRef, useState } from "react";
+import { gsap } from "gsap";
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  BrainIcon,
+  DatabaseIcon,
+  GaugeIcon,
+  LinkIcon,
+  ShieldCheckIcon
+} from "@phosphor-icons/react";
+import {
+  Bar as EvilBar,
+  EvilBarChart,
+  Grid,
+  Tooltip,
+  XAxis,
+  YAxis
+} from "@/components/evilcharts/charts/bar-chart";
+import { usePrefersReducedMotion } from "@/lib/dotmatrix-hooks";
+import {
+  leaderboardSnapshot,
+  monitorMetrics,
+  monitorSteps,
+  providerChips,
+  type MonitorStep
+} from "@/lib/blog/ai-monitor-layer";
+import { cn } from "@/lib/utils";
+
+const leaderboardChartConfig = {
+  tradeOpsFit: {
+    label: "Ubik trade-ops fit",
+    colors: {
+      light: ["hsl(var(--primary))"],
+      dark: ["hsl(var(--primary))"]
+    }
+  }
+};
+
+const statusIcon: Record<MonitorStep["status"], typeof DatabaseIcon> = {
+  input: DatabaseIcon,
+  compare: BrainIcon,
+  evidence: LinkIcon,
+  route: GaugeIcon,
+  review: ShieldCheckIcon
+};
+
+function FigurePair({
+  light,
+  dark,
+  alt,
+  caption,
+  aspect = "aspect-[16/9]"
+}: {
+  light: string;
+  dark: string;
+  alt: string;
+  caption: string;
+  aspect?: string;
+}) {
+  return (
+    <figure className="overflow-hidden border bg-shell">
+      <img src={light} alt={alt} className={cn("w-full object-cover dark:hidden", aspect)} loading="lazy" />
+      <img src={dark} alt={alt} className={cn("hidden w-full object-cover dark:block", aspect)} loading="lazy" />
+      <figcaption className="border-t bg-background p-4 text-xs leading-5 text-muted-foreground">{caption}</figcaption>
+    </figure>
+  );
+}
+
+function ProviderFavicon({ name, domain }: { name: string; domain: string }) {
+  return (
+    <span className="inline-flex items-center gap-2 border bg-background px-3 py-2 text-xs font-medium">
+      <span className="relative flex size-6 items-center justify-center border bg-shell">
+        <span className="font-mono text-[8px] uppercase text-primary">{name.slice(0, 2)}</span>
+        <img
+          src={`https://www.google.com/s2/favicons?domain=${domain}&sz=64`}
+          alt=""
+          className="absolute size-4"
+          loading="lazy"
+          onError={(event) => {
+            event.currentTarget.hidden = true;
+          }}
+        />
+      </span>
+      {name}
+    </span>
+  );
+}
+
+function MonitorDeck() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const cardRef = useRef<HTMLDivElement | null>(null);
+  const touchStartRef = useRef<number | null>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const active = monitorSteps[activeIndex] ?? monitorSteps[0];
+  const Icon = statusIcon[active.status];
+
+  useEffect(() => {
+    if (prefersReducedMotion || !cardRef.current) {
+      return;
+    }
+
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 768px)", () => {
+      const ctx = gsap.context(() => {
+        gsap.fromTo(
+          ".monitor-deck-card",
+          { x: 28, rotation: 1.2, autoAlpha: 0.72 },
+          { x: 0, rotation: 0, autoAlpha: 1, duration: 0.34, ease: "power2.out", overwrite: "auto" }
+        );
+        gsap.fromTo(
+          ".monitor-deck-chip",
+          { y: 8, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.22, ease: "power1.out", stagger: 0.035, overwrite: "auto" }
+        );
+      }, cardRef);
+      return () => ctx.revert();
+    });
+    return () => mm.revert();
+  }, [activeIndex, prefersReducedMotion]);
+
+  const move = (direction: 1 | -1) => {
+    setActiveIndex((current) => (current + direction + monitorSteps.length) % monitorSteps.length);
+  };
+
+  return (
+    <section className="grid min-w-0 gap-5 border bg-card p-4 sm:p-5 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
+      <div>
+        <p className="section-label">Swipe / click monitor deck</p>
+        <h2 className="mt-3 text-3xl font-semibold">Evidence routing should feel like moving one decision card at a time.</h2>
+        <p className="mt-4 text-sm leading-6 text-muted-foreground">
+          The old static evidence chain becomes an operator control: advance the card, inspect the evidence question, then decide whether the row moves, waits, or escalates.
+        </p>
+        <div className="mt-6 hidden gap-2 md:grid">
+          {monitorSteps.map((step, index) => (
+            <button
+              key={step.id}
+              type="button"
+              onClick={() => setActiveIndex(index)}
+              className={cn(
+                "grid grid-cols-[2rem_minmax(0,1fr)] items-center gap-3 border p-3 text-left text-sm transition-colors",
+                activeIndex === index ? "border-primary bg-primary/10" : "bg-background hover:bg-shell"
+              )}
+            >
+              <span className="font-mono text-xs text-primary">{String(index + 1).padStart(2, "0")}</span>
+              <span className="truncate">{step.title}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      <div
+        ref={cardRef}
+        className="min-w-0"
+        onTouchStart={(event) => {
+          touchStartRef.current = event.touches[0]?.clientX ?? null;
+        }}
+        onTouchEnd={(event) => {
+          const start = touchStartRef.current;
+          const end = event.changedTouches[0]?.clientX;
+          touchStartRef.current = null;
+          if (start == null || end == null || Math.abs(start - end) < 36) {
+            return;
+          }
+          move(start > end ? 1 : -1);
+        }}
+      >
+        <div className="monitor-deck-card min-h-[28rem] border bg-background p-5 shadow-sm sm:p-6">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-primary">{active.kicker}</p>
+              <h3 className="mt-5 max-w-xl text-3xl font-semibold">{active.title}</h3>
+            </div>
+            <span className="monitor-deck-chip flex size-12 shrink-0 items-center justify-center border bg-shell text-primary">
+              <Icon size={24} aria-hidden />
+            </span>
+          </div>
+          <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground">{active.copy}</p>
+          <div className="mt-8 border bg-shell p-4">
+            <p className="font-mono text-xs uppercase tracking-[0.14em] text-primary">Operator question</p>
+            <p className="mt-3 text-xl font-semibold">{active.operatorQuestion}</p>
+          </div>
+          <div className="mt-6 grid grid-cols-6 gap-1" aria-hidden>
+            {monitorSteps.map((step, index) => (
+              <span
+                key={step.id}
+                className={cn("monitor-deck-chip h-2", index <= activeIndex ? "bg-primary" : "bg-border")}
+              />
+            ))}
+          </div>
+          <div className="mt-6 flex items-center justify-between gap-3">
+            <button type="button" onClick={() => move(-1)} className="inline-flex items-center gap-2 border bg-card px-4 py-2 text-sm font-medium hover:bg-shell">
+              <ArrowLeftIcon aria-hidden /> Previous
+            </button>
+            <button type="button" onClick={() => move(1)} className="inline-flex items-center gap-2 border bg-card px-4 py-2 text-sm font-medium hover:bg-shell">
+              Next <ArrowRightIcon aria-hidden />
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function LeaderboardSnapshot() {
+  const sortedSnapshot = useMemo(() => [...leaderboardSnapshot].sort((a, b) => b.tradeOpsFit - a.tradeOpsFit), []);
+
+  return (
+    <section id="leaderboards" className="scroll-mt-24 border bg-card p-4 sm:p-6">
+      <div className="flex flex-wrap items-start justify-between gap-5">
+        <div>
+          <p className="section-label">Arena snapshot / as of May 26</p>
+          <h2 className="mt-4 max-w-3xl text-3xl font-semibold">
+            The public leaderboard is the shortlist. The trade workflow score decides the router.
+          </h2>
+        </div>
+        <a href="https://arena.ai/leaderboard/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border bg-background px-4 py-2 text-sm font-medium hover:bg-shell">
+          Open Arena <ArrowRightIcon aria-hidden />
+        </a>
+      </div>
+      <div className="mt-5 flex flex-wrap gap-2">
+        {providerChips.map((provider) => (
+          <ProviderFavicon key={provider.name} {...provider} />
+        ))}
+      </div>
+      <p className="mt-5 max-w-3xl text-sm leading-6 text-muted-foreground">
+        Recreated from the free public Arena leaderboard view, then remapped for seafood operators: evidence work, routing work, and overall fit for messy supplier files. The point is not to crown one model. It is to make frontier intelligences easy to assign to the right job.
+      </p>
+      <div className="mt-6 grid min-w-0 gap-5 lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <div className="min-w-0 border bg-background p-3 sm:p-4">
+          <div className="mb-3 inline-flex items-center gap-2 border bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary">
+            <span className="size-2 bg-primary" aria-hidden />
+            Snapshot as of May 26
+          </div>
+          <div className="h-[24rem] min-w-0 sm:h-[26rem]">
+            <EvilBarChart
+              config={leaderboardChartConfig}
+              data={sortedSnapshot}
+              layout="horizontal"
+              xDataKey="model"
+              barRadius={3}
+              barCategoryGap={22}
+              animationType="center-out"
+              chartProps={{ margin: { top: 10, right: 12, bottom: 4, left: 8 } }}
+            >
+              <Grid horizontal={false} />
+              <XAxis domain={[0, 100]} tick={{ fontSize: 12 }} />
+              <YAxis
+                dataKey="model"
+                width={112}
+                tick={{ fontSize: 12 }}
+              />
+              <Tooltip roundness="sm" />
+              <EvilBar dataKey="tradeOpsFit" isClickable enableHoverHighlight glowing variant="gradient" barProps={{ barSize: 18 }} />
+            </EvilBarChart>
+          </div>
+        </div>
+        <div className="grid gap-px bg-border">
+          {sortedSnapshot.slice(0, 3).map((row) => (
+            <div key={row.model} className="bg-background p-4">
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-primary">
+                Arena rank {row.arenaRank} / {row.provider}
+              </p>
+              <h3 className="mt-3 text-lg font-semibold">{row.model}</h3>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">{row.bestUse}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function AiMonitorLayerArticle() {
+  return (
+    <div className="mt-10 grid min-w-0 grid-cols-[minmax(0,1fr)] gap-8">
+      <section className="grid min-w-0 gap-px bg-border lg:grid-cols-[0.86fr_1.14fr]">
+        <div className="bg-card p-5 sm:p-6">
+          <p className="section-label">Case study / seafood entity enrichment</p>
+          <h2 className="mt-5 text-3xl font-semibold">The failure mode was not a bad answer. It was unsupported confidence entering work.</h2>
+          <p className="mt-5 text-base leading-8 text-muted-foreground">
+            We gave two AI workflows the same seafood exhibitor list and asked for the headquarters or primary operating country. The task looked like enrichment. In practice, it tested whether AI could preserve enough evidence to be trusted inside routing, segmentation, compliance, and outreach.
+          </p>
+        </div>
+        <div className="grid bg-background p-5 sm:p-6">
+          <div className="grid gap-px bg-border sm:grid-cols-3">
+            {monitorMetrics.map((metric) => (
+              <div key={metric.value} className="bg-card p-4">
+                <p className="font-mono text-3xl text-primary">{metric.value}</p>
+                <p className="mt-3 text-sm font-medium leading-6">{metric.label}</p>
+                <p className="mt-3 text-xs leading-5 text-muted-foreground">{metric.note}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-5 border bg-shell p-4 text-sm leading-6 text-muted-foreground">
+            Adoption gets easier when the system explains where to trust, where to verify, and where to stop. That is the monitor layer.
+          </div>
+        </div>
+      </section>
+
+      <section id="reasoning-leakage" className="scroll-mt-24 border-t py-8 sm:py-10">
+        <h2 className="text-3xl font-semibold">From margin leakage to reasoning leakage</h2>
+        <div className="mt-5 grid gap-4 text-base leading-8 text-muted-foreground">
+          <p>
+            The earlier margin note showed how quiet handoff errors erode a seafood file. This note is the AI version: a plausible country tag, missing source context, or overconfident inference can bend routing before anyone sees the weakness.
+          </p>
+          <p>
+            A seafood company can farm in one country, process in another, invoice from a third, and sell through a distributor in a fourth. The field called country is not trivia. It is an operating inference.
+          </p>
+        </div>
+      </section>
+
+      <FigurePair
+        light="/blog/ai-monitor-layer/reasoning-leakage-light.png"
+        dark="/blog/ai-monitor-layer/reasoning-leakage-dark.png"
+        alt="Blueprint-style reasoning leakage cutaway showing unsupported assumptions being intercepted before workflow decisions."
+        caption="Reasoning leakage is operational decay before the PO, supplier record, or compliance lens knows anything went wrong."
+      />
+
+      <MonitorDeck />
+      <LeaderboardSnapshot />
+
+      <FigurePair
+        light="/blog/ai-monitor-layer/routing-friction-light.png"
+        dark="/blog/ai-monitor-layer/routing-friction-dark.png"
+        alt="Blueprint-style green amber red routing rail for monitored AI decisions."
+        caption="The right monitor does not slow every row. It adds friction to the rows where weak evidence, disagreement, or ambiguity would otherwise leak into the operation."
+      />
+
+      <section id="operator-layer" className="scroll-mt-24 border-t py-8 sm:py-10">
+        <h2 className="text-3xl font-semibold">What this means for seafood operators</h2>
+        <div className="mt-5 grid gap-4 text-base leading-8 text-muted-foreground">
+          <p>
+            The lesson is not that every task needs two LLMs. The lesson is that every AI-assisted decision needs a monitor appropriate to its risk. Low-risk enrichment can move with agreement and evidence. Medium-risk workflows need disagreement queues. High-risk workflows need direct source traceability and human sign-off.
+          </p>
+          <p>
+            Ubik’s job is to make that practical: read messy trade context, preserve evidence, compare competing answers, route exceptions, remember corrections, and keep the operator in control when the decision matters.
+          </p>
+        </div>
+      </section>
+
+      <FigurePair
+        light="/blog/ai-monitor-layer/fragmented-truth-light.png"
+        dark="/blog/ai-monitor-layer/fragmented-truth-dark.png"
+        alt="Blueprint-style fragmented operating truth across email, spreadsheets, PDFs, supplier records, and memory converging into an evidence lens."
+        caption="Seafood is a hard AI environment because truth is split across inboxes, spreadsheets, PDFs, ERP, WhatsApp, inspection documents, and human memory."
+        aspect="aspect-[4/3]"
+      />
+
+      <section className="border bg-card p-5 sm:p-6">
+        <div className="flex items-center gap-2">
+          <span className="size-2.5 bg-primary" aria-hidden />
+          <p className="section-label">Final takeaway</p>
+        </div>
+        <h2 className="mt-4 max-w-3xl text-3xl font-semibold">AI transformation gets practical when frontier models meet forward-deployed trade expertise.</h2>
+        <div className="mt-6 grid gap-px bg-border sm:grid-cols-3">
+          {[
+            ["Route the model", "Use the right frontier intelligence for research, extraction, exception review, planning, customer updates, or compliance support."],
+            ["Deploy the operator layer", "Ubik brings seafood context, workflow design, evidence routing, and continuous improvement into the day-to-day system."],
+            ["Lower the transformation cost", "Teams get operating discipline associated with elite consulting and platform work, without waiting for a massive transformation program."]
+          ].map(([title, copy]) => (
+            <div key={title} className="bg-background p-4">
+              <h3 className="text-base font-semibold">{title}</h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">{copy}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}

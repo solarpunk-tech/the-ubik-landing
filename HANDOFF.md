@@ -619,6 +619,69 @@
     - Mobile article top: `verification/article-waterfall-mobile-after-user-note.png`
     - Mobile article mid-scroll: `verification/article-mid-mobile-after-user-note.png`
     - Desktop waterfall after article-view correction: `verification/article-waterfall-desktop-after-user-note.png`
+- Latest AI monitor-layer Trade Notes pass:
+  - Pulled local `main` to latest `origin/main` with `git pull --rebase --autostash origin main`; the existing local Origin Roulette duty-stack/source-card edits and untracked LinkedIn carousel artifacts were preserved.
+  - Added `/blog/ai-monitor-layer-seafood-trade` as the third real Trade Notes article, based on `/Users/shubhranshujha/Downloads/blog - why AI needs a monitor layer`.
+  - Canonical article metrics use `LLM_AB_Comparison_Data.xlsx`: 662 matched rows, 635 primary-path resolved, 486 web-path resolved, 309 agreements, 167 disagreements, 95.9% vs 73.4% resolution, and 64.9% agreement.
+  - Added `src/lib/blog/ai-monitor-layer.ts` and `src/components/blog/AiMonitorLayerVisuals.tsx`; the article uses EvilCharts/Recharts for the benchmark comparison, GSAP for the click/swipe monitor deck, provider favicons, green/amber/red routing, and LMArena/Hugging Face as model-leaderboard context rather than live governance.
+  - Installed `recharts` and the shadcn-compatible EvilCharts bar-chart registry component. The generated EvilCharts code was adjusted for React 18 context provider compatibility.
+  - Added light/dark article assets under `public/blog/ai-monitor-layer/`; missing theme companions were generated through the imagegen CLI with `OPENAI_API_KEY` checked only as set/unset. The raw key was never printed or written.
+  - Updated `src/lib/blog/index.ts`, `src/pages/Blog.tsx`, `src/components/landing/BlogPreview.tsx`, `public/sitemap.xml`, and `public/llms.txt` for the new article and featured preview.
+  - Visual requirements:
+    - Layout: preserve Ubik article chrome, sticky desktop share panel, `/blog` card rhythm, and contained preview art.
+    - Spacing: chart and deck panels must stay inside article width; no document-level mobile overflow.
+    - Typography: use the established heading/body/mono editorial rhythm; avoid raw report-graphic styling in body sections.
+    - Color: tokenized Ubik UI plus light/dark image variants; provider logos use favicon chips with text fallback.
+    - Interactions: EvilCharts legend/bar selection, GSAP deck step transitions, click next/previous, swipe left/right on touch, reduced-motion-safe content.
+    - Responsive behavior: 390px mobile should render single-column cards with no horizontal overflow.
+  - Verification:
+    - `pnpm lint` passes with existing Fast Refresh warnings from EvilCharts generated helper exports.
+    - `pnpm build` passes; Vite still reports the large chunk warning.
+    - `git diff --check` passes.
+    - Secret scan for `OPENAI_API_KEY`, `sk-...`, project keys, and bearer tokens found no API secret values; hits were false positives such as CSS `mask-image` and docs text.
+    - Playwright verified `/blog` and `/blog/ai-monitor-layer-seafood-trade`, deck next interaction, light/dark screenshots, canonical URL, `og:type=article`, JSON-LD, and no horizontal overflow at 390/1366 px.
+  - Latest evidence:
+    - Blog index desktop light: `verification/ai-monitor-blog-index-desktop-light.png`
+    - Article desktop light: `verification/ai-monitor-article-desktop-light.png`
+    - Deck next desktop light: `verification/ai-monitor-deck-next-desktop-light.png`
+    - Article desktop dark: `verification/ai-monitor-article-desktop-dark.png`
+    - Article mobile light: `verification/ai-monitor-article-mobile-light.png`
+    - Article mobile dark: `verification/ai-monitor-article-mobile-dark.png`
+    - Visual/route report: `verification/ai-monitor-visual-report.json`
+- Latest AI monitor-layer browser-comment fix:
+  - Addressed the browser annotations on `/blog/ai-monitor-layer-seafood-trade`.
+  - Hero and blog-list images now fill their media frames with fixed aspect containers instead of rendering as contained artwork with visible side padding.
+  - Mobile monitor deck hides the step list and keeps the single click/swipe card, reducing duplicate content and mobile page weight.
+  - Removed the research-confidence benchmark section, green/amber/red routing card section, and source/limitation note section from the article.
+  - Replaced the generic leaderboard placeholder block with an EvilCharts Arena snapshot section dated May 26, pointing to `https://arena.ai/leaderboard/` and using a custom seafood trade-ops score across frontier models.
+  - Removed Hugging Face and LMArena from the provider favicon chip list; chips now represent LLM providers only.
+  - Strengthened the final takeaway around Ubik's forward-deployed trade expertise, model routing, and AI transformation value without naming it as a direct MBB/Palantir clone.
+  - Verification:
+    - `pnpm lint` passes with existing Fast Refresh warnings from EvilCharts generated helper exports.
+    - `pnpm build` passes; Vite still reports the large chunk warning.
+    - `git diff --check` passes.
+    - Playwright verified the old benchmark/routing/limitation/model-ops text is absent, Arena link is present, non-LLM chips are absent, desktop hero and blog-list images fill their containers, mobile deck step buttons are hidden, and no horizontal overflow exists at 390/740/1181 px.
+  - Latest evidence:
+    - Article desktop light: `verification/ai-monitor-comments-article-desktop-light.png`
+    - Blog index desktop light: `verification/ai-monitor-comments-blog-index-desktop-light.png`
+    - Article tablet light: `verification/ai-monitor-comments-article-tablet-light.png`
+    - Article mobile light: `verification/ai-monitor-comments-article-mobile-light.png`
+    - Visual/comment report: `verification/ai-monitor-comments-visual-report.json`
+- Latest AI monitor-layer final annotation fix:
+  - Replaced the article intro metric cards with broader AI adoption pressure metrics: 12 major models in one March 2026 week, 600x token-price decline since 2020, and 95% enterprise gen-AI pilots with no P&L impact.
+  - Simplified the EvilCharts Arena snapshot into a single visible horizontal trade-ops fit series with an inline `Snapshot as of May 26` callout and less empty chart space.
+  - Replaced the final takeaway sparkle icon with a Ubik blue square marker.
+  - Reworked the final takeaway body from one long paragraph into three operator tiles: route the model, deploy the operator layer, lower the transformation cost.
+  - Verified the share panel links use the article canonical URL for X, WhatsApp, LinkedIn, and email.
+  - Verification:
+    - `pnpm lint` passes with existing Fast Refresh warnings from EvilCharts generated helper exports.
+    - `pnpm build` passes; Vite still reports the large chunk warning.
+    - `git diff --check` passes.
+    - Playwright verified the new metric copy is present, old workbook stat-card labels are absent, the May 26 chart callout is present, visible chart bars render, final tiles render, share links point to `https://theubik.com/blog/ai-monitor-layer-seafood-trade`, and no horizontal overflow exists at 390/740 px.
+  - Latest evidence:
+    - Tablet article final comments: `verification/ai-monitor-final-comments-tablet-light.png`
+    - Mobile article final comments: `verification/ai-monitor-final-comments-mobile-light.png`
+    - Final comments report: `verification/ai-monitor-final-comments-report.json`
 
 ## Next notes
 

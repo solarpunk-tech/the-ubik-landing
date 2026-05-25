@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowRightIcon,
   ArchiveIcon,
@@ -546,100 +546,96 @@ export function LandingV2ToolsSection() {
   );
 }
 
+const railToneClasses = {
+  primary: "bg-primary text-primary-foreground",
+  success: "bg-green-600 text-white",
+  support: "bg-amber-600 text-white",
+  foreground: "bg-foreground text-background"
+};
+
+const railStatToneClasses = {
+  default: "text-primary",
+  success: "text-green-600",
+  support: "text-amber-700 dark:text-amber-300"
+};
+
+function RailStepPanel({ item }: { item: RailStep }) {
+  return (
+    <div className="grid gap-6 md:grid-cols-[1.2fr_1fr] md:gap-8">
+      <div>
+        <h4 className="mb-2 text-2xl font-semibold">{item.heading}</h4>
+        <div className="max-w-[34rem] space-y-4 text-[14px] leading-[1.6] text-muted-foreground">
+          {item.paragraphs.map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
+        </div>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {item.chips.map((chip) => (
+            <span
+              key={chip.label}
+              className="inline-flex items-center gap-1.5 border bg-card px-2.5 py-[0.3rem] font-mono text-[10px] uppercase tracking-[0.06em] text-muted-foreground"
+            >
+              {chip.kind === "img" ? (
+                <img src={chip.src} alt="" className="size-3.5" loading="lazy" />
+              ) : (
+                <chip.icon className="size-3 text-primary" />
+              )}
+              <span>{chip.label}</span>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex min-h-[240px] flex-col gap-3 border bg-background p-4">
+        <span className={cn("inline-flex w-fit items-center gap-1.5 px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.06em]", railToneClasses[item.pill.tone])}>
+          <item.pill.icon className="size-3" />
+          {item.pill.label}
+        </span>
+
+        <div className="grid grid-cols-[24px_1fr_auto] items-center gap-2.5 border bg-card px-3 py-2.5 text-[12px]">
+          {item.vizRow.icon === "agent" ? (
+            <span className="size-[18px] bg-primary" />
+          ) : (
+            <img src={item.vizRow.icon} alt="" className="size-[18px]" loading="lazy" />
+          )}
+          <div>
+            <div className="text-[13px] font-medium">{item.vizRow.title}</div>
+            <div className="font-mono text-[10px] tracking-[0.04em] text-muted-foreground">{item.vizRow.meta}</div>
+          </div>
+          <span className={cn("font-mono text-[12px] font-semibold", railStatToneClasses[item.vizRow.statTone ?? "default"])}>
+            {item.vizRow.stat}
+          </span>
+        </div>
+
+        {item.memoryRows ? (
+          <div className="flex flex-col gap-1.5 border bg-shell px-3 py-2.5">
+            <div className="mb-0.5 font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground">
+              memory · 3 sources recalled
+            </div>
+            {item.memoryRows.map((row) => (
+              <div key={row.label} className="flex items-center gap-2">
+                {row.icon === "table" ? (
+                  <TableIcon className="size-3 text-primary" />
+                ) : (
+                  <img src={row.icon} alt="" className="size-3" loading="lazy" />
+                )}
+                <span className="text-[11px] text-foreground">{row.label}</span>
+              </div>
+            ))}
+          </div>
+        ) : null}
+
+        <span className="inline-flex items-center border-l-2 border-primary bg-shell px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.06em] text-primary">
+          {item.handoff}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export function LandingV2HowSection() {
   const [activeStep, setActiveStep] = useState(0);
   const step = railSteps[activeStep];
-  const toneClasses = useMemo(
-    () => ({
-      primary: "bg-primary text-primary-foreground",
-      success: "bg-green-600 text-white",
-      support: "bg-amber-600 text-white",
-      foreground: "bg-foreground text-background"
-    }),
-    []
-  );
-  const statToneClasses = useMemo(
-    () => ({
-      default: "text-primary",
-      success: "text-green-600",
-      support: "text-amber-700 dark:text-amber-300"
-    }),
-    []
-  );
-
-  function RailStepPanel({ item }: { item: RailStep }) {
-    return (
-      <div className="grid gap-6 md:grid-cols-[1.2fr_1fr] md:gap-8">
-        <div>
-          <h4 className="mb-2 text-2xl font-semibold">{item.heading}</h4>
-          <div className="max-w-[34rem] space-y-4 text-[14px] leading-[1.6] text-muted-foreground">
-            {item.paragraphs.map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
-          </div>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {item.chips.map((chip) => (
-              <span
-                key={chip.label}
-                className="inline-flex items-center gap-1.5 border bg-card px-2.5 py-[0.3rem] font-mono text-[10px] uppercase tracking-[0.06em] text-muted-foreground"
-              >
-                {chip.kind === "img" ? (
-                  <img src={chip.src} alt="" className="size-3.5" loading="lazy" />
-                ) : (
-                  <chip.icon className="size-3 text-primary" />
-                )}
-                <span>{chip.label}</span>
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex min-h-[240px] flex-col gap-3 border bg-background p-4">
-          <span className={cn("inline-flex w-fit items-center gap-1.5 px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[0.06em]", toneClasses[item.pill.tone])}>
-            <item.pill.icon className="size-3" />
-            {item.pill.label}
-          </span>
-
-          <div className="grid grid-cols-[24px_1fr_auto] items-center gap-2.5 border bg-card px-3 py-2.5 text-[12px]">
-            {item.vizRow.icon === "agent" ? (
-              <span className="size-[18px] bg-primary" />
-            ) : (
-              <img src={item.vizRow.icon} alt="" className="size-[18px]" loading="lazy" />
-            )}
-            <div>
-              <div className="text-[13px] font-medium">{item.vizRow.title}</div>
-              <div className="font-mono text-[10px] tracking-[0.04em] text-muted-foreground">{item.vizRow.meta}</div>
-            </div>
-            <span className={cn("font-mono text-[12px] font-semibold", statToneClasses[item.vizRow.statTone ?? "default"])}>
-              {item.vizRow.stat}
-            </span>
-          </div>
-
-          {item.memoryRows ? (
-            <div className="flex flex-col gap-1.5 border bg-shell px-3 py-2.5">
-              <div className="mb-0.5 font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground">
-                memory · 3 sources recalled
-              </div>
-              {item.memoryRows.map((row) => (
-                <div key={row.label} className="flex items-center gap-2">
-                  {row.icon === "table" ? (
-                    <TableIcon className="size-3 text-primary" />
-                  ) : (
-                    <img src={row.icon} alt="" className="size-3" loading="lazy" />
-                  )}
-                  <span className="text-[11px] text-foreground">{row.label}</span>
-                </div>
-              ))}
-            </div>
-          ) : null}
-
-          <span className="inline-flex items-center border-l-2 border-primary bg-shell px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.06em] text-primary">
-            {item.handoff}
-          </span>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <section id="how" className="relative border-b border-t bg-background py-20">

@@ -54,11 +54,20 @@ Ubik minimizes what is shared with external LLMs. Models are used for planning, 
 - /security
 - /privacy
 - /how-it-works
+- /blog/ai-monitor-layer-seafood-trade
 - /blog/the-60-bps-bleed-shrimp-margin-loss
 - /blog/origin-roulette-2026-shrimp-sourcing
 - https://docs.theubik.com
 
 ## Trade Notes
+
+### The Invisible Drift
+
+Path: /blog/ai-monitor-layer-seafood-trade
+
+Summary: An operational AI case study showing why seafood teams need a monitor layer before LLM output becomes workflow state. It uses a 735-row seafood exhibitor country-attribution task and a 662-row matched A/B comparison to explain evidence capture, disagreement detection, confidence routing, green/amber/red review queues, and human escalation.
+
+Key terms: seafood AI monitoring, LLM disagreement, evidence routing, AI governance in workflows, country attribution, supplier intelligence, model evaluation, Arena leaderboard, perishable trade AI.
 
 ### The 60-bps Bleed
 
@@ -72,7 +81,7 @@ Key terms: shrimp margin leakage, seafood RFQ workflow, deglazed weight, demurra
 
 Path: /blog/origin-roulette-2026-shrimp-sourcing
 
-Summary: A shrimp buyer strategy note for Q3 2026 and Q1 2027 forward books. It compares Ecuador, India, Vietnam, Indonesia, Thailand, China, Saudi Arabia and Bangladesh across landed-cost exposure, tariffs, ADD/CVD risk, EU CATCH documentation, FDA import certification, value-added processing capability, halal positioning and origin diversification.
+Summary: A shrimp buyer strategy note for Q3 2026 and Q1 2027 forward books. It compares Ecuador, India, Vietnam, Indonesia, Thailand, China, Saudi Arabia and Bangladesh across landed-duty stack exposure, AD/CVD risk, EU wild-caught CATCH / Annex IV scope, FDA import certification, value-added processing capability, halal positioning and origin diversification.
 
 Key terms: shrimp sourcing strategy, warm-water shrimp tariffs, seafood buyer strategy, Ecuador shrimp exports, India shrimp EU FTA, Vietnam shrimp re-export, Indonesia shrimp FDA certification, Saudi shrimp halal, perishable trade AI.
 

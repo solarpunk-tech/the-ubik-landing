@@ -50,7 +50,7 @@ function LeakProgressStrip({ activeIndex }: { activeIndex: number }) {
           key={node.id}
           className={cn(
             "h-1.5 transition-colors",
-            index <= activeIndex ? categoryClass[node.category].replace("fill-", "bg-") : "bg-border"
+            index <= activeIndex ? "bg-foreground" : "bg-border"
           )}
         />
       ))}
@@ -71,8 +71,8 @@ function FigurePair({
 }) {
   return (
     <figure className="overflow-hidden border bg-shell">
-      <img src={light} alt={alt} className="aspect-[16/9] w-full object-cover dark:hidden" loading="lazy" />
-      <img src={dark} alt={alt} className="hidden aspect-[16/9] w-full object-cover dark:block" loading="lazy" />
+      <img src={light} alt={alt} className="max-h-[34rem] w-full object-contain dark:hidden" loading="lazy" />
+      <img src={dark} alt={alt} className="hidden max-h-[34rem] w-full object-contain dark:block" loading="lazy" />
       <figcaption className="border-t bg-background p-4 text-xs leading-5 text-muted-foreground">{caption}</figcaption>
     </figure>
   );
@@ -275,18 +275,18 @@ export function MarginLeakScrolly() {
           </div>
         </div>
       </div>
-      <div className="grid gap-4">
-        <div className="sticky top-0 z-20 border bg-background/95 p-4 shadow-sm backdrop-blur lg:hidden">
+      <div className="grid gap-4 pb-32 lg:pb-0">
+        <div className="sticky bottom-3 z-20 order-last border bg-background/95 p-4 shadow-sm backdrop-blur lg:hidden">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-primary">
+              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-foreground">
                 Leak {String(activeIndex + 1).padStart(2, "0")} / {String(leakNodes.length).padStart(2, "0")}
               </p>
               <h3 className="mt-2 text-lg font-semibold">{activeNode.label}</h3>
             </div>
             <div className="shrink-0 text-right">
-              <p className="font-mono text-2xl text-primary">-{activeNode.bps}</p>
-              <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted-foreground">bps</p>
+              <p className="font-mono text-2xl text-foreground">-{activeNode.bps}</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-foreground">bps</p>
             </div>
           </div>
           <div className="mt-4">

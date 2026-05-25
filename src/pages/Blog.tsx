@@ -131,12 +131,12 @@ function ArticleShell({ post, children }: ArticleShellProps) {
                 <img
                   src={post.heroLightImage}
                   alt=""
-                  className="aspect-video w-full object-cover dark:hidden"
+                  className="max-h-[32rem] w-full object-contain dark:hidden"
                 />
                 <img
                   src={post.heroDarkImage}
                   alt=""
-                  className="hidden aspect-video w-full object-cover dark:block"
+                  className="hidden max-h-[32rem] w-full object-contain dark:block"
                 />
               </figure>
             ) : null}

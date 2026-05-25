@@ -36,7 +36,7 @@ export function SharePostPanel({ title, url = "https://theubik.com/blog" }: Shar
 
   const copy = async () => {
     try {
-      await navigator.clipboard?.writeText(shareText);
+      await navigator.clipboard?.writeText(url);
     } finally {
       setCopied(true);
       track("copy_link");

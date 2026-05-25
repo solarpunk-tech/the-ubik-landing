@@ -619,6 +619,36 @@
     - Mobile article top: `verification/article-waterfall-mobile-after-user-note.png`
     - Mobile article mid-scroll: `verification/article-mid-mobile-after-user-note.png`
     - Desktop waterfall after article-view correction: `verification/article-waterfall-desktop-after-user-note.png`
+- Latest blog media/share correction:
+  - Kept the work scoped to `/Users/shubhranshujha/Codex/the-ubik-landing-second-blog`.
+  - Changed article hero artwork and article figure pairs from cover-cropped aspect boxes to contained images, so the 60-bps margin/waterfall art stays inside the mobile viewport.
+  - Changed the `Copy link` icon in `Share field note` to copy only the canonical blog URL; X, WhatsApp, LinkedIn, and email continue to use the richer title-plus-link share text where applicable.
+  - Follow-up browser comment fix: kept the mobile leak meter sticky, moved it to the bottom of the mobile waterfall section, and added bottom room so it no longer covers the active leak card while readers scroll through the mobile waterfall cards.
+  - Final annotation fix: completed mobile leak-meter strip ticks and meter labels now use foreground color, so they render black in light mode and white in dark mode instead of low-contrast grey/category colors.
+  - Visual requirements from the user screenshots:
+    - Layout: 60-bps blog hero art and mobile waterfall art must stay within the page bounds.
+    - Spacing: no document-level horizontal overflow at 390px.
+    - Typography: no copy changes requested.
+    - Color: preserve existing light/dark article assets and tokenized page chrome.
+    - Interactions: copy icon writes only the blog URL; social/email share paths keep smart share text.
+    - Responsive behavior: mobile image content should be contained, not clipped.
+    - Browser comment 1: the selected mobile leak-card area must leave the `Counterparty scoring gap` card readable instead of hiding it under the meter.
+  - Verification:
+    - `pnpm exec eslint src/components/blog/MarginLeakVisuals.tsx src/components/landing/SharePostPanel.tsx src/pages/Blog.tsx` passes.
+    - `pnpm exec eslint src/components/blog/MarginLeakVisuals.tsx` passes after the browser-comment fix.
+    - `pnpm build` passes; Vite still reports the existing large chunk warning.
+    - `git diff --check` passes.
+    - Playwright verified at 390px that article hero and waterfall figure use `object-fit: contain`, document width equals viewport width, clipboard contents are only `https://theubik.com/blog/the-60-bps-bleed-shrimp-margin-loss`, and X share still includes the title plus URL.
+    - Playwright verified at 599px that the meter is `position: sticky`, the `Counterparty scoring gap` card is readable above the sticky bottom meter, and document width equals viewport width.
+    - Playwright verified at 599px that sticky-meter label and completed strip colors resolve to `rgb(15, 23, 41)` in light mode and `rgb(248, 250, 252)` in dark mode.
+  - Latest evidence:
+    - Mobile hero image containment: `verification/article-hero-image-mobile-after.png`
+    - Mobile waterfall figure containment: `verification/waterfall-figure-mobile-after.png`
+    - Mobile share copy URL: `verification/share-copy-url-mobile-after.png`
+    - Mobile leak card visible after browser comment: `verification/leak-card-mobile-visible-after.png`
+    - Restored sticky mobile meter: `verification/leak-card-sticky-mobile-restored.png`
+    - Light annotation fix: `verification/leak-meter-light-annotation-after.png`
+    - Dark annotation fix: `verification/leak-meter-dark-annotation-after.png`
 
 ## Next notes
 

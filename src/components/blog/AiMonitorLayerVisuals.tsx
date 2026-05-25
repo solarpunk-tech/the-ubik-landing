@@ -20,7 +20,9 @@ import {
 import { usePrefersReducedMotion } from "@/lib/dotmatrix-hooks";
 import {
   leaderboardSnapshot,
+  leaderboardUseCases,
   monitorMetrics,
+  monitorSourceLinks,
   monitorSteps,
   providerChips,
   type MonitorStep
@@ -28,8 +30,8 @@ import {
 import { cn } from "@/lib/utils";
 
 const leaderboardChartConfig = {
-  tradeOpsFit: {
-    label: "Ubik trade-ops fit",
+  score: {
+    label: "Use-case score",
     colors: {
       light: ["hsl(var(--primary))"],
       dark: ["hsl(var(--primary))"]
@@ -202,7 +204,15 @@ function MonitorDeck() {
 }
 
 function LeaderboardSnapshot() {
-  const sortedSnapshot = useMemo(() => [...leaderboardSnapshot].sort((a, b) => b.tradeOpsFit - a.tradeOpsFit), []);
+  const [activeUseCaseId, setActiveUseCaseId] = useState(leaderboardUseCases[0].id);
+  const activeUseCase = leaderboardUseCases.find((useCase) => useCase.id === activeUseCaseId) ?? leaderboardUseCases[0];
+  const chartRows = useMemo(
+    () =>
+      leaderboardSnapshot
+        .map((row) => ({ ...row, score: row[activeUseCaseId] }))
+        .sort((a, b) => b.score - a.score),
+    [activeUseCaseId]
+  );
 
   return (
     <section id="leaderboards" className="scroll-mt-24 border bg-card p-4 sm:p-6">
@@ -225,16 +235,37 @@ function LeaderboardSnapshot() {
       <p className="mt-5 max-w-3xl text-sm leading-6 text-muted-foreground">
         Recreated from the free public Arena leaderboard view, then remapped for seafood operators: evidence work, routing work, and overall fit for messy supplier files. The point is not to crown one model. It is to make frontier intelligences easy to assign to the right job.
       </p>
+      <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-4" role="tablist" aria-label="Arena use cases">
+        {leaderboardUseCases.map((useCase) => (
+          <button
+            key={useCase.id}
+            type="button"
+            role="tab"
+            aria-selected={activeUseCaseId === useCase.id}
+            onClick={() => setActiveUseCaseId(useCase.id)}
+            className={cn(
+              "border p-3 text-left transition-colors",
+              activeUseCaseId === useCase.id ? "border-primary bg-primary/10" : "bg-background hover:bg-shell"
+            )}
+          >
+            <span className="block font-mono text-[11px] uppercase tracking-[0.12em] text-primary">{useCase.kicker}</span>
+            <span className="mt-2 block text-sm font-semibold">{useCase.label}</span>
+          </button>
+        ))}
+      </div>
       <div className="mt-6 grid min-w-0 gap-5 lg:grid-cols-[minmax(0,1fr)_18rem]">
         <div className="min-w-0 border bg-background p-3 sm:p-4">
-          <div className="mb-3 inline-flex items-center gap-2 border bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary">
-            <span className="size-2 bg-primary" aria-hidden />
-            Snapshot as of May 26
+          <div className="mb-4 grid gap-3 border bg-shell p-3 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center">
+            <div className="inline-flex w-fit items-center gap-2 border bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary">
+              <span className="size-2 bg-primary" aria-hidden />
+              Snapshot as of May 26
+            </div>
+            <p className="text-sm leading-6 text-muted-foreground">{activeUseCase.description}</p>
           </div>
           <div className="h-[24rem] min-w-0 sm:h-[26rem]">
             <EvilBarChart
               config={leaderboardChartConfig}
-              data={sortedSnapshot}
+              data={chartRows}
               layout="horizontal"
               xDataKey="model"
               barRadius={3}
@@ -250,12 +281,12 @@ function LeaderboardSnapshot() {
                 tick={{ fontSize: 12 }}
               />
               <Tooltip roundness="sm" />
-              <EvilBar dataKey="tradeOpsFit" isClickable enableHoverHighlight glowing variant="gradient" barProps={{ barSize: 18 }} />
+              <EvilBar dataKey="score" isClickable enableHoverHighlight glowing variant="gradient" barProps={{ barSize: 18 }} />
             </EvilBarChart>
           </div>
         </div>
         <div className="grid gap-px bg-border">
-          {sortedSnapshot.slice(0, 3).map((row) => (
+          {chartRows.slice(0, 3).map((row) => (
             <div key={row.model} className="bg-background p-4">
               <p className="font-mono text-xs uppercase tracking-[0.14em] text-primary">
                 Arena rank {row.arenaRank} / {row.provider}
@@ -265,6 +296,51 @@ function LeaderboardSnapshot() {
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+function SourceLinks() {
+  return (
+    <section id="sources" className="border bg-card p-5 sm:p-6">
+      <div className="flex items-center gap-2">
+        <span className="size-2.5 bg-primary" aria-hidden />
+        <p className="section-label">Sources</p>
+      </div>
+      <div className="mt-5 flex flex-wrap gap-3">
+        {monitorSourceLinks.map((source) => (
+          <a
+            key={source.url}
+            href={source.url}
+            target="_blank"
+            rel="noreferrer"
+            className="group relative inline-flex items-center gap-2 border bg-background px-3 py-2 text-sm font-medium hover:bg-shell focus:outline-none focus:ring-2 focus:ring-primary"
+            aria-label={`Open ${source.publisher}: ${source.title}`}
+          >
+            <span className="relative flex size-6 items-center justify-center border bg-shell">
+              <span className="font-mono text-[8px] uppercase text-primary">{source.publisher.slice(0, 2)}</span>
+              <img
+                src={`https://www.google.com/s2/favicons?domain=${source.domain}&sz=64`}
+                alt=""
+                className="absolute size-4"
+                loading="lazy"
+                onError={(event) => {
+                  event.currentTarget.hidden = true;
+                }}
+              />
+            </span>
+            {source.publisher}
+            <span className="pointer-events-none absolute bottom-full left-0 z-20 mb-3 hidden w-72 border bg-background p-3 text-left shadow-xl group-hover:block group-focus:block sm:w-80">
+              <span className="block aspect-[16/9] overflow-hidden border bg-shell">
+                <img src={source.image} alt="" className="h-full w-full object-cover" loading="lazy" />
+              </span>
+              <span className="mt-3 block font-mono text-[11px] uppercase tracking-[0.12em] text-primary">{source.publisher}</span>
+              <span className="mt-1 block text-sm font-semibold text-foreground">{source.title}</span>
+              <span className="mt-2 block text-xs leading-5 text-muted-foreground">{source.note}</span>
+            </span>
+          </a>
+        ))}
       </div>
     </section>
   );
@@ -365,6 +441,8 @@ export function AiMonitorLayerArticle() {
           ))}
         </div>
       </section>
+
+      <SourceLinks />
     </div>
   );
 }

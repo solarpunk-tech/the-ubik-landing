@@ -19,8 +19,27 @@ export type LeaderboardSnapshotRow = {
   model: string;
   provider: string;
   arenaRank: number;
-  tradeOpsFit: number;
+  supplierIntel: number;
+  evidenceReview: number;
+  workflowRouting: number;
+  costControl: number;
   bestUse: string;
+};
+
+export type LeaderboardUseCase = {
+  id: keyof Pick<LeaderboardSnapshotRow, "supplierIntel" | "evidenceReview" | "workflowRouting" | "costControl">;
+  label: string;
+  kicker: string;
+  description: string;
+};
+
+export type MonitorSourceLink = {
+  publisher: string;
+  title: string;
+  url: string;
+  domain: string;
+  image: string;
+  note: string;
 };
 
 export const aiMonitorPost: BlogPost = {
@@ -132,35 +151,112 @@ export const leaderboardSnapshot: LeaderboardSnapshotRow[] = [
     model: "Gemini 3",
     provider: "Google",
     arenaRank: 1,
-    tradeOpsFit: 91,
+    supplierIntel: 94,
+    evidenceReview: 87,
+    workflowRouting: 85,
+    costControl: 82,
     bestUse: "Broad reasoning and supplier-file normalization."
   },
   {
     model: "Grok 4.1",
     provider: "xAI",
     arenaRank: 2,
-    tradeOpsFit: 87,
+    supplierIntel: 88,
+    evidenceReview: 80,
+    workflowRouting: 83,
+    costControl: 86,
     bestUse: "Fast second opinion on ambiguous rows."
   },
   {
     model: "Claude Opus",
     provider: "Anthropic",
     arenaRank: 4,
-    tradeOpsFit: 94,
+    supplierIntel: 90,
+    evidenceReview: 96,
+    workflowRouting: 88,
+    costControl: 78,
     bestUse: "Careful exception review and policy reasoning."
   },
   {
     model: "GPT-5.1 High",
     provider: "OpenAI",
     arenaRank: 8,
-    tradeOpsFit: 92,
+    supplierIntel: 91,
+    evidenceReview: 90,
+    workflowRouting: 95,
+    costControl: 84,
     bestUse: "Structured work plans, extraction checks, and agentic handoffs."
   },
   {
     model: "Claude Sonnet",
     provider: "Anthropic",
     arenaRank: 10,
-    tradeOpsFit: 89,
+    supplierIntel: 86,
+    evidenceReview: 88,
+    workflowRouting: 91,
+    costControl: 92,
     bestUse: "Reliable day-to-day operator workflows at lower latency."
+  }
+];
+
+export const leaderboardUseCases: LeaderboardUseCase[] = [
+  {
+    id: "supplierIntel",
+    label: "Supplier intel",
+    kicker: "messy company files",
+    description: "Which model best normalizes exporter, processor, distributor, and HQ signals into a usable supplier record."
+  },
+  {
+    id: "evidenceReview",
+    label: "Evidence review",
+    kicker: "source-backed decisions",
+    description: "Which model is strongest when the output must explain what the source proves before a row moves."
+  },
+  {
+    id: "workflowRouting",
+    label: "Workflow routing",
+    kicker: "operator handoffs",
+    description: "Which model is best suited for turning extracted facts into next steps, queues, and exception paths."
+  },
+  {
+    id: "costControl",
+    label: "Cost control",
+    kicker: "repeatable operations",
+    description: "Which model is easier to use repeatedly when latency, token use, and review load matter."
+  }
+];
+
+export const monitorSourceLinks: MonitorSourceLink[] = [
+  {
+    publisher: "Arena",
+    title: "Public leaderboard",
+    url: "https://arena.ai/leaderboard/",
+    domain: "arena.ai",
+    image: "/blog/ai-monitor-layer/header-light.png",
+    note: "Free public model leaderboard used as the shortlist before workflow-specific remapping."
+  },
+  {
+    publisher: "arXiv",
+    title: "Tiered Super-Moore token pricing",
+    url: "https://arxiv.org/abs/2603.28576",
+    domain: "arxiv.org",
+    image: "/blog/ai-monitor-layer/reasoning-leakage-light.png",
+    note: "Research basis for the long-run token price compression reference."
+  },
+  {
+    publisher: "McKinsey",
+    title: "The State of AI in 2025",
+    url: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai",
+    domain: "mckinsey.com",
+    image: "/blog/ai-monitor-layer/routing-friction-light.png",
+    note: "Enterprise adoption context showing value capture remains concentrated in a small set of high performers."
+  },
+  {
+    publisher: "MIT coverage",
+    title: "Gen-AI pilots and P&L impact",
+    url: "https://www.tomshardware.com/tech-industry/artificial-intelligence/95-percent-of-generative-ai-implementations-in-enterprise-have-no-measurable-impact-on-p-and-l-says-mit-flawed-integration-key-reason-why-ai-projects-underperform",
+    domain: "tomshardware.com",
+    image: "/blog/ai-monitor-layer/fragmented-truth-light.png",
+    note: "Reported MIT finding on why many enterprise pilots stall before measurable value."
   }
 ];

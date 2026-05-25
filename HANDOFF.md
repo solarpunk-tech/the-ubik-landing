@@ -682,6 +682,20 @@
     - Tablet article final comments: `verification/ai-monitor-final-comments-tablet-light.png`
     - Mobile article final comments: `verification/ai-monitor-final-comments-mobile-light.png`
     - Final comments report: `verification/ai-monitor-final-comments-report.json`
+- Latest AI monitor-layer tabs and source strip fix:
+  - Added four workflow-specific tabs to the Arena snapshot: supplier intel, evidence review, workflow routing, and cost control.
+  - Each tab swaps the EvilCharts score series and the explanatory use-case callout so readers can see model performance variance by Ubik-specific task instead of one generic score.
+  - Added a bottom `Sources` strip with favicon links for Arena, arXiv, McKinsey, and MIT coverage. Each source opens externally and shows a simple hover/focus preview card with an image, title, and note.
+  - Verification:
+    - `pnpm lint` passes with existing Fast Refresh warnings from EvilCharts generated helper exports.
+    - `pnpm build` passes; Vite still reports the large chunk warning.
+    - `git diff --check` passes.
+    - Playwright verified four tabs, tab switching updates the selected state and explanation, chart bars remain visible, four source links and four hover cards render, source cards have images, and no horizontal overflow exists at 390/740 px.
+  - Latest evidence:
+    - Tabs and sources tablet: `verification/ai-monitor-tabs-sources-tablet.png`
+    - Source hover tablet: `verification/ai-monitor-sources-hover-tablet.png`
+    - Tabs and sources mobile: `verification/ai-monitor-tabs-sources-mobile.png`
+    - Tabs/source report: `verification/ai-monitor-tabs-sources-report.json`
 
 ## Next notes
 

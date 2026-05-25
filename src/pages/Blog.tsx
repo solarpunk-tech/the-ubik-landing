@@ -6,12 +6,14 @@ import {
   SealCheckIcon,
   WarningDiamondIcon
 } from "@phosphor-icons/react";
+import { MarginLeakArticle } from "@/components/blog/MarginLeakVisuals";
 import { DecisionTreeTable, OriginFlowMap, OriginPortraitRail, TariffDifferentialMatrix } from "@/components/blog/OriginRouletteVisuals";
 import { PageShell } from "@/components/landing/PageShell";
 import { SharePostPanel } from "@/components/landing/SharePostPanel";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Seo } from "@/components/seo/Seo";
-import { blogPosts, originRoulettePost, sourceNotes, type BlogPost } from "@/lib/blog/origin-roulette";
+import { blogPosts, getBlogPostBySlug, marginLeakPost, originRoulettePost, type BlogPost } from "@/lib/blog";
+import { sourceNotes } from "@/lib/blog/origin-roulette";
 
 type ArticleShellProps = {
   post: BlogPost;
@@ -130,13 +132,11 @@ function ArticleShell({ post, children }: ArticleShellProps) {
                   src={post.heroLightImage}
                   alt=""
                   className="aspect-video w-full object-cover dark:hidden"
-                  fetchPriority="high"
                 />
                 <img
                   src={post.heroDarkImage}
                   alt=""
                   className="hidden aspect-video w-full object-cover dark:block"
-                  fetchPriority="high"
                 />
               </figure>
             ) : null}
@@ -298,6 +298,10 @@ function OriginRouletteArticle() {
 }
 
 function ArticleBody({ post }: { post: BlogPost }) {
+  if (post.slug === marginLeakPost.slug) {
+    return <MarginLeakArticle />;
+  }
+
   if (post.slug === originRoulettePost.slug) {
     return <OriginRouletteArticle />;
   }
@@ -305,9 +309,40 @@ function ArticleBody({ post }: { post: BlogPost }) {
   return <TemplatePlaceholder template={post.template} />;
 }
 
+function BlogNotFound() {
+  return (
+    <PageShell>
+      <Seo
+        title="Trade Note not found — Ubik"
+        description="The requested Ubik Trade Note could not be found."
+        canonical="https://theubik.com/blog"
+      />
+      <main className="container-page section-y">
+        <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+          <ArrowLeftIcon aria-hidden /> Trade Notes
+        </Link>
+        <div className="mt-10 max-w-2xl border bg-card p-6">
+          <p className="section-label">Missing field note</p>
+          <h1 className="mt-4 text-4xl font-semibold">This Trade Note is not published.</h1>
+          <p className="mt-5 text-base leading-8 text-muted-foreground">
+            The blog route is live, but this slug does not match a published Ubik Trade Note.
+          </p>
+          <Link to="/blog" className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary">
+            Back to Trade Notes <ArrowRightIcon aria-hidden />
+          </Link>
+        </div>
+      </main>
+    </PageShell>
+  );
+}
+
 export default function Blog() {
   const { slug } = useParams();
-  const selected = slug ? blogPosts.find((post) => post.slug === slug) ?? originRoulettePost : null;
+  const selected = slug ? getBlogPostBySlug(slug) : null;
+
+  if (slug && !selected) {
+    return <BlogNotFound />;
+  }
 
   if (selected) {
     return (
@@ -339,9 +374,9 @@ export default function Blog() {
                 </span>
               </div>
               {post.heroLightImage && post.heroDarkImage ? (
-                <div className="min-h-64 bg-shell">
-                  <img src={post.heroLightImage} alt="" className="h-full min-h-64 w-full object-cover dark:hidden" loading="lazy" />
-                  <img src={post.heroDarkImage} alt="" className="hidden h-full min-h-64 w-full object-cover dark:block" loading="lazy" />
+                <div className="flex min-h-64 items-center bg-shell p-3">
+                  <img src={post.heroLightImage} alt="" className="max-h-96 w-full object-contain dark:hidden" loading="lazy" />
+                  <img src={post.heroDarkImage} alt="" className="hidden max-h-96 w-full object-contain dark:block" loading="lazy" />
                 </div>
               ) : null}
             </Link>

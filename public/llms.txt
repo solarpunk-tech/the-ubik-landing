@@ -54,10 +54,19 @@ Ubik minimizes what is shared with external LLMs. Models are used for planning, 
 - /security
 - /privacy
 - /how-it-works
+- /blog/the-60-bps-bleed-shrimp-margin-loss
 - /blog/origin-roulette-2026-shrimp-sourcing
 - https://docs.theubik.com
 
 ## Trade Notes
+
+### The 60-bps Bleed
+
+Path: /blog/the-60-bps-bleed-shrimp-margin-loss
+
+Summary: A visual seafood margin note showing how an apparently clean shrimp RFQ-to-PO cycle can leak 60 basis points through quote latency, counterparty scoring gaps, FX timing, freight drift, demurrage and detention, temperature deviation, count-size slippage, deglazed-weight economics, forwarder spread, working-capital carry and unclaimed remission.
+
+Key terms: shrimp margin leakage, seafood RFQ workflow, deglazed weight, demurrage detention, AD CVD reserve, seafood trade finance, free-time burn-down, perishable trade AI.
 
 ### Origin Roulette 2026
 

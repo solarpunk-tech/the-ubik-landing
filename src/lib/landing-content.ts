@@ -1,5 +1,5 @@
 import { FingerprintIcon, LockKeyIcon, ShieldCheckIcon } from "@phosphor-icons/react";
-export { blogPosts } from "@/lib/blog/origin-roulette";
+export { blogPosts, featuredBlogPost } from "@/lib/blog";
 
 export interface Faq {
   question: string;

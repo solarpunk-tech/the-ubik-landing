@@ -1,22 +1,4 @@
-export type BlogTemplate = "market-intelligence" | "workflow" | "founder-thesis";
-
-export type BlogPost = {
-  slug: string;
-  date: string;
-  updated: string;
-  category: string;
-  title: string;
-  excerpt: string;
-  seoTitle: string;
-  seoDescription: string;
-  canonical: string;
-  author: string;
-  readingTime: string;
-  template: BlogTemplate;
-  ogImage?: string;
-  heroLightImage?: string;
-  heroDarkImage?: string;
-};
+import type { BlogPost } from "@/lib/blog/types";
 
 export type OriginCode =
   | "ecuador"
@@ -95,8 +77,6 @@ export const originRoulettePost: BlogPost = {
   heroLightImage: "/blog/origin-roulette/header-light.png",
   heroDarkImage: "/blog/origin-roulette/header-dark.png"
 };
-
-export const blogPosts = [originRoulettePost] satisfies BlogPost[];
 
 export const originFilters = ["All", "US anchor", "EU value-add", "Compliance watch", "Emerging"] as const;
 

@@ -1,0 +1,46 @@
+{
+  "blogMetrics": {
+    "title": "Ubik Trade Notes",
+    "h1": "",
+    "scrollWidth": 1366,
+    "clientWidth": 1366,
+    "hasOverlay": false,
+    "chartVisible": false,
+    "blogIndexImageMode": "contain",
+    "finalTakeaway": "",
+    "figcaptions": []
+  },
+  "articleMetrics": {
+    "title": "The 60-bps bleed: shrimp margin loss from RFQ to PO — Ubik Trade Notes",
+    "h1": "The 60-bps bleed: anatomy of margin loss in a seafood RFQ-to-PO cycle",
+    "scrollWidth": 1366,
+    "clientWidth": 1366,
+    "hasOverlay": false,
+    "chartVisible": true,
+    "blogIndexImageMode": "fill",
+    "finalTakeaway": "Close the file with the controls attached: quote clock, free time, deglazed weight, remedy reserve, and tenor.",
+    "figcaptions": [
+      "A shipment-level view of the same leak: quote validity, detention, deglazed weight, remedy reserve, and finance timing are the five controls that decide whether the file closes clean.",
+      "Deglazed economics are the house standard: count, glaze, moisture, and arrival sample evidence all sit on the same operating surface."
+    ]
+  },
+  "mobileMetrics": {
+    "title": "The 60-bps bleed: shrimp margin loss from RFQ to PO — Ubik Trade Notes",
+    "h1": "The 60-bps bleed: anatomy of margin loss in a seafood RFQ-to-PO cycle",
+    "scrollWidth": 599,
+    "clientWidth": 599,
+    "hasOverlay": false,
+    "chartVisible": false,
+    "blogIndexImageMode": "fill",
+    "finalTakeaway": "Close the file with the controls attached: quote clock, free time, deglazed weight, remedy reserve, and tenor.",
+    "figcaptions": [
+      "A shipment-level view of the same leak: quote validity, detention, deglazed weight, remedy reserve, and finance timing are the five controls that decide whether the file closes clean.",
+      "Deglazed economics are the house standard: count, glaze, moisture, and arrival sample evidence all sit on the same operating surface."
+    ],
+    "overflow390": false,
+    "overflow599": false,
+    "overflow768": false,
+    "overflow1366": false
+  },
+  "nonRouterConsole": []
+}

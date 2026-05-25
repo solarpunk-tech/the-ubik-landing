@@ -562,6 +562,63 @@
     - Rendered HTML has 8 footer links to `https://theubik.com`; generated PDF contains 8 URI annotations for `https://theubik.com/`.
     - The decision-rule slide now says `SIMP, forced-labour issues, and CATCH decide durability` and contains no `Annex` mention.
     - Full `pnpm lint` is currently blocked by unrelated existing `.claude/worktrees/determined-engelbart-3f0718` lint errors.
+- Latest second Trade Notes blog pass:
+  - Work was done in clean sibling worktree `/Users/shubhranshujha/Codex/the-ubik-landing-second-blog` on branch `jex/second-blog-margin-leak`, based on `origin/main` at `17a88c3`; the dirty local `main` checkout was not edited or merged.
+  - Added `/blog/the-60-bps-bleed-shrimp-margin-loss` as the second real Trade Notes article.
+  - The new article uses the supplied `/Users/shubhranshujha/Downloads/blog/Article 1` source pack, with light/dark hero, waterfall, and deglazed-inspection assets copied under `public/blog/margin-leak/`.
+  - Blog registry is no longer Origin-only: shared post types live in `src/lib/blog/types.ts`, the registry lives in `src/lib/blog/index.ts`, and homepage featuring now uses explicit `featured` metadata instead of accidental array position.
+  - Unknown `/blog/:slug` routes now render a Trade Note not-found state instead of silently falling back to Origin Roulette.
+  - Added `scrollama`, `gsap`, and narrow visx packages for the article-native SVG waterfall scrollytelling component.
+  - Visual requirements:
+    - Layout: preserve existing Ubik article chrome, sticky desktop share panel, and `/blog` feature-card rhythm.
+    - Spacing: the wide waterfall chart must scroll inside its own panel on mobile and must not create document-level overflow.
+    - Typography: retain the current heading/body/mono editorial rhythm and keep research-report artifacts out of the prose.
+    - Color: use tokenized Ubik colors with light/dark image variants.
+    - Interactions: share panel expands, scrollama steps update the active waterfall node, and reduced-motion readers still get all values without animation dependency.
+    - Responsive behavior: no document-level horizontal overflow at 390, 768, 1366, or 1728 px.
+  - Verification:
+    - `pnpm exec eslint src/components/blog/MarginLeakVisuals.tsx src/components/landing/BlogPreview.tsx src/lib/blog src/lib/landing-content.ts src/pages/Blog.tsx` passes.
+    - `pnpm build` passes; Vite reports the existing large chunk warning.
+    - `git diff --check` passes.
+    - Full `pnpm lint` is blocked by an existing `react-hooks/static-components` issue in `src/components/landing/LandingV2Sections.tsx` from the clean `origin/main` baseline.
+    - Browser plugin verified route identity, metadata, nonblank render, no framework overlay, scrolly DOM presence, and share button presence. Browser screenshot capture timed out on the image-heavy article, so Playwright produced stable visual evidence.
+    - Playwright verified `/`, `/blog`, `/blog/origin-roulette-2026-shrimp-sourcing`, `/blog/the-60-bps-bleed-shrimp-margin-loss`, `/blog/not-a-real-slug`, reduced motion, share expansion, desktop/mobile screenshots, canonical URL, `og:type=article`, OG image, JSON-LD, and no horizontal overflow at 390/768/1366/1728 px.
+  - Latest evidence:
+    - Desktop light: `verification/margin-leak-article-desktop-light.png`
+    - Desktop dark: `verification/margin-leak-article-desktop-dark.png`
+    - Mobile light: `verification/margin-leak-article-mobile-light.png`
+    - Scrolly step: `verification/margin-leak-scrolly-step.png`
+    - Share expanded: `verification/margin-leak-share-expanded.png`
+    - Visual/route report: `verification/margin-leak-visual-report.json`
+- Latest second Trade Notes browser-comment fix:
+  - Fixed `/blog` feature-card image clipping by switching article preview media from cover-cropped to contained artwork.
+  - Reworked the margin waterfall section so mobile readers see scroll-linked leak cards first instead of a wide chart; the SVG waterfall is now desktop-only with a richer active-leak summary panel.
+  - Replaced the generic static-figure caption with shipment-control-specific copy.
+  - Replaced the final takeaway headline with a shorter operator checklist: quote clock, free time, deglazed weight, remedy reserve, and tenor.
+  - Verification:
+    - `pnpm exec eslint src/components/blog/MarginLeakVisuals.tsx src/pages/Blog.tsx` passes.
+    - `pnpm build` passes; Vite still reports the existing large chunk warning.
+    - Playwright verified `/blog` article image `object-fit: contain`, article desktop chart visible, mobile chart hidden, updated caption/takeaway text, no framework overlay, no non-Router console warnings, and no horizontal overflow at 390/599/768/1366 px.
+  - Latest evidence:
+    - Blog index image fit: `verification/comment-fix-blog-index-desktop.png`
+    - Desktop waterfall: `verification/comment-fix-waterfall-desktop.png`
+    - Mobile waterfall cards: `verification/comment-fix-waterfall-mobile.png`
+    - Caption fix: `verification/comment-fix-caption-mobile.png`
+    - Takeaway fix: `verification/comment-fix-takeaway-desktop.png`
+    - Check report: `verification/comment-fix-report.json`
+- Latest article-view correction after user note:
+  - Kept the work scoped to `/Users/shubhranshujha/Codex/the-ubik-landing-second-blog`; the original dirty `main` checkout was not edited.
+  - Added a mobile-only sticky leak meter inside the article waterfall section so scrollama updates the active leak, bps, remaining margin, and control as readers move through the cards.
+  - Confirmed the wide SVG waterfall is hidden on mobile and remains visible only for the desktop sticky chart.
+  - Tightened the operating takeaway to: `Price the file with five live controls: quote clock, free time, deglazed weight, remedy reserve, and tenor.`
+  - Verification:
+    - `pnpm exec eslint src/components/blog/MarginLeakVisuals.tsx src/pages/Blog.tsx` passes.
+    - `pnpm build` passes; Vite still reports the existing large chunk warning.
+    - Playwright verified the article route has no old placeholder caption, no old LinkedIn-ish takeaway, no document overflow at 599/1366 px, mobile waterfall SVG has zero visible layout footprint, and the new takeaway is present.
+  - Latest evidence:
+    - Mobile article top: `verification/article-waterfall-mobile-after-user-note.png`
+    - Mobile article mid-scroll: `verification/article-mid-mobile-after-user-note.png`
+    - Desktop waterfall after article-view correction: `verification/article-waterfall-desktop-after-user-note.png`
 
 ## Next notes
 

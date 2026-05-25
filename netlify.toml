@@ -2,6 +2,10 @@
   command = "pnpm build"
   publish = "dist"
 
+[build.environment]
+  NODE_VERSION = "22"
+  PNPM_VERSION = "10.33.0"
+
 [[headers]]
   for = "/downloads/*.exe"
   [headers.values]

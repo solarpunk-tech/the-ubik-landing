@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { AppleLogoIcon, CheckCircleIcon, WindowsLogoIcon } from "@phosphor-icons/react";
 import { Badge } from "@/components/ui/badge";
@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { MatrixField } from "@/components/landing/MatrixField";
 import { PageShell } from "@/components/landing/PageShell";
 import { Seo } from "@/components/seo/Seo";
-import { downloads } from "@/lib/links";
+import { useDownloadLinks } from "@/lib/use-download-links";
 import { detectOS, type OS } from "@/lib/use-detected-os";
 import { trackEvent } from "@/lib/posthog";
 
@@ -45,6 +45,7 @@ const localHighlights = [
 ];
 
 export default function Download() {
+  const links = useDownloadLinks();
   const [params] = useSearchParams();
   const requested = params.get("os");
   const initialOS: OS = requested === "windows" ? "windows" : requested === "mac" ? "mac" : detectOS();
@@ -52,25 +53,26 @@ export default function Download() {
   const [showInstallGuide, setShowInstallGuide] = useState(false);
   const fired = useRef(false);
 
-  const href = useMemo(() => (os === "windows" ? downloads.windows : downloads.mac), [os]);
   const steps = os === "windows" ? windowsSteps : macSteps;
 
-  function handleDownloadClick(nextOS?: OS) {
-    const resolvedOS = nextOS ?? os;
+  function handleDownloadClick(href: string, nextOS?: OS) {
     if (nextOS) setOS(nextOS);
     fired.current = true;
     setShowInstallGuide(true);
-    trackEvent("download_clicked", { os: resolvedOS });
+    trackEvent("download_clicked", { os: nextOS ?? os });
+    triggerDownload(href);
   }
 
+  // Auto-trigger once the manifest has loaded so we use the live URL.
   useEffect(() => {
-    if (fired.current) return;
+    if (links.loading || fired.current) return;
     fired.current = true;
+    // Mac defaults to arm64 (Apple Silicon) — most Macs sold since 2020.
+    const href = os === "windows" ? links.windows : links.mac_arm64;
     const t = window.setTimeout(() => triggerDownload(href), 250);
     return () => window.clearTimeout(t);
-    // Only auto-fire once on mount, for the initial OS.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [links.loading]);
 
   return (
     <PageShell>
@@ -100,9 +102,9 @@ export default function Download() {
               <p className="text-base text-muted-foreground sm:text-lg">
                 Your download will begin automatically. If it didn{"’"}t start,{" "}
                 <a
-                  href={href}
+                  href={os === "windows" ? links.windows : links.mac_arm64}
                   className="font-medium text-primary underline underline-offset-4 hover:no-underline"
-                  onClick={() => handleDownloadClick()}
+                  onClick={() => handleDownloadClick(os === "windows" ? links.windows : links.mac_arm64)}
                 >
                   download Ubik Meetings manually
                 </a>
@@ -110,27 +112,46 @@ export default function Download() {
               </p>
             </div>
 
-            <div className="flex flex-col items-center gap-3 sm:flex-row">
+            <div className="flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
+              {/* Mac — Apple Silicon (arm64) */}
               <Button
                 asChild
                 size="lg"
                 variant={os === "mac" ? "default" : "outline"}
-                onClick={() => handleDownloadClick("mac")}
+                disabled={links.loading}
+                onClick={() => handleDownloadClick(links.mac_arm64, "mac")}
               >
-                <a href={downloads.mac}>
+                <a href={links.mac_arm64}>
                   <AppleLogoIcon weight="fill" data-icon="inline-start" />
-                  Download Ubik Meetings for Mac
+                  Mac — Apple Silicon
                 </a>
               </Button>
+
+              {/* Mac — Intel (x64) */}
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                disabled={links.loading}
+                onClick={() => handleDownloadClick(links.mac_x64, "mac")}
+              >
+                <a href={links.mac_x64}>
+                  <AppleLogoIcon weight="fill" data-icon="inline-start" />
+                  Mac — Intel
+                </a>
+              </Button>
+
+              {/* Windows */}
               <Button
                 asChild
                 size="lg"
                 variant={os === "windows" ? "default" : "outline"}
-                onClick={() => handleDownloadClick("windows")}
+                disabled={links.loading}
+                onClick={() => handleDownloadClick(links.windows, "windows")}
               >
-                <a href={downloads.windows}>
+                <a href={links.windows}>
                   <WindowsLogoIcon weight="fill" data-icon="inline-start" />
-                  Download Ubik Meetings for Windows
+                  Download for Windows
                 </a>
               </Button>
             </div>
@@ -150,7 +171,7 @@ export default function Download() {
             ) : null}
 
             <p className="text-xs text-muted-foreground">
-              Version {downloads.version} · Detected: {os === "mac" ? "macOS" : "Windows"}
+              {links.loading ? "Loading…" : `Version ${links.version}`} · Detected: {os === "mac" ? "macOS" : "Windows"}
             </p>
           </div>
         </section>

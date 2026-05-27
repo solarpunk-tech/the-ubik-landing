@@ -425,13 +425,78 @@ export const decisionRows: DecisionRow[] = [
   }
 ];
 
-export const sourceNotes = [
-  "FAO fisheries and aquaculture market materials: https://www.fao.org/home/en",
-  "International Trade Administration trade references: https://www.trade.gov/",
-  "Shrimp Insights market coverage: https://www.shrimpinsights.com/",
-  "FDA Cs-137 import certification and Import Alert 99-51/99-52 releases.",
-  "European Commission EU-India FTA text publication and EU CATCH/IUU implementation guidance.",
-  "MPEDA/PIB FY 2025-26 seafood export release.",
-  "US import and trade press data for 2025 warm-water shrimp origin flows.",
-  "VASEP Q1 2026 shrimp export updates and Saudi official aquaculture statistics."
+export type SourceNote = {
+  url: string;
+  faviconLabel: string;
+  favicon: string;
+  publisher: string;
+  title: string;
+  note: string;
+};
+
+export const sourceNotes: SourceNote[] = [
+  {
+    url: "https://www.fao.org/fishery/en",
+    faviconLabel: "FAO",
+    favicon: "https://www.fao.org/favicon.ico",
+    publisher: "FAO",
+    title: "Fisheries and Aquaculture Market Materials",
+    note: "FAO fisheries and aquaculture market data and publications."
+  },
+  {
+    url: "https://www.trade.gov/",
+    faviconLabel: "ITA",
+    favicon: "https://www.trade.gov/favicon.ico",
+    publisher: "ITA",
+    title: "International Trade Administration",
+    note: "International Trade Administration trade references and ADD/CVD data."
+  },
+  {
+    url: "https://www.shrimpinsights.com/",
+    faviconLabel: "SI",
+    favicon: "https://www.shrimpinsights.com/favicon.ico",
+    publisher: "Shrimp Insights",
+    title: "Shrimp Market Coverage",
+    note: "Shrimp Insights market coverage and trade analysis."
+  },
+  {
+    url: "https://www.fda.gov/food/import-program-food/import-alerts",
+    faviconLabel: "FDA",
+    favicon: "https://www.fda.gov/favicon.ico",
+    publisher: "FDA",
+    title: "Import Alert 99-51 / 99-52",
+    note: "FDA Cs-137 import certification and Import Alert releases."
+  },
+  {
+    url: "https://policy.trade.ec.europa.eu/eu-trade-relationships-country-and-region/countries-and-regions/india_en",
+    faviconLabel: "EC",
+    favicon: "https://ec.europa.eu/favicon.ico",
+    publisher: "EU Commission",
+    title: "EU–India FTA and CATCH / IUU Guidance",
+    note: "EU-India FTA text publication and EU CATCH/IUU implementation guidance."
+  },
+  {
+    url: "https://mpeda.gov.in/",
+    faviconLabel: "MPD",
+    favicon: "https://mpeda.gov.in/favicon.ico",
+    publisher: "MPEDA",
+    title: "FY 2025-26 Seafood Export Release",
+    note: "MPEDA / PIB FY 2025-26 seafood export press release."
+  },
+  {
+    url: "https://www.usitc.gov/research_and_analysis/trade_shifts.htm",
+    faviconLabel: "UST",
+    favicon: "https://www.usitc.gov/favicon.ico",
+    publisher: "USITC",
+    title: "2025 Warm-Water Shrimp Origin Flows",
+    note: "US import and trade press data for 2025 warm-water shrimp origin flows."
+  },
+  {
+    url: "https://vasep.com.vn/",
+    faviconLabel: "VSP",
+    favicon: "https://vasep.com.vn/favicon.ico",
+    publisher: "VASEP",
+    title: "Q1 2026 Shrimp Export Updates",
+    note: "VASEP Q1 2026 shrimp export updates and Saudi official aquaculture statistics."
+  }
 ];

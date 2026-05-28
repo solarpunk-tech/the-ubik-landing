@@ -15,9 +15,9 @@ export function BlogPreview() {
         </Link>
         <Link to={`/blog/${featured.slug}`} className="mt-5 grid overflow-hidden border bg-card hover:bg-shell">
           {featured.heroLightImage && featured.heroDarkImage ? (
-            <div className="aspect-[16/9] overflow-hidden bg-shell sm:aspect-[2.35/1]">
-              <img src={featured.heroLightImage} alt="" className="h-full w-full object-cover dark:hidden" loading="lazy" />
-              <img src={featured.heroDarkImage} alt="" className="hidden h-full w-full object-cover dark:block" loading="lazy" />
+            <div className="aspect-[16/9] overflow-hidden bg-shell">
+              <img src={featured.heroLightImage} alt="" className="h-full w-full object-contain dark:hidden" loading="lazy" />
+              <img src={featured.heroDarkImage} alt="" className="hidden h-full w-full object-contain dark:block" loading="lazy" />
             </div>
           ) : null}
           <div className="grid gap-px bg-border lg:grid-cols-[0.42fr_0.58fr]">

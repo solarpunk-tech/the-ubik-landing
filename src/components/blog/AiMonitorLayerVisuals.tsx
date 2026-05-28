@@ -25,6 +25,8 @@ import {
   monitorSourceLinks,
   monitorSteps,
   providerChips,
+  type LeaderboardSnapshotRow,
+  type LeaderboardUseCase,
   type MonitorStep
 } from "@/lib/blog/ai-monitor-layer";
 import { cn } from "@/lib/utils";
@@ -47,6 +49,10 @@ const statusIcon: Record<MonitorStep["status"], typeof DatabaseIcon> = {
   review: ShieldCheckIcon
 };
 
+type LeaderboardChartRow = LeaderboardSnapshotRow & {
+  score: number;
+};
+
 function FigurePair({
   light,
   dark,
@@ -62,10 +68,67 @@ function FigurePair({
 }) {
   return (
     <figure className="overflow-hidden border bg-shell">
-      <img src={light} alt={alt} className={cn("w-full object-cover dark:hidden", aspect)} loading="lazy" />
-      <img src={dark} alt={alt} className={cn("hidden w-full object-cover dark:block", aspect)} loading="lazy" />
+      <img src={light} alt={alt} className={cn("w-full object-contain dark:hidden", aspect)} loading="eager" decoding="async" />
+      <img src={dark} alt={alt} className={cn("hidden w-full object-contain dark:block", aspect)} loading="eager" decoding="async" />
       <figcaption className="border-t bg-background p-4 text-xs leading-5 text-muted-foreground">{caption}</figcaption>
     </figure>
+  );
+}
+
+function LeaderboardBenchmarkPanel({
+  useCase,
+  rows,
+  className
+}: {
+  useCase: LeaderboardUseCase;
+  rows: LeaderboardChartRow[];
+  className?: string;
+}) {
+  return (
+    <div className={cn("grid min-w-0 gap-5 lg:grid-cols-[minmax(0,1fr)_18rem]", className)}>
+      <div className="min-w-0 border bg-background p-3 sm:p-4">
+        <div className="mb-4 grid gap-3 border bg-shell p-3 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center">
+          <div className="inline-flex w-fit items-center gap-2 border bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary">
+            <span className="size-2 bg-primary" aria-hidden />
+            Snapshot as of May 29, 2026
+          </div>
+          <p className="text-sm leading-6 text-muted-foreground">{useCase.description}</p>
+        </div>
+        <div className="h-[22rem] min-w-0 sm:h-[26rem]">
+          <EvilBarChart
+            config={leaderboardChartConfig}
+            data={rows}
+            layout="horizontal"
+            xDataKey="model"
+            barRadius={3}
+            barCategoryGap={22}
+            animationType="center-out"
+            chartProps={{ margin: { top: 10, right: 12, bottom: 4, left: 8 } }}
+          >
+            <Grid horizontal={false} />
+            <XAxis domain={[0, 100]} tick={{ fontSize: 12 }} />
+            <YAxis
+              dataKey="model"
+              width={112}
+              tick={{ fontSize: 12 }}
+            />
+            <Tooltip roundness="sm" />
+            <EvilBar dataKey="score" isClickable enableHoverHighlight glowing variant="gradient" barProps={{ barSize: 18 }} />
+          </EvilBarChart>
+        </div>
+      </div>
+      <div className="grid gap-px bg-border">
+        {rows.slice(0, 3).map((row) => (
+          <div key={row.model} className="bg-background p-4">
+            <p className="font-mono text-xs uppercase tracking-[0.14em] text-primary">
+              Arena rank {row.arenaRank} / {row.provider}
+            </p>
+            <h3 className="mt-3 text-lg font-semibold">{row.model}</h3>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">{row.bestUse}</p>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -218,7 +281,7 @@ function LeaderboardSnapshot() {
     <section id="leaderboards" className="scroll-mt-24 border bg-card p-4 sm:p-6">
       <div className="flex flex-wrap items-start justify-between gap-5">
         <div>
-          <p className="section-label">Arena snapshot / as of May 26</p>
+          <p className="section-label">Arena snapshot / as of May 29, 2026</p>
           <h2 className="mt-4 max-w-3xl text-3xl font-semibold">
             The public leaderboard is the shortlist. The trade workflow score decides the router.
           </h2>
@@ -235,7 +298,29 @@ function LeaderboardSnapshot() {
       <p className="mt-5 max-w-3xl text-sm leading-6 text-muted-foreground">
         Recreated from the free public Arena leaderboard view, then remapped for seafood operators: evidence work, routing work, and overall fit for messy supplier files. The point is not to crown one model. It is to make frontier intelligences easy to assign to the right job.
       </p>
-      <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-4" role="tablist" aria-label="Arena use cases">
+      <div className="mt-5 grid gap-2 lg:hidden" role="tablist" aria-label="Arena use cases">
+        {leaderboardUseCases.map((useCase) => (
+          <div key={useCase.id}>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeUseCaseId === useCase.id}
+              onClick={() => setActiveUseCaseId(useCase.id)}
+              className={cn(
+                "w-full border p-3 text-left transition-colors",
+                activeUseCaseId === useCase.id ? "border-primary bg-primary/10" : "bg-background hover:bg-shell"
+              )}
+            >
+              <span className="block font-mono text-[11px] uppercase tracking-[0.12em] text-primary">{useCase.kicker}</span>
+              <span className="mt-2 block text-sm font-semibold">{useCase.label}</span>
+            </button>
+            {activeUseCaseId === useCase.id ? (
+              <LeaderboardBenchmarkPanel useCase={activeUseCase} rows={chartRows} className="mt-3" />
+            ) : null}
+          </div>
+        ))}
+      </div>
+      <div className="mt-5 hidden gap-2 lg:grid lg:grid-cols-4" role="tablist" aria-label="Arena use cases">
         {leaderboardUseCases.map((useCase) => (
           <button
             key={useCase.id}
@@ -253,50 +338,7 @@ function LeaderboardSnapshot() {
           </button>
         ))}
       </div>
-      <div className="mt-6 grid min-w-0 gap-5 lg:grid-cols-[minmax(0,1fr)_18rem]">
-        <div className="min-w-0 border bg-background p-3 sm:p-4">
-          <div className="mb-4 grid gap-3 border bg-shell p-3 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center">
-            <div className="inline-flex w-fit items-center gap-2 border bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary">
-              <span className="size-2 bg-primary" aria-hidden />
-              Snapshot as of May 26
-            </div>
-            <p className="text-sm leading-6 text-muted-foreground">{activeUseCase.description}</p>
-          </div>
-          <div className="h-[24rem] min-w-0 sm:h-[26rem]">
-            <EvilBarChart
-              config={leaderboardChartConfig}
-              data={chartRows}
-              layout="horizontal"
-              xDataKey="model"
-              barRadius={3}
-              barCategoryGap={22}
-              animationType="center-out"
-              chartProps={{ margin: { top: 10, right: 12, bottom: 4, left: 8 } }}
-            >
-              <Grid horizontal={false} />
-              <XAxis domain={[0, 100]} tick={{ fontSize: 12 }} />
-              <YAxis
-                dataKey="model"
-                width={112}
-                tick={{ fontSize: 12 }}
-              />
-              <Tooltip roundness="sm" />
-              <EvilBar dataKey="score" isClickable enableHoverHighlight glowing variant="gradient" barProps={{ barSize: 18 }} />
-            </EvilBarChart>
-          </div>
-        </div>
-        <div className="grid gap-px bg-border">
-          {chartRows.slice(0, 3).map((row) => (
-            <div key={row.model} className="bg-background p-4">
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-primary">
-                Arena rank {row.arenaRank} / {row.provider}
-              </p>
-              <h3 className="mt-3 text-lg font-semibold">{row.model}</h3>
-              <p className="mt-2 text-sm leading-6 text-muted-foreground">{row.bestUse}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <LeaderboardBenchmarkPanel useCase={activeUseCase} rows={chartRows} className="mt-6 hidden lg:grid" />
     </section>
   );
 }
@@ -333,7 +375,7 @@ function SourceLinks() {
             {source.publisher}
             <span className="pointer-events-none absolute bottom-full left-0 z-20 mb-3 hidden w-72 border bg-background p-3 text-left shadow-xl group-hover:block group-focus:block sm:w-80">
               <span className="block aspect-[16/9] overflow-hidden border bg-shell">
-                <img src={source.image} alt="" className="h-full w-full object-cover" loading="lazy" />
+                <img src={source.image} alt="" className="h-full w-full object-contain" loading="lazy" />
               </span>
               <span className="mt-3 block font-mono text-[11px] uppercase tracking-[0.12em] text-primary">{source.publisher}</span>
               <span className="mt-1 block text-sm font-semibold text-foreground">{source.title}</span>
@@ -388,8 +430,9 @@ export function AiMonitorLayerArticle() {
       <FigurePair
         light="/blog/ai-monitor-layer/reasoning-leakage-light.png"
         dark="/blog/ai-monitor-layer/reasoning-leakage-dark.png"
-        alt="Blueprint-style reasoning leakage cutaway showing unsupported assumptions being intercepted before workflow decisions."
-        caption="Reasoning leakage is operational decay before the PO, supplier record, or compliance lens knows anything went wrong."
+        alt="Country signal proof matrix showing seafood entity clues, evidence classes, confidence, and routing decisions."
+        caption="A country tag only becomes operational state when the system can show whether the evidence proves headquarters, farm origin, processor base, exporter signal, or only a sales presence."
+        aspect="aspect-[4/3]"
       />
 
       <MonitorDeck />
@@ -398,7 +441,7 @@ export function AiMonitorLayerArticle() {
       <FigurePair
         light="/blog/ai-monitor-layer/routing-friction-light.png"
         dark="/blog/ai-monitor-layer/routing-friction-dark.png"
-        alt="Blueprint-style green amber red routing rail for monitored AI decisions."
+        alt="Corridor workflow matrix showing AI-assisted seafood operations moving through evidence, routing, and operator review lanes."
         caption="The right monitor does not slow every row. It adds friction to the rows where weak evidence, disagreement, or ambiguity would otherwise leak into the operation."
       />
 
@@ -417,9 +460,8 @@ export function AiMonitorLayerArticle() {
       <FigurePair
         light="/blog/ai-monitor-layer/fragmented-truth-light.png"
         dark="/blog/ai-monitor-layer/fragmented-truth-dark.png"
-        alt="Blueprint-style fragmented operating truth across email, spreadsheets, PDFs, supplier records, and memory converging into an evidence lens."
+        alt="Strategic monitor layer stack showing model choice, evidence control, workflow routing, and operator review."
         caption="Seafood is a hard AI environment because truth is split across inboxes, spreadsheets, PDFs, ERP, WhatsApp, inspection documents, and human memory."
-        aspect="aspect-[4/3]"
       />
 
       <section className="border bg-card p-5 sm:p-6">

@@ -699,6 +699,29 @@
 
 ## Next notes
 
+- Latest AI monitor-layer image/model refresh:
+  - Updated `/blog/ai-monitor-layer-seafood-trade` after browser comment on the Arena snapshot and image set.
+  - Replaced all AI monitor article image pairs from `/Users/shubhranshujha/Downloads/blog - why AI needs a monitor layer/ubik-ai-monitor-headerB-1B-2B-3B-upscaled/`:
+    - `header-global-evidence-constellation-*` -> `public/blog/ai-monitor-layer/header-*`.
+    - `country-signal-proof-matrix-*` -> `public/blog/ai-monitor-layer/reasoning-leakage-*`.
+    - `corridor-workflow-matrix-*` -> `public/blog/ai-monitor-layer/routing-friction-*`.
+    - `strategic-layer-stack-*` -> `public/blog/ai-monitor-layer/fragmented-truth-*`.
+  - Updated the Arena snapshot to May 29, 2026 and refreshed model labels from public Arena signals: Opus 4.7 Thinking, Gemini 3.1 Pro, GPT-5.5 High, Grok 4.20, and Sonnet 4.6.
+  - Follow-up browser comment fix: mobile leaderboard use cases now behave like stacked sections; tapping a section renders its benchmark chart and top-model cards directly underneath that section instead of below the whole group.
+  - Changed article, blog index, and homepage blog-preview media from cover-cropped to contained artwork so supplied images are not clipped.
+  - Visual requirements:
+    - Layout: keep the existing Trade Notes article chrome and leaderboard section, but ensure new image pairs render as complete diagrams.
+    - Spacing: image frames may letterbox, but must not crop diagram labels or edge content.
+    - Typography: preserve the existing article heading/body/mono style; chart model labels must stay readable on mobile.
+    - Color: use matching light/dark image pairs through the existing theme class behavior.
+    - Interactions: Arena tabs and monitor deck stay functional; source hover previews use contained images.
+    - Responsive behavior: 599px mobile and 1440px desktop screenshots should show contained images and no obvious chart clipping.
+  - Verification:
+    - `pnpm build` passes; Vite still reports the existing large chunk warning.
+    - Before evidence: `verification/ai-monitor-before-mobile.png`, `verification/ai-monitor-before-desktop.png`.
+    - After evidence: `verification/ai-monitor-after-mobile-light.png`, `verification/ai-monitor-after-desktop-light.png`, `verification/ai-monitor-after-mobile-dark.png`, `verification/ai-monitor-after-desktop-dark.png`.
+    - Follow-up mobile leaderboard evidence: `verification/ai-monitor-leaderboard-mobile-accordion-default.png`, `verification/ai-monitor-leaderboard-mobile-accordion-workflow.png`, `verification/ai-monitor-leaderboard-mobile-accordion-cost.png`.
+
 - Final legal review remains needed for the privacy/terms draft before relying on it in production.
 - If final logo filenames change, update only `src/lib/brand.ts`.
 - Browser plugin DOM verification and Playwright screenshot capture were used for the final comment pass.

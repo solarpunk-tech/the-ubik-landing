@@ -128,9 +128,9 @@ function ArticleShell({ post, children }: ArticleShellProps) {
               </div>
             </header>
             {post.heroLightImage && post.heroDarkImage ? (
-              <figure className="mt-10 aspect-[16/9] overflow-hidden border bg-shell sm:aspect-[2/1]">
-                <img src={post.heroLightImage} alt="" className="h-full w-full object-cover dark:hidden" />
-                <img src={post.heroDarkImage} alt="" className="hidden h-full w-full object-cover dark:block" />
+              <figure className="mt-10 aspect-[16/9] overflow-hidden border bg-shell">
+                <img src={post.heroLightImage} alt="" className="h-full w-full object-contain dark:hidden" />
+                <img src={post.heroDarkImage} alt="" className="hidden h-full w-full object-contain dark:block" />
               </figure>
             ) : null}
             {children}
@@ -399,8 +399,8 @@ export default function Blog() {
               </div>
               {post.heroLightImage && post.heroDarkImage ? (
                 <div className="min-h-64 overflow-hidden bg-shell">
-                  <img src={post.heroLightImage} alt="" className="h-full min-h-64 w-full object-cover dark:hidden" loading="lazy" />
-                  <img src={post.heroDarkImage} alt="" className="hidden h-full min-h-64 w-full object-cover dark:block" loading="lazy" />
+                  <img src={post.heroLightImage} alt="" className="h-full min-h-64 w-full object-contain dark:hidden" loading="lazy" />
+                  <img src={post.heroDarkImage} alt="" className="hidden h-full min-h-64 w-full object-contain dark:block" loading="lazy" />
                 </div>
               ) : null}
             </Link>

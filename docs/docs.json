@@ -124,15 +124,10 @@
       {
         "group": "Features",
         "pages": [
-          {
-            "group": "Surfaces",
-            "pages": [
-              "workflows/ask-ubik",
-              "workflows/inbox",
-              "workflows/meetings",
-              "workflows/tasks"
-            ]
-          },
+          "workflows/ask-ubik",
+          "workflows/inbox",
+          "workflows/meetings",
+          "workflows/tasks",
           {
             "group": "Coming soon",
             "pages": [

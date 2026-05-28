@@ -45,7 +45,7 @@ export type MonitorSourceLink = {
 export const aiMonitorPost: BlogPost = {
   slug: "ai-monitor-layer-seafood-trade",
   date: "2026-05-26",
-  updated: "2026-05-26",
+  updated: "2026-05-29",
   category: "Operational AI",
   title: "The Invisible Drift: why seafood AI needs a monitor layer",
   excerpt:
@@ -148,9 +148,19 @@ export const providerChips = [
 
 export const leaderboardSnapshot: LeaderboardSnapshotRow[] = [
   {
-    model: "Gemini 3",
+    model: "Opus 4.7 Thinking",
+    provider: "Anthropic",
+    arenaRank: 2,
+    supplierIntel: 91,
+    evidenceReview: 97,
+    workflowRouting: 90,
+    costControl: 78,
+    bestUse: "Careful exception review and policy reasoning."
+  },
+  {
+    model: "Gemini 3.1 Pro",
     provider: "Google",
-    arenaRank: 1,
+    arenaRank: 6,
     supplierIntel: 94,
     evidenceReview: 87,
     workflowRouting: 85,
@@ -158,9 +168,9 @@ export const leaderboardSnapshot: LeaderboardSnapshotRow[] = [
     bestUse: "Broad reasoning and supplier-file normalization."
   },
   {
-    model: "Grok 4.1",
+    model: "Grok 4.20",
     provider: "xAI",
-    arenaRank: 2,
+    arenaRank: 10,
     supplierIntel: 88,
     evidenceReview: 80,
     workflowRouting: 83,
@@ -168,29 +178,19 @@ export const leaderboardSnapshot: LeaderboardSnapshotRow[] = [
     bestUse: "Fast second opinion on ambiguous rows."
   },
   {
-    model: "Claude Opus",
-    provider: "Anthropic",
-    arenaRank: 4,
-    supplierIntel: 90,
-    evidenceReview: 96,
-    workflowRouting: 88,
-    costControl: 78,
-    bestUse: "Careful exception review and policy reasoning."
-  },
-  {
-    model: "GPT-5.1 High",
+    model: "GPT-5.5 High",
     provider: "OpenAI",
     arenaRank: 8,
-    supplierIntel: 91,
+    supplierIntel: 92,
     evidenceReview: 90,
     workflowRouting: 95,
     costControl: 84,
     bestUse: "Structured work plans, extraction checks, and agentic handoffs."
   },
   {
-    model: "Claude Sonnet",
+    model: "Sonnet 4.6",
     provider: "Anthropic",
-    arenaRank: 10,
+    arenaRank: 20,
     supplierIntel: 86,
     evidenceReview: 88,
     workflowRouting: 91,

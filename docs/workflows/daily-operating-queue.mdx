@@ -1,18 +1,18 @@
 ---
 title: "Daily operating queue"
-description: "Start the day with the work that needs attention before status chasing begins."
+description: "Run the day by operational risk, owner accountability, and decision readiness."
 icon: "list-checks"
 ---
 
-The daily operating queue is the first page most operators should open. It reduces status chasing by showing the work that needs action, the source context behind it, and the next recommended move.
+The daily operating queue is the control surface for work that can slip: buyer commitments, shipment movement, PO processing, approvals, customer updates, and owner handoffs. It reduces status chasing by showing the risk, evidence, owner, and next recommended move in one place.
 
-## Start-of-day pass
+## Start-of-day risk pass
 
 <div className="ubik-steps">
-  <div className="ubik-step"><span>01 · Scan</span> Read the highest-priority items and identify anything time-sensitive.</div>
-  <div className="ubik-step"><span>02 · Open</span> Click into the first item and review source context.</div>
-  <div className="ubik-step"><span>03 · Decide</span> Approve, edit, assign, or reject the proposed action.</div>
-  <div className="ubik-step"><span>04 · Clear</span> Move through the queue until only blocked items remain.</div>
+  <div className="ubik-step"><span>01 · Rank exposure</span> Start with items that can affect customer promises, margin, clearance, cash timing, or supplier reliability.</div>
+  <div className="ubik-step"><span>02 · Inspect source</span> Review the evidence behind the recommendation before acting on it.</div>
+  <div className="ubik-step"><span>03 · Decide route</span> Approve, edit, assign, wait, escalate, or reject based on authority and missing context.</div>
+  <div className="ubik-step"><span>04 · Leave no silent blockers</span> End the pass with each blocked item assigned, explained, or rejected.</div>
 </div>
 
 ## Priority signals
@@ -20,14 +20,14 @@ The daily operating queue is the first page most operators should open. It reduc
 | Signal | Typical state |
 | --- | --- |
 | Buyer or supplier asks for a commitment | <span className="ux-label is-primary">Now</span> |
-| ETA changes affect promise dates | <span className="ux-label is-support">Found</span> |
-| Margin or price variance needs review | <span className="ux-label is-destructive">Analyse</span> |
+| ETA movement affects promise dates | <span className="ux-label is-support">Found</span> |
+| Margin, price, or exception logic needs review | <span className="ux-label is-destructive">Analyse</span> |
 | PO, invoice, or trade document is ready for extraction | <span className="ux-label is-success">Ready</span> |
 | A task has no owner and could slip | <span className="ux-label is-nudge">Try this</span> |
 
 ## Blocked work
 
-Blocked items should not sit silently in the queue. Assign the owner, add the missing context, or reject the recommendation so the trail stays clean.
+Blocked items should not sit silently in the queue. Assign the owner, add missing context, route the decision to the right reviewer, or reject the recommendation so the trail stays clean.
 
 ## End-of-day check
 

@@ -1,19 +1,27 @@
 ---
 title: "Approving AI work"
-description: "Use human review to keep buyer replies, margin decisions, and system updates controlled."
+description: "Use human review to control customer promises, margin decisions, and system writebacks."
 icon: "check-check"
 ---
 
-Approvals are how your team uses AI without losing control. Every sensitive action should be reviewed before it reaches a buyer, supplier, internal owner, or connected business system.
+Approvals are how the team uses AI without losing operating control. Any action that changes a customer promise, margin position, supplier commitment, internal owner, or connected business system should be reviewed before it moves.
 
 ## What needs approval
 
-- Buyer replies with price, promise date, or quantity commitments
-- Margin changes or exceptions
-- System updates
-- PO extraction and SKU mapping
-- Customer updates after ETA movement
-- Actions that use sensitive customer, supplier, or pricing context
+<CardGroup cols={2}>
+  <Card title="Customer commitments" icon="message-square-reply">
+    Buyer replies with price, promise date, quantity, substitute product, or service recovery commitments.
+  </Card>
+  <Card title="Margin and finance" icon="chart-no-axes-combined">
+    Margin exceptions, duty reserves, free-time exposure, credit notes, payment terms, and finance approvals.
+  </Card>
+  <Card title="System state" icon="database">
+    PO extraction, SKU mapping, ERP writebacks, CRM changes, invoice checks, and document updates.
+  </Card>
+  <Card title="Sensitive context" icon="shield-alert">
+    Actions that use customer, supplier, pricing, compliance, or internal operating notes.
+  </Card>
+</CardGroup>
 
 ## What each button means
 
@@ -30,10 +38,10 @@ Approvals are how your team uses AI without losing control. Every sensitive acti
   <strong>Approval means accountability.</strong> Check source context, not just the drafted output. If the context is stale or missing, assign or reject the item instead of approving it.
 </div>
 
-- Source thread matches the customer or supplier.
-- SKU, quantity, unit, and account mapping are correct.
-- Pricing and margin are within the agreed guardrail.
-- The action does not reveal internal notes or sensitive context.
+- Source thread matches the customer, supplier, shipment, or account.
+- SKU, quantity, unit, account, and owner mapping are correct.
+- Pricing, margin, and promise-date logic fit the agreed guardrail.
+- The action does not reveal internal notes, supplier pricing, or sensitive context.
 - The activity trail will explain the decision later.
 
 ## Audit trail

@@ -1,51 +1,60 @@
 ---
 title: "Ubik operator guide"
-description: "Start here to learn how managers and operators use Ubik AI during daily trade work."
+description: "A guide for running reviewed trade operations with source context, owner clarity, and controlled AI assistance."
 icon: "book-open"
 ---
 
 <div className="ubik-hero">
-  <p className="ubik-label">Perishable trade · AI operations</p>
-  <h1>Run daily trade work from one reviewed operating queue.</h1>
+  <p className="ubik-label">Perishable trade operations</p>
+  <h1>Run the day by risk, owner, evidence, and next decision.</h1>
 </div>
 
-This guide stays close to the daily workflow: what to open first, how to ask the AI for help, how to check its recommendation, when to approve, and where to look when something is blocked.
+This guide is for operators, reviewers, admins, and leaders who need AI to carry real operating work without losing control. The core habit is simple: identify what is at risk, inspect the evidence, decide who owns the next move, and approve only what is ready to move.
 
 <div className="ubik-proof-grid">
   <div className="ubik-proof">
     <div className="ubik-metric">20x</div>
     <p className="ubik-label">Faster RFQ cycles</p>
-    <p>Move from scattered inquiry handling to a reviewed quote path.</p>
+    <p>Compress quote handling by bringing account history, margin guardrails, and review context into one path.</p>
   </div>
   <div className="ubik-proof">
     <div className="ubik-metric">30s</div>
     <p className="ubik-label">PO extraction</p>
-    <p>Turn PDF order packets into mapped work ready for ERP review.</p>
+    <p>Convert order packets into mapped work that an operator can check before ERP or accounting handoff.</p>
   </div>
   <div className="ubik-proof">
     <div className="ubik-metric">1</div>
     <p className="ubik-label">Daily queue</p>
-    <p>Start with priority, source context, and the next action in one place.</p>
+    <p>See priority, owner, source context, and the decision needed before a promise slips.</p>
   </div>
 </div>
 
 <div className="ubik-panel">
-  <strong>Operating principle:</strong> ubik does not replace your ERP or CRM. They stay the source of truth. ubik is the system of action above them — reads across, drafts, asks for review, writes back.
+  <strong>Operating principle:</strong> Ubik does not replace ERP, CRM, inbox, or meetings. Those remain systems of record and context. Ubik is the reviewed system of action above them: it reads across, drafts, routes, asks for review, and writes back only through approved workflows.
 </div>
 
-## Daily rhythm
+## Daily operating rhythm
 
 <div className="ubik-steps">
-  <div className="ubik-step"><span>01 · Read</span> Open the queue and review the work Ubik has prioritized.</div>
-  <div className="ubik-step"><span>02 · Check</span> Inspect the source context before making a decision.</div>
-  <div className="ubik-step"><span>03 · Approve</span> Approve, edit, assign, or reject the next action.</div>
-  <div className="ubik-step"><span>04 · Trace</span> Use the activity trail when a buyer, supplier, or internal reviewer asks what happened.</div>
+  <div className="ubik-step"><span>01 · Triage risk</span> Start with work that can affect customer promises, margin, clearance, cash timing, or supplier reliability.</div>
+  <div className="ubik-step"><span>02 · Inspect evidence</span> Check the source thread, document, meeting, task, or system field before the recommendation becomes operating state.</div>
+  <div className="ubik-step"><span>03 · Decide ownership</span> Approve, edit, assign, wait, or escalate based on who has authority to move the work.</div>
+  <div className="ubik-step"><span>04 · Leave a trail</span> Preserve what changed, who reviewed it, what moved, and what still needs a decision.</div>
 </div>
 
-## Next pages
+## Start with the right page
 
-- [Sign in](/getting-started/sign-in)
-- [Workspace basics](/getting-started/workspace-basics)
-- [How Ubik AI works](/getting-started/how-ubik-ai-works)
-- [Inquiry to shipment](/workflows/inquiry-to-shipment)
-- [Security and data](/admin/security-and-data)
+<CardGroup cols={2}>
+  <Card title="Workspace basics" icon="layout-dashboard" href="/getting-started/workspace-basics">
+    Learn the operating queue, source context, action panel, and activity trail.
+  </Card>
+  <Card title="Ask Ubik" icon="square-dot" href="/workflows/ask-ubik">
+    Ask source-backed questions about accounts, shipments, margin, owners, and promises.
+  </Card>
+  <Card title="Daily operating queue" icon="list-checks" href="/workflows/daily-operating-queue">
+    Run the day by risk and decision readiness instead of status chasing.
+  </Card>
+  <Card title="Security and data" icon="shield-check" href="/admin/security-and-data">
+    Understand how sensitive trade context, AI use, and review controls fit together.
+  </Card>
+</CardGroup>

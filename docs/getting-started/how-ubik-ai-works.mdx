@@ -1,58 +1,61 @@
 ---
 title: "How Ubik AI works"
-description: "A plain-language guide to using AI suggestions without losing operator control."
+description: "How to use AI recommendations while preserving source evidence, review authority, and operator control."
 icon: "sparkles"
 ---
 
-Ubik AI is not a replacement for an experienced operator. Think of it as a fast operating assistant that reads context, suggests the next move, and keeps the trail organized so your team can decide faster.
+Ubik AI is not an unattended operator. It is a context engine and action assistant that reads approved sources, proposes the next move, and keeps enough evidence attached for a human reviewer to decide faster.
 
 ## The right mental model
 
 | Instead of thinking... | Think... |
 | --- | --- |
-| "The AI will handle it." | "The AI will prepare it, and my team will review it." |
-| "If it sounds confident, it is correct." | "If the source context supports it, it may be ready." |
-| "AI is only for writing replies." | "AI can help prioritize, summarize, compare, draft, and explain." |
-| "Operators should check everything manually." | "Operators should check the important source context before approving." |
+| "The AI will handle it." | "The AI prepares the work; the approved owner moves it." |
+| "If it sounds confident, it is correct." | "If the source context supports it, it may be ready for review." |
+| "AI is only for writing replies." | "AI can prioritize, compare, explain, draft, route, and preserve evidence." |
+| "Operators should check everything manually." | "Operators should check the evidence that changes customer promises, margin, system state, or ownership." |
 
 ## What Ubik AI can help with
 
-- Summarize a long buyer or supplier thread.
-- Pull the likely next action into the queue.
-- Draft a buyer reply or internal handoff.
-- Compare a request against inventory, margin, or timing context.
-- Explain why an item is blocked.
-- Help managers see where work is waiting.
+- Summarize long buyer, supplier, logistics, and internal threads into decision-ready context.
+- Promote the work most likely to affect customer promises, margin, clearance, or ownership.
+- Draft buyer replies, internal handoffs, approval requests, and supplier follow-ups.
+- Compare a request against inventory, margin guardrails, account terms, and timing context.
+- Explain why an item is blocked, who owns the next move, and what evidence is missing.
+- Help managers see where work is waiting without asking every operator for a status update.
 
 ## What operators must still do
 
 <div className="ubik-panel">
-  <strong>Hand ubik different shapes of work.</strong> Drafting, comparing, summarising, prioritising, explaining — variety is what builds your workflows corpus and grows the memory across people, process, and technology. With more shape, the agent learns what your normal looks like and surfaces deviations cleanly when you graduate it to autonomous.
+  <strong>Hand Ubik different shapes of work.</strong> Drafting, comparing, summarising, prioritising, explaining - variety is what builds your workflow corpus and grows memory across people, process, and technology. With more shape, the agent learns what normal looks like and surfaces deviations cleanly when you graduate it to autonomous.
 </div>
 
-- Check the source context.
-- Confirm product, quantity, timing, and account.
-- Edit any language that sounds too generic or too firm.
-- Assign the item if another person owns the decision.
-- Reject the suggestion if the context is stale, wrong, or incomplete.
+<Accordion title="Reviewer responsibilities">
+  Check source context, account, product, quantity, timing, owner, and margin-sensitive language before approval. Assign or escalate the item when another person owns the decision.
+</Accordion>
+
+<Accordion title="When to reject the recommendation">
+  Reject when source data is stale, the recommendation cannot show evidence, internal notes leak into external copy, or the decision belongs to finance, logistics, management, or another accountable owner.
+</Accordion>
 
 ## How to ask better questions
 
-Good questions include the decision you need to make.
+Good questions name the operating decision, not just the object.
 
 | Weak ask | Better ask |
 | --- | --- |
-| "What is happening?" | "What changed in this buyer thread since yesterday?" |
-| "Can we ship?" | "What would block a partial shipment for this buyer?" |
-| "Summarize this." | "Summarize the decision, owner, deadline, and missing context." |
-| "Write reply." | "Draft a buyer reply that confirms next step without exposing internal margin." |
+| "What is happening?" | "What changed in this buyer thread since yesterday, and what decision is now waiting?" |
+| "Can we ship?" | "What would block a partial shipment for this buyer, and which promise dates would move?" |
+| "Summarize this." | "Summarize the decision, owner, deadline, evidence, and missing context." |
+| "Write reply." | "Draft a buyer reply that confirms the next step without exposing internal margin or supplier notes." |
 
 ## When not to approve
 
-Do not approve if:
-
-- Ubik cannot show the source it used.
-- The source data is old or incomplete.
-- The recommendation affects price, margin, shipment timing, or system records and you have not checked it.
-- The message includes internal notes, supplier pricing, or sensitive operational context.
-- The decision belongs to finance, logistics, management, or another owner.
+<CardGroup cols={2}>
+  <Card title="Approve" icon="check">
+    The answer has current source context, the owner is clear, sensitive details are controlled, and the action is within your authority.
+  </Card>
+  <Card title="Escalate" icon="triangle-alert">
+    The work affects price, margin, shipment timing, compliance, ERP records, or a customer promise outside your approval scope.
+  </Card>
+</CardGroup>

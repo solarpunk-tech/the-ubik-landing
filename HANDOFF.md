@@ -699,6 +699,35 @@
 
 ## Next notes
 
+- Latest docs copy and component literacy pass:
+  - Scope stayed in `docs/`; existing non-doc work in the dirty checkout was left untouched.
+  - Reframed the Mintlify guide around executive-operational trade decisions: risk, evidence, owner, approval authority, customer promise, margin exposure, source context, and review trail.
+  - Updated landing, getting-started, feature workflow, admin/security, FAQ, and coming-soon docs pages with stronger operator guidance.
+  - Reduced forced all-caps treatment in `docs/style.css`; compact mono labels remain, but step labels, prompt row labels, and status/handoff chips now read in natural title/sentence case.
+  - Added more Mintlify-native variety where useful: `CardGroup`, `Card`, and `Accordion` for operating principles, approval guidance, and review paths.
+  - Visual requirements:
+    - Layout: docs pages should keep Mintlify navigation, with Features showing pages directly and no `Surfaces` regression.
+    - Spacing: prompt tables and cards must stack cleanly on mobile without horizontal scroll.
+    - Typography: remove shouty all-caps blocks while preserving small product/status labels.
+    - Color: preserve existing Ubik blue/mono docs system.
+    - Interactions: Ask Ubik tabs remain usable and mobile optimized.
+    - Responsive behavior: 390px mobile and 1440px desktop docs pages should have no horizontal overflow.
+  - Verification:
+    - `mintlify validate` passes.
+    - `mintlify broken-links` passes.
+    - `pnpm build` passes; Vite still reports the existing large chunk warning.
+    - Browser DOM check on `http://localhost:3000/` confirmed real docs content and no visible `Surfaces`.
+    - Playwright verified docs landing, Ask Ubik, Inbox, and Workspace basics at 1440px desktop and 390px mobile with no horizontal overflow, no visible `Surfaces`, and no broad all-caps blocks.
+  - Latest evidence:
+    - Docs landing desktop: `verification/docs-literacy-index-desktop.png`
+    - Docs landing mobile: `verification/docs-literacy-index-mobile.png`
+    - Ask Ubik desktop: `verification/docs-literacy-ask-desktop.png`
+    - Ask Ubik mobile: `verification/docs-literacy-ask-mobile.png`
+    - Inbox desktop: `verification/docs-literacy-inbox-desktop.png`
+    - Inbox mobile: `verification/docs-literacy-inbox-mobile.png`
+    - Workspace basics desktop: `verification/docs-literacy-workspace-desktop.png`
+    - Workspace basics mobile: `verification/docs-literacy-workspace-mobile.png`
+
 - Latest AI monitor-layer image/model refresh:
   - Updated `/blog/ai-monitor-layer-seafood-trade` after browser comment on the Arena snapshot and image set.
   - Replaced all AI monitor article image pairs from `/Users/shubhranshujha/Downloads/blog - why AI needs a monitor layer/ubik-ai-monitor-headerB-1B-2B-3B-upscaled/`:

@@ -58,7 +58,7 @@ export const aiMonitorPost: BlogPost = {
   readingTime: "13 min read",
   template: "visual-analysis",
   featured: true,
-  ogImage: "https://theubik.com/blog/ai-monitor-layer/header-light.png",
+  ogImage: "/blog/ai-monitor-layer/header-light.png",
   heroLightImage: "/blog/ai-monitor-layer/header-light.png",
   heroDarkImage: "/blog/ai-monitor-layer/header-dark.png"
 };

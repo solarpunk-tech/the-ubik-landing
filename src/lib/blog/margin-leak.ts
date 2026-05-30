@@ -42,7 +42,7 @@ export const marginLeakPost: BlogPost = {
   readingTime: "11 min read",
   template: "visual-analysis",
   featured: true,
-  ogImage: "https://theubik.com/blog/margin-leak/header-light.png",
+  ogImage: "/blog/margin-leak/header-light.png",
   heroLightImage: "/blog/margin-leak/header-light.png",
   heroDarkImage: "/blog/margin-leak/header-dark.png"
 };

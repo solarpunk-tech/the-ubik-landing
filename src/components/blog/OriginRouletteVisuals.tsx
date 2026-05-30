@@ -215,12 +215,12 @@ export function OriginFlowMap() {
           {activeFlow ? (
             <div className="mt-5 grid gap-4 text-sm leading-6">
               <p className="font-mono text-primary">{activeFlow.metricTons.toLocaleString()} MT</p>
-              <p className="text-muted-foreground">Tariff bracket: {bracketText[activeFlow.tariffBracket]}</p>
+              <p className="text-muted-foreground">Duty-stack bracket: {bracketText[activeFlow.tariffBracket]}</p>
               <p className="text-muted-foreground">Status stamp: {activeFlow.status}</p>
             </div>
           ) : null}
           <div className="mt-6 border-t pt-4 text-xs leading-5 text-muted-foreground">
-            Line weights use the report’s supplied 2025/early-2026 origin-flow figures and desk-normalized public trade references for visual comparison.
+            Line weights use 2025/early-2026 origin-flow figures and desk-normalized public trade references for visual comparison.
           </div>
         </aside>
       </div>
@@ -251,8 +251,8 @@ export function TariffDifferentialMatrix() {
   return (
     <section className="min-w-0 border bg-card">
       <div className="border-b p-5 sm:p-6">
-        <p className="section-label">Tariff matrix</p>
-        <h2 className="mt-2 text-3xl font-semibold">Effective tariff lanes by origin and market</h2>
+        <p className="section-label">Duty-stack matrix</p>
+        <h2 className="mt-2 text-3xl font-semibold">Landed-duty exposure by origin and market</h2>
       </div>
       <div className="w-full min-w-0 overflow-x-auto">
         <table className="w-full min-w-[58rem] table-fixed border-collapse text-sm">
@@ -289,7 +289,7 @@ export function TariffDifferentialMatrix() {
                   return (
                     <td key={destination} className="border-b p-3 align-top">
                       <div className={cn("flex min-h-28 flex-col justify-between p-4", tone)}>
-                        <p className="font-mono text-2xl leading-none">{cell.effective}%</p>
+                        <p className="break-words font-mono text-xl leading-tight">{cell.label ?? `${cell.effective}%`}</p>
                         {cell.note ? <p className="mt-4 text-xs leading-5 opacity-80">{cell.note}</p> : null}
                       </div>
                     </td>
@@ -301,7 +301,7 @@ export function TariffDifferentialMatrix() {
         </table>
       </div>
       <p className="border-t p-4 text-xs leading-5 text-muted-foreground">
-        As of 7 May 2026; compiled from USITC/DataWeb-style tariff references, EU tariff/CATCH materials, Japan MAFF schedules, GCC common customs assumptions, and buyer-desk normalisation. U.S. cells show ADD/AD and CVD where provided.
+        Updated 18 May 2026; U.S. cells are modeled as duty stacks, not single country tariffs. Base MFN duty can be 0% for common raw frozen shrimp lines, while Section 122 status, trade-framework implementation, AD/CVD cash deposits, China Section 301 exposure, and product-specific carveouts can still change importer cash cost.
       </p>
     </section>
   );

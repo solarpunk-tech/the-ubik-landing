@@ -76,8 +76,9 @@ export default function Index() {
   return (
     <PageShell>
       <Seo
-        title="Ubik — Personalised Workspace for Perishable Trade"
-        description="Ubik is a personalised workspace for seafood importers, exporters, and processors. $700M+ in customer aggregate revenue. 20x faster RFQ cycles. SOC 2 Type II audit in progress."
+        title="Ubik | Decision Intelligence for Trade Operations"
+        description="Ubik is a personalised workspace for seafood importers, exporters, and processors. $25Mn+ in customer aggregate revenue. 100+ containers. SOC 2 Type II audit in progress."
+        image="/og-image.png"
       />
       <JsonLd
         data={[
@@ -175,9 +176,14 @@ export default function Index() {
               <h2 className="text-3xl font-semibold sm:text-4xl">
                 See one workflow move through the loop.
               </h2>
-              <p className="text-muted-foreground">
-                A large vertically integrated seafood conglomerate compressed RFQ cycles from 5-7 days to 6 hours. A US processor moved PO processing from manual work to 30-second extraction. Each loop captures signal, matches context, prepares one reviewed action.
-              </p>
+              <div className="space-y-3 text-muted-foreground">
+                <p>
+                  A large frozen food operator compressed RFQ cycles from 5-7 days to 6 hours.
+                </p>
+                <p>
+                  A U.S. processor moved PO processing from manual work to 30-second extraction. Each loop captures signal, matches context, and prepares one reviewed action.
+                </p>
+              </div>
               <Button asChild variant="outline" className="w-fit">
                 <Link to="/how-it-works">
                   Open full walkthrough <ArrowRightIcon data-icon="inline-end" />

@@ -25,6 +25,7 @@ export function Seo({ title, description, canonical = "https://theubik.com/", im
     setMeta('meta[name="twitter:description"]', "content", description);
     if (image) {
       setMeta('meta[property="og:image"]', "content", image);
+      setMeta('meta[name="twitter:image"]', "content", image);
     }
     document.querySelector('link[rel="canonical"]')?.setAttribute("href", canonical);
   }, [canonical, description, image, title, type]);

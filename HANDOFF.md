@@ -14,12 +14,17 @@
 
 - Homepage browser-comment correction:
   - hero keeps the Landing V2 layout/copy direction but uses the original matrix background seed,
-  - hero headline now highlights `Trade Operations`; hero lede now says `frozen food` and highlights `frozen food`, `$300M+`, and `20,000+ containers`,
+  - hero headline now reads `Decision Intelligence for Trade Operations`; hero lede now says `frozen food` and highlights `frozen food`, `$25Mn+`, and `100+ containers`,
   - the over-copied Landing V2 `What Ubik does` primitives section was removed,
   - the original compact homepage `How it works` section was restored above Security,
   - Landing V2 `Wherever your work already lives` tools grid now sits below the restored `How it works` section,
   - FAQ is followed by a moving company-logo strip for experienced supply-chain operators, builders, and ex-founders,
   - header/download naming changed from `Ubik Local` to `Ubik Meetings`; the header item is now in the nav row with hover icon swap and no bordered secondary CTA treatment.
+- Social preview and share copy:
+  - `og:title`, `twitter:title`, and share text now use `|` instead of em dashes,
+  - homepage OG screenshots were regenerated to `public/og-image.png`,
+  - security note OG screenshots were regenerated to `public/security/og-image.png`,
+  - article OG image URLs now use local public paths so blog previews resolve in this repo and in production.
 - Tool/integration logos in the hero queue, tools grid, workflow evidence, and new company strip use Google favicon URLs (`https://www.google.com/s2/favicons?...`) to match the requested icon approach.
 - Landing page, `/try`, `/security`, `/privacy-policy`, and `/terms-of-service` are React routes.
 - `/security` is a CTO-specific memo with the CTA "Share this with your tech team".
@@ -44,6 +49,7 @@
 
 - `pnpm lint` passes.
 - `pnpm build` passes.
+- Homepage and security note OG screenshots now exist at `public/og-image.png` and `public/security/og-image.png`.
 - Latest browser-comment visual verification captured after this correction:
   - `verification/landing-comments-desktop.png`
   - `verification/landing-comments-mobile.png`

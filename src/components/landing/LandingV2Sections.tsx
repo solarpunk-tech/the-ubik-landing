@@ -434,9 +434,7 @@ export function LandingV2Hero() {
           </div>
 
           <h1 className="mt-5 text-5xl font-semibold leading-[0.98] text-foreground sm:text-6xl lg:text-[4.5rem]">
-            Self-Evolving
-            <br />
-            Workspace
+            Decision Intelligence
             <br />
             for <span className="text-primary">Trade Operations</span>
           </h1>
@@ -444,8 +442,8 @@ export function LandingV2Hero() {
           <p className="mt-5 max-w-[32rem] text-base leading-[1.55] text-muted-foreground sm:text-lg">
             Built to automate decision making for{" "}
             <span className="font-semibold text-primary">frozen food</span> importers, exporters moving{" "}
-            <span className="font-semibold text-primary">$300M+</span> or{" "}
-            <span className="font-semibold text-primary">20,000+ containers</span> a year
+            <span className="font-semibold text-primary">$25Mn+</span> or{" "}
+            <span className="font-semibold text-primary">100+ containers</span> a year
           </p>
 
           <div className="mt-7 flex flex-wrap gap-2.5">

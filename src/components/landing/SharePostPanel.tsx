@@ -30,7 +30,7 @@ export function SharePostPanel({ title, url = "https://theubik.com/blog" }: Shar
     return () => window.clearTimeout(timer);
   }, [copied]);
 
-  const shareText = `${title} — ${url}`;
+  const shareText = `${title} | ${url}`;
 
   const track = (channel: string) => trackEvent("blog_shared", { channel, title, url });
 

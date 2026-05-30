@@ -100,7 +100,7 @@ function ArticleShell({ post, children }: ArticleShellProps) {
   return (
     <PageShell>
       <Seo
-        title={`${post.seoTitle} — Ubik Trade Notes`}
+        title={`${post.seoTitle} | Ubik Trade Notes`}
         description={post.seoDescription}
         canonical={post.canonical}
         image={post.ogImage}
@@ -337,7 +337,7 @@ function BlogNotFound() {
   return (
     <PageShell>
       <Seo
-        title="Trade Note not found — Ubik"
+        title="Trade Note not found | Ubik"
         description="The requested Ubik Trade Note could not be found."
         canonical="https://theubik.com/blog"
       />

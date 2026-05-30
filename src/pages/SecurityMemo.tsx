@@ -126,6 +126,7 @@ export default function SecurityMemo() {
         title="Ubik Security Note for Seafood Operators"
         description="A client-facing trust note for seafood importers, exporters, processors, and their customers."
         canonical="https://theubik.com/security"
+        image="/security/og-image.png"
       />
       <main className="relative overflow-hidden">
         <MatrixField variant="security" density="high" seed="client-trust-note" />

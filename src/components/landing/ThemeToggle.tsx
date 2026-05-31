@@ -22,7 +22,7 @@ export function ThemeToggle({ className, showLabels = false }: ThemeToggleProps)
       title={`Switch to ${nextThemeLabel}`}
       onClick={() => setTheme(nextTheme)}
       className={cn(
-        "inline-flex h-9 items-center justify-center gap-2 border border-border bg-background/75 px-3 text-sm font-medium text-muted-foreground transition-colors hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        "inline-flex h-9 items-center justify-center gap-2 border border-border bg-background/75 px-3 text-sm font-medium text-foreground/72 dark:text-foreground/82 transition-colors hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         showLabels ? "w-full justify-between" : "size-9 px-0",
         className
       )}
@@ -31,7 +31,7 @@ export function ThemeToggle({ className, showLabels = false }: ThemeToggleProps)
       {showLabels ? (
         <span className="flex flex-1 items-center justify-between gap-3">
           <span>Theme</span>
-          <span className="text-xs uppercase text-muted-foreground">{activeTheme}</span>
+          <span className="text-xs uppercase text-foreground/72 dark:text-foreground/82">{activeTheme}</span>
         </span>
       ) : null}
     </button>

@@ -51,7 +51,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
           <Link to="/" aria-label="Ubik home" className="inline-flex min-[430px]:hidden">
             <BrandLogo compact />
           </Link>
-          <nav className="hidden items-center gap-4 text-sm text-muted-foreground lg:flex">
+          <nav className="hidden items-center gap-4 text-sm text-foreground/72 dark:text-foreground/82 lg:flex">
             {navItems.map((item) =>
               "href" in item ? (
                 <a key={item.href} href={item.href} className="nav-link">
@@ -79,7 +79,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
               aria-label="Select language"
               value={selectedLanguage}
               onChange={(event) => handleLanguageChange(event.target.value)}
-              className="hidden h-8 border bg-background px-2 text-xs text-muted-foreground sm:block"
+              className="hidden h-8 border bg-background px-2 text-xs text-foreground/72 dark:text-foreground/82 sm:block"
             >
               {supportedLanguages.map((lang) => (
                 <option key={lang} value={lang}>
@@ -144,7 +144,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
         <div className="container-page grid gap-8 py-10 md:grid-cols-[1fr_auto_1fr] md:items-center">
           <BrandLogo />
           <SolarpunkCredit />
-          <nav className="flex flex-wrap gap-4 text-sm text-muted-foreground md:justify-self-end">
+          <nav className="flex flex-wrap gap-4 text-sm text-foreground/72 dark:text-foreground/82 md:justify-self-end">
             <a href={externalLinks.docs}>{t("nav.guide", { defaultValue: "Guide" })}</a>
             <Link to="/privacy-policy">{t("nav.privacy", { defaultValue: "Privacy" })}</Link>
             <Link to="/terms-of-service">{t("nav.terms", { defaultValue: "Terms" })}</Link>

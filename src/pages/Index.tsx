@@ -61,7 +61,7 @@ function CompanyLogoTicker() {
                     className="size-8 object-contain"
                     loading="lazy"
                   />
-                  <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-muted-foreground">{company.label}</span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-foreground/72 dark:text-foreground/82">{company.label}</span>
                 </div>
               ))}
             </div>
@@ -77,8 +77,9 @@ export default function Index() {
     <PageShell>
       <Seo
         title="Ubik | Decision Intelligence for Trade Operations"
-        description="Ubik is a personalised workspace for seafood importers, exporters, and processors. $25Mn+ in customer aggregate revenue. 100+ containers. SOC 2 Type II audit in progress."
+        description="Ubik is a decision intelligence workspace for frozen food importers, exporters, and processors. $25Mn+ in customer aggregate revenue. 100+ containers. SOC 2 Type II audit in progress."
         image="/og-image.png"
+        imageAlt="Ubik homepage preview for frozen food trade operations"
       />
       <JsonLd
         data={[
@@ -94,10 +95,10 @@ export default function Index() {
             "@type": "SoftwareApplication",
             name: "Ubik",
             applicationCategory: "BusinessApplication",
-            applicationSubCategory: "Personalised workspace for perishable trade",
+            applicationSubCategory: "Decision intelligence workspace for perishable trade",
             operatingSystem: "Web",
             description:
-              "Personalised workspace for perishable trade. Built for seafood importers, exporters, and processors. Compresses RFQ cycles 20x, recovers margin from RFQ leakage, with SOC 2 Type II audit in progress.",
+              "Decision intelligence workspace for perishable trade. Built for frozen food importers, exporters, and processors. Compresses RFQ cycles 20x, recovers margin from RFQ leakage, with SOC 2 Type II audit in progress.",
             offers: [
               { "@type": "Offer", name: "Base", price: "100", priceCurrency: "USD", description: "Monthly personal AI workspace with Ubik Meetings included" },
               { "@type": "Offer", name: "Base Annual", price: "85", priceCurrency: "USD", description: "Annual Base price per month, billed annually" },
@@ -145,7 +146,7 @@ export default function Index() {
               <h2 className="text-3xl font-semibold sm:text-4xl">
                 Enterprise-grade trust. Operator-friendly defaults.
               </h2>
-              <p className="text-muted-foreground">
+              <p className="text-foreground/72 dark:text-foreground/82">
                 SOC 2 Type II audit in progress, GDPR, ISO 27001. EU and APAC data residency. Your RFQs, supplier pricing, and margins never become training input for any third-party model.
               </p>
               <Button asChild variant="outline" className="w-fit">
@@ -161,7 +162,7 @@ export default function Index() {
                     <Icon className="text-primary" aria-hidden />
                     <CardTitle>{title}</CardTitle>
                   </CardHeader>
-                  <CardContent className="text-sm leading-6 text-muted-foreground">{copy}</CardContent>
+                  <CardContent className="text-sm leading-6 text-foreground/72 dark:text-foreground/82">{copy}</CardContent>
                 </Card>
               ))}
             </div>
@@ -176,7 +177,7 @@ export default function Index() {
               <h2 className="text-3xl font-semibold sm:text-4xl">
                 See one workflow move through the loop.
               </h2>
-              <div className="space-y-3 text-muted-foreground">
+              <div className="space-y-3 text-foreground/72 dark:text-foreground/82">
                 <p>
                   A large frozen food operator compressed RFQ cycles from 5-7 days to 6 hours.
                 </p>
@@ -210,7 +211,7 @@ export default function Index() {
                   {compareBacklink.label}
                   <span className="text-primary"> →</span>
                 </h2>
-                <p className="text-sm text-muted-foreground sm:max-w-xs sm:text-right">
+                <p className="text-sm text-foreground/72 dark:text-foreground/82 sm:max-w-xs sm:text-right">
                   Different category. Picks the right model per task, fine-tuned for your ERPs, CRMs and workflows.
                 </p>
               </div>
@@ -224,8 +225,8 @@ export default function Index() {
             <div>
               <Badge variant="secondary" className="mb-4">FAQ</Badge>
               <h2 className="text-3xl font-semibold">Answers for buyers, security reviewers, and investors.</h2>
-              <p className="mt-3 max-w-lg text-muted-foreground">
-                Specific answers, real customer numbers, no jargon. The questions seafood operators and CTOs actually ask before signing.
+              <p className="mt-3 max-w-lg text-foreground/72 dark:text-foreground/82">
+                Specific answers, real customer numbers, no jargon. The questions frozen food operators and CTOs actually ask before signing.
               </p>
             </div>
             <Accordion type="single" collapsible className="w-full">
@@ -233,7 +234,7 @@ export default function Index() {
                 <AccordionItem key={question} value={question}>
                   <AccordionTrigger>{question}</AccordionTrigger>
                   <AccordionContent>
-                    <div className="max-w-3xl border-l border-border pl-4 text-sm leading-7 text-muted-foreground">
+                    <div className="max-w-3xl border-l border-border pl-4 text-sm leading-7 text-foreground/72 dark:text-foreground/82">
                       <div className="grid gap-3 text-pretty">
                         {(paragraphs ?? [answer]).map((paragraph) => (
                           <p key={paragraph}>{paragraph}</p>
@@ -270,7 +271,7 @@ export default function Index() {
         <BlogPreview />
 
         <section className="container-page section-y">
-          <Card className="relative overflow-hidden border-primary/30 bg-primary text-primary-foreground">
+          <Card className="relative overflow-hidden border-primary/30 bg-primary text-primary-foreground dark:bg-[hsl(227_82%_58%)]">
             <MatrixField variant="cta" density="high" seed="cta-blue-sweep" />
             <CardContent className="relative z-10 grid gap-8 p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center lg:p-10">
               <div>
@@ -280,17 +281,17 @@ export default function Index() {
                 <h2 className="max-w-3xl text-3xl font-semibold sm:text-4xl">
                   Pick one workflow. See it live in 4 weeks.
                 </h2>
-                <p className="mt-4 max-w-2xl text-primary-foreground/85">
+                <p className="mt-4 max-w-2xl text-primary-foreground/92">
                   Start with RFQ to quote, PO ingestion, transit-aware scheduling, or lot traceability. If you don't see ROI in 90 days, we work for free until you do.
                 </p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-                <Button asChild variant="secondary" size="lg" className="text-primary">
+                <Button asChild variant="secondary" size="lg" className="border-black bg-black text-white hover:bg-black/88 dark:border-black dark:bg-black dark:text-white dark:hover:bg-neutral-900">
                   <a href={externalLinks.app} onClick={() => trackEvent("cta_clicked", { cta: "try_ubik", location: "cta_section" })}>
                     Try Ubik Now <ArrowRightIcon data-icon="inline-end" />
                   </a>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="border-primary-foreground/35 bg-transparent text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+                <Button asChild variant="outline" size="lg" className="border-white/80 bg-white text-black hover:bg-white/90 hover:text-black dark:border-white dark:bg-white dark:text-black dark:hover:bg-white/90">
                   <a href={externalLinks.founderMeeting} onClick={() => trackEvent("cta_clicked", { cta: "talk_to_founders", location: "cta_section" })}>Talk to founders</a>
                 </Button>
               </div>

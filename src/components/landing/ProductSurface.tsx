@@ -92,7 +92,7 @@ export function ProductSurface() {
                   )}
                   <div>
                     <p className="font-medium">{item.label}</p>
-                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.value}</p>
+                    <p className="mt-2 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{item.value}</p>
                   </div>
                 </div>
               </div>

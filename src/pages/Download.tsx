@@ -99,7 +99,7 @@ export default function Download() {
                 <br />
                 Just a few steps left.
               </h1>
-              <p className="text-base text-muted-foreground sm:text-lg">
+              <p className="text-base text-foreground/72 dark:text-foreground/82 sm:text-lg">
                 Your download will begin automatically. If it didn{"’"}t start,{" "}
                 <a
                   href={os === "windows" ? links.windows : links.mac_arm64}
@@ -164,13 +164,13 @@ export default function Download() {
                       {n}
                     </div>
                     <h2 className="mt-4 text-lg font-semibold">{title}</h2>
-                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{copy}</p>
+                    <p className="mt-2 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{copy}</p>
                   </div>
                 ))}
               </div>
             ) : null}
 
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-foreground/72 dark:text-foreground/82">
               {links.loading ? "Loading…" : `Version ${links.version}`} · Detected: {os === "mac" ? "macOS" : "Windows"}
             </p>
           </div>
@@ -179,7 +179,7 @@ export default function Download() {
         <section className="container-page section-y">
           <div className="mb-10 flex max-w-5xl flex-col gap-3">
             <h2 className="text-3xl font-semibold sm:text-4xl">Your local bridge for intelligence.</h2>
-            <p className="text-muted-foreground lg:whitespace-nowrap">
+            <p className="text-foreground/72 dark:text-foreground/82 lg:whitespace-nowrap">
               Ubik Meetings captures useful computer context and sends only reviewed trade signals into Ubik.
             </p>
           </div>
@@ -188,7 +188,7 @@ export default function Download() {
               <div key={title} className="bg-background p-6">
                 <p className="section-label">Coming soon</p>
                 <h3 className="mt-4 text-xl font-semibold">{title}</h3>
-                <p className="mt-3 text-sm leading-6 text-muted-foreground">{copy}</p>
+                <p className="mt-3 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{copy}</p>
               </div>
             ))}
           </div>

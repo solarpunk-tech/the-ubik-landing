@@ -22,13 +22,13 @@ export function BlogPreview() {
           ) : null}
           <div className="grid gap-px bg-border lg:grid-cols-[0.42fr_0.58fr]">
             <div className="bg-card p-5 sm:p-6">
-              <p className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
+              <p className="text-xs uppercase tracking-[0.14em] text-foreground/72 dark:text-foreground/82">
                 {featured.date} / {featured.category}
               </p>
               <h3 className="mt-6 max-w-xl text-3xl font-semibold">{featured.title}</h3>
             </div>
             <div className="bg-card p-5 sm:p-6">
-              <p className="max-w-3xl text-base leading-7 text-muted-foreground">{featured.excerpt}</p>
+              <p className="max-w-3xl text-base leading-7 text-foreground/72 dark:text-foreground/82">{featured.excerpt}</p>
               <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary">
                 Open latest field note <ArrowRightIcon aria-hidden />
               </span>

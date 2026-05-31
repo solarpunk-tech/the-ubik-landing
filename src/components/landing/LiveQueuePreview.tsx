@@ -130,7 +130,7 @@ export function LiveQueuePreview() {
                   })}
                 </div>
                 <p className="font-medium">{row.title}</p>
-                <p className={cn("text-sm", active ? "text-primary-foreground" : "text-muted-foreground")}>{row.copy}</p>
+                <p className={cn("text-sm", active ? "text-primary-foreground" : "text-foreground/72 dark:text-foreground/82")}>{row.copy}</p>
               </div>
               <Badge variant={active ? "secondary" : "outline"}>{action}</Badge>
             </div>

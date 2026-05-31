@@ -25,6 +25,10 @@
   - homepage OG screenshots were regenerated to `public/og-image.png`,
   - security note OG screenshots were regenerated to `public/security/og-image.png`,
   - article OG image URLs now use local public paths so blog previews resolve in this repo and in production.
+- Homepage SEO refresh:
+  - root meta description, OG description, Twitter description, keywords, and JSON-LD now say `frozen food` instead of `seafood`,
+  - `og:image:alt` and `twitter:image:alt` are now set explicitly through the SEO helper and root HTML,
+  - homepage hero badge and supporting copy now say `Global Frozen Food` so the social preview image matches the page.
 - Tool/integration logos in the hero queue, tools grid, workflow evidence, and new company strip use Google favicon URLs (`https://www.google.com/s2/favicons?...`) to match the requested icon approach.
 - Landing page, `/try`, `/security`, `/privacy-policy`, and `/terms-of-service` are React routes.
 - `/security` is a CTO-specific memo with the CTA "Share this with your tech team".
@@ -756,6 +760,28 @@
     - Before evidence: `verification/ai-monitor-before-mobile.png`, `verification/ai-monitor-before-desktop.png`.
     - After evidence: `verification/ai-monitor-after-mobile-light.png`, `verification/ai-monitor-after-desktop-light.png`, `verification/ai-monitor-after-mobile-dark.png`, `verification/ai-monitor-after-desktop-dark.png`.
     - Follow-up mobile leaderboard evidence: `verification/ai-monitor-leaderboard-mobile-accordion-default.png`, `verification/ai-monitor-leaderboard-mobile-accordion-workflow.png`, `verification/ai-monitor-leaderboard-mobile-accordion-cost.png`.
+
+- Latest site-wide typography parity and brand dossier pass:
+  - Scope covered the public React site, not the separate Mintlify docs deployment.
+  - Strengthened shared muted/readable text behavior across theme tokens, cards, tabs, badges, accordions, dialogs, sheets, route pages, landing sections, and blog visual components.
+  - Fixed the annotated homepage dark-mode surfaces: integration-grid labels under icons now render as semibold high-contrast mono labels, and the blue CTA panel now uses black primary CTA with white text plus a white secondary CTA with black text.
+  - Updated public metadata/title separators away from em dashes on routed page SEO titles and aligned security/pricing/landing category language to frozen food.
+  - Added `BRAND_UI_CREATIVE_SYSTEM.md` as the root creative direction, UI, content, SEO, and future-regression reference for the entire public site.
+  - Visual requirements:
+    - Layout: preserve existing square grid, border, matrix, and component grammar across all pages.
+    - Spacing: do not introduce horizontal overflow or clipped CTA text on mobile.
+    - Typography: readable copy uses foreground tints, mono labels stay intentional, and legal/editorial dense text remains scannable.
+    - Color: dark-mode text should not collapse into grey on neutral, card, or blue surfaces.
+    - Interactions: shared buttons, tabs, accordions, mobile sheet, and footer/header chrome preserve clear hierarchy.
+    - Responsive behavior: 599px captures for all public routes should show no horizontal overflow.
+  - Verification:
+    - `pnpm build` passes; Vite still reports the existing large chunk warning.
+    - `pnpm lint` passes with existing Fast Refresh warnings from EvilCharts generated helper exports.
+    - Playwright checked `/`, `/pricing`, `/how-it-works`, `/try`, `/security`, `/blog`, `/blog/ai-monitor-layer-seafood-trade`, `/download`, `/privacy-policy`, and `/terms-of-service` in light and dark at 599px with no horizontal overflow.
+  - Latest evidence:
+    - Route screenshots directory: `verification/typography-parity-2026-05-31/`
+    - Annotated tools-grid fix: `verification/typography-parity-2026-05-31/dark-home-tools-grid-target.png`
+    - Annotated CTA fix: `verification/typography-parity-2026-05-31/dark-home-cta-target.png`
 
 - Final legal review remains needed for the privacy/terms draft before relying on it in production.
 - If final logo filenames change, update only `src/lib/brand.ts`.

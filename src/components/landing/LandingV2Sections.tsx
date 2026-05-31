@@ -395,7 +395,7 @@ const railSteps: RailStep[] = [
 ];
 
 function SectionEyebrow({ children }: { children: ReactNode }) {
-  return <span className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-muted-foreground">{children}</span>;
+  return <span className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-foreground/72 dark:text-foreground/82">{children}</span>;
 }
 
 function FaviconImg({ src, alt = "" }: { src: string; alt?: string }) {
@@ -428,9 +428,9 @@ export function LandingV2Hero() {
       <MatrixField variant="hero" density="high" seed="ubik-hero-po-to-order" />
       <div className="container-page relative z-10 grid min-h-[calc(100svh-4rem)] items-center gap-10 py-14 lg:grid-cols-[1fr_1.15fr] lg:py-18">
         <div>
-          <div className="inline-flex items-center gap-2 border bg-background px-2.5 py-1.5 font-mono text-[11px] tracking-[0.04em] text-muted-foreground shadow-sm">
+          <div className="inline-flex items-center gap-2 border bg-background px-2.5 py-1.5 font-mono text-[11px] tracking-[0.04em] text-foreground/72 dark:text-foreground/82 shadow-sm">
             <FishIcon className="size-3 text-primary" weight="regular" />
-            <span>Live for Global Seafood</span>
+            <span>Live for Global Frozen Food</span>
           </div>
 
           <h1 className="mt-5 text-5xl font-semibold leading-[0.98] text-foreground sm:text-6xl lg:text-[4.5rem]">
@@ -439,7 +439,7 @@ export function LandingV2Hero() {
             for <span className="text-primary">Trade Operations</span>
           </h1>
 
-          <p className="mt-5 max-w-[32rem] text-base leading-[1.55] text-muted-foreground sm:text-lg">
+          <p className="mt-5 max-w-[32rem] text-base leading-[1.55] text-foreground/72 dark:text-foreground/82 sm:text-lg">
             Built to automate decision making for{" "}
             <span className="font-semibold text-primary">frozen food</span> importers, exporters moving{" "}
             <span className="font-semibold text-primary">$25Mn+</span> or{" "}
@@ -463,7 +463,7 @@ export function LandingV2Hero() {
         <div className="border bg-card shadow-lg">
           <div className="flex items-center justify-between gap-4 border-b bg-shell px-[1.125rem] py-[0.875rem]">
             <h4 className="text-[13px] font-semibold">Operating queue · tuesday 09:14 ist</h4>
-            <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.06em] text-muted-foreground before:size-1.5 before:animate-pulse before:bg-green-500 before:content-['']">
+            <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.06em] text-foreground/72 dark:text-foreground/82 before:size-1.5 before:animate-pulse before:bg-green-500 before:content-['']">
               live
             </span>
           </div>
@@ -484,7 +484,7 @@ export function LandingV2Hero() {
                   </span>
                   <div>
                     <div className="text-[13px] font-medium leading-[1.35]">{row.title}</div>
-                    <div className={cn("mt-0.5 flex items-center gap-2 font-mono text-[10px] tracking-[0.04em]", active ? "text-primary-foreground/95" : "text-muted-foreground")}>
+                    <div className={cn("mt-0.5 flex items-center gap-2 font-mono text-[10px] tracking-[0.04em]", active ? "text-primary-foreground/95" : "text-foreground/72 dark:text-foreground/82")}>
                       {row.metaIcons?.map((icon) => <FaviconImg key={icon} src={icon} />)}
                       <span>{row.meta}</span>
                     </div>
@@ -502,7 +502,7 @@ export function LandingV2Hero() {
               <span className="size-1.5 animate-pulse bg-primary" />
               <span>ubik · drafting buyer reply · {thinkTime.toFixed(1)}s</span>
             </span>
-            <span className="font-mono text-[10px] tracking-[0.04em] text-muted-foreground">auto-refresh · 12s</span>
+            <span className="font-mono text-[10px] tracking-[0.04em] text-foreground/72 dark:text-foreground/82">auto-refresh · 12s</span>
           </div>
         </div>
       </div>
@@ -522,7 +522,7 @@ export function LandingV2ToolsSection() {
               Wherever your work already <span className="text-primary">lives.</span>
             </h2>
           </div>
-          <p className="text-[15px] leading-[1.6] text-muted-foreground">
+          <p className="text-[15px] leading-[1.6] text-foreground/72 dark:text-foreground/84">
             Connect to your stack and stop switching apps for work. We read state, draft, take action while you
             monitor.
           </p>
@@ -530,12 +530,12 @@ export function LandingV2ToolsSection() {
 
         <div className="grid grid-cols-4 gap-px border bg-border sm:grid-cols-6 lg:grid-cols-8 xl:grid-cols-12">
           {integrationTools.map(([label, domain]) => (
-            <div key={label} className="flex flex-col items-center gap-2 bg-card px-3 py-4 transition-transform duration-150 hover:-translate-y-0.5 hover:bg-accent">
+            <div key={label} className="flex flex-col items-center gap-2 bg-card px-3 py-4 transition-transform duration-150 hover:-translate-y-0.5 hover:bg-shell dark:hover:bg-muted/70">
               <img src={favicon(domain)} alt="" className="size-[22px]" loading="lazy" />
-              <span className="font-mono text-[9px] uppercase tracking-[0.06em] text-muted-foreground">{label}</span>
+              <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.08em] text-foreground/74 dark:text-foreground">{label}</span>
             </div>
           ))}
-          <div className="flex items-center justify-center bg-card px-3 py-4 font-mono text-[10px] text-muted-foreground">
+          <div className="flex items-center justify-center bg-card px-3 py-4 font-mono text-[10px] font-semibold text-foreground/74 dark:text-foreground">
             + <b className="ml-1 text-foreground">120</b>
           </div>
         </div>
@@ -562,7 +562,7 @@ function RailStepPanel({ item }: { item: RailStep }) {
     <div className="grid gap-6 md:grid-cols-[1.2fr_1fr] md:gap-8">
       <div>
         <h4 className="mb-2 text-2xl font-semibold">{item.heading}</h4>
-        <div className="max-w-[34rem] space-y-4 text-[14px] leading-[1.6] text-muted-foreground">
+        <div className="max-w-[34rem] space-y-4 text-[14px] leading-[1.6] text-foreground/72 dark:text-foreground/82">
           {item.paragraphs.map((paragraph, index) => (
             <p key={index}>{paragraph}</p>
           ))}
@@ -571,7 +571,7 @@ function RailStepPanel({ item }: { item: RailStep }) {
           {item.chips.map((chip) => (
             <span
               key={chip.label}
-              className="inline-flex items-center gap-1.5 border bg-card px-2.5 py-[0.3rem] font-mono text-[10px] uppercase tracking-[0.06em] text-muted-foreground"
+              className="inline-flex items-center gap-1.5 border bg-card px-2.5 py-[0.3rem] font-mono text-[10px] uppercase tracking-[0.06em] text-foreground/72 dark:text-foreground/82"
             >
               {chip.kind === "img" ? (
                 <img src={chip.src} alt="" className="size-3.5" loading="lazy" />
@@ -598,7 +598,7 @@ function RailStepPanel({ item }: { item: RailStep }) {
           )}
           <div>
             <div className="text-[13px] font-medium">{item.vizRow.title}</div>
-            <div className="font-mono text-[10px] tracking-[0.04em] text-muted-foreground">{item.vizRow.meta}</div>
+            <div className="font-mono text-[10px] tracking-[0.04em] text-foreground/72 dark:text-foreground/82">{item.vizRow.meta}</div>
           </div>
           <span className={cn("font-mono text-[12px] font-semibold", railStatToneClasses[item.vizRow.statTone ?? "default"])}>
             {item.vizRow.stat}
@@ -607,7 +607,7 @@ function RailStepPanel({ item }: { item: RailStep }) {
 
         {item.memoryRows ? (
           <div className="flex flex-col gap-1.5 border bg-shell px-3 py-2.5">
-            <div className="mb-0.5 font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground">
+            <div className="mb-0.5 font-mono text-[9px] uppercase tracking-[0.1em] text-foreground/72 dark:text-foreground/82">
               memory · 3 sources recalled
             </div>
             {item.memoryRows.map((row) => (
@@ -646,7 +646,7 @@ export function LandingV2HowSection() {
               A whole shipment, <span className="text-primary">one morning</span>, six handoffs.
             </h2>
           </div>
-          <p className="text-[15px] leading-[1.6] text-muted-foreground">
+          <p className="text-[15px] leading-[1.6] text-foreground/72 dark:text-foreground/82">
             Scrub the rail to walk through a real Tuesday. Buyer email arrives at 9:14. Quote sent and audit-logged by
             14:22. <b className="font-medium text-foreground">Six explicit handoffs.</b> Every one human-reviewed.
           </p>
@@ -665,7 +665,7 @@ export function LandingV2HowSection() {
                     index === activeStep && "border-t-primary bg-shell"
                   )}
                 >
-                  <div className="font-mono text-[10px] font-medium tracking-[0.06em] text-muted-foreground">{item.time}</div>
+                  <div className="font-mono text-[10px] font-medium tracking-[0.06em] text-foreground/72 dark:text-foreground/82">{item.time}</div>
                   <div className="mt-1 text-[12px] font-medium leading-[1.4]">{item.title}</div>
                 </button>
                 {index === activeStep ? (
@@ -689,7 +689,7 @@ export function LandingV2HowSection() {
                   index === activeStep && "bg-shell border-t-primary"
                 )}
               >
-                <div className="font-mono text-[10px] font-medium tracking-[0.06em] text-muted-foreground">{item.time}</div>
+                <div className="font-mono text-[10px] font-medium tracking-[0.06em] text-foreground/72 dark:text-foreground/82">{item.time}</div>
                 <div className="mt-1 text-[12px] font-medium leading-[1.4]">{item.title}</div>
               </button>
             ))}
@@ -746,9 +746,9 @@ export function LandingV2WhatUbikDoes() {
               The operator layer above your <span className="text-primary">ERP, CRM, email, and WhatsApp.</span>
             </h2>
           </div>
-          <p className="text-[15px] leading-[1.6] text-muted-foreground">
-            Five seafood-native workflow primitives. In production with importers, exporters, and processors moving
-            $300M+ a year. <b className="font-medium text-foreground">Every action human-reviewed before it moves.</b>
+          <p className="text-[15px] leading-[1.6] text-foreground/72 dark:text-foreground/82">
+            Five frozen food workflow primitives. In production with importers, exporters, and processors moving
+            $25Mn+ or 100+ containers a year. <b className="font-medium text-foreground">Every action human-reviewed before it moves.</b>
           </p>
         </div>
 
@@ -759,10 +759,10 @@ export function LandingV2WhatUbikDoes() {
                 <span className="inline-flex size-9 items-center justify-center border bg-muted text-primary">
                   <item.icon className="size-[18px]" />
                 </span>
-                <span className="ml-auto font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">{item.num}</span>
+                <span className="ml-auto font-mono text-[10px] uppercase tracking-[0.12em] text-foreground/72 dark:text-foreground/82">{item.num}</span>
               </div>
               <h3 className="text-[1.0625rem] font-semibold tracking-[-0.018em]">{item.title}</h3>
-              <p className="text-[13px] leading-[1.6] text-muted-foreground">{item.body}</p>
+              <p className="text-[13px] leading-[1.6] text-foreground/72 dark:text-foreground/82">{item.body}</p>
               <span className="mt-2 inline-flex items-center border-l-2 border-primary bg-shell px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.06em] text-primary">
                 {item.handoff}
               </span>

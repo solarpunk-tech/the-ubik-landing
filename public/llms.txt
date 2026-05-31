@@ -1,16 +1,16 @@
 # Ubik
 
-> Ubik is an AI operating workspace for perishable trade operators, starting with seafood importers, exporters and processors.
+> Ubik is a decision intelligence workspace for frozen food trade operators, starting with importers, exporters and processors.
 
 Ubik connects to email, WhatsApp, ERP, CRM, documents, meetings and market intelligence sources, then runs memory workflows and agents for trade operations.
 
 ## Core positioning
 
-- AI operating workspace for perishable trade
-- Built for seafood importers, exporters, processors and frozen-food operators
+- Decision intelligence workspace for perishable trade
+- Built for frozen food importers, exporters and processors
 - Combines web workspace, local desktop context, memory workflows, market intelligence and enterprise-grade automation
 - Designed for RFQ-to-quote, PO ingestion, VMI, margin protection, traceability and operational intelligence
-- Built by operators from seafood, supply chain and AI-native product teams
+- Built by operators from frozen food, supply chain and AI-native product teams
 
 ## Product
 
@@ -23,11 +23,11 @@ Ubik connects to email, WhatsApp, ERP, CRM, documents, meetings and market intel
 
 ## Buyers
 
-Ubik is for seafood importers, exporters, processors and frozen-food operators who manage trade across email, WhatsApp, spreadsheets, ERP and CRM systems.
+Ubik is for frozen food importers, exporters and processors who manage trade across email, WhatsApp, spreadsheets, ERP and CRM systems.
 
 Primary ICP:
-- $40M to $400M+ annual revenue
-- 30 to 200+ containers per year
+- $25Mn+ customer aggregate revenue proof point
+- 100+ containers per year
 - Teams where inboxes and WhatsApp threads act like the real ERP
 - Operators who need faster quotes, cleaner PO processing, margin visibility and traceability
 

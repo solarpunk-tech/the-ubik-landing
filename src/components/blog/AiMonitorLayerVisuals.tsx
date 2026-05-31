@@ -70,7 +70,7 @@ function FigurePair({
     <figure className="overflow-hidden border bg-shell">
       <img src={light} alt={alt} className={cn("w-full object-contain dark:hidden", aspect)} loading="eager" decoding="async" />
       <img src={dark} alt={alt} className={cn("hidden w-full object-contain dark:block", aspect)} loading="eager" decoding="async" />
-      <figcaption className="border-t bg-background p-4 text-xs leading-5 text-muted-foreground">{caption}</figcaption>
+      <figcaption className="border-t bg-background p-4 text-xs leading-5 text-foreground/72 dark:text-foreground/82">{caption}</figcaption>
     </figure>
   );
 }
@@ -92,7 +92,7 @@ function LeaderboardBenchmarkPanel({
             <span className="size-2 bg-primary" aria-hidden />
             Snapshot as of May 29, 2026
           </div>
-          <p className="text-sm leading-6 text-muted-foreground">{useCase.description}</p>
+          <p className="text-sm leading-6 text-foreground/72 dark:text-foreground/82">{useCase.description}</p>
         </div>
         <div className="h-[22rem] min-w-0 sm:h-[26rem]">
           <EvilBarChart
@@ -124,7 +124,7 @@ function LeaderboardBenchmarkPanel({
               Arena rank {row.arenaRank} / {row.provider}
             </p>
             <h3 className="mt-3 text-lg font-semibold">{row.model}</h3>
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">{row.bestUse}</p>
+            <p className="mt-2 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{row.bestUse}</p>
           </div>
         ))}
       </div>
@@ -193,7 +193,7 @@ function MonitorDeck() {
       <div>
         <p className="section-label">Swipe / click monitor deck</p>
         <h2 className="mt-3 text-3xl font-semibold">Evidence routing should feel like moving one decision card at a time.</h2>
-        <p className="mt-4 text-sm leading-6 text-muted-foreground">
+        <p className="mt-4 text-sm leading-6 text-foreground/72 dark:text-foreground/82">
           The old static evidence chain becomes an operator control: advance the card, inspect the evidence question, then decide whether the row moves, waits, or escalates.
         </p>
         <div className="mt-6 hidden gap-2 md:grid">
@@ -239,7 +239,7 @@ function MonitorDeck() {
               <Icon size={24} aria-hidden />
             </span>
           </div>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground">{active.copy}</p>
+          <p className="mt-6 max-w-2xl text-base leading-8 text-foreground/72 dark:text-foreground/82">{active.copy}</p>
           <div className="mt-8 border bg-shell p-4">
             <p className="font-mono text-xs uppercase tracking-[0.14em] text-primary">Operator question</p>
             <p className="mt-3 text-xl font-semibold">{active.operatorQuestion}</p>
@@ -295,7 +295,7 @@ function LeaderboardSnapshot() {
           <ProviderFavicon key={provider.name} {...provider} />
         ))}
       </div>
-      <p className="mt-5 max-w-3xl text-sm leading-6 text-muted-foreground">
+      <p className="mt-5 max-w-3xl text-sm leading-6 text-foreground/72 dark:text-foreground/82">
         Recreated from the free public Arena leaderboard view, then remapped for seafood operators: evidence work, routing work, and overall fit for messy supplier files. The point is not to crown one model. It is to make frontier intelligences easy to assign to the right job.
       </p>
       <div className="mt-5 grid gap-2 lg:hidden" role="tablist" aria-label="Arena use cases">
@@ -379,7 +379,7 @@ function SourceLinks() {
               </span>
               <span className="mt-3 block font-mono text-[11px] uppercase tracking-[0.12em] text-primary">{source.publisher}</span>
               <span className="mt-1 block text-sm font-semibold text-foreground">{source.title}</span>
-              <span className="mt-2 block text-xs leading-5 text-muted-foreground">{source.note}</span>
+              <span className="mt-2 block text-xs leading-5 text-foreground/72 dark:text-foreground/82">{source.note}</span>
             </span>
           </a>
         ))}
@@ -395,7 +395,7 @@ export function AiMonitorLayerArticle() {
         <div className="bg-card p-5 sm:p-6">
           <p className="section-label">Case study / seafood entity enrichment</p>
           <h2 className="mt-5 text-3xl font-semibold">The failure mode was not a bad answer. It was unsupported confidence entering work.</h2>
-          <p className="mt-5 text-base leading-8 text-muted-foreground">
+          <p className="mt-5 text-base leading-8 text-foreground/72 dark:text-foreground/82">
             We gave two AI workflows the same seafood exhibitor list and asked for the headquarters or primary operating country. The task looked like enrichment. In practice, it tested whether AI could preserve enough evidence to be trusted inside routing, segmentation, compliance, and outreach.
           </p>
         </div>
@@ -405,11 +405,11 @@ export function AiMonitorLayerArticle() {
               <div key={metric.value} className="bg-card p-4">
                 <p className="font-mono text-3xl text-primary">{metric.value}</p>
                 <p className="mt-3 text-sm font-medium leading-6">{metric.label}</p>
-                <p className="mt-3 text-xs leading-5 text-muted-foreground">{metric.note}</p>
+                <p className="mt-3 text-xs leading-5 text-foreground/72 dark:text-foreground/82">{metric.note}</p>
               </div>
             ))}
           </div>
-          <div className="mt-5 border bg-shell p-4 text-sm leading-6 text-muted-foreground">
+          <div className="mt-5 border bg-shell p-4 text-sm leading-6 text-foreground/72 dark:text-foreground/82">
             Adoption gets easier when the system explains where to trust, where to verify, and where to stop. That is the monitor layer.
           </div>
         </div>
@@ -417,7 +417,7 @@ export function AiMonitorLayerArticle() {
 
       <section id="reasoning-leakage" className="scroll-mt-24 border-t py-8 sm:py-10">
         <h2 className="text-3xl font-semibold">From margin leakage to reasoning leakage</h2>
-        <div className="mt-5 grid gap-4 text-base leading-8 text-muted-foreground">
+        <div className="mt-5 grid gap-4 text-base leading-8 text-foreground/72 dark:text-foreground/82">
           <p>
             The earlier margin note showed how quiet handoff errors erode a seafood file. This note is the AI version: a plausible country tag, missing source context, or overconfident inference can bend routing before anyone sees the weakness.
           </p>
@@ -447,7 +447,7 @@ export function AiMonitorLayerArticle() {
 
       <section id="operator-layer" className="scroll-mt-24 border-t py-8 sm:py-10">
         <h2 className="text-3xl font-semibold">What this means for seafood operators</h2>
-        <div className="mt-5 grid gap-4 text-base leading-8 text-muted-foreground">
+        <div className="mt-5 grid gap-4 text-base leading-8 text-foreground/72 dark:text-foreground/82">
           <p>
             The lesson is not that every task needs two LLMs. The lesson is that every AI-assisted decision needs a monitor appropriate to its risk. Low-risk enrichment can move with agreement and evidence. Medium-risk workflows need disagreement queues. High-risk workflows need direct source traceability and human sign-off.
           </p>
@@ -478,7 +478,7 @@ export function AiMonitorLayerArticle() {
           ].map(([title, copy]) => (
             <div key={title} className="bg-background p-4">
               <h3 className="text-base font-semibold">{title}</h3>
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">{copy}</p>
+              <p className="mt-3 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{copy}</p>
             </div>
           ))}
         </div>

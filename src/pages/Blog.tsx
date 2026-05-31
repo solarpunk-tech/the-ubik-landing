@@ -104,11 +104,12 @@ function ArticleShell({ post, children }: ArticleShellProps) {
         description={post.seoDescription}
         canonical={post.canonical}
         image={post.ogImage}
+        imageAlt={`${post.title} preview`}
         type="article"
       />
       <JsonLd data={jsonLd} />
       <main className="container-page section-y">
-        <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+        <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-foreground/72 dark:text-foreground/82 hover:text-foreground">
           <ArrowLeftIcon aria-hidden /> Trade Notes
         </Link>
         <article className="mt-10 grid gap-10 xl:grid-cols-[minmax(0,1fr)_16rem] xl:items-start">
@@ -118,8 +119,8 @@ function ArticleShell({ post, children }: ArticleShellProps) {
                 {post.date} / {post.category}
               </p>
               <h1 className="mt-4 text-5xl font-semibold leading-[1.05] sm:text-6xl lg:text-7xl">{post.title}</h1>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">{post.excerpt}</p>
-              <div className="mt-6 flex flex-wrap gap-3 text-xs uppercase tracking-[0.14em] text-muted-foreground">
+              <p className="mt-6 max-w-3xl text-lg leading-8 text-foreground/72 dark:text-foreground/82">{post.excerpt}</p>
+              <div className="mt-6 flex flex-wrap gap-3 text-xs uppercase tracking-[0.14em] text-foreground/72 dark:text-foreground/82">
                 <span>Last updated {post.updated}</span>
                 <span>/</span>
                 <span>{post.author}</span>
@@ -148,7 +149,7 @@ function ArticleSection({ id, title, children }: { id: string; title: string; ch
   return (
     <section id={id} className="scroll-mt-24 border-t py-8 sm:py-10">
       <h2 className="text-3xl font-semibold">{title}</h2>
-      <div className="mt-5 grid gap-4 text-base leading-8 text-muted-foreground">{children}</div>
+      <div className="mt-5 grid gap-4 text-base leading-8 text-foreground/72 dark:text-foreground/82">{children}</div>
     </section>
   );
 }
@@ -160,7 +161,7 @@ function TemplatePlaceholder({ template }: { template: BlogPost["template"] }) {
       <h2 className="mt-3 text-3xl font-semibold">
         {template === "workflow" ? "Workflow article template" : template === "founder-thesis" ? "Founder thesis template" : "Market intelligence template"}
       </h2>
-      <p className="mt-4 max-w-2xl text-base leading-8 text-muted-foreground">
+      <p className="mt-4 max-w-2xl text-base leading-8 text-foreground/72 dark:text-foreground/82">
         This renderer is kept for the next researched Trade Note. It preserves the article chrome, metadata, share flow, and responsive layout without shipping placeholder copy publicly.
       </p>
     </div>
@@ -174,7 +175,7 @@ function OriginRouletteArticle() {
         <div className="min-w-0 bg-card p-5 sm:p-6">
           <p className="section-label">Trade-desk note / 7 May 2026</p>
           <h2 className="mt-5 text-3xl font-semibold">Buyer strategy for Q3 2026 and Q1 2027 books.</h2>
-          <p className="mt-5 text-base leading-8 text-muted-foreground">
+          <p className="mt-5 text-base leading-8 text-foreground/72 dark:text-foreground/82">
             Fifteen months ago, the shrimp desk carried three assumptions: the U.S. would take every kilo, Ecuador’s cost edge would narrow, and value-added processing was a side quest. All three broke. The origin mix now turns on tariff gates, certification depth, disease windows, and which product can clear the destination at the lowest landed cost with the least forward-book risk.
           </p>
         </div>
@@ -187,11 +188,11 @@ function OriginRouletteArticle() {
             ].map(([stat, label]) => (
               <div key={stat} className="bg-card p-4">
                 <p className="font-mono text-2xl text-primary">{stat}</p>
-                <p className="mt-3 text-sm leading-6 text-muted-foreground">{label}</p>
+                <p className="mt-3 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{label}</p>
               </div>
             ))}
           </div>
-          <div className="mt-5 border bg-shell p-4 text-sm leading-6 text-muted-foreground">
+          <div className="mt-5 border bg-shell p-4 text-sm leading-6 text-foreground/72 dark:text-foreground/82">
             The buyer question is no longer “is there enough shrimp?” It is “which shrimp clears the regulatory gate, keeps the landed-cost curve sane, and does not trap the book in one origin’s policy risk?”
           </div>
         </div>
@@ -241,7 +242,7 @@ function OriginRouletteArticle() {
           <div key={bet.title} className="bg-card p-5 sm:p-6">
             <p className="font-mono text-sm text-primary">BET 0{index + 1}</p>
             <h2 className="mt-6 text-2xl font-semibold">{bet.title}</h2>
-            <p className="mt-4 text-sm leading-6 text-muted-foreground">{bet.copy}</p>
+            <p className="mt-4 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{bet.copy}</p>
           </div>
         ))}
       </section>
@@ -251,7 +252,7 @@ function OriginRouletteArticle() {
           <div key={title} className="bg-background p-5 sm:p-6">
             <WarningDiamondIcon className="text-primary" size={24} aria-hidden />
             <h2 className="mt-6 text-2xl font-semibold">{title}</h2>
-            <p className="mt-4 text-sm leading-6 text-muted-foreground">{copy}</p>
+            <p className="mt-4 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{copy}</p>
           </div>
         ))}
       </section>
@@ -264,7 +265,7 @@ function OriginRouletteArticle() {
                 <CheckCircleIcon className="mt-1 shrink-0 text-primary" aria-hidden />
                 <div>
                   <h3 className="text-xl font-semibold">{claim}</h3>
-                  <p className="mt-3 text-base leading-8 text-muted-foreground">{answer}</p>
+                  <p className="mt-3 text-base leading-8 text-foreground/72 dark:text-foreground/82">{answer}</p>
                 </div>
               </div>
             </div>
@@ -277,7 +278,7 @@ function OriginRouletteArticle() {
           <SealCheckIcon className="text-primary" aria-hidden />
           <p className="section-label">Source and limitation note</p>
         </div>
-        <p className="mt-4 max-w-3xl text-sm leading-6 text-muted-foreground">
+        <p className="mt-4 max-w-3xl text-sm leading-6 text-foreground/72 dark:text-foreground/82">
           This note is a buyer-strategy synthesis, not legal advice or a live customs ruling. Tariffs, ADD/CVD cash deposits, import alerts, and certification requirements can change without matching the cadence of public trade articles.
         </p>
         <div className="mt-5 grid gap-px bg-border md:grid-cols-2">
@@ -307,7 +308,7 @@ function OriginRouletteArticle() {
                   <span className="min-w-0">{source.title}</span>
                   <ArrowRightIcon className="mt-0.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-100" aria-hidden />
                 </span>
-                <span className="mt-2 block text-xs leading-5 text-muted-foreground">{source.note}</span>
+                <span className="mt-2 block text-xs leading-5 text-foreground/72 dark:text-foreground/82">{source.note}</span>
               </span>
             </a>
           ))}
@@ -342,13 +343,13 @@ function BlogNotFound() {
         canonical="https://theubik.com/blog"
       />
       <main className="container-page section-y">
-        <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+        <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-foreground/72 dark:text-foreground/82 hover:text-foreground">
           <ArrowLeftIcon aria-hidden /> Trade Notes
         </Link>
         <div className="mt-10 max-w-2xl border bg-card p-6">
           <p className="section-label">Missing field note</p>
           <h1 className="mt-4 text-4xl font-semibold">This Trade Note is not published.</h1>
-          <p className="mt-5 text-base leading-8 text-muted-foreground">
+          <p className="mt-5 text-base leading-8 text-foreground/72 dark:text-foreground/82">
             The blog route is live, but this slug does not match a published Ubik Trade Note.
           </p>
           <Link to="/blog" className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary">
@@ -388,11 +389,11 @@ export default function Blog() {
           {blogPosts.map((post) => (
             <Link key={post.slug} to={`/blog/${post.slug}`} className="grid min-h-72 bg-background hover:bg-shell lg:grid-cols-[0.44fr_0.56fr]">
               <div className="p-5 sm:p-6">
-                <p className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                <p className="text-xs uppercase tracking-[0.14em] text-foreground/72 dark:text-foreground/82">
                   {post.date} / {post.category}
                 </p>
                 <h2 className="mt-8 max-w-xl text-3xl font-semibold">{post.title}</h2>
-                <p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground">{post.excerpt}</p>
+                <p className="mt-5 max-w-xl text-base leading-7 text-foreground/72 dark:text-foreground/82">{post.excerpt}</p>
                 <span className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-primary">
                   Read field note <ArrowRightIcon aria-hidden />
                 </span>

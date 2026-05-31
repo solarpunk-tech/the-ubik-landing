@@ -103,7 +103,7 @@ export default function Pricing() {
   return (
     <PageShell>
       <Seo
-        title="Pricing — Ubik"
+        title="Pricing | Ubik"
         description="Choose Base for a personal AI workspace or Enterprise for trade workflows across teams, systems and geographies."
         canonical="https://theubik.com/pricing"
       />
@@ -131,7 +131,7 @@ export default function Pricing() {
               <h1 className="text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
                 Choose the workspace that matches your <span className="text-primary">operating reality.</span>
               </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">
+              <p className="mt-5 max-w-3xl text-lg leading-8 text-foreground/72 dark:text-foreground/82">
                 Start with a personal AI workspace. Go Enterprise when Ubik needs to run workflows across your trade stack, team and customers.
               </p>
             </div>
@@ -139,14 +139,14 @@ export default function Pricing() {
               <button
                 type="button"
                 onClick={() => setBilling("monthly")}
-                className={cn("px-4 py-2 transition-colors", billing === "monthly" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground")}
+                className={cn("px-4 py-2 transition-colors", billing === "monthly" ? "bg-primary text-primary-foreground" : "text-foreground/72 dark:text-foreground/82 hover:text-foreground")}
               >
                 Monthly
               </button>
               <button
                 type="button"
                 onClick={() => setBilling("annual")}
-                className={cn("px-4 py-2 transition-colors", billing === "annual" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground")}
+                className={cn("px-4 py-2 transition-colors", billing === "annual" ? "bg-primary text-primary-foreground" : "text-foreground/72 dark:text-foreground/82 hover:text-foreground")}
               >
                 Annual <span className="ml-1 text-[11px]">Save 15%</span>
               </button>
@@ -158,7 +158,7 @@ export default function Pricing() {
               <CardHeader className="gap-6 p-6 sm:p-8">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="section-label text-primary-foreground/65">Base</p>
+                    <p className="section-label text-primary-foreground/85">Base</p>
                     <CardTitle className="mt-3 text-3xl">Base</CardTitle>
                   </div>
                   {billing === "annual" ? (
@@ -170,9 +170,9 @@ export default function Pricing() {
                 <div>
                   <p className="text-5xl font-semibold">
                     {basePrice}
-                    <span className="ml-2 text-base font-medium text-primary-foreground/70">/ month</span>
+                    <span className="ml-2 text-base font-medium text-primary-foreground/85">/ month</span>
                   </p>
-                  <p className="mt-5 max-w-xl text-primary-foreground/80">
+                  <p className="mt-5 max-w-xl text-primary-foreground/92">
                     For operators who want a personal AI workspace for trade, market intelligence, meetings and live work artifacts.
                   </p>
                 </div>
@@ -185,7 +185,7 @@ export default function Pricing() {
                       Try Ubik Now <ArrowRightIcon data-icon="inline-end" />
                     </a>
                   </Button>
-                  <p className="text-sm text-primary-foreground/70">Built for one operator. Comes with Ubik Meetings included.</p>
+                  <p className="text-sm text-primary-foreground/88">Built for one operator. Comes with Ubik Meetings included.</p>
                 </div>
               </CardContent>
             </Card>
@@ -198,8 +198,8 @@ export default function Pricing() {
                 </div>
                 <div>
                   <p className="text-5xl font-semibold">Custom</p>
-                  <p className="mt-5 max-w-xl text-muted-foreground">
-                    For seafood importers, exporters and processors running mission-critical trade workflows across teams, systems and geographies.
+                  <p className="mt-5 max-w-xl text-foreground/72 dark:text-foreground/82">
+                    For frozen food importers, exporters and processors running mission-critical trade workflows across teams, systems and geographies.
                   </p>
                 </div>
               </CardHeader>
@@ -211,7 +211,7 @@ export default function Pricing() {
                       Talk to founders <ArrowRightIcon data-icon="inline-end" />
                     </a>
                   </Button>
-                  <p className="text-sm text-muted-foreground">Built with your operators in 30 days. Priced around value recovered, not seats.</p>
+                  <p className="text-sm text-foreground/72 dark:text-foreground/82">Built with your operators in 30 days. Priced around value recovered, not seats.</p>
                 </div>
               </CardContent>
             </Card>
@@ -228,7 +228,7 @@ export default function Pricing() {
                 </h2>
               </div>
               <div>
-                <p className="text-sm leading-6 text-muted-foreground">
+                <p className="text-sm leading-6 text-foreground/72 dark:text-foreground/82">
                   Today, it records and summarizes local meetings. Next, it becomes the hotkey-summoned desktop overlay that bridges your local context with the Ubik Webapp.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -254,7 +254,7 @@ export default function Pricing() {
                 <AccordionItem key={faq.question} value={faq.question}>
                   <AccordionTrigger>{faq.question}</AccordionTrigger>
                   <AccordionContent>
-                    <div className="grid gap-4 border-l border-border pl-4 text-sm leading-7 text-muted-foreground">
+                    <div className="grid gap-4 border-l border-border pl-4 text-sm leading-7 text-foreground/72 dark:text-foreground/82">
                       {faq.answer.map((paragraph) => (
                         <p key={paragraph}>{paragraph}</p>
                       ))}

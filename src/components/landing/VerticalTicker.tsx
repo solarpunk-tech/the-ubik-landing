@@ -5,7 +5,7 @@ type VerticalTickerProps = {
 };
 
 const tickerIcons = {
-  "Live for Global Seafood": FishSimpleIcon,
+  "Live for Global Frozen Food": FishSimpleIcon,
   "Testing for Meat": ForkKnifeIcon,
   "Testing for Dairy": CowIcon,
   "Testing for Frozen Veggies": SnowflakeIcon

@@ -19,7 +19,7 @@
   --secondary: 210 38% 96%;
   --secondary-foreground: 222 47% 11%;
   --muted: 210 24% 94%;
-  --muted-foreground: 215 16% 39%;
+  --muted-foreground: 215 20% 34%;
   --accent: 227 81% 56%;
   --accent-foreground: 210 40% 98%;
   --destructive: 0 72% 51%;
@@ -31,7 +31,7 @@
   --support-foreground: 30 84% 28%;
   --shell: 210 28% 96%;
   --well: 210 45% 97%;
-  --well-foreground: 215 24% 30%;
+  --well-foreground: 215 26% 26%;
   --radius: 0;
   --sidebar-background: 210 31% 97%;
   --sidebar-foreground: 222 47% 11%;
@@ -61,7 +61,7 @@
   --secondary: 216 13% 16%;
   --secondary-foreground: 210 40% 98%;
   --muted: 216 13% 16%;
-  --muted-foreground: 214 18% 76%;
+  --muted-foreground: 214 22% 82%;
   --accent: 227 81% 64%;
   --accent-foreground: 210 40% 98%;
   --destructive: 0 63% 54%;
@@ -73,7 +73,7 @@
   --support-foreground: 38 96% 80%;
   --shell: 220 18% 8%;
   --well: 216 15% 13%;
-  --well-foreground: 214 20% 82%;
+  --well-foreground: 214 24% 86%;
   --sidebar-background: 216 14% 11%;
   --sidebar-foreground: 210 40% 98%;
   --sidebar-primary: 227 81% 64%;
@@ -190,7 +190,7 @@
   }
 
   .section-label {
-    @apply text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground;
+    @apply text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground/70 dark:text-foreground/82;
   }
 
   .surface-card {
@@ -274,7 +274,7 @@
 
   .solarpunk-credit {
     font-family: "IBM Plex Mono", monospace;
-    @apply flex items-center justify-center gap-2 border border-transparent px-2 py-1 text-center text-xs text-muted-foreground transition-colors hover:border-border hover:bg-background hover:text-foreground;
+    @apply flex items-center justify-center gap-2 border border-transparent px-2 py-1 text-center text-xs font-medium text-foreground/70 transition-colors hover:border-border hover:bg-background hover:text-foreground dark:text-foreground/80;
   }
 
   .solarpunk-credit img {

@@ -49,7 +49,7 @@ export default function Try() {
   return (
     <PageShell>
       <Seo
-        title="Try Ubik Now — Ubik"
+        title="Try Ubik Now | Ubik"
         description="Request early access to run one Ubik workflow above your existing CRM, programs, ERP, inbox, and sales stack."
         canonical="https://theubik.com/try"
       />
@@ -68,7 +68,7 @@ export default function Try() {
             <h1 className="text-5xl font-semibold leading-tight">
               Try Ubik Now.
             </h1>
-            <p className="text-lg leading-8 text-muted-foreground">
+            <p className="text-lg leading-8 text-foreground/72 dark:text-foreground/82">
               The v1 journey is an early-access request for teams that want to pilot a sales
               follow-up, PO review, shipment exception, approval packet, or ERP-ready handoff
               before expanding.
@@ -119,11 +119,11 @@ export default function Try() {
                     <TabsTrigger value="plus">Plus</TabsTrigger>
                     <TabsTrigger value="enterprise">Enterprise</TabsTrigger>
                   </TabsList>
-                  <TabsContent value="free" className="text-sm text-muted-foreground">One workspace, one operator queue.</TabsContent>
-                  <TabsContent value="plus" className="text-sm text-muted-foreground">
+                  <TabsContent value="free" className="text-sm text-foreground/72 dark:text-foreground/82">One workspace, one operator queue.</TabsContent>
+                  <TabsContent value="plus" className="text-sm text-foreground/72 dark:text-foreground/82">
                     One live pilot for inquiries, purchase orders, logistics exceptions, or quality packets.
                   </TabsContent>
-                  <TabsContent value="enterprise" className="text-sm text-muted-foreground">
+                  <TabsContent value="enterprise" className="text-sm text-foreground/72 dark:text-foreground/82">
                     Founder-led rollout with security review, admin approval, data boundaries, and ERP handoff.
                   </TabsContent>
                 </Tabs>

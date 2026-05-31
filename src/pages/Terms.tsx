@@ -151,15 +151,15 @@ export default function Terms() {
   return (
     <PageShell>
       <Seo
-        title="Terms and Conditions — Ubik"
+        title="Terms and Conditions | Ubik"
         description="The terms governing access to and use of Ubik."
         canonical="https://theubik.com/terms-of-service"
       />
       <main className="container-page section-y">
         <article className="mx-auto max-w-4xl">
-          <p className="text-sm font-medium text-muted-foreground">Effective date: 2026-05-05</p>
+          <p className="text-sm font-medium text-foreground/72 dark:text-foreground/82">Effective date: 2026-05-05</p>
           <h1 className="mt-3 text-5xl font-semibold">Terms and Conditions</h1>
-          <p className="mt-6 text-lg leading-8 text-muted-foreground">
+          <p className="mt-6 text-lg leading-8 text-foreground/72 dark:text-foreground/82">
             These Terms govern access to and use of Ubik, provided by Solarpunk Technology Sdn Bhd, operating as Ubik.
           </p>
 
@@ -168,7 +168,7 @@ export default function Terms() {
               const spanLast = companyDetails.length % 2 === 1 && index === companyDetails.length - 1;
               return (
                 <div key={label} className={`bg-background p-4 ${spanLast ? "sm:col-span-2" : ""}`}>
-                  <p className="text-xs font-medium uppercase text-muted-foreground">{label}</p>
+                  <p className="text-xs font-medium uppercase text-foreground/72 dark:text-foreground/82">{label}</p>
                   <p className="mt-2 text-sm leading-6">{value}</p>
                 </div>
               );
@@ -179,7 +179,7 @@ export default function Terms() {
             {sections.map(({ title, paragraphs, bullets }) => (
               <section key={title}>
                 <h2 className="text-2xl font-semibold">{title}</h2>
-                <div className="mt-4 grid gap-3 leading-7 text-muted-foreground">
+                <div className="mt-4 grid gap-3 leading-7 text-foreground/72 dark:text-foreground/82">
                   {paragraphs?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                   {bullets ? (
                     <ul className="grid gap-2 pl-5">
@@ -195,7 +195,7 @@ export default function Terms() {
 
           <section className="mt-12 border bg-card p-5">
             <h2 className="text-2xl font-semibold">19. Contact</h2>
-            <div className="mt-4 grid gap-3 text-sm leading-6 text-muted-foreground">
+            <div className="mt-4 grid gap-3 text-sm leading-6 text-foreground/72 dark:text-foreground/82">
               <p>Solarpunk Technology Sdn Bhd, operating as Ubik</p>
               <p>Tax Identification No.: C 60510379080</p>
               <p>Registered address: 7-2, Plaza Danau 2, Jalan 2/109F, Taman Danau Desa, 58100 Kuala Lumpur, Federal Territory of Kuala Lumpur, Malaysia</p>

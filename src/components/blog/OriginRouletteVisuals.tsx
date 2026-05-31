@@ -76,7 +76,7 @@ export function OriginPortraitRail() {
       <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-px bg-border lg:grid-cols-[0.92fr_1.08fr]">
         <div className="min-w-0 bg-card p-4 sm:p-5">
           <div className="flex flex-wrap items-center gap-2">
-            <div className="inline-flex items-center gap-2 border bg-background px-3 py-2 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
+            <div className="inline-flex items-center gap-2 border bg-background px-3 py-2 text-xs font-medium uppercase tracking-[0.14em] text-foreground/72 dark:text-foreground/82">
               <FishSimpleIcon className="text-primary" aria-hidden />
               Origin filter
             </div>
@@ -86,7 +86,7 @@ export function OriginPortraitRail() {
                 type="button"
                 className={cn(
                   "border px-3 py-2 text-xs font-medium transition-colors",
-                  filter === item ? "bg-primary text-primary-foreground" : "bg-background text-muted-foreground hover:text-foreground"
+                  filter === item ? "bg-primary text-primary-foreground" : "bg-background text-foreground/72 dark:text-foreground/82 hover:text-foreground"
                 )}
                 onClick={() => setFilter(item)}
               >
@@ -107,7 +107,7 @@ export function OriginPortraitRail() {
               >
                 <p className="font-mono text-xs text-primary">{origin.stamp}</p>
                 <h3 className="mt-3 text-xl font-semibold">{origin.name}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">{origin.role}</p>
+                <p className="mt-2 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{origin.role}</p>
               </button>
             ))}
           </div>
@@ -131,12 +131,12 @@ export function OriginPortraitRail() {
             <p className="section-label">{selected.shortName} origin desk</p>
             <h2 className="mt-3 text-3xl font-semibold">{selected.name}</h2>
             <p className="mt-2 font-mono text-sm text-primary">{selected.stat}</p>
-            <p className="mt-5 text-base leading-8 text-muted-foreground">{selected.details}</p>
+            <p className="mt-5 text-base leading-8 text-foreground/72 dark:text-foreground/82">{selected.details}</p>
             <div className="mt-6 grid gap-3 text-sm leading-6">
               <p><span className="font-medium text-foreground">Buy when:</span> {selected.buyWhen}</p>
               <p><span className="font-medium text-foreground">Avoid when:</span> {selected.avoidWhen}</p>
               <p><span className="font-medium text-foreground">Watch for:</span> {selected.watchFor}</p>
-              <p className="border-t pt-3 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">{selected.tariffNote}</p>
+              <p className="border-t pt-3 font-mono text-xs uppercase tracking-[0.12em] text-foreground/72 dark:text-foreground/82">{selected.tariffNote}</p>
             </div>
           </div>
         </div>
@@ -160,7 +160,7 @@ export function OriginFlowMap() {
               <p className="section-label">Origin to destination flow map</p>
               <h2 className="mt-2 text-3xl font-semibold">Where the tonnage is moving</h2>
             </div>
-            <div className="flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+            <div className="flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.12em] text-foreground/72 dark:text-foreground/82">
               {Object.entries(bracketText).slice(0, 4).map(([key, label]) => (
                 <span key={key} className="inline-flex items-center gap-1.5">
                   <span className={cn("size-2 bg-current", bracketClass[key as FlowDatum["tariffBracket"]].replace("stroke-", "text-"))} />
@@ -215,11 +215,11 @@ export function OriginFlowMap() {
           {activeFlow ? (
             <div className="mt-5 grid gap-4 text-sm leading-6">
               <p className="font-mono text-primary">{activeFlow.metricTons.toLocaleString()} MT</p>
-              <p className="text-muted-foreground">Duty-stack bracket: {bracketText[activeFlow.tariffBracket]}</p>
-              <p className="text-muted-foreground">Status stamp: {activeFlow.status}</p>
+              <p className="text-foreground/72 dark:text-foreground/82">Duty-stack bracket: {bracketText[activeFlow.tariffBracket]}</p>
+              <p className="text-foreground/72 dark:text-foreground/82">Status stamp: {activeFlow.status}</p>
             </div>
           ) : null}
-          <div className="mt-6 border-t pt-4 text-xs leading-5 text-muted-foreground">
+          <div className="mt-6 border-t pt-4 text-xs leading-5 text-foreground/72 dark:text-foreground/82">
             Line weights use 2025/early-2026 origin-flow figures and desk-normalized public trade references for visual comparison.
           </div>
         </aside>
@@ -264,9 +264,9 @@ export function TariffDifferentialMatrix() {
           </colgroup>
           <thead>
             <tr className="bg-shell text-left">
-              <th className="border-b px-4 py-3 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">Origin</th>
+              <th className="border-b px-4 py-3 font-mono text-xs uppercase tracking-[0.12em] text-foreground/72 dark:text-foreground/82">Origin</th>
               {destinations.map((destination) => (
-                <th key={destination} className="border-b px-4 py-3 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">{destination}</th>
+                <th key={destination} className="border-b px-4 py-3 font-mono text-xs uppercase tracking-[0.12em] text-foreground/72 dark:text-foreground/82">{destination}</th>
               ))}
             </tr>
           </thead>
@@ -300,7 +300,7 @@ export function TariffDifferentialMatrix() {
           </tbody>
         </table>
       </div>
-      <p className="border-t p-4 text-xs leading-5 text-muted-foreground">
+      <p className="border-t p-4 text-xs leading-5 text-foreground/72 dark:text-foreground/82">
         Updated 18 May 2026; U.S. cells are modeled as duty stacks, not single country tariffs. Base MFN duty can be 0% for common raw frozen shrimp lines, while Section 122 status, trade-framework implementation, AD/CVD cash deposits, China Section 301 exposure, and product-specific carveouts can still change importer cash cost.
       </p>
     </section>
@@ -319,7 +319,7 @@ export function DecisionTreeTable() {
           <thead className="bg-shell text-left">
             <tr>
               {["Species", "Count", "End-market", "Window", "Certification", "Optimal origin", "Rationale"].map((header) => (
-                <th key={header} className="border-b p-3 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">{header}</th>
+                <th key={header} className="border-b p-3 font-mono text-xs uppercase tracking-[0.12em] text-foreground/72 dark:text-foreground/82">{header}</th>
               ))}
             </tr>
           </thead>
@@ -332,7 +332,7 @@ export function DecisionTreeTable() {
                 <td className="border-b p-3">{row.window}</td>
                 <td className="border-b p-3">{row.certification}</td>
                 <td className="border-b p-3 font-medium">{row.origins}</td>
-                <td className="border-b p-3 text-muted-foreground">{row.rationale}</td>
+                <td className="border-b p-3 text-foreground/72 dark:text-foreground/82">{row.rationale}</td>
               </tr>
             ))}
           </tbody>

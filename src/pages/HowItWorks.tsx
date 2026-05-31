@@ -10,7 +10,7 @@ export default function HowItWorks() {
   return (
     <PageShell>
       <Seo
-        title="How Ubik works — Real product journeys"
+        title="How Ubik works | Real product journeys"
         description="Watch Ubik move through operator home, inbox review, meeting memory, Know Anything, and VMI exception workflows."
       />
       <main className="overflow-hidden">
@@ -24,7 +24,7 @@ export default function HowItWorks() {
               </h1>
             </div>
             <div className="max-w-xl lg:justify-self-end">
-              <p className="text-lg leading-8 text-muted-foreground">
+              <p className="text-lg leading-8 text-foreground/72 dark:text-foreground/82">
                 Home, inbox, meetings, trade memory, and VMI exceptions all move through the same reviewed-action model.
               </p>
               <Button asChild className="mt-6">

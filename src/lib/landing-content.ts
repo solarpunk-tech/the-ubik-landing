@@ -17,12 +17,12 @@ export const compareBacklink = {
 
 export const proofPoints = [
   {
-    stat: "$700M+",
+    stat: "$25Mn+",
     label: "in customer aggregate revenue"
   },
   {
-    stat: "20x",
-    label: "faster RFQ cycles (5-7 days to 6 hours)"
+    stat: "100+",
+    label: "containers in reviewed trade workflows"
   },
   {
     stat: "$200K",
@@ -31,7 +31,7 @@ export const proofPoints = [
 ];
 
 export const heroTickerItems = [
-  "Live for Global Seafood",
+  "Live for Global Frozen Food",
   "Testing for Meat",
   "Testing for Dairy",
   "Testing for Frozen Veggies"
@@ -209,11 +209,11 @@ export const securityCards = [
 export const faqs: Faq[] = [
   {
     question: "What is Ubik?",
-    answer: "Ubik is the personalised workspace for perishable trade, built for seafood importers, exporters, and processors. It connects your CRM, ERP, email, WhatsApp, and shared drives, then runs reviewed agent workflows that handle the work most teams hire 4 to 7 people to do: turning RFQs into quotes, processing POs, tracking transit, monitoring margin, and tracing lots from container to customer. Ubik is built by ex-operators from seafood and aquaculture companies, not generalist AI engineers. It is in production with companies running $700M+ in combined annual revenue.",
+    answer: "Ubik is the decision intelligence workspace for perishable trade, built for frozen food importers, exporters, and processors. It connects your CRM, ERP, email, WhatsApp, and shared drives, then runs reviewed agent workflows that handle the work most teams hire 4 to 7 people to do: turning RFQs into quotes, processing POs, tracking transit, monitoring margin, and tracing lots from container to customer. Ubik is built by ex-operators from frozen food, supply chain, and AI-native product teams. It is in production with companies moving $25Mn+ or 100+ containers a year.",
     paragraphs: [
-      "Ubik is the personalised workspace for perishable trade, built for seafood importers, exporters, and processors.",
+      "Ubik is the decision intelligence workspace for perishable trade, built for frozen food importers, exporters, and processors.",
       "It connects your CRM, ERP, email, WhatsApp, and shared drives, then runs reviewed agent workflows that handle the work most teams hire 4 to 7 people to do.",
-      "Ubik is built by ex-operators from seafood and aquaculture companies, not generalist AI engineers. It is in production with companies running $700M+ in combined annual revenue."
+      "Ubik is built by ex-operators from frozen food, supply chain, and AI-native product teams. It is in production with companies moving $25Mn+ or 100+ containers a year."
     ],
     bullets: [
       "Turning RFQs into quotes.",
@@ -225,11 +225,11 @@ export const faqs: Faq[] = [
   },
   {
     question: "Who is Ubik for?",
-    answer: "Ubik is for seafood importers, exporters, and processors with $40M to $400M in annual revenue, typically family-owned or founder-led, moving frozen, chilled, or live seafood across borders. Active deployments include US, French, Canadian, and Indian operators across importing, processing, pilots, and PO automation. If your team handles 30 to 200 containers a year and your inbox is the de facto ERP, you are our customer.",
+    answer: "Ubik is for frozen food importers, exporters, and processors with meaningful cross-border trade volume, typically family-owned or founder-led, moving frozen products across borders. Active deployments include US, French, Canadian, and Indian operators across importing, processing, pilots, and PO automation. If your team handles 100+ containers a year and your inbox is the de facto ERP, you are our customer.",
     paragraphs: [
-      "Ubik is for seafood importers, exporters, and processors with $40M to $400M in annual revenue, typically family-owned or founder-led, moving frozen, chilled, or live seafood across borders.",
+      "Ubik is for frozen food importers, exporters, and processors with meaningful cross-border trade volume, typically family-owned or founder-led, moving frozen products across borders.",
       "Active deployments include US, French, Canadian, and Indian operators across importing, processing, pilots, and PO automation.",
-      "If your team handles 30 to 200 containers a year and your inbox is the de facto ERP, you are our customer."
+      "If your team handles 100+ containers a year and your inbox is the de facto ERP, you are our customer."
     ]
   },
   {

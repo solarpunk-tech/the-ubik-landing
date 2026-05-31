@@ -123,10 +123,11 @@ export default function SecurityMemo() {
   return (
     <PageShell>
       <Seo
-        title="Ubik Security Note for Seafood Operators"
-        description="A client-facing trust note for seafood importers, exporters, processors, and their customers."
+        title="Ubik Security Note for Frozen Food Operators"
+        description="A client-facing trust note for frozen food importers, exporters, processors, and their customers."
         canonical="https://theubik.com/security"
         image="/security/og-image.png"
+        imageAlt="Ubik security note preview"
       />
       <main className="relative overflow-hidden">
         <MatrixField variant="security" density="high" seed="client-trust-note" />
@@ -136,9 +137,9 @@ export default function SecurityMemo() {
               <div className="flex flex-col gap-5">
                 <Badge variant="secondary" className="w-fit">Security</Badge>
                 <h1 className="text-5xl font-semibold leading-tight sm:text-6xl">
-                  Security for seafood operators and their customers.
+                  Security for frozen food operators and their customers.
                 </h1>
-                <p className="max-w-3xl text-lg leading-8 text-muted-foreground">
+                <p className="max-w-3xl text-lg leading-8 text-foreground/72 dark:text-foreground/82">
                   Ubik connects only approved company tools for quotes, approvals, POs, and shipment
                   work. It drafts; operators stay in control.
                 </p>
@@ -147,7 +148,7 @@ export default function SecurityMemo() {
                 <CardHeader>
                   <CardTitle>Operating position</CardTitle>
                 </CardHeader>
-                <CardContent className="grid gap-4 text-sm leading-6 text-muted-foreground">
+                <CardContent className="grid gap-4 text-sm leading-6 text-foreground/72 dark:text-foreground/82">
                   <p>
                     Start with one approved workflow. Connect only what that workflow needs.
                   </p>
@@ -175,7 +176,7 @@ export default function SecurityMemo() {
                 <div key={item.title} className="grid min-h-32 content-between gap-4 bg-background p-4">
                   <div>
                     <p className="text-sm font-semibold text-foreground">{item.title}</p>
-                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.copy}</p>
+                    <p className="mt-2 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{item.copy}</p>
                   </div>
                   {item.status ? <StatusTicker label={item.status} /> : null}
                 </div>
@@ -191,7 +192,7 @@ export default function SecurityMemo() {
                       {title}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="text-sm leading-6 text-muted-foreground">{copy}</CardContent>
+                  <CardContent className="text-sm leading-6 text-foreground/72 dark:text-foreground/82">{copy}</CardContent>
                 </Card>
               ))}
             </div>
@@ -202,7 +203,7 @@ export default function SecurityMemo() {
               <div>
                 <Badge variant="outline" className="mb-4">Admin approval</Badge>
                 <h2 className="text-3xl font-semibold">Access approval is scoped.</h2>
-                <p className="mt-3 text-muted-foreground">
+                <p className="mt-3 text-foreground/72 dark:text-foreground/82">
                   Your company reviews the app, permissions, and first workflow before access is
                   granted. Access can be limited to the pilot and revoked by admins.
                 </p>
@@ -218,13 +219,13 @@ export default function SecurityMemo() {
                         {title}
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="text-sm leading-6 text-muted-foreground">{copy}</CardContent>
+                    <CardContent className="text-sm leading-6 text-foreground/72 dark:text-foreground/82">{copy}</CardContent>
                   </Card>
                 ))}
               </div>
             </section>
 
-            <div className="mt-8 border bg-background/88 p-5 text-sm leading-6 text-muted-foreground">
+            <div className="mt-8 border bg-background/88 p-5 text-sm leading-6 text-foreground/72 dark:text-foreground/82">
               <p className="font-medium text-foreground">For workspace admins</p>
               <p className="mt-2">
                 Treat Ubik like any other app approval: confirm the app and permissions, approve only
@@ -238,7 +239,7 @@ export default function SecurityMemo() {
               <div>
                 <Badge variant="outline" className="mb-4">Before going live</Badge>
                 <h2 className="text-3xl font-semibold">Production review.</h2>
-                <p className="mt-3 text-muted-foreground">
+                <p className="mt-3 text-foreground/72 dark:text-foreground/82">
                   Confirm scope, owners, approvals, revocation, and customer security expectations
                   before Ubik handles live replies, confirmations, or ERP-ready actions.
                 </p>
@@ -247,7 +248,7 @@ export default function SecurityMemo() {
                 {reviewChecklist.map((item, index) => (
                   <div key={item} className="grid grid-cols-[auto_1fr] gap-4 bg-background p-4 text-sm leading-6">
                     <Badge variant="outline">0{index + 1}</Badge>
-                    <span className="text-muted-foreground">{item}</span>
+                    <span className="text-foreground/72 dark:text-foreground/82">{item}</span>
                   </div>
                 ))}
               </div>

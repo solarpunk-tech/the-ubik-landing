@@ -85,7 +85,11 @@
         "items": [
           {
             "label": "Privacy",
-            "href": "https://theubik.com/privacy-policy"
+            "href": "https://theubik.com/legal/privacy"
+          },
+          {
+            "label": "Subprocessors",
+            "href": "https://theubik.com/legal/subprocessors"
           },
           {
             "label": "Terms",

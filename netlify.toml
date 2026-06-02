@@ -28,7 +28,7 @@
 
 [[redirects]]
   from = "/privacy"
-  to = "/privacy-policy"
+  to = "/legal/privacy"
   status = 301
 
 [[redirects]]

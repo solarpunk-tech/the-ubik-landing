@@ -146,7 +146,8 @@ export function PageShell({ children }: { children: React.ReactNode }) {
           <SolarpunkCredit />
           <nav className="flex flex-wrap gap-4 text-sm text-foreground/72 dark:text-foreground/82 md:justify-self-end">
             <a href={externalLinks.docs}>{t("nav.guide", { defaultValue: "Guide" })}</a>
-            <Link to="/privacy-policy">{t("nav.privacy", { defaultValue: "Privacy" })}</Link>
+            <Link to="/legal/privacy">{t("nav.privacy", { defaultValue: "Privacy" })}</Link>
+            <Link to="/legal/subprocessors">Subprocessors</Link>
             <Link to="/terms-of-service">{t("nav.terms", { defaultValue: "Terms" })}</Link>
             <Link to="/security">{t("nav.trust", { defaultValue: "Security" })}</Link>
             <Link to={downloadHref}>Ubik Meetings</Link>

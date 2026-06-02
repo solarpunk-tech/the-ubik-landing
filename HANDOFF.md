@@ -3,6 +3,7 @@
 ## Current status
 
 - Repo path: `/Users/shubhranshujha/Codex/the-ubik-landing`.
+- Active compliance branch: `jex/pren-187-compai-landing-compliance` for Linear PREN-187 under PREN-175.
 - Latest homepage pass rebased against `origin/main` on May 23, 2026; no remote delta was pending.
 - The old static HTML/CSS site has been rewritten as Vite + React 18 + TypeScript + Tailwind v4 + shadcn `radix-nova` / Mist.
 - shadcn preset is configured in `components.json`, with registries for `@svgl`, `@manifest`, and `@dotmatrix`.
@@ -48,11 +49,35 @@
 - The hero now has a vertical seafood/category ticker, soft-blur text reveal, and animated multi-app operating queue.
 - Footer includes the Solarpunk credit line and public Solarpunk logo assets.
 - Gmail research was read-only and used only to extract broad positioning from Hemanth-led outreach; no email was sent, forwarded, or modified.
+- Latest CompAI compliance pass:
+  - Pulled `origin/main`; it was already up to date before branching.
+  - Added canonical `/legal/privacy` and `/legal/subprocessors` React routes while keeping existing `/privacy-policy` compatibility.
+  - Footer and docs footer now link to canonical privacy and subprocessor pages.
+  - Privacy Notice no longer claims generic "no tracking"; it now discloses cookieless PostHog telemetry, no advertising/cross-site cookies, no session replay, and DSR/deletion request handling by email.
+  - Added public subprocessor page focused on customer-data/content subprocessors from the CompAI/vendor inventory and keeps PostHog in the Privacy Notice-only telemetry category.
+  - Added `public/.well-known/security.txt`.
+  - Added `.github/dependabot.yml`, `.github/CODEOWNERS`, and a dependency-review workflow for high-severity dependency checks on PRs.
 
 ## Verification
 
 - `pnpm lint` passes.
 - `pnpm build` passes.
+- Latest CompAI compliance verification:
+  - `git pull --ff-only origin main` returned already up to date.
+  - `pnpm lint` passes with existing Fast Refresh warnings in `src/components/evilcharts/**`.
+  - `pnpm build` passes.
+  - `git diff --check` passes.
+  - Rendered DOM checks at 390px confirm `/legal/privacy` includes PostHog disclosure, `/legal/subprocessors` includes Recall.ai and the PostHog note, old "We do not use tracking cookies" and "currently TBD" copy are absent, footer Privacy/Subprocessors links are present, and there is no horizontal overflow.
+  - `security.txt` is served at `/.well-known/security.txt` in the Vite preview.
+  - `mintlify validate` passes after rerunning with cache permissions.
+  - `mintlify broken-links` passes.
+  - Visual evidence:
+    - `verification/compai-privacy-desktop.png`
+    - `verification/compai-privacy-mobile.png`
+    - `verification/compai-privacy-mobile-fullpage.png`
+    - `verification/compai-subprocessors-desktop.png`
+    - `verification/compai-subprocessors-mobile.png`
+    - `verification/compai-subprocessors-fullpage.png`
 - Homepage and security note OG screenshots now exist at `public/og-image.png` and `public/security/og-image.png`.
 - Latest browser-comment visual verification captured after this correction:
   - `verification/landing-comments-desktop.png`

@@ -28,7 +28,7 @@ const sections: LegalSection[] = [
     title: "2. Information we collect",
     paragraphs: [
       "Information you provide to us may include name, work email, company name, role, business contact details, demo, sales, support, partnership, or investor inquiries, event or newsletter preferences, and messages, attachments, or other content you submit through forms or email.",
-      "We do not use tracking cookies, web beacons, pixels, or similar advertising tracking technologies on theubik.com. We may use strictly necessary browser storage for user preferences such as language and theme.",
+      "We do not use advertising cookies, cross-site tracking cookies, web beacons, pixels, or session replay on theubik.com. We use cookieless PostHog telemetry on the website to understand page and CTA usage without persisting analytics cookies, creating identified person profiles, or recording sessions.",
       "We may collect limited technical information through server logs and security systems to operate, secure, troubleshoot, and improve the website.",
       "We may receive limited business contact or company information from lawful third-party sources, such as business contact enrichment providers, anti-fraud providers, public company sources, or event partners, where permitted by applicable law."
     ],
@@ -59,8 +59,8 @@ const sections: LegalSection[] = [
   {
     title: "5. Sharing and disclosure",
     paragraphs: [
-      "We may share personal information with service providers and subprocessors for cloud hosting, infrastructure, communications, customer support, security, privacy-preserving analytics without advertising cookies, logging, professional services, and operational tooling.",
-      "Current subprocessors include Aurinko; Google Workspace/Gmail; Microsoft; PostHog; Sentry; Slack; Zoho; OpenAI; Anthropic; and our hosting, infrastructure, API, and database providers as applicable. A formal subprocessor page is currently TBD.",
+      "We may share personal information with service providers and subprocessors for cloud hosting, infrastructure, communications, customer support, security, privacy-preserving telemetry without advertising cookies, logging, professional services, and operational tooling.",
+      "Current customer-data subprocessors are listed on our public subprocessor page at https://theubik.com/legal/subprocessors. PostHog is disclosed here as website/product telemetry and is not used for advertising, session replay, or customer-data processing on the marketing site.",
       "We may also share information with affiliates or in connection with a merger, acquisition, financing, restructuring, sale of assets, or similar corporate transaction; when required to comply with law, enforce agreements, respond to lawful requests, protect rights, prevent fraud, or protect safety and security; or where you direct us to do so or provide consent.",
       "We require service providers and subprocessors to protect personal information using appropriate confidentiality, security, and data protection measures."
     ]
@@ -103,7 +103,7 @@ const sections: LegalSection[] = [
     title: "9. Retention",
     paragraphs: [
       "We retain personal information only for as long as necessary for the purposes described in this Privacy Notice or as required by law.",
-      "Typical retention periods are draft and subject to final approval: website inquiries and support records are TBD, with proposed retention of 24 months after last interaction unless longer retention is required for legal, security, or business purposes; marketing contact records are retained until opt-out, deletion request, or inactivity-based deletion under our retention policy; server logs are TBD, with proposed retention of 30-90 days; security and audit logs are TBD, with proposed retention of 12 months; contract and business records are TBD, with proposed retention of 7 years after contract termination or as required by law; and legal, tax, compliance, and audit records are retained as required by applicable law.",
+      "Typical retention periods depend on the record type: website inquiries and support records are retained while the relationship is active and for a reasonable period afterward; marketing contact records are retained until opt-out, deletion request, or inactivity-based deletion; server, security, and audit logs are retained for operational security and compliance needs; contract, tax, and business records are retained as required by law.",
       "After the relevant retention period, we delete, anonymize, or de-identify personal information unless we are legally required to retain it."
     ]
   },
@@ -111,15 +111,15 @@ const sections: LegalSection[] = [
     title: "10. Your privacy rights",
     paragraphs: [
       "Depending on your location, you may have rights to access personal information, correct inaccurate personal information, delete personal information, restrict or object to processing, receive a portable copy of your information, withdraw consent, opt out of marketing communications, and lodge a complaint with a data protection authority.",
-      "To exercise your rights, email founders@theubik.com. We may verify your identity before responding. We will respond within applicable legal timelines.",
+      "To exercise your rights or request deletion, email founders@theubik.com. We log privacy requests, may verify your identity before responding, and respond within applicable legal timelines.",
       "For data where Ubik acts as processor, please contact the relevant customer directly. If you contact us, we will route the request where possible."
     ]
   },
   {
     title: "11. Cookies and similar technologies",
     paragraphs: [
-      "We do not use tracking cookies, web beacons, pixels, or similar advertising tracking technologies on theubik.com.",
-      "The website may use strictly necessary browser storage for user preferences such as language and theme. If our tracking or analytics practices change, we will update this Privacy Notice and, where required, provide appropriate notice or consent mechanisms.",
+      "We do not use advertising cookies, cross-site tracking cookies, web beacons, pixels, or session replay on theubik.com.",
+      "The website may use strictly necessary browser storage for user preferences such as language and theme. PostHog telemetry is configured to avoid persistent analytics cookies on the marketing site. If our analytics practices change, we will update this Privacy Notice and, where required, provide appropriate notice or consent mechanisms.",
       "If you navigate from theubik.com to third-party websites, their own privacy, cookie, and tracking practices apply."
     ]
   },
@@ -145,7 +145,7 @@ export default function Privacy() {
       <Seo
         title="Privacy Notice | Ubik"
         description="How Ubik collects, uses, discloses, and safeguards personal information."
-        canonical="https://theubik.com/privacy-policy"
+        canonical="https://theubik.com/legal/privacy"
       />
       <main className="container-page section-y">
         <article className="mx-auto max-w-4xl">

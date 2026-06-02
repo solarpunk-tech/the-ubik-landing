@@ -148,6 +148,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
             <a href={externalLinks.docs}>{t("nav.guide", { defaultValue: "Guide" })}</a>
             <Link to="/legal/privacy">{t("nav.privacy", { defaultValue: "Privacy" })}</Link>
             <Link to="/legal/subprocessors">Subprocessors</Link>
+            <Link to="/legal/cookies">Cookies</Link>
             <Link to="/terms-of-service">{t("nav.terms", { defaultValue: "Terms" })}</Link>
             <Link to="/security">{t("nav.trust", { defaultValue: "Security" })}</Link>
             <Link to={downloadHref}>Ubik Meetings</Link>

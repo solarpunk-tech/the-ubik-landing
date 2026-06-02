@@ -1,6 +1,7 @@
 import { PageShell } from "@/components/landing/PageShell";
 import { Seo } from "@/components/seo/Seo";
 
+// Public legal copy mapped from compliance/privacy/subprocessor-list-public.md.
 type Subprocessor = {
   name: string;
   purpose: string;
@@ -10,57 +11,39 @@ type Subprocessor = {
 
 const subprocessors: Subprocessor[] = [
   {
+    name: "Recall.ai",
+    purpose: "Meeting recording & transcription",
+    data: "Meeting audio/video and transcripts (customer content)",
+    location: "United States"
+  },
+  {
     name: "Google Cloud Platform",
-    purpose: "Primary hosting, storage, database, and analytics infrastructure",
-    data: "Customer data and service metadata",
-    location: "India and United States"
+    purpose: "Primary hosting, storage, database (Cloud SQL), analytics warehouse",
+    data: "All customer data",
+    location: "India (asia-south1) and United States (us-central1)"
   },
   {
     name: "Google Workspace",
-    purpose: "Identity provider and Gmail/Drive ingestion",
-    data: "User identifiers and authorized customer content",
+    purpose: "Identity provider (SSO) and Gmail/Drive ingestion",
+    data: "User identifiers and customer content",
     location: "United States"
   },
   {
-    name: "Microsoft",
-    purpose: "OAuth identity provider",
-    data: "User identifiers",
-    location: "United States"
-  },
-  {
-    name: "Recall.ai",
-    purpose: "Meeting recording and transcription",
-    data: "Meeting audio, video, and transcripts",
-    location: "United States"
-  },
-  {
-    name: "Zep / Neo4j",
-    purpose: "Graph memory and relationship context",
+    name: "Zep",
+    purpose: "Graph memory service (Neo4j)",
     data: "Customer content and derived memory",
-    location: "United States; Neo4j region under review"
+    location: "United States"
+  },
+  {
+    name: "Neo4j",
+    purpose: "Graph database (via Zep)",
+    data: "Customer relationship graphs",
+    location: "United States"
   },
   {
     name: "Mem0",
-    purpose: "User and preference memory",
+    purpose: "User/preference memory",
     data: "Derived customer data",
-    location: "United States"
-  },
-  {
-    name: "OpenAI",
-    purpose: "LLM processing",
-    data: "Prompts and outputs derived from customer content",
-    location: "United States"
-  },
-  {
-    name: "Anthropic",
-    purpose: "LLM processing",
-    data: "Prompts and outputs derived from customer content",
-    location: "United States"
-  },
-  {
-    name: "OpenRouter",
-    purpose: "LLM routing gateway",
-    data: "Prompts and outputs derived from customer content",
     location: "United States"
   },
   {
@@ -70,28 +53,46 @@ const subprocessors: Subprocessor[] = [
     location: "United States"
   },
   {
-    name: "LlamaIndex / LlamaParse",
+    name: "OpenAI",
+    purpose: "LLM processing",
+    data: "Prompts and outputs from customer content",
+    location: "United States"
+  },
+  {
+    name: "Anthropic",
+    purpose: "LLM processing (Claude)",
+    data: "Prompts and outputs from customer content",
+    location: "United States"
+  },
+  {
+    name: "OpenRouter",
+    purpose: "LLM routing/gateway",
+    data: "Prompts and outputs from customer content",
+    location: "United States"
+  },
+  {
+    name: "LlamaIndex (LlamaParse)",
     purpose: "Document parsing",
-    data: "Customer files such as purchase orders, invoices, and contracts",
+    data: "Customer files (POs, invoices, contracts)",
     location: "United States"
   },
   {
     name: "Tavily",
     purpose: "Web search API",
-    data: "Query content derived from customer workflows",
+    data: "Query content derived from customer data",
     location: "United States"
   },
   {
     name: "Composio",
     purpose: "Integration gateway",
-    data: "Customer data in transit between authorized tools",
+    data: "Customer data in transit",
     location: "United States"
   },
   {
     name: "Zoho",
     purpose: "ERP ingestion",
     data: "Customer business data",
-    location: "Region under review"
+    location: "India"
   },
   {
     name: "Razorpay",
@@ -100,10 +101,10 @@ const subprocessors: Subprocessor[] = [
     location: "India"
   },
   {
-    name: "SeaRates",
-    purpose: "Shipment tracking",
-    data: "Shipment identifiers",
-    location: "Region under review"
+    name: "Microsoft",
+    purpose: "OAuth identity provider",
+    data: "User identifiers",
+    location: "United States"
   }
 ];
 
@@ -117,20 +118,20 @@ export default function Subprocessors() {
       />
       <main className="container-page section-y">
         <article className="mx-auto max-w-5xl">
-          <p className="text-sm font-medium text-foreground/72 dark:text-foreground/82">Last updated: 2026-06-02</p>
+          <p className="text-sm font-medium text-foreground/72 dark:text-foreground/82">Version 1.0 — effective on publication</p>
           <h1 className="mt-3 text-5xl font-semibold">Subprocessors</h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-foreground/72 dark:text-foreground/82">
-            This page lists third-party providers that Ubik uses to process customer personal data or customer content when delivering the service.
+            This page lists the third-party subprocessors that Ubik (Solarpunk Technology) engages to process customer personal data or content in delivering the Ubik service.
           </p>
 
           <section className="mt-10 border bg-card p-5">
             <h2 className="text-2xl font-semibold">Change notification</h2>
             <div className="mt-4 grid gap-3 leading-7 text-foreground/72 dark:text-foreground/82">
               <p>
-                Ubik will provide affected customers with advance notice before adding or replacing a subprocessor that processes customer data, as described in the applicable customer agreement or Data Processing Agreement.
+                When we intend to add or replace a subprocessor, we will provide affected customers with at least 30 days’ advance notice before the new subprocessor begins processing customer data. Notifications are published on our Trust Center and sent by email to affected customers.
               </p>
               <p>
-                Customers may contact founders@theubik.com with subprocessor questions, DPA/SCC requests, or reasonable data-protection objections.
+                Customers may object to a new subprocessor on reasonable data-protection grounds during the notice window, as set out in our Data Processing Agreement.
               </p>
             </div>
           </section>
@@ -167,12 +168,9 @@ export default function Subprocessors() {
           </section>
 
           <section className="mt-10 grid gap-3 leading-7 text-foreground/72 dark:text-foreground/82">
-            <h2 className="text-2xl font-semibold text-foreground">Notes</h2>
+            <h2 className="text-2xl font-semibold text-foreground">Transfers</h2>
             <p>
-              PostHog is used for cookieless product and website telemetry and is disclosed in the Privacy Notice. It is not listed here as a customer-data subprocessor when configured without cookies, session recording, user profiles, or customer identifiers.
-            </p>
-            <p>
-              Regions and transfer mechanisms marked as under review are being finalized as part of Ubik's SOC 2 readiness and privacy pack review.
+              For transfers to US-based subprocessors, Ubik relies on the EU Standard Contractual Clauses (SCCs, Modules 2 and 3) together with a Data Processing Agreement per subprocessor. See our Privacy Notice and Data Processing Agreement for detail.
             </p>
           </section>
         </article>

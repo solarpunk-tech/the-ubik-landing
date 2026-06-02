@@ -10,6 +10,7 @@
   <url><loc>https://theubik.com/security</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://theubik.com/legal/privacy</loc><priority>0.3</priority></url>
   <url><loc>https://theubik.com/legal/subprocessors</loc><priority>0.3</priority></url>
+  <url><loc>https://theubik.com/legal/cookies</loc><priority>0.3</priority></url>
   <url><loc>https://theubik.com/privacy-policy</loc><priority>0.2</priority></url>
   <url><loc>https://theubik.com/terms-of-service</loc><priority>0.3</priority></url>
 </urlset>

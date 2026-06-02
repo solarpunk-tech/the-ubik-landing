@@ -57,6 +57,16 @@
   - Added public subprocessor page focused on customer-data/content subprocessors from the CompAI/vendor inventory and keeps PostHog in the Privacy Notice-only telemetry category.
   - Added `public/.well-known/security.txt`.
   - Added `.github/dependabot.yml`, `.github/CODEOWNERS`, and a dependency-review workflow for high-severity dependency checks on PRs.
+- Latest finalized privacy-pack alignment:
+  - Public legal content is now mapped from `/Users/shubhranshujha/Claude Code/compliance/privacy/privacy-notice.md`, `subprocessor-list-public.md`, and `cookie-inventory.md`.
+  - `/legal/privacy` now uses Solarpunk Technology, Vadodara address, DPDP grievance officer, controller/processor table, lawful-basis table, recording consent, SCC transfer language, concrete retention table, and EU representative language from the finalized pack.
+  - `/legal/subprocessors` now uses the finalized vendor ordering, exact locations, 30 days' advance notice, and SCC/DPA transfer note.
+  - Added `/legal/cookies` for the finalized Cookie & Tracker Inventory; footer, docs footer, sitemap, and llms index include the route.
+  - Compatibility routes `/privacy`, `/privacy-policy`, and `/privacy-policy.html` continue rendering the Privacy Notice; `/legal/privacy` remains canonical.
+  - Public source-mapping notes are kept out of rendered legal copy; source references remain in code comments and this handoff only.
+  - SeaRates was removed from the public subprocessor list because it is not currently used and was exploratory/planned.
+  - Scope note: `/terms-of-service` still contains the older Malaysia entity/legal venue text and was not part of this privacy-pack mapping pass.
+  - Visual delta: legal pages now use finalized privacy-pack content while preserving the existing PageShell/legal article layout; desktop tables remain grid-based and mobile tables collapse into stacked labelled rows with no horizontal overflow.
 
 ## Verification
 
@@ -71,6 +81,37 @@
   - `security.txt` is served at `/.well-known/security.txt` in the Vite preview.
   - `mintlify validate` passes after rerunning with cache permissions.
   - `mintlify broken-links` passes.
+  - Latest finalized privacy-pack verification:
+    - `pnpm lint` passes with existing Fast Refresh warnings in `src/components/evilcharts/**`.
+    - `pnpm build` passes.
+    - `git diff --check` passes.
+    - `mintlify validate` passes after rerunning with cache permissions.
+    - `mintlify broken-links` passes.
+    - Rendered DOM checks at 390px confirm required finalized phrases are present on `/legal/privacy`, `/legal/subprocessors`, and `/legal/cookies`; old Malaysia entity/address, region-under-review subprocessor locations, and earlier cookieless-only privacy wording are absent from those legal pages; `/privacy` compatibility renders the finalized notice; `/.well-known/security.txt` returns 200.
+    - Local design review server: `http://127.0.0.1:5173/`.
+    - Legal cleanup follow-up:
+      - Removed rendered source-path/mapping notes from `/legal/privacy`, `/legal/subprocessors`, and `/legal/cookies`; source mapping now remains only in code comments and this handoff.
+      - Removed SeaRates from `/legal/subprocessors` because it is not currently used.
+      - Targeted audit found no rendered legal-page hits for `mapped from`, `compliance/privacy`, `placeholder`, `under review`, or `SeaRates`; broader marketing integration copy still mentions SeaRates and is intentionally left for a separate decision.
+      - `pnpm lint`, `pnpm build`, `git diff --check`, `mintlify validate`, and `mintlify broken-links` pass. Mintlify commands should be run from `docs/`; running `mintlify broken-links` from repo root reports false broken docs links.
+      - Rendered DOM checks at 390px confirm `/legal/privacy`, `/legal/subprocessors`, and `/legal/cookies` contain required finalized terms, contain none of the forbidden cleanup strings, and have no horizontal overflow.
+      - Visual delta: the cookie intro now ends after the public domain scope, the subprocessor transfer note no longer exposes an internal source path, and the mobile subprocessor list moves from Razorpay directly to Microsoft.
+      - Updated visual evidence:
+        - `verification/legal-cleanup-privacy-desktop.png`
+        - `verification/legal-cleanup-privacy-mobile.png`
+        - `verification/legal-cleanup-subprocessors-desktop.png`
+        - `verification/legal-cleanup-subprocessors-mobile.png`
+        - `verification/legal-cleanup-cookies-desktop.png`
+        - `verification/legal-cleanup-cookies-mobile.png`
+        - `verification/legal-cleanup-footer-fullpage.png`
+    - Visual evidence:
+      - `verification/final-privacy-pack-privacy-desktop.png`
+      - `verification/final-privacy-pack-privacy-mobile.png`
+      - `verification/final-privacy-pack-subprocessors-desktop.png`
+      - `verification/final-privacy-pack-subprocessors-mobile.png`
+      - `verification/final-privacy-pack-cookies-desktop.png`
+      - `verification/final-privacy-pack-cookies-mobile.png`
+      - `verification/final-privacy-pack-footer-fullpage.png`
   - Visual evidence:
     - `verification/compai-privacy-desktop.png`
     - `verification/compai-privacy-mobile.png`

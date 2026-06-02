@@ -7,6 +7,7 @@ const Index = lazy(() => import("@/pages/Index"));
 const Try = lazy(() => import("@/pages/Try"));
 const Privacy = lazy(() => import("@/pages/Privacy"));
 const Subprocessors = lazy(() => import("@/pages/Subprocessors"));
+const Cookies = lazy(() => import("@/pages/Cookies"));
 const Terms = lazy(() => import("@/pages/Terms"));
 const SecurityMemo = lazy(() => import("@/pages/SecurityMemo"));
 const HowItWorks = lazy(() => import("@/pages/HowItWorks"));
@@ -49,10 +50,12 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/try" element={<Try />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="/privacy-policy" element={<Privacy />} />
           <Route path="/privacy-policy.html" element={<Privacy />} />
           <Route path="/legal/privacy" element={<Privacy />} />
           <Route path="/legal/subprocessors" element={<Subprocessors />} />
+          <Route path="/legal/cookies" element={<Cookies />} />
           <Route path="/terms-of-service" element={<Terms />} />
           <Route path="/terms-of-service.html" element={<Terms />} />
           <Route path="/security" element={<SecurityMemo />} />

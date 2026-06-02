@@ -54,6 +54,7 @@ Ubik minimizes what is shared with external LLMs. Models are used for planning, 
 - /security
 - /legal/privacy
 - /legal/subprocessors
+- /legal/cookies
 - /how-it-works
 - /blog/ai-monitor-layer-seafood-trade
 - /blog/the-60-bps-bleed-shrimp-margin-loss

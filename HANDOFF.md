@@ -67,6 +67,26 @@
   - SeaRates was removed from the public subprocessor list because it is not currently used and was exploratory/planned.
   - Scope note: `/terms-of-service` still contains the older Malaysia entity/legal venue text and was not part of this privacy-pack mapping pass.
   - Visual delta: legal pages now use finalized privacy-pack content while preserving the existing PageShell/legal article layout; desktop tables remain grid-based and mobile tables collapse into stacked labelled rows with no horizontal overflow.
+- Latest Trust Center and Meetings download pass:
+  - Added central Comp AI Trust Center links in `src/lib/links.ts`:
+    - Trust Center page: `https://security.trycomp.ai/?organizationId=org_6942f5b5ad9fe5d196af748b`
+    - Public overview API: `https://api.trycomp.ai/v1/trust-access/solarpunk-technology/overview`
+    - Public vendor API: `https://api.trycomp.ai/v1/trust-access/solarpunk-technology/vendors`
+  - `/security` now exposes external `Open Trust Center` CTAs near the founder/contact trust actions and final trust CTA.
+  - `/legal/subprocessors` now exposes `View live Trust Center` while staying a public customer-data/content subprocessor list, not a full Trust Center vendor mirror.
+  - Public subprocessor parity decision: added PostHog with `Product analytics`, `Opaque user id + product usage events (IP not collected)`, and `United States`; intentionally did not mirror operational Trust Center vendors such as GitHub, Slack, Linear, Netlify, Azure Trusted Signing, ChatGPT/Claude app entries, or AWS for this pass.
+  - SeaRates appears in the live Trust Center vendor API but remains excluded from local public legal copy until current product usage is confirmed.
+  - `/download` remains canonical and no longer auto-downloads on page load; it now presents a meetings-product hero, proof cards, and a compatibility strip for Zoom, Slack, Webex, Microsoft Teams, and Google Meet using Google favicon logos.
+  - The primary download CTA uses the existing `useDownloadLinks()` S3 URLs and preserves the old S3 fallback links. `/download?os=mac` defaults to Apple Silicon; `/download?os=windows` selects the Windows installer; the compact selector switches Mac Apple Silicon, Mac Intel, and Windows CTA label, icon, URL, and install steps.
+  - Visual requirements captured from the screenshot/prototype: centered hero; three proof cards for not joining meetings, screen-share invisibility, and movable workflow widget; notification card with segmented left strip, meeting CTA, caret affordance, counter badge, and floating widget; responsive layout with no 390px horizontal overflow.
+  - Latest browser-feedback pass:
+    - Replaced the top-right `Next meeting in 7 minutes` block with a `Pre-read preview` card marked `Coming soon`.
+    - The pre-read card shows context sources for Ubik Memory, LinkedIn, Email, and Calendar, with favicon-backed source marks where applicable.
+    - The notification card left strip now has three clickable segments and auto-cycles through meeting, update, and compliance/review notifications about every 4.2 seconds.
+    - The third proof card now uses a vertical chip/widget visual instead of the previous `AI Response` overlay.
+    - macOS install steps now include Screen Recording and Microphone permissions plus restarting Ubik for local detection; Windows steps now refer to the setup wizard and Start-menu launch.
+    - Production S3 CORS decision: allow only `https://theubik.com` and `https://www.theubik.com` for `GET`/`HEAD` on the `ubik-meetings` manifest. Do not add localhost, `127.0.0.1`, `app.theubik.com`, or `staging.theubik.com`; app/staging only redirect to canonical `/download`.
+    - AWS CLI is installed locally, but this session had no AWS credentials, so the S3 CORS config could not be applied from Codex. Apply it outside this repo, then verify the production manifest fetch.
 
 ## Verification
 
@@ -104,6 +124,45 @@
         - `verification/legal-cleanup-cookies-desktop.png`
         - `verification/legal-cleanup-cookies-mobile.png`
         - `verification/legal-cleanup-footer-fullpage.png`
+    - Latest Trust Center and Meetings download verification:
+      - `mcp__comp_ai.get_public_vendors` with `friendlyUrl: solarpunk-technology` returned live vendors including PostHog and SeaRates.
+      - `curl` checks returned 200 for the public overview API and public vendor API.
+      - Public vendor API parsed at 25 vendors with `PostHog=true` and `SeaRates=true`; local `/legal/subprocessors` includes PostHog and intentionally excludes SeaRates.
+      - `/download` rendered with no auto-download. DOM verification confirmed selected installer `mac_arm64` for `/download?os=mac`, CTA `href=https://ubik-meetings.s3.ap-south-1.amazonaws.com/desktop/latest/Ubik-Meeting-arm64.dmg`, and CTA text `Download for Mac`.
+      - Selector verification confirmed switching to Windows changes selected installer to `windows`, CTA `href=https://ubik-meetings.s3.ap-south-1.amazonaws.com/desktop/latest/Ubik-Meeting-Setup.exe`, and CTA text `Download for Windows`.
+      - Mobile `/download?os=windows` confirmed no horizontal overflow at 390px and retained the Windows S3 installer URL.
+      - `/security` desktop/mobile confirmed no horizontal overflow and two `Open Trust Center` links pointing to `https://security.trycomp.ai/?organizationId=org_6942f5b5ad9fe5d196af748b`.
+      - `/legal/subprocessors` desktop/mobile confirmed no horizontal overflow, `View live Trust Center` points to the Trust Center URL, PostHog is visible, and SeaRates is not visible.
+      - Codex in-app Browser plugin was attempted first but could not attach to the local Vite target, so Playwright was used for screenshots and DOM checks.
+      - Local S3 manifest requests still show CORS errors from the Vite origin; `useDownloadLinks()` falls back to the retained old S3 download URLs and the rendered CTA `href`s were verified.
+      - Checks passed after implementation: `pnpm lint` with existing Fast Refresh warnings in `src/components/evilcharts/**`, `pnpm build`, `git diff --check`, `mintlify validate`, and `mintlify broken-links`.
+      - Visual delta: `/download` changed from auto-download-first to a meetings-product hero with one adaptive CTA; `/security` gained Trust Center CTAs without layout overflow; `/legal/subprocessors` gained the Trust Center CTA and PostHog parity while staying focused on public subprocessors.
+      - Latest visual evidence:
+        - `verification/trust-meetings-download-desktop.png`
+        - `verification/trust-meetings-download-windows-selected.png`
+        - `verification/trust-meetings-download-mobile.png`
+        - `verification/trust-center-security-desktop.png`
+        - `verification/trust-center-security-mobile.png`
+        - `verification/trust-center-subprocessors-desktop.png`
+        - `verification/trust-center-subprocessors-mobile.png`
+    - Latest browser-feedback verification:
+      - In-app Browser verified `/download?os=mac` page identity, nonblank content, no framework overlay, pre-read card presence, `Coming soon`, macOS permission step copy, and ticker segment click from meeting to compliance notification.
+      - In-app Browser verified switching the OS selector to Windows changes the primary CTA to `Download for Windows`, the CTA `href` to `https://ubik-meetings.s3.ap-south-1.amazonaws.com/desktop/latest/Ubik-Meeting-Setup.exe`, and install copy to `Complete the wizard`.
+      - 390px Browser viewport check returned `documentScrollWidth=375` and `bodyScrollWidth=375` for the Windows download route before viewport reset.
+      - Playwright evidence confirmed no document/body horizontal overflow on desktop or 390px mobile, pre-read source labels are present, ticker click shows `Compliance gaps flagged`, and retained S3 installer URLs are still used.
+      - `aws s3api get-bucket-cors --bucket ubik-meetings` could not run because AWS credentials were not configured in this environment.
+      - Localhost manifest CORS errors remain expected local-dev behavior; `useDownloadLinks()` falls back to the retained S3 URLs.
+      - Checks passed after the feedback pass: `pnpm lint` with existing Fast Refresh warnings in `src/components/evilcharts/**`, `pnpm build`, `git diff --check`, `mintlify validate`, and `mintlify broken-links`.
+      - Latest visual evidence:
+        - `verification/trust-meetings-download-feedback-desktop.png`
+        - `verification/trust-meetings-download-feedback-windows-selected.png`
+        - `verification/trust-meetings-download-feedback-mobile.png`
+        - `verification/trust-meetings-download-feedback-mobile-fullpage.png`
+        - `verification/trust-meetings-download-feedback-proof-section.png`
+        - `verification/trust-center-security-feedback-desktop.png`
+        - `verification/trust-center-security-feedback-mobile.png`
+        - `verification/trust-center-subprocessors-feedback-desktop.png`
+        - `verification/trust-center-subprocessors-feedback-mobile.png`
     - Visual evidence:
       - `verification/final-privacy-pack-privacy-desktop.png`
       - `verification/final-privacy-pack-privacy-mobile.png`

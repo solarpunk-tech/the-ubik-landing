@@ -169,6 +169,11 @@ export default function SecurityMemo() {
                 <ClipboardTextIcon data-icon="inline-start" />
                 Copy trust note
               </Button>
+              <Button asChild variant="outline">
+                <a href={externalLinks.trustCenter} target="_blank" rel="noopener noreferrer">
+                  Open Trust Center <ArrowRightIcon data-icon="inline-end" />
+                </a>
+              </Button>
             </div>
 
             <div className="mb-10 grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
@@ -267,6 +272,11 @@ export default function SecurityMemo() {
                 <Button asChild variant="secondary">
                   <a href={externalLinks.founderMeeting}>
                     Talk to founders <ArrowRightIcon data-icon="inline-end" />
+                  </a>
+                </Button>
+                <Button asChild variant="outline" className="border-primary-foreground/50 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
+                  <a href={externalLinks.trustCenter} target="_blank" rel="noopener noreferrer">
+                    Open Trust Center <ArrowRightIcon data-icon="inline-end" />
                   </a>
                 </Button>
               </CardContent>

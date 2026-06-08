@@ -1,5 +1,7 @@
 import { PageShell } from "@/components/landing/PageShell";
 import { Seo } from "@/components/seo/Seo";
+import { Button } from "@/components/ui/button";
+import { externalLinks } from "@/lib/links";
 
 // Public legal copy mapped from compliance/privacy/subprocessor-list-public.md.
 type Subprocessor = {
@@ -105,6 +107,12 @@ const subprocessors: Subprocessor[] = [
     purpose: "OAuth identity provider",
     data: "User identifiers",
     location: "United States"
+  },
+  {
+    name: "PostHog",
+    purpose: "Product analytics",
+    data: "Opaque user id + product usage events (IP not collected)",
+    location: "United States"
   }
 ];
 
@@ -123,6 +131,13 @@ export default function Subprocessors() {
           <p className="mt-6 max-w-3xl text-lg leading-8 text-foreground/72 dark:text-foreground/82">
             This page lists the third-party subprocessors that Ubik (Solarpunk Technology) engages to process customer personal data or content in delivering the Ubik service.
           </p>
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <Button asChild>
+              <a href={externalLinks.trustCenter} target="_blank" rel="noopener noreferrer">
+                View live Trust Center
+              </a>
+            </Button>
+          </div>
 
           <section className="mt-10 border bg-card p-5">
             <h2 className="text-2xl font-semibold">Change notification</h2>

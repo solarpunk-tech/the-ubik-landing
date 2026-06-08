@@ -14,7 +14,7 @@ export const DOWNLOAD_MANIFEST_URL =
 
 // Shown while the manifest is loading or if the fetch fails.
 export const downloadsFallback = {
-  version: "...",
+  version: "",
   mac_arm64: "https://ubik-meetings.s3.ap-south-1.amazonaws.com/desktop/latest/Ubik-Meeting-arm64.dmg",
   mac_x64:   "https://ubik-meetings.s3.ap-south-1.amazonaws.com/desktop/latest/Ubik-Meeting-x64.dmg",
   windows:   "https://ubik-meetings.s3.ap-south-1.amazonaws.com/desktop/latest/Ubik-Meeting-Setup.exe",

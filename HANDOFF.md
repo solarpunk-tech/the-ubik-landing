@@ -87,6 +87,13 @@
     - macOS install steps now include Screen Recording and Microphone permissions plus restarting Ubik for local detection; Windows steps now refer to the setup wizard and Start-menu launch.
     - Production S3 CORS decision: allow only `https://theubik.com` and `https://www.theubik.com` for `GET`/`HEAD` on the `ubik-meetings` manifest. Do not add localhost, `127.0.0.1`, `app.theubik.com`, or `staging.theubik.com`; app/staging only redirect to canonical `/download`.
     - AWS CLI is installed locally, but this session had no AWS credentials, so the S3 CORS config could not be applied from Codex. Apply it outside this repo, then verify the production manifest fetch.
+  - Latest deployment/version/mobile guard follow-up:
+    - Netlify automatic production deploy for commit `b1c16d6` was skipped with `Skipped due to account credit usage exceeded`; the live site remained on deploy `6a1e98dab3df2d000993868b` / commit `d653ad2` until a manual CLI deploy is published.
+    - S3 `desktop/latest/latest.json` is still the source of truth for dynamic installer URLs and version display; current manifest version is `3.8.0`.
+    - The retained fallback installer URLs are unchanged and remain under `https://ubik-meetings.s3.ap-south-1.amazonaws.com/desktop/latest/`.
+    - Fallback version copy now reads `Latest desktop release` instead of `Version ...` when the browser cannot read the manifest.
+    - Mobile/tablet/coarse-pointer or sub-1024px views do not render an active DMG/EXE installer CTA, installer filename, or OS build selector. They show `Open this page on a Mac or Windows desktop to install Ubik Meetings.` and a desktop-install guidance section.
+    - Desktop/fine-pointer views keep the dynamic `useDownloadLinks()` CTA href, OS selector, and macOS/Windows-specific install steps.
 
 ## Verification
 
@@ -163,6 +170,17 @@
         - `verification/trust-center-security-feedback-mobile.png`
         - `verification/trust-center-subprocessors-feedback-desktop.png`
         - `verification/trust-center-subprocessors-feedback-mobile.png`
+    - Latest deployment/version/mobile guard verification:
+      - `git rev-parse --short HEAD` and `git rev-parse --short origin/main` both returned `b1c16d6` before the follow-up edit.
+      - Netlify API showed the latest production deploy for `b1c16d6` in `error` state with `Skipped due to account credit usage exceeded`.
+      - `curl` confirmed S3 `latest.json` returns 200 and contains `version: 3.8.0`; it does not expose browser CORS headers yet.
+      - `aws s3api put-bucket-cors --bucket ubik-meetings` could not run because AWS credentials were not configured.
+      - Local rendered checks confirmed desktop Windows and Mac retain active S3 installer anchors from `useDownloadLinks()`, while 820px tablet and 390px mobile expose zero installer anchors, no DMG/EXE filenames, no `Version ...`, and no document overflow.
+      - Checks passed: `pnpm lint` with existing Fast Refresh warnings in `src/components/evilcharts/**`, `pnpm build`, `git diff --check`, `mintlify validate`, and `mintlify broken-links`.
+      - Latest visual evidence:
+        - `verification/download-desktop-active-cta-version-fallback-v2.png`
+        - `verification/download-tablet-no-installer-cta-v2.png`
+        - `verification/download-mobile-no-installer-cta-v2.png`
     - Visual evidence:
       - `verification/final-privacy-pack-privacy-desktop.png`
       - `verification/final-privacy-pack-privacy-mobile.png`

@@ -129,6 +129,15 @@ const preReadSources = [
   { label: "Calendar", detail: "Agenda, attendees, and timing", domain: "calendar.google.com" }
 ];
 
+function isDesktopInstallDevice() {
+  if (typeof window === "undefined") return true;
+
+  const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+  const hasHover = window.matchMedia("(hover: hover)").matches;
+  const wideEnough = window.matchMedia("(min-width: 1024px)").matches;
+  return hasFinePointer && hasHover && wideEnough;
+}
+
 function getInitialChoice(requested: string | null): DownloadChoice {
   if (requested === "windows") return "windows";
   if (requested === "mac") return "mac_arm64";
@@ -331,13 +340,33 @@ export default function Download() {
   const [params] = useSearchParams();
   const [selectedId, setSelectedId] = useState<DownloadChoice>(() => getInitialChoice(params.get("os")));
   const [showInstallGuide, setShowInstallGuide] = useState(false);
+  const [canInstallDesktop, setCanInstallDesktop] = useState(isDesktopInstallDevice);
 
   const selected = downloadOptions.find((option) => option.id === selectedId) ?? downloadOptions[0];
   const selectedHref = selected.id === "windows" ? links.windows : selected.id === "mac_x64" ? links.mac_x64 : links.mac_arm64;
   const SelectedOSIcon = selected.os === "windows" ? WindowsLogoIcon : AppleLogoIcon;
   const steps = selected.os === "windows" ? windowsSteps : macSteps;
 
-  const versionText = useMemo(() => (links.loading ? "Loading latest release..." : `Version ${links.version}`), [links.loading, links.version]);
+  const versionText = useMemo(() => {
+    if (links.loading) return "Loading latest release...";
+    return links.version ? `Version ${links.version}` : "Latest desktop release";
+  }, [links.loading, links.version]);
+
+  useEffect(() => {
+    const queries = [
+      window.matchMedia("(pointer: fine)"),
+      window.matchMedia("(hover: hover)"),
+      window.matchMedia("(min-width: 1024px)")
+    ];
+
+    const updateInstallEligibility = () => setCanInstallDesktop(isDesktopInstallDevice());
+    updateInstallEligibility();
+
+    queries.forEach((query) => query.addEventListener("change", updateInstallEligibility));
+    return () => {
+      queries.forEach((query) => query.removeEventListener("change", updateInstallEligibility));
+    };
+  }, []);
 
   function handleDownloadClick(event: MouseEvent<HTMLAnchorElement>) {
     if (links.loading) {
@@ -366,40 +395,48 @@ export default function Download() {
               <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-foreground/72 dark:text-foreground/82 sm:text-lg">
                 A private desktop companion for meeting alerts, reviewed notes, and the work context operators need before the next action moves.
               </p>
-              <div className="mx-auto mt-8 flex max-w-3xl flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-                <Button asChild size="lg" className="h-11 px-5 text-base">
-                  <a
-                    href={selectedHref}
-                    aria-disabled={links.loading}
-                    onClick={handleDownloadClick}
-                    className={links.loading ? "pointer-events-none opacity-60" : undefined}
-                  >
-                    <SelectedOSIcon weight="fill" data-icon="inline-start" />
-                    {selected.cta}
-                    <DownloadSimpleIcon data-icon="inline-end" />
-                  </a>
-                </Button>
-                <label className="flex h-11 items-center gap-2 border bg-background px-3 text-sm text-foreground/72 dark:text-foreground/82">
-                  <span className="whitespace-nowrap">Change build</span>
-                  <select
-                    aria-label="Select installer"
-                    value={selectedId}
-                    onChange={(event) => {
-                      setSelectedId(event.target.value as DownloadChoice);
-                      setShowInstallGuide(false);
-                    }}
-                    className="h-8 min-w-44 bg-transparent text-sm font-medium text-foreground outline-none"
-                  >
-                    {downloadOptions.map((option) => (
-                      <option key={option.id} value={option.id}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </div>
+              {canInstallDesktop ? (
+                <div className="mx-auto mt-8 flex max-w-3xl flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+                  <Button asChild size="lg" className="h-11 px-5 text-base">
+                    <a
+                      href={selectedHref}
+                      aria-disabled={links.loading}
+                      onClick={handleDownloadClick}
+                      className={links.loading ? "pointer-events-none opacity-60" : undefined}
+                    >
+                      <SelectedOSIcon weight="fill" data-icon="inline-start" />
+                      {selected.cta}
+                      <DownloadSimpleIcon data-icon="inline-end" />
+                    </a>
+                  </Button>
+                  <label className="flex h-11 items-center gap-2 border bg-background px-3 text-sm text-foreground/72 dark:text-foreground/82">
+                    <span className="whitespace-nowrap">Change build</span>
+                    <select
+                      aria-label="Select installer"
+                      value={selectedId}
+                      onChange={(event) => {
+                        setSelectedId(event.target.value as DownloadChoice);
+                        setShowInstallGuide(false);
+                      }}
+                      className="h-8 min-w-44 bg-transparent text-sm font-medium text-foreground outline-none"
+                    >
+                      {downloadOptions.map((option) => (
+                        <option key={option.id} value={option.id}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+              ) : (
+                <div className="mx-auto mt-8 max-w-xl border bg-card px-5 py-4 text-sm font-medium leading-6 text-foreground shadow-sm">
+                  Open this page on a Mac or Windows desktop to install Ubik Meetings.
+                </div>
+              )}
               <p className="mt-3 text-xs leading-5 text-foreground/62 dark:text-foreground/76">
-                {selected.helper} {versionText} · {selected.fileLabel}
+                {canInstallDesktop
+                  ? `${selected.helper} ${versionText} · ${selected.fileLabel}`
+                  : `${versionText} · Desktop installer available for macOS and Windows`}
               </p>
             </div>
 
@@ -452,13 +489,24 @@ export default function Download() {
 
         <section className="container-page section-y">
           <div className="mb-10 flex max-w-5xl flex-col gap-3">
-            <h2 className="text-3xl font-semibold sm:text-4xl">Install once. Keep the meeting loop local.</h2>
+            <h2 className="text-3xl font-semibold sm:text-4xl">
+              {canInstallDesktop ? "Install once. Keep the meeting loop local." : "Install from a desktop when you are ready."}
+            </h2>
             <p className="max-w-3xl text-foreground/72 dark:text-foreground/82">
-              Use the desktop app for meeting alerts now. As the bridge expands, local spreadsheets, portals, and documents can move into reviewed Ubik workflows without turning every file into cloud clutter.
+              {canInstallDesktop
+                ? "Use the desktop app for meeting alerts now. As the bridge expands, local spreadsheets, portals, and documents can move into reviewed Ubik workflows without turning every file into cloud clutter."
+                : "Ubik Meetings is a Mac and Windows desktop app. Keep this page handy, then reopen it on your workstation to choose the right installer."}
             </p>
           </div>
           <div className="grid gap-px bg-border md:grid-cols-3">
-            {steps.map(({ n, title, copy }) => (
+            {(canInstallDesktop
+              ? steps
+              : [
+                  { n: 1, title: "Use a workstation", copy: "Open this page from the Mac or Windows machine where you want Ubik Meetings installed." },
+                  { n: 2, title: "Pick the build", copy: "The desktop page will offer the detected installer first, with a selector for other builds." },
+                  { n: 3, title: "Enable local access", copy: "After installing, allow the requested local permissions so meeting detection can run on-device." }
+                ]
+            ).map(({ n, title, copy }) => (
               <div key={n} className="bg-background p-5 sm:p-6">
                 <div className="inline-flex size-8 items-center justify-center bg-primary text-sm font-semibold text-primary-foreground">
                   {n}

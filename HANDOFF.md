@@ -94,6 +94,9 @@
     - Fallback version copy now reads `Latest desktop release` instead of `Version ...` when the browser cannot read the manifest.
     - Mobile/tablet/coarse-pointer or sub-1024px views do not render an active DMG/EXE installer CTA, installer filename, or OS build selector. They show `Open this page on a Mac or Windows desktop to install Ubik Meetings.` and a desktop-install guidance section.
     - Desktop/fine-pointer views keep the dynamic `useDownloadLinks()` CTA href, OS selector, and macOS/Windows-specific install steps.
+    - Follow-up commit `0340abd` was pushed to `origin/main`, but Netlify auto-deploy also skipped it with `Skipped due to account credit usage exceeded`.
+    - Manual deploy attempts were blocked too: `netlify deploy --prod --dir=dist` returned `JSONHTTPError: Forbidden`, and the Netlify MCP deploy command failed after upload with `500 Internal Server Error`.
+    - Current publish blocker: Netlify account/project deployment is blocked at the platform/account layer. Resolve Netlify credit/billing/permission state, then redeploy `origin/main` at `0340abd` or later.
 
 ## Verification
 
@@ -177,6 +180,8 @@
       - `aws s3api put-bucket-cors --bucket ubik-meetings` could not run because AWS credentials were not configured.
       - Local rendered checks confirmed desktop Windows and Mac retain active S3 installer anchors from `useDownloadLinks()`, while 820px tablet and 390px mobile expose zero installer anchors, no DMG/EXE filenames, no `Version ...`, and no document overflow.
       - Checks passed: `pnpm lint` with existing Fast Refresh warnings in `src/components/evilcharts/**`, `pnpm build`, `git diff --check`, `mintlify validate`, and `mintlify broken-links`.
+      - Netlify API after push showed deploy `6a271dd5f7c3eb0008b2169b` for commit `0340abd2e4265914bf3404ca75295df606ec3297` in `error` state with `Skipped due to account credit usage exceeded`.
+      - Production HTML probe still did not contain the new `/download` text because the latest deploys are unpublished.
       - Latest visual evidence:
         - `verification/download-desktop-active-cta-version-fallback-v2.png`
         - `verification/download-tablet-no-installer-cta-v2.png`

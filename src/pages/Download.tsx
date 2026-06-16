@@ -8,10 +8,8 @@ import {
   EnvelopeSimpleIcon,
   HardDrivesIcon,
   ShieldWarningIcon,
-  SparkleIcon,
   WindowsLogoIcon
 } from "@phosphor-icons/react";
-import { Button } from "@/components/ui/button";
 import { MatrixField } from "@/components/landing/MatrixField";
 import { PageShell } from "@/components/landing/PageShell";
 import { Seo } from "@/components/seo/Seo";
@@ -28,24 +26,30 @@ type DownloadOption = {
   cta: string;
   helper: string;
   fileLabel: string;
+  chip: string;
+  explainer: string;
 };
 
 const downloadOptions: DownloadOption[] = [
   {
     id: "mac_arm64",
     os: "mac",
-    label: "macOS - Apple Silicon",
+    label: "Mac (M-series)",
     cta: "Download for Mac",
-    helper: "Recommended for most Macs sold since 2020.",
-    fileLabel: "Ubik-Meeting-arm64.dmg"
+    helper: "Recommended for Macs with M1, M2, M3, M4, or newer Apple silicon chips.",
+    fileLabel: "Ubik-Meeting-arm64.dmg",
+    chip: "Apple silicon",
+    explainer: "Most Macs sold since late 2020 use Apple silicon. Choose this if your Mac model mentions M1, M2, M3, M4, or newer."
   },
   {
     id: "mac_x64",
     os: "mac",
-    label: "macOS - Intel",
+    label: "Mac (Intel)",
     cta: "Download for Mac",
-    helper: "Use this if your Mac has an Intel processor.",
-    fileLabel: "Ubik-Meeting-x64.dmg"
+    helper: "Use this for older Intel-based Macs.",
+    fileLabel: "Ubik-Meeting-x64.dmg",
+    chip: "Intel",
+    explainer: "Choose this if About This Mac says Processor: Intel, or if it is an older pre-M-series Mac."
   },
   {
     id: "windows",
@@ -53,7 +57,9 @@ const downloadOptions: DownloadOption[] = [
     label: "Windows",
     cta: "Download for Windows",
     helper: "For Windows 10 and Windows 11 workstations.",
-    fileLabel: "Ubik-Meeting-Setup.exe"
+    fileLabel: "Ubik-Meeting-Setup.exe",
+    chip: "Windows 10+",
+    explainer: "Choose this for Windows 10 or Windows 11 laptops and desktops."
   }
 ];
 
@@ -93,6 +99,13 @@ const compatibleTools = [
   { label: "Webex", domain: "webex.com" },
   { label: "Microsoft Teams", domain: "teams.microsoft.com" },
   { label: "Google Meet", domain: "meet.google.com" }
+];
+
+const rosterSurfaces = [
+  { label: "Google Meet", detail: "Host and invited guests only", domain: "meet.google.com" },
+  { label: "Zoom", detail: "No Ubik participant tile", domain: "zoom.us" },
+  { label: "Microsoft Teams", detail: "No bot in the roster", domain: "teams.microsoft.com" },
+  { label: "Webex", detail: "Desktop helper stays local", domain: "webex.com" }
 ];
 
 const notifications = [
@@ -146,6 +159,12 @@ function getInitialChoice(requested: string | null): DownloadChoice {
 
 function favicon(domain: string, size = 64) {
   return `https://www.google.com/s2/favicons?domain=${domain}&sz=${size}`;
+}
+
+function getDownloadHref(choice: DownloadChoice, links: ReturnType<typeof useDownloadLinks>) {
+  if (choice === "windows") return links.windows;
+  if (choice === "mac_x64") return links.mac_x64;
+  return links.mac_arm64;
 }
 
 function MeetingNotificationCard() {
@@ -204,7 +223,7 @@ function PreReadPreviewCard() {
     <div className="border bg-card p-5 shadow-lg shadow-primary/10">
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-start gap-3">
-          <SparkleIcon className="mt-0.5 text-primary" aria-hidden />
+          <span className="mt-1 size-3 shrink-0 bg-primary" aria-hidden />
           <div>
             <p className="text-sm font-semibold">Pre-read preview</p>
             <p className="mt-1 text-xs leading-5 text-foreground/62 dark:text-foreground/76">
@@ -256,20 +275,22 @@ function ProofVisual({ visual }: { visual: (typeof proofCards)[number]["visual"]
     return (
       <div className="grid gap-3">
         <div className="flex items-center justify-between">
-          <p className="text-sm font-semibold">Meeting participants</p>
-          <span className="inline-flex items-center gap-1 bg-primary/8 px-2 py-1 text-[0.65rem] font-semibold text-primary">
+          <p className="text-sm font-semibold">Participant roster</p>
+          <span className="inline-flex items-center gap-1 border border-primary/20 bg-primary/8 px-2 py-1 text-[0.65rem] font-semibold text-primary">
             <CheckCircleIcon weight="fill" aria-hidden />
             No bot detected
           </span>
         </div>
-        {["Gina Huels", "Todd Cremin", "Holly Gleason", "Tomas Hansen"].map((name, index) => (
-          <div key={name} className="grid grid-cols-[auto_1fr_auto] items-center gap-3 border-t pt-2">
-            <span className="size-7 bg-primary/10" aria-hidden />
+        {rosterSurfaces.map((surface) => (
+          <div key={surface.label} className="grid grid-cols-[auto_1fr_auto] items-center gap-3 border-t pt-2">
+            <span className="flex size-7 items-center justify-center border bg-background">
+              <img src={favicon(surface.domain)} alt="" className="size-4" />
+            </span>
             <div className="min-w-0">
-              <p className="truncate text-xs font-semibold">{name}</p>
-              <p className="truncate text-[0.65rem] text-foreground/60">meeting guest</p>
+              <p className="truncate text-xs font-semibold">{surface.label}</p>
+              <p className="truncate text-[0.65rem] text-foreground/60 dark:text-foreground/72">{surface.detail}</p>
             </div>
-            <span className="text-[0.65rem] text-foreground/60">{index === 0 ? "Owner" : "Speaker"}</span>
+            <span className="text-[0.65rem] text-foreground/60 dark:text-foreground/72">Local</span>
           </div>
         ))}
       </div>
@@ -279,16 +300,16 @@ function ProofVisual({ visual }: { visual: (typeof proofCards)[number]["visual"]
   if (visual === "screen") {
     return (
       <div className="relative h-full min-h-52 overflow-hidden">
-        <div className="absolute inset-y-0 left-0 w-[54%] border-2 border-emerald-500 bg-card p-4">
-          <span className="bg-foreground/72 px-2 py-1 text-[0.66rem] font-semibold text-background">Visible to you</span>
+        <div className="absolute inset-y-0 left-0 w-[54%] border-2 border-emerald-500 bg-card p-4 dark:bg-card/80">
+          <span className="bg-foreground/78 px-2 py-1 text-[0.66rem] font-semibold text-background">Visible to you</span>
           <div className="mt-5 space-y-2 text-xs">
             <p className="font-semibold text-primary">AI Response</p>
-            <p className="leading-5 text-foreground/70">Flag missing PO context before the reply is approved.</p>
+            <p className="leading-5 text-foreground/70 dark:text-foreground/82">Flag missing PO context before the reply is approved.</p>
           </div>
         </div>
         <div className="absolute inset-y-0 left-[50%] w-px bg-foreground/60" />
-        <div className="absolute inset-y-0 right-0 w-[50%] bg-muted/80 p-4">
-          <span className="float-right bg-foreground/72 px-2 py-1 text-[0.66rem] font-semibold text-background">Invisible to others</span>
+        <div className="absolute inset-y-0 right-0 w-[50%] bg-muted/70 p-4 dark:bg-muted/35">
+          <span className="float-right bg-foreground/78 px-2 py-1 text-[0.66rem] font-semibold text-background">Invisible to others</span>
         </div>
         <div className="absolute bottom-3 left-8 right-8 border bg-background/85 p-4 shadow-lg backdrop-blur">
           <div className="space-y-2">
@@ -304,21 +325,21 @@ function ProofVisual({ visual }: { visual: (typeof proofCards)[number]["visual"]
 
   return (
     <div className="grid h-full min-h-52 content-center gap-5">
-      <div className="relative mx-auto w-full max-w-xs border bg-foreground p-3 text-background">
+      <div className="relative mx-auto w-full max-w-xs border bg-foreground p-3 text-background dark:border-border dark:bg-card dark:text-foreground">
         <div className="grid grid-cols-2 gap-2">
-          <div className="aspect-[4/3] bg-background/18" />
+          <div className="aspect-[4/3] bg-background/18 dark:bg-muted/70" />
           <div className="aspect-[4/3] bg-primary/70" />
         </div>
-        <div className="mt-3 h-8 bg-background/10" />
-        <div className="absolute bottom-4 right-4 flex border border-background/35 bg-background/12 backdrop-blur">
-          <div className="grid w-8 place-items-center border-r border-background/25 py-2">
+        <div className="mt-3 h-8 bg-background/10 dark:bg-muted/70" />
+        <div className="absolute bottom-4 right-4 flex border border-background/35 bg-background/12 backdrop-blur dark:border-border dark:bg-background/90">
+          <div className="grid w-8 place-items-center border-r border-background/25 py-2 dark:border-border">
             <span className="size-2 bg-primary" aria-hidden />
           </div>
           <div className="grid gap-1.5 p-2">
             {[HardDrivesIcon, EnvelopeSimpleIcon, ShieldWarningIcon].map((Icon, index) => (
-              <span key={index} className="flex h-6 w-28 items-center gap-2 border border-background/20 bg-background/12 px-2">
-                <Icon className="size-3.5 text-background" aria-hidden />
-                <span className="h-1.5 flex-1 bg-background/70" />
+              <span key={index} className="flex h-6 w-28 items-center gap-2 border border-background/20 bg-background/12 px-2 dark:border-border dark:bg-muted/50">
+                <Icon className="size-3.5 text-background dark:text-foreground" aria-hidden />
+                <span className="h-1.5 flex-1 bg-background/70 dark:bg-foreground/60" />
               </span>
             ))}
           </div>
@@ -343,8 +364,6 @@ export default function Download() {
   const [canInstallDesktop, setCanInstallDesktop] = useState(isDesktopInstallDevice);
 
   const selected = downloadOptions.find((option) => option.id === selectedId) ?? downloadOptions[0];
-  const selectedHref = selected.id === "windows" ? links.windows : selected.id === "mac_x64" ? links.mac_x64 : links.mac_arm64;
-  const SelectedOSIcon = selected.os === "windows" ? WindowsLogoIcon : AppleLogoIcon;
   const steps = selected.os === "windows" ? windowsSteps : macSteps;
 
   const versionText = useMemo(() => {
@@ -368,14 +387,14 @@ export default function Download() {
     };
   }, []);
 
-  function handleDownloadClick(event: MouseEvent<HTMLAnchorElement>) {
+  function handleDownloadClick(event: MouseEvent<HTMLAnchorElement>, option: DownloadOption) {
     if (links.loading) {
       event.preventDefault();
       return;
     }
 
     setShowInstallGuide(true);
-    trackEvent("download_clicked", { os: selected.os, build: selected.id, version: links.version });
+    trackEvent("download_clicked", { os: option.os, build: option.id, version: links.version });
   }
 
   return (
@@ -396,37 +415,47 @@ export default function Download() {
                 A private desktop companion for meeting alerts, reviewed notes, and the work context operators need before the next action moves.
               </p>
               {canInstallDesktop ? (
-                <div className="mx-auto mt-8 flex max-w-3xl flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-                  <Button asChild size="lg" className="h-11 px-5 text-base">
-                    <a
-                      href={selectedHref}
-                      aria-disabled={links.loading}
-                      onClick={handleDownloadClick}
-                      className={links.loading ? "pointer-events-none opacity-60" : undefined}
-                    >
-                      <SelectedOSIcon weight="fill" data-icon="inline-start" />
-                      {selected.cta}
-                      <DownloadSimpleIcon data-icon="inline-end" />
-                    </a>
-                  </Button>
-                  <label className="flex h-11 items-center gap-2 border bg-background px-3 text-sm text-foreground/72 dark:text-foreground/82">
-                    <span className="whitespace-nowrap">Change build</span>
-                    <select
-                      aria-label="Select installer"
-                      value={selectedId}
-                      onChange={(event) => {
-                        setSelectedId(event.target.value as DownloadChoice);
-                        setShowInstallGuide(false);
-                      }}
-                      className="h-8 min-w-44 bg-transparent text-sm font-medium text-foreground outline-none"
-                    >
-                      {downloadOptions.map((option) => (
-                        <option key={option.id} value={option.id}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
+                <div className="mx-auto mt-8 max-w-4xl">
+                  <div className="grid gap-2 sm:grid-cols-3">
+                    {downloadOptions.map((option) => {
+                      const href = getDownloadHref(option.id, links);
+                      const OptionIcon = option.os === "windows" ? WindowsLogoIcon : AppleLogoIcon;
+                      const isSelected = option.id === selectedId;
+
+                      return (
+                        <a
+                          key={option.id}
+                          href={href}
+                          aria-current={isSelected ? "true" : undefined}
+                          aria-disabled={links.loading}
+                          onClick={(event) => {
+                            setSelectedId(option.id);
+                            handleDownloadClick(event, option);
+                          }}
+                          className={[
+                            "group grid min-h-36 gap-3 border bg-card p-4 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                            isSelected ? "border-primary shadow-lg shadow-primary/10" : "hover:border-primary/50 hover:bg-muted/40",
+                            links.loading ? "pointer-events-none opacity-60" : "",
+                          ].join(" ")}
+                        >
+                          <span className="flex items-center justify-between gap-3">
+                            <span className="inline-flex items-center gap-2 text-base font-semibold">
+                              <OptionIcon weight="fill" className={isSelected ? "text-primary" : "text-foreground/70"} aria-hidden />
+                              {option.label}
+                            </span>
+                            <span className="border bg-background px-2 py-1 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-foreground/62 dark:text-foreground/76">
+                              {option.chip}
+                            </span>
+                          </span>
+                          <span className="text-sm leading-6 text-foreground/68 dark:text-foreground/80">{option.explainer}</span>
+                          <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                            {option.cta}
+                            <DownloadSimpleIcon aria-hidden />
+                          </span>
+                        </a>
+                      );
+                    })}
+                  </div>
                 </div>
               ) : (
                 <div className="mx-auto mt-8 max-w-xl border bg-card px-5 py-4 text-sm font-medium leading-6 text-foreground shadow-sm">
@@ -437,6 +466,9 @@ export default function Download() {
                 {canInstallDesktop
                   ? `${selected.helper} ${versionText} · ${selected.fileLabel}`
                   : `${versionText} · Desktop installer available for macOS and Windows`}
+              </p>
+              <p className="mx-auto mt-2 max-w-2xl text-xs leading-5 text-foreground/58 dark:text-foreground/72">
+                Not sure which Mac you have? Open Apple menu, About This Mac. M-series means Apple silicon; Intel means the Intel build.
               </p>
             </div>
 
@@ -458,8 +490,8 @@ export default function Download() {
             <div className="mt-16 grid gap-8 md:grid-cols-3">
               {proofCards.map((card) => (
                 <article key={card.title} className="grid gap-5">
-                  <div className="min-h-72 border bg-shell p-5">
-                    <div className="h-full border bg-background/78 p-4 shadow-sm">
+                  <div className="min-h-72 border bg-card/60 p-5 dark:bg-card/35">
+                    <div className="h-full border bg-background p-4 shadow-sm dark:bg-background/65">
                       <ProofVisual visual={card.visual} />
                     </div>
                   </div>

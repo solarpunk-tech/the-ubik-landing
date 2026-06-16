@@ -1,3 +1,4 @@
+import { type FormEvent, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   ArrowLeftIcon,
@@ -13,8 +14,11 @@ import { PageShell } from "@/components/landing/PageShell";
 import { SharePostPanel } from "@/components/landing/SharePostPanel";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Seo } from "@/components/seo/Seo";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { aiMonitorPost, blogPosts, getBlogPostBySlug, marginLeakPost, originRoulettePost, type BlogPost } from "@/lib/blog";
 import { sourceNotes } from "@/lib/blog/origin-roulette";
+import { trackEvent } from "@/lib/posthog";
 
 type ArticleShellProps = {
   post: BlogPost;
@@ -74,6 +78,108 @@ const wisdomChecks = [
       "It matters commercially for seafood-risk perception and wild-caught or processed wild inputs. For farmed vannamei, the tighter issues are residue control, establishment approvals, and raw-material traceability."
   }
 ];
+
+function TradeNotesNewsletter({ source }: { source: string }) {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+      setStatus("error");
+      setMessage("Enter a valid email address.");
+      return;
+    }
+
+    setStatus("submitting");
+    setMessage("");
+
+    try {
+      const response = await fetch("/.netlify/functions/newsletter-subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: normalizedEmail, source }),
+      });
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(typeof data.message === "string" ? data.message : "Could not subscribe this email right now.");
+      }
+
+      setStatus("success");
+      setMessage("Subscribed to Trade Notes.");
+      setEmail("");
+      trackEvent("trade_notes_subscribed", { source });
+    } catch (error) {
+      setStatus("error");
+      setMessage(error instanceof Error ? error.message : "Could not subscribe this email right now.");
+    }
+  }
+
+  return (
+    <section className="border bg-shell p-5 sm:p-6">
+      <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(18rem,26rem)] md:items-center">
+        <div>
+          <p className="section-label">Trade Notes</p>
+          <h2 className="mt-3 text-3xl font-semibold">Subscribe to the field notes.</h2>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-foreground/72 dark:text-foreground/82">
+            Market reads, workflow notes, and reviewed automation lessons for perishable trade operators.
+          </p>
+        </div>
+        <form onSubmit={handleSubmit} noValidate className="grid gap-3 border bg-background p-4 shadow-sm">
+          <label htmlFor={`trade-notes-email-${source.replace(/[^a-z0-9]/gi, "-")}`} className="text-sm font-semibold">
+            Work email
+          </label>
+          <div className="grid gap-2 sm:grid-cols-[1fr_auto]">
+            <Input
+              id={`trade-notes-email-${source.replace(/[^a-z0-9]/gi, "-")}`}
+              type="email"
+              value={email}
+              onChange={(event) => {
+                setEmail(event.target.value);
+                if (status !== "submitting") {
+                  setStatus("idle");
+                  setMessage("");
+                }
+              }}
+              placeholder="you@company.com"
+              autoComplete="email"
+              aria-invalid={status === "error"}
+              className="h-10"
+            />
+            <Button type="submit" disabled={status === "submitting"} className="h-10 px-4">
+              {status === "submitting" ? "Subscribing..." : "Subscribe"}
+            </Button>
+          </div>
+          <p className="text-xs leading-5 text-foreground/58 dark:text-foreground/72">
+            We use your email to send Trade Notes and product-relevant operator updates. You can unsubscribe any time. Read Ubik&apos;s{" "}
+            <Link to="/legal/privacy" className="font-medium text-primary underline-offset-4 hover:underline">
+              Privacy Notice
+            </Link>
+            {" "}and Loops&apos;{" "}
+            <a
+              href="https://loops.so/privacy"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium text-primary underline-offset-4 hover:underline"
+            >
+              email platform privacy policy
+            </a>
+            .
+          </p>
+          {message ? (
+            <p className={status === "error" ? "text-sm font-medium text-destructive" : "text-sm font-medium text-primary"} role="status">
+              {message}
+            </p>
+          ) : null}
+        </form>
+      </div>
+    </section>
+  );
+}
 
 function ArticleShell({ post, children }: ArticleShellProps) {
   const jsonLd = {
@@ -135,6 +241,9 @@ function ArticleShell({ post, children }: ArticleShellProps) {
               </figure>
             ) : null}
             {children}
+            <div className="mt-10">
+              <TradeNotesNewsletter source={`theubik.com/blog/${post.slug}`} />
+            </div>
           </div>
           <aside className="xl:sticky xl:top-24 xl:justify-self-start">
             <SharePostPanel title={post.title} url={post.canonical} />
@@ -406,6 +515,9 @@ export default function Blog() {
               ) : null}
             </Link>
           ))}
+        </div>
+        <div className="mt-10">
+          <TradeNotesNewsletter source="theubik.com/blog" />
         </div>
       </main>
     </PageShell>

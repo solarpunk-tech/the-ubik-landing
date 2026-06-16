@@ -145,6 +145,13 @@ Preview the production build locally:
 pnpm preview
 ```
 
+Trade Notes signup uses a Netlify Function at `/.netlify/functions/newsletter-subscribe`.
+Set these runtime environment variables before enabling it in production:
+
+- `LOOPS_FORM_ENDPOINT`: preferred Loops custom form endpoint URL from Loops Forms settings.
+- `LOOPS_API_KEY`: fallback server-side Loops API key. Never expose this as a `VITE_` variable.
+- `LOOPS_NEWSLETTER_LIST_ID`: optional Loops mailing-list ID for the Trade Notes newsletter/category.
+
 ## Project Structure
 
 ```text

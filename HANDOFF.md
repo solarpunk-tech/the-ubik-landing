@@ -934,3 +934,78 @@
 - Final legal review remains needed for the privacy/terms draft before relying on it in production.
 - If final logo filenames change, update only `src/lib/brand.ts`.
 - Browser plugin DOM verification and Playwright screenshot capture were used for the final comment pass.
+
+- Latest download build selector and Loops newsletter pass:
+  - Pulled `origin/main` with `git pull --ff-only origin main`; repo was already up to date.
+  - No commit, push, PR, main merge, or Netlify deploy was performed. Keep this local until explicit approval because Netlify credits are constrained.
+  - `/download?os=windows` now presents explicit desktop build cards for `Windows`, `Mac (M-series)`, and `Mac (Intel)` instead of burying the alternatives in a compact selector.
+  - Copy guidance: M-series means Apple silicon/ARM64 and is recommended for Macs with M1/M2/M3/M4/newer chips; Intel maps to older Intel/x64 Macs. Avoided a strict 2021+ rule because Apple silicon began in late 2020 and Apple sold overlapping Intel models.
+  - Kept the existing mobile/tablet installer guard: 390px mobile shows no direct DMG/EXE anchors and asks users to reopen on a Mac or Windows desktop.
+  - Added `netlify/functions/newsletter-subscribe.js`, a server-side Loops subscribe endpoint using `PUT https://app.loops.so/api/v1/contacts/update` so the API key is never exposed client-side.
+  - Newsletter endpoint requires `LOOPS_API_KEY`; optional `LOOPS_NEWSLETTER_LIST_ID` maps the contact into the configured Loops mailing list/category via `mailingLists: { [id]: true }`.
+  - Added a download-page newsletter form with privacy copy linking to `/legal/privacy`; added `README.md` env notes for future deployment.
+  - Latest Loops docs checked on June 16, 2026: API keys must stay server-side; update contact is update-or-create; mailing lists are keyed boolean objects; CLI is available/beta but not needed for runtime website signup.
+  - Validation:
+    - `pnpm lint` passes with existing Fast Refresh warnings in `src/components/evilcharts/**`.
+    - `pnpm build` passes; Vite still reports existing large chunk warnings.
+    - `git diff --check` passes.
+    - Node unit check mocked Loops fetch and confirmed lowercased email, `source: theubik.com/download`, `userGroup: Newsletter`, and configured mailing-list payload.
+    - In-app Browser verified `http://localhost:5173/download?os=windows` page identity, nonblank content, no framework overlay, Windows selected, and installer hrefs for arm64 DMG, x64 DMG, and Windows EXE.
+    - In-app Browser desktop light/dark sanity confirmed theme toggle changes root class to `dark` and computed dark colors.
+    - In-app Browser mobile 390px confirmed no horizontal overflow (`documentScrollWidth=375`, `bodyScrollWidth=375`) and zero installer anchors.
+    - In-app Browser newsletter invalid-email state confirmed custom in-page error, `aria-invalid=true`, `novalidate`, and Privacy Notice link.
+  - Visual requirements:
+    - Layout: three desktop build choices should be visible above the fold and Windows should be selected on `?os=windows`.
+    - Spacing: build cards and newsletter form must not overflow desktop or 390px mobile.
+    - Typography: use nontechnical labels (`Mac (M-series)`, `Mac (Intel)`) with concise helper copy.
+    - Color: build cards and newsletter form must be legible in light and dark mode.
+    - Interactions: clicking a build card starts that installer download; newsletter form validates email before submitting.
+    - Responsive behavior: desktop shows installers; mobile preserves no-installer guard.
+  - Before evidence:
+    - User screenshot: `/var/folders/yz/jgm0w7r158s1lth5ylp9rhvh0000gn/T/codex-clipboard-3d27ea9d-f29f-42c5-99a7-91e9b21fb98f.png`
+    - Prior production Windows evidence: `verification/prod-download-windows-desktop.png`, `verification/prod-download-windows-mobile.png`
+  - After evidence:
+    - `verification/download-build-newsletter-after-desktop-light.png`
+    - `verification/download-build-newsletter-after-desktop-dark.png`
+    - `verification/download-build-newsletter-after-mobile-windows.png`
+    - `verification/download-newsletter-invalid-email-state.png`
+
+- Latest browser-comment follow-up on download proof cards and Trade Notes signup:
+  - No commit, push, PR, main merge, or Netlify deploy was performed.
+  - Moved the subscribe UI off `/download`; the Meetings page no longer renders a newsletter/Trade Notes form.
+  - Added reusable Trade Notes signup UI to `/blog` and every article page through `ArticleShell`.
+  - Updated the Loops function payload language from generic Newsletter/download to `userGroup: Trade Notes`; it accepts a blog/article `source` from the client and still reads `LOOPS_API_KEY` only server-side from `process.env`.
+  - README env note now calls the signup Trade Notes and keeps `LOOPS_API_KEY` explicitly server-side/non-`VITE_`.
+  - Local behavior note: plain Vite `pnpm dev` does not run Netlify Functions, so dropping an email into localhost will not create a real Loops contact unless running through `netlify dev` with `LOOPS_API_KEY` and optional `LOOPS_NEWSLETTER_LIST_ID` configured. Production Netlify will add contacts once those env vars are set.
+  - Reworked the Meetings proof-card surfaces for light/dark mode with calmer card backgrounds and less blue-heavy dark surfaces.
+  - Replaced mock participant names (`Gina Huels`, `Todd Cremin`, etc.) with app-like roster rows using favicons for Google Meet, Zoom, Microsoft Teams, and Webex while preserving `No bot detected`.
+  - Validation:
+    - `pnpm lint` passes with existing Fast Refresh warnings in `src/components/evilcharts/**`.
+    - `pnpm build` passes; Vite still reports existing large chunk warnings.
+    - Mocked Netlify Function confirmed `PUT https://app.loops.so/api/v1/contacts/update`, lowercased email, `source: theubik.com/blog/field-note`, `userGroup: Trade Notes`, and `mailingLists: { list_123: true }`.
+    - In-app Browser DOM checks stayed usable, but Browser screenshot capture timed out twice on `Page.captureScreenshot`; Playwright was used for screenshot evidence.
+    - Playwright verified `/download?os=windows` has no newsletter form, no old mock names, app-logo roster rows, `No bot detected`, and no 1280px overflow.
+    - Playwright verified `/blog` has the Trade Notes form, privacy copy, `/legal/privacy` link, and no 1280px overflow.
+    - Playwright verified `/blog/ai-monitor-layer-seafood-trade` has one Trade Notes form with article-specific email input id and no 1280px overflow.
+    - Playwright verified `/blog` at 390px has the Trade Notes form and no horizontal overflow.
+    - Known local console noise remains: React Router future-flag warnings, local S3 manifest CORS fallback errors on `/download`, and existing chart zero-size warnings on the AI monitor article.
+  - Latest evidence:
+    - `verification/download-proof-cards-after-light.png`
+    - `verification/download-proof-cards-after-dark.png`
+    - `verification/blog-trade-notes-newsletter-index.png`
+    - `verification/blog-trade-notes-newsletter-article.png`
+    - `verification/blog-trade-notes-newsletter-mobile.png`
+
+- Latest pre-read icon and Trade Notes privacy-copy follow-up:
+  - No commit, push, PR, main merge, or Netlify deploy was performed.
+  - Replaced the `SparkleIcon` in the `/download` pre-read preview with the product AI mark pattern: a small blue square dot.
+  - Updated the Trade Notes consent copy on `/blog` and every article page to state the actual email use: Trade Notes and product-relevant operator updates.
+  - Consent copy now links to both Ubik Privacy Notice (`/legal/privacy`) and Loops email platform privacy policy (`https://loops.so/privacy`, external tab).
+  - Validation:
+    - `pnpm lint` passes with existing Fast Refresh warnings in `src/components/evilcharts/**`.
+    - `pnpm build` passes; Vite still reports existing large chunk warnings.
+    - Playwright verified `/download?os=windows` still has no 1280px horizontal overflow and the pre-read preview remains present.
+    - Playwright verified `/blog` renders the intent copy, Ubik privacy link, Loops privacy link, external target, and no 1280px horizontal overflow.
+  - Latest evidence:
+    - `verification/download-pre-read-square-ai-icon.png`
+    - `verification/blog-trade-notes-privacy-links.png`

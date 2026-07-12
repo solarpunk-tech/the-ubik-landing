@@ -200,7 +200,7 @@ pnpm build
 
 Set the output directory to `dist`.
 
-## Contact
+## Contact\n\n## Contributing\n\nContributors are encouraged to review the [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 - Website: [theubik.com](https://theubik.com)
 - Product guide: [docs.theubik.com](https://docs.theubik.com)

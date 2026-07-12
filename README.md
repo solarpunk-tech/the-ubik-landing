@@ -208,3 +208,5 @@ Set the output directory to `dist`.
 - Contact: [Talk to the founders](founders@theubik.com)
 
 Solarpunk is an AI Operations company working on fixing broken perishable food ecosystem. Our first product is ubik, personalised workspace for vertically integrated importers, exporters & distributors in perishable food.
+
+Licensed under the MIT License. See [LICENSE](LICENSE) for details.

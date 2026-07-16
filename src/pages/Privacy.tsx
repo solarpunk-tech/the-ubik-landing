@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { PageShell } from "@/components/landing/PageShell";
 import { Seo } from "@/components/seo/Seo";
 
@@ -9,7 +10,7 @@ type Detail = {
 
 type Section = {
   title: string;
-  paragraphs?: string[];
+  paragraphs?: (string | ReactNode)[];
   bullets?: string[];
   table?: {
     headers: string[];
@@ -146,7 +147,19 @@ const sections: Section[] = [
     title: "12. Your rights",
     paragraphs: [
       "Depending on your location, you may have rights to access, correct, delete, restrict or object to processing, port your data, and withdraw consent. Under the GDPR you may also lodge a complaint with a supervisory authority. Under the India DPDP Act you have rights of access, correction, completion, erasure, grievance redressal and nomination.",
-      "To exercise your rights, contact us at founders@theubik.com. Where we process your data as a processor on behalf of a customer, we will refer your request to that customer and assist them in responding.",
+      <>
+        To request deletion of your personal data specifically, submit a request via our{" "}
+        <a
+          href="https://forms.gle/LpJA7WWis8rdXsXp9"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary underline-offset-4 hover:underline"
+        >
+          data deletion request form
+        </a>
+        . For all other rights requests (access, correction, portability, objection), contact us at founders@theubik.com. Where we process your data as a processor on behalf of a customer, we will refer your request to that customer and assist them in responding.
+      </>,
+      "All data deletion requests are logged and tracked internally, with confirmation sent to the requester upon completion.",
       "We will respond within the timeframe required by applicable law, for example within one month under the GDPR."
     ]
   },
@@ -218,7 +231,9 @@ export default function Privacy() {
               <section key={title}>
                 <h2 className="text-2xl font-semibold">{title}</h2>
                 <div className="mt-4 grid gap-3 leading-7 text-foreground/72 dark:text-foreground/82">
-                  {paragraphs?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                  {paragraphs?.map((paragraph, index) => (
+                    <p key={typeof paragraph === "string" ? paragraph : `paragraph-${index}`}>{paragraph}</p>
+                  ))}
                   {bullets ? (
                     <ul className="grid gap-2 pl-5">
                       {bullets.map((item) => (

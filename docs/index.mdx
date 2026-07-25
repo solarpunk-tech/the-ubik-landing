@@ -35,21 +35,29 @@ This guide is for operators, reviewers, admins, and leaders who need AI to carry
 
 ## Deployment options
 
-<div className="ubik-deploy-grid">
-  <div>
-    <p className="ubik-label">01 / On premises</p>
-    <strong>In your data center.</strong>
-    <span>Self-host on bare metal or your own Kubernetes. Zero data leaves your perimeter.</span>
+<div className="ubik-deploy-shell">
+  <div className="ubik-deploy-lead">
+    <p className="ubik-label">Where Ubik runs</p>
+    <h2>Pick the deployment that matches your risk boundary.</h2>
+    <p>Use the same operating workflow whether you keep data on premises, inside your cloud account, or on a local workstation.</p>
   </div>
-  <div>
-    <p className="ubik-label">02 / Your cloud</p>
-    <strong>In your VPC.</strong>
-    <span>Deploy to AWS, GCP, or Azure inside your account. BYOC from day one.</span>
-  </div>
-  <div>
-    <p className="ubik-label">03 / Local</p>
-    <strong>On your laptop.</strong>
-    <span>Run the full stack on a workstation for offline dev, demos, or sensitive work.</span>
+
+  <div className="ubik-deploy-grid">
+    <div className="ubik-deploy-card">
+      <p className="ubik-label">01 / On premises</p>
+      <strong>In your data center.</strong>
+      <span>Self-host on bare metal or your own Kubernetes. Zero data leaves your perimeter.</span>
+    </div>
+    <div className="ubik-deploy-card">
+      <p className="ubik-label">02 / Your cloud</p>
+      <strong>In your VPC.</strong>
+      <span>Deploy to AWS, GCP, or Azure inside your account. BYOC from day one.</span>
+    </div>
+    <div className="ubik-deploy-card">
+      <p className="ubik-label">03 / Local</p>
+      <strong>On your laptop.</strong>
+      <span>Run the full stack on a workstation for offline dev, demos, or sensitive work.</span>
+    </div>
   </div>
 </div>
 

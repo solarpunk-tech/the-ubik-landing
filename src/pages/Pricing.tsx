@@ -15,18 +15,18 @@ import { trackEvent } from "@/lib/posthog";
 
 const baseFeatures = [
   "Webapp + Ubik Meetings desktop add-on",
-  "Memory workflows for inbox, meetings, projects and ops",
-  "10+ LLMs plus live trade artifacts",
-  "Market intelligence projects + agentic browsing",
-  "Local meeting recorder and device-held credentials"
+  "2-3 new workflows every month",
+  "Inbox, meetings, market intel and live artifacts",
+  "10+ LLMs with device-held credentials",
+  "Local meeting recorder included"
 ];
 
 const enterpriseFeatures = [
   "Everything in Base",
-  "WhatsApp + email + ERP + CRM workflow automation",
-  "RFQ, PO, VMI, margin and traceability playbooks",
-  "A trade expert and a product engineer keep your playbooks and agents updated, models fine-tuned for your KPIs and OKRs — frontier intelligence at a fraction of token costs",
-  "Private deployments, SSO, roles and audit logs"
+  "2-3 new workflows every week",
+  "WhatsApp, email, ERP and CRM automation",
+  "Custom ERP or CRM transition into Ubik",
+  "Maintenance, playbook updates and private controls"
 ];
 
 const localPills = [
@@ -48,15 +48,15 @@ const pricingFaqs = [
   {
     question: "What does Base cover?",
     answer: [
-      "Base is the personal AI workspace for one operator. It includes the Ubik Webapp, Ubik Meetings, local meeting recording, memory workflows, market intelligence projects, live artifacts and agentic browsing.",
+      "Base is the personal AI workspace for one operator. It includes the Ubik Webapp, Ubik Meetings, local meeting recording, market intelligence projects, live artifacts and 2-3 new workflows every month.",
       "It is built for individual trade, pricing, meeting and operations work before Ubik becomes a wider workflow layer for the team."
     ]
   },
   {
     question: "How does Enterprise expand Base?",
     answer: [
-      "Enterprise starts with everything in Base, then adds cross-team workflow automation across WhatsApp, email, ERP, CRM, documents and customer-facing operations.",
-      "A trade expert and a product engineer keep your playbooks and agents updated, models fine-tuned for your KPIs and OKRs — frontier intelligence at a fraction of token costs. Plus custom playbooks, SSO/SAML, role-based permissions, audit logs and private deployment options."
+      "Enterprise starts with everything in Base, then adds 2-3 new workflows every week across WhatsApp, email, ERP, CRM, documents and customer-facing operations.",
+      "A trade expert and product engineer maintain the workflows, handle custom ERP or CRM transition work, and build the right operating system into Ubik. SSO/SAML, role-based permissions, audit logs and private deployment options are included."
     ]
   },
   {
@@ -120,10 +120,10 @@ export default function Pricing() {
         }}
       />
 
-      <main className="relative overflow-hidden">
+      <main className="pricing-brand-page relative overflow-hidden">
         <MatrixField variant="hero" density="medium" seed="pricing-workspace" />
         <section className="container-page section-y relative z-10">
-          <div className="mb-10 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div className="pricing-brand-hero mb-10 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
             <div className="max-w-4xl">
               <Badge variant="outline" className="mb-5">
                 Pricing
@@ -131,7 +131,7 @@ export default function Pricing() {
               <h1 className="text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
                 Choose the workspace that matches your <span className="text-primary">operating reality.</span>
               </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-foreground/72 dark:text-foreground/82">
+              <p className="mt-5 max-w-3xl text-lg leading-8 text-primary-foreground/84">
                 Start with a personal AI workspace. Go Enterprise when Ubik needs to run workflows across your trade stack, team and customers.
               </p>
             </div>
@@ -162,7 +162,7 @@ export default function Pricing() {
                     <CardTitle className="mt-3 text-3xl">Base</CardTitle>
                   </div>
                   {billing === "annual" ? (
-                    <Badge variant="secondary" className="bg-primary-foreground text-primary">
+                    <Badge variant="secondary" className="bg-shell text-primary-foreground">
                       Save 15%
                     </Badge>
                   ) : null}
@@ -173,7 +173,7 @@ export default function Pricing() {
                     <span className="ml-2 text-base font-medium text-primary-foreground/85">/ month</span>
                   </p>
                   <p className="mt-5 max-w-xl text-primary-foreground/92">
-                    For operators who want a personal AI workspace for trade, market intelligence, meetings and live work artifacts.
+                    For operators who want a personal AI workspace plus 2-3 new workflows every month.
                   </p>
                 </div>
               </CardHeader>
@@ -199,7 +199,7 @@ export default function Pricing() {
                 <div>
                   <p className="text-5xl font-semibold">Custom</p>
                   <p className="mt-5 max-w-xl text-foreground/72 dark:text-foreground/82">
-                    For frozen food importers, exporters and processors running mission-critical trade workflows across teams, systems and geographies.
+                    For teams that want 2-3 new workflows every week, maintained across ERP, CRM, email, WhatsApp and custom systems.
                   </p>
                 </div>
               </CardHeader>

@@ -170,8 +170,56 @@ a {
   border-right: 0;
 }
 
+.ubik-deploy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1.75rem 0;
+  border: 1px solid var(--ubik-light-border);
+  background: linear-gradient(180deg, rgba(56, 95, 232, 0.04), rgba(56, 95, 232, 0.12));
+}
+
+.ubik-deploy-grid > div {
+  min-height: 11rem;
+  padding: 1.25rem;
+  border-right: 1px solid var(--ubik-light-border);
+}
+
+.ubik-deploy-grid > div:last-child {
+  border-right: 0;
+}
+
+.ubik-deploy-grid strong,
+.ubik-deploy-grid span {
+  display: block;
+}
+
+.ubik-deploy-grid strong {
+  margin-top: 3rem;
+  font-size: 1.35rem;
+  line-height: 1.15;
+}
+
+.ubik-deploy-grid span {
+  margin-top: 0.7rem;
+  color: var(--ubik-light-muted);
+  line-height: 1.6;
+}
+
 .dark .ubik-proof {
   border-right-color: var(--ubik-dark-border);
+}
+
+.dark .ubik-deploy-grid {
+  border-color: var(--ubik-dark-border);
+  background: linear-gradient(180deg, rgba(77, 112, 240, 0.08), rgba(77, 112, 240, 0.16));
+}
+
+.dark .ubik-deploy-grid > div {
+  border-right-color: var(--ubik-dark-border);
+}
+
+.dark .ubik-deploy-grid span {
+  color: var(--ubik-dark-muted);
 }
 
 .ubik-metric {
@@ -286,6 +334,28 @@ a {
 
   .ubik-proof:last-child {
     border-bottom: 0;
+  }
+
+  .ubik-deploy-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ubik-deploy-grid > div {
+    min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--ubik-light-border);
+  }
+
+  .dark .ubik-deploy-grid > div {
+    border-bottom-color: var(--ubik-dark-border);
+  }
+
+  .ubik-deploy-grid > div:last-child {
+    border-bottom: 0;
+  }
+
+  .ubik-deploy-grid strong {
+    margin-top: 1.5rem;
   }
 
   .ubik-prompt-row {

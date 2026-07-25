@@ -1,5 +1,573 @@
 # Handoff — the-ubik-landing
 
+## 2026-07-25 homepage annotations, docs deployment section, and pricing simplification
+
+- Local dev server remains running at `http://127.0.0.1:5173/`.
+- No commit, push, PR, main merge, or deploy was performed.
+- Correction after user review: the supplied deployment screenshot is no longer embedded on the homepage. The homepage now recreates those three points as a native `Deploy anywhere` section component in the site style.
+- Scope touched for this pass:
+  - `src/pages/Index.tsx`: removed the right-side hero integration component; shortened the hero headline and lede; applied browser annotation copy changes; removed the `Bulk reply completed` workflow commit footer; added a native three-card `Deploy anywhere` section above the team cards; moved Trade Notes to the bottom above the footer with the shorter title/link; updated the company strip label and closing CTA headline.
+  - `src/index.css`: added responsive/stable styling for the new deployment-card section using local CSS-drawn deployment marks. Mobile stacks the cards; desktop uses a three-card grid beside the title.
+  - `docs/index.mdx` and `docs/style.css`: renamed the Mintlify home page from `Ubik operator guide` to `Getting Started` and added the deployment options as a home-page guide section.
+  - `src/pages/Pricing.tsx`: shortened Base/Enterprise feature bullets; Base now says `2-3 new workflows every month`; Enterprise says `2-3 new workflows every week`, custom ERP/CRM transition into Ubik, and maintenance/playbook updates.
+- Validation:
+  - `pnpm build` passes; Vite retains the existing large-chunk warning.
+  - `pnpm lint` passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+  - `git diff --check` passes.
+  - `mintlify validate` passes.
+  - `mintlify broken-links` passes.
+  - Playwright homepage desktop/mobile confirms all requested visible copy, removed hero component, removed `Bulk reply completed` footer, native deployment-card section, no screenshot image reference, bottom Trade Notes placement, zero console errors, and no horizontal overflow.
+  - Playwright pricing desktop confirms monthly/weekly workflow bullets, custom ERP/CRM transition copy, zero console errors, and no horizontal overflow.
+- Visual evidence:
+  - Before/user reference screenshot: `/Users/shubhranshujha/Desktop/Screenshot 2026-07-25 at 7.39.16 PM.png`
+  - After native deployment section desktop: `output/playwright/home-deploy-native-final-desktop.png`
+  - After native deployment section mobile: `output/playwright/home-deploy-native-final-mobile.png`
+  - After pricing desktop: `output/playwright/pricing-workflow-points-desktop.png`
+
+## 2026-07-25 homepage copy reduction and cleanup pass
+
+- Local dev server remains running at `http://127.0.0.1:5173/`.
+- No commit, push, PR, main merge, or deploy was performed.
+- Browser comments addressed:
+  - Removed the hero visual top chrome (`LIVE SYSTEMS` / `ONE TRADE MEMORY`).
+  - Removed the hero visual bottom output strip (`SAFE NEXT MOVE` / reviewed action copy).
+  - Replaced the center white-box mark with a five-square animated blue Ubik mark.
+  - Made hero tool nodes lighter and more blended into the grid; favicon images use multiply blending to reduce visible white backgrounds.
+  - Enlarged the operating-experience company rail and gave it more vertical presence.
+  - Reworked the founder closing block so the quote uses more horizontal width, removed the right-column kicker/body, and made Hemanth's image link to LinkedIn.
+  - Changed team labels to `Product GTM` and `Agent systems`.
+- Copy reduction beyond annotations:
+  - Removed homepage subtitle/kicker lines above section titles for the hero, shipment reality, trade memory, outcomes, Trade Notes, and closing CTA sections.
+  - Folded key terms into answer-style headings/body where useful: perishable importers/exporters, trade memory, decision-to-done workflows, and perishable trade operators.
+- Validation:
+  - `pnpm build` passes; Vite retains the existing large-chunk warning.
+  - Playwright desktop confirms the removed chrome/kicker strings are absent, the new memory heading and team labels are present, Hemanth photo links to LinkedIn, the hero core has five square children with transparent container/no shadow, and no horizontal overflow.
+  - Playwright mobile confirms no horizontal overflow, removed hero chrome remains absent, and the founder photo LinkedIn link is present.
+- Visual evidence:
+  - After hero desktop: `output/playwright/home-cleanup-hero-after-desktop.png`
+  - After founder desktop: `output/playwright/home-cleanup-founder-after-desktop.png`
+  - After hero mobile: `output/playwright/home-cleanup-hero-after-mobile.png`
+  - After founder mobile: `output/playwright/home-cleanup-founder-after-mobile.png`
+
+## 2026-07-25 Sai Kiran LinkedIn URL supplied
+
+- Local dev server is running at `http://127.0.0.1:5173/` from `/Users/shubhranshujha/Codex/the-ubik-landing`.
+- Updated Sai Kiran's team-card LinkedIn URL from the scoped people-search fallback to `https://www.linkedin.com/in/saikiraniitb/`.
+- The older handoff entries below still mention the historical blocker, but it is resolved for the rendered homepage as of this note.
+- No commit, push, PR, main merge, or deploy was performed in this step.
+
+## 2026-07-25 shrimp workflow relevance and hero rail-square cleanup
+
+### Status
+
+- **STATICALLY COMPLETE — browser visual verification is blocked, not committed or pushed.**
+- Existing unrelated content blocker remains: Sai Kiran's exact LinkedIn URL is unknown.
+- Browser blocker: the in-app browser refused the localhost page with its URL policy while trying to run the after-check. Do not bypass this with a second browser surface. Next action: manually reload the visible `http://127.0.0.1:5173/` tab, then retry screenshot capture.
+
+### Implemented
+
+- Removed the extra blue square markers from the hero leadership and manager rail lines. The central Ubik memory core is now the only blue square mark in that hero map.
+- Reworked the trade-memory journey around one product: shrimp.
+- Replaced generic Panel 01 source favicons with contextual source rows:
+  - Compliance: FDA alert, BAP certificate, health PDF,
+  - Sales Ops: buyer email, WhatsApp, CRM promise,
+  - Plant & Inventory: SAP stock, cold-store inventory, Power BI,
+  - Packaging: artwork PDF, buyer spec, packaging policy,
+  - Finance: Ramp, FX sheet, Power BI,
+  - Procurement: supplier email, Coupa, vendor certificates.
+- Removed the repeated Panel 01 sentence `Evidence arrives from the tools your team already works in.`
+- Changed Panel 03 from a repeated `One safe next move` heading to step-specific reviewed outputs:
+  - Compliance release,
+  - Buyer update,
+  - Production plan,
+  - Packaging override,
+  - Margin approval,
+  - Supplier choice.
+
+### Visual requirements and evidence
+
+- Layout: keep the three-panel systems -> memory -> reviewed output structure, with source rows doing more visual work instead of the removed helper sentence.
+- Spacing: preserve existing panel widths and row heights; avoid adding a new text block below Panel 01.
+- Typography: keep compact IBM Plex Mono status labels; keep readable product-specific output titles in Panel 03.
+- Color: only the center hero memory mark should be blue on the top/bottom rail axis; no extra blue rail midpoint squares.
+- Interactions: retain the existing auto-advancing team spine and manual selection pause.
+- Responsive behavior: contextual source rows should stay contained in the existing mobile panel stack.
+- Before: browser-comment screenshots attached to this task showing extra rail squares, repeated Panel 01 helper copy, generic source favicons, and repeated Panel 03 output language.
+- After: not captured due to the browser blocker above.
+- Static verification:
+  - `pnpm build` passes,
+  - `git diff --check` passes,
+  - `pnpm lint` passes with the existing seven Fast Refresh warnings under `src/components/evilcharts/**`.
+
+## 2026-07-25 live systems rotation and Ubik-mark correction
+
+### Status
+
+- **COMPLETE LOCALLY — visually verified, not committed or pushed.**
+- Existing unrelated content blocker remains: Sai Kiran's exact LinkedIn URL is unknown.
+
+### Implemented
+
+- Converted the six static hero tiles into coordinated 3.6-second rotations:
+  - Gmail / Outlook,
+  - WhatsApp / Slack / Teams,
+  - D365 / Zoho / Oracle / SAP,
+  - Maersk / DHL / MSC,
+  - PDF / Excel / Images / CSV,
+  - Ramp / Razorpay / Power BI / Wise.
+- Added a leadership rail above the tools (`LEADERSHIP · DECIDE`) and a manager rail below them (`MANAGERS · MONITOR · VALIDATE`).
+- The hero memory core is now a solid Ubik-blue square with blue border layers instead of a white field with a small blue square.
+- The active workflow selector and traveling orchestration actor now remain solid Ubik blue without the white hollow-square treatment.
+- Tool swapping and workflow motion stop under `prefers-reduced-motion`.
+- The integration graphic exposes one concise accessible summary instead of announcing every timed swap.
+
+### Visual requirements and evidence
+
+- Layout: retain the six-node systems → memory composition and use the previously empty top/bottom field space for decision ownership.
+- Spacing: keep all rotating labels on one line without changing the hero's overall footprint.
+- Typography: retain compact IBM Plex Mono system metadata; distinguish responsibility with `LEADERSHIP`, `DECIDE`, `MANAGERS`, and `MONITOR · VALIDATE`.
+- Color: warm paper and commodity ink remain dominant; solid Ubik blue marks the memory core, active workflow, and moving orchestration actor.
+- Interactions: tool families rotate together every 3.6 seconds; reduced-motion users see the first stable set.
+- Responsive behavior: six tiles stay contained in the existing mobile field; longer labels such as `Razorpay` and `Power BI` do not wrap or overflow.
+- Before: `output/browser-comments/home-hero-live-systems-before.png`.
+- After:
+  - `output/browser-comments/home-hero-live-systems-after.png`,
+  - `output/browser-comments/home-hero-live-systems-mobile-after.png`,
+  - `output/browser-comments/home-workflow-ubik-mark-after.png`.
+- Browser verification:
+  - multiple timed tool sets render with the expected favicons or file-type icons,
+  - leadership and manager rails remain visible,
+  - mobile tiles report zero overflow and zero wrapped labels,
+  - document width remains below viewport width,
+  - no browser console errors.
+- Static verification:
+  - `pnpm build` passes,
+  - `git diff --check` passes,
+  - `pnpm lint` passes with the existing seven Fast Refresh warnings under `src/components/evilcharts/**`.
+
+## 2026-07-25 hero integration product-name correction
+
+### Status
+
+- **COMPLETE LOCALLY — visually verified, not committed or pushed.**
+- Replaced the hero integration field's generic category labels with the recognizable product names already represented by each tile's favicon:
+  - `ERP` → `Odoo`,
+  - `Carrier` → `Maersk`,
+  - `Documents` → `Adobe`,
+  - `Finance` → `Tally`.
+- Existing unrelated content blocker remains: Sai Kiran's exact LinkedIn URL is unknown.
+
+### Visual requirements and evidence
+
+- Layout: preserve the existing six-tile field and central Ubik memory square.
+- Spacing: keep all tile dimensions and positions unchanged; only the labels change.
+- Typography: retain compact uppercase IBM Plex Mono labels.
+- Color: preserve the warm-paper, commodity-ink, and Ubik-blue hero system.
+- Interactions: none; the integration map remains a static product story.
+- Responsive behavior: keep the existing mobile tile layout and avoid longer labels that would force wrapping.
+- Before: `output/browser-comments/home-hero-app-names-before.png`.
+- After:
+  - `output/browser-comments/home-hero-app-names-after.png`,
+  - `output/browser-comments/home-hero-app-names-mobile-after.png`.
+- Browser verification:
+  - the integration field renders `Gmail`, `WhatsApp`, `Odoo`, `Maersk`, `Adobe`, and `Tally`,
+  - no tile overflows and no label wraps at the narrow viewport,
+  - document width remains below viewport width,
+  - no browser console errors.
+- Static verification:
+  - `pnpm build` passes,
+  - `git diff --check` passes,
+  - `pnpm lint` passes with the existing seven Fast Refresh warnings under `src/components/evilcharts/**`.
+
+## 2026-07-25 workflow-orchestration correction and team-copy restore
+
+### Status
+
+- **COMPLETE LOCALLY — visually verified, not committed or pushed.**
+- This section supersedes the `INCOMPLETE` screenshot status and provisional team copy in the immediately following handoff entry.
+- Existing content blocker remains: Sai Kiran's exact LinkedIn URL is unknown; the icon still uses the scoped LinkedIn people search.
+
+### Corrected implementation
+
+- Removed both misaligned diamond connector markers between the three workflow panels.
+- Added one full-width orchestration rail above the panels:
+  - `UBIK IS WORKING`,
+  - a blue Ubik square moves evidence → memory → action,
+  - the active-team square on the six-stop spine remains the selector indicator.
+- The center product surface is now purpose-built for every workflow instead of repeating one bitemporal card:
+  - Compliance & CSR: PDF OCR + image extraction with structured certificate fields,
+  - Sales Ops: buyer-promise history and known-time timeline,
+  - Plant & Inventory: lot allocation chart across warehouses,
+  - Packaging: extraction, rule check, human review, and production-tracker task progression,
+  - Finance: landed-margin history against the approved floor,
+  - Procurement: supplier project progress and reviewed reply tasks.
+- Replaced the bottom ownership sentence with eight additional integration favicons and `+100 MORE`.
+- Restored the earlier concise team copy:
+  - Shubhranshu: `Product & systems` / `Turns complex operating context into calm products, integrations, and dependable workflows.`,
+  - Sai: `Product engineering` / `Builds and ships the workflow layer that carries trade decisions safely into the systems teams use.`
+
+### Visual requirements and evidence
+
+- Layout: retain the three-column systems → working memory → output composition, with the orchestration rail spanning all three columns.
+- Typography: short mono process metadata; clear product-facing team roles and two-line bios.
+- Color: warm paper and commodity ink; Ubik blue is the moving actor, active selector, extracted intelligence, and written-back result.
+- Interactions: all six team tabs remain directly selectable and pause auto-advance after manual selection.
+- Responsive behavior: selectors use two columns; source, memory, and output panels stack; the app strip remains contained.
+- Before: two browser-comment screenshots attached to this correction task showing the repeated bitemporal card, connector diamonds, and sentence footer.
+- After:
+  - `output/browser-comments/home-workflow-distinct-memory-after.png`,
+  - `output/browser-comments/home-workflow-orchestration-and-integrations-after.png`,
+  - `output/browser-comments/home-team-copy-restored-after.png`,
+  - `output/browser-comments/home-workflow-orchestration-mobile-after.png`.
+- Browser verification:
+  - all six selectors render their matching distinct memory label,
+  - `.workflow-flow-rule` count is `0`,
+  - additional integration favicon count is `8`,
+  - `MEET THE TEAM BEHIND IT` count remains `0`,
+  - mobile document width equals viewport width (`416px`) and the workflow stack is contained at `384.69px`,
+  - no browser console errors.
+- Static verification:
+  - `pnpm build` passes,
+  - `git diff --check` passes,
+  - `pnpm lint` passes with the existing seven Fast Refresh warnings under `src/components/evilcharts/**`.
+
+## 2026-07-25 integrations, team workflow spine, and hero visual pass
+
+### Status
+
+- **INCOMPLETE — implementation and static checks are complete, but the required after screenshots could not be captured.**
+- Blocker: the existing in-app browser tab had become an `ERR_CONNECTION_REFUSED` page while the local Vite server was stopped. After restarting Vite at `http://127.0.0.1:5173/`, Browser Use blocked navigation from the generated error page back to localhost under its URL policy. Do not use a second browser surface as a workaround. Next action: reload the already-open localhost tab manually, then capture the four after views listed below.
+- Existing content blocker remains: Sai Kiran's exact LinkedIn URL is still unknown; the icon continues to use a scoped LinkedIn people search.
+
+### Source and intent
+
+- The four supplied sales-deck screenshots were treated as product/content evidence only, not as visual references.
+- Recovered the older integration vocabulary from the committed favicon grid and source-system surface, then adapted it to the current warm-paper Swiss landing system.
+- The product story is now apps → bitemporal trade memory → reviewed output across six operating teams, rather than a generic dashboard or a sales-deck card library.
+
+### Implemented locally
+
+- Hero:
+  - replaced the text-heavy shipment decision sheet with a quiet visual integration field,
+  - six source-app tiles feed a central Ubik memory square,
+  - the only outcome copy is `One reviewed action, with its evidence attached.`,
+  - left-side hero proposition and CTAs remain the visual priority.
+- Product / trade memory:
+  - title is provisionally `Every team works from the same trade memory.`,
+  - added six directly selectable stops: Compliance & CSR, Sales Operations, Plant & Inventory, Packaging, Finance, and Procurement,
+  - every stop shows three real source apps, one valid-time / known-time record, linked ontology context, and one relevant result widget,
+  - widgets cover lot traceability, buyer promise watch, lot readiness, packaging material rules, margin watch, and vendor comparison,
+  - auto-advance pauses when a visitor makes a selection.
+- Closing team strip:
+  - removed the separate `MEET THE TEAM BEHIND IT` label column,
+  - the two profiles now share the full horizontal width,
+  - Shubhranshu is provisionally `Product operator · design · GTM`,
+  - Sai is provisionally `AI/ML · systems architecture`.
+
+### Visual requirements and evidence
+
+- Layout: visual-first hero; six-stop horizontal team spine; expanded three-part systems → memory → output surface; two equal founder-profile columns.
+- Spacing: preserve the existing 8px-derived rhythm, generous editorial section spacing, and compact evidence rows.
+- Typography: Montserrat/Noto display and body system already used by the landing; IBM Plex Mono only for apps, times, states, and result metadata.
+- Color: warm paper, commodity ink, and Ubik blue only; green/red/amber are not introduced as decorative UI color.
+- Interactions: team stops auto-advance every 4.2 seconds until manually selected; selection then remains stable.
+- Responsive behavior: six stops become a two-column selector; evidence, memory, and result stack vertically; the team profiles stack to one column.
+- Before:
+  - `output/browser-comments/home-ontology-bitemporal-after.png`,
+  - `output/browser-comments/home-closing-team-strip-after.png`,
+  - browser-comment hero screenshot attached to task `019f95a0-cb2d-7020-b564-89c06143adaa`.
+- Required after capture once the localhost tab is reloaded:
+  - `output/browser-comments/home-hero-integration-visual-after.png`,
+  - `output/browser-comments/home-team-workflow-stack-after.png`,
+  - `output/browser-comments/home-team-profiles-two-column-after.png`,
+  - `output/browser-comments/home-team-workflow-stack-mobile-after.png`.
+- Static verification:
+  - `pnpm build` passes,
+  - `git diff --check` passes,
+  - `pnpm lint` passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+
+### Provisional copy for next-session cleanup
+
+- Product eyebrow: `OWN YOUR TRADE SECRETS, DATA & INTELLIGENCE`
+- Product title: `Every team works from the same trade memory.`
+- Product support: `Ubik joins the systems each team already uses, remembers what was true and when it became known, and turns that context into the next safe workflow.`
+- Hero visual outcome: `One reviewed action, with its evidence attached.`
+- Shubhranshu role: `Product operator · design · GTM`
+- Shubhranshu bio: `A full-stack FDE and venture builder who turns domain insight into product, adoption, and repeatable growth.`
+- Sai role: `AI/ML · systems architecture`
+- Sai bio: `Builds the foundational LLM, memory, and agent systems that make Ubik reliable in real operating workflows.`
+- No copy cleanup or push was performed; user requested a dedicated cleanup session before publishing.
+
+## 2026-07-25 bitemporal ontology, contrast, and closing-team pass
+
+### Source and intent
+
+- Continued from Codex task `019f95a0-cb2d-7020-b564-89c06143adaa`.
+- Reused `/Users/shubhranshujha/Codex/fresh/ubik-webapp/output/ubik-widget-board.html` as a component-language reference, especially its source evidence, linked entities, review states, and writeback patterns.
+- Replaced the physical Harvest → Retail ontology story with the product mechanism that differentiates Ubik: bitemporal truth, linked trade entities, conflict detection, downstream impact, human review, and reusable memory.
+
+### Implemented locally
+
+- Trade ontology:
+  - eyebrow: `OWN YOUR TRADE SECRETS, DATA & INTELLIGENCE`,
+  - title: `Know what changed, when it changed, and what it changes next.`,
+  - support explains valid-time truth, knowledge-time truth, and the buyer/lot/shipment/margin/promise consequences,
+  - eight interactive states now read `Signal captured`, `Truth dated`, `Entities linked`, `Conflict found`, `Impact traced`, `Decision prepared`, `Human reviewed`, and `Memory updated`,
+  - each state has a purpose-built artifact: source evidence card, dual-time record, entity graph, reconciliation conflict, impact grid, decision brief, approval trail, or intelligence receipt.
+- Outcomes contrast:
+  - `FROM DECISION TO DONE` now renders at full inverse white,
+  - body copy is full inverse white, `18px`, and medium weight instead of low-opacity grey.
+- Closing section:
+  - the 14-company experience row now spans the full content width with larger marks and full-strength labels,
+  - Hemanth's credit is a direct LinkedIn link with a LinkedIn mark,
+  - added the compact `MEET THE TEAM BEHIND IT` strip with two columns for Shubhranshu Jha and Sai Kiran plus one-line bios and LinkedIn marks.
+- LinkedIn URL status:
+  - Hemanth: verified direct URL `https://www.linkedin.com/in/hemanth-thimmasarthi`,
+  - Shubhranshu: verified direct URL `https://www.linkedin.com/in/11shubhranshu`,
+  - Sai: no direct personal LinkedIn URL was discoverable from the repo, GitHub profile, or public search; the current icon uses a scoped LinkedIn people search. Replace it with Sai's direct URL when supplied.
+
+### Visual requirements and evidence
+
+- Layout: keep the Swiss editorial proposition above one interactive console; make the company proof a true full-width band; keep the team bios subordinate as a thin horizontal strip.
+- Spacing: preserve the existing 8px-derived rhythm and the large separation between proposition, proof component, and closing statement.
+- Typography: product innovation in operator language; full-strength supporting copy on ink; compact IBM Plex Mono for evidence/time/state metadata.
+- Color: warm paper, commodity ink, and Ubik blue only; blue identifies the active signal, evidence state, or action.
+- Interactions: all eight ontology tabs are directly selectable and render their matching state-specific artifact.
+- Responsive behavior: ontology selectors become a two-column mobile grid; team profiles stack; DOM audit reports document width `416` at viewport width `433`, with no horizontal overflow.
+- Before:
+  - `output/playwright/trade-ontology-after-desktop.png`,
+  - `output/browser-comments/home-outcomes-closing-before.png`.
+- After:
+  - `output/browser-comments/home-ontology-bitemporal-after.png`,
+  - `output/browser-comments/home-outcomes-contrast-after.png`,
+  - `output/browser-comments/home-closing-team-after.png`,
+  - `output/browser-comments/home-closing-team-strip-after.png`,
+  - `output/browser-comments/home-ontology-bitemporal-mobile-after.png`.
+- Browser verification:
+  - all eight ontology tabs select and render the correct artifact class,
+  - outcomes kicker and body compute to `rgb(254, 253, 251)`,
+  - outcomes body computes to `18px` / `500`,
+  - company row width is `1344px` and the team grid resolves to two equal desktop columns,
+  - no browser console errors,
+  - desktop and mobile document widths remain below their viewport widths.
+- `pnpm build` and `git diff --check` pass.
+- `pnpm lint` passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+
+## 2026-07-25 widget-board-informed work ledger
+
+### Source and intent
+
+- Reviewed `/Users/shubhranshujha/Codex/fresh/ubik-webapp/output/ubik-widget-board.html` as an exhaustive component study, then adapted its compact ledger rows, route comparison, delegated-decision trail, and ETA status stack to the cleaner landing-page composition.
+- The landing section remains one interactive work ledger rather than reproducing the prototype's six-card board.
+
+### Implemented locally
+
+- `Vendor replies`: a compact table shows a single reviewed bulk action completed across Amcor, Mondi, Berry Global, and Sealed Air, including source favicons, timestamps, and the packaging-programme writeback.
+- `Shipment tracker`: a compact route canvas retains the booked Maersk lane between Visakhapatnam and Newark and overlays a blue dotted Hapag-Lloyd alternative detected by Ubik, with the time and cost delta.
+- `Approval`: a delegated → reviewed → approved → committed trail shows Operations, Commercial, and Quality manager decisions, the trade-off each accepted, and a leadership-level readout.
+- `ETA watch`: a live status stack shows watched promises, next carrier check, SLA/watch/pending distribution, and the Maersk exception that remains under observation.
+- Each view now has state-specific ownership and completion language. Completed replies and manager approvals no longer incorrectly say they are waiting at the human boundary; the alternative carrier route still does.
+- Selecting a ledger tab pauses auto-advance so the chosen work product remains inspectable.
+- Supporting copy now describes vendor coordination, route comparison, manager approvals, and ongoing monitoring instead of repeating the hero decision queue.
+
+### Visual requirements and evidence
+
+- Layout: preserve the editorial statement plus one large ledger; each state uses one purpose-built artifact rather than a repeated generic field list.
+- Spacing: dense internal information with clear row rhythm; generous separation between section proposition and work surface.
+- Typography: large work-product title, compact mono metadata, and short operational copy; leadership trade-offs remain directly readable.
+- Color: commodity ink band, warm-paper artifact, Ubik-blue action/alternative signal, with green and amber reserved for state.
+- Interactions: four directly selectable states auto-advance until the visitor selects one; manual selection then remains stable.
+- Responsive behavior: selectors become a two-column grid and artifacts stack without horizontal overflow.
+- Before: `output/browser-comments/home-outcomes-closing-before.png`.
+- After:
+  - `output/browser-comments/work-ledger-vendor-replies-final.png`
+  - `output/browser-comments/work-ledger-shipment-route-final.png`
+  - `output/browser-comments/work-ledger-approval-final.png`
+  - `output/browser-comments/work-ledger-eta-watch-final.png`
+  - `output/browser-comments/work-ledger-approval-mobile-final.png`
+- Browser verification:
+  - all four tabs render their distinct artifact heading,
+  - vendor and ETA status data remain legible at desktop,
+  - route comparison and manager trade-offs remain visible without opening another surface,
+  - mobile document width is `416` at a `433` viewport, so there is no horizontal overflow.
+- `pnpm build` and `git diff --check` pass.
+- `pnpm lint` passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+
+## 2026-07-25 outcomes component and closing-section correction
+
+### User correction
+
+- The outcomes section repeated the hero decision queue despite the reference examples demonstrating different component and narrative patterns.
+- `Less chasing. Better trade judgement.` repeated the decision narrative instead of showing what Ubik actually produces.
+- The closing panel had unnecessary horizontal dividers and did not explain the forward-deployed team included with the weekly workflows.
+
+### Implemented locally
+
+- Removed the second `TradeDecisionQueue`/`trade-inbox` from the outcomes section.
+- Replaced it with an interactive decision-to-done work ledger:
+  - buyer reply / `Revised delivery promise`,
+  - shipment tracker / `Lot 87 allocated`,
+  - approval / `Commercial sign-off`,
+  - ETA watch / `The next exception is covered`.
+- The ledger is a numbered artifact catalog with a changing warm-paper work product, concrete fields, system destination, human-review boundary, and a dark working-set status bar. It is intentionally different from the hero intake/decision queue.
+- New section copy:
+  - kicker: `FROM DECISION TO DONE`,
+  - heading: `The work moves with the decision.`,
+  - support: `Ubik drafts the reply, updates the tracker, opens the approval, and keeps watch after your team signs off.`
+- Closing section:
+  - removed the right-column top border,
+  - removed the company ticker bottom border,
+  - kicker now reads `YOUR FORWARD-DEPLOYED UBIK TEAM`,
+  - heading now reads `One domain expert. One product engineer. Three personalised workflows every week.`,
+  - support explains that they learn the programme, build against the customer's systems, and stay after go-live.
+
+### Visual requirements and evidence
+
+- Layout: outcomes uses a short editorial statement plus one large artifact catalog; it must not resemble the hero decision queue.
+- Spacing: preserve the full dark-band rhythm and give the work product more space than the selector.
+- Typography: crisp six-word outcome heading; product artifact title is the visual focal point.
+- Color: ink section, Ubik-blue change-set bar, warm-paper document; no extra palette.
+- Interactions: four work-product tabs auto-advance and are directly selectable; selected work swaps with a short horizontal reveal.
+- Responsive behavior: catalog stacks above the work product on mobile and the four selectors become a two-column grid.
+- Before: `output/browser-comments/home-outcomes-closing-before.png`.
+- After outcomes: `output/browser-comments/home-outcomes-after.png`.
+- After closing: `output/browser-comments/home-closing-after.png`.
+- After mobile: `output/browser-comments/home-outcomes-closing-after-mobile.png`.
+- Browser verification:
+  - exactly one `.trade-work-ledger`,
+  - zero `.trade-inbox` elements,
+  - closing panel top border and ticker bottom border both compute to `0px`,
+  - desktop document width `1488` at viewport `1505`,
+  - mobile document width `416` at viewport `433`,
+  - clicking `Shipment tracker` selects the tab and renders `Lot 87 allocated`.
+- `pnpm build` and `git diff --check` pass.
+- `pnpm lint` passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+
+## 2026-07-25 browser comments and header-film research
+
+### Implemented locally
+
+- `/how-it-works` workflow showcase contrast:
+  - inactive tabs now use white text on the ink surface,
+  - the workflow eyebrow, step numbers, body copy, and outline CTA now use the inverse white type contract,
+  - the selected tab remains ink text on the warm-paper active surface.
+- Homepage closing section:
+  - restored the exact 14-company production set beside the founder statement: AZ Gems, Sandhya Aqua, Dr. Reddy's, Airtel, Udaan, Ola, Walmart, Whole Foods Market, Costco, AquaExchange, ClearTax, Arintra, Lumian, and Housing,
+  - retained the live production logo sources, including the corrected Wikimedia Ola asset and the Sandhya Aqua mark,
+  - replaced the unapproved `Put one trade workflow live in two weeks.` heading with the recorded user wording `3 personalised workflows every week.`,
+  - changed the supporting kicker to `BUILT AROUND YOUR TRADE DESK` so it does not repeat the heading.
+- Verification:
+  - `pnpm build` passes with the existing chunk-size warning only,
+  - `pnpm lint` passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`,
+  - `git diff --check` passes.
+
+### Visual requirements from the browser comment
+
+- Layout: keep the existing five-tab product walkthrough and the current split copy/media panel.
+- Spacing: no layout or spacing expansion was requested.
+- Typography: all labels and supporting copy placed on the ink surface must be white/inverse; only the selected warm-paper tab uses ink type.
+- Color: preserve the Swiss warm-paper, commodity-ink, and Ubik-blue palette.
+- Interactions: tab selection, spring active-state handoff, video controls, autoplay, and reduced-motion behavior stay unchanged.
+- Responsive behavior: keep the existing horizontal tab scroller and stacked mobile product panel.
+- Before evidence: `output/browser-comments/how-it-works-contrast-before.png`.
+- After evidence: **blocked**. The in-app browser accepted the before capture but rejected localhost capture after refresh under its URL safety policy. Manual next action: refresh `http://localhost:5173/how-it-works`, confirm all inactive tab/copy/action text is white on ink, and save `output/browser-comments/how-it-works-contrast-after.png`.
+- UI completion status: **INCOMPLETE pending the after screenshot**, even though code verification passes.
+
+### Reference-site findings
+
+- Claude Cowork:
+  - centered proposition and CTA block stay separate from a large rounded video poster below,
+  - the poster tells the story before playback through completed-task chips and a phone notification,
+  - the 1:20 film is click-to-play and moves through one operator prompt, connected context/tools, scheduled tasks, work output, and a final notification,
+  - legibility is enforced with solid white cards on blue fields rather than text over busy moving imagery.
+- Composio:
+  - a short high-contrast thesis sits inside a dark kinetic field,
+  - animated scanline/tool bands frame the copy without passing behind it,
+  - the first scroll reveals a three-column execution proof: tool search/plan, agent conversation, connections/execution/config.
+- Supermemory:
+  - a quiet white hero uses blue dotted motion at the edges, never behind the central copy,
+  - customer logos supply trust before a full-width kinetic blue/ink visual,
+  - the next component is a numbered interactive catalog with a persistent selector and one large changing artifact.
+- Borrow the narrative sequencing and contrast discipline, not the reference brands' type, rounded geometry, or decorative effects.
+
+### Header-film experiment to try
+
+- Recommended first test: a 24–32 second, sound-optional product film built with the existing Motion + HTML video pipeline; do not start with an avatar.
+- Storyboard:
+  1. `One shipment. Five systems. One safe next move.`
+  2. Operator request: the buyer needs a revised delivery promise.
+  3. Email, WhatsApp, ERP, and carrier signals converge on the Ubik blue square.
+  4. Ubik checks Lot 87, margin, ETA, and packaging/compliance evidence.
+  5. Ubik drafts the buyer reply, updates the shipment tracker, and creates the approval task.
+  6. Final phone/meeting-style notification: `Revised delivery plan ready. One approval needs you.`
+- Visual language:
+  - warm-paper and ink UI, one Ubik-blue active square,
+  - Meetings-style segmented source rail and three-bar working pulse,
+  - web-app-style execution trace, provenance, approval, and artifact states,
+  - no dashboard montage and no tiny unreadable UI.
+- Delivery brief:
+  - master at 1920×1200 or 1440×900, 30 fps,
+  - export H.264 MP4 plus a poster PNG; add WebM only if it materially improves weight,
+  - target a sub-8 MB web asset,
+  - keep all essential meaning visible without audio and provide burned-in captions if voice is used,
+  - reserve the centre 70% for legible UI because the player crops at smaller breakpoints.
+- Tool choice:
+  - use Motion for the in-page player shell, poster transitions, progress, and reduced-motion fallback,
+  - use the existing HTML video pattern from `HowWorkflowCarousel`,
+  - use HeyGen only for a clean voice track or an optional separate founder-led cut; an avatar is not recommended for the product-first hero,
+  - use Remotion only if an offline rendered UI film is needed; it is not currently installed,
+  - do not add GSAP to the hero unless timeline requirements exceed Motion.
+- Decision gate: create two rough exports before implementing the hero:
+  - A: 24-second silent/captioned product cut,
+  - B: 35-second voice-led cut using the same scenes.
+  Choose based on whether a first-time importer/exporter can state the input, Ubik's work, the approval boundary, and the resulting artifact after one viewing.
+
+## 2026-07-24 Swiss homepage reset
+
+- Supersedes the previous blue/agentic-pattern homepage direction. The token-only recolor was rejected because it left the legacy composition and matrix system visibly intact.
+- Homepage was rebuilt as a standalone minimal Swiss trade desk in `src/pages/Index.tsx`: one warm-paper hero, a black-ink shipment control sheet, a four-programme reality table, a three-step value section, a small text-only Trade Notes preview, and the founder note at the bottom beside the final CTA.
+- Copy now leads with the useful commercial proposition: a shipment is several broken programmes, and Ubik reconnects messages, lots, approvals, and buyer promises so the team can make one safe next move.
+- The homepage no longer renders comparison, app-grid, carousel, founder-photo, or matrix-field components. The only background treatment is a low-contrast grid that changes to orange only on hero hover.
+- Palette: warm white `42 36% 96%`, near-black commodity ink, and Ubik blue `227 81% 56%` as the single product/action signal. Blue must never return as a full-page matrix background.
+- Header uses the paper wordmark at the top and changes to ink with the inverse wordmark on scroll.
+- Founder note: Hemanth’s portrait from `public/founders/hemanth.png` now appears beside the quote in the final homepage section, in a restrained monochrome editorial treatment.
+- Shared in-repo route treatment: `/how-it-works`, `/pricing`, `/security`, `/download`, `/try`, `/blog`, all legal pages, and their shared header/footer now use the same paper/ink/Ubik-blue visual contract. Matrix fields are suppressed on secondary routes; existing product flows, pricing toggle, installer controls, legal tables, and Trade Notes content stay unchanged. `docs.theubik.com` is a separate site and was intentionally not changed.
+- Visual evidence: `output/playwright/swiss-home-after-desktop.png`, `output/playwright/swiss-home-after-mobile.png`, `output/playwright/swiss-founder-note-after-desktop.png`, and `output/playwright/swiss-pricing-after-desktop.png`; mobile check reports document width 416 vs viewport width 433 (no horizontal overflow). Pricing desktop check reports no visible matrix field and document width 1265 vs viewport width 1280.
+- Verification: `pnpm build` and `git diff --check` pass. Build retains the existing chunk-size warnings only.
+
+### 2026-07-24 trade decision queue follow-up
+
+- Homepage eyebrow now reads `Live for Perishable Food Importers & Exporters`.
+- Hero throughput proof now says `3 / wk` / `tailored workflows`.
+- Reviewed `ubik-meetings-pr21-staging`'s `NotificationCard.jsx` and `Chip.jsx`; carried over the segmented source strip, timed signal swap, and blue-square/audio-bar status language as a new landing-specific `TradeDecisionQueue` component inside `src/pages/Index.tsx`.
+- The hero decision card now shows Ubik joining a rotating Email, WhatsApp, ERP, or carrier signal through source favicons before rendering the recommendation. The right column next to `Less chasing. Better trade judgement.` uses the same queue to make the value of decision consolidation explicit.
+- Visual evidence: `output/playwright/trade-queue-after-desktop.png` and `output/playwright/outcomes-queue-after-desktop.png`. Desktop check found two decision queues, two active source favicon elements, and no horizontal overflow (`1265` document width vs `1280` viewport).
+
+### 2026-07-24 decision and ontology follow-up
+
+- Removed the duplicate `UBIK RECOMMENDS` and evidence block from the hero card. The live queue is now the single decision artifact and ends with the resulting short action.
+- Rotating examples now include revised-delivery email, revised quantity, Lot 87 allocation, carrier-delay follow-up, and packaging compliance approval. WhatsApp uses its direct favicon rather than the white-backed Google favicon endpoint.
+- Added `TradeFlowOntology` after the programme-breakage section: eight clickable linked stages from Harvest → Quality → Export → Import → Cold chain → Warehouse → Packaging → Retail, with the commercial decision question and a stage-specific explanation.
+- Evidence: `output/playwright/decision-flow-after-desktop.png` and `output/playwright/trade-ontology-after-desktop.png`. DOM check confirms eight ontology stages, no `UBIK RECOMMENDS` copy, and no desktop horizontal overflow (`1265` document width vs `1280` viewport).
+- The outcomes section intentionally uses a different component from the hero: a stacked `trade-inbox` of Email, WhatsApp, and ERP notifications converging on a blue `Ubik decision queue` action. Evidence: `output/playwright/outcomes-inbox-after-desktop.png`.
+
+### 2026-07-24 live decision and programme-film follow-up
+
+- Hero queue resolution is now a dark working state rather than a blue label: the rotating source signal resolves into a bold white decision, an animated blue Ubik square, and a changing operational line such as `Writing the lot move into the shipment tracker` or `Reminding Hemanth about material delivery`. There is no `UBIK RECOMMENDS` or evidence copy.
+- Replaced the copied eight-box flow with the interactive `TradeFlowOntology` console. A click/auto-advancing programme list drives one animated blue square along Harvest → Retail and morphs its adjacent product artifact between a chart, quality checklist, clearance file, ETA timeline, and lot-allocation tracker. This is intentionally a small launch-film language, not another dashboard or a literal flow diagram.
+- Trade Notes heading is shortened to `Trade Notes.` and the right-hand teaser now reads `featuredBlogPost.title` from `src/lib/landing-content.ts`, so it stays aligned to the actual latest article.
+- Visual requirements / evidence: the hero must show white bold decision text plus blue active-agent mark; the ontology must consume the full area without trailing rail whitespace and visibly change its product artifact by stage; Trade Notes must show the current article title. Captures: `output/playwright/home-after-hero-queue.png`, `output/playwright/home-after-ontology.png`, and `output/playwright/home-after-trade-notes.png`.
+- Verification: `pnpm build` and `git diff --check` pass; only the repository's pre-existing Vite chunk-size warnings remain.
+
+### 2026-07-24 operational proof and closing follow-up
+
+- The hero queue result no longer reuses the header’s equalizer-style agent mark. It now carries a distinct travelling blue-square working dot with a short motion trail beside the white decision and live operational progress line.
+- The trade ontology proposition is now a full-width, tighter statement: `Every trade decision changes the programme.` The supporting line is one sentence: `Ubik follows the commercial consequence from harvest to retail.`
+- The outcomes queue now demonstrates work produced by Ubik—not just source consolidation—with a changing action (for example, `Create the revised-delivery task`), its follow-up progress, and compact proof chips for artifact creation, task updates, workflow monitoring, and reminders.
+- Removed `A NOTE FROM THE FOUNDER`; the founder credit is now `Hemanth Rao · Operator in Chief`. The final CTA replaces `Start small` with `3 tailored workflows / week` and includes a moving perishable-trade proof ticker. The ticker deliberately uses domain labels rather than unverified past-employer logos; replace with real marks only after the exact company list is supplied.
+- Resolved the accidental-looking section colour shift: Trade Notes and the closing section share the same warm-paper surface and are divided by a fine rule only.
+- Visual evidence: `output/playwright/home-after-workflow-agent.png`, `output/playwright/home-after-ontology-copy.png`, `output/playwright/home-after-outcomes-artifacts.png`, and `output/playwright/home-after-closing-unified.png`.
+
 ## Current status
 
 - Repo path: `/Users/shubhranshujha/Codex/the-ubik-landing`.
@@ -10,6 +578,94 @@
 - Dotmatrix loaders are installed from the registry and imported through `src/components/dotmatrix-loader.css`.
 - A deterministic large-scale bitmatrix visual system is implemented in `src/components/landing/MatrixField.tsx`.
 - Additional dotmatrix registry loaders are available for accents: `dotm-square-1`, `dotm-square-6`, `dotm-circular-4`, and `dotm-triangle-15`.
+- Latest homepage component/copy pass is local-only at `http://127.0.0.1:5173/`; do not deploy until the user and team approve it.
+
+### 2026-07-24 homepage benchmark and component pass
+
+- Visual requirements:
+  - layout: replace the repeated synthetic walkthrough with one real-product workflow surface; use full-width blue, ink, and white bands instead of pale floating sections,
+  - spacing: preserve generous section rhythm while reducing repeated explanatory blocks,
+  - typography: use answer-first category and buyer-question headings with short supporting copy,
+  - color: carry the hero blue through category, systems, comparison, and closing bands; use ink for evidence, trust, and founder sections,
+  - interactions: keep cursor-reactive matrix fields only on hero/category/CTA; use spring tabs and clipped content handoffs for product and systems,
+  - responsive behavior: horizontally scrollable workflow tabs, stacked case-study/security panels, three-column system selector, and zero document overflow at 390px.
+- Implementation:
+  - homepage category was initially changed to `The AI operating layer for perishable trade`; the follow-up below supersedes this with agentic operating-system positioning,
+  - the primary workflow section uses real prototype video/screenshots through `HowWorkflowCarousel`,
+  - the original detailed `LandingV2HowSection` remains in source but is no longer rendered on the homepage,
+  - integrations are a selectable signal/context/action console with no unsupported integration count,
+  - FAQ and JSON-LD share one concise `homepageFaqs` source,
+  - public roadmap/internal-status copy and bottom placeholder callouts are removed,
+  - static matrix fields no longer attach global pointer listeners,
+  - GSAP was reviewed but not added; the existing Motion runtime covers the required scroll, spring, layout, presence, and reduced-motion behavior without a second animation runtime.
+- Visual evidence:
+  - before desktop: `output/playwright/homepage-components-before-desktop.png`
+  - before mobile: `output/playwright/homepage-components-before-mobile.png`
+  - after desktop: `output/playwright/homepage-components-after-desktop.png`
+  - after mobile: `output/playwright/homepage-components-after-mobile.png`
+- Verification:
+  - production build passes,
+  - lint passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`,
+  - `git diff --check` passes,
+  - Playwright at 390x844 reports document/body width 390, no console errors, working workflow and integration selectors, all category steps present, and no roadmap copy.
+
+### 2026-07-24 agentic operating-system identity pass
+
+- User direction:
+  - replace review-centric language with an agentic operating-system story,
+  - use the category band's empty left side for a post-AI decision queue,
+  - show Ubik's blue-square orchestrator spawning specialist agents and connecting to browser, computer, email, and ERP tools,
+  - restore the full app grid on an ink background with click-to-select combinations,
+  - make FAQs feel like an importer/exporter desk,
+  - carry the blue/ink identity into Pricing, How It Works, Security, Meetings, Trade Notes, and the shared header/footer without changing linked layouts or controls.
+- Homepage implementation:
+  - canonical category is `The agentic operating system for perishable trade`,
+  - category queue shows memory recall, specialist-agent spawn, tool access, and a composed commercial decision,
+  - the three strategy buckets are `Perceive`, `Reason`, and `Act`, with reduced-motion-aware rotating signals covering demand, inventory, risk, working capital, margin/volume, service/cash, compliance, pricing, allocation, and escalation,
+  - the model-logo card is replaced by a frameless blue-square orchestration map,
+  - systems section uses the full 35-app grid on ink; Outlook is selected by default; users can select/deselect up to three apps; combinations produce rice packaging, shrimp margin, meat inventory, grain shipment, or working-capital workflows,
+  - FAQ is an ink trade-desk surface with RFQ, PO, ETA, VMI, LOT, CIF, COGS, LANE, and TRACE cues; the first answer opens by default,
+  - homepage SEO, JSON-LD, FAQ answer, `index.html`, and `public/llms.txt` use the same agentic operating-system definition.
+- Site identity implementation:
+  - shared header/footer use an ink liquid-glass treatment with inverse logos and white navigation,
+  - Pricing and How It Works have explicit inverse blue hero contracts,
+  - Security and Meetings keep their existing layouts and wired controls while receiving blue hero and stronger text treatments,
+  - Trade Notes keeps its editorial layout with a blue desk header and stronger article metadata,
+  - `Guide` remains an external link to `https://docs.theubik.com`; it is not a route in this repository and was not restyled here.
+- Verification evidence:
+  - previous route captures: `output/playwright/brand-pass-before-{pricing,how,security,meetings,trade-notes}-desktop.png`,
+  - homepage after: `output/playwright/brand-pass-after-home-desktop.png` and `output/playwright/brand-pass-after-home-mobile.png`,
+  - secondary routes after: `output/playwright/brand-pass-after-{pricing,how,security,meetings,trade-notes}-desktop.png`,
+  - combination state: `output/playwright/brand-pass-systems-combo.png`,
+  - 390px checks pass with no horizontal overflow on `/`, `/pricing`, `/how-it-works`, `/security`, `/download`, and `/blog`,
+  - homepage system selection, cap, deselection, grain combination, default-open FAQ, and Pricing annual billing interaction pass,
+  - `/download` still reports the known localhost-only S3 manifest CORS error and falls back to the retained installer URLs; no download layout or wiring changed.
+
+### 2026-07-24 fixed blue-and-ink palette pass
+
+- User direction:
+  - the ink header felt detached from the blue hero,
+  - remove light/dark mode switching and keep one Ubik visual mode,
+  - remove white page and component backgrounds; use cobalt and ink surfaces with white typography.
+- Implementation:
+  - the shared header is now translucent cobalt glass instead of black,
+  - the root palette is fixed to cobalt, ink, and dark blue cards; browser/OS color preference no longer changes the site,
+  - the desktop and mobile theme controls, `ThemeProvider`, dormant `ThemeToggle`, and `next-themes` dependency were removed,
+  - Sonner notifications now use the fixed dark presentation,
+  - hero chips, primary CTAs, workflow panels, tool selectors, pricing cards, Meetings cards, menus, popovers, and tooltips no longer introduce white surfaces,
+  - white remains available for typography, logos, and pixels inside real product screenshots.
+- Visual requirements:
+  - layout and spacing remain unchanged,
+  - the header must visually continue the hero rather than form a black cap,
+  - blue marks active/product regions; ink separates evidence, tools, and reading sections,
+  - desktop and mobile keep the same fixed palette with no theme affordance.
+- Evidence:
+  - user before reference: `/var/folders/yz/jgm0w7r158s1lth5ylp9rhvh0000gn/T/codex-clipboard-b78c746b-3a73-4605-9a73-240dcfb6e32d.png`,
+  - after homepage fold: `output/playwright/single-palette-final-home-fold.png`,
+  - after homepage mobile: `output/playwright/single-palette-final-home-mobile.png`,
+  - after Pricing: `output/playwright/single-palette-final-pricing-fold.png`,
+  - after How It Works: `output/playwright/single-palette-final-how-fold.png`,
+  - after Meetings: `output/playwright/single-palette-after-meetings-fold.png`.
 
 ## Implemented
 
@@ -99,6 +755,82 @@
     - Current publish blocker: Netlify account/project deployment is blocked at the platform/account layer. Resolve Netlify credit/billing/permission state, then redeploy `origin/main` at `0340abd` or later.
 
 ## Verification
+
+### 2026-07-22 homepage interaction and copy pass
+
+- Reworked the hero category chip in `src/components/landing/LandingV2Sections.tsx` into an animated cold-chain instrument: pulse marker, live category label, and scanning status bar. Categories now rotate through Frozen food, Dairy, Meat, Produce, and Specialty goods.
+- Replaced homepage case-study and founder copy that was over-indexed on seafood with broader perishable-trade / buyer-RFQ language. Existing editorial Trade Notes still contain seafood-specific articles by design.
+- Added a distinct animated SVG handoff path to `src/components/landing/HowWorkflowCarousel.tsx`; it sits alongside the actual prototype video/image workflow media and lights the active review stages.
+- Added reusable CSS motion primitives in `src/index.css` for the trade chip and workflow path; respects the existing reduced-motion behavior in the media carousel.
+- Visual evidence after the pass:
+  - `output/playwright/perishable-redesign-desktop.png`
+  - `output/playwright/perishable-redesign-mobile.png`
+  - `output/playwright/perishable-how-it-works-desktop.png`
+  - `output/playwright/perishable-how-it-works-mobile.png`
+- Browser checks: homepage and `/how-it-works` rendered with no console errors from the new code, no horizontal overflow at 390px, the chip is present, the workflow path is present, and `/how-it-works` still renders one real prototype video.
+- `pnpm build`, `pnpm lint`, and `git diff --check` pass. Lint retains the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+- Remotion and HeyGen are not installed in this repo or available as active skills/tools in this session. The implementation uses the existing Motion/GSAP-capable stack, CSS keyframes, inline SVG motion, dotmatrix registry components, and shipped prototype media instead of adding a video-generation pipeline to the marketing page.
+
+### 2026-07-22 case-study clarity follow-up
+
+- Replaced the ambiguous `one decision · buyer RFQ` label with the explicit `case study · buyer RFQ` label and the plain-language heading `How one buyer RFQ moves from inbox to approved quote.`
+- Added Motion enter/exit transitions to the active case-study fragment while keeping the existing snap rail and keyboard/focus behavior.
+- Inspected the sibling `/Users/shubhranshujha/Codex/web-app` design-system sources and aligned the landing treatment with its real primitives: approval/status language, workflow library framing, operator queue, and inset `well` surfaces. The repos remain separate applications and the landing uses its own compatible tokens/components.
+- Follow-up evidence: `output/playwright/case-study-copy-section.png`, `output/playwright/case-study-copy-desktop.png`, and `output/playwright/case-study-copy-mobile.png`.
+- Browser verification confirms the new case-study label is present, the old `one decision` copy is absent, and 390px has no horizontal overflow. `pnpm build`, `pnpm lint`, and `git diff --check` pass; lint retains the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+
+### 2026-07-22 component structure correction
+
+- The prior follow-up only relabeled and animated the existing card rail; this pass replaced the repeated card pattern.
+- Homepage case study is now an annotated evidence scene: left `Trace the request` stage navigator, center animated evidence workspace, and right `Decision receipt` handoff timeline.
+- `/how-it-works` is now a workflow canvas: frameless workflow picker, large product-media panel, and vertical review trace. It uses real prototype media from `public/prototypes/` and does not repeat the marketing card grid.
+- Visual evidence:
+  - `output/playwright/case-study-trace-section.png`
+  - `output/playwright/workflow-canvas-section.png`
+  - `output/playwright/case-study-trace-desktop.png`
+  - `output/playwright/workflow-canvas-desktop.png`
+- Browser verification found `.case-study-scene`, `.workflow-canvas`, and `.workflow-media-panel`; desktop and 390px mobile had no horizontal overflow. Build, lint, and diff checks pass.
+
+### 2026-07-22 ontology and joined-insight pass
+
+- Replaced the case-study middle artifact with `CaseStudyInsightCanvas`: a source-linked margin chart, ontology/entity graph connecting RFQ → buyer/SKU/lane/margin, an explainable quote insight, and a memory-recalled source strip for Gmail, WhatsApp, margin model, and ERP.
+- Removed the Workflow Section `Review loop` column completely. The workflow component now gives the real product media the space, with only the workflow picker and product journey remaining.
+- Evidence:
+  - `output/playwright/case-study-insight-canvas-section.png`
+  - `output/playwright/case-study-insight-canvas.png`
+  - `output/playwright/workflow-no-review-loop.png`
+- Browser verification confirmed `.case-insight` and `.workflow-media-panel`, no `Review loop` text, no horizontal overflow, and no console errors from the new code. Build, lint, and diff checks pass; existing lint warnings remain confined to `src/components/evilcharts/**`.
+
+### 2026-07-22 ontology graph cleanup
+
+- Simplified the ontology SVG after browser review: removed the extra cross-links and ambiguous shipment label, changed the center entity to a clear RFQ block, and kept only four linked entities (buyer, SKU, lane, margin) with consistent geometry.
+- New copy: `One request. Four linked entities. One explainable decision.`
+- Verified `pnpm build`, `pnpm lint`, and `git diff --check`; lint retains the existing seven warnings in `src/components/evilcharts/**`.
+
+### 2026-07-22 case-study stage variety pass
+
+- Replaced the single repeated `CaseStudyInsightCanvas` with four distinct stage components:
+  - signals: ontology map + comparable-quote margin chart
+  - recommendation: multi-source memory join timeline
+  - approval: dark approval artifact with commit map and mapped fields
+  - outcome: before/after time comparison with decision/system/memory writeback
+- Browser evidence captured at `output/playwright/case-study-variety-stage1.png` and `output/playwright/case-study-variety-stage3.png`; stage 3 interaction was verified by clicking the `approval` step.
+- Replaced the chart area fill with an explicit RGBA SVG fill after browser rendering exposed a black fallback.
+- `pnpm build`, `pnpm lint`, and `git diff --check` pass; lint retains the existing seven warnings in `src/components/evilcharts/**`.
+
+### 2026-07-23 company ticker update
+
+- Fixed the missing Ola logo by switching from the unavailable favicon endpoint to the Wikimedia-hosted Ola Cabs SVG asset; the asset returned HTTP 200 during verification.
+- Added Walmart, Whole Foods Market, and Costco to the Companies We have worked with ticker using Google favicon assets.
+- `pnpm build`, `pnpm lint`, and `git diff --check` pass; lint retains the existing seven warnings in `src/components/evilcharts/**`.
+
+### 2026-07-23 homepage How It Works simplification
+
+- Removed the `§ how it works · tuesday 09:14–14:22` eyebrow/date and the explanatory right-column paragraph from the homepage rail heading.
+- Removed the long step paragraphs from `RailStepPanel`; each stage now leads with the handoff headline, compact source chips, and the evidence surface.
+- Tightened the right evidence panel from a fixed `min-h-[240px]` box to content-fit sizing.
+- Added Motion transitions between selected steps and a small three-square Ubik blue transition signal using CSS keyframes.
+- `pnpm build`, `pnpm lint`, and `git diff --check` pass; lint retains the existing seven warnings in `src/components/evilcharts/**`.
 
 - `pnpm lint` passes.
 - `pnpm build` passes.
@@ -1009,3 +1741,290 @@
   - Latest evidence:
     - `verification/download-pre-read-square-ai-icon.png`
     - `verification/blog-trade-notes-privacy-links.png`
+
+- Latest Ubik quality pass: trade memory, case-study proof, and Trade Notes category structure:
+  - No commit, push, PR, main merge, or Netlify deploy was performed. OpenSEO and Remotion remain explicitly deferred.
+  - Homepage narrative now leads with `Own your trade memory.` and explains that inboxes, documents, meetings, ERP, CRM, and market signals become reviewed decisions the team can find, approve, and reuse.
+  - Homepage SEO, root HTML metadata, JSON-LD description, and `public/llms.txt` were aligned to the same trade-memory language.
+  - Added a minimal horizontal Seafood RFQ case-study rail with one visible step at a time, touch/trackpad scroll, keyboard controls, reduced-motion handling, and authored fragments for connected apps, recommendation, PO fields, approval, and outcome.
+  - The case-study proof is limited to the existing approved `5-7 days -> 6 hours` RFQ-to-quote outcome; no new customer or metric claims were introduced.
+  - Added Hemanth founder statement with local asset `public/founders/hemanth.png`; wording is visibly marked draft/pending approval.
+  - Added Trade Notes category metadata and shareable filters for Seafood, Agri, Dairy, and Poultry via `/blog?category=<slug>`. Seafood derives from current published posts; Agri, Dairy, and Poultry show useful empty states and are not presented as current proof.
+  - Visual direction follows the supplied inbox prototype: hairline surfaces, one primary product artifact, mono evidence labels, and compact signal treatment.
+  - The hero's former frozen-food-only badge is now a compact, polite ticker: `Seafood`, `Grains`, `Oils`, `Dairy`, and `Poultry` rotate under `Built for perishable trade`, keeping the broader direction legible without adding a homepage category grid.
+  - Validation:
+    - `pnpm build` passes; Vite still reports the existing large-chunk warning.
+    - `pnpm lint` passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+    - `git diff --check` passes.
+    - Playwright desktop homepage confirms title `Ubik | Own your trade memory`, hero copy, case-study step content, and no horizontal overflow.
+    - Playwright 390px homepage confirms no horizontal overflow (`scrollWidth=390` or narrower depending on browser chrome).
+    - Playwright confirms the next case-study control advances to the recommendation step and the outcome step is present.
+    - Playwright confirms `/blog?category=agri` renders the unpublished-category empty state with no overflow.
+    - Playwright 390px verification confirms the perishable category ticker changes over time and remains within the viewport (`overflow=false`).
+  - Visual evidence:
+    - Before homepage desktop: `verification/final-home-desktop.png`
+    - Before homepage mobile: `verification/final-home-mobile.png`
+    - After homepage desktop: `output/playwright/quality-home-desktop.png`
+    - After homepage mobile: `output/playwright/quality-home-mobile-390-final.png`
+    - After case-study initial state: `output/playwright/quality-case-study-mobile-final.png`
+    - After case-study next-step interaction: `output/playwright/quality-case-study-mobile-final-next.png`
+    - After Trade Notes Agri empty state: `output/playwright/quality-tradenotes-agri.png`
+    - After perishable-category ticker on mobile: `output/playwright/quality-home-category-mobile.png`
+  - Local review URL: `http://127.0.0.1:5173/`
+  - Review routes: `/`, `/blog`, `/blog?category=seafood`, `/blog?category=agri`, `/blog?category=dairy`, `/blog?category=poultry`.
+  - Remaining human approval: Hemanth must approve or revise the founder statement before publication; category placeholder content should remain unpublished until real notes exist.
+
+- Latest browser-comment follow-up: homepage swarm background and How It Works cleanup:
+  - No commit, push, PR, main merge, or Netlify deploy was performed.
+  - Browser comments came from the live local homepage at `http://127.0.0.1:5173/` and targeted the proof-stat band plus the homepage How It Works rail.
+  - Removed the selected left-side detail block from `RailStepPanel`, including the `Accounting acknowledges. Audit-logged.` heading and compact chips such as `COMMITTED AUDIT` / `5H 08M TOTAL`; the active rail now centers the evidence artifact by itself.
+  - Expanded the How It Works heading to use the full desktop container width with larger desktop type.
+  - Replaced the previous square-grid/dot-matrix background behavior in `MatrixField` with a Motion React cold-swarm field using `motion/react`, `useMotionValue`, `useSpring`, `useTransform`, pointer events, and `useReducedMotion`.
+  - The swarm responds to cursor movement and touch/pointer input without React state updates for pointer coordinates; reduced-motion users get a calmer static version.
+  - Reworked the proof-stat strip from flat grey cards into a dark kinetic band with the new interactive swarm, stronger contrast, scan-line affordances, and hover motion.
+  - Motion docs/patterns were reviewed in a spawned read-only subagent before final validation; guidance used: keep `motion/react`, use Motion Values + springs, pointer events for touch/mobile, and avoid React state for high-frequency cursor tracking.
+  - Validation:
+    - `pnpm build` passes; Vite still reports existing large-chunk warnings.
+    - `pnpm lint` passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+    - `git diff --check` passes.
+    - Playwright desktop check confirms no horizontal overflow at 1505px, How It Works heading width is 1344px, the selected audit text/chips are gone, and the final `14:22 Audit-logged` tab still renders its centered evidence artifact.
+    - Playwright mobile check confirms no horizontal overflow at 390px and the removed audit text remains absent.
+  - Visual evidence:
+    - Before evidence: user-attached browser-comment screenshots in the current Codex task for comments 1, 2, and 3.
+    - After hero/swarm desktop: `output/playwright/homepage-motion-swarm-after-desktop.png`
+    - After hero/swarm mobile: `output/playwright/homepage-motion-swarm-after-mobile.png`
+    - After proof-stat swarm band: `output/playwright/homepage-proof-swarm-after-desktop.png`
+    - After How It Works default rail: `output/playwright/homepage-how-rail-annotations-after-desktop.png`
+    - After How It Works final audit tab: `output/playwright/homepage-how-rail-audit-after-desktop.png`
+    - After How It Works mobile: `output/playwright/homepage-how-rail-annotations-after-mobile.png`
+  - Local review URL remains `http://127.0.0.1:5173/`.
+
+- Latest browser-comment follow-up: square swarm, comparison ticker, logo/founder continuity:
+  - No commit, push, PR, main merge, or Netlify deploy was performed.
+  - Browser feedback came from screenshot `codex-clipboard-4b850771-59aa-4c05-8664-1593a9caddac.png` and targeted the compare/FAQ transition, circular swarm dots, company ticker strip, and founder bio.
+  - Changed the Motion swarm nodes back to the Ubik square-dot mark by removing circular rounding from `.matrix-dot` while preserving cursor/touch interaction.
+  - Removed the standalone `Different category` compare label and removed the same phrase from the FAQ answer content so it does not reappear when the accordion opens.
+  - Replaced the right-side comparison blurb with a live model-routing ticker using favicon-backed examples: Claude for financial exposure, ChatGPT for execution planning, Gemini for multimodal document review, and Perplexity for market context.
+  - Unified the compare, FAQ, company ticker, and founder sections with the same ambient background treatment to reduce abrupt section-color breaks.
+  - Flattened the company logo ticker by removing tile backgrounds, strengthening label contrast, and keeping hover as a subtle blue underline/background shift.
+  - Expanded the founder section into a longer writeup with inline company-logo chips inside the paragraph plus three compact proof cards. Founder copy remains marked `draft / pending approval`.
+  - Validation:
+    - `pnpm build` passes; Vite still reports existing large-chunk warnings.
+    - `pnpm lint` passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+    - `git diff --check` passes.
+    - Playwright confirms desktop and 390px mobile have no horizontal overflow.
+    - Playwright confirms `.matrix-dot` has `border-radius: 0px`, compare text does not include `Different category`, opening the FAQ still does not reveal `Different category`, logo ticker items are transparent, and the founder paragraph renders five inline logo chips.
+  - Visual evidence:
+    - After square swarm hero: `output/playwright/homepage-square-swarm-after-desktop.png`
+    - After compare/FAQ continuity desktop: `output/playwright/homepage-compare-faq-continuity-after-desktop.png`
+    - After compare/FAQ continuity mobile: `output/playwright/homepage-compare-faq-continuity-after-mobile.png`
+    - After logo/founder desktop: `output/playwright/homepage-founder-logos-after-desktop.png`
+    - After logo/founder mobile: `output/playwright/homepage-founder-logos-after-mobile.png`
+  - Local review URL remains `http://127.0.0.1:5173/`.
+
+- Latest browser-comment follow-up: denser rail console, founder cleanup, IP roadmap:
+  - No commit, push, PR, main merge, or Netlify deploy was performed.
+  - Browser comments targeted the homepage How It Works rail, model-router card, founder block, and Trade Notes preview.
+  - Replaced the sparse centered rail artifact with a three-column `rail-console`: task overview, live artifact with bar simulation/metrics, and decision path. This uses the existing tabbed rail interaction but removes much of the empty middle whitespace.
+  - Converted the model-router area from a vertical ticker into a static orchestration rail in the original Ubik style: blue square Ubik orchestrator first, then ChatGPT for packaging tracker update, Claude for compliance/verification, Gemini for document/image inspection, and Perplexity for market refresh.
+  - Founder section cleanup:
+    - Replaced `builder · operator layer` under the photo with `Hemanth Rao`.
+    - Removed the founder/draft/pending-approval caption entirely.
+    - Removed the three extra cards (`operator context`, `systems taste`, `human review`).
+    - Replaced the founder paragraph with the supplied two-decade regulated supply chain, $450M+ P&L, $1B+ scale-up, 2 AM container-decision positioning while keeping inline company-logo accents.
+    - Founder photo stays grayscale by default and changes to color on hover.
+  - Made Trade Notes preview compact and added a horizontal `Current innovation roadmap` section covering memory graph, trade ontology, agent programs, and decision layer.
+  - Validation:
+    - `pnpm build` passes; Vite still reports existing large-chunk warnings.
+    - `pnpm lint` passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+    - `git diff --check` passes.
+    - Playwright confirms no horizontal overflow at 1505px desktop and 390px mobile.
+    - Playwright confirms rail console is present, founder bad labels are absent, `Hemanth Rao` is present, supplied founder copy is present, founder photo hover computes to `grayscale(0)`, roadmap renders four cards, and the compact Trade Notes card is present.
+  - Visual evidence:
+    - After How It Works rail console desktop: `output/playwright/homepage-how-rail-console-after-desktop.png`
+    - After How It Works rail console mobile: `output/playwright/homepage-how-rail-console-after-mobile.png`
+    - After model-router rail desktop: `output/playwright/homepage-model-router-after-desktop.png`
+    - After founder cleanup and photo hover desktop: `output/playwright/homepage-founder-copy-hover-after-desktop.png`
+    - After roadmap + compact Trade Notes desktop: `output/playwright/homepage-roadmap-tradenotes-after-desktop.png`
+    - After roadmap + compact Trade Notes mobile: `output/playwright/homepage-roadmap-tradenotes-after-mobile.png`
+  - Local review URL remains `http://127.0.0.1:5173/`.
+
+- Latest browser-comment follow-up: rail cleanup, case-study heading, CTA outline:
+  - No commit, push, PR, main merge, or Netlify deploy was performed.
+  - Browser comments targeted the homepage How It Works rail, case-study heading/subheading, and final blue CTA card.
+  - Adjusted the How It Works `Sent to ERP` step so it no longer forces the generic decision-path graph. That step now uses a two-column layout with the existing task overview plus a conversation-style artifact showing Email, WhatsApp, and Ubik agent updates in one inbox-like panel.
+  - Reduced heavy/bold visual treatment in the rail chips, decision rows, and metrics so the rail feels closer to the calmer Ubik card language.
+  - Removed the case-study right-side subheading line beginning `A real operating trace...`.
+  - Expanded the case-study title width to use the freed horizontal space.
+  - Changed the final blue CTA card primary `Try Ubik Now` button from black fill to transparent fill with white border and white text.
+  - Validation:
+    - `pnpm build` passes; Vite still reports existing large-chunk warnings.
+    - `pnpm lint` passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+    - `git diff --check` passes.
+    - Playwright confirms no horizontal overflow at 1505px desktop and 390px mobile.
+    - Playwright confirms the case-study subheading is absent, case-study title width is 1056px at desktop, the ERP rail conversation artifact is present, the forced decision-path graph is absent for the ERP step, and the CTA button computes to transparent background with white text/border.
+  - Visual evidence:
+    - After ERP conversation rail desktop: `output/playwright/homepage-how-rail-conversation-after-desktop.png`
+    - After case-study title desktop: `output/playwright/homepage-case-study-title-after-desktop.png`
+    - After case-study title mobile: `output/playwright/homepage-case-study-title-after-mobile.png`
+    - After CTA outline desktop: `output/playwright/homepage-cta-outline-after-desktop.png`
+  - Local review URL remains `http://127.0.0.1:5173/`.
+
+- Latest browser-comment follow-up: Trade Notes and roadmap stacking:
+  - No commit, push, PR, main merge, or Netlify deploy was performed.
+  - Browser comment targeted `section#blog` and asked for the Trade Notes card and roadmap to appear one by one instead of side by side, remove the `Browse notes` subheader/link, and shorten the roadmap title.
+  - Changed `BlogPreview` so the Trade Notes card and innovation roadmap now stack vertically on desktop and mobile.
+  - Removed the right-side `Browse notes` link from the roadmap header.
+  - Shortened `Technical IP under the operator layer.` to `This month’s build.` while retaining the smaller `Current innovation roadmap` eyebrow.
+  - Validation:
+    - `pnpm build` passes; Vite still reports existing large-chunk warnings.
+    - `pnpm lint` passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+    - `git diff --check` passes.
+    - Playwright confirms `This month’s build.` is present, the old long title is absent, `Browse notes` is absent, the Trade Notes card stacks above the roadmap with a 32px desktop gap, and there is no horizontal overflow at 1505px desktop or 390px mobile.
+  - Visual evidence:
+    - Before evidence: user-attached browser-comment screenshot for the `section#blog` comment in the current Codex task.
+    - After stacked Trade Notes/roadmap desktop: `output/playwright/homepage-blog-roadmap-stacked-after-desktop.png`
+    - After stacked Trade Notes/roadmap mobile: `output/playwright/homepage-blog-roadmap-stacked-after-mobile.png`
+  - Local review URL remains `http://127.0.0.1:5173/`.
+
+- Latest browser-comment follow-up: remove repeated How It Works decision paths:
+  - No commit, push, PR, main merge, or Netlify deploy was performed.
+  - Browser comment targeted `section#how` and called out that the same decision-path graph was repeating across steps despite prior feedback.
+  - Replaced the shared right-side `decision path` panel with step-specific sidecars:
+    - `Email arrives`: inbox triage.
+    - `Agent reads`: source context.
+    - `Margin checked`: guardrail details.
+    - `You approve`: approval receipt.
+    - `Follow-up queued`: timer logic.
+    - `Buyer confirms`: thread sync.
+    - `Audit-logged`: audit receipt.
+  - Replaced the repeated generic live bar artifact across non-ERP steps with distinct artifacts: inbox rows, memory board, margin guardrail chart, approval card, ERP conversation, follow-up timer, WhatsApp confirmation, and audit receipt.
+  - Removed the rail tab crossfade wrapper so active tab content is fully readable immediately after switching.
+  - Validation:
+    - `pnpm build` passes; Vite still reports existing large-chunk warnings.
+    - `pnpm lint` passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+    - `git diff --check` passes.
+    - Playwright clicked all eight visible desktop tabs and confirmed `decision path`, `read signal`, `join memory`, `check guardrail`, and `prepare action` are absent in every state.
+    - Playwright confirmed each tab renders its expected unique label, rail panel opacity is `1`, and there is no horizontal overflow at 1505px desktop or 390px mobile.
+  - Visual evidence:
+    - Before evidence: user-attached browser-comment screenshot for the `section#how` comment in the current Codex task.
+    - After unique email rail desktop: `output/playwright/homepage-how-rail-unique-email-after-desktop.png`
+    - After unique margin rail desktop: `output/playwright/homepage-how-rail-unique-margin-after-desktop.png`
+    - After unique follow-up rail desktop: `output/playwright/homepage-how-rail-unique-followup-after-desktop.png`
+    - After unique audit rail desktop: `output/playwright/homepage-how-rail-unique-audit-after-desktop.png`
+    - After unique rail mobile: `output/playwright/homepage-how-rail-unique-mobile-after.png`
+  - Local review URL remains `http://127.0.0.1:5173/`.
+
+- Latest browser-comment follow-up: chat rail, smaller Ubik mark, copy reduction:
+  - No commit, push, PR, main merge, or Netlify deploy was performed.
+  - Browser comments targeted the compare model-router mark, the How It Works rail, and grey helper/subheading copy on the homepage.
+  - Replaced the How It Works rail dashboard/task-overview layout with a chat-style thread. Each step now shows short messages from Email, WhatsApp, operator, Ubik, or system sources plus a compact `@ubik` task outcome.
+  - Removed the old rail dashboard CSS so task overview, sidecar, chart, and decision-path visual treatments no longer render in the rail.
+  - Changed the compare `Ubik orchestrator` mark from a chunky blue tile to a small plain logo-style square.
+  - Removed grey helper paragraphs from the homepage hero, security lead, workflow overview, FAQ intro, CTA copy, tools section, and case-study stage body.
+  - Validation:
+    - `pnpm build` passes; Vite still reports existing large-chunk warnings.
+    - `pnpm lint` passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+    - `git diff --check` passes.
+    - Playwright confirms the rail includes `Email`, `WhatsApp group`, and `@ubik create task`; old rail labels `task overview`, `inbox triage`, and `decision path` are absent.
+    - Playwright confirms the compare Ubik mark computes to a small square with no box shadow.
+    - Playwright confirms no horizontal overflow at 1780px desktop or 390px mobile.
+  - Visual evidence:
+    - Before evidence: user-attached browser-comment screenshots for the compare and How It Works comments in the current Codex task.
+    - After How chat rail desktop: `output/playwright/homepage-how-chat-rail-after-desktop.png`
+    - After How chat rail mobile: `output/playwright/homepage-how-chat-rail-after-mobile.png`
+    - After compare Ubik mark desktop: `output/playwright/homepage-compare-ubik-mark-after-desktop.png`
+  - Local review URL is running again at `http://127.0.0.1:5173/` via the current dev-server session.
+
+- Latest browser-comment follow-up: restore mixed How It Works rail artifacts:
+  - No commit, push, PR, main merge, or Netlify deploy was performed.
+  - Scope clarification from user: this pass applies only to the `A whole shipment, one morning, six handoffs` section.
+  - Restored variety across that rail:
+    - Step 1 remains a chat thread with Email, WhatsApp group, and Operator tagging Ubik.
+    - Step 2 is OCR/file read plus value verification.
+    - Step 3 is Zoho/pricing-intel/finance table checks plus margin logic.
+    - Step 4 is a decision queue with approve/edit controls.
+    - Step 5 is a systems queue across Email, Zoho, Tally, and Salesforce.
+    - Step 6 is a follow-up timer.
+    - Step 7 is a WhatsApp confirmation panel.
+    - Step 8 is an evidence trail sent as team email, CEO memo PDF, and client WhatsApp update.
+  - Fixed the operator contact tile in the chat step so it renders as a clean `SR` initials square.
+  - Fixed the Ubik task/evidence rows so the Ubik logo is a plain blue square on the left with no shadow.
+  - Validation:
+    - `pnpm build` passes; Vite still reports existing large-chunk warnings.
+    - `pnpm lint` passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+    - `git diff --check` passes.
+    - Playwright clicked all eight visible desktop tabs and confirmed expected labels: `WhatsApp group`, `OCR read`, `pricing tables`, `decision queue`, `Zoho mapped`, `follow-up timer`, `Vinod: looks good`, and `evidence trail`.
+    - Playwright confirms the operator tile text is `SR`, the Ubik task squares compute to `16.8px` by `16.8px` with `box-shadow: none`, and there is no horizontal overflow at 1780px desktop or 390px mobile.
+  - Visual evidence:
+    - Before evidence: user-attached browser-comment screenshots for the operator contact and Ubik task row in the current Codex task.
+    - After mixed rail chat desktop: `output/playwright/homepage-how-mixed-chat-after-desktop.png`
+    - After mixed rail OCR desktop: `output/playwright/homepage-how-mixed-ocr-after-desktop.png`
+    - After mixed rail margin desktop: `output/playwright/homepage-how-mixed-margin-after-desktop.png`
+    - After mixed rail decision desktop: `output/playwright/homepage-how-mixed-decision-after-desktop.png`
+    - After mixed rail evidence desktop: `output/playwright/homepage-how-mixed-evidence-after-desktop.png`
+    - After mixed rail mobile: `output/playwright/homepage-how-mixed-after-mobile.png`
+  - Local review URL remains `http://127.0.0.1:5173/`.
+
+- Latest browser-comment follow-up: operator contact and live agent indicator, deployed:
+  - Replaced the misaligned `SR` initials glyph in the `Email arrives` chat with a small avatar and a normal `SR Operator` contact line. The Ubik task row remains a plain blue square mark on the left.
+  - Replaced the stacked model-router list in `section#compare` with one active routed agent at a time. The active item cycles through Ubik orchestrator, ChatGPT, Claude, Gemini, and Perplexity with its favicon, task label, transition, pulse mark, and a five-square progress cadence.
+  - Visual requirements captured from the user annotation:
+    - Layout: contact must read as a simple person/message row, not a floating initials marker.
+    - Interaction: only one agent is visible in the comparison router at a time; the favicon and agent change through a short transition.
+    - Responsive: preserve the rail and compare panel without horizontal overflow at mobile width.
+  - Validation:
+    - `pnpm build` passes; Vite retains the existing large-chunk warning.
+    - `pnpm lint` passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+    - `git diff --check` passes.
+    - Playwright visual checks confirm the avatar/contact is visible, one progress square is active, the agent changes during the session (Gemini and Ubik orchestrator observed), and there is no horizontal overflow at 1780px or 390px.
+  - Visual evidence:
+    - Before evidence: user-attached browser-comment screenshots for the contact display and static model-router stack in the current Codex task.
+    - After contact desktop: `output/playwright/homepage-how-contact-avatar-after-desktop.png`
+    - After contact mobile: `output/playwright/homepage-how-contact-avatar-after-mobile.png`
+    - After live agent desktop: `output/playwright/homepage-compare-live-agent-after-desktop.png`
+    - After live agent mobile: `output/playwright/homepage-compare-live-agent-after-mobile.png`
+  - Production deployment:
+    - Netlify production deploy `6a61fdb8255f994400167fd6` is `ready` and published at `https://theubik.com`.
+    - Immutable deploy URL: `https://6a61fdb8255f994400167fd6--theubik.netlify.app`.
+
+- 2026-07-24 local-only Motion UI background pass:
+  - No commit, push, PR, main merge, or Netlify deploy was performed. Keep this pass local until the user and team approve it.
+  - Motion sources reviewed:
+    - `https://github.com/motiondivision/motion`
+    - `https://motion.dev/magazine/introducing-motion-ui`
+    - `https://motion.dev/ui/install`
+    - `https://motion.dev/ui`
+  - Product/access distinction:
+    - The core `motion` package is MIT-licensed and already installed in this repo.
+    - Motion UI supports shadcn CLI installation and semantic-token theming, but its current `@motion/...` registry requires a Motion+ token; some sections also depend on private `@motionplus/...` packages.
+    - Created the reusable local skill at `/Users/shubhranshujha/.codex/skills/motion-ui-marketing/`, with the public Motion engine/examples as the default implementation reference and the tokenized Motion UI registry as an optional install path.
+  - Visual requirements:
+    - Layout: preserve the split hero and operating queue, but make the full first viewport feel like one composed product surface.
+    - Spacing/copy: remove the grey explanatory paragraph; keep one headline, three compact proof facts, and two actions.
+    - Typography: white display headline on blue; IBM Plex Mono for proof facts and operating details.
+    - Color: replace the pale grey dot field with full-strength Ubik blue, white hairline structure, and white-on-primary controls.
+    - Interaction: retain cursor-responsive matrix cells and add a guarded ambient scan; reduced-motion users receive a static field.
+    - Responsive: stack the queue below the headline on mobile with no horizontal overflow.
+  - Implementation:
+    - Updated `LandingV2Hero` to use the interactive matrix field, blue/white hero treatment, proof strip, and stronger queue framing.
+    - Updated the hero field CSS to use a blue grid/scan field with white responsive cells instead of the grey haze.
+  - Validation:
+    - `pnpm build` passes; Vite retains the existing large-chunk warning.
+    - `pnpm lint` passes with the existing seven Fast Refresh warnings in `src/components/evilcharts/**`.
+    - `git diff --check` passes.
+    - Playwright reports zero console errors, two existing React Router future-flag warnings, and no horizontal overflow at 1280px desktop or 390px mobile.
+  - Visual evidence:
+    - Before grey motion field desktop: `output/playwright/homepage-motion-swarm-after-desktop.png`
+    - After blue Motion-inspired hero desktop: `output/playwright/motion-ui-hero-desktop.png`
+    - After blue Motion-inspired hero mobile: `output/playwright/motion-ui-hero-mobile.png`
+  - Local review URL: `http://127.0.0.1:5173/`.
+## 2026-07-25 homepage annotation recheck
+
+- User reported that not all browser annotations appeared fixed.
+- Rechecked the live localhost page and found two remaining visual/copy gaps: the Trade Notes feature still had a subtitle above its title, and the companies strip still used a small `OPERATING EXPERIENCE ACROSS` kicker with low-contrast logos.
+- Fixed by removing the remaining Trade Notes subtitle, replacing the ticker label with `Companies our team has worked with`, increasing strip/logo scale and spacing, and increasing logo contrast/saturation to prevent pale marks disappearing on the light background.
+- Verified `pnpm build` and `git diff --check` pass. Localhost remains at `http://localhost:5173/`.
+- Final visual evidence:
+  - `output/playwright/home-annotations-final-desktop.png`
+  - `output/playwright/home-annotations-final-founder.png`

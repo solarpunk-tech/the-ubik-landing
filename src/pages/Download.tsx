@@ -180,7 +180,7 @@ function MeetingNotificationCard() {
   }, []);
 
   return (
-    <div className="relative mx-auto w-full max-w-[24rem] border bg-card text-left shadow-lg shadow-primary/10">
+    <div className="relative mx-auto w-full max-w-[24rem] border bg-card text-left text-foreground shadow-lg shadow-primary/10">
       <div className="absolute -right-2 -top-2 flex size-6 items-center justify-center bg-primary font-mono text-[0.64rem] font-semibold text-primary-foreground">
         {notifications.length}
       </div>
@@ -220,7 +220,7 @@ function MeetingNotificationCard() {
 
 function PreReadPreviewCard() {
   return (
-    <div className="border bg-card p-5 shadow-lg shadow-primary/10">
+    <div className="border bg-card p-5 text-foreground shadow-lg shadow-primary/10">
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-start gap-3">
           <span className="mt-1 size-3 shrink-0 bg-primary" aria-hidden />
@@ -301,7 +301,7 @@ function ProofVisual({ visual }: { visual: (typeof proofCards)[number]["visual"]
     return (
       <div className="relative h-full min-h-52 overflow-hidden">
         <div className="absolute inset-y-0 left-0 w-[54%] border-2 border-emerald-500 bg-card p-4 dark:bg-card/80">
-          <span className="bg-foreground/78 px-2 py-1 text-[0.66rem] font-semibold text-background">Visible to you</span>
+          <span className="bg-primary px-2 py-1 text-[0.66rem] font-semibold text-primary-foreground">Visible to you</span>
           <div className="mt-5 space-y-2 text-xs">
             <p className="font-semibold text-primary">AI Response</p>
             <p className="leading-5 text-foreground/70 dark:text-foreground/82">Flag missing PO context before the reply is approved.</p>
@@ -309,7 +309,7 @@ function ProofVisual({ visual }: { visual: (typeof proofCards)[number]["visual"]
         </div>
         <div className="absolute inset-y-0 left-[50%] w-px bg-foreground/60" />
         <div className="absolute inset-y-0 right-0 w-[50%] bg-muted/70 p-4 dark:bg-muted/35">
-          <span className="float-right bg-foreground/78 px-2 py-1 text-[0.66rem] font-semibold text-background">Invisible to others</span>
+          <span className="float-right bg-primary px-2 py-1 text-[0.66rem] font-semibold text-primary-foreground">Invisible to others</span>
         </div>
         <div className="absolute bottom-3 left-8 right-8 border bg-background/85 p-4 shadow-lg backdrop-blur">
           <div className="space-y-2">
@@ -325,7 +325,7 @@ function ProofVisual({ visual }: { visual: (typeof proofCards)[number]["visual"]
 
   return (
     <div className="grid h-full min-h-52 content-center gap-5">
-      <div className="relative mx-auto w-full max-w-xs border bg-foreground p-3 text-background dark:border-border dark:bg-card dark:text-foreground">
+      <div className="relative mx-auto w-full max-w-xs border bg-card p-3 text-foreground">
         <div className="grid grid-cols-2 gap-2">
           <div className="aspect-[4/3] bg-background/18 dark:bg-muted/70" />
           <div className="aspect-[4/3] bg-primary/70" />
@@ -338,7 +338,7 @@ function ProofVisual({ visual }: { visual: (typeof proofCards)[number]["visual"]
           <div className="grid gap-1.5 p-2">
             {[HardDrivesIcon, EnvelopeSimpleIcon, ShieldWarningIcon].map((Icon, index) => (
               <span key={index} className="flex h-6 w-28 items-center gap-2 border border-background/20 bg-background/12 px-2 dark:border-border dark:bg-muted/50">
-                <Icon className="size-3.5 text-background dark:text-foreground" aria-hidden />
+                <Icon className="size-3.5 text-foreground" aria-hidden />
                 <span className="h-1.5 flex-1 bg-background/70 dark:bg-foreground/60" />
               </span>
             ))}
@@ -404,14 +404,14 @@ export default function Download() {
         description="Download Ubik Meetings for Mac or Windows. Join meetings from your desktop without adding a bot to the guest list."
       />
       <main className="relative overflow-hidden">
-        <section className="relative border-b bg-background">
+        <section className="meetings-brand-hero relative border-b">
           <MatrixField variant="hero" density="medium" seed="download-meetings-hero" />
           <div className="container-page relative z-10 py-16 sm:py-20 lg:py-24">
             <div className="mx-auto max-w-4xl text-center">
               <h1 className="text-5xl font-semibold leading-[1.02] sm:text-6xl lg:text-7xl">
                 Ubik Meetings stays with you, not inside the call.
               </h1>
-              <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-foreground/72 dark:text-foreground/82 sm:text-lg">
+              <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-primary-foreground/84 sm:text-lg">
                 A private desktop companion for meeting alerts, reviewed notes, and the work context operators need before the next action moves.
               </p>
               {canInstallDesktop ? (
@@ -433,7 +433,7 @@ export default function Download() {
                             handleDownloadClick(event, option);
                           }}
                           className={[
-                            "group grid min-h-36 gap-3 border bg-card p-4 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                            "group grid min-h-36 gap-3 border bg-card p-4 text-left text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                             isSelected ? "border-primary shadow-lg shadow-primary/10" : "hover:border-primary/50 hover:bg-muted/40",
                             links.loading ? "pointer-events-none opacity-60" : "",
                           ].join(" ")}
@@ -447,7 +447,7 @@ export default function Download() {
                               {option.chip}
                             </span>
                           </span>
-                          <span className="text-sm leading-6 text-foreground/68 dark:text-foreground/80">{option.explainer}</span>
+                          <span className="text-sm leading-6 text-foreground/84">{option.explainer}</span>
                           <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary">
                             {option.cta}
                             <DownloadSimpleIcon aria-hidden />
@@ -462,12 +462,12 @@ export default function Download() {
                   Open this page on a Mac or Windows desktop to install Ubik Meetings.
                 </div>
               )}
-              <p className="mt-3 text-xs leading-5 text-foreground/62 dark:text-foreground/76">
+              <p className="mt-3 text-xs leading-5 text-primary-foreground/76">
                 {canInstallDesktop
                   ? `${selected.helper} ${versionText} · ${selected.fileLabel}`
                   : `${versionText} · Desktop installer available for macOS and Windows`}
               </p>
-              <p className="mx-auto mt-2 max-w-2xl text-xs leading-5 text-foreground/58 dark:text-foreground/72">
+              <p className="mx-auto mt-2 max-w-2xl text-xs leading-5 text-primary-foreground/68">
                 Not sure which Mac you have? Open Apple menu, About This Mac. M-series means Apple silicon; Intel means the Intel build.
               </p>
             </div>
@@ -478,7 +478,7 @@ export default function Download() {
               </div>
               <div className="order-1 mx-auto flex flex-col items-center gap-4 lg:order-2">
                 <FloatingWidget />
-                <p className="max-w-36 text-center font-mono text-[0.64rem] font-semibold uppercase tracking-[0.16em] text-foreground/60">
+                <p className="max-w-36 text-center font-mono text-[0.64rem] font-semibold uppercase tracking-[0.16em] text-primary-foreground/68">
                   Desktop widget
                 </p>
               </div>
@@ -491,11 +491,11 @@ export default function Download() {
               {proofCards.map((card) => (
                 <article key={card.title} className="grid gap-5">
                   <div className="min-h-72 border bg-card/60 p-5 dark:bg-card/35">
-                    <div className="h-full border bg-background p-4 shadow-sm dark:bg-background/65">
+                    <div className="h-full border bg-background p-4 text-foreground shadow-sm dark:bg-background/65">
                       <ProofVisual visual={card.visual} />
                     </div>
                   </div>
-                  <div>
+                  <div className="meetings-proof-copy">
                     <h2 className="text-xl font-semibold">{card.title}</h2>
                     <p className="mt-2 text-base leading-7 text-foreground/72 dark:text-foreground/82">{card.copy}</p>
                   </div>
@@ -503,13 +503,13 @@ export default function Download() {
               ))}
             </div>
 
-            <div className="mt-16 text-center">
-              <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-foreground/58">
+            <div className="meetings-compatible mt-16 text-center">
+              <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em]">
                 Compatible with every tool
               </p>
               <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
                 {compatibleTools.map((tool) => (
-                  <div key={tool.label} className="inline-flex items-center gap-2 text-sm font-medium text-foreground/76 dark:text-foreground/86">
+                  <div key={tool.label} className="inline-flex items-center gap-2 text-sm font-medium">
                     <img src={favicon(tool.domain)} alt="" className="size-4" />
                     {tool.label}
                   </div>

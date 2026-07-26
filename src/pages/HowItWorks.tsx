@@ -14,7 +14,7 @@ export default function HowItWorks() {
         description="Watch Ubik move through operator home, inbox review, meeting memory, Know Anything, and VMI exception workflows."
       />
       <main className="overflow-hidden">
-        <section className="relative border-b">
+        <section className="branded-page-hero relative border-b">
           <MatrixField variant="hero" density="high" seed="how-it-works-page" />
           <div className="container-page section-y relative z-10 grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-end">
             <div>
@@ -24,8 +24,8 @@ export default function HowItWorks() {
               </h1>
             </div>
             <div className="max-w-xl lg:justify-self-end">
-              <p className="text-lg leading-8 text-foreground/72 dark:text-foreground/82">
-                Home, inbox, meetings, trade memory, and VMI exceptions all move through the same reviewed-action model.
+              <p className="text-lg leading-8 text-primary-foreground/84">
+                Home, inbox, meetings, trade memory, and VMI exceptions all move through the same agentic operating loop.
               </p>
               <Button asChild className="mt-6">
                 <a href={externalLinks.app}>

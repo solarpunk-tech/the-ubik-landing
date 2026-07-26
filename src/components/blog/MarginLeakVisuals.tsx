@@ -189,7 +189,7 @@ function WaterfallChart({ activeIndex }: { activeIndex: number }) {
 
         <g transform={`translate(${innerWidth - 230}, ${innerHeight - 106})`}>
           <rect width="220" height="84" className="fill-background stroke-border" />
-          <text x="14" y="24" className="fill-muted-foreground font-mono text-[10px] uppercase tracking-[0.14em]">
+          <text x="14" y="24" className="fill-muted-foreground font-mono text-[11px] uppercase tracking-[0.14em]">
             Active leak
           </text>
           <text x="14" y="50" className="fill-foreground text-sm font-semibold">
@@ -446,7 +446,7 @@ export function MarginLeakArticle() {
               className="group grid min-w-0 grid-cols-[2.5rem_minmax(0,1fr)] gap-3 bg-background p-4 transition-colors hover:bg-card"
             >
               <span className="relative flex size-10 items-center justify-center border bg-shell">
-                <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-primary">{source.faviconLabel}</span>
+                <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-primary">{source.faviconLabel}</span>
                 <img
                   src={source.favicon}
                   alt=""

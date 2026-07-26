@@ -136,7 +136,7 @@ function ProviderFavicon({ name, domain }: { name: string; domain: string }) {
   return (
     <span className="inline-flex items-center gap-2 border bg-background px-3 py-2 text-xs font-medium">
       <span className="relative flex size-6 items-center justify-center border bg-shell">
-        <span className="font-mono text-[8px] uppercase text-primary">{name.slice(0, 2)}</span>
+        <span className="font-mono text-[11px] uppercase text-primary">{name.slice(0, 2)}</span>
         <img
           src={`https://www.google.com/s2/favicons?domain=${domain}&sz=64`}
           alt=""
@@ -361,7 +361,7 @@ function SourceLinks() {
             aria-label={`Open ${source.publisher}: ${source.title}`}
           >
             <span className="relative flex size-6 items-center justify-center border bg-shell">
-              <span className="font-mono text-[8px] uppercase text-primary">{source.publisher.slice(0, 2)}</span>
+              <span className="font-mono text-[11px] uppercase text-primary">{source.publisher.slice(0, 2)}</span>
               <img
                 src={`https://www.google.com/s2/favicons?domain=${source.domain}&sz=64`}
                 alt=""

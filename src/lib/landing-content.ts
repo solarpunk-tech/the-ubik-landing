@@ -10,7 +10,6 @@ export interface Faq {
 }
 
 export const compareBacklink = {
-  eyebrow: "Different category",
   label: "See how ubik is different from ChatGPT, Claude, Gemini and Perplexity",
   href: "https://docs.theubik.com/getting-started/vs-other-llms"
 };
@@ -59,7 +58,7 @@ export const liveQueueRows = [
     status: "Analyse"
   },
   {
-    title: "PO -> ERP -> Accounting",
+    title: "PO → ERP → Accounting",
     copy: "PDF PO parsed, mapped to SKUs, pushed to ERP, accounting check drafted.",
     apps: ["Zoho", "Accounting"],
     status: "Ready"
@@ -97,7 +96,7 @@ export const bottomCallouts = [
     title: "Local-first data privacy approach"
   },
   {
-    title: "Human approved -> autonomous and audited"
+    title: "Human approved → autonomous and audited"
   }
 ];
 
@@ -191,18 +190,18 @@ export const processSteps = [
 export const securityCards = [
   {
     icon: ShieldCheckIcon,
-    title: "SOC 2 Type II audit in progress",
-    copy: "GDPR, ISO 27001, EU data residency, AES-256 at rest, TLS 1.3 in transit."
+    title: "Security review built in",
+    copy: "Access, deployment, retention, and residency requirements are scoped before a workflow goes live."
   },
   {
     icon: LockKeyIcon,
-    title: "Never trained on your data",
-    copy: "Your RFQs, supplier pricing, and margins never become input to any third-party model. Contractually guaranteed."
+    title: "Bounded model access",
+    copy: "Ubik limits the context sent to external models and supports private deployment requirements for enterprise workflows."
   },
   {
     icon: FingerprintIcon,
-    title: "Human sign-off, every time",
-    copy: "Least-privilege OAuth scopes, revocable access, audit log on every action. Sensitive moves require review."
+    title: "Human sign-off for sensitive actions",
+    copy: "Operators can inspect evidence, edit or reject a proposal, and retain a trace of the approved action."
   }
 ];
 
@@ -234,19 +233,19 @@ export const faqs: Faq[] = [
   },
   {
     question: "How is Ubik different from ChatGPT, Claude, Gemini or Perplexity?",
-    answer: "Different category. Ubik knows frozen food trade out of the box, runs inside your stack, makes the artifact (not just the text), remembers your meetings and suppliers, and never trains the model on your RFQs or pricing.",
+    answer: "Ubik is an operator layer for trade work. It knows frozen food trade out of the box, runs inside your stack, makes the artifact (not just the text), remembers your meetings and suppliers, and never trains the model on your RFQs or pricing.",
     paragraphs: [
-      "Different category. Generic AI answers. Ubik carries the work.",
+      "Generic AI answers. Ubik carries the work.",
       "ubik knows frozen food trade (HS codes, BOL, lot codes, cold chain, FDA holds), runs inside Gmail, Outlook, WhatsApp, Zoho, SAP, makes the artifact, remembers your trade, and never trains the model on your RFQs or pricing."
     ],
     seeMore: { label: "See the full comparison", href: "https://docs.theubik.com/getting-started/vs-other-llms" }
   },
   {
     question: "Does Ubik replace my ERP or CRM?",
-    answer: "No. Ubik sits on top of your ERP and CRM and makes them useful. Most seafood operators run a stack of one ERP (Zoho, SAP, NetSuite, or a custom build), one CRM, plus 10 to 15 other tools. Ninety percent of trade still happens in email and WhatsApp, which never reach the ERP. Ubik unifies that into a single workspace where agents read across systems, trigger actions, and write back. Customers keep their ERP as the system of record. Ubik becomes the system of action.",
+    answer: "No. Ubik sits on top of your ERP and CRM and makes them useful. Most perishable-trade operators run a stack of one ERP (Zoho, SAP, NetSuite, or a custom build), one CRM, plus 10 to 15 other tools. Ninety percent of trade still happens in email and WhatsApp, which never reach the ERP. Ubik unifies that into a single workspace where agents read across systems, trigger actions, and write back. Customers keep their ERP as the system of record. Ubik becomes the system of action.",
     paragraphs: [
       "No. Ubik sits on top of your ERP and CRM and makes them useful.",
-      "Most seafood operators run a stack of one ERP (Zoho, SAP, NetSuite, or a custom build), one CRM, plus 10 to 15 other tools. Ninety percent of trade still happens in email and WhatsApp, which never reach the ERP.",
+      "Most perishable-trade operators run a stack of one ERP (Zoho, SAP, NetSuite, or a custom build), one CRM, plus 10 to 15 other tools. Ninety percent of trade still happens in email and WhatsApp, which never reach the ERP.",
       "Ubik unifies that into a single workspace where agents read across systems, trigger actions, and write back. Customers keep their ERP as the system of record. Ubik becomes the system of action."
     ]
   },
@@ -329,26 +328,26 @@ export const faqs: Faq[] = [
     ]
   },
   {
-    question: "Why seafood, why now?",
-    answer: "Seafood is the most traded, least digitized commodity on earth. Raw material is 55 to 62% of product value, so a 2% pricing error costs more than an annual Ubik subscription. Margins are 5 to 15% and operational inefficiency leaks all of it. Existing tools fail: ERPs are built for structured data while 90% of seafood trade runs on email and WhatsApp; generic AI does not understand HSFCA, BOL, or seafood compliance; data scientists cost €40K per year for one person while Ubik automates the same patterns in seconds. Vertical context plus agentic workflows are reorganizing entire categories.",
+    question: "Why perishable trade, why now?",
+    answer: "Perishable trade is one of the most valuable, least digitized operating environments. Raw material can be 55 to 62% of product value, so a 2% pricing error costs more than an annual Ubik subscription. Margins are 5 to 15% and operational inefficiency leaks all of it. Existing tools fail: ERPs are built for structured data while 90% of trade runs on email and WhatsApp; generic AI does not understand BOLs, lot codes, cold-chain constraints, or compliance; data scientists cost €40K per year for one person while Ubik automates the same patterns in seconds. Vertical context plus agentic workflows are reorganizing entire categories.",
     paragraphs: [
-      "Seafood is the most traded, least digitized commodity on earth.",
+      "Perishable trade is one of the most valuable, least digitized operating environments.",
       "Raw material is 55 to 62% of product value, so a 2% pricing error costs more than an annual Ubik subscription. Margins are 5 to 15% and operational inefficiency leaks all of it.",
       "Existing tools fail.",
       "Vertical context plus agentic workflows are reorganizing entire categories."
     ],
     bullets: [
-      "ERPs are built for structured data while 90% of seafood trade runs on email and WhatsApp.",
-      "Generic AI does not understand HSFCA, BOL, or seafood compliance.",
+      "ERPs are built for structured data while 90% of perishable trade runs on email and WhatsApp.",
+      "Generic AI does not understand BOLs, lot codes, cold-chain constraints, or compliance.",
       "Data scientists cost €40K per year for one person while Ubik automates the same patterns in seconds."
     ]
   },
   {
     question: "Where is Ubik live today?",
-    answer: "Ubik is in production with five paying customers across four countries. Current customers include a large US shrimp importer, a top-5 French importer, a Canadian pilot, an Indian contract customer, and a US processor implementing PO automation. The active pipeline spans enterprise food, seafood, and perishables operators. Active operator count is 30+ across 4 companies.",
+    answer: "Ubik is in production with five paying customers across four countries. Current customers include a large US importer, a top-5 French importer, a Canadian pilot, an Indian contract customer, and a US processor implementing PO automation. The active pipeline spans enterprise food and perishables operators. Active operator count is 30+ across 4 companies.",
     paragraphs: [
       "Ubik is in production with five paying customers across four countries.",
-      "The active pipeline spans enterprise food, seafood, and perishables operators. Active operator count is 30+ across 4 companies."
+      "The active pipeline spans enterprise food and perishables operators. Active operator count is 30+ across 4 companies."
     ],
     bullets: [
       "A large US shrimp importer.",
@@ -357,6 +356,55 @@ export const faqs: Faq[] = [
       "An Indian contract customer.",
       "A US processor implementing PO automation."
     ]
+  }
+];
+
+export const homepageFaqs: Faq[] = [
+  {
+    question: "What is Ubik?",
+    answer:
+      "Ubik is an agentic operating system for perishable trade. It gives specialist agents shared trade memory, model orchestration, and access to approved browser, computer, email, ERP, CRM, document, and market-intelligence tools."
+  },
+  {
+    question: "Who is Ubik for?",
+    answer:
+      "Ubik is built for importers, exporters, processors, and distributors whose commercial and operations teams manage perishable trade across inboxes, messaging, spreadsheets, ERP, and CRM systems."
+  },
+  {
+    question: "How is Ubik different from ChatGPT, Claude, Gemini, or Perplexity?",
+    answer:
+      "General AI tools produce standalone answers. Ubik keeps the source evidence, prepares the operational artifact, requires human review, and writes the approved action back to the system where work continues.",
+    seeMore: { label: "See the full comparison", href: "https://docs.theubik.com/getting-started/vs-other-llms" }
+  },
+  {
+    question: "Does Ubik replace my ERP or CRM?",
+    answer:
+      "No. Your ERP and CRM remain systems of record. Ubik works across them and the unstructured channels around them, then prepares reviewed actions and writes approved updates back."
+  },
+  {
+    question: "What workflows can Ubik run?",
+    answer:
+      "Ubik can support RFQ-to-quote, PO ingestion, transit exceptions, VMI, margin review, lot traceability, follow-ups, and other workflows that combine scattered context with a human approval step."
+  },
+  {
+    question: "Which systems can Ubik connect to?",
+    answer:
+      "Ubik connects to common email, messaging, CRM, ERP, accounting, BI, logistics, and document systems. The exact connection plan is scoped around the APIs, permissions, and structured exports available in your stack."
+  },
+  {
+    question: "How quickly can a team start?",
+    answer:
+      "Ubik starts with one operating decision. The team maps its sources, guardrails, reviewer, and destination, then targets a reviewable pilot within four weeks before expanding to more workflows."
+  },
+  {
+    question: "What data is shared with AI models?",
+    answer:
+      "Ubik minimizes the context sent to external models and uses them for bounded reasoning and drafting steps. Data handling, model access, residency, and private deployment requirements are agreed for each customer setup."
+  },
+  {
+    question: "How does Ubik govern autonomous agent actions?",
+    answer:
+      "Teams define each agent's tools, decision boundaries, escalation rules, and audit requirements. Routine bounded work can move autonomously while higher-risk commercial, financial, and compliance decisions follow the controls chosen by the operator."
   }
 ];
 

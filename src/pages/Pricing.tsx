@@ -128,11 +128,11 @@ export default function Pricing() {
               <Badge variant="outline" className="mb-5">
                 Pricing
               </Badge>
-              <h1 className="text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-                Choose the workspace that matches your <span className="text-primary">operating reality.</span>
+              <h1 className="text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">
+                The best models, <span className="text-primary">without the meter running.</span>
               </h1>
               <p className="mt-5 max-w-3xl text-lg leading-8 text-primary-foreground/84">
-                Start with a personal AI workspace. Go Enterprise when Ubik needs to run workflows across your trade stack, team and customers.
+                We route each step to the frontier model that can do it and pay for the tokens, so your bill reads the same in a quiet week and a full one.
               </p>
             </div>
             <div className="grid grid-cols-2 border border-border bg-card p-1 text-sm font-medium">
@@ -220,16 +220,19 @@ export default function Pricing() {
           <section className="mt-8 border border-border bg-card p-5 sm:p-6">
             <div className="grid gap-5 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
               <div>
-                <p className="section-label">Computer and browser use</p>
-                <h2 className="mt-3 flex flex-wrap items-end gap-3 text-2xl font-semibold">
-                  <img src={brandAssets.wordmarkLight} alt="Ubik" className="h-auto w-28 dark:hidden sm:w-32" />
-                  <img src={brandAssets.wordmarkDark} alt="Ubik" className="hidden h-auto w-28 dark:block sm:w-32" />
-                  <span className="pb-1 text-xl leading-none">Meetings</span>
+                <p className="section-label">Free desktop app</p>
+                {/* The wordmark art has its own internal padding, so pairing it with
+                    a text span left "Meetings" floating off the baseline. Stack the
+                    lockup instead and let the rule carry the alignment. */}
+                <h2 className="ubik-meetings-lockup mt-3">
+                  <img src={brandAssets.wordmarkLight} alt="Ubik" className="dark:hidden" />
+                  <img src={brandAssets.wordmarkDark} alt="Ubik" className="hidden dark:block" />
+                  <span>Meetings</span>
                 </h2>
               </div>
               <div>
                 <p className="text-sm leading-6 text-foreground/72 dark:text-foreground/82">
-                  Today, it records and summarizes local meetings. Next, it becomes the hotkey-summoned desktop overlay that bridges your local context with the Ubik Webapp.
+                  Records and summarises your meetings on-device, then sits a hotkey away as a desktop overlay that carries the room's context straight into your Ubik workspace.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {localPills.map((pill) => (

@@ -1,12 +1,13 @@
 # Ubik
 
-> Ubik is a decision intelligence workspace for frozen food trade operators, starting with importers, exporters and processors.
+> Ubik is an agentic operating system for perishable trade. It gives specialist agents shared trade memory, model orchestration, and access to approved browser, computer, email, ERP, CRM, document, and market-intelligence tools.
 
 Ubik connects to email, WhatsApp, ERP, CRM, documents, meetings and market intelligence sources, then runs memory workflows and agents for trade operations.
 
 ## Core positioning
 
-- Decision intelligence workspace for perishable trade
+- Agentic decision infrastructure for perishable trade
+- Trade memory that remains searchable, reviewable, and reusable
 - Built for frozen food importers, exporters and processors
 - Combines web workspace, local desktop context, memory workflows, market intelligence and enterprise-grade automation
 - Designed for RFQ-to-quote, PO ingestion, VMI, margin protection, traceability and operational intelligence
@@ -14,22 +15,21 @@ Ubik connects to email, WhatsApp, ERP, CRM, documents, meetings and market intel
 
 ## Product
 
-- Base: personal AI workspace for operators, with Ubik Webapp and Ubik Local included
+- Base: personal AI workspace for operators, with Ubik Webapp and Ubik Meetings included
 - Enterprise: custom workflow automation for teams, with domain expert and forward-deployed product engineer support
-- Ubik Local: included desktop add-on for local meeting recording and, later, hotkey-summoned desktop context bridging
+- Ubik Meetings: desktop meeting recording, transcription, summaries, and searchable meeting context
 - Supports 10+ LLMs including Claude, ChatGPT, Gemini, Grok and more
 - Supports private, local and air-gapped deployments for enterprise customers
 - Integrates with email, WhatsApp, ERP, CRM, documents, spreadsheets, meetings and market intelligence tools
 
-## Buyers
+## Who Ubik is for
 
 Ubik is for frozen food importers, exporters and processors who manage trade across email, WhatsApp, spreadsheets, ERP and CRM systems.
 
-Primary ICP:
-- $25Mn+ customer aggregate revenue proof point
-- 100+ containers per year
-- Teams where inboxes and WhatsApp threads act like the real ERP
-- Operators who need faster quotes, cleaner PO processing, margin visibility and traceability
+Typical teams:
+- Importers, exporters, processors, and distributors
+- Teams where inboxes and WhatsApp threads carry critical trade context
+- Operators who need faster quotes, cleaner PO processing, margin visibility, and traceability
 
 ## Outcomes
 
@@ -39,9 +39,9 @@ Primary ICP:
 - Compounding memory across inbox, meetings, projects and trade artifacts
 - Lower operational leakage from slow decisions and fragmented context
 
-## Ubik Local
+## Ubik Meetings
 
-Ubik Local is included with Base and Enterprise. Today, it records and summarizes local meetings. Over time, it becomes the desktop context bridge for Ubik: a lightweight, hotkey-summoned overlay that connects local context, meetings, browser activity and the Ubik Webapp.
+Ubik Meetings records and transcribes local meetings, produces summaries, and keeps approved meeting context searchable inside the operator workspace.
 
 ## Security and data handling
 
@@ -62,6 +62,8 @@ Ubik minimizes what is shared with external LLMs. Models are used for planning, 
 - https://docs.theubik.com
 
 ## Trade Notes
+
+Trade Notes publishes operating research for perishable-trade teams. Published notes should be treated as research, not customer proof.
 
 ### The Invisible Drift
 

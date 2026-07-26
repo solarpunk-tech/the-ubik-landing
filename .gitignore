@@ -12,3 +12,12 @@ public/downloads/**/*.dmg
 
 # Local Netlify folder
 .netlify
+
+# Local agent/tooling scratch — never part of the deployed site
+.claude/
+.playwright-cli/
+output/
+
+# Visual-regression screenshots. Local build artefacts, not source: they were
+# tracked by mistake and added ~200 PNGs to the repo.
+verification/

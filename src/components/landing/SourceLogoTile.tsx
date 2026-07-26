@@ -49,7 +49,7 @@ function LogoMark({ logo, meta, logoPath, wordmarkOnly }: Pick<SourceLogoTilePro
   }
 
   return (
-    <span className="inline-flex size-5 shrink-0 items-center justify-center border border-current/20 text-[9px] font-semibold uppercase">
+    <span className="inline-flex size-5 shrink-0 items-center justify-center border border-current/20 text-[11px] font-semibold uppercase">
       {meta.slice(0, 2)}
     </span>
   );
@@ -61,7 +61,7 @@ export function SourceLogoTile({ label, logo, meta, logoPath, compact = false, a
       <div
         className={cn(
           "inline-flex h-10 min-w-[5.75rem] max-w-[7.5rem] items-center justify-center border px-3",
-          active ? "border-primary-foreground/35 bg-primary-foreground text-foreground" : "border-border/70 bg-card shadow-sm"
+          active ? "border-primary-foreground/35 bg-primary text-primary-foreground" : "border-border/70 bg-card shadow-sm"
         )}
         aria-label={label}
       >
@@ -75,7 +75,7 @@ export function SourceLogoTile({ label, logo, meta, logoPath, compact = false, a
     <div
       className={cn(
         "flex items-center gap-3 border p-3",
-        active ? "border-primary-foreground bg-primary-foreground text-primary" : "border-border/70 bg-card shadow-sm",
+        active ? "border-primary-foreground bg-primary text-primary-foreground" : "border-border/70 bg-card shadow-sm",
         compact ? "min-w-0 px-2.5 py-2" : "",
       )}
     >

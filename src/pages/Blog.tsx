@@ -1,5 +1,5 @@
 import { type FormEvent, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -16,7 +16,18 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Seo } from "@/components/seo/Seo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { aiMonitorPost, blogPosts, getBlogPostBySlug, marginLeakPost, originRoulettePost, type BlogPost } from "@/lib/blog";
+import {
+  aiMonitorPost,
+  blogCategories,
+  blogPosts,
+  getBlogCategory,
+  getBlogPostBySlug,
+  getBlogPostCategorySlugs,
+  marginLeakPost,
+  originRoulettePost,
+  type BlogCategorySlug,
+  type BlogPost
+} from "@/lib/blog";
 import { sourceNotes } from "@/lib/blog/origin-roulette";
 import { trackEvent } from "@/lib/posthog";
 
@@ -214,7 +225,7 @@ function ArticleShell({ post, children }: ArticleShellProps) {
         type="article"
       />
       <JsonLd data={jsonLd} />
-      <main className="container-page section-y">
+      <main className="trade-notes-article container-page section-y">
         <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-foreground/72 dark:text-foreground/82 hover:text-foreground">
           <ArrowLeftIcon aria-hidden /> Trade Notes
         </Link>
@@ -400,7 +411,7 @@ function OriginRouletteArticle() {
               className="group grid min-w-0 grid-cols-[2.5rem_minmax(0,1fr)] gap-3 bg-background p-4 transition-colors hover:bg-card"
             >
               <span className="relative flex size-10 items-center justify-center border bg-shell">
-                <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-primary">{source.faviconLabel}</span>
+                <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-primary">{source.faviconLabel}</span>
                 <img
                   src={source.favicon}
                   alt=""
@@ -451,7 +462,7 @@ function BlogNotFound() {
         description="The requested Ubik Trade Note could not be found."
         canonical="https://theubik.com/blog"
       />
-      <main className="container-page section-y">
+      <main className="trade-notes-empty container-page section-y">
         <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-foreground/72 dark:text-foreground/82 hover:text-foreground">
           <ArrowLeftIcon aria-hidden /> Trade Notes
         </Link>
@@ -472,6 +483,7 @@ function BlogNotFound() {
 
 export default function Blog() {
   const { slug } = useParams();
+  const [searchParams] = useSearchParams();
   const selected = slug ? getBlogPostBySlug(slug) : null;
 
   if (slug && !selected) {
@@ -486,6 +498,15 @@ export default function Blog() {
     );
   }
 
+  const requestedCategory = searchParams.get("category");
+  const activeCategory = blogCategories.some((category) => category.slug === requestedCategory)
+    ? (requestedCategory as BlogCategorySlug)
+    : null;
+  const categoryMetadata = activeCategory ? getBlogCategory(activeCategory) : null;
+  const filteredPosts = activeCategory
+    ? blogPosts.filter((post) => getBlogPostCategorySlugs(post).includes(activeCategory))
+    : blogPosts;
+
   return (
     <PageShell>
       <Seo
@@ -493,16 +514,46 @@ export default function Blog() {
         description="Buyer strategy notes on perishable operations, shrimp sourcing, reviewed automation, and the operator layer above existing systems."
         canonical="https://theubik.com/blog"
       />
-      <main className="container-page section-y">
-        <div className="grid gap-px bg-border">
-          {blogPosts.map((post) => (
+      <main className="trade-notes-page container-page section-y">
+        <div className="mb-8 border-b pb-6">
+          <p className="section-label">Browse the desk</p>
+          <nav aria-label="Trade Notes categories" className="mt-4 flex flex-wrap gap-2">
+            <Link
+              to="/blog"
+              aria-current={activeCategory === null ? "page" : undefined}
+              className={`border px-3 py-2 text-sm font-medium transition-colors hover:bg-shell ${
+                activeCategory === null ? "border-primary bg-primary text-primary-foreground" : "bg-background"
+              }`}
+            >
+              All notes
+            </Link>
+            {blogCategories.map((category) => (
+              <Link
+                key={category.slug}
+                to={`/blog?category=${category.slug}`}
+                aria-current={activeCategory === category.slug ? "page" : undefined}
+                className={`border px-3 py-2 text-sm font-medium transition-colors hover:bg-shell ${
+                  activeCategory === category.slug ? "border-primary bg-primary text-primary-foreground" : "bg-background"
+                }`}
+              >
+                {category.label}
+              </Link>
+            ))}
+          </nav>
+          <p className="mt-4 max-w-2xl text-sm leading-6 text-primary-foreground/84">
+            {categoryMetadata?.description ?? "Field notes on perishable trade, operations, and reviewed automation."}
+          </p>
+        </div>
+        {filteredPosts.length ? (
+          <div className="grid gap-px bg-border">
+            {filteredPosts.map((post) => (
             <Link key={post.slug} to={`/blog/${post.slug}`} className="grid min-h-72 bg-background hover:bg-shell lg:grid-cols-[0.44fr_0.56fr]">
               <div className="p-5 sm:p-6">
-                <p className="text-xs uppercase tracking-[0.14em] text-foreground/72 dark:text-foreground/82">
+                <p className="text-xs uppercase tracking-[0.14em] text-foreground/78">
                   {post.date} / {post.category}
                 </p>
                 <h2 className="mt-8 max-w-xl text-3xl font-semibold">{post.title}</h2>
-                <p className="mt-5 max-w-xl text-base leading-7 text-foreground/72 dark:text-foreground/82">{post.excerpt}</p>
+                <p className="mt-5 max-w-xl text-base leading-7 text-foreground/88">{post.excerpt}</p>
                 <span className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-primary">
                   Read field note <ArrowRightIcon aria-hidden />
                 </span>
@@ -514,8 +565,20 @@ export default function Blog() {
                 </div>
               ) : null}
             </Link>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="border bg-card p-6 sm:p-8">
+            <p className="section-label">Category coming soon</p>
+            <h2 className="mt-3 text-3xl font-semibold">{categoryMetadata?.emptyState}</h2>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-foreground/72 dark:text-foreground/82">
+              We’ll add researched notes here when they are ready. For now, browse the published Seafood notes or return to all Trade Notes.
+            </p>
+            <Link to="/blog" className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary">
+              View published notes <ArrowRightIcon aria-hidden />
+            </Link>
+          </div>
+        )}
         <div className="mt-10">
           <TradeNotesNewsletter source="theubik.com/blog" />
         </div>

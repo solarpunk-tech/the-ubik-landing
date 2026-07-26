@@ -1,9 +1,7 @@
 import { useState } from "react";
+import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from "motion/react";
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
-import { DotmSquare1 } from "@/components/ui/dotm-square-1";
-import { MatrixField } from "@/components/landing/MatrixField";
-import { usePrefersReducedMotion } from "@/lib/dotmatrix-hooks";
 import { howWorkflows } from "@/lib/landing-content";
 import { externalLinks } from "@/lib/links";
 import { cn } from "@/lib/utils";
@@ -15,105 +13,98 @@ type HowWorkflowCarouselProps = {
 type Workflow = (typeof howWorkflows)[number];
 
 function WorkflowMedia({ workflow, compact }: { workflow: Workflow; compact: boolean }) {
-  const reducedMotion = usePrefersReducedMotion();
+  const reducedMotion = Boolean(useReducedMotion());
   const showControls = reducedMotion || !compact;
 
   return (
-    <div className="mt-6 grid gap-3">
-      <div className="aspect-video overflow-hidden border border-border bg-background">
-        {workflow.media.type === "video" ? (
-          <video
-            key={workflow.media.src}
-            className="size-full object-cover"
-            src={workflow.media.src}
-            poster={workflow.media.poster}
-            muted
-            loop={!reducedMotion}
-            autoPlay={!reducedMotion}
-            playsInline
-            preload="metadata"
-            controls={showControls}
-            aria-label={workflow.media.alt}
-          />
-        ) : (
-          <img className="size-full object-contain" src={workflow.media.src} alt={workflow.media.alt} loading="lazy" />
-        )}
-      </div>
-      {"secondaryMedia" in workflow && workflow.secondaryMedia && !compact ? (
-        <div className="grid gap-3 sm:grid-cols-2">
-          {workflow.secondaryMedia.map((item) => (
-            <div key={item.src} className="aspect-video overflow-hidden border border-border bg-background">
-              <img className="size-full object-cover object-top" src={item.src} alt={item.alt} loading="lazy" />
-            </div>
-          ))}
-        </div>
-      ) : null}
+    <div className="workflow-product-media">
+      {workflow.media.type === "video" ? (
+        <video
+          key={workflow.media.src}
+          className="size-full object-cover"
+          src={workflow.media.src}
+          poster={workflow.media.poster}
+          muted
+          loop={!reducedMotion}
+          autoPlay={!reducedMotion}
+          playsInline
+          preload="metadata"
+          controls={showControls}
+          aria-label={workflow.media.alt}
+        />
+      ) : (
+        <img className="size-full object-contain" src={workflow.media.src} alt={workflow.media.alt} loading="lazy" />
+      )}
     </div>
   );
 }
 
 export function HowWorkflowCarousel({ compact = false }: HowWorkflowCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const reducedMotion = Boolean(useReducedMotion());
   const workflows = compact
     ? howWorkflows.filter((workflow) => ["Operator home", "Inbox to reviewed action", "VMI exception"].includes(workflow.title))
     : howWorkflows;
   const active = workflows[activeIndex] ?? workflows[0];
 
   return (
-    <div className={cn("relative overflow-hidden border bg-card", compact ? "p-4" : "p-5 sm:p-6")}>
-      <MatrixField variant="subtle" density="low" seed={`workflow-${active.title}`} className="opacity-35" />
-      <div className="relative z-10 grid gap-px bg-border lg:grid-cols-[0.74fr_1.2fr_0.86fr]">
-        <section className="bg-card p-5">
-          <p className="section-label">Workflow shown</p>
-          <div className="mt-5 flex flex-col gap-2">
-            {workflows.map((workflow, index) => (
-              <button
-                key={workflow.title}
-                type="button"
-                onClick={() => setActiveIndex(index)}
-                className={cn(
-                  "border p-3 text-left transition-colors",
-                  index === activeIndex ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background hover:bg-shell"
-                )}
-              >
-                <span className="block text-xs uppercase tracking-[0.14em] opacity-70">{workflow.eyebrow}</span>
-                <span className="mt-1 block font-semibold">{workflow.title}</span>
-              </button>
-            ))}
-          </div>
-        </section>
+    <div className="workflow-showcase border border-border bg-shell text-primary-foreground">
+      <LayoutGroup id={compact ? "homepage-workflows" : "all-workflows"}>
+        <div className="workflow-tabs" role="tablist" aria-label="Product workflows">
+          {workflows.map((workflow, index) => (
+            <button
+              key={workflow.title}
+              type="button"
+              role="tab"
+              aria-selected={index === activeIndex}
+              onClick={() => setActiveIndex(index)}
+              className={cn("workflow-tab", index === activeIndex && "is-active")}
+            >
+              {index === activeIndex ? (
+                <motion.span
+                  layoutId="workflow-tab-active"
+                  className="workflow-tab-active"
+                  transition={{ type: "spring", stiffness: 420, damping: 38 }}
+                />
+              ) : null}
+              <span className="relative z-10 font-mono text-[11px] uppercase">0{index + 1} · {workflow.eyebrow}</span>
+              <strong className="relative z-10">{workflow.title}</strong>
+            </button>
+          ))}
+        </div>
+      </LayoutGroup>
 
-        <section className="relative min-h-[18rem] bg-shell p-5">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <p className="section-label">Product journey</p>
-              <h3 className="mt-2 text-2xl font-semibold">{active.title}</h3>
-            </div>
-            <DotmSquare1 size={34} dotSize={4} aria-label="Product media accent" />
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={active.title}
+          className="workflow-active-grid"
+          initial={reducedMotion ? false : { opacity: 0, clipPath: "inset(0 0 0 8%)", x: 18 }}
+          animate={{ opacity: 1, clipPath: "inset(0 0 0 0%)", x: 0 }}
+          exit={reducedMotion ? undefined : { opacity: 0, clipPath: "inset(0 8% 0 0)", x: -12 }}
+          transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className="workflow-copy">
+            <p className="font-mono text-[11px] uppercase text-primary-foreground/55">Agent workflow</p>
+            <h3>{active.outcome}</h3>
+            <ol className="workflow-receipt">
+              {active.steps.map((step, index) => (
+                <li key={step}>
+                  <span>0{index + 1}</span>
+                  <p>{step}</p>
+                </li>
+              ))}
+            </ol>
+            {!compact ? (
+              <Button asChild variant="outline" className="mt-6 border-primary-foreground/70 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
+                <a href={externalLinks.founderMeeting}>
+                  Automate my workflows <ArrowRightIcon data-icon="inline-end" />
+                </a>
+              </Button>
+            ) : null}
           </div>
           <WorkflowMedia workflow={active} compact={compact} />
-        </section>
-
-        <section className="bg-card p-5">
-          <p className="section-label">Review loop</p>
-          <h3 className="mt-2 text-xl font-semibold">{active.outcome}</h3>
-          <div className="mt-6 grid gap-px bg-border">
-            {active.steps.map((step, index) => (
-              <div key={step} className="flex items-center gap-3 bg-background p-3">
-                <span className="text-xs text-primary">0{index + 1}</span>
-                <span className="text-sm font-medium">{step}</span>
-              </div>
-            ))}
-          </div>
-          {!compact ? (
-            <Button asChild className="mt-6">
-              <a href={externalLinks.founderMeeting}>
-                Automate my workflows <ArrowRightIcon data-icon="inline-end" />
-              </a>
-            </Button>
-          ) : null}
-        </section>
-      </div>
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }

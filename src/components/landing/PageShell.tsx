@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { AppleLogoIcon, PlusIcon, WindowsLogoIcon, XIcon } from "@phosphor-icons/react";
 import { useDetectedOS } from "@/lib/use-detected-os";
 import { useEffect, useState } from "react";
@@ -6,15 +6,17 @@ import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { BrandLogo } from "./BrandLogo";
-import { SolarpunkCredit } from "./SolarpunkCredit";
 import { ThemeToggle } from "./ThemeToggle";
-import { persistExplicitLanguage, supportedLanguages } from "@/lib/i18n";
+import { SolarpunkCredit } from "./SolarpunkCredit";
+import { ensureLanguage, persistExplicitLanguage, supportedLanguages } from "@/lib/i18n";
 import { externalLinks } from "@/lib/links";
 import { cn } from "@/lib/utils";
 
 export function PageShell({ children }: { children: React.ReactNode }) {
   const { i18n, t } = useTranslation();
+  const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
   const detectedOS = useDetectedOS();
   const downloadHref = `/download?os=${detectedOS}`;
   const DownloadOSIcon = detectedOS === "windows" ? WindowsLogoIcon : AppleLogoIcon;
@@ -34,24 +36,32 @@ export function PageShell({ children }: { children: React.ReactNode }) {
 
   function handleLanguageChange(language: string) {
     persistExplicitLanguage(language);
-    void i18n.changeLanguage(language);
+    // Locale bundles are code-split, so fetch before switching.
+    void ensureLanguage(language).then(() => i18n.changeLanguage(language));
   }
 
   useEffect(() => {
     document.documentElement.lang = selectedLanguage;
   }, [selectedLanguage]);
 
+  useEffect(() => {
+    const onScroll = () => setHasScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <div className="min-h-dvh bg-background text-foreground">
-      <header className="header-matrix sticky top-0 z-40 backdrop-blur-xl">
+    <div className={cn("site-shell min-h-dvh bg-background text-foreground", pathname === "/" ? "home-route" : "secondary-route")}>
+      <header className={cn("header-matrix site-header sticky top-0 z-40", hasScrolled && "is-scrolled")}>
         <div className="container-page flex h-16 items-center justify-between gap-4">
           <Link to="/" aria-label="Ubik home" className="hidden min-[430px]:inline-flex">
-            <BrandLogo />
+            <BrandLogo inverse={hasScrolled} />
           </Link>
           <Link to="/" aria-label="Ubik home" className="inline-flex min-[430px]:hidden">
-            <BrandLogo compact />
+            <BrandLogo compact inverse={hasScrolled} />
           </Link>
-          <nav className="hidden items-center gap-4 text-sm text-foreground/72 dark:text-foreground/82 lg:flex">
+          <nav className="hidden items-center gap-4 text-sm lg:flex">
             {navItems.map((item) =>
               "href" in item ? (
                 <a key={item.href} href={item.href} className="nav-link">
@@ -75,11 +85,12 @@ export function PageShell({ children }: { children: React.ReactNode }) {
             )}
           </nav>
           <div className="flex items-center gap-2">
+            <ThemeToggle />
             <select
               aria-label="Select language"
               value={selectedLanguage}
               onChange={(event) => handleLanguageChange(event.target.value)}
-              className="hidden h-8 border bg-background px-2 text-xs text-foreground/72 dark:text-foreground/82 sm:block"
+              className="site-language hidden h-8 border px-2 text-xs sm:block"
             >
               {supportedLanguages.map((lang) => (
                 <option key={lang} value={lang}>
@@ -87,7 +98,6 @@ export function PageShell({ children }: { children: React.ReactNode }) {
                 </option>
               ))}
             </select>
-            <ThemeToggle className="hidden sm:inline-flex" />
             <a
               href={externalLinks.app}
               className="nav-try-link inline-flex h-9 items-center justify-center border border-primary bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -99,10 +109,9 @@ export function PageShell({ children }: { children: React.ReactNode }) {
                 <button
                   type="button"
                   className={cn(
-                    "inline-flex size-8 items-center justify-center bg-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:hidden",
-                    menuOpen ? "text-foreground" : "text-primary"
+                    "nav-menu-button inline-flex size-8 items-center justify-center bg-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:hidden"
                   )}
-                  aria-label="Open menu"
+                  aria-label={menuOpen ? "Close menu" : "Open menu"}
                 >
                   {menuOpen ? <XIcon aria-hidden /> : <PlusIcon aria-hidden />}
                 </button>
@@ -125,9 +134,6 @@ export function PageShell({ children }: { children: React.ReactNode }) {
                       </Link>
                     )
                   )}
-                  <div className="border-b py-4">
-                    <ThemeToggle showLabels />
-                  </div>
                   <Button asChild onClick={() => setMenuOpen(false)}>
                     <a href={externalLinks.app}>
                       Try Ubik Now
@@ -140,11 +146,11 @@ export function PageShell({ children }: { children: React.ReactNode }) {
         </div>
       </header>
       {children}
-      <footer className="border-t bg-shell">
+      <footer className="site-footer border-t">
         <div className="container-page grid gap-8 py-10 md:grid-cols-[1fr_auto_1fr] md:items-center">
-          <BrandLogo />
+          <BrandLogo inverse className="site-footer-logo" />
           <SolarpunkCredit />
-          <nav className="flex flex-wrap gap-4 text-sm text-foreground/72 dark:text-foreground/82 md:justify-self-end">
+          <nav className="flex flex-wrap gap-4 text-sm text-white/72 md:justify-self-end">
             <a href={externalLinks.docs}>{t("nav.guide", { defaultValue: "Guide" })}</a>
             <Link to="/legal/privacy">{t("nav.privacy", { defaultValue: "Privacy" })}</Link>
             <Link to="/legal/subprocessors">Subprocessors</Link>

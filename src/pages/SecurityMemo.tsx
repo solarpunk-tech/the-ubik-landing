@@ -129,17 +129,17 @@ export default function SecurityMemo() {
         image="/security/og-image.png"
         imageAlt="Ubik security note preview"
       />
-      <main className="relative overflow-hidden">
+      <main className="security-brand-page relative overflow-hidden">
         <MatrixField variant="security" density="high" seed="client-trust-note" />
         <div className="container-page section-y relative z-10">
           <div className="mx-auto max-w-6xl">
-            <div className="mb-10 grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
+            <div className="security-brand-hero mb-10 grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
               <div className="flex flex-col gap-5">
                 <Badge variant="secondary" className="w-fit">Security</Badge>
                 <h1 className="text-5xl font-semibold leading-tight sm:text-6xl">
                   Security for frozen food operators and their customers.
                 </h1>
-                <p className="max-w-3xl text-lg leading-8 text-foreground/72 dark:text-foreground/82">
+                <p className="max-w-3xl text-lg leading-8 text-primary-foreground/84">
                   Ubik connects only approved company tools for quotes, approvals, POs, and shipment
                   work. It drafts; operators stay in control.
                 </p>

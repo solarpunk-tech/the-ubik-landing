@@ -160,7 +160,7 @@ export function OriginFlowMap() {
               <p className="section-label">Origin to destination flow map</p>
               <h2 className="mt-2 text-3xl font-semibold">Where the tonnage is moving</h2>
             </div>
-            <div className="flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.12em] text-foreground/72 dark:text-foreground/82">
+            <div className="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.12em] text-foreground/72 dark:text-foreground/82">
               {Object.entries(bracketText).slice(0, 4).map(([key, label]) => (
                 <span key={key} className="inline-flex items-center gap-1.5">
                   <span className={cn("size-2 bg-current", bracketClass[key as FlowDatum["tariffBracket"]].replace("stroke-", "text-"))} />
@@ -199,7 +199,7 @@ export function OriginFlowMap() {
                   return (
                     <g key={origin.id} transform={`translate(${point[0]},${point[1]})`}>
                       <circle r="4.5" className="fill-primary stroke-background" strokeWidth="2" />
-                      <text x="8" y="4" className="fill-foreground font-mono text-[10px]">{origin.shortName}</text>
+                      <text x="8" y="4" className="fill-foreground font-mono text-[11px]">{origin.shortName}</text>
                     </g>
                   );
                 })}

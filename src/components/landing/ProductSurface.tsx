@@ -52,13 +52,13 @@ export function ProductSurface() {
           </div>
           <div className="mt-5 grid gap-px bg-primary-foreground/20">
             {operatorSignals.map((signal, index) => (
-              <div key={signal.label} className={index === 0 ? "bg-primary-foreground p-4 text-primary" : "bg-primary-foreground/10 p-4"}>
+              <div key={signal.label} className={index === 0 ? "bg-primary p-4 text-primary-foreground" : "bg-primary/10 p-4"}>
                 <div className="flex items-start gap-3">
                   <Badge
                     variant={index === 0 ? "secondary" : "outline"}
                     className={
                       index === 0
-                        ? "bg-foreground text-background"
+                        ? "bg-primary text-primary-foreground"
                         : "border-primary-foreground/25 text-primary-foreground"
                     }
                   >

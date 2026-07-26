@@ -30,7 +30,21 @@
   --ring: 227 81% 56%;
   --support: 38 80% 48%;
   --support-foreground: 25 25% 14%;
+  /* Text-safe variants. --support and --primary are *fill* colors; neither can
+     carry small text where it lands. Measured on this palette:
+       --support        on paper  = 2.33:1  --support-text   on paper = 5.56:1
+       --primary        on shell  = 2.41:1  --primary-on-dark on shell = 7.35:1
+     Mirrors ubik-design's --attention-text / dark-theme --accent-foreground. */
+  --support-text: 47 100% 24%;
+  --primary-on-dark: 224 100% 83%;
+  /* Action blue clears 4.5:1 on paper but only reaches 4.41:1 on the tan
+     --secondary surface. Use this for small blue text on that tier (5.15:1). */
+  --primary-text: 227 72% 52%;
   --shell: 30 24% 18%;
+  /* Header/footer chrome only. One fixed value, not redefined in .dark, so the
+     bars read as the same black band in both themes instead of dark mode's
+     --shell (already near-black) stacking even darker on an already-dark page. */
+  --chrome: 28 22% 14%;
   --well: 38 28% 90%;
   --well-foreground: 25 25% 14%;
   --radius: 0;
@@ -48,6 +62,68 @@
   --chart-4: hsl(42 98% 46%);
   --chart-5: hsl(35 92% 33%);
   --sidebar: 224 38% 10%;
+}
+
+/* ---------------------------------------------------------------------------
+   DARK THEME
+   Same palette lifted for contrast, not a separate identity: warm paper
+   inverts to a warm near-black, ink inverts to warm off-white, and the action
+   blue lifts (#5B82FF territory) so it can carry text on dark the way it
+   carries text on paper. The particle field reads --primary at runtime, so
+   the falling squares pick this up on their own.
+   --------------------------------------------------------------------------- */
+.dark {
+  color-scheme: dark;
+  --background: 26 16% 9%;
+  --foreground: 40 30% 94%;
+  --card: 26 14% 12%;
+  --card-foreground: 40 30% 94%;
+  --popover: 26 14% 12%;
+  --popover-foreground: 40 30% 94%;
+  /* Brand blue and its label stay identical to light mode on purpose.
+     --primary-foreground does double duty across this codebase: it is the
+     label on blue fills *and* the text colour on every dark --shell band.
+     Those two wants diverge if the blue lifts, and the shell bands (many)
+     would go dark-on-dark. Holding both fixed keeps every existing pairing
+     valid and keeps the particle squares the same blue in both themes. */
+  --primary: 227 81% 56%;
+  --primary-foreground: 42 45% 99%;
+  --secondary: 28 12% 17%;
+  --secondary-foreground: 40 30% 94%;
+  --muted: 28 12% 17%;
+  --muted-foreground: 36 16% 72%;
+  --accent: 17 65% 55%;
+  --accent-foreground: 26 30% 8%;
+  --destructive: 0 66% 60%;
+  --destructive-foreground: 40 30% 94%;
+  --border: 30 12% 28%;
+  --input: 30 12% 28%;
+  --ring: 227 81% 56%;
+  --support: 40 85% 60%;
+  --support-foreground: 26 30% 8%;
+  /* On this canvas the amber and blue swap roles: amber can carry text
+     directly, and the blue no longer needs a darkened text variant. */
+  --support-text: 42 90% 68%;
+  --primary-on-dark: 224 100% 83%;
+  --primary-text: 227 100% 76%;
+  /* The shell band stays the darkest tier so the light/dark rhythm survives. */
+  --shell: 26 20% 6%;
+  --well: 28 12% 17%;
+  --well-foreground: 40 30% 94%;
+  --sidebar-background: 26 20% 6%;
+  --sidebar-foreground: 40 30% 94%;
+  --sidebar-primary: 227 81% 56%;
+  --sidebar-primary-foreground: 42 45% 99%;
+  --sidebar-accent: 28 12% 17%;
+  --sidebar-accent-foreground: 40 30% 94%;
+  --sidebar-border: 30 12% 28%;
+  --sidebar-ring: 227 81% 56%;
+  --chart-1: hsl(227 81% 56%);
+  --chart-2: hsl(212 100% 62%);
+  --chart-3: hsl(49 100% 66%);
+  --chart-4: hsl(42 98% 60%);
+  --chart-5: hsl(35 85% 52%);
+  --sidebar: 26 20% 6%;
 }
 
 @custom-variant dark (&:is(.dark *));
@@ -74,6 +150,8 @@
   --color-ring: hsl(var(--ring));
   --color-support: hsl(var(--support));
   --color-support-foreground: hsl(var(--support-foreground));
+  --color-support-text: hsl(var(--support-text));
+  --color-primary-on-dark: hsl(var(--primary-on-dark));
   --color-shell: hsl(var(--shell));
   --color-well: hsl(var(--well));
   --color-well-foreground: hsl(var(--well-foreground));
@@ -150,7 +228,7 @@
   }
 
   .section-label {
-    @apply text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground/70 dark:text-foreground/82;
+    @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground/70 dark:text-foreground/82;
   }
 
   .surface-card {
@@ -686,8 +764,8 @@
     right: 1.25rem;
     bottom: 1rem;
     font-family: "IBM Plex Mono", monospace;
-    font-size: 0.68rem;
-    color: hsl(var(--foreground) / 0.36);
+    font-size: 0.6875rem;
+    color: hsl(var(--foreground) / 0.7);
   }
 
   .proof-swarm-card:hover {
@@ -782,7 +860,7 @@
     margin-top: 0.24rem;
     display: block;
     font-family: "IBM Plex Mono", monospace;
-    font-size: 0.58rem;
+    font-size: 0.6875rem;
     line-height: 1.35;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -811,7 +889,7 @@
     justify-content: space-between;
     gap: 1rem;
     font-family: "IBM Plex Mono", monospace;
-    font-size: 0.58rem;
+    font-size: 0.6875rem;
     letter-spacing: 0.075em;
     text-transform: uppercase;
     color: hsl(var(--primary));
@@ -1048,7 +1126,7 @@
     align-items: center;
     gap: 0.45rem;
     font-family: "IBM Plex Mono", monospace;
-    font-size: 0.62rem;
+    font-size: 0.6875rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: hsl(var(--primary));
@@ -1086,10 +1164,10 @@
   .rail-data-table span,
   .rail-logic-card span {
     font-family: "IBM Plex Mono", monospace;
-    font-size: 0.62rem;
+    font-size: 0.6875rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: hsl(var(--foreground) / 0.62);
+    color: hsl(var(--foreground) / 0.7);
   }
 
   .rail-doc-row b,
@@ -1116,7 +1194,7 @@
   .rail-data-table i {
     justify-self: end;
     font-family: "IBM Plex Mono", monospace;
-    font-size: 0.62rem;
+    font-size: 0.6875rem;
     font-style: normal;
     color: hsl(var(--primary));
   }
@@ -1147,7 +1225,7 @@
 
   .rail-decision-card span {
     font-family: "IBM Plex Mono", monospace;
-    font-size: 0.62rem;
+    font-size: 0.6875rem;
     text-transform: uppercase;
     color: hsl(var(--primary));
   }
@@ -1191,7 +1269,7 @@
     border-left: 2px solid hsl(var(--primary));
     padding-left: 0.75rem;
     font-family: "IBM Plex Mono", monospace;
-    font-size: 0.68rem;
+    font-size: 0.6875rem;
     text-transform: uppercase;
     color: hsl(var(--primary));
   }
@@ -1271,7 +1349,7 @@
     background: hsl(var(--card));
     padding: 0.85rem;
     font-family: "IBM Plex Mono", monospace;
-    font-size: 0.68rem;
+    font-size: 0.6875rem;
     text-transform: uppercase;
     color: hsl(var(--primary));
   }
@@ -1593,8 +1671,8 @@
 
 .workflow-receipt span {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.62rem;
-  color: hsl(var(--primary-foreground) / 0.58);
+  font-size: 0.6875rem;
+  color: hsl(var(--primary-foreground) / 0.6);
 }
 
 .workflow-receipt p {
@@ -1639,7 +1717,7 @@
 
 .system-tool span {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.56rem;
+  font-size: 0.6875rem;
   font-weight: 650;
   text-transform: uppercase;
 }
@@ -1659,9 +1737,9 @@
 
 .system-readout-row span {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.58rem;
+  font-size: 0.6875rem;
   text-transform: uppercase;
-  color: hsl(var(--primary-foreground) / 0.54);
+  color: hsl(var(--primary-foreground) / 0.6);
 }
 
 .system-readout-row p {
@@ -1690,7 +1768,7 @@
 }
 
 .case-study-section .container-page > div:first-child span {
-  color: hsl(var(--foreground) / 0.62);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .compare-band .model-router-ticker {
@@ -1729,10 +1807,10 @@
   max-width: 100%;
   overflow: hidden;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.5rem;
+  font-size: 0.6875rem;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: hsl(var(--foreground) / 0.62);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .model-router-commit {
@@ -1881,7 +1959,7 @@
 }
 
 .site-header.is-scrolled {
-  background: hsl(var(--shell) / 0.96);
+  background: hsl(var(--chrome) / 0.96);
   border-bottom-color: hsl(var(--primary-foreground) / 0.22);
 }
 
@@ -1972,11 +2050,11 @@
 
 .home-kicker {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.62rem;
+  font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: hsl(var(--foreground) / 0.52);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .home-kicker-inverse {
@@ -2042,24 +2120,24 @@
   border-bottom: 1px solid hsl(var(--foreground));
   padding: 0.8rem 1rem;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.62rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .trade-control-topline span:last-child { color: hsl(var(--primary)); }
 .trade-control-title { padding: 2.2rem 1.25rem 1.8rem; }
-.trade-control-title p { font-family: "IBM Plex Mono", monospace; font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(var(--foreground) / 0.55); }
+.trade-control-title p { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
 .trade-control-title h2 { margin-top: 0.6rem; max-width: 11ch; font-size: clamp(1.75rem, 3vw, 2.75rem); font-weight: 620; line-height: 1; letter-spacing: -0.04em; }
 .trade-control-data { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid hsl(var(--border)); }
 .trade-control-data > div { min-height: 5.6rem; border-right: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); padding: 0.85rem 1rem; }
 .trade-control-data > div:nth-child(2n) { border-right: 0; }
-.trade-control-data span, .trade-control-recommendation > span { display: block; font-family: "IBM Plex Mono", monospace; font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(var(--foreground) / 0.52); }
+.trade-control-data span, .trade-control-recommendation > span { display: block; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
 .trade-control-data strong { display: block; margin-top: 0.45rem; font-size: 0.8rem; line-height: 1.25; }
 .trade-control-recommendation { margin: 1rem; padding: 1rem; background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
 .trade-control-recommendation > span { color: hsl(var(--primary)); }
 .trade-control-recommendation > p { margin-top: 0.65rem; font-size: 0.96rem; font-weight: 560; line-height: 1.45; }
-.trade-control-evidence { display: flex; align-items: center; gap: 0.4rem; margin-top: 1rem; font-family: "IBM Plex Mono", monospace; font-size: 0.62rem; color: hsl(var(--primary-foreground) / 0.64); }
+.trade-control-evidence { display: flex; align-items: center; gap: 0.4rem; margin-top: 1rem; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; color: hsl(var(--primary-foreground) / 0.64); }
 .trade-control-recommendation svg { color: hsl(var(--primary)); }
 
 .hero-integration-visual {
@@ -2102,7 +2180,7 @@
   border: 1px solid hsl(var(--foreground) / 0.18);
   background: hsl(var(--background) / 0.52);
   backdrop-filter: blur(2px);
-  animation: hero-tool-swap 260ms cubic-bezier(.16,1,.3,1) both;
+  animation: hero-tool-swap 260ms cubic-bezier(.16,1,.3,1);
 }
 
 .hero-app-field > span:nth-of-type(1), .hero-app-field > span:nth-of-type(2) { top: 18%; }
@@ -2116,7 +2194,7 @@
 .hero-app-field img { mix-blend-mode: multiply; }
 .hero-app-field img { filter: saturate(1.15) contrast(1.18); }
 .hero-app-field > span > svg { color: hsl(var(--primary)); }
-.hero-app-field small { font-family: "IBM Plex Mono", monospace; font-size: 0.52rem; font-weight: 700; text-transform: uppercase; }
+.hero-app-field small { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; }
 
 .hero-role-rail {
   position: absolute;
@@ -2127,9 +2205,9 @@
   grid-template-columns: auto minmax(2rem, 1fr) auto;
   align-items: center;
   gap: 0.65rem;
-  color: hsl(var(--foreground) / 0.66);
+  color: hsl(var(--foreground) / 0.7);
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.46rem;
+  font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.08em;
 }
@@ -2194,7 +2272,7 @@
   padding: 0.55rem 0.7rem;
   border-bottom: 1px solid hsl(var(--primary-foreground) / 0.18);
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.56rem;
+  font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.1em;
 }
@@ -2220,15 +2298,15 @@
 .trade-queue-rail { display: flex; flex-direction: column; gap: 0.18rem; padding: 0.32rem 0; background: hsl(var(--primary-foreground) / 0.06); }
 .trade-queue-rail button { flex: 1; border: 0; padding: 0; background: hsl(var(--primary-foreground) / 0.18); cursor: pointer; transition: background 220ms ease; }
 .trade-queue-rail button.is-active { background: hsl(var(--primary)); }
-.trade-queue-signal { display: flex; align-items: center; gap: 0.7rem; padding: 0.75rem; animation: queue-signal-in 260ms ease-out both; }
+.trade-queue-signal { display: flex; align-items: center; gap: 0.7rem; padding: 0.75rem; animation: queue-signal-in 260ms ease-out; }
 .trade-queue-signal img { width: 1.35rem; height: 1.35rem; object-fit: contain; }
 .trade-queue-signal strong { display: block; font-size: 0.76rem; font-weight: 650; }
-.trade-queue-signal p { margin: 0.2rem 0 0; font-size: 0.72rem; line-height: 1.35; color: hsl(var(--primary-foreground) / 0.68); }
-.trade-queue-result { position: relative; display: grid; grid-template-columns: 1.8rem minmax(0, 1fr); align-items: center; gap: 0.65rem; overflow: hidden; padding: 0.6rem 0.7rem; border-top: 1px solid hsl(var(--primary-foreground) / 0.18); background: hsl(var(--shell)); animation: queue-signal-in 260ms ease-out both; }
+.trade-queue-signal p { margin: 0.2rem 0 0; font-size: 0.75rem; line-height: 1.35; color: hsl(var(--primary-foreground) / 0.68); }
+.trade-queue-result { position: relative; display: grid; grid-template-columns: 1.8rem minmax(0, 1fr); align-items: center; gap: 0.65rem; overflow: hidden; padding: 0.6rem 0.7rem; border-top: 1px solid hsl(var(--primary-foreground) / 0.18); background: hsl(var(--shell)); animation: queue-signal-in 260ms ease-out; }
 .trade-queue-result::after { content: ""; position: absolute; right: -1.15rem; bottom: -1.75rem; width: 5rem; height: 5rem; border: 1px solid hsl(var(--primary) / 0.4); transform: rotate(45deg); }
 .trade-queue-result > div { position: relative; z-index: 1; }
-.trade-queue-result strong { display: block; color: hsl(var(--primary-foreground)); font-size: 0.74rem; font-weight: 750; line-height: 1.2; }
-.trade-queue-result p { margin: 0.18rem 0 0; font-family: "IBM Plex Mono", monospace; font-size: 0.53rem; font-weight: 600; line-height: 1.35; letter-spacing: 0.015em; color: hsl(var(--primary-foreground) / 0.72); }
+.trade-queue-result strong { display: block; color: hsl(var(--primary-foreground)); font-size: 0.75rem; font-weight: 750; line-height: 1.2; }
+.trade-queue-result p { margin: 0.18rem 0 0; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-weight: 600; line-height: 1.35; letter-spacing: 0.015em; color: hsl(var(--primary-foreground) / 0.72); }
 .trade-queue-working-dot { position: relative; z-index: 1; display: block; width: 1.8rem; height: 1.8rem; overflow: hidden; border: 1px solid hsl(var(--primary) / 0.4); background: hsl(var(--primary) / 0.08); }
 .trade-queue-working-dot::before, .trade-queue-working-dot::after { content: ""; position: absolute; top: 50%; width: 0.22rem; height: 0.22rem; background: hsl(var(--primary) / 0.45); transform: translateY(-50%); }
 .trade-queue-working-dot::before { left: 0.18rem; animation: working-trail 1.45s linear infinite; }
@@ -2236,25 +2314,28 @@
 .trade-queue-working-dot i { position: absolute; top: 0.46rem; left: 0.18rem; width: 0.72rem; height: 0.72rem; background: hsl(var(--primary)); animation: working-square 1.45s cubic-bezier(.5,0,.25,1) infinite; }
 
 .trade-decision-queue.is-compact { margin-bottom: 0; }
-.trade-decision-queue.is-compact .trade-queue-head { min-height: 2rem; padding: 0.4rem 0.55rem; font-size: 0.48rem; }
+.trade-decision-queue.is-compact .trade-queue-head { min-height: 2rem; padding: 0.4rem 0.55rem; font-size: 0.75rem; }
 .trade-decision-queue.is-compact .trade-agent-mark { width: 1.45rem; height: 1.45rem; }
 .trade-decision-queue.is-compact .trade-queue-body { min-height: 3.6rem; }
 .trade-decision-queue.is-compact .trade-queue-signal { padding: 0.5rem 0.55rem; }
 .trade-decision-queue.is-compact .trade-queue-signal img { width: 1.1rem; height: 1.1rem; }
-.trade-decision-queue.is-compact .trade-queue-signal strong { font-size: 0.65rem; }
-.trade-decision-queue.is-compact .trade-queue-signal p { font-size: 0.61rem; }
+.trade-decision-queue.is-compact .trade-queue-signal strong { font-size: 0.75rem; }
+.trade-decision-queue.is-compact .trade-queue-signal p { font-size: 0.75rem; }
 .trade-decision-queue.is-compact .trade-queue-result { padding: 0.45rem 0.55rem; }
 .trade-decision-queue.is-compact .trade-queue-result { grid-template-columns: 1.45rem minmax(0, 1fr); gap: 0.5rem; }
 .trade-decision-queue.is-compact .trade-queue-working-dot { width: 1.45rem; height: 1.45rem; }
 .trade-decision-queue.is-compact .trade-queue-working-dot i { top: 0.33rem; width: 0.6rem; height: 0.6rem; }
 .trade-decision-queue.is-compact .trade-queue-working-dot::before { left: 0.1rem; }
 .trade-decision-queue.is-compact .trade-queue-working-dot::after { left: 0.38rem; }
-.trade-decision-queue.is-compact .trade-queue-result strong { font-size: 0.62rem; }
-.trade-decision-queue.is-compact .trade-queue-result p { font-size: 0.47rem; }
+.trade-decision-queue.is-compact .trade-queue-result strong { font-size: 0.75rem; }
+.trade-decision-queue.is-compact .trade-queue-result p { font-size: 0.75rem; }
 
 @keyframes agent-square-pulse { 0%,100% { transform: translateY(0); opacity: .55; } 50% { transform: translateY(-2px); opacity: 1; } }
 @keyframes agent-bars { 0%,100% { transform: scaleY(.55); } 50% { transform: scaleY(1.55); } }
-@keyframes queue-signal-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+/* Transform-only: a paused/throttled animation timeline holds the `from`
+   keyframe, so anything that fades opacity here would leave real content
+   invisible on low-end or backgrounded tabs. Motion, never visibility. */
+@keyframes queue-signal-in { from { transform: translateY(4px); } to { transform: translateY(0); } }
 @keyframes working-square { 0% { transform: translateX(0) rotate(0); } 45% { transform: translateX(0.75rem) rotate(90deg); } 55% { transform: translateX(0.75rem) rotate(90deg); } 100% { transform: translateX(0) rotate(180deg); } }
 @keyframes working-trail { 0%, 35% { opacity: 0; transform: translate(0, -50%) scale(.4); } 52% { opacity: 1; transform: translate(0.45rem, -50%) scale(1); } 100% { opacity: 0; transform: translate(0.9rem, -50%) scale(.4); } }
 
@@ -2264,23 +2345,6 @@
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
   box-shadow: 9px 9px 0 hsl(224 45% 8%);
-}
-
-.trade-work-ledger-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  min-height: 2.4rem;
-  padding: 0.6rem 0.75rem;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.5rem;
-  letter-spacing: 0.08em;
-}
-
-.trade-work-ledger-head strong {
-  font-weight: 600;
-  color: hsl(var(--primary-foreground) / 0.72);
 }
 
 .trade-work-ledger-body {
@@ -2323,25 +2387,44 @@
   color: hsl(var(--foreground));
 }
 
+/* Inactive buttons sit on the dark shell, the active one flips to a light
+   background — so the step number needs the lifted blue by default and the
+   standard action blue only once active. */
 .trade-work-index button > span {
   grid-row: span 2;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.5rem;
+  font-size: 0.6875rem;
+  color: hsl(var(--primary-on-dark));
+}
+
+.trade-work-index button.is-active > span {
   color: hsl(var(--primary));
 }
 
 .trade-work-index button strong {
-  font-size: 0.69rem;
+  font-size: 0.75rem;
   line-height: 1.1;
+  color: hsl(var(--primary-foreground));
 }
 
+.trade-work-index button.is-active strong {
+  color: hsl(var(--foreground));
+}
+
+/* The status line used to stack opacity:0.62 on top of the button's already
+   faded 0.64 colour — an effective 0.40 alpha on the dark shell, which is
+   unreadable. Set the colour outright instead of multiplying alphas. */
 .trade-work-index button em {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.45rem;
+  font-size: 0.6875rem;
   font-style: normal;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  opacity: 0.62;
+  color: hsl(var(--primary-foreground) / 0.78);
+}
+
+.trade-work-index button.is-active em {
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .trade-work-paper {
@@ -2351,23 +2434,21 @@
   padding: clamp(1.2rem, 3vw, 2rem);
   background: hsl(var(--background));
   color: hsl(var(--foreground));
-  animation: work-paper-in 340ms cubic-bezier(.22,1,.36,1) both;
+  animation: work-paper-in 340ms cubic-bezier(.22,1,.36,1);
 }
 
-.trade-work-paper-topline,
-.trade-work-paper-foot {
+.trade-work-paper-topline {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.5rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.07em;
   text-transform: uppercase;
 }
 
-.trade-work-paper-topline span,
-.trade-work-paper-foot {
-  color: hsl(var(--foreground) / 0.48);
+.trade-work-paper-topline span {
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .trade-work-paper-topline strong {
@@ -2388,7 +2469,7 @@
   margin-top: 0.9rem;
   font-size: 0.78rem;
   line-height: 1.55;
-  color: hsl(var(--foreground) / 0.64);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .bulk-reply-artifact,
@@ -2409,17 +2490,17 @@
 .bulk-reply-head {
   padding: 0 0.7rem 0.45rem;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.45rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: hsl(var(--foreground) / 0.45);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .bulk-reply-row {
   min-height: 2.45rem;
   padding: 0.48rem 0.7rem;
   border-top: 1px solid hsl(var(--border));
-  font-size: 0.61rem;
+  font-size: 0.75rem;
 }
 
 .bulk-reply-row > span:first-child {
@@ -2436,7 +2517,7 @@
 }
 
 .bulk-reply-row > span:nth-child(2) {
-  color: hsl(var(--foreground) / 0.62);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .bulk-reply-row strong {
@@ -2445,7 +2526,7 @@
   justify-content: flex-end;
   gap: 0.35rem;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.48rem;
+  font-size: 0.6875rem;
   color: hsl(151 86% 25%);
 }
 
@@ -2462,10 +2543,10 @@
   padding-top: 0.65rem;
   border-top: 1px solid hsl(var(--border));
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.45rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: hsl(var(--foreground) / 0.5);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .artifact-nudge strong {
@@ -2527,13 +2608,13 @@
   bottom: 1rem;
   display: grid;
   gap: 0.1rem;
-  font-size: 0.48rem;
+  font-size: 0.6875rem;
   text-transform: uppercase;
 }
 
 .route-point small {
-  font-size: 0.42rem;
-  color: hsl(var(--foreground) / 0.5);
+  font-size: 0.75rem;
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .route-point.is-origin { left: 5%; }
@@ -2546,7 +2627,7 @@
   padding: 0.3rem 0.42rem;
   border: 1px solid hsl(var(--border));
   background: hsl(var(--background));
-  font-size: 0.46rem;
+  font-size: 0.75rem;
   box-shadow: 3px 3px 0 hsl(var(--foreground) / 0.08);
 }
 
@@ -2565,7 +2646,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.44rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: hsl(var(--primary));
@@ -2597,16 +2678,16 @@
 .route-comparison span {
   display: block;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.44rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: hsl(var(--foreground) / 0.46);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .route-comparison strong {
   display: block;
   margin-top: 0.25rem;
-  font-size: 0.67rem;
+  font-size: 0.75rem;
 }
 
 .route-comparison .is-better strong,
@@ -2618,11 +2699,11 @@
   display: grid;
   align-content: center;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.5rem;
+  font-size: 0.6875rem;
   font-weight: 600;
 }
 
-.route-comparison > p b { color: hsl(var(--foreground) / 0.42); }
+.route-comparison > p b { color: hsl(var(--foreground) / 0.7); }
 
 .approval-steps {
   display: flex;
@@ -2642,10 +2723,10 @@
   justify-content: space-between;
   margin-top: 0.4rem;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.42rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: hsl(var(--foreground) / 0.5);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .approval-list {
@@ -2662,15 +2743,38 @@
   border-bottom: 1px solid hsl(var(--border));
 }
 
+/* Generated square mark behind the initials, so each approver reads as a
+   distinct person without inventing a stock face for someone fictional. */
 .approval-person {
+  position: relative;
   display: grid;
   place-items: center;
   width: 1.7rem;
   height: 1.7rem;
-  background: hsl(var(--foreground));
-  color: hsl(var(--background));
+  overflow: hidden;
+  /* --shell, not --foreground: foreground inverts between themes, which turned
+     this chip white-on-white in dark mode. Shell is the dark tier in both. */
+  background: hsl(var(--shell));
+  color: hsl(var(--primary-foreground));
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.48rem;
+  font-size: 0.6875rem;
+}
+
+.approval-person .identicon {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: hsl(var(--primary));
+  opacity: 0.85;
+}
+
+.approval-person b {
+  position: relative;
+  z-index: 1;
+  font-weight: 700;
+  color: hsl(var(--primary-foreground));
+  text-shadow: 0 0 3px hsl(var(--shell) / 0.95);
 }
 
 .approval-list p {
@@ -2679,12 +2783,12 @@
   margin: 0;
 }
 
-.approval-list p strong { font-size: 0.62rem; }
+.approval-list p strong { font-size: 0.75rem; }
 .approval-list p small {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.43rem;
+  font-size: 0.6875rem;
   text-transform: uppercase;
-  color: hsl(var(--foreground) / 0.5);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .approval-check {
@@ -2694,7 +2798,7 @@
   height: 1.1rem;
   background: hsl(151 86% 25%);
   color: hsl(var(--primary-foreground));
-  font-size: 0.65rem;
+  font-size: 0.75rem;
 }
 
 .approval-leadership-note {
@@ -2707,7 +2811,7 @@
 .approval-leadership-note span {
   display: block;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.44rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: hsl(var(--primary));
@@ -2716,7 +2820,7 @@
 .approval-leadership-note strong {
   display: block;
   margin-top: 0.35rem;
-  font-size: 0.66rem;
+  font-size: 0.75rem;
 }
 
 .eta-metrics {
@@ -2733,10 +2837,10 @@
 .eta-metrics span {
   display: block;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.44rem;
+  font-size: 0.6875rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: hsl(var(--foreground) / 0.5);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .eta-metrics strong {
@@ -2773,7 +2877,7 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 0.32rem;
-  font-size: 0.5rem;
+  font-size: 0.75rem;
 }
 
 .eta-legend i {
@@ -2783,7 +2887,7 @@
 
 .eta-legend strong {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.46rem;
+  font-size: 0.6875rem;
 }
 
 .eta-focus-row {
@@ -2800,7 +2904,7 @@
   display: flex;
   align-items: center;
   gap: 0.45rem;
-  font-size: 0.56rem;
+  font-size: 0.75rem;
   font-weight: 650;
 }
 
@@ -2815,31 +2919,22 @@
   margin: 0;
 }
 
-.eta-focus-row p strong { font-size: 0.58rem; }
+.eta-focus-row p strong { font-size: 0.75rem; }
 .eta-focus-row p small {
-  font-size: 0.48rem;
-  color: hsl(var(--foreground) / 0.52);
+  font-size: 0.75rem;
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .eta-focus-row em {
   padding: 0.25rem 0.4rem;
   border: 1px solid hsl(var(--support));
-  color: hsl(var(--support));
+  color: hsl(var(--support-text));
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.44rem;
+  font-size: 0.6875rem;
   font-style: normal;
 }
 
 @keyframes route-dash { to { stroke-dashoffset: -28; } }
-
-.trade-work-paper-foot {
-  margin-top: auto;
-  padding-top: 1.5rem;
-}
-
-.trade-work-paper-foot span:last-child {
-  color: hsl(var(--foreground));
-}
 
 .trade-work-commit {
   display: grid;
@@ -2851,14 +2946,14 @@
 }
 
 .trade-work-commit strong {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
 }
 
 .trade-work-commit p {
   justify-self: end;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.48rem;
-  color: hsl(var(--primary-foreground) / 0.58);
+  font-size: 0.6875rem;
+  color: hsl(var(--primary-foreground) / 0.6);
 }
 
 .trade-work-square {
@@ -2876,8 +2971,8 @@
 }
 
 @keyframes work-paper-in {
-  from { opacity: 0; transform: translateX(8px); }
-  to { opacity: 1; transform: translateX(0); }
+  from { transform: translateX(8px); }
+  to { transform: translateX(0); }
 }
 
 @media (max-width: 639px) {
@@ -2897,7 +2992,7 @@
   .route-comparison > p { grid-column: 1 / -1; min-height: 2rem; }
   .approval-list > div { grid-template-columns: 1.7rem minmax(0, 1fr) 1.1rem; }
   .approval-list > div > p:nth-of-type(2) { grid-column: 2 / -1; }
-  .approval-step-labels { font-size: 0.37rem; }
+  .approval-step-labels { font-size: 0.75rem; }
   .eta-legend { grid-template-columns: repeat(2, 1fr); }
   .eta-focus-row { grid-template-columns: minmax(0, 1fr) auto; }
   .eta-focus-row p { grid-column: 1 / -1; }
@@ -2906,21 +3001,23 @@
   .trade-work-commit p { grid-column: 1 / -1; justify-self: start; }
 }
 
-.trade-flow-section { background: hsl(var(--card)); }
+/* Was --card (99% L) against a --background page at 96% — a visible seam where
+   this band met the deploy section below it. Both now sit on page paper. */
+.trade-flow-section { background: hsl(var(--background)); }
 .trade-flow-section .home-section-title { max-width: none; }
 .trade-ontology-console { display: grid; grid-template-columns: minmax(11rem, 0.42fr) minmax(0, 1fr); border: 1px solid hsl(var(--border)); background: hsl(var(--background)); }
 .ontology-stage-list { display: grid; grid-template-rows: repeat(8, 1fr); border-right: 1px solid hsl(var(--border)); }
 .ontology-stage-list button { display: grid; grid-template-columns: 1.75rem minmax(0, 1fr) auto; align-items: center; gap: 0.45rem; min-height: 3.55rem; padding: 0.7rem 0.8rem; border: 0; border-bottom: 1px solid hsl(var(--border)); background: transparent; color: hsl(var(--foreground)); text-align: left; cursor: pointer; transition: background 180ms ease, color 180ms ease; }
 .ontology-stage-list button:last-child { border-bottom: 0; }
-.ontology-stage-list span, .ontology-stage-list em, .ontology-workbench-topline, .ontology-artifact-copy > span { font-family: "IBM Plex Mono", monospace; font-size: 0.56rem; letter-spacing: 0.07em; text-transform: uppercase; }
+.ontology-stage-list span, .ontology-stage-list em, .ontology-workbench-topline, .ontology-artifact-copy > span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.07em; text-transform: uppercase; }
 .ontology-stage-list span { color: hsl(var(--primary)); }
 .ontology-stage-list strong { font-size: 0.82rem; font-weight: 700; }
-.ontology-stage-list em { font-style: normal; color: hsl(var(--foreground) / 0.5); }
+.ontology-stage-list em { font-style: normal; color: hsl(var(--foreground) / 0.7); }
 .ontology-stage-list button.is-active { background: hsl(var(--shell)); color: hsl(var(--primary-foreground)); }
 .ontology-stage-list button.is-active span { color: hsl(var(--primary)); }
 .ontology-stage-list button.is-active em { color: hsl(var(--primary-foreground) / 0.63); }
 .ontology-workbench { display: grid; grid-template-rows: auto auto 1fr; min-height: 28.4rem; padding: 1.15rem; }
-.ontology-workbench-topline { display: flex; justify-content: space-between; color: hsl(var(--foreground) / 0.55); }
+.ontology-workbench-topline { display: flex; justify-content: space-between; color: hsl(var(--foreground) / 0.7); }
 .ontology-workbench-topline span:last-child { color: hsl(var(--primary)); }
 .ontology-route { position: relative; display: grid; grid-template-columns: repeat(8, 1fr); align-items: center; height: 5.25rem; margin: 0.4rem 0 1rem; }
 .ontology-route::before { content: ""; position: absolute; right: 0; left: 0; height: 1px; background: hsl(var(--border)); }
@@ -2928,12 +3025,12 @@
 .ontology-route i.is-active { border-color: hsl(var(--primary)); background: hsl(var(--primary)); }
 .ontology-route b { position: absolute; top: 1.55rem; width: 1.6rem; height: 1.6rem; background: hsl(var(--primary)); box-shadow: 0 0 0 7px hsl(var(--primary) / 0.12); transform: translateX(-50%); transition: left 620ms cubic-bezier(.22,1,.36,1); }
 .ontology-route b::after { content: ""; position: absolute; inset: 0.45rem; border: 1px solid hsl(var(--primary-foreground)); animation: ontology-core 1.6s ease-in-out infinite; }
-.ontology-artifact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(12rem, 0.85fr); gap: 1rem; min-height: 14rem; padding: clamp(1rem, 3vw, 2.2rem); border: 1px solid hsl(var(--border)); background: hsl(var(--secondary)); animation: ontology-artifact-in 360ms cubic-bezier(.22,1,.36,1) both; }
+.ontology-artifact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(12rem, 0.85fr); gap: 1rem; min-height: 14rem; padding: clamp(1rem, 3vw, 2.2rem); border: 1px solid hsl(var(--border)); background: hsl(var(--secondary)); animation: ontology-artifact-in 360ms cubic-bezier(.22,1,.36,1); }
 .ontology-artifact-copy { align-self: end; }
 .ontology-artifact-copy > span { color: hsl(var(--primary)); }
 .ontology-artifact-copy h3 { max-width: 19ch; margin-top: 0.65rem; font-size: clamp(1.15rem, 2vw, 1.7rem); font-weight: 680; line-height: 1.06; letter-spacing: -0.025em; }
 .ontology-artifact-copy p { max-width: 30ch; margin-top: 0.8rem; font-size: 0.84rem; font-weight: 600; line-height: 1.5; color: hsl(var(--foreground)); }
-.ontology-artifact-copy > strong { display: block; max-width: 28ch; margin-top: 1.15rem; font-family: "IBM Plex Mono", monospace; font-size: 0.56rem; line-height: 1.6; letter-spacing: 0.04em; text-transform: uppercase; color: hsl(var(--foreground) / 0.62); }
+.ontology-artifact-copy > strong { display: block; max-width: 28ch; margin-top: 1.15rem; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; line-height: 1.6; letter-spacing: 0.04em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
 .ontology-artifact-shape { position: relative; align-self: stretch; min-height: 10rem; overflow: hidden; border: 1px solid hsl(var(--foreground)); background: hsl(var(--background)); }
 .ontology-artifact-shape > div { height: 100%; }
 
@@ -2941,21 +3038,21 @@
 .ontology-source-card > div { display: grid; grid-template-columns: 1.8rem minmax(0, 1fr) auto; gap: 0.7rem; align-items: center; padding-bottom: 0.9rem; border-bottom: 1px solid hsl(var(--border)); }
 .ontology-source-card img { width: 1.8rem; height: 1.8rem; object-fit: contain; }
 .ontology-source-card span { display: grid; }
-.ontology-source-card b, .ontology-source-card strong { font-size: 0.72rem; }
-.ontology-source-card small, .ontology-source-card em, .ontology-source-card p span { font-family: "IBM Plex Mono", monospace; font-size: 0.5rem; font-style: normal; letter-spacing: 0.06em; text-transform: uppercase; color: hsl(var(--foreground) / 0.6); }
+.ontology-source-card b, .ontology-source-card strong { font-size: 0.75rem; }
+.ontology-source-card small, .ontology-source-card em, .ontology-source-card p span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-style: normal; letter-spacing: 0.06em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
 .ontology-source-card p { display: grid; grid-template-columns: auto 1fr auto 1fr; gap: 0.45rem; align-items: baseline; margin-top: 1rem; }
 
 .ontology-temporal-card { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 1rem; align-items: stretch; padding: 1.15rem; }
 .ontology-temporal-card > div { display: grid; align-content: center; gap: 0.55rem; }
 .ontology-temporal-card > i { width: 1px; background: hsl(var(--foreground)); }
-.ontology-temporal-card span, .ontology-temporal-card small { font-family: "IBM Plex Mono", monospace; font-size: 0.5rem; font-style: normal; letter-spacing: 0.06em; text-transform: uppercase; color: hsl(var(--foreground) / 0.58); }
+.ontology-temporal-card span, .ontology-temporal-card small { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-style: normal; letter-spacing: 0.06em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
 .ontology-temporal-card strong { font-size: clamp(0.9rem, 1.4vw, 1.2rem); }
 .ontology-temporal-card > div:last-child strong { color: hsl(var(--primary)); }
 
 .ontology-graph-card { position: relative; min-height: 11rem; }
 .ontology-graph-card::before, .ontology-graph-card::after { content: ""; position: absolute; inset: 50% 11%; height: 1px; background: hsl(var(--foreground) / 0.35); }
 .ontology-graph-card::after { inset: 14% 50%; width: 1px; height: auto; }
-.ontology-graph-card i { position: absolute; z-index: 1; min-width: 4rem; padding: 0.4rem 0.55rem; border: 1px solid hsl(var(--foreground)); background: hsl(var(--background)); font-family: "IBM Plex Mono", monospace; font-size: 0.48rem; font-style: normal; text-align: center; text-transform: uppercase; }
+.ontology-graph-card i { position: absolute; z-index: 1; min-width: 4rem; padding: 0.4rem 0.55rem; border: 1px solid hsl(var(--foreground)); background: hsl(var(--background)); font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-style: normal; text-align: center; text-transform: uppercase; }
 .ontology-graph-card .is-centre { top: calc(50% - 0.9rem); left: calc(50% - 2.5rem); min-width: 5rem; background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); border-color: hsl(var(--primary)); }
 .ontology-graph-card .is-buyer { top: 12%; left: 7%; }.ontology-graph-card .is-lot { top: 12%; right: 7%; }
 .ontology-graph-card .is-lane { bottom: 12%; left: 7%; }.ontology-graph-card .is-programme { right: 7%; bottom: 12%; }
@@ -2963,32 +3060,32 @@
 
 .ontology-conflict-card { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.85rem; align-content: center; padding: 1.15rem; }
 .ontology-conflict-card > div { display: grid; gap: 0.35rem; padding: 0.85rem; border: 1px solid hsl(var(--border)); }
-.ontology-conflict-card span, .ontology-conflict-card small { font-family: "IBM Plex Mono", monospace; font-size: 0.48rem; letter-spacing: 0.06em; text-transform: uppercase; color: hsl(var(--foreground) / 0.58); }
+.ontology-conflict-card span, .ontology-conflict-card small { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
 .ontology-conflict-card > em { align-self: center; font-size: 1.4rem; font-style: normal; color: hsl(var(--primary)); }
-.ontology-conflict-card > p { grid-column: 1 / -1; padding-top: 0.75rem; border-top: 1px solid hsl(var(--foreground)); font-size: 0.64rem; font-weight: 700; }
+.ontology-conflict-card > p { grid-column: 1 / -1; padding-top: 0.75rem; border-top: 1px solid hsl(var(--foreground)); font-size: 0.75rem; font-weight: 700; }
 .ontology-conflict-card > p i { display: inline-block; width: 0.55rem; height: 0.55rem; margin-right: 0.35rem; background: hsl(var(--primary)); }
 
 .ontology-impact-card { display: grid; grid-template-columns: 1fr 1fr; align-content: center; padding: 1.15rem; }
-.ontology-impact-card span { display: grid; gap: 0.45rem; min-height: 4.1rem; padding: 0.75rem; border: 1px solid hsl(var(--border)); font-size: 0.68rem; font-weight: 700; }
-.ontology-impact-card b { align-self: end; font-family: "IBM Plex Mono", monospace; font-size: 0.55rem; letter-spacing: 0.05em; color: hsl(var(--primary)); }
+.ontology-impact-card span { display: grid; gap: 0.45rem; min-height: 4.1rem; padding: 0.75rem; border: 1px solid hsl(var(--border)); font-size: 0.75rem; font-weight: 700; }
+.ontology-impact-card b { align-self: end; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.05em; color: hsl(var(--primary)); }
 
 .ontology-brief-card { display: grid; align-content: center; padding: 1.35rem; background: hsl(var(--shell)); color: hsl(var(--primary-foreground)); }
-.ontology-brief-card > span { font-family: "IBM Plex Mono", monospace; font-size: 0.5rem; letter-spacing: 0.08em; color: hsl(var(--primary)); }
+.ontology-brief-card > span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.08em; color: hsl(var(--primary)); }
 .ontology-brief-card h4 { margin-top: 0.7rem; font-size: clamp(1rem, 1.6vw, 1.35rem); line-height: 1.12; }
 .ontology-brief-card p { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1rem; }
-.ontology-brief-card p > * { padding: 0.35rem 0.5rem; border: 1px solid hsl(var(--primary-foreground) / 0.35); font-family: "IBM Plex Mono", monospace; font-size: 0.48rem; font-style: normal; text-transform: uppercase; }
+.ontology-brief-card p > * { padding: 0.35rem 0.5rem; border: 1px solid hsl(var(--primary-foreground) / 0.35); font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-style: normal; text-transform: uppercase; }
 .ontology-brief-card p b { background: hsl(var(--primary)); border-color: hsl(var(--primary)); }
 
 .ontology-review-card, .ontology-memory-card { display: grid; align-content: center; padding: 1.15rem; }
 .ontology-review-card > div, .ontology-memory-card > div { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 0.65rem; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid hsl(var(--border)); }
-.ontology-review-card > div > span, .ontology-memory-card > div > span { display: grid; place-items: center; width: 1.65rem; height: 1.65rem; background: hsl(var(--foreground)); color: hsl(var(--background)); font-family: "IBM Plex Mono", monospace; font-size: 0.5rem; }
+.ontology-review-card > div > span, .ontology-memory-card > div > span { display: grid; place-items: center; width: 1.65rem; height: 1.65rem; background: hsl(var(--foreground)); color: hsl(var(--background)); font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; }
 .ontology-review-card p, .ontology-memory-card p { display: grid; }
-.ontology-review-card small, .ontology-memory-card small { font-size: 0.58rem; color: hsl(var(--foreground) / 0.6); }
-.ontology-review-card em, .ontology-memory-card em { font-family: "IBM Plex Mono", monospace; font-size: 0.48rem; font-style: normal; color: hsl(var(--primary)); }
-.ontology-review-card > p { margin-top: 0.8rem; font-family: "IBM Plex Mono", monospace; font-size: 0.5rem; line-height: 1.5; text-transform: uppercase; color: hsl(var(--foreground) / 0.62); }
+.ontology-review-card small, .ontology-memory-card small { font-size: 0.75rem; color: hsl(var(--foreground) / 0.7); }
+.ontology-review-card em, .ontology-memory-card em { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-style: normal; color: hsl(var(--primary)); }
+.ontology-review-card > p { margin-top: 0.8rem; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; line-height: 1.5; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
 
 @keyframes ontology-core { 0%, 100% { transform: scale(.58) rotate(0); opacity: .62; } 50% { transform: scale(1) rotate(90deg); opacity: 1; } }
-@keyframes ontology-artifact-in { from { opacity: 0; transform: translateY(6px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes ontology-artifact-in { from { transform: translateY(6px) scale(.985); } to { transform: translateY(0) scale(1); } }
 
 @media (max-width: 767px) {
   .trade-ontology-console { grid-template-columns: 1fr; }
@@ -3041,9 +3138,11 @@
 }
 
 .workflow-team-spine button:last-of-type { border-right: 0; }
-.workflow-team-spine button span { font-family: "IBM Plex Mono", monospace; font-size: 0.54rem; color: hsl(var(--primary)); }
-.workflow-team-spine button strong { max-width: 13ch; font-size: 0.72rem; line-height: 1.25; }
+.workflow-team-spine button span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; color: hsl(var(--primary)); }
+.workflow-team-spine button strong { max-width: 13ch; font-size: 0.75rem; line-height: 1.25; }
 .workflow-team-spine button.is-active { background: hsl(var(--shell)); color: hsl(var(--primary-foreground)); }
+/* Active button flips to the dark shell, so its step number needs the lifted blue. */
+.workflow-team-spine button.is-active span { color: hsl(var(--primary-on-dark)); }
 
 .workflow-spine-core {
   position: absolute;
@@ -3063,7 +3162,13 @@
   grid-template-columns: 0.8fr 1.05fr 1.15fr;
   grid-template-rows: auto 1fr;
   min-height: 26rem;
-  animation: ontology-artifact-in 360ms cubic-bezier(.22,1,.36,1) both;
+  /* No `both` fill here on purpose. React remounts this panel on every tab
+     change, so with a backwards fill the element holds the keyframe's
+     `opacity: 0` until the animation actually advances — and if the animation
+     timeline is paused (backgrounded tab, throttled/low-end device) it never
+     does, leaving the whole panel permanently blank. Default fill keeps the
+     resting state visible and still plays the fade whenever animations run. */
+  animation: ontology-artifact-in 360ms cubic-bezier(.22,1,.36,1);
 }
 
 .workflow-orchestration-rail {
@@ -3080,7 +3185,7 @@
   background: hsl(var(--shell));
   color: hsl(var(--primary-foreground));
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.48rem;
+  font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -3153,7 +3258,7 @@
 .workflow-result-foot,
 .workflow-integration-foot {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.52rem;
+  font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -3179,14 +3284,24 @@
   background: hsl(var(--primary) / 0.08);
   color: hsl(var(--primary));
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.36rem;
+  font-size: 0.6875rem;
   font-style: normal;
   font-weight: 800;
   line-height: 1;
   text-align: center;
 }
-.workflow-app-grid strong { font-size: 0.72rem; }
-.workflow-app-grid span { font-family: "IBM Plex Mono", monospace; font-size: 0.46rem; text-transform: uppercase; color: hsl(var(--foreground) / 0.55); }
+/* Remounted on every tool swap (keyed by domain), so the fade runs per change. */
+.workflow-app-logo { animation: workflow-logo-swap 320ms cubic-bezier(.22,1,.36,1); }
+@keyframes workflow-logo-swap {
+  from { opacity: 0; transform: scale(.82); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .workflow-app-logo { animation: none; }
+}
+
+.workflow-app-grid strong { font-size: 0.75rem; }
+.workflow-app-grid span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
 
 .workflow-time-grid {
   display: grid;
@@ -3197,14 +3312,14 @@
 
 .workflow-time-grid > div { display: grid; align-content: center; gap: 0.65rem; min-height: 9.8rem; padding: 0.85rem; }
 .workflow-time-grid > div:first-child { border-right: 1px solid hsl(var(--foreground)); }
-.workflow-time-grid span, .workflow-time-grid small { font-family: "IBM Plex Mono", monospace; font-size: 0.47rem; letter-spacing: 0.05em; text-transform: uppercase; color: hsl(var(--foreground) / 0.56); }
+.workflow-time-grid span, .workflow-time-grid small { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.05em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
 .workflow-time-grid strong { font-size: clamp(0.8rem, 1.2vw, 1rem); line-height: 1.15; }
 .workflow-time-grid > div:last-child strong { color: hsl(var(--primary)); }
 
 .workflow-entity-links { margin-top: 1rem; }
-.workflow-entity-links > span { color: hsl(var(--foreground) / 0.56); }
+.workflow-entity-links > span { color: hsl(var(--foreground) / 0.7); }
 .workflow-entity-links p { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.65rem; }
-.workflow-entity-links b { padding: 0.35rem 0.48rem; border: 1px solid hsl(var(--border)); font-size: 0.58rem; }
+.workflow-entity-links b { padding: 0.35rem 0.48rem; border: 1px solid hsl(var(--border)); font-size: 0.75rem; }
 
 .workflow-memory-view {
   min-height: 10.25rem;
@@ -3215,43 +3330,43 @@
 
 .workflow-memory-view.is-extraction { display: grid; grid-template-columns: 0.86fr 1.14fr; }
 .memory-document { display: grid; align-content: center; gap: 0.42rem; padding: 0.75rem; border-right: 1px solid hsl(var(--foreground)); }
-.memory-document > span, .memory-document > b { font-family: "IBM Plex Mono", monospace; font-size: 0.43rem; letter-spacing: 0.05em; }
+.memory-document > span, .memory-document > b { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.05em; }
 .memory-document > i { display: block; height: 0.28rem; background: hsl(var(--foreground) / 0.14); }
 .memory-document > i:nth-of-type(2) { width: 82%; }.memory-document > i:nth-of-type(3) { width: 91%; }.memory-document > i:nth-of-type(4) { width: 67%; }
 .memory-document > b { margin-top: 0.45rem; color: hsl(var(--primary)); }
 .memory-extracted-fields { display: grid; grid-template-columns: repeat(2, 1fr); }
 .memory-extracted-fields > span { display: grid; align-content: center; gap: 0.3rem; padding: 0.55rem; border-right: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); }
 .memory-extracted-fields > span:nth-child(2n) { border-right: 0; }.memory-extracted-fields > span:nth-last-child(-n+2) { border-bottom: 0; }
-.memory-extracted-fields b { font-family: "IBM Plex Mono", monospace; font-size: 0.42rem; text-transform: uppercase; color: hsl(var(--foreground) / 0.52); }
-.memory-extracted-fields strong { font-size: 0.62rem; }
+.memory-extracted-fields b { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.memory-extracted-fields strong { font-size: 0.75rem; }
 
 .workflow-memory-view.is-timeline { display: grid; align-content: center; padding: 0.95rem; }
 .memory-timeline { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); align-items: center; min-height: 5.8rem; }
 .memory-timeline::before { content: ""; position: absolute; right: 0; left: 0; height: 1px; background: hsl(var(--foreground) / 0.38); }
 .memory-timeline > i { position: relative; z-index: 1; justify-self: center; width: 0.42rem; height: 0.42rem; border: 1px solid hsl(var(--foreground)); border-radius: 50%; background: hsl(var(--background)); }
 .memory-timeline > i.is-active { width: 0.72rem; height: 0.72rem; border-radius: 0; border-color: hsl(var(--primary)); background: hsl(var(--primary)); box-shadow: 0 0 0 0.26rem hsl(var(--primary) / 0.14); }
-.memory-timeline > span { position: absolute; top: 3.65rem; font-family: "IBM Plex Mono", monospace; font-size: 0.44rem; line-height: 1.45; color: hsl(var(--foreground) / 0.58); }
+.memory-timeline > span { position: absolute; top: 3.65rem; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; line-height: 1.45; color: hsl(var(--foreground) / 0.7); }
 .memory-timeline > span b { color: hsl(var(--foreground)); }.memory-timeline .is-original { left: 0; }.memory-timeline .is-known { right: 0; text-align: right; }
 .workflow-memory-view.is-timeline > p { display: grid; gap: 0.3rem; padding-top: 0.65rem; border-top: 1px solid hsl(var(--border)); }
-.workflow-memory-view.is-timeline > p span { font-family: "IBM Plex Mono", monospace; font-size: 0.42rem; color: hsl(var(--primary)); }.workflow-memory-view.is-timeline > p strong { font-size: 0.62rem; }
+.workflow-memory-view.is-timeline > p span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; color: hsl(var(--primary)); }.workflow-memory-view.is-timeline > p strong { font-size: 0.75rem; }
 
 .workflow-memory-view.is-allocation { display: grid; grid-template-rows: 1fr auto; padding: 0.85rem 0.85rem 0; }
 .memory-allocation-chart { display: flex; align-items: end; gap: 0.55rem; min-height: 7rem; border-bottom: 1px solid hsl(var(--foreground)); }
 .memory-allocation-chart > span { display: grid; align-content: end; flex: 1; min-height: 2rem; padding: 0.4rem; background: hsl(var(--foreground)); color: hsl(var(--background)); }
 .memory-allocation-chart > span:last-child { background: hsl(var(--primary)); }
-.memory-allocation-chart b, .memory-allocation-chart i, .memory-allocation-foot { font-family: "IBM Plex Mono", monospace; font-size: 0.42rem; font-style: normal; }
+.memory-allocation-chart b, .memory-allocation-chart i, .memory-allocation-foot { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-style: normal; }
 .memory-allocation-chart i { color: hsl(var(--primary-foreground) / 0.68); }
 .memory-allocation-foot { display: flex; justify-content: space-between; gap: 0.45rem; padding: 0.6rem 0; }.memory-allocation-foot strong { color: hsl(var(--primary)); }
 
 .workflow-memory-view.is-revision { display: grid; }
 .workflow-memory-view.is-revision > div, .workflow-memory-view.is-project > div:not(.memory-project-progress) { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr) auto; align-items: center; gap: 0.55rem; padding: 0.6rem 0.7rem; border-bottom: 1px solid hsl(var(--border)); }
 .workflow-memory-view.is-revision > div:last-child, .workflow-memory-view.is-project > div:last-child { border-bottom: 0; }
-.workflow-memory-view.is-revision span, .workflow-memory-view.is-revision em, .workflow-memory-view.is-project span { font-family: "IBM Plex Mono", monospace; font-size: 0.43rem; font-style: normal; color: hsl(var(--foreground) / 0.58); }
-.workflow-memory-view.is-revision strong, .workflow-memory-view.is-project strong { font-size: 0.59rem; }
+.workflow-memory-view.is-revision span, .workflow-memory-view.is-revision em, .workflow-memory-view.is-project span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-style: normal; color: hsl(var(--foreground) / 0.7); }
+.workflow-memory-view.is-revision strong, .workflow-memory-view.is-project strong { font-size: 0.75rem; }
 .workflow-memory-view.is-revision em { color: hsl(var(--primary)); }.workflow-memory-view.is-revision em.is-live { padding: 0.2rem 0.3rem; background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
 
 .workflow-memory-view.is-margin-chart { display: grid; padding: 0.8rem; }
-.memory-margin-head, .memory-margin-foot { display: flex; align-items: baseline; justify-content: space-between; font-family: "IBM Plex Mono", monospace; font-size: 0.43rem; }
+.memory-margin-head, .memory-margin-foot { display: flex; align-items: baseline; justify-content: space-between; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; }
 .memory-margin-head strong { font-size: 1rem; color: hsl(var(--primary)); }
 .workflow-memory-view.is-margin-chart svg { width: 100%; height: 6rem; overflow: visible; }
 .margin-floor { fill: none; stroke: hsl(var(--foreground) / 0.32); stroke-width: 1; stroke-dasharray: 3 4; }.margin-line { fill: none; stroke: hsl(var(--primary)); stroke-width: 3; }.workflow-memory-view.is-margin-chart circle { fill: hsl(var(--primary)); }
@@ -3260,12 +3375,12 @@
 .workflow-memory-view.is-project { display: grid; align-content: start; }
 .memory-project-progress { position: relative; height: 2.45rem; border-bottom: 1px solid hsl(var(--foreground)); background: hsl(var(--foreground) / 0.07); }
 .memory-project-progress > span { display: block; height: 100%; background: hsl(var(--primary)); }
-.memory-project-progress > b { position: absolute; top: 0.85rem; right: 0.65rem; font-family: "IBM Plex Mono", monospace; font-size: 0.43rem; color: hsl(var(--foreground)); mix-blend-mode: multiply; }
+.memory-project-progress > b { position: absolute; top: 0.85rem; right: 0.65rem; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; color: hsl(var(--foreground)); mix-blend-mode: multiply; }
 .workflow-memory-view.is-project > div:not(.memory-project-progress) { grid-template-columns: 0.55rem minmax(0, 1fr) auto; }
 .workflow-memory-view.is-project i { width: 0.45rem; height: 0.45rem; background: hsl(var(--primary)); }
 
 .workflow-result-widget { display: grid; align-content: start; margin-top: 1rem; min-height: 18.4rem; padding: 1rem; border: 1px solid hsl(var(--foreground)); background: hsl(var(--secondary)); }
-.workflow-result-head { display: flex; justify-content: space-between; color: hsl(var(--primary)); }
+.workflow-result-head { display: flex; justify-content: space-between; color: hsl(var(--primary-text)); }
 .workflow-result-head em { font-style: normal; color: hsl(var(--foreground)); }
 .workflow-result-title {
   display: block;
@@ -3274,22 +3389,70 @@
   line-height: 1.1;
 }
 .workflow-result-widget h3 { margin-top: 0.55rem; font-size: clamp(1.45rem, 2.5vw, 2.35rem); line-height: 0.98; letter-spacing: -0.045em; }
-.workflow-result-widget > p { max-width: 34ch; margin-top: 0.7rem; font-size: 0.7rem; font-weight: 600; line-height: 1.5; color: hsl(var(--foreground) / 0.7); }
+.workflow-result-widget > p { max-width: 34ch; margin-top: 0.7rem; font-size: 0.75rem; font-weight: 600; line-height: 1.5; color: hsl(var(--foreground) / 0.7); }
 
 .workflow-result-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 1.1rem; border-block: 1px solid hsl(var(--border)); }
 .workflow-result-stats > div { display: grid; gap: 0.35rem; padding: 0.65rem 0.35rem; border-right: 1px solid hsl(var(--border)); }
 .workflow-result-stats > div:last-child { border-right: 0; }
-.workflow-result-stats span { font-family: "IBM Plex Mono", monospace; font-size: 0.44rem; text-transform: uppercase; color: hsl(var(--foreground) / 0.56); }
+.workflow-result-stats span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
 .workflow-result-stats strong { font-size: 0.8rem; }
 
-.workflow-result-rule { display: flex; align-items: end; gap: 0.32rem; height: 2.7rem; margin-top: 0.75rem; }
-.workflow-result-rule i { flex: 1; height: 28%; background: hsl(var(--foreground)); }
-.workflow-result-rule i:nth-child(2) { height: 48%; }
-.workflow-result-rule i:nth-child(3) { height: 38%; }
-.workflow-result-rule i:nth-child(4) { height: 74%; }
-.workflow-result-rule i:nth-child(5) { height: 100%; background: hsl(var(--primary)); }
-.workflow-result-foot { display: flex; justify-content: space-between; gap: 0.75rem; margin-top: auto; padding-top: 0.7rem; border-top: 1px solid hsl(var(--border)); font-size: 0.43rem; }
-.workflow-result-foot strong { color: hsl(var(--primary)); }
+/* ---------------------------------------------------------------------------
+   Panel 03 chart variants — one shape per team so the six tabs read as six
+   different kinds of work, not one template. Series colours follow the
+   ubik-design chart ramp: stepped mono-blue, slate neutral, green/red outcome,
+   amber for status only.
+   --------------------------------------------------------------------------- */
+.wf-chart { margin-top: 0.85rem; }
+.wf-chart .is-b1, .wf-chart i.is-b1 { background: hsl(var(--primary)); }
+.wf-chart .is-b2, .wf-chart i.is-b2 { background: hsl(227 81% 68%); }
+.wf-chart .is-b3, .wf-chart i.is-b3 { background: hsl(227 72% 82%); }
+.wf-chart .is-slate, .wf-chart i.is-slate { background: hsl(222 18% 41%); }
+
+/* heatmap — lot grid */
+.wf-heatmap { display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; }
+.wf-heatmap i { aspect-ratio: 1; background: hsl(var(--foreground) / 0.1); }
+.wf-heatmap i.is-s { background: hsl(222 18% 41% / 0.55); }
+.wf-heatmap i.is-g { background: hsl(147 88% 25%); }
+.wf-heatmap i.is-a { background: hsl(var(--support)); }
+
+/* line — committed vs live forecast */
+.wf-line { height: 3.6rem; border-bottom: 1px solid hsl(var(--border)); }
+.wf-line svg { width: 100%; height: 100%; display: block; }
+.wf-line-series { fill: none; stroke: hsl(var(--primary)); stroke-width: 3; vector-effect: non-scaling-stroke; }
+.wf-line-baseline { fill: none; stroke: hsl(222 18% 41%); stroke-width: 2; stroke-dasharray: 4 4; vector-effect: non-scaling-stroke; }
+
+/* bars — quantity by lot */
+.wf-bars { display: flex; align-items: end; gap: 0.28rem; height: 3.4rem; }
+.wf-bars i { flex: 1; min-width: 3px; background: hsl(var(--primary)); }
+.wf-bars i.is-peak { background: hsl(var(--primary)); box-shadow: inset 0 0 0 1px hsl(var(--foreground)); }
+
+/* steps — override progress */
+.wf-steps-track { display: flex; gap: 4px; }
+.wf-steps-track i { flex: 1; height: 4px; background: hsl(var(--foreground) / 0.16); }
+.wf-steps-track i.is-done { background: hsl(var(--primary)); }
+.wf-steps-track i.is-now { background: hsl(var(--support)); }
+.wf-steps-labels { display: flex; justify-content: space-between; margin-top: 0.45rem; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+
+/* stack — margin against the approved floor */
+.wf-stack-bar { display: flex; height: 1.5rem; border: 1px solid hsl(var(--foreground)); overflow: hidden; }
+.wf-stack-bar span { display: block; height: 100%; }
+.wf-stack-bar .is-floor { background: hsl(var(--primary)); }
+.wf-stack-bar .is-room { background: hsl(147 88% 25%); }
+.wf-stack-bar .is-rest { background: hsl(var(--foreground) / 0.12); }
+.wf-stack-legend { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; margin-top: 0.5rem; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.wf-stack-legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.wf-stack-legend b { width: 0.55rem; height: 0.55rem; }
+.wf-stack-legend .is-floor { background: hsl(var(--primary)); }
+.wf-stack-legend .is-room { background: hsl(147 88% 25%); }
+
+/* funnel — replies narrowing to one choice */
+.wf-funnel { display: grid; gap: 0.32rem; }
+.wf-funnel > div { display: grid; grid-template-columns: 5.2rem minmax(0, 1fr); align-items: center; gap: 0.5rem; }
+.wf-funnel span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.wf-funnel i { height: 0.85rem; background: hsl(var(--primary)); }
+.workflow-result-foot { display: flex; justify-content: space-between; gap: 0.75rem; margin-top: auto; padding-top: 0.7rem; border-top: 1px solid hsl(var(--border)); font-size: 0.75rem; }
+.workflow-result-foot strong { color: hsl(var(--primary-text)); }
 
 .workflow-integration-foot {
   display: grid;
@@ -3319,6 +3482,11 @@
   .workflow-team-spine button:nth-last-child(-n+2) { border-bottom: 0; }
   .workflow-spine-core { display: none; }
   .workflow-memory-panel { grid-template-columns: 1fr; }
+  /* Single column makes this panel ~1200px tall — taller than the viewport.
+     Re-running the entrance fade on every 4.2s tab change then leaves whatever
+     you are actually reading sitting at opacity 0. The fade only makes sense
+     when the panel is a compact row, so drop it here. */
+  .workflow-memory-panel { animation: none; }
   .workflow-memory-panel > section { border-right: 0; border-bottom: 1px solid hsl(var(--foreground)); }
   .workflow-memory-panel > section:last-of-type { border-bottom: 0; }
   .workflow-outcome { grid-column: auto; border-top: 0; }
@@ -3341,7 +3509,7 @@
 .operator-proof-ticker::before { left: 0; background: linear-gradient(90deg, hsl(var(--background)), transparent); }
 .operator-proof-ticker::after { right: 0; background: linear-gradient(270deg, hsl(var(--background)), transparent); }
 .operator-proof-ticker > div { display: flex; width: max-content; gap: 2.4rem; animation: operator-proof-ticker 20s linear infinite; }
-.operator-proof-ticker span { white-space: nowrap; font-family: "IBM Plex Mono", monospace; font-size: 0.56rem; font-weight: 600; letter-spacing: 0.1em; color: hsl(var(--foreground) / 0.62); }
+.operator-proof-ticker span { white-space: nowrap; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.1em; color: hsl(var(--foreground) / 0.7); }
 @keyframes operator-proof-ticker { to { transform: translateX(-50%); } }
 
 .founder-company-row {
@@ -3351,12 +3519,11 @@
   align-items: center;
   width: 100%;
   padding: 2.15rem 0;
-  border-block: 1px solid hsl(var(--foreground) / 0.22);
 }
 
 .founder-company-label {
   font-family: "IBM Plex Mono", monospace;
-  font-size: clamp(0.62rem, 0.8vw, 0.76rem);
+  font-size: clamp(0.6875rem, 0.8vw, 0.76rem);
   font-weight: 700;
   letter-spacing: 0.08em;
   line-height: 1.35;
@@ -3387,6 +3554,18 @@
   filter: saturate(1.15) contrast(1.18);
 }
 
+/* Dark mode: a light plate behind each mark rather than forcing them white.
+   These are third-party favicons from mixed sources and we cannot know which
+   have transparent backgrounds — `brightness(0) invert(1)` turns every opaque
+   square favicon (Walmart, Airtel, Dr. Reddy's) into a solid white block. The
+   plate is deterministic: every logo keeps its brand colour and reads against
+   the near-black canvas. Radius stays 0 to match the rest of the grid. */
+.dark .founder-company-ticker img {
+  padding: 0.28rem;
+  background: hsl(42 45% 97%);
+  filter: saturate(1.05) contrast(1.05);
+}
+
 .founder-company-ticker small {
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.76rem;
@@ -3396,21 +3575,143 @@
   color: hsl(var(--foreground));
 }
 
-.closing-main-grid {
-  display: grid;
-  gap: clamp(2rem, 5vw, 5rem);
-  align-items: center;
-}
-
-@media (min-width: 1024px) {
-  .closing-main-grid { grid-template-columns: 1.1fr 0.9fr; }
-}
-
+/* Photo + quote span the full container rather than half a split grid, so the
+   quote has room to breathe and the team cards sit directly underneath. */
 .founder-note-grid {
   display: grid;
-  grid-template-columns: 5.5rem minmax(0, 44rem);
-  gap: 1.5rem;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 1.75rem;
   align-items: start;
+}
+
+.founder-note-quote {
+  max-width: 68rem;
+  font-size: clamp(1.2rem, 2.1vw, 1.9rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+
+/* ---------------------------------------------------------------------------
+   Square loader — the mark orbiting a hairline frame. Zero radius throughout.
+   --------------------------------------------------------------------------- */
+.square-loader {
+  display: inline-grid;
+  place-items: center;
+  width: var(--sq-size, 40px);
+  height: var(--sq-size, 40px);
+}
+
+.square-loader-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 1px solid hsl(var(--foreground) / 0.22);
+}
+
+.square-loader-frame i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34%;
+  height: 34%;
+  background: hsl(var(--primary));
+  animation: square-loader-orbit 1.8s cubic-bezier(0.7, 0, 0.3, 1) infinite;
+}
+
+/* Corner to corner, pausing on each — reads as deliberate steps, not a spin. */
+@keyframes square-loader-orbit {
+  0%,   6%  { transform: translate(0, 0); }
+  25%,  31% { transform: translate(194%, 0); }
+  50%,  56% { transform: translate(194%, 194%); }
+  75%,  81% { transform: translate(0, 194%); }
+  100%      { transform: translate(0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .square-loader-frame i { animation: square-loader-pulse 1.6s ease-in-out infinite; }
+  @keyframes square-loader-pulse {
+    0%, 100% { opacity: 0.35; }
+    50%      { opacity: 1; }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Page particle field. One fixed, viewport-sized canvas that owns every square
+   on the page: it forms the hero illustration, falls the length of the document
+   as you scroll, and settles into a drift at the footer.
+
+   It sits *above* the section backgrounds rather than behind them — the page
+   is made of opaque bands (--card, --shell), so a field behind them would only
+   ever be visible in the hero. Above them, the squares genuinely fall through
+   the page. Kept translucent and pointer-transparent so nothing it crosses
+   becomes harder to read or to click.
+   --------------------------------------------------------------------------- */
+.particle-field {
+  position: fixed;
+  inset: 0;
+  /* Above content (z-10) so squares fall over the bands, below the sticky
+     header (z-40) so it never covers navigation. */
+  z-index: 25;
+  pointer-events: none;
+  opacity: 0;
+  /* No fade-in. A transition or keyframe reveal holds its start value whenever
+     the animation timeline is paused or throttled, which would strand the
+     whole field at opacity 0 with no way back. */
+}
+
+.particle-field.is-ready { opacity: 1; }
+.particle-field canvas { display: block; }
+
+@media (max-width: 1023px) {
+  .particle-field.is-ready { opacity: 0.6; }
+}
+
+/* Ubik + Meetings lockup. The wordmark PNG is a square canvas with the mark
+   centred, so baseline-aligning a text span against it never sits right —
+   stack them on a shared left edge instead. */
+.ubik-meetings-lockup {
+  display: inline-grid;
+  justify-items: start;
+  gap: 0.15rem;
+}
+
+.ubik-meetings-lockup img {
+  width: 6.5rem;
+  height: auto;
+  margin-left: -0.15rem;
+}
+
+.ubik-meetings-lockup span {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: hsl(var(--foreground) / 0.7);
+}
+
+.closing-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem 2.5rem;
+  padding-top: 2.25rem;
+  border-top: 1px solid hsl(var(--foreground) / 0.22);
+}
+
+.closing-cta-copy {
+  max-width: 46ch;
+  margin-top: 0.9rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: hsl(var(--foreground) / 0.78);
+}
+
+@media (max-width: 640px) {
+  .founder-note-grid { grid-template-columns: 4.5rem minmax(0, 1fr); gap: 1.1rem; }
 }
 
 .founder-photo-link {
@@ -3465,13 +3766,68 @@
 
 .home-deploy-card {
   position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
   min-width: 0;
   min-height: 17rem;
   overflow: hidden;
   padding: clamp(1rem, 2.2vw, 1.55rem);
-  background:
-    linear-gradient(180deg, hsl(var(--primary) / 0.04), hsl(var(--primary) / 0.11)),
-    hsl(var(--background));
+  background: hsl(var(--background));
+}
+
+/* The dithered cutout, in the same material as the hero field. */
+.home-deploy-tile {
+  display: block;
+  width: 100%;
+  height: 6.5rem;
+  margin: 0.9rem 0 0.4rem;
+}
+
+/* Compliance posture. Typographic marks rather than the certification bodies'
+   logos — held at low contrast on purpose, because these are in progress. */
+.compliance-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1.1rem;
+  margin-top: 1.25rem;
+  padding: 0.9rem 1rem;
+  border: 1px dashed hsl(var(--foreground) / 0.28);
+}
+
+.compliance-strip-label,
+.compliance-strip-note {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: hsl(var(--foreground) / 0.7);
+}
+
+.compliance-strip-note { color: hsl(var(--support-text)); }
+
+.compliance-strip ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.compliance-strip li {
+  padding: 0.35rem 0.65rem;
+  border: 1px solid hsl(var(--foreground) / 0.3);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  /* 0.55 alpha is intentional here: these are aspirational, and the muted
+     treatment is the signal — but the dashed border and the "In progress"
+     note already carry that, so the text itself stays legible (0.55 measured
+     3.5:1, below AA). */
+  color: hsl(var(--foreground) / 0.72);
 }
 
 .home-deploy-card::before {
@@ -3492,7 +3848,7 @@
   padding: 0.55rem 0.7rem;
   border: 1px solid hsl(var(--primary) / 0.28);
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.58rem;
+  font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   line-height: 1;
@@ -3522,92 +3878,7 @@
   font-size: 0.84rem;
   font-weight: 560;
   line-height: 1.65;
-  color: hsl(var(--foreground) / 0.62);
-}
-
-.home-deploy-visual {
-  position: relative;
-  z-index: 1;
-  width: 5.4rem;
-  height: 4.4rem;
-  margin-top: 2rem;
-  color: hsl(var(--primary));
-}
-
-.home-deploy-visual span {
-  position: absolute;
-  display: block;
-}
-
-.home-deploy-visual.is-premises span {
-  left: 1.35rem;
-  width: 2.25rem;
-  height: 1.05rem;
-  background: currentColor;
-  box-shadow: 0 0 0 1px hsl(var(--primary-foreground) / 0.2) inset;
-  transform: skewY(-24deg);
-}
-
-.home-deploy-visual.is-premises span:nth-child(1) { top: 0.55rem; opacity: 0.48; }
-.home-deploy-visual.is-premises span:nth-child(2) { top: 1.45rem; opacity: 0.74; }
-.home-deploy-visual.is-premises span:nth-child(3) { top: 2.35rem; }
-
-.home-deploy-visual.is-cloud span:nth-child(1) {
-  left: 0.45rem;
-  bottom: 1rem;
-  width: 4rem;
-  height: 1.65rem;
-  border: 0.55rem solid currentColor;
-  border-top-width: 0.8rem;
-  border-radius: 999px;
-  opacity: 0.22;
-}
-
-.home-deploy-visual.is-cloud span:nth-child(2) {
-  left: 1.3rem;
-  top: 0.6rem;
-  width: 2rem;
-  height: 2rem;
-  border: 0.55rem solid currentColor;
-  border-radius: 999px;
-  opacity: 0.7;
-}
-
-.home-deploy-visual.is-cloud span:nth-child(3) {
-  left: 2.65rem;
-  top: 1.25rem;
-  width: 1.45rem;
-  height: 1.45rem;
-  border: 0.45rem solid currentColor;
-  border-radius: 999px;
-}
-
-.home-deploy-visual.is-local span:nth-child(1) {
-  left: 0.75rem;
-  top: 0.35rem;
-  width: 2.4rem;
-  height: 3.15rem;
-  background: currentColor;
-  box-shadow:
-    0 0 0 0.22rem hsl(var(--primary) / 0.28),
-    0 0 0 1px hsl(var(--primary-foreground) / 0.25) inset;
-}
-
-.home-deploy-visual.is-local span:nth-child(2) {
-  right: 0.4rem;
-  bottom: 0.55rem;
-  width: 2.3rem;
-  height: 1.35rem;
-  border: 0.28rem solid currentColor;
-  border-bottom-width: 0.45rem;
-}
-
-.home-deploy-visual.is-local span:nth-child(3) {
-  right: 1.05rem;
-  bottom: 0.15rem;
-  width: 1.1rem;
-  height: 0.32rem;
-  background: currentColor;
+  color: hsl(var(--foreground) / 0.7);
 }
 
 @media (min-width: 1024px) {
@@ -3630,11 +3901,14 @@
 .meet-team-grid article { min-width: 0; padding: 1.35rem 1.5rem 1.45rem; }
 .meet-team-grid article + article { border-left: 1px solid hsl(var(--foreground) / 0.22); }
 .meet-team-grid article > div { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-.meet-team-grid article > div > span { font-family: "IBM Plex Mono", monospace; font-size: 0.54rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(var(--foreground) / 0.62); }
+.meet-team-grid article > div > span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
 .meet-team-grid article a { display: grid; place-items: center; width: 1.4rem; height: 1.4rem; color: hsl(var(--primary)); }
+.meet-team-grid article a svg { width: 0.95rem; height: 0.95rem; }
 .meet-team-grid article a:hover { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
-.meet-team-grid article h3 { margin-top: 0.55rem; font-size: 1rem; font-weight: 750; }
-.meet-team-grid article p { max-width: 45ch; margin-top: 0.35rem; font-size: 0.76rem; font-weight: 550; line-height: 1.55; color: hsl(var(--foreground) / 0.78); }
+.meet-team-grid article h3 { margin-top: 0.55rem; font-size: 1.1rem; font-weight: 750; }
+/* No ch cap — at 0.76rem the 45ch limit stopped the bio well short of the card
+   edge and left a ragged column of whitespace on the right. */
+.meet-team-grid article p { margin-top: 0.4rem; font-size: 0.85rem; font-weight: 500; line-height: 1.6; color: hsl(var(--foreground) / 0.78); }
 
 @media (max-width: 639px) {
   .home-collision-grid { inset: 42% 0 0; mask-image: linear-gradient(180deg, transparent, black 20%); }
@@ -3652,7 +3926,7 @@
   .hero-app-field > span > svg { width: 1.15rem; height: 1.15rem; }
   .hero-app-field > span:nth-of-type(odd) { left: 4%; }
   .hero-app-field > span:nth-of-type(even) { right: 4%; }
-  .hero-role-rail { right: 5%; left: 5%; gap: 0.45rem; font-size: 0.4rem; }
+  .hero-role-rail { right: 5%; left: 5%; gap: 0.45rem; font-size: 0.75rem; }
   .hero-memory-core { top: calc(50% - 1.35rem); left: calc(50% - 1.35rem); width: 2.7rem; height: 2.7rem; grid-template-columns: repeat(3, 0.62rem); grid-template-rows: repeat(3, 0.62rem); }
   .hero-memory-core i { width: 0.62rem; height: 0.62rem; }
   .operator-proof-ticker { width: 100%; }
@@ -3672,27 +3946,73 @@
   .workflow-orchestration-rail > i b { animation: none; }
 }
 
+/* The header is light paper at rest and dark shell once scrolled. Every control
+   inside it has to flip with that, or it goes invisible against its own
+   background — see .site-language / .nav-menu-button below. */
 .site-header .nav-meetings-link:hover,
 .site-header .nav-meetings-link:focus-visible,
 .site-header .nav-meetings-link:active {
+  color: hsl(var(--foreground)) !important;
+}
+
+.site-header.is-scrolled .nav-meetings-link:hover,
+.site-header.is-scrolled .nav-meetings-link:focus-visible,
+.site-header.is-scrolled .nav-meetings-link:active {
   color: hsl(var(--primary-foreground)) !important;
 }
 
 .site-header .site-language {
+  border-color: hsl(var(--foreground) / 0.25);
+  background: hsl(var(--foreground) / 0.04);
+  color: hsl(var(--foreground));
+}
+
+.site-header.is-scrolled .site-language {
   border-color: hsl(var(--primary-foreground) / 0.25);
   background: hsl(var(--primary-foreground) / 0.08);
   color: hsl(var(--primary-foreground));
 }
 
 .site-header .site-language option {
+  background: hsl(var(--card));
+  color: hsl(var(--foreground));
+}
+
+.site-header.is-scrolled .site-language option {
   background: hsl(var(--shell));
   color: hsl(var(--primary-foreground));
 }
 
+.site-header .nav-menu-button {
+  color: hsl(var(--foreground));
+}
+
+.site-header.is-scrolled .nav-menu-button {
+  color: hsl(var(--primary-foreground));
+}
+
+/* Like every other control in the header, this has to flip with the band it
+   sits on or it goes invisible against its own background. */
+.site-header .theme-toggle {
+  border: 1px solid hsl(var(--foreground) / 0.25);
+  background: hsl(var(--foreground) / 0.04);
+  color: hsl(var(--foreground));
+}
+
+.site-header.is-scrolled .theme-toggle {
+  border-color: hsl(var(--primary-foreground) / 0.25);
+  background: hsl(var(--primary-foreground) / 0.08);
+  color: hsl(var(--primary-foreground));
+}
+
+.site-header .theme-toggle:hover { border-color: hsl(var(--primary)); }
+
+/* Plain shell, no gradient and no blue. Brand blue here fought the blue of the
+   squares landing on it — two blues at different values read as a mismatch
+   rather than one material. A clean dark band lets the pile sit on top of it. */
 .site-footer {
   border-color: hsl(var(--primary-foreground) / 0.14);
-  background:
-    linear-gradient(180deg, hsl(var(--shell)), hsl(224 50% 7%));
+  background: hsl(var(--chrome));
   color: hsl(var(--primary-foreground));
 }
 
@@ -3721,7 +4041,7 @@
   border-bottom: 1px solid hsl(var(--primary-foreground) / 0.18);
   padding: 0.75rem 0.9rem;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.58rem;
+  font-size: 0.6875rem;
   text-transform: uppercase;
 }
 
@@ -3756,9 +4076,9 @@
 
 .post-ai-queue-body span {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.54rem;
+  font-size: 0.6875rem;
   text-transform: uppercase;
-  color: hsl(var(--foreground) / 0.48);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .post-ai-queue-body p {
@@ -3826,8 +4146,8 @@
 
 .agent-spawn-list span {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.54rem;
-  color: hsl(var(--primary-foreground) / 0.5);
+  font-size: 0.6875rem;
+  color: hsl(var(--primary-foreground) / 0.6);
 }
 
 .agent-spawn-list strong {
@@ -3858,13 +4178,13 @@
 .agent-tool-rail span {
   max-width: 100%;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.48rem;
+  font-size: 0.6875rem;
   text-transform: uppercase;
 }
 
 /* Multi-system composer */
 .systems-band .container-page > .grid > span {
-  color: hsl(var(--foreground) / 0.68);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .systems-band .matrix-field {
@@ -3883,7 +4203,7 @@
   position: relative;
   min-height: 5.5rem;
   background: hsl(var(--card));
-  color: hsl(var(--foreground) / 0.62);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .system-tool:hover {
@@ -3912,7 +4232,7 @@
   background: hsl(var(--primary-foreground));
   color: hsl(var(--primary));
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.5rem;
+  font-size: 0.6875rem;
   font-style: normal;
 }
 
@@ -3940,9 +4260,9 @@
 .system-selection > span,
 .system-combination-result > span {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.56rem;
+  font-size: 0.6875rem;
   text-transform: uppercase;
-  color: hsl(var(--foreground) / 0.5);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .system-selection > div {
@@ -3958,7 +4278,7 @@
   gap: 0.45rem;
   border: 1px solid hsl(var(--foreground) / 0.22);
   padding: 0.5rem 0.6rem;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   text-transform: capitalize;
 }
 
@@ -3985,7 +4305,7 @@
   margin-top: 0.75rem;
   font-size: 0.78rem;
   line-height: 1.65;
-  color: hsl(var(--foreground) / 0.68);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .system-combination-action {
@@ -4022,8 +4342,8 @@
   place-items: center;
   background: hsl(var(--card));
   font-family: "IBM Plex Mono", monospace;
-  font-size: 0.58rem;
-  color: hsl(var(--foreground) / 0.5);
+  font-size: 0.6875rem;
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .faq-desk-terms span.is-active {
@@ -4040,7 +4360,7 @@
 }
 
 .faq-desk-item button svg {
-  color: hsl(var(--foreground) / 0.55);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 /* Secondary page identity, scoped to existing layouts */
@@ -4262,7 +4582,7 @@
 }
 
 .secondary-route .trade-notes-page > div:first-child .section-label {
-  color: hsl(var(--foreground) / 0.58);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .secondary-route .pricing-brand-page,
@@ -4272,10 +4592,204 @@
 }
 
 .secondary-route .section-label {
-  color: hsl(var(--foreground) / 0.58);
+  color: hsl(var(--foreground) / 0.7);
 }
 
 .secondary-route .bg-shell {
   background-color: hsl(var(--shell));
   color: hsl(var(--primary-foreground));
 }
+
+
+/* ---------------------------------------------------------------------------
+   Dark mode: blue as TEXT.
+   The brand blue clears 4.5:1 on paper but only reaches 3.83:1 on the dark
+   canvas, so every place that paints text with raw --primary is remapped to
+   the lifted --primary-text here. Blue *fills* are untouched — only type.
+   --------------------------------------------------------------------------- */
+.dark .approval-leadership-note span { color: hsl(var(--primary-text)); }
+.dark .artifact-nudge strong { color: hsl(var(--primary-text)); }
+.dark .founder-link svg { color: hsl(var(--primary-text)); }
+.dark .founder-photo-stack span { color: hsl(var(--primary-text)); }
+.dark .hero-app-field > span > svg { color: hsl(var(--primary-text)); }
+.dark .hero-ticker svg { color: hsl(var(--primary-text)); }
+.dark .home-deploy-card > p { color: hsl(var(--primary-text)); }
+.dark .home-display em { color: hsl(var(--primary-text)); }
+.dark .meet-team-grid article a { color: hsl(var(--primary-text)); }
+.dark .memory-allocation-foot strong { color: hsl(var(--primary-text)); }
+.dark .memory-document > b { color: hsl(var(--primary-text)); }
+.dark .memory-margin-foot strong { color: hsl(var(--primary-text)); }
+.dark .memory-margin-head strong { color: hsl(var(--primary-text)); }
+.dark .model-router-item span { color: hsl(var(--primary-text)); }
+.dark .model-router-status { color: hsl(var(--primary-text)); }
+.dark .ontology-artifact-copy > span { color: hsl(var(--primary-text)); }
+.dark .ontology-brief-card > span { color: hsl(var(--primary-text)); }
+.dark .ontology-conflict-card > em { color: hsl(var(--primary-text)); }
+.dark .ontology-impact-card b { color: hsl(var(--primary-text)); }
+.dark .ontology-review-card em, .ontology-memory-card em { color: hsl(var(--primary-text)); }
+.dark .ontology-stage-list button.is-active span { color: hsl(var(--primary-text)); }
+.dark .ontology-stage-list span { color: hsl(var(--primary-text)); }
+.dark .ontology-temporal-card > div:last-child strong { color: hsl(var(--primary-text)); }
+.dark .ontology-workbench-topline span:last-child { color: hsl(var(--primary-text)); }
+.dark .rail-chat-header > span:last-child { color: hsl(var(--primary-text)); }
+.dark .rail-confirm-grid span { color: hsl(var(--primary-text)); }
+.dark .rail-data-table i { color: hsl(var(--primary-text)); }
+.dark .rail-decision-card span { color: hsl(var(--primary-text)); }
+.dark .rail-decision-foot { color: hsl(var(--primary-text)); }
+.dark .rail-panel-label { color: hsl(var(--primary-text)); }
+.dark .rail-timer-clock { color: hsl(var(--primary-text)); }
+.dark .route-comparison > p { color: hsl(var(--primary-text)); }
+.dark .route-ubik-signal { color: hsl(var(--primary-text)); }
+.dark .secondary-route .pricing-brand-hero .text-primary { color: hsl(var(--primary-text)); }
+.dark .system-tool i { color: hsl(var(--primary-text)); }
+.dark .trade-control-recommendation > span { color: hsl(var(--primary-text)); }
+.dark .trade-control-recommendation svg { color: hsl(var(--primary-text)); }
+.dark .trade-control-topline span:last-child { color: hsl(var(--primary-text)); }
+.dark .trade-work-index button.is-active > span { color: hsl(var(--primary-text)); }
+.dark .trade-work-paper-topline strong { color: hsl(var(--primary-text)); }
+.dark .workflow-app-grid i { color: hsl(var(--primary-text)); }
+.dark .workflow-integration-foot strong { color: hsl(var(--primary-text)); }
+.dark .workflow-memory-view.is-revision em { color: hsl(var(--primary-text)); }
+.dark .workflow-memory-view.is-timeline > p span { color: hsl(var(--primary-text)); }
+.dark .workflow-panel-label span { color: hsl(var(--primary-text)); }
+.dark .workflow-team-spine button span { color: hsl(var(--primary-text)); }
+.dark .workflow-time-grid > div:last-child strong { color: hsl(var(--primary-text)); }
+.dark .text-primary { color: hsl(var(--primary-text)); }
+
+/* Missed by the generated sweep above: this rule lists two selectors on
+   separate lines, so only the last was captured. */
+.dark .route-comparison .is-better strong { color: hsl(var(--primary-text)); }
+
+/* ---------------------------------------------------------------------------
+   The three layers, in the same material as Deploy's card grid.
+
+   Deliberately the same design language as .home-deploy-* — dithered vector
+   tile, mono label chip, hairline three-up grid — applied to a different set
+   of facts, rather than a competing diagram style. The five-step loop is
+   demoted to a single mono caption above the grid.
+   --------------------------------------------------------------------------- */
+.layer-head {
+  display: grid;
+  gap: 0.85rem;
+  max-width: 46rem;
+}
+
+.loop-grid {
+  display: grid;
+  min-width: 0;
+  margin-top: 2.75rem;
+  border: 1px solid hsl(var(--foreground) / 0.18);
+  background: hsl(var(--foreground) / 0.12);
+  gap: 1px;
+}
+
+.loop-card {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  min-width: 0;
+  min-height: 17rem;
+  overflow: hidden;
+  padding: clamp(1rem, 2.2vw, 1.55rem);
+  background: hsl(var(--background));
+}
+
+.loop-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(hsl(var(--primary) / 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--primary) / 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(180deg, black, transparent 88%);
+  pointer-events: none;
+}
+
+.loop-card > p {
+  position: relative;
+  z-index: 1;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid hsl(var(--primary) / 0.28);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: hsl(var(--primary));
+}
+
+.loop-tile {
+  display: block;
+  width: 100%;
+  height: 6.5rem;
+  margin: 0.9rem 0 0.4rem;
+}
+
+.loop-card h3,
+.loop-card > span {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+.loop-card h3 {
+  margin-top: 0.85rem;
+  max-width: 20ch;
+  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  font-weight: 680;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+/* A single short clause, not a paragraph — no max-width clamp needed. */
+.loop-card > span {
+  margin-top: 0.75rem;
+  font-size: 0.84rem;
+  font-weight: 560;
+  line-height: 1.4;
+  color: hsl(var(--foreground) / 0.7);
+}
+
+@media (min-width: 1024px) {
+  .loop-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1023px) {
+  .loop-grid { justify-items: stretch; }
+  .loop-card { justify-items: center; text-align: center; min-height: 0; padding-bottom: 1.6rem; }
+  .loop-tile { max-width: 13rem; height: 7.5rem; margin-inline: auto; }
+  .loop-card h3 { max-width: 22ch; }
+}
+
+/* ---------------------------------------------------------------------------
+   Tablet / mobile refinements
+   --------------------------------------------------------------------------- */
+
+/* Deploy cards centre their illustration and copy once the grid drops out of
+   three columns — left-aligned text under a full-width tile reads lopsided. */
+@media (max-width: 1023px) {
+  .home-deploy-proof { justify-items: center; text-align: center; }
+  .home-deploy-proof > div:first-child { text-align: center; }
+  .home-deploy-card {
+    justify-items: center;
+    text-align: center;
+    min-height: 0;
+    padding-bottom: 1.6rem;
+  }
+  .home-deploy-tile { max-width: 13rem; height: 7.5rem; margin-inline: auto; }
+  .home-deploy-card h3 { max-width: 22ch; }
+  .home-deploy-card span { max-width: 34ch; }
+  .compliance-strip { justify-content: center; text-align: center; }
+}
+
+/* The wordmark is redundant beside the footer nav on a narrow column, and it
+   pushed the useful links below the fold. */
+@media (max-width: 767px) {
+  .site-footer-logo { display: none; }
+}
+
+/* Added after the generated sweep above, so listed explicitly: the layer-row
+   numbers paint text with raw --primary and need the lifted blue on dark. */
+.dark .loop-card > p { color: hsl(var(--primary-text)); }

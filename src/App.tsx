@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { DotmTriangle2 } from "@/components/ui/dotm-triangle-2";
+import { SquareLoader } from "@/components/landing/SquareLoader";
 import { trackEvent } from "@/lib/posthog";
 
 const Index = lazy(() => import("@/pages/Index"));
@@ -43,7 +43,7 @@ export default function App() {
       <Suspense
         fallback={
           <div className="grid min-h-dvh place-items-center bg-background text-foreground">
-            <DotmTriangle2 size={42} dotSize={5} aria-label="Loading page" />
+            <SquareLoader size={44} label="Loading page" />
           </div>
         }
       >

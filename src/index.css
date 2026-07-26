@@ -3767,7 +3767,11 @@
 .home-deploy-card {
   position: relative;
   display: grid;
-  grid-template-rows: auto 1fr auto auto;
+  /* Slack goes to the LAST row, not the tile row. Each card is its own grid, so
+     with 1fr on the tile the card with shorter copy (02, two lines vs three)
+     pooled its extra height above the heading and pushed the title down out of
+     line with 01 and 03. */
+  grid-template-rows: auto auto auto 1fr;
   min-width: 0;
   min-height: 17rem;
   overflow: hidden;
@@ -4674,6 +4678,14 @@
   max-width: 46rem;
 }
 
+.layer-caption {
+  max-width: 52ch;
+  font-size: 1.02rem;
+  font-weight: 520;
+  line-height: 1.6;
+  color: hsl(var(--foreground) / 0.74);
+}
+
 .loop-grid {
   display: grid;
   min-width: 0;
@@ -4686,7 +4698,9 @@
 .loop-card {
   position: relative;
   display: grid;
-  grid-template-rows: auto 1fr auto auto;
+  /* Same reason as .home-deploy-card: slack belongs below the copy so the three
+     headings sit on one line regardless of how long each card's copy runs. */
+  grid-template-rows: auto auto auto 1fr;
   min-width: 0;
   min-height: 17rem;
   overflow: hidden;

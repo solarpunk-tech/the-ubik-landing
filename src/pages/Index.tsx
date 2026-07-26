@@ -7,9 +7,37 @@ import { Seo } from "@/components/seo/Seo";
 import { PageShell } from "@/components/landing/PageShell";
 import { ParticleField } from "@/components/landing/ParticleField";
 import { DitherTile } from "@/components/landing/DitherTile";
+import { pickScene, type HeroScene } from "@/lib/hero-scenes";
 import { featuredBlogPost } from "@/lib/landing-content";
 import { externalLinks } from "@/lib/links";
 import { trackEvent } from "@/lib/posthog";
+
+/**
+ * Hero copy is paired to the hero artwork, so the headline and the picture are
+ * making the same point. Keyed by scene id from `hero-scenes`; `?scene=` pins a
+ * pair for review. `lead`/`emphasis` split because the last clause is set in
+ * brand blue.
+ */
+const heroCopy: Record<string, { lead: string; emphasis: string; subhead: string }> = {
+  wave: {
+    lead: "Trade decisions,",
+    emphasis: "together.",
+    subhead:
+      "Ubik doesn't just wrap your apps in a chat box. It trains the memory, models and agents that do the work."
+  },
+  ship: {
+    lead: "Trade operators,",
+    emphasis: "unite.",
+    subhead:
+      "Ubik clears the manual work so ERPs, inboxes and vendor threads stop running your day."
+  },
+  harvest: {
+    lead: "Every lot,",
+    emphasis: "accounted for.",
+    subhead:
+      "Ubik keeps the lot, the spec and the promise attached, so a claim six weeks later still arrives with its evidence."
+  }
+};
 
 /* The loop verb lives on the card chip, not in a caption strip above the grid.
    One occurrence each: the chip labels its own card, so a separate
@@ -240,17 +268,20 @@ const workflowTeams = [
   }
 ] as const;
 
+/* Bios are background, not job description. What each person does at Ubik is
+   already the whole page above them; what a buyer cannot tell from the product
+   is who built it and what they saw before this. */
 const teamProfiles = [
   {
     name: "Shubhranshu Jha",
-    role: "Product GTM",
-    bio: "Turns complex operating context into calm products, integrations, and dependable workflows.",
+    role: "Product Design, Ops & GTM",
+    bio: "Fractional operator and venture builder. Raised $10M+ and shipped as much in ARR, pallets and shelves across sustainability, commerce and D2C.",
     linkedin: "https://www.linkedin.com/in/11shubhranshu"
   },
   {
     name: "Sai Kiran",
-    role: "Agent systems",
-    bio: "Builds and ships the workflow layer that carries trade decisions safely into the systems teams use.",
+    role: "AI/ML & Product Engineering",
+    bio: "Scaled engineering across mobility, commerce and finance unicorns. Then explored AI-native orgs and built foundation models for healthcare.",
     linkedin: "https://www.linkedin.com/in/saikiraniitb/"
   }
 ] as const;
@@ -823,8 +854,11 @@ function OperatingLoop() {
       <div className="container-page py-16 sm:py-24">
         <div className="layer-head">
           <h2 id="home-layers-title" className="home-section-title">
-            Supercharge Perishable Trade
+            Decision Intelligence for Food
           </h2>
+          <p className="layer-caption">
+            How Ubik helps importers and exporters take decisions in days instead of weeks.
+          </p>
         </div>
 
         <div className="loop-grid" aria-label="The three layers of Ubik's operating loop">
@@ -879,13 +913,22 @@ function DeployProof() {
 }
 
 export default function Index() {
+  /* Picked once here rather than inside ParticleField so the headline and the
+     artwork always agree. Falls back to the wave copy for an unknown id. */
+  const [scene] = useState<HeroScene>(() => pickScene());
+  const hero = heroCopy[scene.id] ?? heroCopy.wave;
+
   return (
     <PageShell>
+      {/* Kept identical to the static tags in index.html on purpose. Scrapers
+          that do not run JS (WhatsApp, LinkedIn, Slack, most LLM crawlers) only
+          ever see index.html, so a different title here meant the page had two
+          competing identities depending on who was reading it. */}
       <Seo
-        title="Ubik | Trade operations, held together"
-        description="Ubik connects the messages, lots, approvals, and buyer promises that break apart across a shipment—so trade teams can make the next decision with confidence."
-        image="/og-image.png"
-        imageAlt="Ubik for perishable trade operations"
+        title="Ubik | Agentic operating system for perishable trade"
+        description="Turn scattered trade signals into reviewed decisions your team can approve, trace, and reuse."
+        image="/og-image.png?v=2"
+        imageAlt="Ubik: trade decisions, together. An agentic operating system for perishable trade."
       />
       <JsonLd
         data={{
@@ -899,18 +942,16 @@ export default function Index() {
       />
 
       <main className="home-minimal overflow-hidden">
-        <ParticleField />
+        <ParticleField scene={scene} />
 
         <section className="home-hero">
           <div className="home-collision-grid" aria-hidden="true" />
           <div className="container-page relative z-10 py-16 sm:py-24 lg:min-h-[calc(100svh-4rem)] lg:py-20">
             <div className="max-w-5xl">
-              <h1 className="home-display max-w-[10ch]">
-                Trade decisions, <em>together.</em>
+              <h1 className="home-display max-w-[12ch]">
+                {hero.lead} <em>{hero.emphasis}</em>
               </h1>
-              <p className="mt-7 max-w-xl text-lg leading-8 text-foreground/72">
-                Ubik pulls the messages, approvals, and buyer promises back into one calm operating view.
-              </p>
+              <p className="mt-7 max-w-xl text-lg leading-8 text-foreground/72">{hero.subhead}</p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <Button asChild size="lg" className="home-primary-action">
                   <a href={externalLinks.app} onClick={() => trackEvent("cta_clicked", { cta: "try_ubik", location: "hero" })}>

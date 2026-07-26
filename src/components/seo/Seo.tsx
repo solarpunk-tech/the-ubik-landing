@@ -14,6 +14,12 @@ function setMeta(selector: string, attr: string, value: string) {
   if (el) el.setAttribute(attr, value);
 }
 
+const SITE_ORIGIN = "https://theubik.com";
+
+/** og:image must be absolute — several scrapers will not resolve "/og-image.png". */
+const absoluteUrl = (value: string) =>
+  value.startsWith("http") ? value : `${SITE_ORIGIN}${value.startsWith("/") ? "" : "/"}${value}`;
+
 export function Seo({ title, description, canonical = "https://theubik.com/", image, imageAlt, type = "website" }: SeoProps) {
   useEffect(() => {
     document.title = title;
@@ -25,8 +31,10 @@ export function Seo({ title, description, canonical = "https://theubik.com/", im
     setMeta('meta[name="twitter:title"]', "content", title);
     setMeta('meta[name="twitter:description"]', "content", description);
     if (image) {
-      setMeta('meta[property="og:image"]', "content", image);
-      setMeta('meta[name="twitter:image"]', "content", image);
+      const resolved = absoluteUrl(image);
+      setMeta('meta[property="og:image"]', "content", resolved);
+      setMeta('meta[property="og:image:secure_url"]', "content", resolved);
+      setMeta('meta[name="twitter:image"]', "content", resolved);
       if (imageAlt) {
         setMeta('meta[property="og:image:alt"]', "content", imageAlt);
         setMeta('meta[name="twitter:image:alt"]', "content", imageAlt);

@@ -200,10 +200,15 @@ function buildField(
   };
 }
 
-export function ParticleField() {
+/**
+ * `scene` is passed in so the hero headline can describe the artwork on screen.
+ * Index owns the pick; the local fallback keeps the component usable on its own.
+ */
+export function ParticleField({ scene: sceneProp }: { scene?: HeroScene } = {}) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [ready, setReady] = useState(false);
-  const [scene] = useState<HeroScene>(() => pickScene());
+  const [fallbackScene] = useState<HeroScene>(() => pickScene());
+  const scene = sceneProp ?? fallbackScene;
 
   useEffect(() => {
     const canvas = canvasRef.current;

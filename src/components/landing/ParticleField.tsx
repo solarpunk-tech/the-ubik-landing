@@ -55,6 +55,9 @@ type Particle = {
   vy: number;
   luma: number;
   heat: number;
+  /** Stable phase and blue-ramp index for coherent ambient flow. */
+  phase: number;
+  tone: number;
   /** Survives the in-flight cull — fixed per particle so it never flickers. */
   keep: boolean;
 };
@@ -179,6 +182,8 @@ function buildField(
       vy: 0,
       luma: p.luma,
       heat: 0,
+      phase: p.r1 * Math.PI * 0.7 + p.hx * 0.006 + p.hy * 0.004,
+      tone: Math.min(3, Math.floor((p.luma * 0.58 + p.r1 * 0.2 + p.hx / heroW * 0.22) * 4)),
       // ~22% of the field survives the fall. Enough to read as motion on the
       // way down and to form a drift at the bottom, far too sparse to
       // interfere with the copy it passes over.
@@ -227,16 +232,26 @@ export function ParticleField({ scene: sceneProp }: { scene?: HeroScene } = {}) 
     let vh = 0;
     let scrollY = 0;
     let lastTick = 0;
+    let elapsed = 0;
 
     // Pointer is tracked in document space so it lines up with the squares.
     let pointer: { x: number; y: number } | null = null;
     let lastPointer: { x: number; y: number } | null = null;
     let pointerIdleAt = 0;
 
-    let inkColor = "#315CF4";
+    let inkColors = ["hsl(227 88% 70%)", "hsl(227 84% 62%)", "hsl(227 81% 56%)", "hsl(227 78% 46%)"];
     function readTokens() {
       const v = getComputedStyle(document.documentElement).getPropertyValue("--primary").trim();
-      inkColor = v ? `hsl(${v})` : "#315CF4";
+      const match = v.match(/([\d.]+)\s+([\d.]+)%\s+([\d.]+)%/);
+      if (!match) return;
+      const hue = Number(match[1]);
+      const saturation = Number(match[2]);
+      const lightness = Number(match[3]);
+      const lightnessSteps = [lightness + 14, lightness + 6, lightness, lightness - 10];
+      inkColors = lightnessSteps.map(
+        (step, index) =>
+          `hsl(${hue} ${Math.max(0, saturation - index * 2)}% ${Math.min(88, Math.max(24, step))}%)`
+      );
     }
 
     function measure() {
@@ -259,9 +274,10 @@ export function ParticleField({ scene: sceneProp }: { scene?: HeroScene } = {}) 
         ? footer.getBoundingClientRect().top + window.scrollY
         : docH - 200;
 
-      // Fewer, larger squares on small screens and on low-core devices.
+      // Finer cells give the silhouettes and their motion a smoother gradient.
+      // Low-core and small-screen devices retain a lighter particle budget.
       const lean = vw < 640 || (navigator.hardwareConcurrency || 8) <= 4;
-      const cell = lean ? 13 : vw < 1100 ? 10 : 9;
+      const cell = lean ? 10 : vw < 1100 ? 8 : 7;
 
       field = buildField(scene, heroTop, heroRect.width, heroRect.height, footerTop, docH, vh, cell);
       return Boolean(field);
@@ -273,8 +289,7 @@ export function ParticleField({ scene: sceneProp }: { scene?: HeroScene } = {}) 
       ctx!.clearRect(0, 0, vw, vh);
 
       const cell = field.cell;
-      const solid = new Path2D();
-      const soft = new Path2D();
+      const tones = [new Path2D(), new Path2D(), new Path2D(), new Path2D()];
       // Squares that have left the hero cross live copy on their way down.
       // They are heavily thinned and split by where they are: `driftEdge` is
       // out in the page gutters where nothing is being read, `driftOver` is
@@ -305,8 +320,18 @@ export function ParticleField({ scene: sceneProp }: { scene?: HeroScene } = {}) 
         // Settle position is resolved against the *live* footer each frame, so
         // a carousel changing the page height can't shift the drift.
         const settleY = footerTop - p.settleRow * cell * 0.92;
-        const dx = p.hx + (p.sx - p.hx) * e + p.ox;
-        const dy = p.hy + (settleY - p.hy) * e + p.oy;
+        const flowStrength = Math.pow(1 - e, 2);
+        const flowPhase = elapsed * 0.62 + p.phase;
+        const ambientX = (
+          Math.sin(flowPhase + p.hy * 0.004) * cell * 0.34 +
+          Math.sin(elapsed * 0.27 + p.hx * 0.009) * cell * 0.13
+        ) * flowStrength;
+        const ambientY = (
+          Math.cos(flowPhase * 0.83 + p.hx * 0.004) * cell * 0.22 +
+          Math.sin(elapsed * 0.2 + (p.hx + p.hy) * 0.005) * cell * 0.1
+        ) * flowStrength;
+        const dx = p.hx + (p.sx - p.hx) * e + p.ox + ambientX;
+        const dy = p.hy + (settleY - p.hy) * e + p.oy + ambientY;
 
         const sy = dy - scrollY;
         if (sy < -cell || sy > vh + cell) continue;
@@ -316,10 +341,11 @@ export function ParticleField({ scene: sceneProp }: { scene?: HeroScene } = {}) 
         if (list) list.push(p);
         else buckets.set(key, [p]);
 
-        const size = cell * (0.4 + p.luma * 0.48 + p.heat * 0.5);
+        const breathe = 1 + Math.sin(elapsed * 0.9 + p.phase) * 0.055 * flowStrength;
+        const size = cell * (0.34 + p.luma * 0.5 + p.heat * 0.42) * breathe;
         const half = size / 2;
-        const rx = Math.round(dx - half) + 0.5;
-        const ry = Math.round(sy - half) + 0.5;
+        const rx = dx - half;
+        const ry = sy - half;
 
         if (e > 0.06 && p.heat < 0.25) {
           // Everything that isn't a survivor dissolves the moment it leaves
@@ -335,22 +361,23 @@ export function ParticleField({ scene: sceneProp }: { scene?: HeroScene } = {}) 
           }
           // Landed in the drift — back over dead space, so full strength.
         }
-        if (p.luma > 0.55 || p.heat > 0.25) {
-          solid.rect(rx, ry, size, size);
-        } else {
-          soft.rect(rx, ry, size, size);
-        }
+        const heatLift = p.heat > 0.5 ? 1 : 0;
+        const tone = Math.min(3, p.tone + heatLift);
+        tones[tone].rect(rx, ry, size, size);
       }
 
-      ctx!.fillStyle = inkColor;
+      ctx!.fillStyle = inkColors[1];
       ctx!.globalAlpha = 0.07;
       ctx!.fill(driftOver);
+      ctx!.fillStyle = inkColors[2];
       ctx!.globalAlpha = 0.2;
       ctx!.fill(driftEdge);
-      ctx!.globalAlpha = 0.22;
-      ctx!.fill(soft);
-      ctx!.globalAlpha = 0.72;
-      ctx!.fill(solid);
+      const toneAlpha = [0.32, 0.48, 0.66, 0.82];
+      for (let i = 0; i < tones.length; i += 1) {
+        ctx!.fillStyle = inkColors[i];
+        ctx!.globalAlpha = toneAlpha[i];
+        ctx!.fill(tones[i]);
+      }
       ctx!.globalAlpha = 1;
     }
 
@@ -405,26 +432,30 @@ export function ParticleField({ scene: sceneProp }: { scene?: HeroScene } = {}) 
       lastPointer = pointer;
     }
 
-    function tick() {
+    function tick(now: number) {
       if (!running || !field) return;
-      lastTick = performance.now();
+      const deltaMs = lastTick ? Math.min(42, now - lastTick) : 16.667;
+      const frame = deltaMs / 16.667;
+      lastTick = now;
+      elapsed += deltaMs / 1000;
       scrollY = window.scrollY;
 
       applyPointer();
-      if (pointer && performance.now() - pointerIdleAt > 2000) {
+      if (pointer && now - pointerIdleAt > 2000) {
         pointer = null;
         lastPointer = null;
       }
 
       for (const p of field.particles) {
         if (p.ox || p.oy || p.vx || p.vy || p.heat) {
-          p.vx += -p.ox * 0.13;
-          p.vy += -p.oy * 0.13;
-          p.vx *= 0.83;
-          p.vy *= 0.83;
-          p.ox += p.vx;
-          p.oy += p.vy;
-          p.heat *= 0.91;
+          p.vx += -p.ox * 0.13 * frame;
+          p.vy += -p.oy * 0.13 * frame;
+          const damping = Math.pow(0.83, frame);
+          p.vx *= damping;
+          p.vy *= damping;
+          p.ox += p.vx * frame;
+          p.oy += p.vy * frame;
+          p.heat *= Math.pow(0.91, frame);
           if (Math.abs(p.ox) < 0.01 && Math.abs(p.vx) < 0.01) { p.ox = 0; p.vx = 0; }
           if (Math.abs(p.oy) < 0.01 && Math.abs(p.vy) < 0.01) { p.oy = 0; p.vy = 0; }
           if (p.heat < 0.01) p.heat = 0;

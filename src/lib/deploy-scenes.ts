@@ -4,10 +4,11 @@
  * into brand squares by <DitherTile>, so the deployment options are rendered in
  * exactly the same material as the hero rather than as a separate icon set.
  *
- * These are static: no particles, no rAF, one draw at mount.
+ * DitherTile supplies the viewport-aware animation loop. Scene geometry accepts
+ * a phase so selected silhouettes can move without changing their identity.
  */
 
-export type DeploySceneDraw = (ctx: CanvasRenderingContext2D, w: number, h: number) => void;
+export type DeploySceneDraw = (ctx: CanvasRenderingContext2D, w: number, h: number, phase?: number) => void;
 
 const ink = (ctx: CanvasRenderingContext2D, value: number) => {
   const level = Math.round(255 * (1 - value));
@@ -41,101 +42,159 @@ const drawPremises: DeploySceneDraw = (ctx, w, h) => {
   ctx.fillRect(0, h * 0.93, w, h * 0.02);
 };
 
-/** Your cloud — a VPC boundary with instances inside it. */
+/** Your cloud — a private cloud wearing a discreet spy hat. */
 const drawCloud: DeploySceneDraw = (ctx, w, h) => {
-  // Geometry is derived from the centre out so the whole composition sits in
-  // the middle of the tile rather than drifting toward the top-left.
-  const boxW = w * 0.76;
-  const boxH = h * 0.62;
-  const boxX = (w - boxW) / 2;
-  const boxY = (h - boxH) / 2;
-
-  // Perimeter, drawn as a dashed boundary: the point is that it is *yours*.
-  ink(ctx, 0.85);
-  ctx.lineWidth = Math.max(2, w * 0.018);
-  ctx.setLineDash([w * 0.05, w * 0.035]);
-  ctx.strokeRect(boxX, boxY, boxW, boxH);
+  // Dashed private perimeter.
+  ink(ctx, 0.48);
+  ctx.lineWidth = Math.max(1.5, w * 0.012);
+  ctx.setLineDash([w * 0.035, w * 0.024]);
+  ctx.strokeRect(w * 0.12, h * 0.16, w * 0.76, h * 0.7);
   ctx.setLineDash([]);
 
-  // Instances inside the boundary, centred as a block. Even ink across all six:
-  // the old alternating 0.55 dithered most of them away, which read as a
-  // lopsided scatter rather than a grid.
-  const cols = 3;
-  const rows = 2;
-  const gapX = w * 0.05;
-  const gapY = h * 0.09;
-  const bw = (boxW * 0.78 - gapX * (cols - 1)) / cols;
-  const bh = (boxH * 0.62 - gapY * (rows - 1)) / rows;
-  const gridW = bw * cols + gapX * (cols - 1);
-  const gridH = bh * rows + gapY * (rows - 1);
-  const startX = (w - gridW) / 2;
-  const startY = (h - gridH) / 2;
+  // Cloud body.
+  ink(ctx, 0.9);
+  ctx.beginPath();
+  ctx.moveTo(w * 0.2, h * 0.7);
+  ctx.bezierCurveTo(w * 0.13, h * 0.58, w * 0.22, h * 0.45, w * 0.35, h * 0.49);
+  ctx.bezierCurveTo(w * 0.37, h * 0.33, w * 0.61, h * 0.31, w * 0.66, h * 0.49);
+  ctx.bezierCurveTo(w * 0.81, h * 0.43, w * 0.9, h * 0.58, w * 0.81, h * 0.7);
+  ctx.lineTo(w * 0.2, h * 0.7);
+  ctx.closePath();
+  ctx.fill();
 
-  for (let r = 0; r < rows; r += 1) {
-    for (let c = 0; c < cols; c += 1) {
-      ink(ctx, (r + c) % 2 === 0 ? 0.95 : 0.78);
-      ctx.fillRect(startX + c * (bw + gapX), startY + r * (bh + gapY), bw, bh);
-    }
-  }
-};
-
-/** Managed — the same workload, with Ubik holding it up. */
-const drawManaged: DeploySceneDraw = (ctx, w, h) => {
-  // Whole composition is balanced around the tile's centre: block above the
-  // midline, brackets and mark below it, so it no longer sits top-heavy.
-  const blockW = w * 0.52;
-  const blockH = h * 0.3;
-  const blockX = (w - blockW) / 2;
-  const blockY = h * 0.14;
-
-  ink(ctx, 0.95);
-  ctx.fillRect(blockX, blockY, blockW, blockH);
+  // Spy hat: broad brim, angled crown, and a punched-out band.
+  ink(ctx, 1);
   ctx.save();
+  ctx.translate(w * 0.49, h * 0.19);
+  ctx.rotate(-0.08);
+  ctx.fillRect(-w * 0.27, h * 0.13, w * 0.54, h * 0.1);
+  ctx.beginPath();
+  ctx.moveTo(-w * 0.18, h * 0.14);
+  ctx.lineTo(-w * 0.13, -h * 0.08);
+  ctx.lineTo(w * 0.16, -h * 0.05);
+  ctx.lineTo(w * 0.21, h * 0.14);
+  ctx.closePath();
+  ctx.fill();
   ctx.globalCompositeOperation = "destination-out";
-  for (let u = 0; u < 3; u += 1) {
-    ctx.fillStyle = "rgba(0,0,0,0.85)";
-    ctx.fillRect(blockX + blockW * 0.12, blockY + blockH * (0.18 + u * 0.28), blockW * 0.76, blockH * 0.12);
-  }
+  ctx.fillStyle = "rgba(0,0,0,0.9)";
+  ctx.fillRect(-w * 0.17, h * 0.065, w * 0.36, h * 0.055);
   ctx.restore();
 
-  // The hands under it. Heavier ink and a thicker stroke than before: at this
-  // scale a 0.6 hairline dithered away almost entirely, so the block looked
-  // like it was floating with nothing beneath it.
-  ink(ctx, 0.82);
-  ctx.lineWidth = Math.max(3, w * 0.032);
-  ctx.beginPath();
-  ctx.moveTo(w * 0.16, h * 0.84);
-  ctx.quadraticCurveTo(w * 0.2, h * 0.6, w * 0.42, h * 0.57);
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(w * 0.84, h * 0.84);
-  ctx.quadraticCurveTo(w * 0.8, h * 0.6, w * 0.58, h * 0.57);
-  ctx.stroke();
+  // One paper row separates hat from cloud so the two silhouettes stay
+  // legible after the 5px dither sample.
+  ctx.save();
+  ctx.globalCompositeOperation = "destination-out";
+  ctx.fillStyle = "rgba(0,0,0,1)";
+  ctx.fillRect(w * 0.25, h * 0.39, w * 0.5, h * 0.055);
+  ctx.restore();
 
-  // Ubik's mark sitting at the base — the operator on duty.
-  ink(ctx, 1);
-  ctx.fillRect(w * 0.44, h * 0.72, w * 0.12, h * 0.13);
+  // Private instances visible inside the cloud.
+  ctx.save();
+  ctx.globalCompositeOperation = "destination-out";
+  ctx.fillStyle = "rgba(0,0,0,0.82)";
+  for (let i = 0; i < 3; i += 1) {
+    ctx.fillRect(w * (0.38 + i * 0.09), h * 0.53, w * 0.055, h * 0.09);
+  }
+  ctx.restore();
 };
 
-/** Organisational memory — stacked, inset ledger bars with punched-out rows. */
-const drawMemory: DeploySceneDraw = (ctx, w, h) => {
-  const bars = 3;
-  const barH = h * 0.16;
-  const gap = h * 0.09;
-  let y = (h - (bars * barH + (bars - 1) * gap)) / 2;
-  for (let i = 0; i < bars; i += 1) {
-    const inset = i * w * 0.05;
-    ink(ctx, i === 1 ? 0.95 : 0.6);
-    ctx.fillRect(w * 0.1 + inset, y, w * 0.8 - inset * 2, barH);
-    ctx.save();
-    ctx.globalCompositeOperation = "destination-out";
-    ctx.fillStyle = "rgba(0,0,0,0.85)";
-    for (let l = 0; l < 3; l += 1) {
-      ctx.fillRect(w * 0.17 + inset, y + barH * (0.2 + l * 0.27), w * 0.46 - inset * 2, barH * 0.09);
-    }
-    ctx.restore();
-    y += barH + gap;
+/** Managed — an athletic android sprinting the workload forward. */
+const drawManaged: DeploySceneDraw = (ctx, w, h, phase = 0) => {
+  const stride = Math.sin(phase * 2.2);
+  const lift = Math.cos(phase * 4.4) * h * 0.012;
+  const cx = w * (0.56 + Math.sin(phase * 0.7) * 0.014);
+  const shoulderY = h * 0.36 + lift;
+  const hipY = h * 0.61 + lift;
+
+  // Speed trails.
+  ink(ctx, 0.42);
+  ctx.lineWidth = Math.max(1.5, w * 0.012);
+  for (let i = 0; i < 4; i += 1) {
+    ctx.beginPath();
+    ctx.moveTo(w * (0.08 + i * 0.035), h * (0.34 + i * 0.13));
+    ctx.lineTo(w * (0.32 + i * 0.025), h * (0.34 + i * 0.13));
+    ctx.stroke();
   }
+
+  // Stable head and torso keep most of the silhouette unchanged.
+  ink(ctx, 1);
+  ctx.fillRect(cx - w * 0.06, h * 0.12 + lift, w * 0.12, h * 0.17);
+  ctx.beginPath();
+  ctx.moveTo(cx - w * 0.105, shoulderY);
+  ctx.lineTo(cx + w * 0.095, shoulderY - h * 0.035);
+  ctx.lineTo(cx + w * 0.065, hipY);
+  ctx.lineTo(cx - w * 0.075, hipY);
+  ctx.closePath();
+  ctx.fill();
+
+  // Face slit and chest core.
+  ctx.save();
+  ctx.globalCompositeOperation = "destination-out";
+  ctx.fillStyle = "rgba(0,0,0,0.9)";
+  ctx.fillRect(cx - w * 0.037, h * 0.18 + lift, w * 0.075, h * 0.035);
+  ctx.fillRect(cx - w * 0.03, h * 0.44 + lift, w * 0.06, h * 0.075);
+  ctx.restore();
+
+  // Limbs shift through a running loop while torso/head remain anchored.
+  ink(ctx, 0.88);
+  ctx.lineCap = "square";
+  ctx.lineWidth = Math.max(6, w * 0.052);
+  const armSwing = stride * w * 0.075;
+  ctx.beginPath();
+  ctx.moveTo(cx - w * 0.085, shoulderY + h * 0.02);
+  ctx.lineTo(cx - w * 0.17 - armSwing * 0.35, h * 0.48);
+  ctx.lineTo(cx - w * 0.11 - armSwing, h * 0.6);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(cx + w * 0.075, shoulderY);
+  ctx.lineTo(cx + w * 0.17 + armSwing * 0.35, h * 0.43);
+  ctx.lineTo(cx + w * 0.28 + armSwing, h * 0.36);
+  ctx.stroke();
+
+  const legSwing = stride * w * 0.08;
+  ctx.lineWidth = Math.max(7, w * 0.06);
+  ctx.beginPath();
+  ctx.moveTo(cx - w * 0.035, hipY);
+  ctx.lineTo(cx - w * 0.1 - legSwing, h * 0.75);
+  ctx.lineTo(cx - w * 0.3 - legSwing * 0.6, h * 0.84);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(cx + w * 0.035, hipY);
+  ctx.lineTo(cx + w * 0.12 + legSwing, h * 0.72);
+  ctx.lineTo(cx + w * 0.27 + legSwing * 0.55, h * 0.88);
+  ctx.stroke();
+
+  // Ground dash.
+  ink(ctx, 0.55);
+  ctx.fillRect(w * 0.18, h * 0.91, w * 0.68, h * 0.018);
+};
+
+/** Organisational memory — a time-indexed record vault. */
+const drawMemory: DeploySceneDraw = (ctx, w, h) => {
+  // Offset history layers behind the current record.
+  ink(ctx, 0.48);
+  ctx.fillRect(w * 0.13, h * 0.13, w * 0.58, h * 0.64);
+  ink(ctx, 0.68);
+  ctx.fillRect(w * 0.2, h * 0.2, w * 0.58, h * 0.64);
+  ink(ctx, 1);
+  ctx.fillRect(w * 0.27, h * 0.27, w * 0.58, h * 0.64);
+
+  // Punch a paper window into the front record.
+  ctx.save();
+  ctx.globalCompositeOperation = "destination-out";
+  ctx.fillStyle = "rgba(0,0,0,0.9)";
+  ctx.fillRect(w * 0.36, h * 0.34, w * 0.4, h * 0.48);
+  ctx.restore();
+
+  // Visible record rows and valid-time / known-time markers.
+  ink(ctx, 0.62);
+  [0.4, 0.52, 0.64, 0.76].forEach((y, index) => {
+    ctx.fillRect(w * 0.43, h * y, w * (index === 1 ? 0.25 : 0.29), h * 0.045);
+  });
+  ink(ctx, 0.78);
+  [0.4, 0.52, 0.64, 0.76].forEach((y, index) => {
+    ctx.fillRect(w * 0.38, h * y, w * (index === 2 ? 0.045 : 0.032), h * 0.05);
+  });
 };
 
 /** Operating intelligence — a node graph, patterns learned from the record. */
@@ -176,32 +235,45 @@ const drawIntelligence: DeploySceneDraw = (ctx, w, h) => {
   });
 };
 
-/** Agentic workflows — a swarm converging on one action, not a lone actor. */
+/** Agentic workflows — signal lanes converging into reviewed action. */
 const drawAgents: DeploySceneDraw = (ctx, w, h) => {
-  ink(ctx, 1);
-  ctx.fillRect(w * 0.42, h * 0.42, w * 0.16, h * 0.16);
-
-  const angles = [200, 260, 320, 20, 80, 140];
-  angles.forEach((deg, i) => {
-    const rad = (deg * Math.PI) / 180;
-    const dist = w * 0.32;
-    const x = w * 0.5 + Math.cos(rad) * dist;
-    const y = h * 0.5 + Math.sin(rad) * dist;
-
-    ctx.save();
-    ink(ctx, 0.4);
-    ctx.globalAlpha = 0.5;
-    ctx.lineWidth = Math.max(1, w * 0.008);
+  // Three source lanes enter from existing systems.
+  ink(ctx, 0.58);
+  ctx.lineWidth = Math.max(1.5, w * 0.012);
+  [0.25, 0.5, 0.75].forEach((y, index) => {
+    const endY = h * (0.43 + index * 0.07);
     ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(w * 0.5, h * 0.5);
+    ctx.moveTo(w * 0.06, h * y);
+    ctx.bezierCurveTo(w * 0.22, h * y, w * 0.28, endY, w * 0.42, endY);
     ctx.stroke();
-    ctx.restore();
-
-    ink(ctx, 0.55 + (i % 3) * 0.12);
-    const s = w * 0.09;
-    ctx.fillRect(x - s / 2, y - s / 2, s, s);
+    ink(ctx, 0.72 + index * 0.1);
+    ctx.fillRect(w * 0.07, h * y - w * 0.035, w * 0.07, w * 0.07);
   });
+
+  // Ubik reasoning core.
+  ink(ctx, 1);
+  ctx.fillRect(w * 0.4, h * 0.34, w * 0.2, h * 0.32);
+  ctx.save();
+  ctx.globalCompositeOperation = "destination-out";
+  ctx.fillStyle = "rgba(0,0,0,0.88)";
+  ctx.fillRect(w * 0.46, h * 0.43, w * 0.08, h * 0.14);
+  ctx.restore();
+
+  // Reviewed action leaves the core and resolves into two committed outputs.
+  ink(ctx, 0.68);
+  ctx.lineWidth = Math.max(2, w * 0.016);
+  ctx.beginPath();
+  ctx.moveTo(w * 0.6, h * 0.5);
+  ctx.lineTo(w * 0.75, h * 0.5);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(w * 0.7, h * 0.44);
+  ctx.lineTo(w * 0.76, h * 0.5);
+  ctx.lineTo(w * 0.7, h * 0.56);
+  ctx.stroke();
+  ink(ctx, 0.9);
+  ctx.fillRect(w * 0.78, h * 0.31, w * 0.14, h * 0.14);
+  ctx.fillRect(w * 0.78, h * 0.57, w * 0.14, h * 0.14);
 };
 
 export const deployScenes: Record<string, DeploySceneDraw> = {

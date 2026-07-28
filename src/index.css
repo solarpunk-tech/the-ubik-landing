@@ -3379,7 +3379,7 @@
 .workflow-memory-view.is-project > div:not(.memory-project-progress) { grid-template-columns: 0.55rem minmax(0, 1fr) auto; }
 .workflow-memory-view.is-project i { width: 0.45rem; height: 0.45rem; background: hsl(var(--primary)); }
 
-.workflow-result-widget { display: grid; align-content: start; margin-top: 1rem; min-height: 18.4rem; padding: 1rem; border: 1px solid hsl(var(--foreground)); background: hsl(var(--secondary)); }
+.workflow-result-widget { display: grid; align-content: start; margin-top: 1rem; min-height: 18.4rem; padding: 1rem; border: 1px solid hsl(var(--foreground)); background: hsl(var(--background)); }
 .workflow-result-head { display: flex; justify-content: space-between; color: hsl(var(--primary-text)); }
 .workflow-result-head em { font-style: normal; color: hsl(var(--foreground)); }
 .workflow-result-title {
@@ -3664,6 +3664,10 @@
 .particle-field.is-ready { opacity: 1; }
 .particle-field canvas { display: block; }
 
+/* The moving field stays visible across the hero, but copy and controls must
+   remain the foreground layer as the finer particles flow beneath them. */
+.home-hero > .container-page { z-index: 30; }
+
 @media (max-width: 1023px) {
   .particle-field.is-ready { opacity: 0.6; }
 }
@@ -3693,21 +3697,36 @@
 }
 
 .closing-cta {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
   gap: 1.5rem 2.5rem;
   padding-top: 2.25rem;
   border-top: 1px solid hsl(var(--foreground) / 0.22);
 }
 
+.closing-cta-title {
+  max-width: none;
+}
+
+.closing-cta-title em {
+  color: hsl(var(--primary));
+  font-style: normal;
+}
+
 .closing-cta-copy {
-  max-width: 46ch;
+  max-width: none;
   margin-top: 0.9rem;
   font-size: 1rem;
   line-height: 1.6;
   color: hsl(var(--foreground) / 0.78);
+}
+
+@media (min-width: 1280px) {
+  .closing-cta-title,
+  .closing-cta-copy {
+    white-space: nowrap;
+  }
 }
 
 @media (max-width: 640px) {
@@ -3787,8 +3806,6 @@
   margin: 0.9rem 0 0.4rem;
 }
 
-/* Compliance posture. Typographic marks rather than the certification bodies'
-   logos — held at low contrast on purpose, because these are in progress. */
 .compliance-strip {
   display: flex;
   flex-wrap: wrap;
@@ -3800,7 +3817,6 @@
   border: 1px dashed hsl(var(--foreground) / 0.28);
 }
 
-.compliance-strip-label,
 .compliance-strip-note {
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.6875rem;
@@ -3821,6 +3837,9 @@
 }
 
 .compliance-strip li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   padding: 0.35rem 0.65rem;
   border: 1px solid hsl(var(--foreground) / 0.3);
   font-family: "IBM Plex Mono", monospace;
@@ -3832,6 +3851,19 @@
      note already carry that, so the text itself stays legible (0.55 measured
      3.5:1, below AA). */
   color: hsl(var(--foreground) / 0.72);
+}
+
+.compliance-strip-mark {
+  display: inline-grid;
+  width: 1.35rem;
+  height: 1.35rem;
+  place-items: center;
+  border: 1px solid hsl(var(--primary) / 0.5);
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+  color: hsl(var(--primary));
 }
 
 .home-deploy-card::before {
@@ -3885,6 +3917,14 @@
   color: hsl(var(--foreground) / 0.7);
 }
 
+.home-deploy-card.is-managed > span {
+  max-width: none;
+  font-size: 0.72rem;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
 @media (min-width: 1024px) {
   .home-deploy-proof {
     grid-template-columns: minmax(12rem, 0.34fr) minmax(0, 1fr);
@@ -3910,6 +3950,9 @@
 .meet-team-grid article a svg { width: 0.95rem; height: 0.95rem; }
 .meet-team-grid article a:hover { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
 .meet-team-grid article h3 { margin-top: 0.55rem; font-size: 1.1rem; font-weight: 750; }
+.meet-team-grid .team-stealth-label {
+  color: hsl(var(--primary));
+}
 /* No ch cap — at 0.76rem the 45ch limit stopped the bio well short of the card
    edge and left a ragged column of whitespace on the right. */
 .meet-team-grid article p { margin-top: 0.4rem; font-size: 0.85rem; font-weight: 500; line-height: 1.6; color: hsl(var(--foreground) / 0.78); }
@@ -3923,6 +3966,7 @@
   .founder-company-label { max-width: 24rem; }
   .meet-team-grid { grid-template-columns: 1fr; }
   .meet-team-grid article + article { border-top: 1px solid hsl(var(--foreground) / 0.22); border-left: 0; }
+  .closing-cta { grid-template-columns: 1fr; }
   .hero-integration-visual { min-height: 27rem; }
   .hero-app-field { min-height: 27rem; }
   .hero-app-field > span { min-width: 5rem; grid-template-columns: 1.25rem auto; padding: 0.45rem; }
@@ -4684,6 +4728,17 @@
   font-weight: 520;
   line-height: 1.6;
   color: hsl(var(--foreground) / 0.74);
+}
+
+@media (min-width: 1024px) {
+  .layer-head {
+    max-width: none;
+  }
+
+  .layer-head .home-section-title,
+  .layer-caption {
+    max-width: none;
+  }
 }
 
 .loop-grid {

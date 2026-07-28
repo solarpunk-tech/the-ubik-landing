@@ -119,8 +119,6 @@ const teamCompanies: readonly TeamCompany[] = [
   { label: "Costco", domain: "costco.com" },
   { label: "AquaExchange", domain: "aquaexchange.com" },
   { label: "ClearTax", domain: "cleartax.in" },
-  { label: "Arintra", domain: "arintra.com" },
-  { label: "Lumian", domain: "lumian.ai" },
   { label: "Housing", domain: "housing.com" }
 ] as const;
 
@@ -279,10 +277,9 @@ const teamProfiles = [
     linkedin: "https://www.linkedin.com/in/11shubhranshu"
   },
   {
-    name: "Sai Kiran",
+    name: "Leadership announcement coming soon",
     role: "AI/ML & Product Engineering",
-    bio: "Scaled engineering across mobility, commerce and finance unicorns. Then explored AI-native orgs and built foundation models for healthcare.",
-    linkedin: "https://www.linkedin.com/in/saikiraniitb/"
+    bio: "Our AI/ML and product engineering leader is working with Ubik in stealth. We’ll introduce them when the time is right."
   }
 ] as const;
 
@@ -832,14 +829,22 @@ const deployOptions = [
   {
     label: "03 / Managed",
     title: "We run it.",
-    copy: "Ubik hosts and operates the stack, you keep the decision trail.",
+    copy: (
+      <>
+        Frontier speed. No data collection or sharing;
+        <br />
+        never used for training, analytics, or ads.
+      </>
+    ),
     scene: "managed" as const
   }
 ];
 
-// Typographic marks, not the certification bodies' logos — we are not certified
-// yet and reproducing their marks would imply that we are.
-const compliancePosture = ["GDPR", "DPDP", "SOC 2 Type II"];
+const compliancePosture = [
+  { label: "GDPR", mark: "EU" },
+  { label: "DPDP", mark: "IN" },
+  { label: "SOC 2 Type II", mark: "SOC" }
+] as const;
 
 /**
  * The operating loop + the three layers.
@@ -888,7 +893,7 @@ function DeployProof() {
           <div>
             <div className="home-deploy-grid" aria-label="Ubik deployment options">
               {deployOptions.map((option) => (
-                <article key={option.label} className="home-deploy-card">
+                <article key={option.label} className={`home-deploy-card is-${option.scene}`}>
                   <p>{option.label}</p>
                   <DitherTile scene={option.scene} className="home-deploy-tile" />
                   <h3>{option.title}</h3>
@@ -896,11 +901,15 @@ function DeployProof() {
                 </article>
               ))}
             </div>
-            <div className="compliance-strip">
-              <span className="compliance-strip-label">Compliance posture</span>
+            <div className="compliance-strip" aria-label="Compliance work in progress">
               <ul>
                 {compliancePosture.map((mark) => (
-                  <li key={mark}>{mark}</li>
+                  <li key={mark.label}>
+                    <span className="compliance-strip-mark" aria-hidden="true">
+                      {mark.mark}
+                    </span>
+                    {mark.label}
+                  </li>
                 ))}
               </ul>
               <span className="compliance-strip-note">In progress</span>
@@ -1033,9 +1042,13 @@ export default function Index() {
                   <article key={profile.name}>
                     <div>
                       <span>{profile.role}</span>
-                      <a href={profile.linkedin} target="_blank" rel="noreferrer" aria-label={`${profile.name} on LinkedIn`}>
-                        <LinkedInMark />
-                      </a>
+                      {"linkedin" in profile ? (
+                        <a href={profile.linkedin} target="_blank" rel="noreferrer" aria-label={`${profile.name} on LinkedIn`}>
+                          <LinkedInMark />
+                        </a>
+                      ) : (
+                        <span className="team-stealth-label">Stealth</span>
+                      )}
                     </div>
                     <h3>{profile.name}</h3>
                     <p>{profile.bio}</p>
@@ -1046,9 +1059,11 @@ export default function Index() {
 
             <div className="closing-cta mt-14">
               <div>
-                <h2 className="home-section-title">Priced on outcome, not seats</h2>
+                <h2 className="home-section-title closing-cta-title">
+                  Priced on <em>outcome</em>, not seats
+                </h2>
                 <p className="closing-cta-copy">
-                  Base ships 2-3 new workflows a month. Enterprise ships 2-3 a week, plus WhatsApp, ERP and CRM automation.
+                  Base plan ships 2-3 new workflows every month. Enterprise ships 2-3 a week along with SSO, local first, mobile integrations.
                 </p>
               </div>
               <Button asChild size="lg" className="home-primary-action">

@@ -1,5 +1,52 @@
 # Handoff — the-ubik-landing
 
+## 2026-07-28 homepage closing and workflow browser annotations
+
+- Status: complete locally and visually verified. No commit, push, PR, or
+  deployment performed.
+- Follow-up correction: at desktop widths of 1280px and above, the closing
+  headline and its Base/Enterprise caption now each stay on one line. The
+  explicit headline line break and the caption's `76ch` cap were removed;
+  smaller viewports retain natural wrapping.
+- Normalized all `.workflow-result-widget` backgrounds from the secondary
+  surface to the same warm-paper background used by the surrounding workflow
+  panels. Compliance / `12 lots cleared` was verified directly.
+- Removed Arintra and Lumian from the repeated company experience rail.
+- Replaced Sai Kiran's named profile and LinkedIn link with an anonymous stealth
+  card:
+  - `AI/ML & Product Engineering`,
+  - `Leadership announcement coming soon`,
+  - a short explanation that the leader is working with Ubik in stealth.
+- Reworked the closing pricing statement:
+  - desktop headline is explicitly two lines,
+  - `outcome` is highlighted in Ubik blue,
+  - the content area is wider,
+  - caption now reads: `Base plan ships 2-3 new workflows every month.
+    Enterprise ships 2-3 a week along with SSO, local first, mobile
+    integrations.`
+- Responsive behavior:
+  - closing CTA becomes one column on mobile,
+  - the forced desktop line break is released on mobile,
+  - 390px viewport has zero horizontal overflow.
+- Validation:
+  - `pnpm build` passes with existing Vite chunk warnings,
+  - `pnpm lint` passes with eight existing Fast Refresh warnings,
+  - `git diff --check` passes,
+  - browser text confirms Arintra, Lumian, and Sai Kiran are absent.
+- Before evidence: four user browser-comment screenshots in the current task.
+- After evidence:
+  - workflow background:
+    `output/playwright/home-annotations-workflow-background-after.png`,
+  - closing/team/company desktop:
+    `output/playwright/home-annotations-closing-after-desktop.png`,
+  - closing/team/company mobile:
+    `output/playwright/home-annotations-closing-after-mobile.png`,
+  - single-line closing desktop:
+    `output/playwright/home-closing-single-line-after-desktop.png`.
+- Browser console has no implementation errors. The existing external
+  Hapag-Lloyd Google favicon request still returns 404.
+- Local review URL: `http://127.0.0.1:5174/`.
+
 ## 2026-07-25 homepage annotations, docs deployment section, and pricing simplification
 
 - Local dev server remains running at `http://127.0.0.1:5173/`.
@@ -2028,3 +2075,124 @@
 - Final visual evidence:
   - `output/playwright/home-annotations-final-desktop.png`
   - `output/playwright/home-annotations-final-founder.png`
+# 2026-07-28 local hero motion planning
+
+- Status: first local implementation complete and visually verified.
+- Scope is explicitly local only across multiple sessions. Do not commit, push,
+  open a PR, or deploy without explicit user approval.
+- User correction: retain the existing fisherman, ship, wave, harvest, and
+  related hero graphics. The references affect motion and rendering quality
+  only; they do not replace the artwork.
+- All prototypes begin in Ubik blue. Do not start with a monochrome version.
+  The gradient-flow reference should become a restrained multi-tone blue ramp,
+  not a rainbow palette.
+- Added `PLAN.md` with two separate workstreams:
+  - an isolated Canvas 2D sandbox that applies `@yuruyurau`-inspired phase
+    continuity to the existing hero scenes,
+  - a refinement of the existing `ParticleField` renderer using delta-time
+    motion, subpixel coordinates, adaptive smaller cells, tonal Ubik-blue
+    bands, coherent flow, and density crossfades.
+- The current implementation is Canvas 2D, not Three.js. It rasterizes
+  grayscale vector scenes through an 8x8 Bayer matrix at 9/10/13px cells and
+  draws pixel-rounded squares in two opacity buckets.
+- Current baseline:
+  `output/playwright/hero-dither-plan-baseline-desktop.png`.
+- Implemented in `src/components/landing/ParticleField.tsx`:
+  - retained the existing wave, ship, and fisherman/harvest vector scenes,
+  - changed adaptive cell sizes from 9/10/13px to 7/8/10px,
+  - removed moving-particle integer pixel snapping,
+  - added deterministic coherent phase flow and subtle size breathing,
+  - added a four-step tonal ramp derived from the existing `--primary` blue,
+  - made pointer spring and heat decay delta-time based,
+  - kept ambient flow anchored to home positions and faded it out during the
+    scroll-to-footer journey.
+- Added a hero stacking guard in `src/index.css` so text and controls remain
+  above the denser moving canvas.
+- Validation:
+  - `pnpm build` passes with the existing Vite chunk warnings,
+  - `pnpm lint` passes with eight existing Fast Refresh warnings,
+  - `git diff --check` passes,
+  - 120-frame desktop sample averaged 9.93ms with 0 frames over 20ms,
+  - normal mode changes canvas frames; reduced-motion mode stays static,
+  - 390px viewport has zero horizontal overflow and a 390px canvas,
+  - all three pinned scenes remain recognizable.
+- Visual evidence:
+  - before desktop:
+    `output/playwright/hero-dither-plan-baseline-desktop.png`,
+  - after wave desktop:
+    `output/playwright/hero-flow-after-wave-desktop.png`,
+  - after ship desktop:
+    `output/playwright/hero-flow-after-ship-desktop.png`,
+  - after harvest mobile:
+    `output/playwright/hero-flow-final-harvest-mobile-390.png`.
+- Browser console has no implementation errors. The existing external
+  Hapag-Lloyd Google favicon request still returns 404 after several seconds.
+- Exact tweet URLs or recordings remain needed before claiming visual parity
+  with the `@yuruyurau` and `@its_sslvr` references.
+- Local review URL is `http://127.0.0.1:5174/`.
+
+## 2026-07-28 operating-loop and deploy illustration pass
+
+- Status: implemented and visually verified locally. Do not commit, push, open
+  a PR, or deploy without explicit user approval.
+- Reworked the dither scenes in `src/lib/deploy-scenes.ts`:
+  - Organisational Memory is now a layered, time-indexed record vault.
+  - Agentic Workflows now shows three input lanes converging on the Ubik core
+    and resolving into committed outputs.
+  - VPC is a private cloud silhouette wearing a separated spy-style hat.
+  - Managed is an athletic android runner with a stable torso and animated
+    limbs/speed trails.
+- Updated `DitherTile` with viewport-gated, approximately 30fps animation,
+  coherent subpixel drift, restrained blue glints, and a static reduced-motion
+  state. The same behavior applies on desktop and mobile.
+- Managed copy is intentionally fixed to two lines:
+  `Frontier speed. No data collection or sharing;` and
+  `never used for training, analytics, or ads.`
+- Removed the `COMPLIANCE POSTURE` label. GDPR, DPDP, and SOC 2 Type II now
+  include compact certificate/issuer favicons and retain `IN PROGRESS`.
+- Validation:
+  - `pnpm build` passes with the existing Vite chunk warnings.
+  - `pnpm lint` passes with eight existing Fast Refresh warnings.
+  - `git diff --check` passes.
+  - all three deploy canvases change in normal motion mode and remain static
+    under reduced motion.
+  - the three compliance images load successfully.
+  - desktop and 390px mobile checks report zero horizontal overflow.
+- Visual evidence:
+  - final operating-loop desktop:
+    `output/playwright/dither-illustrations-operating-loop-final2-desktop.png`
+  - final deploy desktop:
+    `output/playwright/dither-illustrations-deploy-final-desktop.png`
+  - final operating-loop mobile:
+    `output/playwright/dither-illustrations-operating-loop-after-mobile.png`
+  - final deploy mobile:
+    `output/playwright/dither-illustrations-deploy-final-mobile.png`
+- Local review URL remains `http://127.0.0.1:5174/`.
+
+### Compliance-mark correction
+
+- The initial favicon treatment was rejected as inaccurate. `gdpr.eu` is a
+  private reference site, MeitY's favicon is not a DPDP certification badge,
+  and AICPA's corporate favicon is not a SOC 2 Type II certification mark.
+- Replaced all three external favicons with neutral `EU`, `IN`, and `SOC`
+  identifiers. These distinguish jurisdiction/report family without implying
+  that Ubik holds a certification or has permission to use an issuer mark.
+- Verified the corrected strip contains no images, has zero horizontal
+  overflow, and builds successfully.
+- Corrected visual evidence:
+  `output/playwright/compliance-neutral-marks-after.png`.
+
+### Final Decision Intelligence width annotation
+
+- Removed the desktop-only width caps from the Decision Intelligence heading
+  wrapper, title, and caption. At wide desktop the title and unchanged caption
+  now each fit on one line; the existing mobile wrapping is unchanged.
+- Desktop and 390px mobile checks report zero horizontal overflow.
+- Visual evidence:
+  - before: user browser annotation supplied on 2026-07-28,
+  - after desktop:
+    `output/playwright/decision-intelligence-width-after-desktop.png`,
+  - after mobile:
+    `output/playwright/decision-intelligence-width-after-mobile.png`.
+- User approved this accumulated local direction for a push to `main` and a
+  production Netlify deployment after this annotation fix.

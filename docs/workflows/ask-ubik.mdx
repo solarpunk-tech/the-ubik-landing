@@ -1,10 +1,10 @@
 ---
-title: "Ask Ubik"
-description: "Use Ubik to search across meetings, chats, documents, and linked work in plain language."
+title: "Ask ubik"
+description: "Use ubik to search across meetings, chats, documents, and linked work in plain language."
 icon: "square-dot"
 ---
 
-Ask Ubik when the operating question is bigger than a keyword search: why a shipment is slipping, where margin changed, which promise was made, or what context a leader needs before approving the next move.
+Ask ubik when the operating question is bigger than a keyword search: why a shipment is slipping, where margin changed, which promise was made, or what context a leader needs before approving the next move.
 
 ## Best uses
 
@@ -16,110 +16,126 @@ Ask Ubik when the operating question is bigger than a keyword search: why a ship
 
 ## Executive prompt patterns
 
-Use Ask Ubik like an operating analyst, not a chatbot. Give it the business object, the decision you are trying to make, and the evidence standard you expect.
+Use Ask ubik like an operating analyst, not a chatbot. Give it the business object, the decision you are trying to make, and the evidence standard you expect.
 
 <Tabs>
   <Tab title="Operator Tasks">
     <div className="ubik-prompt-table">
-      <div className="ubik-prompt-row ubik-prompt-head">
-        <span>Situation</span>
-        <span>Ask Ubik</span>
-      </div>
-      <div className="ubik-prompt-row">
-        <span>Daily exception review</span>
-        <span>"Show the 10 operating exceptions most likely to affect customer promises this week. Group by revenue risk, owner, source system, and next decision needed."</span>
-      </div>
-      <div className="ubik-prompt-row">
-        <span>Blocked work</span>
-        <span>"Which queues have been blocked for more than 48 hours, what evidence is missing, and which manager can unblock each one?"</span>
-      </div>
-      <div className="ubik-prompt-row">
-        <span>Leadership briefing</span>
-        <span>"Prepare a COO brief for today's standup: late shipments, margin exceptions, supplier misses, buyer escalations, and actions that need executive approval."</span>
-      </div>
-      <div className="ubik-prompt-row">
-        <span>Follow-through audit</span>
-        <span>"Compare last week's meeting commitments with completed tasks. Call out missed handoffs, stale owners, and promises that changed without a note."</span>
-      </div>
-    </div>
+  <div className="ubik-prompt-row ubik-prompt-head">
+    <span>Situation</span>
+    <span>Ask ubik</span>
+  </div>
+
+  <div className="ubik-prompt-row">
+    <span>Daily exception review</span>
+    <span>"Show the 10 operating exceptions most likely to affect customer promises this week. Group by revenue risk, owner, source system, and next decision needed."</span>
+  </div>
+
+  <div className="ubik-prompt-row">
+    <span>Blocked work</span>
+    <span>"Which queues have been blocked for more than 48 hours, what evidence is missing, and which manager can unblock each one?"</span>
+  </div>
+
+  <div className="ubik-prompt-row">
+    <span>Leadership briefing</span>
+    <span>"Prepare a COO brief for today's standup: late shipments, margin exceptions, supplier misses, buyer escalations, and actions that need executive approval."</span>
+  </div>
+
+  <div className="ubik-prompt-row">
+    <span>Follow-through audit</span>
+    <span>"Compare last week's meeting commitments with completed tasks. Call out missed handoffs, stale owners, and promises that changed without a note."</span>
+  </div>
+</div>
   </Tab>
   <Tab title="Margin and price">
     <div className="ubik-prompt-table">
-      <div className="ubik-prompt-row ubik-prompt-head">
-        <span>Situation</span>
-        <span>Ask Ubik</span>
-      </div>
-      <div className="ubik-prompt-row">
-        <span>Quote review</span>
-        <span>"Before we approve this quote, compare current COGS, freight, duty reserve, free-time exposure, and last buyer price. Where is margin most exposed?"</span>
-      </div>
-      <div className="ubik-prompt-row">
-        <span>Price drift</span>
-        <span>"Find orders where quoted margin and expected landed margin now differ by more than 60 bps. Show the driver and recommended recovery action."</span>
-      </div>
-      <div className="ubik-prompt-row">
-        <span>Contract discipline</span>
-        <span>"Which open buyer commitments rely on stale freight, FX, tariff, or supplier-cost assumptions? Prioritize by revenue and customer sensitivity."</span>
-      </div>
-      <div className="ubik-prompt-row">
-        <span>Supplier negotiation</span>
-        <span>"Build a negotiation memo for this supplier: late shipments, quality claims, price moves, recovery credits, and terms we should ask for next."</span>
-      </div>
-    </div>
+  <div className="ubik-prompt-row ubik-prompt-head">
+    <span>Situation</span>
+    <span>Ask ubik</span>
+  </div>
+
+  <div className="ubik-prompt-row">
+    <span>Quote review</span>
+    <span>"Before we approve this quote, compare current COGS, freight, duty reserve, free-time exposure, and last buyer price. Where is margin most exposed?"</span>
+  </div>
+
+  <div className="ubik-prompt-row">
+    <span>Price drift</span>
+    <span>"Find orders where quoted margin and expected landed margin now differ by more than 60 bps. Show the driver and recommended recovery action."</span>
+  </div>
+
+  <div className="ubik-prompt-row">
+    <span>Contract discipline</span>
+    <span>"Which open buyer commitments rely on stale freight, FX, tariff, or supplier-cost assumptions? Prioritize by revenue and customer sensitivity."</span>
+  </div>
+
+  <div className="ubik-prompt-row">
+    <span>Supplier negotiation</span>
+    <span>"Build a negotiation memo for this supplier: late shipments, quality claims, price moves, recovery credits, and terms we should ask for next."</span>
+  </div>
+</div>
   </Tab>
   <Tab title="Customer risk">
     <div className="ubik-prompt-table">
-      <div className="ubik-prompt-row ubik-prompt-head">
-        <span>Situation</span>
-        <span>Ask Ubik</span>
-      </div>
-      <div className="ubik-prompt-row">
-        <span>Escalation prep</span>
-        <span>"Summarize the full history of this buyer escalation: original promise, changes, internal owner, supplier dependency, and safest customer update."</span>
-      </div>
-      <div className="ubik-prompt-row">
-        <span>Account health</span>
-        <span>"Which strategic accounts have unresolved service, quality, or pricing issues that have appeared in more than one channel this month?"</span>
-      </div>
-      <div className="ubik-prompt-row">
-        <span>Reply approval</span>
-        <span>"Check this draft reply against the source context. What claims are unsupported, what needs a caveat, and what should be escalated before sending?"</span>
-      </div>
-      <div className="ubik-prompt-row">
-        <span>Promise control</span>
-        <span>"List customer promises made in email or meetings that are not reflected in tasks, shipment notes, or the operating queue."</span>
-      </div>
-    </div>
+  <div className="ubik-prompt-row ubik-prompt-head">
+    <span>Situation</span>
+    <span>Ask ubik</span>
+  </div>
+
+  <div className="ubik-prompt-row">
+    <span>Escalation prep</span>
+    <span>"Summarize the full history of this buyer escalation: original promise, changes, internal owner, supplier dependency, and safest customer update."</span>
+  </div>
+
+  <div className="ubik-prompt-row">
+    <span>Account health</span>
+    <span>"Which strategic accounts have unresolved service, quality, or pricing issues that have appeared in more than one channel this month?"</span>
+  </div>
+
+  <div className="ubik-prompt-row">
+    <span>Reply approval</span>
+    <span>"Check this draft reply against the source context. What claims are unsupported, what needs a caveat, and what should be escalated before sending?"</span>
+  </div>
+
+  <div className="ubik-prompt-row">
+    <span>Promise control</span>
+    <span>"List customer promises made in email or meetings that are not reflected in tasks, shipment notes, or the operating queue."</span>
+  </div>
+</div>
   </Tab>
   <Tab title="Supply execution">
     <div className="ubik-prompt-table">
-      <div className="ubik-prompt-row ubik-prompt-head">
-        <span>Situation</span>
-        <span>Ask Ubik</span>
-      </div>
-      <div className="ubik-prompt-row">
-        <span>Shipment slippage</span>
-        <span>"For this delayed shipment, show affected buyers, revised promise dates, inventory substitutes, customer-risk tier, and the recommended escalation path."</span>
-      </div>
-      <div className="ubik-prompt-row">
-        <span>Document readiness</span>
-        <span>"Which shipments are missing documents or approvals that could delay clearance, invoicing, or customer delivery in the next seven days?"</span>
-      </div>
-      <div className="ubik-prompt-row">
-        <span>Supplier reliability</span>
-        <span>"Compare this supplier's last 90 days against plan: late ETD, quality claims, document misses, price changes, and open recovery actions."</span>
-      </div>
-      <div className="ubik-prompt-row">
-        <span>Exception routing</span>
-        <span>"Separate these open supply issues into automate, assist, wait, and escalate. Explain the evidence threshold for each route."</span>
-      </div>
-    </div>
+  <div className="ubik-prompt-row ubik-prompt-head">
+    <span>Situation</span>
+    <span>Ask ubik</span>
+  </div>
+
+  <div className="ubik-prompt-row">
+    <span>Shipment slippage</span>
+    <span>"For this delayed shipment, show affected buyers, revised promise dates, inventory substitutes, customer-risk tier, and the recommended escalation path."</span>
+  </div>
+
+  <div className="ubik-prompt-row">
+    <span>Document readiness</span>
+    <span>"Which shipments are missing documents or approvals that could delay clearance, invoicing, or customer delivery in the next seven days?"</span>
+  </div>
+
+  <div className="ubik-prompt-row">
+    <span>Supplier reliability</span>
+    <span>"Compare this supplier's last 90 days against plan: late ETD, quality claims, document misses, price changes, and open recovery actions."</span>
+  </div>
+
+  <div className="ubik-prompt-row">
+    <span>Exception routing</span>
+    <span>"Separate these open supply issues into automate, assist, wait, and escalate. Explain the evidence threshold for each route."</span>
+  </div>
+</div>
   </Tab>
 </Tabs>
 
 ## What to require from the answer
 
-Ask Ubik to expose the operating basis of the recommendation, not just the recommendation itself.
+Ask ubik to expose the operating basis of the recommendation, not just the recommendation itself.
 
 <div className="ubik-steps">
   <div className="ubik-step"><span>01 · Decision</span> State the decision or risk the answer is helping with.</div>

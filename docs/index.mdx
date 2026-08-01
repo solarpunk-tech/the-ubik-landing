@@ -17,11 +17,13 @@ This guide is for operators, reviewers, admins, and leaders who need AI to carry
     <p className="ubik-label">Faster RFQ cycles</p>
     <p>Compress quote handling by bringing account history, margin guardrails, and review context into one path.</p>
   </div>
+
   <div className="ubik-proof">
     <div className="ubik-metric">30s</div>
     <p className="ubik-label">PO extraction</p>
     <p>Convert order packets into mapped work that an operator can check before ERP or accounting handoff.</p>
   </div>
+
   <div className="ubik-proof">
     <div className="ubik-metric">1</div>
     <p className="ubik-label">Daily queue</p>
@@ -30,8 +32,41 @@ This guide is for operators, reviewers, admins, and leaders who need AI to carry
 </div>
 
 <div className="ubik-panel">
-  <strong>Operating principle:</strong> Ubik does not replace ERP, CRM, inbox, or meetings. Those remain systems of record and context. Ubik is the reviewed system of action above them: it reads across, drafts, routes, asks for review, and writes back only through approved workflows.
+  <strong>Operating principle:</strong> ubik does not replace ERP, CRM, inbox, or meetings. Those remain systems of record and context. ubik is the reviewed system of action above them: it reads across, drafts, routes, asks for review, and writes back only through approved workflows.
 </div>
+
+## Choose how to learn
+
+Start with a short visual walkthrough, or read the operating pattern behind the interface. Both paths use the same Inbox and Tasks journeys so the guide stays close to the product you are reviewing.
+
+<Tabs>
+  <Tab title="Watch" icon="play">
+    <CardGroup cols={2}>
+      <Card title="Inbox → reviewed action" icon="inbox" href="/workflows/inbox">
+        Watch the thread move from signal to source context, owner, decision, and approved next move.
+      </Card>
+
+      <Card title="Tasks → owned follow-through" icon="list-checks" href="/workflows/tasks">
+        Watch a follow-up retain its source, deadline, owner, and decision trail until it is done.
+      </Card>
+    </CardGroup>
+
+    <Note>
+      Video clips are intentionally marked as placeholders until the final recordings are approved. The screenshot journeys and one-click prototypes are ready now.
+    </Note>
+  </Tab>
+  <Tab title="Read" icon="book-open">
+    <CardGroup cols={2}>
+      <Card title="Read the Inbox journey" icon="inbox" href="/workflows/inbox">
+        Understand how buyer, supplier, logistics, and finance threads become reviewable decisions.
+      </Card>
+
+      <Card title="Read the Tasks journey" icon="list-checks" href="/workflows/tasks">
+        Follow the source context and ownership trail from decision to completion.
+      </Card>
+    </CardGroup>
+  </Tab>
+</Tabs>
 
 ## Deployment options
 
@@ -48,11 +83,13 @@ This guide is for operators, reviewers, admins, and leaders who need AI to carry
       <strong>In your data center.</strong>
       <span>Self-host on bare metal or your own Kubernetes. Zero data leaves your perimeter.</span>
     </div>
+
     <div className="ubik-deploy-card">
       <p className="ubik-label">02 / Your cloud</p>
       <strong>In your VPC.</strong>
       <span>Deploy to AWS, GCP, or Azure inside your account. BYOC from day one.</span>
     </div>
+
     <div className="ubik-deploy-card">
       <p className="ubik-label">03 / Local</p>
       <strong>On your laptop.</strong>
@@ -76,12 +113,15 @@ This guide is for operators, reviewers, admins, and leaders who need AI to carry
   <Card title="Workspace basics" icon="layout-dashboard" href="/getting-started/workspace-basics">
     Learn the operating queue, source context, action panel, and activity trail.
   </Card>
+
   <Card title="Ask Ubik" icon="square-dot" href="/workflows/ask-ubik">
     Ask source-backed questions about accounts, shipments, margin, owners, and promises.
   </Card>
+
   <Card title="Daily operating queue" icon="list-checks" href="/workflows/daily-operating-queue">
     Run the day by risk and decision readiness instead of status chasing.
   </Card>
+
   <Card title="Security and data" icon="shield-check" href="/admin/security-and-data">
     Understand how sensitive trade context, AI use, and review controls fit together.
   </Card>

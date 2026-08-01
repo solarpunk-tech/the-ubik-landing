@@ -126,7 +126,14 @@
           "getting-started/sign-in",
           "getting-started/workspace-basics",
           "getting-started/how-ubik-ai-works",
-          "getting-started/vs-other-llms"
+          "getting-started/vs-other-llms",
+          {
+            "group": "Watch",
+            "pages": [
+              "getting-started/watch/inbox-journey"
+            ]
+          },
+          "getting-started/watch/tasks-journey"
         ]
       },
       {

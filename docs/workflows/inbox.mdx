@@ -4,9 +4,17 @@ description: "Turn buyer, supplier, logistics, and finance threads into reviewed
 icon: "inbox"
 ---
 
-Inbox is where most trade decisions still arrive: buyer RFQs, supplier replies, freight forwarder updates, FDA notices, margin escalations, and finance approvals. ubik ranks the threads that can change a promise, owner, margin, or system state, then attaches the context needed to review the next move.
+Inbox is where most trade decisions still arrive: buyer RFQs, supplier replies, freight forwarder updates, FDA notices, margin escalations, and finance approvals. Ubik ranks the threads that can change a promise, owner, margin, or system state, then attaches the context needed to review the next move.
 
-## What ubik does in your inbox
+<Frame>
+  ![ubik Inbox review journey showing a rate confirmation that needs approval](https://theubik.com/prototypes/posters/inbox-navigation.jpg)
+</Frame>
+
+<Card title="Open the Inbox prototype" icon="arrow-up-right" href="https://app.theubik.com/inbox">
+  Open the product surface in a new tab and follow the same journey: inspect the source, review the prepared context, then decide whether to reply, assign, or wait.
+</Card>
+
+## What Ubik does in your inbox
 
 | Signal | Operating use |
 | --- | --- |
@@ -18,19 +26,19 @@ Inbox is where most trade decisions still arrive: buyer RFQs, supplier replies, 
 ## A typical inbox loop
 
 <div className="ubik-steps">
-  <div className="ubik-step"><span>01 · Detect risk</span> ubik flags the threads where a customer promise, supplier dependency, or internal owner is waiting.</div>
+  <div className="ubik-step"><span>01 · Detect risk</span> Ubik flags the threads where a customer promise, supplier dependency, or internal owner is waiting.</div>
   <div className="ubik-step"><span>02 · Bring context</span> The review path includes account history, inventory, margin guardrails, lane history, and relevant prior decisions.</div>
   <div className="ubik-step"><span>03 · Decide route</span> Approve, edit, assign, wait, escalate, or reject based on authority and evidence quality.</div>
   <div className="ubik-step"><span>04 · Preserve trail</span> Every moved reply carries reviewer, timestamp, and source context for later review.</div>
 </div>
 
 <div className="ubik-panel">
-  <strong>Privacy posture.</strong> ubik reads only approved inboxes. Replies, approvals, and ERP handoffs stay human-reviewed. Customer, supplier, pricing, and margin data does not train any model.
+  <strong>Privacy posture.</strong> Ubik reads only approved inboxes. Replies, approvals, and ERP handoffs stay human-reviewed. Customer, supplier, pricing, and margin data does not train any model.
 </div>
 
 ## Useful prompts inside Inbox
 
-| Situation | Ask ubik |
+| Situation | Ask Ubik |
 | --- | --- |
 | Backlog triage | "Which buyer or supplier threads have waited more than 36 hours, and what promise or owner is at risk?" |
 | Quote prep | "Pull the last three quotes for this account, current margin guardrail, open inventory, and any unresolved service issue." |
@@ -39,6 +47,6 @@ Inbox is where most trade decisions still arrive: buyer RFQs, supplier replies, 
 
 ## Next pages
 
-- [Ask ubik](/workflows/ask-ubik)
+- [Ask Ubik](/workflows/ask-ubik)
 - [Tasks](/workflows/tasks)
 - [Approvals](/workflows/approvals)

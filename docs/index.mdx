@@ -1,128 +1,75 @@
 ---
 title: "Getting Started"
-description: "Start running reviewed trade operations with source context, owner clarity, and controlled AI assistance."
+description: "Learn ubik through product clips or short operating guides."
 icon: "book-open"
 ---
 
 <div className="ubik-hero">
   <p className="ubik-label">Perishable trade operations</p>
-  <h1>Run the day by risk, owner, evidence, and next decision.</h1>
+  <h1>See the risk. Check the source. Move the work.</h1>
 </div>
 
-This guide is for operators, reviewers, admins, and leaders who need AI to carry real operating work without losing control. The core habit is simple: identify what is at risk, inspect the evidence, decide who owns the next move, and approve only what is ready to move.
+ubik joins the thread, owner, evidence, and next decision in one review path.
 
 <div className="ubik-proof-grid">
   <div className="ubik-proof">
     <div className="ubik-metric">20x</div>
-    <p className="ubik-label">Faster RFQ cycles</p>
-    <p>Compress quote handling by bringing account history, margin guardrails, and review context into one path.</p>
+    <p className="ubik-label">RFQ cycles</p>
+    <p>Account history, margin rules, and review in one path.</p>
   </div>
 
   <div className="ubik-proof">
     <div className="ubik-metric">30s</div>
     <p className="ubik-label">PO extraction</p>
-    <p>Convert order packets into mapped work that an operator can check before ERP or accounting handoff.</p>
+    <p>Mapped line items ready for an operator check.</p>
   </div>
 
   <div className="ubik-proof">
     <div className="ubik-metric">1</div>
     <p className="ubik-label">Daily queue</p>
-    <p>See priority, owner, source context, and the decision needed before a promise slips.</p>
+    <p>Risk, owner, source, and next decision.</p>
   </div>
 </div>
 
 <div className="ubik-panel">
-  <strong>Operating principle:</strong> ubik does not replace ERP, CRM, inbox, or meetings. Those remain systems of record and context. ubik is the reviewed system of action above them: it reads across, drafts, routes, asks for review, and writes back only through approved workflows.
+  ERP, CRM, inbox, and meetings keep the records. ubik carries the reviewed action between them.
 </div>
 
-## Choose how to learn
-
-Start with a short visual walkthrough, or read the operating pattern behind the interface. Both paths use the same Inbox and Tasks journeys so the guide stays close to the product you are reviewing.
+## Watch or read
 
 <Tabs>
   <Tab title="Watch" icon="play">
     <CardGroup cols={2}>
-      <Card title="Inbox → reviewed action" icon="inbox" href="/workflows/inbox">
-        Watch the thread move from signal to source context, owner, decision, and approved next move.
+      <Card title="Inbox journey" icon="inbox" href="/getting-started/watch/inbox-journey">
+        A trade thread becomes a reviewed next move.
       </Card>
 
-      <Card title="Tasks → owned follow-through" icon="list-checks" href="/workflows/tasks">
-        Watch a follow-up retain its source, deadline, owner, and decision trail until it is done.
+      <Card title="Tasks journey" icon="list-checks" href="/getting-started/watch/tasks-journey">
+        A decision keeps its source, owner, and deadline.
       </Card>
     </CardGroup>
-
-    <Note>
-      Video clips are intentionally marked as placeholders until the final recordings are approved. The screenshot journeys and one-click prototypes are ready now.
-    </Note>
   </Tab>
   <Tab title="Read" icon="book-open">
     <CardGroup cols={2}>
-      <Card title="Read the Inbox journey" icon="inbox" href="/workflows/inbox">
-        Understand how buyer, supplier, logistics, and finance threads become reviewable decisions.
+      <Card title="Inbox" icon="inbox" href="/workflows/inbox">
+        Triage threads by promise, margin, and owner risk.
       </Card>
 
-      <Card title="Read the Tasks journey" icon="list-checks" href="/workflows/tasks">
-        Follow the source context and ownership trail from decision to completion.
+      <Card title="Tasks" icon="list-checks" href="/workflows/tasks">
+        Carry decisions from source to done.
       </Card>
     </CardGroup>
   </Tab>
 </Tabs>
 
-## Deployment options
-
-<div className="ubik-deploy-shell">
-  <div className="ubik-deploy-lead">
-    <p className="ubik-label">Where Ubik runs</p>
-    <h2>Pick the deployment that matches your risk boundary.</h2>
-    <p>Use the same operating workflow whether you keep data on premises, inside your cloud account, or on a local workstation.</p>
-  </div>
-
-  <div className="ubik-deploy-grid">
-    <div className="ubik-deploy-card">
-      <p className="ubik-label">01 / On premises</p>
-      <strong>In your data center.</strong>
-      <span>Self-host on bare metal or your own Kubernetes. Zero data leaves your perimeter.</span>
-    </div>
-
-    <div className="ubik-deploy-card">
-      <p className="ubik-label">02 / Your cloud</p>
-      <strong>In your VPC.</strong>
-      <span>Deploy to AWS, GCP, or Azure inside your account. BYOC from day one.</span>
-    </div>
-
-    <div className="ubik-deploy-card">
-      <p className="ubik-label">03 / Local</p>
-      <strong>On your laptop.</strong>
-      <span>Run the full stack on a workstation for offline dev, demos, or sensitive work.</span>
-    </div>
-  </div>
-</div>
-
-## Daily operating rhythm
-
-<div className="ubik-steps">
-  <div className="ubik-step"><span>01 · Triage risk</span> Start with work that can affect customer promises, margin, clearance, cash timing, or supplier reliability.</div>
-  <div className="ubik-step"><span>02 · Inspect evidence</span> Check the source thread, document, meeting, task, or system field before the recommendation becomes operating state.</div>
-  <div className="ubik-step"><span>03 · Decide ownership</span> Approve, edit, assign, wait, or escalate based on who has authority to move the work.</div>
-  <div className="ubik-step"><span>04 · Leave a trail</span> Preserve what changed, who reviewed it, what moved, and what still needs a decision.</div>
-</div>
-
-## Start with the right page
+## Start here
 
 <CardGroup cols={2}>
   <Card title="Workspace basics" icon="layout-dashboard" href="/getting-started/workspace-basics">
-    Learn the operating queue, source context, action panel, and activity trail.
+    Queue, evidence, actions, and activity.
   </Card>
 
-  <Card title="Ask Ubik" icon="square-dot" href="/workflows/ask-ubik">
-    Ask source-backed questions about accounts, shipments, margin, owners, and promises.
-  </Card>
-
-  <Card title="Daily operating queue" icon="list-checks" href="/workflows/daily-operating-queue">
-    Run the day by risk and decision readiness instead of status chasing.
-  </Card>
-
-  <Card title="Security and data" icon="shield-check" href="/admin/security-and-data">
-    Understand how sensitive trade context, AI use, and review controls fit together.
+  <Card title="Ask ubik" icon="square-dot" href="/workflows/ask-ubik">
+    Search meetings, files, threads, and linked work.
   </Card>
 </CardGroup>

@@ -1,52 +1,38 @@
 ---
 title: "Inbox"
-description: "Turn buyer, supplier, logistics, and finance threads into reviewed operating decisions."
+description: "Turn trade threads into reviewed decisions."
 icon: "inbox"
 ---
 
-Inbox is where most trade decisions still arrive: buyer RFQs, supplier replies, freight forwarder updates, FDA notices, margin escalations, and finance approvals. Ubik ranks the threads that can change a promise, owner, margin, or system state, then attaches the context needed to review the next move.
+Buyer RFQs, supplier replies, ETA changes, and finance approvals arrive in Inbox. ubik ranks the threads that can change a promise, margin, owner, or system state.
 
 <Frame>
-  ![ubik Inbox review journey showing a rate confirmation that needs approval](https://theubik.com/prototypes/posters/inbox-navigation.jpg)
+  ![ubik Inbox review showing a rate confirmation that needs approval](https://theubik.com/prototypes/posters/inbox-navigation.jpg)
 </Frame>
 
-<Card title="Open the Inbox prototype" icon="arrow-up-right" href="https://app.theubik.com/inbox">
-  Open the product surface in a new tab and follow the same journey: inspect the source, review the prepared context, then decide whether to reply, assign, or wait.
+<Card title="Open Inbox" icon="arrow-up-right" href="https://app.theubik.com/inbox">
+  Inspect the source, check the context, then reply, assign, or wait.
 </Card>
 
-## What Ubik does in your inbox
-
-| Signal | Operating use |
-| --- | --- |
-| Buyer commitment | Promotes threads where price, quantity, promise date, or substitute product needs review. |
-| Source recall | Pulls past quotes, shipments, supplier history, margin guardrails, and lane context into the review path. |
-| Drafted action | Prepares replies, internal handoffs, escalations, and tasks without sending them automatically. |
-| Noise control | Keeps newsletters, marketing, and low-signal threads out of the operating queue. |
-
-## A typical inbox loop
+## The loop
 
 <div className="ubik-steps">
-  <div className="ubik-step"><span>01 · Detect risk</span> Ubik flags the threads where a customer promise, supplier dependency, or internal owner is waiting.</div>
-  <div className="ubik-step"><span>02 · Bring context</span> The review path includes account history, inventory, margin guardrails, lane history, and relevant prior decisions.</div>
-  <div className="ubik-step"><span>03 · Decide route</span> Approve, edit, assign, wait, escalate, or reject based on authority and evidence quality.</div>
-  <div className="ubik-step"><span>04 · Preserve trail</span> Every moved reply carries reviewer, timestamp, and source context for later review.</div>
+  <div className="ubik-step"><span>01 · Detect</span> Find the thread that can change a promise, margin, or owner.</div>
+  <div className="ubik-step"><span>02 · Recall</span> Attach quotes, inventory, lane history, and prior decisions.</div>
+  <div className="ubik-step"><span>03 · Decide</span> Approve, edit, assign, wait, escalate, or reject.</div>
+  <div className="ubik-step"><span>04 · Record</span> Keep the source, reviewer, and timestamp with the action.</div>
 </div>
 
 <div className="ubik-panel">
-  <strong>Privacy posture.</strong> Ubik reads only approved inboxes. Replies, approvals, and ERP handoffs stay human-reviewed. Customer, supplier, pricing, and margin data does not train any model.
+  ubik reads approved inboxes. Replies and writebacks wait for human review. Customer data does not train a model.
 </div>
 
-## Useful prompts inside Inbox
+## Useful prompts
 
-| Situation | Ask Ubik |
+| Need | Ask ubik |
 | --- | --- |
-| Backlog triage | "Which buyer or supplier threads have waited more than 36 hours, and what promise or owner is at risk?" |
-| Quote prep | "Pull the last three quotes for this account, current margin guardrail, open inventory, and any unresolved service issue." |
-| Escalation | "Draft a partial-shipment reply that is honest about timing, protects internal margin, and routes finance approval before sending." |
-| Manager review | "Which threads have been blocked the longest, who owns the next decision, and what evidence is missing?" |
+| Triage | "Which buyer or supplier threads have waited more than 36 hours?" |
+| Quote | "Pull the last three quotes, current margin rule, and open inventory." |
+| Review | "Who owns the next decision, and what evidence is missing?" |
 
-## Next pages
-
-- [Ask Ubik](/workflows/ask-ubik)
-- [Tasks](/workflows/tasks)
-- [Approvals](/workflows/approvals)
+[Tasks](/workflows/tasks) · [Approvals](/workflows/approvals)

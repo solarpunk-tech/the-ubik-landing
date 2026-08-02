@@ -4,7 +4,7 @@ description: "Build source-aware operator prompts with connected apps, files, an
 icon: "square-dot"
 ---
 
-Ask ubik is the operator surface for questions and tasks that need context from more than one system. Start with the outcome you need, attach the relevant sources, and review the evidence before acting.
+Name the task, attach the sources that can change the answer, then review the evidence before acting.
 
 <Tabs>
   <Tab title="Start" icon="message-square">
@@ -19,17 +19,15 @@ Ask ubik is the operator surface for questions and tasks that need context from 
   </Tab>
 </Tabs>
 
-## Start with an operator task
-
 <Columns cols={3}>
   <Card title="Daily morning brief" icon="https://www.google.com/s2/favicons?domain=slack.com&sz=64">
-    Pull review-ready work from GitHub, Notion, and Slack. Group it by source, flag urgency, and finish with the three things that need attention first.
+    Group GitHub, Notion, and Slack work by source, risk, and first action.
   </Card>
   <Card title="Catch up on Slack" icon="https://www.google.com/s2/favicons?domain=slack.com&sz=64">
-    Summarize important threads, decisions, mentions, and unanswered questions without turning every unread message into work.
+    Pull decisions, mentions, unanswered questions, and overdue replies.
   </Card>
   <Card title="PRs to review" icon="https://www.google.com/s2/favicons?domain=github.com&sz=64">
-    Find pull requests awaiting your review, explain the change and risk, and put blocked or failing work first.
+    Put blocked and failing reviews first; keep change, risk, and owner attached.
   </Card>
 </Columns>
 
@@ -40,38 +38,11 @@ Ask ubik is the operator surface for questions and tasks that need context from 
 | PRs to review | GitHub | Review queue with change, risk, status, and owner | Failing checks and blocked releases |
 | Prepare for a meeting | Calendar · meetings · workspace knowledge | Recent decisions, open tasks, risks, and questions | Stale owners and unsupported assumptions |
 
-## How connected prompts work
-
 <Steps>
-  <Step title="Choose the work">
-    Start from a suggestion or describe the decision, review, comparison, or action you need.
-  </Step>
-  <Step title="Attach only useful sources">
-    Keep organization knowledge selected when the task needs shared context. Add apps and files only when they can change the answer.
-  </Step>
-  <Step title="Set the evidence standard">
-    Ask for source links, owners, dates, uncertainty, and the next decision—not just a summary.
-  </Step>
-  <Step title="Review, then continue">
-    Open the cited context. Edit the output before sending a reply, creating a task, or approving a writeback.
-  </Step>
+  <Step title="Name the work">State the decision, review, comparison, or action.</Step>
+  <Step title="Attach sources">Add only the apps, files, or workspace knowledge that can change the answer.</Step>
+  <Step title="Set the contract">Require sources, dates, owner, uncertainty, and next move.</Step>
+  <Step title="Review">Open the cited context before a reply, task, or writeback moves.</Step>
 </Steps>
-
-## A stronger prompt contract
-
-<AccordionGroup>
-  <Accordion title="Decision" icon="route" defaultOpen>
-    State the decision or risk the answer should help with. A prompt without a decision usually produces a generic summary.
-  </Accordion>
-  <Accordion title="Evidence" icon="link">
-    Require the emails, meetings, documents, tasks, or system fields behind every important claim.
-  </Accordion>
-  <Accordion title="Confidence" icon="scan-search">
-    Separate verified facts, inferred context, missing information, and assumptions.
-  </Accordion>
-  <Accordion title="Next move" icon="arrow-right">
-    End with who owns the next move and whether ubik should draft, assign, wait, escalate, or ask for approval.
-  </Accordion>
-</AccordionGroup>
 
 <Card title="Open Ask ubik" icon="arrow-up-right" href="https://app.theubik.com" />

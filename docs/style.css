@@ -13,7 +13,7 @@
   --ubik-dark-muted: #b2bac8;
   --ubik-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* Design palette — mirrors the ubik-webapp tokens. Use these for status
+  /* Design palette mirrors the ubik-webapp tokens. Use these for status
    * labels, handoff chips, and any tonal callouts. */
   --palette-primary: hsl(227 81% 56%);
   --palette-success: hsl(145 65% 40%);
@@ -138,6 +138,67 @@ nav-logo img,
 
 a {
   text-underline-offset: 4px;
+}
+
+.ubik-lesson-head {
+  align-items: center;
+  border-bottom: 1px solid var(--ubik-light-border);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+}
+
+.dark .ubik-lesson-head {
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-lesson-head > span,
+.ubik-mode-switch a {
+  font-family: var(--ubik-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ubik-lesson-head > span {
+  color: var(--ubik-light-muted);
+}
+
+.dark .ubik-lesson-head > span {
+  color: var(--ubik-dark-muted);
+}
+
+.ubik-mode-switch {
+  border: 1px solid var(--ubik-light-border);
+  display: inline-flex;
+}
+
+.dark .ubik-mode-switch {
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-mode-switch a {
+  color: var(--ubik-light-text);
+  padding: 0.45rem 0.75rem;
+  text-decoration: none;
+}
+
+.dark .ubik-mode-switch a {
+  color: var(--ubik-dark-text);
+}
+
+.ubik-mode-switch a + a {
+  border-left: 1px solid var(--ubik-light-border);
+}
+
+.dark .ubik-mode-switch a + a {
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-mode-switch a.is-active {
+  background: var(--ubik-blue);
+  color: #ffffff;
 }
 
 .ubik-hero {
@@ -368,6 +429,12 @@ a {
 }
 
 @media (max-width: 720px) {
+  .ubik-lesson-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
   .ubik-proof-grid {
     grid-template-columns: 1fr;
   }
@@ -424,7 +491,7 @@ a {
 }
 
 /* ---------------------------------------------------------------------------
- * Status + handoff labels — mirrors the web app's UX vocabulary.
+ * Status + handoff labels mirror the web app's UX vocabulary.
  * Solid filled blocks for state, soft pills for nudges, outlined chips for
  * handoff arrows. Use sparingly in docs to teach the system visually.
  * ------------------------------------------------------------------------- */

@@ -1,16 +1,24 @@
 ---
 title: "Tasks"
-description: "Watch how Tasks separates work owed by you, owed by others, and closed with evidence."
-icon: "list-checks"
+description: "Watch Tasks separate work owed by you, owed by others, and closed with evidence."
+icon: "play"
 ---
 
-<Frame caption="The current obligation board groups open, waiting, and closed work with evidence and next actions visible.">
-  <img src="/images/product/tasks-obligations.png" alt="ubik Tasks board with open, waiting, and completed obligations" />
+<div className="ubik-lesson-head">
+  <span>04 / 04 · Tasks</span>
+  <div className="ubik-mode-switch">
+    <a href="/getting-started/read/tasks">Read</a>
+    <a className="is-active" href="/getting-started/watch/tasks">Watch</a>
+  </div>
+</div>
+
+<Frame caption="The board groups obligations by who owes the next move.">
+  <img src="/images/product/tasks-obligations.png" alt="ubik Tasks with open, waiting, and completed obligations" />
 </Frame>
 
-Start with who owes the next move. Review the source, confidence signals, receipts, activity, and recommended action before closing or reassigning the work.
+Open means we owe the move. Waiting means they do. Closed keeps the evidence that proves the work moved.
 
 <Columns cols={2}>
-  <Card title="Read the Tasks guide" icon="book-open" href="/workflows/tasks" />
-  <Card title="Return to Watch" icon="play" href="/getting-started/watch" />
+  <Card title="Back: Meetings" icon="arrow-left" href="/getting-started/watch/meetings" />
+  <Card title="Read from Inbox" icon="book-open" href="/getting-started/read" />
 </Columns>

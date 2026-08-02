@@ -4,9 +4,9 @@ description: "Track obligations by who owes the next move, the evidence attached
 icon: "list-checks"
 ---
 
-Tasks is an obligation view, not a folder tree. It shows who owes the next move, what evidence supports the state, how urgent the work is, and why a task was closed.
+Tasks groups obligations by who owes the next move, what changed, and what proves completion.
 
-<Frame caption="Obligations grouped into open, waiting, and done—with counterparty, evidence, and closure receipts visible.">
+<Frame caption="Open, waiting, and done with counterparty, evidence, and closure receipts visible.">
   <img src="/images/product/tasks-obligations.png" alt="ubik Tasks board grouped by open, waiting, and completed obligations" />
 </Frame>
 
@@ -17,26 +17,14 @@ Tasks is an obligation view, not a folder tree. It shows who owes the next move,
   <Card title="Closed today" icon="badge-check">Completed work with a reason or receipt.</Card>
 </Columns>
 
-## Review a task
-
 <Steps>
-  <Step title="Filter the obligation">Start with Mine or Team, then choose Open, Waiting, Probably closed, Closed today, or All.</Step>
-  <Step title="Group the queue">Switch between list, board, and category views to see urgency, status, counterparty, source, or assignee.</Step>
-  <Step title="Inspect the source and evidence">Check the thread, meeting, document, confidence signals, receipts, activity, and recommended next action.</Step>
-  <Step title="Close with a reason">Record why the work is complete so the final state can be trusted later.</Step>
+  <Step title="Filter">Choose Mine or Team, then Open, Waiting, Probably closed, Closed today, or All.</Step>
+  <Step title="Group">Use list, board, or category to compare urgency, owner, source, and counterparty.</Step>
+  <Step title="Inspect">Check the source, confidence signals, receipts, activity, and next action.</Step>
+  <Step title="Close">Record the reason or receipt that proves completion.</Step>
 </Steps>
 
-<AccordionGroup>
-  <Accordion title="What does owed by them mean?" icon="users">
-    The obligation is still open, but the next move belongs to a third party. ubik watches for the reply or evidence that changes the state.
-  </Accordion>
-  <Accordion title="What is a closure receipt?" icon="receipt-text">
-    A source-backed signal—such as an outbound reply, document, payment, invoice, or workflow closure—that shows the work actually moved.
-  </Accordion>
-  <Accordion title="Can an external owner act without a seat?" icon="mail-check">
-    Yes. External owners can receive and respond to an email handoff without joining the ubik workspace.
-  </Accordion>
-</AccordionGroup>
+<div className="ubik-panel">External owners can act by email. They do not need a ubik seat.</div>
 
 <Columns cols={2}>
   <Card title="Trace the source in Inbox" icon="inbox" href="/workflows/inbox" />

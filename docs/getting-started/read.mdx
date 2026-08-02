@@ -1,24 +1,30 @@
 ---
-title: "Read"
-description: "Read the four core ubik journeys: Inbox, Ask ubik, Meetings, and Tasks."
-icon: "book-open"
+title: "Inbox"
+description: "Read the source thread, open context when it changes the decision, then act."
+icon: "inbox"
 ---
 
-Choose a surface. Each guide explains what to look at, when context helps, and what stays under operator review.
+<div className="ubik-lesson-head">
+  <span>01 / 04 · Inbox</span>
+  <div className="ubik-mode-switch">
+    <a className="is-active" href="/getting-started/read">Read</a>
+    <a href="/getting-started/watch">Watch</a>
+  </div>
+</div>
+
+<Frame caption="The message stays central; context and actions stay within reach.">
+  <img src="/images/product/inbox-evidence-first.png" alt="ubik Inbox with a selected source thread, context tabs, and reply actions" />
+</Frame>
+
+Read the latest message before its summary. Open Tasks, Waiting for, Files, or Links only when that context can change the reply, owner, or next move.
+
+<Steps>
+  <Step title="Read">Check the latest message and quoted history.</Step>
+  <Step title="Check">Open the evidence needed for this decision.</Step>
+  <Step title="Move">Reply, assign, ask ubik, or wait.</Step>
+</Steps>
 
 <Columns cols={2}>
-  <Card title="01 · Inbox" icon="inbox" href="/workflows/inbox" image="/images/product/inbox-evidence-first.png">
-    Read the source thread, inspect context when needed, and move the work.
-  </Card>
-  <Card title="02 · Ask ubik" icon="square-dot" href="/workflows/ask-ubik" image="/images/product/ask-operator-connected.png">
-    Build a source-aware prompt with connected apps and files.
-  </Card>
-  <Card title="03 · Meetings" icon="video" href="/workflows/meetings" image="/images/product/meetings-workspace.jpg">
-    Keep decisions, owners, and follow-ups searchable.
-  </Card>
-  <Card title="04 · Tasks" icon="list-checks" href="/workflows/tasks" image="/images/product/tasks-obligations.png">
-    Track who owes the next move and the evidence behind the state.
-  </Card>
+  <Card title="Open the full Inbox guide" icon="inbox" href="/workflows/inbox" />
+  <Card title="Next: Ask ubik" icon="arrow-right" href="/getting-started/read/ask-ubik" />
 </Columns>
-
-<Card title="Prefer short clips?" icon="play" href="/getting-started/watch">Watch the same four journeys.</Card>

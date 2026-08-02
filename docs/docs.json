@@ -127,16 +127,7 @@
             "group": "Learn",
             "pages": [
               "getting-started/read",
-              {
-                "group": "Watch",
-                "pages": [
-                  "getting-started/watch",
-                  "getting-started/watch/inbox",
-                  "getting-started/watch/ask-ubik",
-                  "getting-started/watch/meetings",
-                  "getting-started/watch/tasks"
-                ]
-              }
+              "getting-started/watch"
             ]
           },
           "getting-started/sign-in",

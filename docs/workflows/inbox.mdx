@@ -4,43 +4,25 @@ description: "Read the thread first, open supporting context when needed, and mo
 icon: "inbox"
 ---
 
-Inbox keeps the source message at the center. ubik ranks the threads that need attention, preserves quoted history, and keeps context and actions close without replacing the conversation.
+Inbox keeps the source message central. Context and actions stay close without replacing the conversation.
 
 <Frame caption="Evidence-first Inbox: thread list, source message, context tabs, and operator actions in one view.">
   <img src="/images/product/inbox-evidence-first.png" alt="ubik Inbox showing a rate-confirmation thread, its source messages, context tabs, and reply actions" />
 </Frame>
 
-<Columns cols={3}>
-  <Card title="Read the source" icon="mail-open">
-    Start with the latest message and quoted history before relying on a summary.
-  </Card>
-  <Card title="Open context on demand" icon="panels-top-left">
-    Use Summary, Tasks, Waiting for, Files, and Links only when they help answer the current question.
-  </Card>
-  <Card title="Act with review" icon="send">
-    Reply, reply all, forward, assign, or wait. Drafts and writebacks stay under operator control.
-  </Card>
-</Columns>
-
-## The inbox loop
-
 <Steps>
   <Step title="Triage the queue">Use Business critical, Action required, Waiting on, Updates, and All mail to narrow the work.</Step>
-  <Step title="Read the thread">Check the current message and the conversation it responds to.</Step>
-  <Step title="Inspect supporting context">Open summaries, tasks, files, links, or waiting dependencies only when needed.</Step>
-  <Step title="Move the work">Reply, assign, create a task, ask ubik, or wait for the missing owner or evidence.</Step>
+  <Step title="Read the thread">Check the message and quoted history before its summary.</Step>
+  <Step title="Open context">Use Tasks, Waiting for, Files, and Links only when they change the decision.</Step>
+  <Step title="Move">Reply, assign, ask ubik, or wait for the missing owner or evidence.</Step>
 </Steps>
 
 <AccordionGroup>
-  <Accordion title="What ubik reads" icon="eye">
-    Only approved inboxes and connected sources. Customer, supplier, pricing, and margin data does not train a model.
-  </Accordion>
-  <Accordion title="What remains human-reviewed" icon="user-check">
-    Customer-facing replies, approvals, assignments, and system writebacks remain reviewable before they move.
-  </Accordion>
+  <Accordion title="Source boundary" icon="eye">ubik reads approved inboxes and connected sources. Customer data does not train a model.</Accordion>
+  <Accordion title="Action boundary" icon="user-check">Replies, approvals, assignments, and writebacks wait for review.</Accordion>
 </AccordionGroup>
 
 <Columns cols={2}>
-  <Card title="Ask about this thread" icon="square-dot" href="/workflows/ask-ubik">Continue with the source context attached.</Card>
-  <Card title="Carry it into Tasks" icon="list-checks" href="/workflows/tasks">Turn a decision or follow-up into owned work.</Card>
+  <Card title="Ask about this thread" icon="square-dot" href="/workflows/ask-ubik" />
+  <Card title="Carry it into Tasks" icon="list-checks" href="/workflows/tasks" />
 </Columns>

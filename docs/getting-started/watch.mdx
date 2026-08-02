@@ -1,16 +1,24 @@
 ---
-title: "Watch"
-description: "Watch the four core ubik journeys: Inbox, Ask ubik, Meetings, and Tasks."
+title: "Inbox"
+description: "Watch Inbox keep the source thread central while context and actions stay close."
 icon: "play"
 ---
 
-Follow the same path as the Read guide, shown through short product clips and current interface frames.
+<div className="ubik-lesson-head">
+  <span>01 / 04 · Inbox</span>
+  <div className="ubik-mode-switch">
+    <a href="/getting-started/read">Read</a>
+    <a className="is-active" href="/getting-started/watch">Watch</a>
+  </div>
+</div>
+
+<Frame caption="Read first. Open prepared context only when it changes the next move.">
+  <video controls preload="metadata" poster="https://theubik.com/prototypes/posters/inbox-navigation.jpg" alt="Inbox thread review walkthrough" aria-label="Inbox thread review walkthrough" style={{ width: "100%" }}>
+    <source src="https://theubik.com/prototypes/inbox-navigation.mp4" type="video/mp4" />
+  </video>
+</Frame>
 
 <Columns cols={2}>
-  <Card title="01 · Inbox" icon="inbox" href="/getting-started/watch/inbox" image="/images/product/inbox-evidence-first.png">Read first; open context on demand.</Card>
-  <Card title="02 · Ask ubik" icon="square-dot" href="/getting-started/watch/ask-ubik" image="/images/product/ask-operator-connected.png">Attach useful sources to an operator task.</Card>
-  <Card title="03 · Meetings" icon="video" href="/getting-started/watch/meetings" image="/images/product/meetings-workspace.jpg">Review notes, owners, and follow-ups.</Card>
-  <Card title="04 · Tasks" icon="list-checks" href="/getting-started/watch/tasks" image="/images/product/tasks-obligations.png">See what is open, waiting, or closed.</Card>
+  <Card title="Open the full Inbox guide" icon="inbox" href="/workflows/inbox" />
+  <Card title="Next: Ask ubik" icon="arrow-right" href="/getting-started/watch/ask-ubik" />
 </Columns>
-
-<Card title="Prefer written guides?" icon="book-open" href="/getting-started/read">Read the same four journeys.</Card>

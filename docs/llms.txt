@@ -5,8 +5,14 @@
 ## Start
 
 - [Getting started](https://docs.theubik.com/index.md): A short introduction to the ubik workspace and the Read or Watch learning paths.
-- [Read](https://docs.theubik.com/getting-started/read.md): Written guides for Inbox, Ask ubik, Meetings, and Tasks.
-- [Watch](https://docs.theubik.com/getting-started/watch.md): Product clips and current interface frames for the same four journeys.
+- [Read Inbox](https://docs.theubik.com/getting-started/read.md): Read the source thread before its summary.
+- [Read Ask ubik](https://docs.theubik.com/getting-started/read/ask-ubik.md): Attach sources that can change the answer.
+- [Read Meetings](https://docs.theubik.com/getting-started/read/meetings.md): Review decisions and owners before notes enter workspace memory.
+- [Read Tasks](https://docs.theubik.com/getting-started/read/tasks.md): Track who owes the next move and the evidence attached.
+- [Watch Inbox](https://docs.theubik.com/getting-started/watch.md): See the thread-first Inbox loop.
+- [Watch Ask ubik](https://docs.theubik.com/getting-started/watch/ask-ubik.md): See a suggestion become a connected prompt.
+- [Watch Meetings](https://docs.theubik.com/getting-started/watch/meetings.md): See a conversation become reviewed notes.
+- [Watch Tasks](https://docs.theubik.com/getting-started/watch/tasks.md): See obligations grouped by owner and evidence.
 - [Sign in](https://docs.theubik.com/getting-started/sign-in.md): Enter an ubik workspace and choose the right account.
 - [Workspace basics](https://docs.theubik.com/getting-started/workspace-basics.md): Understand the workspace navigation and review surfaces.
 - [How ubik AI works](https://docs.theubik.com/getting-started/how-ubik-ai-works.md): Use source-backed recommendations while preserving operator control.

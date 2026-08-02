@@ -1,36 +1,68 @@
 ---
 title: "Connected tools"
-description: "Decide which systems ubik can read from or update for approved trade workflows."
+description: "Choose which systems ubik may read from or update for approved workflows."
 icon: "plug"
 ---
 
-Connected tools give ubik the evidence needed to recommend useful work. The exact tools depend on onboarding scope, admin approval, and which workflows are allowed to read or write.
+Connected tools give ubik the source context behind an operator task. Access is scoped by the workflow, the workspace admin, and whether the integration is read-only or allowed to make reviewed updates.
 
-## Common connected tools
+## Common connections
 
-| Tool type | What operators usually need from it |
-| --- | --- |
-| Email | Buyer inquiries, supplier replies, attachments, approvals, and promise changes. |
-| ERP and accounting | Order state, inventory, invoice checks, SKU mapping, and writeback readiness. |
-| CRM | Account owner, opportunity, terms, relationship history, and customer commitments. |
-| Documents | POs, PDFs, specs, shipment packets, shared-drive files. |
-| Chat | WhatsApp, Slack, and Teams context where operational decisions happen. |
-| Logistics and BI | ETA movement, dashboard variance, and downstream promise dates. |
+<Columns cols={3}>
+  <Card title="Gmail" icon="https://www.google.com/s2/favicons?domain=gmail.com&sz=64">
+    Buyer inquiries, supplier replies, attachments, approvals, and changed promises.
+  </Card>
+  <Card title="Microsoft Outlook" icon="https://www.google.com/s2/favicons?domain=outlook.com&sz=64">
+    Email and calendar context from Microsoft 365.
+  </Card>
+  <Card title="Slack" icon="https://www.google.com/s2/favicons?domain=slack.com&sz=64">
+    Decisions, mentions, open questions, and handoffs from selected channels.
+  </Card>
+  <Card title="GitHub" icon="https://www.google.com/s2/favicons?domain=github.com&sz=64">
+    Pull requests, reviews, failing checks, ownership, and release blockers.
+  </Card>
+  <Card title="Notion" icon="https://www.google.com/s2/favicons?domain=notion.so&sz=64">
+    Project pages, plans, decisions, and operating knowledge.
+  </Card>
+  <Card title="Google Drive" icon="https://www.google.com/s2/favicons?domain=drive.google.com&sz=64">
+    POs, PDFs, specs, shipment packets, and shared files.
+  </Card>
+</Columns>
 
-## What managers should review
+Your workspace can also connect ERP, accounting, CRM, logistics, BI, calendars, WhatsApp, and other approved systems.
 
-<div className="ubik-panel">
-  <strong>Principle:</strong> ubik reads only what is needed for the approved workflow and writes back only through reviewed actions.
-</div>
+## Read and write boundaries
 
-Before expanding an integration, confirm:
+<Tabs>
+  <Tab title="Read" icon="eye">
+    ubik may retrieve the messages, files, fields, records, or events required for the approved workflow. A connection does not automatically make every workspace object available.
+  </Tab>
+  <Tab title="Draft" icon="file-pen-line">
+    ubik may prepare a reply, task, record update, or approval packet without committing it to the source system.
+  </Tab>
+  <Tab title="Reviewed writeback" icon="shield-check">
+    An approved operator action may update the connected system. The reviewer, source, timestamp, and resulting state remain attached to the action.
+  </Tab>
+</Tabs>
 
-- Which workflow needs the tool.
-- Which documents, fields, messages, or records are required.
-- Who approves access and who owns renewal or revocation.
-- Whether the tool should be read-only or allow reviewed updates.
-- How stale data, auth failure, or provider downtime should surface to operators.
+## Review before connecting a tool
 
-## If a connected tool is stale
+<Steps>
+  <Step title="Name the workflow">Document which operator task needs the connection and what outcome it supports.</Step>
+  <Step title="Limit the source scope">Choose the accounts, inboxes, channels, folders, objects, or fields the workflow actually needs.</Step>
+  <Step title="Choose the action boundary">Keep the tool read-only, allow drafts, or permit reviewed writeback.</Step>
+  <Step title="Assign an owner">Name who can renew, revoke, or troubleshoot the connection.</Step>
+  <Step title="Plan for failure">Decide how stale data, expired consent, missing permissions, and provider downtime should appear to operators.</Step>
+</Steps>
 
-Look for expired OAuth consent, changed permissions, renamed folders, moved fields, or provider downtime. Reconnect only after confirming the admin owner and the workflow that needs the connection.
+<AccordionGroup>
+  <Accordion title="Why did a connected-app suggestion disappear?" icon="circle-help">
+    Suggestions appear only when the required app is connected and available to the current workspace. Check the app connection, permissions, and source scope.
+  </Accordion>
+  <Accordion title="Why is the data stale?" icon="refresh-cw">
+    Look for expired OAuth consent, changed permissions, renamed folders, moved fields, provider downtime, or a workflow that no longer includes that source.
+  </Accordion>
+  <Accordion title="Does a connection allow automatic writeback?" icon="shield-alert">
+    No. Read access, drafting, and reviewed writeback are separate boundaries. The workflow must explicitly permit the action.
+  </Accordion>
+</AccordionGroup>

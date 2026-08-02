@@ -28,27 +28,27 @@ The workspace is built around one operating question: what needs a decision befo
 
 Every queue item carries a handoff chip that tells you who has the next move.
 
-<span className="ux-handoff is-human">Human → Review</span>   <span className="ux-handoff is-agent">Agent → Drafting</span>   <span className="ux-handoff is-system">System → ERP queue</span>   <span className="ux-handoff is-final">Final → Committed</span>
+<span className="ux-handoff is-human">Human → Review</span> &nbsp;
+<span className="ux-handoff is-agent">Agent → Drafting</span> &nbsp;
+<span className="ux-handoff is-system">System → ERP queue</span> &nbsp;
+<span className="ux-handoff is-final">Final → Committed</span>
 
 ## Good operator habits
 
-<CardGroup cols={2}>
+<Columns cols={2}>
   <Card title="Source before speed" icon="search-check">
     Approve when the source, owner, and action are clear. Fast unsupported work creates downstream rework.
   </Card>
-
   <Card title="Route by authority" icon="route">
     Move routine work through the queue; escalate price, margin, promise-date, finance, or compliance decisions.
   </Card>
-
   <Card title="Keep the trail useful" icon="history">
     Leave enough context for a future operator to understand what changed and why the action moved.
   </Card>
-
   <Card title="Teach the memory with variety" icon="brain">
     RFQs, PO chases, supplier follow-ups, margin checks, meeting recaps, and vendor reviews make deviations easier to spot later.
   </Card>
-</CardGroup>
+</Columns>
 
 ## Theme and readability
 

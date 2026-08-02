@@ -23,8 +23,8 @@
   },
   "fonts": {
     "heading": {
-      "family": "Montserrat",
-      "weight": 650
+      "family": "Noto Sans",
+      "weight": 600
     },
     "body": {
       "family": "Noto Sans",
@@ -123,12 +123,22 @@
         "group": "Start",
         "pages": [
           "index",
-          "getting-started/read",
-          "getting-started/watch",
-          "getting-started/watch/inbox",
-          "getting-started/watch/ask-ubik",
-          "getting-started/watch/meetings",
-          "getting-started/watch/tasks",
+          {
+            "group": "Learn",
+            "pages": [
+              "getting-started/read",
+              {
+                "group": "Watch",
+                "pages": [
+                  "getting-started/watch",
+                  "getting-started/watch/inbox",
+                  "getting-started/watch/ask-ubik",
+                  "getting-started/watch/meetings",
+                  "getting-started/watch/tasks"
+                ]
+              }
+            ]
+          },
           "getting-started/sign-in",
           "getting-started/workspace-basics",
           "getting-started/how-ubik-ai-works",

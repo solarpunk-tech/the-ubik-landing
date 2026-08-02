@@ -1,44 +1,40 @@
 ---
 title: "Meetings"
-description: "Capture calls as operating memory: decisions, owners, evidence, and follow-through."
+description: "Capture conversations locally, review the notes, and keep decisions and follow-ups searchable."
 icon: "video"
 ---
 
-Meetings keeps decisions, owners, and follow-ups searchable in the ubik workspace.
+Meetings turns a conversation into reviewable operating memory: what changed, who owns the follow-up, what evidence is missing, and where the decision belongs.
 
-## What meetings does
+<Frame caption="Meeting notes, decisions, owners, and follow-ups stay connected to the workspace.">
+  <img src="/images/product/meetings-workspace.jpg" alt="ubik Meetings workspace with recorded conversations and prepared notes" />
+</Frame>
 
-| Surface | Operating use |
-| --- | --- |
-| On-device recorder | Captures the call locally first. No cloud upload until you approve. |
-| Auto notes | Summary, decisions, owners, follow-ups, and unresolved evidence drafted as the call ends. |
-| Trade memory link | Decisions are attached to the account, supplier, lane, or shipment they touched. |
-| Searchable later | Ask ubik what was said, who agreed, what changed, and what still needs action. |
+<Columns cols={3}>
+  <Card title="Capture locally" icon="mic">Record on the operator's device first.</Card>
+  <Card title="Review the notes" icon="file-check-2">Check the summary, decisions, owners, and sensitive context.</Card>
+  <Card title="Carry work forward" icon="list-plus">Attach the meeting and create the follow-ups that should remain visible.</Card>
+</Columns>
 
-## A typical meeting loop
+## The meeting loop
 
-<div className="ubik-steps">
-  <div className="ubik-step"><span>01 · Capture</span> Record the call locally when it may affect price, timing, supplier reliability, customer expectation, or owner accountability.</div>
-  <div className="ubik-step"><span>02 · Review</span> Check the drafted summary, decisions, owners, follow-ups, and sensitive context before attaching it.</div>
-  <div className="ubik-step"><span>03 · Attach</span> Link the notes to the account, supplier, lane, shipment, or project the conversation changed.</div>
-  <div className="ubik-step"><span>04 · Follow through</span> Ask later what was promised, who owns it, and whether the operating queue reflects the commitment.</div>
-</div>
+<Steps>
+  <Step title="Capture">Record a call when it may change price, timing, supplier reliability, customer expectations, or ownership.</Step>
+  <Step title="Review">Correct the prepared notes and confirm the decisions, owners, follow-ups, and unresolved questions.</Step>
+  <Step title="Attach">Link the meeting to the account, supplier, shipment, project, or workspace context it changed.</Step>
+  <Step title="Follow through">Ask later what was promised and confirm that the task queue reflects the commitment.</Step>
+</Steps>
 
-<div className="ubik-panel">
-  <strong>Local-first by default.</strong> Recordings live on the operator's device unless you attach them to the workspace. Sensitive supplier pricing, margin context, and customer commitments stay under operator control.
-</div>
+<AccordionGroup>
+  <Accordion title="Where does the recording live?" icon="hard-drive" defaultOpen>
+    Recordings stay on the operator's device unless they are deliberately attached to the workspace.
+  </Accordion>
+  <Accordion title="What should I check before sharing notes?" icon="shield-check">
+    Review names, commitments, prices, sensitive context, owners, and anything inferred from an unclear part of the conversation.
+  </Accordion>
+</AccordionGroup>
 
-## Useful prompts after a meeting
-
-| Situation | Ask ubik |
-| --- | --- |
-| Decision recovery | "What pricing, timing, or recovery commitment did the supplier make in the May 12 review, and what evidence supports it?" |
-| Owner check | "Who owns the FDA-hold follow-up from yesterday's call, and is it reflected in the task queue?" |
-| Follow-up draft | "Draft the recap email for the freight forwarder sync with commitments, open evidence, and owner names." |
-| Account memory | "Show every meeting where this buyer's floor price, substitution tolerance, or delivery-risk concern came up." |
-
-## Next pages
-
-- [Ask ubik](/workflows/ask-ubik)
-- [Tasks](/workflows/tasks)
-- [Daily operating queue](/workflows/daily-operating-queue)
+<Columns cols={2}>
+  <Card title="Ask what was decided" icon="square-dot" href="/workflows/ask-ubik" />
+  <Card title="Review meeting follow-ups" icon="list-checks" href="/workflows/tasks" />
+</Columns>

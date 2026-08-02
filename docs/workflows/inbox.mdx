@@ -1,27 +1,46 @@
 ---
 title: "Inbox"
-description: "Turn trade threads into reviewed decisions."
+description: "Read the thread first, open supporting context when needed, and move the work forward."
 icon: "inbox"
 ---
 
-Inbox keeps the message at the center. Read the thread, open context only when you need it, then reply, assign, or wait.
+Inbox keeps the source message at the center. ubik ranks the threads that need attention, preserves quoted history, and keeps context and actions close without replacing the conversation.
 
-<Frame>
-  ![ubik inbox review](https://theubik.com/prototypes/posters/inbox-navigation.jpg)
+<Frame caption="Evidence-first Inbox: thread list, source message, context tabs, and operator actions in one view.">
+  <img src="/images/product/inbox-evidence-first.png" alt="ubik Inbox showing a rate-confirmation thread, its source messages, context tabs, and reply actions" />
 </Frame>
 
-<Card title="Open inbox" icon="arrow-up-right" href="https://app.theubik.com/inbox" />
+<Columns cols={3}>
+  <Card title="Read the source" icon="mail-open">
+    Start with the latest message and quoted history before relying on a summary.
+  </Card>
+  <Card title="Open context on demand" icon="panels-top-left">
+    Use Summary, Tasks, Waiting for, Files, and Links only when they help answer the current question.
+  </Card>
+  <Card title="Act with review" icon="send">
+    Reply, reply all, forward, assign, or wait. Drafts and writebacks stay under operator control.
+  </Card>
+</Columns>
 
-## The loop
+## The inbox loop
 
-<div className="ubik-steps">
-  <div className="ubik-step"><span>01 · Read</span> Start with the latest message and its quoted history.</div>
-  <div className="ubik-step"><span>02 · Check</span> Open Summary, Tasks, Files, or Related when needed.</div>
-  <div className="ubik-step"><span>03 · Act</span> Reply, reply all, forward, assign, or wait.</div>
-</div>
+<Steps>
+  <Step title="Triage the queue">Use Business critical, Action required, Waiting on, Updates, and All mail to narrow the work.</Step>
+  <Step title="Read the thread">Check the current message and the conversation it responds to.</Step>
+  <Step title="Inspect supporting context">Open summaries, tasks, files, links, or waiting dependencies only when needed.</Step>
+  <Step title="Move the work">Reply, assign, create a task, ask ubik, or wait for the missing owner or evidence.</Step>
+</Steps>
 
-<div className="ubik-panel">
-  ubik reads approved inboxes. Replies and writebacks wait for human review. Customer data does not train a model.
-</div>
+<AccordionGroup>
+  <Accordion title="What ubik reads" icon="eye">
+    Only approved inboxes and connected sources. Customer, supplier, pricing, and margin data does not train a model.
+  </Accordion>
+  <Accordion title="What remains human-reviewed" icon="user-check">
+    Customer-facing replies, approvals, assignments, and system writebacks remain reviewable before they move.
+  </Accordion>
+</AccordionGroup>
 
-[Ask ubik](/workflows/ask-ubik) · [Tasks](/workflows/tasks)
+<Columns cols={2}>
+  <Card title="Ask about this thread" icon="square-dot" href="/workflows/ask-ubik">Continue with the source context attached.</Card>
+  <Card title="Carry it into Tasks" icon="list-checks" href="/workflows/tasks">Turn a decision or follow-up into owned work.</Card>
+</Columns>

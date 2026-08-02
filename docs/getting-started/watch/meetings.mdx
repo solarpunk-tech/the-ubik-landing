@@ -1,13 +1,18 @@
 ---
 title: "Meetings"
-description: "Keep decisions, owners, and follow-ups searchable."
+description: "Watch how a conversation becomes reviewed notes, decisions, owners, and follow-ups."
 icon: "video"
 ---
 
-<Frame>
-  <div className="ubik-clip-placeholder">Clip in review</div>
+<Frame caption="Capture locally, review the prepared notes, and attach only what should become shared operating memory.">
+  <video controls preload="metadata" poster="https://theubik.com/prototypes/posters/meeting-nav.jpg" style={{ width: "100%" }}>
+    <source src="https://theubik.com/prototypes/meeting-nav.mp4" type="video/mp4" />
+  </video>
 </Frame>
 
-Capture the conversation, review the notes, and keep decisions and follow-ups connected to the workspace.
+Review decisions, owners, commitments, sensitive context, and unresolved questions before the notes become shared workspace context.
 
-<Card title="Next: Tasks" icon="arrow-right" href="/getting-started/watch/tasks" />
+<Columns cols={2}>
+  <Card title="Read the Meetings guide" icon="book-open" href="/workflows/meetings" />
+  <Card title="Next: Tasks" icon="arrow-right" href="/getting-started/watch/tasks" />
+</Columns>

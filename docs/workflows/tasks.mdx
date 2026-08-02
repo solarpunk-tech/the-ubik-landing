@@ -4,35 +4,25 @@ description: "Carry decisions from source to done."
 icon: "list-checks"
 ---
 
-Tasks turns an email, meeting note, approval, or agent recommendation into owned work. Each task keeps its source, owner, deadline, and activity.
+Tasks shows who owes what, what is blocked, and what changed. Every task keeps its source, owner, due date, and activity.
 
 <Frame>
-  ![ubik Tasks queue with owners and follow-up work](https://theubik.com/prototypes/posters/home-task-nav.jpg)
+  ![ubik tasks grouped by obligation](https://theubik.com/prototypes/posters/home-task-nav.jpg)
 </Frame>
 
-<Card title="Open Tasks" icon="arrow-up-right" href="https://app.theubik.com/tasks">
-  Follow one task from source to owner, due date, activity, and completion.
-</Card>
+<Card title="Open tasks" icon="arrow-up-right" href="https://app.theubik.com/tasks" />
 
 ## The loop
 
 <div className="ubik-steps">
-  <div className="ubik-step"><span>01 · Create</span> Turn evidence into a clear outcome.</div>
-  <div className="ubik-step"><span>02 · Assign</span> Keep it, hand it to a teammate, or email an external owner.</div>
-  <div className="ubik-step"><span>03 · Track</span> See whether evidence, approval, or a counterparty blocks it.</div>
-  <div className="ubik-step"><span>04 · Close</span> Preserve the source and final decision.</div>
+  <div className="ubik-step"><span>01 · Filter</span> See work owed by you, owed by them, or recently closed.</div>
+  <div className="ubik-step"><span>02 · Group</span> Switch between urgency, status, counterparty, source, or assignee.</div>
+  <div className="ubik-step"><span>03 · Review</span> Check priority, receipts, activity, and the next move.</div>
+  <div className="ubik-step"><span>04 · Close</span> Record why the work is complete.</div>
 </div>
 
 <div className="ubik-panel">
   External owners can act by email. They do not need a ubik seat.
 </div>
 
-## Useful prompts
-
-| Need | Ask ubik |
-| --- | --- |
-| End of day | "Which tasks are blocked before tomorrow?" |
-| Manager view | "Which tasks are older than 5 days, and who owns the next decision?" |
-| Supplier chase | "Create a task for BL-2408-219 and attach the last ETA note." |
-
-[Inbox](/workflows/inbox) · [Approvals](/workflows/approvals)
+[Inbox](/workflows/inbox) · [Ask ubik](/workflows/ask-ubik)

@@ -4,35 +4,24 @@ description: "Turn trade threads into reviewed decisions."
 icon: "inbox"
 ---
 
-Buyer RFQs, supplier replies, ETA changes, and finance approvals arrive in Inbox. ubik ranks the threads that can change a promise, margin, owner, or system state.
+Inbox keeps the message at the center. Read the thread, open context only when you need it, then reply, assign, or wait.
 
 <Frame>
-  ![ubik Inbox review showing a rate confirmation that needs approval](https://theubik.com/prototypes/posters/inbox-navigation.jpg)
+  ![ubik inbox review](https://theubik.com/prototypes/posters/inbox-navigation.jpg)
 </Frame>
 
-<Card title="Open Inbox" icon="arrow-up-right" href="https://app.theubik.com/inbox">
-  Inspect the source, check the context, then reply, assign, or wait.
-</Card>
+<Card title="Open inbox" icon="arrow-up-right" href="https://app.theubik.com/inbox" />
 
 ## The loop
 
 <div className="ubik-steps">
-  <div className="ubik-step"><span>01 · Detect</span> Find the thread that can change a promise, margin, or owner.</div>
-  <div className="ubik-step"><span>02 · Recall</span> Attach quotes, inventory, lane history, and prior decisions.</div>
-  <div className="ubik-step"><span>03 · Decide</span> Approve, edit, assign, wait, escalate, or reject.</div>
-  <div className="ubik-step"><span>04 · Record</span> Keep the source, reviewer, and timestamp with the action.</div>
+  <div className="ubik-step"><span>01 · Read</span> Start with the latest message and its quoted history.</div>
+  <div className="ubik-step"><span>02 · Check</span> Open Summary, Tasks, Files, or Related when needed.</div>
+  <div className="ubik-step"><span>03 · Act</span> Reply, reply all, forward, assign, or wait.</div>
 </div>
 
 <div className="ubik-panel">
   ubik reads approved inboxes. Replies and writebacks wait for human review. Customer data does not train a model.
 </div>
 
-## Useful prompts
-
-| Need | Ask ubik |
-| --- | --- |
-| Triage | "Which buyer or supplier threads have waited more than 36 hours?" |
-| Quote | "Pull the last three quotes, current margin rule, and open inventory." |
-| Review | "Who owns the next decision, and what evidence is missing?" |
-
-[Tasks](/workflows/tasks) · [Approvals](/workflows/approvals)
+[Ask ubik](/workflows/ask-ubik) · [Tasks](/workflows/tasks)

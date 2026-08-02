@@ -1,8 +1,8 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "luma",
-  "name": "Ubik Guide",
-  "description": "A practical product guide for managers and operators using Ubik in perishable trade.",
+  "name": "ubik guide",
+  "description": "Learn how to use the ubik workspace and app.",
   "logo": {
     "light": "/images/ubik-wordmark-light.png",
     "dark": "/images/ubik-wordmark-dark.png",
@@ -123,17 +123,16 @@
         "group": "Start",
         "pages": [
           "index",
+          "getting-started/read",
+          "getting-started/watch",
+          "getting-started/watch/inbox",
+          "getting-started/watch/ask-ubik",
+          "getting-started/watch/meetings",
+          "getting-started/watch/tasks",
           "getting-started/sign-in",
           "getting-started/workspace-basics",
           "getting-started/how-ubik-ai-works",
-          "getting-started/vs-other-llms",
-          {
-            "group": "Watch",
-            "pages": [
-              "getting-started/watch/inbox-journey"
-            ]
-          },
-          "getting-started/watch/tasks-journey"
+          "getting-started/vs-other-llms"
         ]
       },
       {

@@ -1,55 +1,44 @@
 ---
-title: "Workspace basics"
-description: "Understand the queue, evidence, actions, and audit trail that structure daily trade work."
-icon: "layout-dashboard"
+title: "Operator habits"
+description: "Four review habits, two settings pages, and direct founder support."
+icon: "circle-check-big"
 ---
 
-The workspace is built around one operating question: what needs a decision before it becomes customer risk, margin leakage, clearance delay, or owner ambiguity?
-
-## Main areas you will use
-
-| Area | Purpose |
-| --- | --- |
-| Operating queue | Work prioritized by urgency, risk, owner, and readiness for review. |
-| Source context | The email, document, meeting, chat, or system detail behind the recommendation. |
-| Action panel | The reply, task, approval request, or handoff proposed for review. |
-| Activity trail | The record of who reviewed, edited, approved, rejected, assigned, or escalated the work. |
-
-## Queue states
-
-| State | When you see it |
-| --- | --- |
-| <span className="ux-label is-primary">Now</span> | Review before lower-priority work because a promise, owner, or deadline may move. |
-| <span className="ux-label is-support">Found</span> | ubik detected a change that may affect downstream plans. |
-| <span className="ux-label is-destructive">Analyse</span> | The item needs human judgment before a recommendation is safe. |
-| <span className="ux-label is-success">Ready</span> | The action is prepared and waiting for approval, assignment, or writeback. |
-
-## Handoff modes
-
-Every queue item carries a handoff chip that tells you who has the next move.
-
-<span className="ux-handoff is-human">Human → Review</span> &nbsp;
-<span className="ux-handoff is-agent">Agent → Drafting</span> &nbsp;
-<span className="ux-handoff is-system">System → ERP queue</span> &nbsp;
-<span className="ux-handoff is-final">Final → Committed</span>
-
-## Good operator habits
+## Four habits
 
 <Columns cols={2}>
-  <Card title="Source before speed" icon="search-check">
-    Approve when the source, owner, and action are clear. Fast unsupported work creates downstream rework.
+  <Card title="Read the source" icon="search-check">
+    Open the message, record, or file that supports the proposed move.
   </Card>
-  <Card title="Route by authority" icon="route">
-    Move routine work through the queue; escalate price, margin, promise-date, finance, or compliance decisions.
+  <Card title="Name the owner" icon="user-round-check">
+    Open means your team owes the move. Waiting means somebody else does.
   </Card>
-  <Card title="Keep the trail useful" icon="history">
-    Leave enough context for a future operator to understand what changed and why the action moved.
+  <Card title="Review every write" icon="shield-check">
+    Check customer promises, price, timing, and system changes before approval.
   </Card>
-  <Card title="Teach the memory with variety" icon="brain">
-    RFQs, PO chases, supplier follow-ups, margin checks, meeting recaps, and vendor reviews make deviations easier to spot later.
+  <Card title="Leave a receipt" icon="history">
+    Close work with the reason, evidence, and reviewer attached.
   </Card>
 </Columns>
 
-## Theme and readability
+## Settings
 
-ubik supports light and dark modes. Choose the mode that gives your team the clearest daily read, especially when reviewing grey secondary text, source snippets, and long approval trails.
+<Columns cols={2}>
+  <Card title="Connected tools" icon="plug" href="/admin/integrations">
+    Set read, draft, and reviewed-write boundaries.
+  </Card>
+  <Card title="Security and data" icon="shield-check" href="/admin/security-and-data">
+    Review sensitive context and reporting rules.
+  </Card>
+</Columns>
+
+## Need help?
+
+<Columns cols={2}>
+  <Card title="Raise a request" icon="mail" href="mailto:founders@theubik.com?subject=ubik%20workspace%20request">
+    Send the workspace, affected work, timestamp, and expected result.
+  </Card>
+  <Card title="Call the founders" icon="calendar" href="https://calendar.app.google/frJjo2U6qdBdgZ1w9">
+    Review a workflow, blocker, or rollout decision with Shubhranshu and Hemanth.
+  </Card>
+</Columns>

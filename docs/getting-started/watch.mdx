@@ -1,24 +1,23 @@
 ---
-title: "Inbox"
-description: "Watch Inbox keep the source thread central while context and actions stay close."
-icon: "play"
+title: "Ask ubik"
+description: "Watch a suggested task attach its connected apps and become a reviewable artifact."
+icon: "message-square"
 ---
 
 <div className="ubik-lesson-head">
-  <span>01 / 04 · Inbox</span>
-  <div className="ubik-mode-switch">
-    <a href="/getting-started/read">Read</a>
-    <a className="is-active" href="/getting-started/watch">Watch</a>
-  </div>
+  <span>01 / 06 · Ask ubik</span>
+  <a href="/workflows/ask-ubik">Read</a>
 </div>
 
-<Frame caption="Read first. Open prepared context only when it changes the next move.">
-  <video controls preload="metadata" poster="https://theubik.com/prototypes/posters/inbox-navigation.jpg" alt="Inbox thread review walkthrough" aria-label="Inbox thread review walkthrough" style={{ width: "100%" }}>
-    <source src="https://theubik.com/prototypes/inbox-navigation.mp4" type="video/mp4" />
-  </video>
-</Frame>
+<Tabs>
+  <Tab title="Start" icon="message-square">
+    <Frame><img src="/images/product/ask-operator-start.png" alt="Ask ubik before a suggested task is selected" /></Frame>
+  </Tab>
+  <Tab title="Apps connected" icon="blocks">
+    <Frame><img src="/images/product/ask-operator-connected.png" alt="Ask ubik after GitHub, Notion, and Slack are attached" /></Frame>
+  </Tab>
+</Tabs>
 
-<Columns cols={2}>
-  <Card title="Open the full Inbox guide" icon="inbox" href="/workflows/inbox" />
-  <Card title="Next: Ask ubik" icon="arrow-right" href="/getting-started/watch/ask-ubik" />
-</Columns>
+The click fills the task and attaches the apps that can change its answer.
+
+<Card title="Next: Inbox" icon="arrow-right" href="/getting-started/watch/inbox" />

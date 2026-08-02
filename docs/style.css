@@ -154,6 +154,7 @@ a {
 }
 
 .ubik-lesson-head > span,
+.ubik-lesson-head > a,
 .ubik-mode-switch a {
   font-family: var(--ubik-mono);
   font-size: 0.72rem;
@@ -167,6 +168,18 @@ a {
 
 .dark .ubik-lesson-head > span {
   color: var(--ubik-dark-muted);
+}
+
+.ubik-lesson-head > a {
+  border: 1px solid var(--ubik-light-border);
+  color: var(--ubik-light-text);
+  padding: 0.45rem 0.75rem;
+  text-decoration: none;
+}
+
+.dark .ubik-lesson-head > a {
+  border-color: var(--ubik-dark-border);
+  color: var(--ubik-dark-text);
 }
 
 .ubik-mode-switch {

@@ -1,6 +1,6 @@
 ---
 title: "Inbox"
-description: "Read the thread first, open supporting context when needed, and move the work forward."
+description: "Read the source thread, inspect the context that changes the decision, then move the work."
 icon: "inbox"
 ---
 
@@ -10,19 +10,16 @@ Inbox keeps the source message central. Context and actions stay close without r
   <img src="/images/product/inbox-evidence-first.png" alt="ubik Inbox showing a rate-confirmation thread, its source messages, context tabs, and reply actions" />
 </Frame>
 
-<Steps>
-  <Step title="Triage the queue">Use Business critical, Action required, Waiting on, Updates, and All mail to narrow the work.</Step>
-  <Step title="Read the thread">Check the message and quoted history before its summary.</Step>
-  <Step title="Open context">Use Tasks, Waiting for, Files, and Links only when they change the decision.</Step>
-  <Step title="Move">Reply, assign, ask ubik, or wait for the missing owner or evidence.</Step>
-</Steps>
+Read the message before its summary. Open Tasks, Waiting for, Files, or Links only when they can change the reply, owner, or next move.
 
-<AccordionGroup>
-  <Accordion title="Source boundary" icon="eye">ubik reads approved inboxes and connected sources. Customer data does not train a model.</Accordion>
-  <Accordion title="Action boundary" icon="user-check">Replies, approvals, assignments, and writebacks wait for review.</Accordion>
-</AccordionGroup>
+| Signal | Move |
+| :--- | :--- |
+| A reply is safe and supported | Reply |
+| Another person owns the decision | Assign |
+| The thread needs comparison or synthesis | Ask ubik |
+| Evidence or an external owner is missing | Wait |
 
 <Columns cols={2}>
-  <Card title="Ask about this thread" icon="square-dot" href="/workflows/ask-ubik" />
-  <Card title="Carry it into Tasks" icon="list-checks" href="/workflows/tasks" />
+  <Card title="Ask about this thread" icon="message-square" href="/workflows/ask-ubik" />
+  <Card title="Watch Inbox" icon="play" href="/getting-started/watch/inbox" />
 </Columns>

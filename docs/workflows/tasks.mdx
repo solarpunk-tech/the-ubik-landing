@@ -10,23 +10,16 @@ Tasks groups obligations by who owes the next move, what changed, and what prove
   <img src="/images/product/tasks-obligations.png" alt="ubik Tasks board grouped by open, waiting, and completed obligations" />
 </Frame>
 
-<Columns cols={4}>
-  <Card title="Open" icon="circle-dot">Work owed by you or your team.</Card>
-  <Card title="Waiting" icon="hourglass">Work owed by a supplier, buyer, or another owner.</Card>
-  <Card title="Probably closed" icon="scan-search">Work whose evidence suggests it may already be complete.</Card>
-  <Card title="Closed today" icon="badge-check">Completed work with a reason or receipt.</Card>
-</Columns>
-
-<Steps>
-  <Step title="Filter">Choose Mine or Team, then Open, Waiting, Probably closed, Closed today, or All.</Step>
-  <Step title="Group">Use list, board, or category to compare urgency, owner, source, and counterparty.</Step>
-  <Step title="Inspect">Check the source, confidence signals, receipts, activity, and next action.</Step>
-  <Step title="Close">Record the reason or receipt that proves completion.</Step>
-</Steps>
+| State | Meaning |
+| :--- | :--- |
+| Open | Your team owes the next move |
+| Waiting | A buyer, supplier, or another owner owes it |
+| Probably closed | Evidence suggests the work moved |
+| Closed today | A reason or receipt proves completion |
 
 <div className="ubik-panel">External owners can act by email. They do not need a ubik seat.</div>
 
 <Columns cols={2}>
   <Card title="Trace the source in Inbox" icon="inbox" href="/workflows/inbox" />
-  <Card title="Ask about blocked work" icon="square-dot" href="/workflows/ask-ubik" />
+  <Card title="Watch Tasks" icon="play" href="/getting-started/watch/tasks" />
 </Columns>

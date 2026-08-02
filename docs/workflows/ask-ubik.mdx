@@ -1,7 +1,7 @@
 ---
 title: "Ask ubik"
-description: "Build source-aware operator prompts with connected apps, files, and workspace knowledge."
-icon: "square-dot"
+description: "Name the task, attach the context that can change it, and review the resulting artifact."
+icon: "message-square"
 ---
 
 Name the task, attach the sources that can change the answer, then review the evidence before acting.
@@ -19,30 +19,29 @@ Name the task, attach the sources that can change the answer, then review the ev
   </Tab>
 </Tabs>
 
-<Columns cols={3}>
-  <Card title="Daily morning brief" icon="https://www.google.com/s2/favicons?domain=slack.com&sz=64">
-    Group GitHub, Notion, and Slack work by source, risk, and first action.
-  </Card>
-  <Card title="Catch up on Slack" icon="https://www.google.com/s2/favicons?domain=slack.com&sz=64">
-    Pull decisions, mentions, unanswered questions, and overdue replies.
-  </Card>
-  <Card title="PRs to review" icon="https://www.google.com/s2/favicons?domain=github.com&sz=64">
-    Put blocked and failing reviews first; keep change, risk, and owner attached.
-  </Card>
+## Artifacts
+
+<Tabs>
+  <Tab title="Morning brief" icon="https://www.google.com/s2/favicons?domain=notion.so&sz=64">
+    | Reads | Creates | Review |
+    | :--- | :--- | :--- |
+    | GitHub, Notion, Slack | Work grouped by source, risk, and first action | Urgent items and the top three moves |
+  </Tab>
+  <Tab title="Slack catch-up" icon="https://www.google.com/s2/favicons?domain=slack.com&sz=64">
+    | Reads | Creates | Review |
+    | :--- | :--- | :--- |
+    | Selected Slack channels | Decisions, mentions, unanswered questions | Sensitive or unclear threads |
+  </Tab>
+  <Tab title="PR review" icon="https://www.google.com/s2/favicons?domain=github.com&sz=64">
+    | Reads | Creates | Review |
+    | :--- | :--- | :--- |
+    | GitHub pull requests and checks | Queue ordered by risk, status, and owner | Failing checks and blocked releases |
+  </Tab>
+</Tabs>
+
+Ask for sources, dates, owner, uncertainty, and the next move. Open the cited context before sending a reply or changing another system.
+
+<Columns cols={2}>
+  <Card title="Open Ask ubik" icon="arrow-up-right" href="https://app.theubik.com" />
+  <Card title="Watch the lesson" icon="play" href="/getting-started/watch" />
 </Columns>
-
-| Operator task | Connected sources | Useful output | Review before acting |
-| :--- | :--- | :--- | :--- |
-| Daily morning brief | GitHub · Notion · Slack | One prioritized brief grouped by source | Urgent items and the top three actions |
-| Catch up on Slack | Slack | Decisions, mentions, open questions, and overdue replies | Sensitive or ambiguous threads |
-| PRs to review | GitHub | Review queue with change, risk, status, and owner | Failing checks and blocked releases |
-| Prepare for a meeting | Calendar · meetings · workspace knowledge | Recent decisions, open tasks, risks, and questions | Stale owners and unsupported assumptions |
-
-<Steps>
-  <Step title="Name the work">State the decision, review, comparison, or action.</Step>
-  <Step title="Attach sources">Add only the apps, files, or workspace knowledge that can change the answer.</Step>
-  <Step title="Set the contract">Require sources, dates, owner, uncertainty, and next move.</Step>
-  <Step title="Review">Open the cited context before a reply, task, or writeback moves.</Step>
-</Steps>
-
-<Card title="Open Ask ubik" icon="arrow-up-right" href="https://app.theubik.com" />

@@ -1,36 +1,29 @@
-# ubik documentation
+# ubik guide
 
-> Learn how to use the ubik workspace to review source context, ask across connected apps, capture meeting decisions, and carry obligations to completion.
+> Use Ask ubik, Inbox, Tasks, and reviewed workflows. Watch six short lessons from connected question to tested workflow update.
 
 ## Start
 
-- [Getting started](https://docs.theubik.com/index.md): A short introduction to the ubik workspace and the Read or Watch learning paths.
-- [Read Inbox](https://docs.theubik.com/getting-started/read.md): Read the source thread before its summary.
-- [Read Ask ubik](https://docs.theubik.com/getting-started/read/ask-ubik.md): Attach sources that can change the answer.
-- [Read Meetings](https://docs.theubik.com/getting-started/read/meetings.md): Review decisions and owners before notes enter workspace memory.
-- [Read Tasks](https://docs.theubik.com/getting-started/read/tasks.md): Track who owes the next move and the evidence attached.
-- [Watch Inbox](https://docs.theubik.com/getting-started/watch.md): See the thread-first Inbox loop.
-- [Watch Ask ubik](https://docs.theubik.com/getting-started/watch/ask-ubik.md): See a suggestion become a connected prompt.
-- [Watch Meetings](https://docs.theubik.com/getting-started/watch/meetings.md): See a conversation become reviewed notes.
-- [Watch Tasks](https://docs.theubik.com/getting-started/watch/tasks.md): See obligations grouped by owner and evidence.
-- [Sign in](https://docs.theubik.com/getting-started/sign-in.md): Enter an ubik workspace and choose the right account.
-- [Workspace basics](https://docs.theubik.com/getting-started/workspace-basics.md): Understand the workspace navigation and review surfaces.
-- [How ubik AI works](https://docs.theubik.com/getting-started/how-ubik-ai-works.md): Use source-backed recommendations while preserving operator control.
-- [ubik vs. other LLMs](https://docs.theubik.com/getting-started/vs-other-llms.md): Understand how workspace context differs from a general chatbot.
+- [Getting started](https://docs.theubik.com/index.md): Choose Read or Watch.
+- [Operator habits](https://docs.theubik.com/getting-started/workspace-basics.md): Review sources, owners, writes, and closure evidence; open settings or contact the founders.
 
-## Core workflows
+## Read
 
-- [Ask ubik](https://docs.theubik.com/workflows/ask-ubik.md): Build source-aware operator prompts with connected apps, files, and organization knowledge.
-- [Inbox](https://docs.theubik.com/workflows/inbox.md): Read the thread first, inspect context on demand, and move the work.
-- [Meetings](https://docs.theubik.com/workflows/meetings.md): Capture locally, review notes, and keep decisions and follow-ups searchable.
-- [Tasks](https://docs.theubik.com/workflows/tasks.md): Track obligations by who owes the next move, evidence, activity, and closure receipts.
+- [Ask ubik](https://docs.theubik.com/workflows/ask-ubik.md): Attach useful context and review the artifact it creates.
+- [Inbox](https://docs.theubik.com/workflows/inbox.md): Read the source thread, inspect decision-changing context, then move the work.
+- [Tasks](https://docs.theubik.com/workflows/tasks.md): Track who owes the next move and what proves completion.
+- [Workflows](https://docs.theubik.com/workflows/workflows.md): Map two or three loops in Week 1, ship one reviewed workflow, then measure its result.
 
-## Administration
+## Watch
 
-- [Connected tools](https://docs.theubik.com/admin/integrations.md): Choose which systems ubik may read from or update.
-- [Users and access](https://docs.theubik.com/admin/users-and-access.md): Manage workspace membership and roles.
-- [Security and data](https://docs.theubik.com/admin/security-and-data.md): Review data boundaries, model use, and writeback controls.
+- [Ask ubik](https://docs.theubik.com/getting-started/watch.md): See a suggested task attach connected apps.
+- [Inbox](https://docs.theubik.com/getting-started/watch/inbox.md): See a source thread stay central while context remains close.
+- [Tasks](https://docs.theubik.com/getting-started/watch/tasks.md): See obligations grouped by owner and closure evidence.
+- [Workflows](https://docs.theubik.com/getting-started/watch/workflows.md): See a library choice open into a live operating queue.
+- [Trade memory](https://docs.theubik.com/getting-started/watch/trade-memory.md): See prior decisions and evidence return for the next question.
+- [Finetuning](https://docs.theubik.com/getting-started/watch/finetuning.md): Turn reviewed examples and failures into a tested workflow update.
 
-## Support
+## Settings
 
-- [FAQ](https://docs.theubik.com/troubleshooting/faq.md): Troubleshoot common workspace, integration, and workflow questions.
+- [Connected tools](https://docs.theubik.com/admin/integrations.md): Set read, draft, and reviewed-write boundaries.
+- [Security and data](https://docs.theubik.com/admin/security-and-data.md): Review sensitive context and reporting rules.

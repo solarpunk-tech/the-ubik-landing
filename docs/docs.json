@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "luma",
   "name": "ubik guide",
-  "description": "Learn how to use the ubik workspace and app.",
+  "description": "Run Ask ubik, Inbox, Tasks, and reviewed trade workflows.",
   "logo": {
     "light": "/images/ubik-wordmark-light.png",
     "dark": "/images/ubik-wordmark-dark.png",
@@ -116,63 +116,93 @@
   "metadata": {
     "timestamp": true
   },
+  "redirects": [
+    {
+      "source": "/getting-started/read",
+      "destination": "/workflows/ask-ubik"
+    },
+    {
+      "source": "/getting-started/read/ask-ubik",
+      "destination": "/workflows/ask-ubik"
+    },
+    {
+      "source": "/getting-started/read/meetings",
+      "destination": "/workflows/workflows"
+    },
+    {
+      "source": "/getting-started/read/tasks",
+      "destination": "/workflows/tasks"
+    },
+    {
+      "source": "/getting-started/watch/ask-ubik",
+      "destination": "/getting-started/watch"
+    },
+    {
+      "source": "/getting-started/watch/meetings",
+      "destination": "/getting-started/watch/workflows"
+    },
+    {
+      "source": "/getting-started/sign-in",
+      "destination": "/"
+    },
+    {
+      "source": "/getting-started/how-ubik-ai-works",
+      "destination": "/getting-started/watch/trade-memory"
+    },
+    {
+      "source": "/getting-started/vs-other-llms",
+      "destination": "/"
+    },
+    {
+      "source": "/admin/users-and-access",
+      "destination": "/getting-started/workspace-basics"
+    },
+    {
+      "source": "/workflows/meetings",
+      "destination": "/workflows/workflows"
+    },
+    {
+      "source": "/workflows/projects",
+      "destination": "/workflows/workflows"
+    },
+    {
+      "source": "/workflows/market-intel",
+      "destination": "/workflows/workflows"
+    }
+  ],
   "navigation": {
     "directory": "card",
     "groups": [
       {
         "group": "Start",
         "pages": [
-          "index",
-          {
-            "group": "Learn",
-            "pages": [
-              "getting-started/read",
-              "getting-started/watch"
-            ]
-          },
-          "getting-started/sign-in",
-          "getting-started/workspace-basics",
-          "getting-started/how-ubik-ai-works",
-          "getting-started/vs-other-llms"
+          "index"
         ]
       },
       {
-        "group": "Features",
+        "group": "Read",
         "pages": [
           "workflows/ask-ubik",
           "workflows/inbox",
-          "workflows/meetings",
           "workflows/tasks",
-          {
-            "group": "Coming soon",
-            "pages": [
-              "workflows/workflows",
-              "workflows/projects",
-              "workflows/market-intel"
-            ]
-          },
-          {
-            "group": "Reference workflows",
-            "pages": [
-              "workflows/inquiry-to-shipment",
-              "workflows/approvals",
-              "workflows/daily-operating-queue"
-            ]
-          }
+          "workflows/workflows"
         ]
       },
       {
-        "group": "Admin",
+        "group": "Watch",
         "pages": [
-          "admin/users-and-access",
-          "admin/integrations",
-          "admin/security-and-data"
+          "getting-started/watch",
+          "getting-started/watch/inbox",
+          "getting-started/watch/tasks",
+          "getting-started/watch/workflows",
+          "getting-started/watch/trade-memory",
+          "getting-started/watch/finetuning"
         ]
       },
       {
-        "group": "Troubleshooting",
+        "group": "Help",
         "pages": [
-          "troubleshooting/faq"
+          "getting-started/workspace-basics"
         ]
       }
     ]

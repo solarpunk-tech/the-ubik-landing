@@ -1,29 +1,10 @@
-const AppChip = ({ mark, name }) => (
-  <span className="ubik-demo__chip"><span>{mark}</span>{name}</span>
-);
-
-const StateTabs = ({ id, label, tabs, children }) => (
-  <div className={`ubik-demo__states ubik-demo__states--${id}`}>
-    {tabs.map((tab, index) => (
-      <input
-        className="ubik-demo__state"
-        defaultChecked={index === 0}
-        id={`${id}-${tab.id}`}
-        key={tab.id}
-        name={`${id}-state`}
-        type="radio"
-      />
-    ))}
-    <div className="ubik-demo__tabs" role="tablist" aria-label={label}>
-      {tabs.map((tab) => (
-        <label htmlFor={`${id}-${tab.id}`} key={tab.id}>{tab.label}</label>
-      ))}
-    </div>
-    <div className="ubik-demo__panels">{children}</div>
-  </div>
-);
-
 export const OperatorPrototype = ({ compact = false }) => {
+  const AppChip = ({ mark, name }) => <span className="ubik-demo__chip"><span>{mark}</span>{name}</span>;
+  const StateTabs = ({ id, label, tabs, children }) => <div className={`ubik-demo__states ubik-demo__states--${id}`}>
+    {tabs.map((tab, index) => <input className="ubik-demo__state" defaultChecked={index === 0} id={`${id}-${tab.id}`} key={tab.id} name={`${id}-state`} type="radio" />)}
+    <div className="ubik-demo__tabs" role="tablist" aria-label={label}>{tabs.map((tab) => <label htmlFor={`${id}-${tab.id}`} key={tab.id}>{tab.label}</label>)}</div>
+    <div className="ubik-demo__panels">{children}</div>
+  </div>;
   const tabs = [
     { id: "start", label: "Start" },
     { id: "connected", label: "Apps connected" },
@@ -73,6 +54,11 @@ export const OperatorPrototype = ({ compact = false }) => {
 };
 
 export const InboxPrototype = () => {
+  const StateTabs = ({ id, label, tabs, children }) => <div className={`ubik-demo__states ubik-demo__states--${id}`}>
+    {tabs.map((tab, index) => <input className="ubik-demo__state" defaultChecked={index === 0} id={`${id}-${tab.id}`} key={tab.id} name={`${id}-state`} type="radio" />)}
+    <div className="ubik-demo__tabs" role="tablist" aria-label={label}>{tabs.map((tab) => <label htmlFor={`${id}-${tab.id}`} key={tab.id}>{tab.label}</label>)}</div>
+    <div className="ubik-demo__panels">{children}</div>
+  </div>;
   const tabs = [{ id: "thread", label: "Thread" }, { id: "tasks", label: "Tasks" }, { id: "files", label: "Files" }];
   return (
     <section className="ubik-demo" aria-label="Interactive Inbox guide">
@@ -94,6 +80,11 @@ export const InboxPrototype = () => {
 };
 
 export const TasksPrototype = () => {
+  const StateTabs = ({ id, label, tabs, children }) => <div className={`ubik-demo__states ubik-demo__states--${id}`}>
+    {tabs.map((tab, index) => <input className="ubik-demo__state" defaultChecked={index === 0} id={`${id}-${tab.id}`} key={tab.id} name={`${id}-state`} type="radio" />)}
+    <div className="ubik-demo__tabs" role="tablist" aria-label={label}>{tabs.map((tab) => <label htmlFor={`${id}-${tab.id}`} key={tab.id}>{tab.label}</label>)}</div>
+    <div className="ubik-demo__panels">{children}</div>
+  </div>;
   const tabs = [{ id: "mine", label: "Mine" }, { id: "team", label: "Team" }];
   const Rows = ({ team = false }) => (team ? [
     ["Open", "Review margin exception", "Finance"], ["Waiting", "Customer artwork approval", "Buyer"], ["Closed", "Container pickup booked", "Confirmation attached"],
@@ -112,6 +103,11 @@ export const TasksPrototype = () => {
 };
 
 export const WorkflowPrototype = ({ compact = false }) => {
+  const StateTabs = ({ id, label, tabs, children }) => <div className={`ubik-demo__states ubik-demo__states--${id}`}>
+    {tabs.map((tab, index) => <input className="ubik-demo__state" defaultChecked={index === 0} id={`${id}-${tab.id}`} key={tab.id} name={`${id}-state`} type="radio" />)}
+    <div className="ubik-demo__tabs" role="tablist" aria-label={label}>{tabs.map((tab) => <label htmlFor={`${id}-${tab.id}`} key={tab.id}>{tab.label}</label>)}</div>
+    <div className="ubik-demo__panels">{children}</div>
+  </div>;
   const tabs = [{ id: "library", label: "Library" }, { id: "live", label: "Live" }, { id: "map", label: "Week 1 map" }];
   return (
     <section className={`ubik-demo ${compact ? "is-compact" : ""}`} aria-label="Interactive workflow guide">
@@ -126,6 +122,11 @@ export const WorkflowPrototype = ({ compact = false }) => {
 };
 
 export const WatchPrototype = () => {
+  const StateTabs = ({ id, label, tabs, children }) => <div className={`ubik-demo__states ubik-demo__states--${id}`}>
+    {tabs.map((tab, index) => <input className="ubik-demo__state" defaultChecked={index === 0} id={`${id}-${tab.id}`} key={tab.id} name={`${id}-state`} type="radio" />)}
+    <div className="ubik-demo__tabs" role="tablist" aria-label={label}>{tabs.map((tab) => <label htmlFor={`${id}-${tab.id}`} key={tab.id}>{tab.label}</label>)}</div>
+    <div className="ubik-demo__panels">{children}</div>
+  </div>;
   const tabs = [{ id: "ask", label: "Ask ubik" }, { id: "inbox", label: "Inbox" }, { id: "tasks", label: "Tasks" }, { id: "workflows", label: "Workflows" }, { id: "memory", label: "Trade memory" }, { id: "finetuning", label: "Finetuning" }];
   const steps = [
     ["ask", "01 / 06", "Question becomes an artifact", "Attach only context that can change the answer."],
@@ -147,25 +148,29 @@ export const WatchPrototype = () => {
   );
 };
 
-const PRODUCT_SURFACES = [
-  { id: "inbox", label: "Inbox", rows: [["Inquiry", "Buyer asks for availability", "New"], ["PO", "PO-2381 needs SKU mapping", "2h"]] },
-  { id: "email", label: "Email", rows: [["Drafted", "Renewal follow-up ready to send", "Draft"], ["Sent", "Quote update sent to three vendors", "2m"]] },
-  { id: "tasks", label: "Tasks", rows: [["Open", "Confirm COA for BL-2408-219", "Today"], ["Open", "Send revised quote to MFL", "Tomorrow"]] },
-  { id: "workflows", label: "Workflows", rows: [["Running", "Import clearance, 6 of 9 steps", "62%"], ["Queued", "Demurrage review", "Next"]] },
-  { id: "markets", label: "Market intel", rows: [["Up", "Shrimp L2 spot", "+4.2%"], ["Flat", "Salmon fillet, 30d average", "$6.80/kg"]] },
-  { id: "meetings", label: "Meetings", rows: [["Fri", "Buyer sync, renewal terms", "10:00"], ["Ready", "Transcript, MFL renewal call", "Today"], ["Pre-read", "Last-call memory summarized", "Ready"]] },
-  { id: "artifacts", label: "Artifacts", rows: [["PDF", "Q3 shipment report", "Ready"], ["DOC", "Customs packet, BL-2408-219", "Ready"]] },
-];
-
-export const ProductSurfacePreview = () => (
-  <section className="ubik-demo ubik-surface-preview" aria-label="ubik product surfaces">
+export const ProductSurfacePreview = () => {
+  const surfaces = [
+    { id: "inbox", label: "Inbox", rows: [["Inquiry", "Buyer asks for availability", "New"], ["PO", "PO-2381 needs SKU mapping", "2h"]] },
+    { id: "email", label: "Email", rows: [["Drafted", "Renewal follow-up ready to send", "Draft"], ["Sent", "Quote update sent to three vendors", "2m"]] },
+    { id: "tasks", label: "Tasks", rows: [["Open", "Confirm COA for BL-2408-219", "Today"], ["Open", "Send revised quote to MFL", "Tomorrow"]] },
+    { id: "workflows", label: "Workflows", rows: [["Running", "Import clearance, 6 of 9 steps", "62%"], ["Queued", "Demurrage review", "Next"]] },
+    { id: "markets", label: "Market intel", rows: [["Up", "Shrimp L2 spot", "+4.2%"], ["Flat", "Salmon fillet, 30d average", "$6.80/kg"]] },
+    { id: "meetings", label: "Meetings", rows: [["Fri", "Buyer sync, renewal terms", "10:00"], ["Ready", "Transcript, MFL renewal call", "Today"], ["Pre-read", "Last-call memory summarized", "Ready"]] },
+    { id: "artifacts", label: "Artifacts", rows: [["PDF", "Q3 shipment report", "Ready"], ["DOC", "Customs packet, BL-2408-219", "Ready"]] },
+  ];
+  const StateTabs = ({ id, label, tabs, children }) => <div className={`ubik-demo__states ubik-demo__states--${id}`}>
+    {tabs.map((tab, index) => <input className="ubik-demo__state" defaultChecked={index === 0} id={`${id}-${tab.id}`} key={tab.id} name={`${id}-state`} type="radio" />)}
+    <div className="ubik-demo__tabs" role="tablist" aria-label={label}>{tabs.map((tab) => <label htmlFor={`${id}-${tab.id}`} key={tab.id}>{tab.label}</label>)}</div>
+    <div className="ubik-demo__panels">{children}</div>
+  </div>;
+  return <section className="ubik-demo ubik-surface-preview" aria-label="ubik product surfaces">
     <div className="ubik-surface-preview__stats">
       <div><strong>$700M+</strong><span>Perishables traded</span></div>
       <div><strong>20x</strong><span>Faster operations</span></div>
       <div><strong>$200K</strong><span>Average annual savings</span></div>
     </div>
-    <StateTabs id="surface" label="Product surface" tabs={PRODUCT_SURFACES}>
-      {PRODUCT_SURFACES.map((surface) => (
+    <StateTabs id="surface" label="Product surface" tabs={surfaces}>
+      {surfaces.map((surface) => (
         <div className="ubik-demo__panel" data-state={surface.id} key={surface.id}>
           <div className="ubik-surface-preview__head"><span>{surface.label}</span><b>Live product surface</b></div>
           <div className="ubik-demo__rows">
@@ -179,10 +184,15 @@ export const ProductSurfacePreview = () => (
       <span><b>Private</b>Data never trained on</span>
       <a href="https://theubik.com/download"><b>ubik Meetings</b>Get the desktop app</a>
     </div>
-  </section>
-);
+  </section>;
+};
 
 export const MeetingsPreview = () => {
+  const StateTabs = ({ id, label, tabs, children }) => <div className={`ubik-demo__states ubik-demo__states--${id}`}>
+    {tabs.map((tab, index) => <input className="ubik-demo__state" defaultChecked={index === 0} id={`${id}-${tab.id}`} key={tab.id} name={`${id}-state`} type="radio" />)}
+    <div className="ubik-demo__tabs" role="tablist" aria-label={label}>{tabs.map((tab) => <label htmlFor={`${id}-${tab.id}`} key={tab.id}>{tab.label}</label>)}</div>
+    <div className="ubik-demo__panels">{children}</div>
+  </div>;
   const tabs = [{ id: "list", label: "List" }, { id: "calendar", label: "Calendar" }];
   return (
     <section className="ubik-demo ubik-meetings" aria-label="Meetings workspace">

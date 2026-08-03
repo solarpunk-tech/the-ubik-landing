@@ -102,7 +102,7 @@ const drawCloud: DeploySceneDraw = (ctx, w, h) => {
 const drawManaged: DeploySceneDraw = (ctx, w, h, phase = 0) => {
   const stride = Math.sin(phase * 2.2);
   const lift = Math.cos(phase * 4.4) * h * 0.012;
-  const cx = w * (0.56 + Math.sin(phase * 0.7) * 0.014);
+  const cx = w * 0.56;
   const shoulderY = h * 0.36 + lift;
   const hipY = h * 0.61 + lift;
 
@@ -151,17 +151,19 @@ const drawManaged: DeploySceneDraw = (ctx, w, h, phase = 0) => {
   ctx.lineTo(cx + w * 0.28 + armSwing, h * 0.36);
   ctx.stroke();
 
-  const legSwing = stride * w * 0.08;
+  // Keep the gait compact: one leg trails, one leg reaches forward, but the
+  // silhouette stays legible as a single managed runner rather than a starburst.
+  const legSwing = stride * w * 0.05;
   ctx.lineWidth = Math.max(7, w * 0.06);
   ctx.beginPath();
   ctx.moveTo(cx - w * 0.035, hipY);
-  ctx.lineTo(cx - w * 0.1 - legSwing, h * 0.75);
-  ctx.lineTo(cx - w * 0.3 - legSwing * 0.6, h * 0.84);
+  ctx.lineTo(cx - w * 0.06 - legSwing, h * 0.75);
+  ctx.lineTo(cx - w * 0.16 - legSwing * 0.45, h * 0.84);
   ctx.stroke();
   ctx.beginPath();
   ctx.moveTo(cx + w * 0.035, hipY);
-  ctx.lineTo(cx + w * 0.12 + legSwing, h * 0.72);
-  ctx.lineTo(cx + w * 0.27 + legSwing * 0.55, h * 0.88);
+  ctx.lineTo(cx + w * 0.08 + legSwing, h * 0.72);
+  ctx.lineTo(cx + w * 0.17 + legSwing * 0.45, h * 0.88);
   ctx.stroke();
 
   // Ground dash.

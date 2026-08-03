@@ -60,7 +60,7 @@ export const aiMonitorPost: BlogPost = {
   featured: true,
   ogImage: "/blog/ai-monitor-layer/header-light.png",
   heroLightImage: "/blog/ai-monitor-layer/header-light.png",
-  heroDarkImage: "/blog/ai-monitor-layer/header-dark.png"
+  heroDarkImage: "/blog/ai-monitor-layer/header-dark.png",
 };
 
 export const monitorMetrics: MonitorMetric[] = [

@@ -59,6 +59,7 @@ export default function App() {
           <Route path="/terms-of-service" element={<Terms />} />
           <Route path="/terms-of-service.html" element={<Terms />} />
           <Route path="/security" element={<SecurityMemo />} />
+          <Route path="/learn" element={<HowItWorks />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/download" element={<Download />} />

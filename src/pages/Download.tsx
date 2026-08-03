@@ -64,7 +64,7 @@ const downloadOptions: DownloadOption[] = [
 ];
 
 const macSteps = [
-  { n: 1, title: "Open the installer", copy: "Open the Ubik Meetings DMG from your Downloads folder." },
+  { n: 1, title: "Open the installer", copy: "Open the ubik Meetings DMG from your Downloads folder." },
   { n: 2, title: "Move to Applications", copy: "Drag Ubik into Applications, then launch it from there." },
   { n: 3, title: "Allow local detection", copy: "Enable Screen Recording and Microphone in System Settings, then restart Ubik." }
 ];
@@ -78,7 +78,7 @@ const windowsSteps = [
 const proofCards = [
   {
     title: "Doesn't join meetings.",
-    copy: "Ubik Meetings stays on your desktop, so there is no extra bot in the guest list.",
+    copy: "ubik Meetings stays on your desktop, so there is no extra bot in the guest list.",
     visual: "participants"
   },
   {
@@ -400,8 +400,8 @@ export default function Download() {
   return (
     <PageShell>
       <Seo
-        title="Download Ubik Meetings"
-        description="Download Ubik Meetings for Mac or Windows. Join meetings from your desktop without adding a bot to the guest list."
+        title="Download ubik Meetings"
+        description="Download ubik Meetings for Mac or Windows. Join meetings from your desktop without adding a bot to the guest list."
       />
       <main className="relative overflow-hidden">
         <section className="meetings-brand-hero relative border-b">
@@ -409,7 +409,7 @@ export default function Download() {
           <div className="container-page relative z-10 py-16 sm:py-20 lg:py-24">
             <div className="mx-auto max-w-4xl text-center">
               <h1 className="text-5xl font-semibold leading-[1.02] sm:text-6xl lg:text-7xl">
-                Ubik Meetings stays with you, not inside the call.
+                ubik Meetings stays with you, not inside the call.
               </h1>
               <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-primary-foreground/84 sm:text-lg">
                 A private desktop companion for meeting alerts, reviewed notes, and the work context operators need before the next action moves.
@@ -459,7 +459,7 @@ export default function Download() {
                 </div>
               ) : (
                 <div className="mx-auto mt-8 max-w-xl border bg-card px-5 py-4 text-sm font-medium leading-6 text-foreground shadow-sm">
-                  Open this page on a Mac or Windows desktop to install Ubik Meetings.
+                  Open this page on a Mac or Windows desktop to install ubik Meetings.
                 </div>
               )}
               <p className="mt-3 text-xs leading-5 text-primary-foreground/76">
@@ -527,14 +527,14 @@ export default function Download() {
             <p className="max-w-3xl text-foreground/72 dark:text-foreground/82">
               {canInstallDesktop
                 ? "Use the desktop app for meeting alerts now. As the bridge expands, local spreadsheets, portals, and documents can move into reviewed Ubik workflows without turning every file into cloud clutter."
-                : "Ubik Meetings is a Mac and Windows desktop app. Keep this page handy, then reopen it on your workstation to choose the right installer."}
+                : "ubik Meetings is a Mac and Windows desktop app. Keep this page handy, then reopen it on your workstation to choose the right installer."}
             </p>
           </div>
           <div className="grid gap-px bg-border md:grid-cols-3">
             {(canInstallDesktop
               ? steps
               : [
-                  { n: 1, title: "Use a workstation", copy: "Open this page from the Mac or Windows machine where you want Ubik Meetings installed." },
+                  { n: 1, title: "Use a workstation", copy: "Open this page from the Mac or Windows machine where you want ubik Meetings installed." },
                   { n: 2, title: "Pick the build", copy: "The desktop page will offer the detected installer first, with a selector for other builds." },
                   { n: 3, title: "Enable local access", copy: "After installing, allow the requested local permissions so meeting detection can run on-device." }
                 ]

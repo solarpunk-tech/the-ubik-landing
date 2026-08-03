@@ -12,6 +12,7 @@ import { MarginLeakArticle } from "@/components/blog/MarginLeakVisuals";
 import { DecisionTreeTable, OriginFlowMap, OriginPortraitRail, TariffDifferentialMatrix } from "@/components/blog/OriginRouletteVisuals";
 import { PageShell } from "@/components/landing/PageShell";
 import { SharePostPanel } from "@/components/landing/SharePostPanel";
+import { TradeNoteBitmatrix } from "@/components/landing/TradeNoteBitmatrix";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Seo } from "@/components/seo/Seo";
 import { Button } from "@/components/ui/button";
@@ -131,11 +132,11 @@ function TradeNotesNewsletter({ source }: { source: string }) {
   }
 
   return (
-    <section className="border bg-shell p-5 sm:p-6">
+    <section className="trade-notes-newsletter border bg-card p-5 text-foreground sm:p-6 dark:bg-shell dark:text-primary-foreground">
       <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(18rem,26rem)] md:items-center">
         <div>
-          <p className="section-label">Trade Notes</p>
-          <h2 className="mt-3 text-3xl font-semibold">Subscribe to the field notes.</h2>
+          <p className="section-label text-foreground/70 dark:text-primary-foreground/72">Trade Notes</p>
+          <h2 className="mt-3 text-3xl font-semibold text-foreground dark:text-primary-foreground">Subscribe to the field notes.</h2>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-foreground/72 dark:text-foreground/82">
             Market reads, workflow notes, and reviewed automation lessons for perishable trade operators.
           </p>
@@ -540,31 +541,37 @@ export default function Blog() {
               </Link>
             ))}
           </nav>
-          <p className="mt-4 max-w-2xl text-sm leading-6 text-primary-foreground/84">
+          <p className="mt-4 max-w-2xl text-sm leading-6 text-foreground/72 dark:text-foreground/82">
             {categoryMetadata?.description ?? "Field notes on perishable trade, operations, and reviewed automation."}
           </p>
         </div>
         {filteredPosts.length ? (
           <div className="grid gap-px bg-border">
             {filteredPosts.map((post) => (
-            <Link key={post.slug} to={`/blog/${post.slug}`} className="grid min-h-72 bg-background hover:bg-shell lg:grid-cols-[0.44fr_0.56fr]">
-              <div className="p-5 sm:p-6">
-                <p className="text-xs uppercase tracking-[0.14em] text-foreground/78">
-                  {post.date} / {post.category}
-                </p>
-                <h2 className="mt-8 max-w-xl text-3xl font-semibold">{post.title}</h2>
-                <p className="mt-5 max-w-xl text-base leading-7 text-foreground/88">{post.excerpt}</p>
-                <span className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-primary">
-                  Read field note <ArrowRightIcon aria-hidden />
-                </span>
-              </div>
-              {post.heroLightImage && post.heroDarkImage ? (
-                <div className="min-h-64 overflow-hidden bg-shell">
-                  <img src={post.heroLightImage} alt="" className="h-full min-h-64 w-full object-contain dark:hidden" loading="lazy" />
-                  <img src={post.heroDarkImage} alt="" className="hidden h-full min-h-64 w-full object-contain dark:block" loading="lazy" />
+              <Link
+                key={post.slug}
+                to={`/blog/${post.slug}`}
+                className="trade-note-card grid gap-6 bg-background p-4 transition-colors hover:bg-shell sm:p-6 md:grid-cols-[minmax(0,1fr)_minmax(13rem,16rem)] md:items-center md:gap-8 md:p-7"
+              >
+                <div className="order-2 min-w-0 md:order-1">
+                  <p className="trade-note-card-meta text-xs uppercase tracking-[0.14em] text-foreground/78">
+                    {post.date} / {post.category}
+                  </p>
+                  <h2 className="trade-note-card-title mt-5 max-w-xl text-3xl font-semibold">{post.title}</h2>
+                  <p className="trade-note-card-excerpt mt-4 max-w-xl text-base leading-7 text-foreground/88">{post.excerpt}</p>
+                  <span className="trade-note-card-link mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary">
+                    Read field note <ArrowRightIcon aria-hidden />
+                  </span>
                 </div>
-              ) : null}
-            </Link>
+                <div className="order-1 flex justify-center md:order-2 md:justify-end">
+                  <div className="trade-note-illustration-frame aspect-square w-full max-w-[14rem] p-2 sm:p-3">
+                    <TradeNoteBitmatrix
+                      variant={post.slug === originRoulettePost.slug ? "roulette" : post.slug === marginLeakPost.slug ? "bleed" : "drift"}
+                      className="h-full w-full"
+                    />
+                  </div>
+                </div>
+              </Link>
             ))}
           </div>
         ) : (

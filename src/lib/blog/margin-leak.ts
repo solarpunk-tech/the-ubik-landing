@@ -44,7 +44,7 @@ export const marginLeakPost: BlogPost = {
   featured: true,
   ogImage: "/blog/margin-leak/header-light.png",
   heroLightImage: "/blog/margin-leak/header-light.png",
-  heroDarkImage: "/blog/margin-leak/header-dark.png"
+  heroDarkImage: "/blog/margin-leak/header-dark.png",
 };
 
 export const leakNodes: LeakNode[] = [

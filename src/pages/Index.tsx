@@ -23,19 +23,19 @@ const heroCopy: Record<string, { lead: string; emphasis: string; subhead: string
     lead: "Trade decisions,",
     emphasis: "together.",
     subhead:
-      "Ubik doesn't just wrap your apps in a chat box. It trains the memory, models and agents that do the work."
+      "ubik doesn't just wrap your apps in a chat box. It trains the memory, models and agents that do the work."
   },
   ship: {
     lead: "Trade operators,",
     emphasis: "unite.",
     subhead:
-      "Ubik clears the manual work so ERPs, inboxes and vendor threads stop running your day."
+      "ubik clears the manual work so ERPs, inboxes and vendor threads stop running your day."
   },
   harvest: {
     lead: "Every lot,",
     emphasis: "accounted for.",
     subhead:
-      "Ubik keeps the lot, the spec and the promise attached, so a claim six weeks later still arrives with its evidence."
+      "ubik keeps the lot, the spec and the promise attached, so a claim six weeks later still arrives with its evidence."
   }
 };
 
@@ -79,7 +79,7 @@ const workOutputs = [
     label: "Shipment tracker",
     status: "Route found",
     title: "A faster lane surfaced",
-    copy: "The booked Maersk route stays visible while Ubik prices a lower-cost alternative across the same two points.",
+    copy: "The booked Maersk route stays visible while ubik prices a lower-cost alternative across the same two points.",
     system: "Carrier + shipment tracker",
     view: "route"
   },
@@ -87,7 +87,7 @@ const workOutputs = [
     label: "Approval",
     status: "Approved",
     title: "Manager decisions are in",
-    copy: "Leadership sees what was delegated, who approved it in their Ubik, and the trade-off each manager accepted.",
+    copy: "Leadership sees what was delegated, who approved it in their ubik, and the trade-off each manager accepted.",
     system: "Leadership view",
     view: "approval"
   },
@@ -279,7 +279,7 @@ const teamProfiles = [
   {
     name: "Leadership announcement coming soon",
     role: "AI/ML & Product Engineering",
-    bio: "Our AI/ML and product engineering leader is working with Ubik in stealth. We’ll introduce them when the time is right."
+    bio: "Our AI/ML and product engineering leader is working with ubik in stealth. We’ll introduce them when the time is right."
   }
 ] as const;
 
@@ -750,10 +750,10 @@ function TradeFlowOntology() {
       <div className="container-page py-16 sm:py-24">
         <div className="max-w-6xl">
           <h2 className="home-section-title max-w-4xl">No bots, copilots, or Chief of Staffs</h2>
-          <p className="mt-5 max-w-3xl text-lg font-medium leading-8 text-foreground/78">Ubik removes the decision delays that cost you the most margin, time, and revenue.</p>
+          <p className="mt-5 max-w-3xl text-lg font-medium leading-8 text-foreground/78">ubik removes the decision delays that cost you the most margin, time, and revenue.</p>
         </div>
         <div className="workflow-memory-stack mt-12">
-          <div className="workflow-team-spine" role="tablist" aria-label="How Ubik works across your teams">
+          <div className="workflow-team-spine" role="tablist" aria-label="How ubik works across your teams">
             {workflowTeams.map((team, index) => (
               <button
                 key={team.team}
@@ -772,8 +772,8 @@ function TradeFlowOntology() {
             <i className="workflow-spine-core ubik-core-mark" style={{ left: `${((active + 0.5) / workflowTeams.length) * 100}%` }} aria-hidden="true" />
           </div>
           <div className="workflow-memory-panel" key={item.team}>
-            <div className="workflow-orchestration-rail" aria-label="Ubik is orchestrating this workflow">
-              <span>UBIK IS WORKING</span><i><b className="ubik-core-mark" /></i><em>evidence → memory → action</em>
+            <div className="workflow-orchestration-rail" aria-label="ubik is orchestrating this workflow">
+              <span>ubik IS WORKING</span><i><b className="ubik-core-mark" /></i><em>evidence → memory → action</em>
             </div>
             <section className="workflow-sources">
               <div className="workflow-panel-label"><span>01 / EXISTING SYSTEMS</span><strong>{item.sourceLine}</strong></div>
@@ -800,7 +800,7 @@ function TradeFlowOntology() {
               <WorkflowResult item={item} />
             </section>
           </div>
-          <div className="workflow-integration-foot" aria-label="Ubik connects with more than one hundred additional tools">
+          <div className="workflow-integration-foot" aria-label="ubik connects with more than one hundred additional tools">
             <span>AND THE REST OF YOUR STACK</span>
             <div>
               {additionalIntegrations.map(([label, domain]) => <img key={label} src={favicon(domain)} alt={label} title={label} />)}
@@ -862,7 +862,7 @@ function OperatingLoop() {
             Decision Intelligence for Food
           </h2>
           <p className="layer-caption">
-            How Ubik helps importers and exporters take decisions in days instead of weeks.
+            How ubik helps importers and exporters take decisions in days instead of weeks.
           </p>
         </div>
 

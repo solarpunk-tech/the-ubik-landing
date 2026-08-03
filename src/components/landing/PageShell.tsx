@@ -20,18 +20,18 @@ export function PageShell({ children }: { children: React.ReactNode }) {
   const detectedOS = useDetectedOS();
   const downloadHref = `/download?os=${detectedOS}`;
   const DownloadOSIcon = detectedOS === "windows" ? WindowsLogoIcon : AppleLogoIcon;
-  const downloadAriaLabel = `Download Ubik Meetings for ${detectedOS === "windows" ? "Windows" : "Mac"}`;
+  const downloadAriaLabel = `Download ubik Meetings for ${detectedOS === "windows" ? "Windows" : "Mac"}`;
   const resolvedLanguage = (i18n.resolvedLanguage ?? i18n.language ?? "en").split("-")[0];
   const selectedLanguage = supportedLanguages.includes(resolvedLanguage)
     ? resolvedLanguage
     : "en";
   const navItems = [
-    { to: "/how-it-works", label: t("nav.how-it-works", { defaultValue: "How it works" }) },
+    { to: "/learn", label: t("nav.learn", { defaultValue: "Learn" }) },
     { href: externalLinks.docs, label: t("nav.guide", { defaultValue: "Guide" }) },
     { to: "/pricing", label: t("nav.pricing", { defaultValue: "Pricing" }) },
     { to: "/blog", label: t("nav.journal", { defaultValue: "Trade Notes" }) },
     { to: "/security", label: t("nav.trust", { defaultValue: "Security" }) },
-    { to: downloadHref, label: "Ubik Meetings", download: true }
+    { to: downloadHref, label: "ubik Meetings", download: true }
   ];
 
   function handleLanguageChange(language: string) {
@@ -55,10 +55,10 @@ export function PageShell({ children }: { children: React.ReactNode }) {
     <div className={cn("site-shell min-h-dvh bg-background text-foreground", pathname === "/" ? "home-route" : "secondary-route")}>
       <header className={cn("header-matrix site-header sticky top-0 z-40", hasScrolled && "is-scrolled")}>
         <div className="container-page flex h-16 items-center justify-between gap-4">
-          <Link to="/" aria-label="Ubik home" className="hidden min-[430px]:inline-flex">
+          <Link to="/" aria-label="ubik home" className="hidden min-[430px]:inline-flex">
             <BrandLogo inverse={hasScrolled} />
           </Link>
-          <Link to="/" aria-label="Ubik home" className="inline-flex min-[430px]:hidden">
+          <Link to="/" aria-label="ubik home" className="inline-flex min-[430px]:hidden">
             <BrandLogo compact inverse={hasScrolled} />
           </Link>
           <nav className="hidden items-center gap-4 text-sm lg:flex">
@@ -102,7 +102,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
               href={externalLinks.app}
               className="nav-try-link inline-flex h-9 items-center justify-center border border-primary bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              Try Ubik Now
+              Try ubik Now
             </a>
             <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger asChild>
@@ -136,7 +136,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
                   )}
                   <Button asChild onClick={() => setMenuOpen(false)}>
                     <a href={externalLinks.app}>
-                      Try Ubik Now
+                      Try ubik Now
                     </a>
                   </Button>
                 </div>
@@ -157,7 +157,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
             <Link to="/legal/cookies">Cookies</Link>
             <Link to="/terms-of-service">{t("nav.terms", { defaultValue: "Terms" })}</Link>
             <Link to="/security">{t("nav.trust", { defaultValue: "Security" })}</Link>
-            <Link to={downloadHref}>Ubik Meetings</Link>
+            <Link to={downloadHref}>ubik Meetings</Link>
             <a href={externalLinks.founderMeeting}>
               {t("footer.contact", { defaultValue: "Talk to founders" })}
             </a>

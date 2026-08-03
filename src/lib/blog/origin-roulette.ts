@@ -85,7 +85,7 @@ export const originRoulettePost: BlogPost = {
   template: "market-intelligence",
   ogImage: "/blog/origin-roulette/header-light.png",
   heroLightImage: "/blog/origin-roulette/header-light.png",
-  heroDarkImage: "/blog/origin-roulette/header-dark.png"
+  heroDarkImage: "/blog/origin-roulette/header-dark.png",
 };
 
 export const originFilters = ["All", "US anchor", "EU value-add", "Compliance watch", "Emerging"] as const;

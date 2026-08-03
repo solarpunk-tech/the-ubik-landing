@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/posthog";
 
 const baseFeatures = [
-  "Webapp + Ubik Meetings desktop add-on",
+  "Webapp + ubik Meetings desktop add-on",
   "2-3 new workflows every month",
   "Inbox, meetings, market intel and live artifacts",
   "10+ LLMs with device-held credentials",
@@ -48,7 +48,7 @@ const pricingFaqs = [
   {
     question: "What does Base cover?",
     answer: [
-      "Base is the personal AI workspace for one operator. It includes the Ubik Webapp, Ubik Meetings, local meeting recording, market intelligence projects, live artifacts and 2-3 new workflows every month.",
+      "Base is the personal AI workspace for one operator. It includes the ubik Webapp, ubik Meetings, local meeting recording, market intelligence projects, live artifacts and 2-3 new workflows every month.",
       "It is built for individual trade, pricing, meeting and operations work before Ubik becomes a wider workflow layer for the team."
     ]
   },
@@ -62,7 +62,7 @@ const pricingFaqs = [
   {
     question: "How do credentials and private files work?",
     answer: [
-      "Credentials stay on-device. Private files are encrypted. Ubik Meetings is designed to bridge desktop context to the Webapp without turning your local machine into a public data lake.",
+      "Credentials stay on-device. Private files are encrypted. ubik Meetings is designed to bridge desktop context to the Webapp without turning your local machine into a public data lake.",
       "Enterprise deployments can keep sensitive workflows in private, local or air-gapped environments depending on the security model."
     ]
   },
@@ -182,10 +182,10 @@ export default function Pricing() {
                 <div className="grid gap-3">
                   <Button asChild variant="secondary" size="lg">
                     <a href={externalLinks.app}>
-                      Try Ubik Now <ArrowRightIcon data-icon="inline-end" />
+                      Try ubik Now <ArrowRightIcon data-icon="inline-end" />
                     </a>
                   </Button>
-                  <p className="text-sm text-primary-foreground/88">Built for one operator. Comes with Ubik Meetings included.</p>
+                  <p className="text-sm text-primary-foreground/88">Built for one operator. Comes with ubik Meetings included.</p>
                 </div>
               </CardContent>
             </Card>
@@ -225,14 +225,14 @@ export default function Pricing() {
                     a text span left "Meetings" floating off the baseline. Stack the
                     lockup instead and let the rule carry the alignment. */}
                 <h2 className="ubik-meetings-lockup mt-3">
-                  <img src={brandAssets.wordmarkLight} alt="Ubik" className="dark:hidden" />
-                  <img src={brandAssets.wordmarkDark} alt="Ubik" className="hidden dark:block" />
+                  <img src={brandAssets.wordmarkLight} alt="ubik" className="dark:hidden" />
+                  <img src={brandAssets.wordmarkDark} alt="ubik" className="hidden dark:block" />
                   <span>Meetings</span>
                 </h2>
               </div>
               <div>
                 <p className="text-sm leading-6 text-foreground/72 dark:text-foreground/82">
-                  Records and summarises your meetings on-device, then sits a hotkey away as a desktop overlay that carries the room's context straight into your Ubik workspace.
+                Records and summarises your meetings on-device, then sits a hotkey away as a desktop overlay that carries the room's context straight into your ubik workspace.
                 </p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {localPills.map((pill) => (
@@ -250,7 +250,7 @@ export default function Pricing() {
               <Badge variant="secondary" className="mb-4">
                 Data handling
               </Badge>
-              <h2 className="text-3xl font-semibold">LLMs plan and draft. Ubik controls the context.</h2>
+              <h2 className="text-3xl font-semibold">LLMs plan and draft. ubik controls the context.</h2>
             </div>
             <Accordion type="single" collapsible className="w-full">
               {pricingFaqs.map((faq) => (

@@ -532,7 +532,7 @@ export function LandingV2Hero() {
           <div className="mt-7 flex flex-wrap gap-2.5">
             <Button asChild size="lg" className="h-[42px] bg-primary px-5 text-primary-foreground hover:bg-primary/88">
               <a href={externalLinks.app} onClick={() => trackEvent("cta_clicked", { cta: "try_ubik", location: "hero" })}>
-                Try Ubik Now <ArrowRightIcon />
+                Try ubik Now <ArrowRightIcon />
               </a>
             </Button>
             <Button asChild variant="outline" size="lg" className="h-[42px] border-foreground/65 bg-transparent px-5 text-foreground hover:bg-foreground hover:text-background">

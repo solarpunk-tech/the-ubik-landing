@@ -650,7 +650,16 @@ a {
 #watch-tasks:checked ~ .ubik-demo__panels > [data-state="tasks"],
 #watch-workflows:checked ~ .ubik-demo__panels > [data-state="workflows"],
 #watch-memory:checked ~ .ubik-demo__panels > [data-state="memory"],
-#watch-finetuning:checked ~ .ubik-demo__panels > [data-state="finetuning"] {
+#watch-finetuning:checked ~ .ubik-demo__panels > [data-state="finetuning"],
+#surface-inbox:checked ~ .ubik-demo__panels > [data-state="inbox"],
+#surface-email:checked ~ .ubik-demo__panels > [data-state="email"],
+#surface-tasks:checked ~ .ubik-demo__panels > [data-state="tasks"],
+#surface-workflows:checked ~ .ubik-demo__panels > [data-state="workflows"],
+#surface-markets:checked ~ .ubik-demo__panels > [data-state="markets"],
+#surface-meetings:checked ~ .ubik-demo__panels > [data-state="meetings"],
+#surface-artifacts:checked ~ .ubik-demo__panels > [data-state="artifacts"],
+#meeting-view-list:checked ~ .ubik-demo__panels > [data-state="list"],
+#meeting-view-calendar:checked ~ .ubik-demo__panels > [data-state="calendar"] {
   display: block;
 }
 
@@ -759,6 +768,15 @@ a {
 #watch-workflows:checked ~ .ubik-demo__tabs label[for="watch-workflows"],
 #watch-memory:checked ~ .ubik-demo__tabs label[for="watch-memory"],
 #watch-finetuning:checked ~ .ubik-demo__tabs label[for="watch-finetuning"],
+#surface-inbox:checked ~ .ubik-demo__tabs label[for="surface-inbox"],
+#surface-email:checked ~ .ubik-demo__tabs label[for="surface-email"],
+#surface-tasks:checked ~ .ubik-demo__tabs label[for="surface-tasks"],
+#surface-workflows:checked ~ .ubik-demo__tabs label[for="surface-workflows"],
+#surface-markets:checked ~ .ubik-demo__tabs label[for="surface-markets"],
+#surface-meetings:checked ~ .ubik-demo__tabs label[for="surface-meetings"],
+#surface-artifacts:checked ~ .ubik-demo__tabs label[for="surface-artifacts"],
+#meeting-view-list:checked ~ .ubik-demo__tabs label[for="meeting-view-list"],
+#meeting-view-calendar:checked ~ .ubik-demo__tabs label[for="meeting-view-calendar"],
 .ubik-demo__tabs button.is-active {
   background: var(--ubik-blue);
   color: #ffffff;
@@ -1353,13 +1371,242 @@ a {
   color: var(--ubik-dark-muted);
 }
 
+.ubik-surface-preview__stats {
+  background: var(--ubik-blue);
+  color: #ffffff;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ubik-surface-preview__stats > div {
+  border-right: 1px solid rgb(255 255 255 / 22%);
+  padding: 1rem;
+}
+
+.ubik-surface-preview__stats > div:last-child {
+  border-right: 0;
+}
+
+.ubik-surface-preview__stats strong,
+.ubik-surface-preview__stats span,
+.ubik-surface-preview__trust b {
+  display: block;
+}
+
+.ubik-surface-preview__stats strong {
+  font-family: var(--ubik-mono);
+  font-size: 1.35rem;
+}
+
+.ubik-surface-preview__stats span,
+.ubik-surface-preview__head,
+.ubik-surface-preview__trust {
+  font-family: var(--ubik-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+}
+
+.ubik-surface-preview__head {
+  align-items: center;
+  background: var(--ubik-light-surface);
+  border-bottom: 1px solid var(--ubik-light-border);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  text-transform: uppercase;
+}
+
+.dark .ubik-surface-preview__head {
+  background: var(--ubik-dark-surface);
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-surface-preview__head span {
+  color: var(--ubik-blue);
+}
+
+.ubik-surface-preview__trust {
+  background: var(--ubik-light-border);
+  border-top: 1px solid var(--ubik-light-border);
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.dark .ubik-surface-preview__trust {
+  background: var(--ubik-dark-border);
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-surface-preview__trust > span,
+.ubik-surface-preview__trust > a {
+  background: var(--ubik-light-surface);
+  color: var(--ubik-light-muted);
+  padding: 0.8rem 1rem;
+  text-decoration: none;
+}
+
+.dark .ubik-surface-preview__trust > span,
+.dark .ubik-surface-preview__trust > a {
+  background: var(--ubik-dark-surface);
+  color: var(--ubik-dark-muted);
+}
+
+.ubik-surface-preview__trust b {
+  color: var(--ubik-light-text);
+  margin-bottom: 0.2rem;
+}
+
+.dark .ubik-surface-preview__trust b {
+  color: var(--ubik-dark-text);
+}
+
+.ubik-surface-preview__trust a b {
+  color: var(--ubik-blue);
+}
+
+.ubik-meetings__filters {
+  background: var(--ubik-light-surface);
+  border-bottom: 1px solid var(--ubik-light-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding: 0.65rem 0.8rem;
+}
+
+.dark .ubik-meetings__filters {
+  background: var(--ubik-dark-surface);
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-meetings__filters span {
+  border: 1px solid var(--ubik-light-border);
+  font-family: var(--ubik-mono);
+  font-size: 0.65rem;
+  padding: 0.35rem 0.5rem;
+}
+
+.dark .ubik-meetings__filters span {
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-meetings__filters span.is-active {
+  background: var(--ubik-blue);
+  border-color: var(--ubik-blue);
+  color: #ffffff;
+}
+
+.ubik-meetings__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(13rem, 0.7fr);
+}
+
+.ubik-meetings__list,
+.ubik-meetings__rail {
+  padding: 1rem;
+}
+
+.ubik-meetings__list {
+  border-right: 1px solid var(--ubik-light-border);
+}
+
+.dark .ubik-meetings__list {
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-meetings__list > div {
+  align-items: center;
+  border-top: 1px solid var(--ubik-light-border);
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(0, 1.5fr) minmax(8rem, 0.8fr) auto;
+  padding: 0.75rem 0;
+}
+
+.dark .ubik-meetings__list > div {
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-meetings__list span,
+.ubik-meetings__list small {
+  color: var(--ubik-light-muted);
+  font-family: var(--ubik-mono);
+  font-size: 0.66rem;
+}
+
+.dark .ubik-meetings__list span,
+.dark .ubik-meetings__list small {
+  color: var(--ubik-dark-muted);
+}
+
+.ubik-meetings__rail {
+  background: var(--ubik-light-well);
+}
+
+.dark .ubik-meetings__rail {
+  background: var(--ubik-dark-well);
+}
+
+.ubik-meetings__rail > b {
+  display: block;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  margin-top: 2rem;
+}
+
+.ubik-meetings__rail > a {
+  background: var(--ubik-blue);
+  color: #ffffff;
+  display: inline-block;
+  font-family: var(--ubik-mono);
+  font-size: 0.68rem;
+  margin-top: 1rem;
+  padding: 0.6rem 0.75rem;
+  text-decoration: none;
+}
+
+.ubik-meetings__calendar {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  padding: 1rem;
+}
+
+.ubik-meetings__calendar > span,
+.ubik-meetings__calendar > div {
+  border-bottom: 1px solid var(--ubik-light-border);
+  border-right: 1px solid var(--ubik-light-border);
+  min-height: 3rem;
+  padding: 0.55rem;
+}
+
+.dark .ubik-meetings__calendar > span,
+.dark .ubik-meetings__calendar > div {
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-meetings__calendar > span,
+.ubik-meetings__calendar small {
+  color: var(--ubik-light-muted);
+  display: block;
+  font-family: var(--ubik-mono);
+  font-size: 0.63rem;
+}
+
+.dark .ubik-meetings__calendar > span,
+.dark .ubik-meetings__calendar small {
+  color: var(--ubik-dark-muted);
+}
+
 @media (max-width: 720px) {
   .ubik-demo__suggestions,
   .ubik-demo__team-grid,
   .ubik-demo__kpis,
   .ubik-demo__flow,
   .ubik-demo__inbox,
-  .ubik-watch__stage {
+  .ubik-watch__stage,
+  .ubik-surface-preview__stats,
+  .ubik-surface-preview__trust,
+  .ubik-meetings__layout {
     grid-template-columns: 1fr;
   }
 
@@ -1396,6 +1643,19 @@ a {
 
   .ubik-watch__copy strong {
     margin-top: 2rem;
+  }
+
+  .ubik-meetings__list {
+    border-bottom: 1px solid var(--ubik-light-border);
+    border-right: 0;
+  }
+
+  .dark .ubik-meetings__list {
+    border-bottom-color: var(--ubik-dark-border);
+  }
+
+  .ubik-meetings__list > div {
+    grid-template-columns: 1fr;
   }
 }
 

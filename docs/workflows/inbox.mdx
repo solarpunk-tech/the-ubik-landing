@@ -5,26 +5,15 @@ icon: "inbox"
 mode: "wide"
 ---
 
-import { InboxPrototype } from "/snippets/product-prototypes.jsx";
+import { InboxPrototype, MeetingsPreview } from "/snippets/product-prototypes.jsx";
 
 The message stays central. Tasks, files, and prepared actions remain one click away.
 
 <InboxPrototype />
 
-## Product UI
-
-<Tabs>
-  <Tab title="Source thread" icon="inbox">
-    <Frame caption="The thread, source messages, deciding context, and operator actions stay together.">
-      <img src="/images/product/inbox-evidence-first.png" alt="ubik Inbox showing a rate-confirmation thread, source messages, context tabs, and reply actions" />
-    </Frame>
-  </Tab>
-  <Tab title="Meeting follow-through" icon="calendar">
-    <Frame caption="Calls, notes, owners, and the work that follows remain in one operating view.">
-      <img src="/images/product/meetings-workspace.jpg" alt="ubik meeting workspace with upcoming calls, notes, folders, and follow-through" />
-    </Frame>
-  </Tab>
-</Tabs>
+<Frame caption="The thread, source messages, deciding context, and operator actions stay together.">
+  <img src="/images/product/inbox-evidence-first.png" alt="ubik Inbox showing a rate-confirmation thread, source messages, context tabs, and reply actions" />
+</Frame>
 
 Read the thread before its summary. Open context only when it can change the reply, owner, or next move.
 
@@ -35,7 +24,13 @@ Read the thread before its summary. Open context only when it can change the rep
 | The thread needs comparison or synthesis | Ask ubik |
 | Evidence or an external owner is missing | Wait |
 
+## Meetings
+
+Meetings brings upcoming calls, completed conversations, and their follow-through into one place. The desktop app captures the call so its transcript, decisions, and tasks can return here.
+
+<MeetingsPreview />
+
 <Columns cols={2}>
   <Card title="Ask about this thread" icon="message-square" href="/workflows/ask-ubik" />
-  <Card title="Watch Inbox" icon="play" href="/getting-started/watch/inbox" />
+  <Card title="Download the desktop app" icon="download" href="https://theubik.com/download" />
 </Columns>

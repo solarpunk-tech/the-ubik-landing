@@ -5,26 +5,13 @@ icon: "book-open"
 mode: "wide"
 ---
 
-import { OperatorPrototype } from "/snippets/product-prototypes.jsx";
+import { OperatorPrototype, ProductSurfacePreview } from "/snippets/product-prototypes.jsx";
 
 Start with a task. Connect the context that can change it. Inspect the artifact before it moves.
 
 <OperatorPrototype />
 
-## Product UI
-
-<Tabs>
-  <Tab title="Start" icon="message-square">
-    <Frame caption="Begin with organization knowledge, a file, or a suggested operator task.">
-      <img src="/images/product/ask-operator-start.png" alt="Ask ubik composer with organization knowledge, files, and suggested operator tasks" />
-    </Frame>
-  </Tab>
-  <Tab title="Apps connected" icon="blocks">
-    <Frame caption="The daily brief attaches GitHub, Notion, and Slack before it runs.">
-      <img src="/images/product/ask-operator-connected.png" alt="Ask ubik composer with GitHub, Notion, and Slack attached to a daily morning brief" />
-    </Frame>
-  </Tab>
-</Tabs>
+<ProductSurfacePreview />
 
 <Columns cols={2}>
   <Card title="Read" icon="book-open" href="/workflows/ask-ubik">

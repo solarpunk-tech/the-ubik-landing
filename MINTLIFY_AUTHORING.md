@@ -42,7 +42,7 @@ When a file moves, add a `redirects` entry in `docs.json`. Run the broken-link c
 
 ### Getting started
 
-Use one sentence, one interactive product prototype, one product-state screenshot pair, and Read or Watch links. The prototype shows a state change; the screenshots preserve parity with the working product.
+Use one sentence, the Ask ubik interaction, the login right-panel product map, and Read or Watch links. The product map must cover Inbox, Email, Tasks, Workflows, Market Intel, Meetings, and Artifacts without adding seven navigation pages.
 
 ### Read lesson
 
@@ -81,7 +81,7 @@ Show the workflow library as a compact snapshot. A selected card may open a scre
 
 ### ubik-design parity
 
-Interactive product surfaces live in `/snippets/product-prototypes.jsx`; Read pages pair them with current product screenshots. Their CSS must consume the canonical `ubik-design` values: paper `#FBFAF7`, ink `#10182B`, shell `#F4F2EC`, well `#F2F0EA`, action blue `#315CF4`, dark action blue `#5B82FF`, rule blue `#BFCEE8`, Noto Sans, IBM Plex Mono, zero radius, and no shadow outside overlays.
+Interactive product surfaces live in `/snippets/product-prototypes.jsx`; Read pages pair them with current product screenshots when the screenshot still matches staging. Getting started uses the login product map; Inbox uses a current Meetings rendition and desktop-app nudge instead of a stale meeting screenshot. Their CSS must consume the canonical `ubik-design` values: paper `#FBFAF7`, ink `#10182B`, shell `#F4F2EC`, well `#F2F0EA`, action blue `#315CF4`, dark action blue `#5B82FF`, rule blue `#BFCEE8`, Noto Sans, IBM Plex Mono, zero radius, and no shadow outside overlays.
 
 Each prototype needs keyboard-accessible controls, a useful initial state without interaction, and a mobile layout. Keep product copy inside the component lowercase for `ubik`.
 

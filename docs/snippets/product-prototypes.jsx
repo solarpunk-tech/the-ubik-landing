@@ -146,3 +146,72 @@ export const WatchPrototype = () => {
     </section>
   );
 };
+
+const PRODUCT_SURFACES = [
+  { id: "inbox", label: "Inbox", rows: [["Inquiry", "Buyer asks for availability", "New"], ["PO", "PO-2381 needs SKU mapping", "2h"]] },
+  { id: "email", label: "Email", rows: [["Drafted", "Renewal follow-up ready to send", "Draft"], ["Sent", "Quote update sent to three vendors", "2m"]] },
+  { id: "tasks", label: "Tasks", rows: [["Open", "Confirm COA for BL-2408-219", "Today"], ["Open", "Send revised quote to MFL", "Tomorrow"]] },
+  { id: "workflows", label: "Workflows", rows: [["Running", "Import clearance, 6 of 9 steps", "62%"], ["Queued", "Demurrage review", "Next"]] },
+  { id: "markets", label: "Market intel", rows: [["Up", "Shrimp L2 spot", "+4.2%"], ["Flat", "Salmon fillet, 30d average", "$6.80/kg"]] },
+  { id: "meetings", label: "Meetings", rows: [["Fri", "Buyer sync, renewal terms", "10:00"], ["Ready", "Transcript, MFL renewal call", "Today"], ["Pre-read", "Last-call memory summarized", "Ready"]] },
+  { id: "artifacts", label: "Artifacts", rows: [["PDF", "Q3 shipment report", "Ready"], ["DOC", "Customs packet, BL-2408-219", "Ready"]] },
+];
+
+export const ProductSurfacePreview = () => (
+  <section className="ubik-demo ubik-surface-preview" aria-label="ubik product surfaces">
+    <div className="ubik-surface-preview__stats">
+      <div><strong>$700M+</strong><span>Perishables traded</span></div>
+      <div><strong>20x</strong><span>Faster operations</span></div>
+      <div><strong>$200K</strong><span>Average annual savings</span></div>
+    </div>
+    <StateTabs id="surface" label="Product surface" tabs={PRODUCT_SURFACES}>
+      {PRODUCT_SURFACES.map((surface) => (
+        <div className="ubik-demo__panel" data-state={surface.id} key={surface.id}>
+          <div className="ubik-surface-preview__head"><span>{surface.label}</span><b>Live product surface</b></div>
+          <div className="ubik-demo__rows">
+            {surface.rows.map(([tag, text, meta]) => <div className="ubik-demo__row" key={text}><span className="ubik-demo__source">{tag}</span><b>{text}</b><span>{meta}</span></div>)}
+          </div>
+        </div>
+      ))}
+    </StateTabs>
+    <div className="ubik-surface-preview__trust">
+      <span><b>Security</b>SOC 2 Type II and GDPR</span>
+      <span><b>Private</b>Data never trained on</span>
+      <a href="https://theubik.com/download"><b>ubik Meetings</b>Get the desktop app</a>
+    </div>
+  </section>
+);
+
+export const MeetingsPreview = () => {
+  const tabs = [{ id: "list", label: "List" }, { id: "calendar", label: "Calendar" }];
+  return (
+    <section className="ubik-demo ubik-meetings" aria-label="Meetings workspace">
+      <div className="ubik-demo__bar"><span className="ubik-demo__identity">Meetings</span><span className="ubik-demo__status"><i /> desktop capture</span></div>
+      <div className="ubik-meetings__filters"><span className="is-active">All meetings · 6</span><span>Supplier review · 2</span><span>Logistics · 2</span><span>My notes · 2</span></div>
+      <StateTabs id="meeting-view" label="Meetings view" tabs={tabs}>
+        <div className="ubik-demo__panel" data-state="list">
+          <div className="ubik-meetings__layout">
+            <div className="ubik-meetings__list">
+              <span className="ubik-demo__eyebrow">Coming up</span>
+              <div><b>Supplier review, Thai Union</b><span>Today · 10:30</span><small>Upcoming</small></div>
+              <div><b>Logistics sync, Maersk</b><span>Today · 14:00</span><small>Upcoming</small></div>
+              <span className="ubik-demo__eyebrow">Past</span>
+              <div><b>MFL renewal call</b><span>Transcript and decisions ready</span><small>Completed</small></div>
+            </div>
+            <aside className="ubik-meetings__rail">
+              <span className="ubik-demo__eyebrow">Before the next call</span>
+              <b>Capture the conversation, then keep its decisions and follow-ups linked.</b>
+              <a href="https://theubik.com/download">Get the desktop app →</a>
+            </aside>
+          </div>
+        </div>
+        <div className="ubik-demo__panel" data-state="calendar">
+          <div className="ubik-meetings__calendar">
+            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span>
+            <div>12</div><div>13<small>Supplier review</small></div><div>14</div><div>15<small>Logistics sync</small></div><div>16<small>Buyer renewal</small></div>
+          </div>
+        </div>
+      </StateTabs>
+    </section>
+  );
+};

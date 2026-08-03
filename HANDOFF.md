@@ -2265,3 +2265,29 @@
 - Visual status remains INCOMPLETE until the Mintlify editor renders this branch
   and supplies after screenshots. Do not substitute a local preview because the
   user reviews through the connected Mintlify editor.
+
+### Login surface, Meetings, and Watch route repair
+
+- Removed the repeated `Product UI` headings from Getting started, Ask ubik,
+  Inbox, Tasks, and Workflows.
+- Getting started now uses a Mintlify-native rendition of the current login
+  right panel from `ubik-webapp` staging commit
+  `aedad967bd5545c5cc5a506ff4e35f2e76871cec`: three proof stats, seven
+  switchable surfaces, and the trust/download rail.
+- Removed `meetings-workspace.jpg` from rendered docs because it is not the
+  current Meetings UI. The unused tracked asset remains in Git history only.
+- Added a current Meetings rendition inside the Inbox page: filter chips,
+  List/Calendar states, Coming up and Past rows, a follow-through rail, and a
+  canonical `https://theubik.com/download` action.
+- There is no live or historical PR head named `redesign/meetings-rail` on the
+  webapp remote. The current staging Meetings source and merged desktop prompt
+  work were used instead; do not claim branch-specific parity unless that ref
+  becomes available.
+- Watch lesson files moved from nested `/getting-started/watch/*` routes to
+  flat `/getting-started/watch-*` routes. Old nested URLs now redirect to the
+  flat pages. This avoids stale editor redirects that previously sent every
+  Next action back to the first lesson or produced a missing page.
+- Mintlify build, broken links, accessibility across 18 MDX files, JSON parsing,
+  lowercase copy audit, and `git diff --check` pass after the change.
+- Visual status remains INCOMPLETE until the connected Mintlify editor renders
+  the updated branch and the user supplies an after screenshot.

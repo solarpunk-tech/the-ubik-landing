@@ -139,7 +139,27 @@
     },
     {
       "source": "/getting-started/watch/meetings",
-      "destination": "/getting-started/watch"
+      "destination": "/getting-started/watch-inbox"
+    },
+    {
+      "source": "/getting-started/watch/inbox",
+      "destination": "/getting-started/watch-inbox"
+    },
+    {
+      "source": "/getting-started/watch/tasks",
+      "destination": "/getting-started/watch-tasks"
+    },
+    {
+      "source": "/getting-started/watch/workflows",
+      "destination": "/getting-started/watch-workflows"
+    },
+    {
+      "source": "/getting-started/watch/trade-memory",
+      "destination": "/getting-started/watch-trade-memory"
+    },
+    {
+      "source": "/getting-started/watch/finetuning",
+      "destination": "/getting-started/watch-finetuning"
     },
     {
       "source": "/getting-started/sign-in",
@@ -192,11 +212,11 @@
         "group": "Watch",
         "pages": [
           "getting-started/watch",
-          "getting-started/watch/inbox",
-          "getting-started/watch/tasks",
-          "getting-started/watch/workflows",
-          "getting-started/watch/trade-memory",
-          "getting-started/watch/finetuning"
+          "getting-started/watch-inbox",
+          "getting-started/watch-tasks",
+          "getting-started/watch-workflows",
+          "getting-started/watch-trade-memory",
+          "getting-started/watch-finetuning"
         ]
       },
       {

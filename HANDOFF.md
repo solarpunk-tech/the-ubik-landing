@@ -2313,3 +2313,35 @@
   product-state controls; the compact Start/Read/Watch/Help navigation is live;
   and Watch Inbox loads its video lesson with working previous/next navigation.
 - Visual status: COMPLETE for this publication pass.
+
+### Trade Notes and landing source reconciliation
+
+- Preserved the original dirty checkout at
+  `/Users/shubhranshujha/Codex/the-ubik-landing`; none of its uncommitted docs
+  files were staged, rewritten, or discarded.
+- Isolated all 17 local `src/` changes, including the previously untracked
+  `TradeNoteBitmatrix.tsx`, and rebased them cleanly onto current `origin/main`
+  as branch `jex/trade-notes-local-reconcile`.
+- The reconciled source includes the compact Trade Notes Bitmatrix cards,
+  newsletter and article-route updates, Learn refresh, navigation terminology,
+  and the accumulated homepage, pricing, download, and Try page changes.
+- Visual requirements:
+  - layout: compact square Trade Notes illustrations replace the full-width
+    article artwork; category filters and newsletter retain their hierarchy;
+  - spacing: each note keeps a generous text/illustration row without loading
+    the article-scale media;
+  - typography: Noto Sans and IBM Plex Mono remain the active product type;
+  - color: paper, ink, and canonical ubik blue remain unchanged;
+  - interaction: category filtering and article links resolve correctly;
+  - responsive: the filtered index remains readable without route or content
+    failures in the responsive browser pass.
+- Before evidence:
+  `output/playwright/trade-notes-before-production.png`.
+- After evidence:
+  `output/playwright/trade-notes-after-desktop.png`,
+  `output/playwright/trade-notes-after-mobile.png`,
+  `output/playwright/landing-after-desktop.png`, and
+  `output/playwright/learn-after-desktop.png`.
+- Verification: `pnpm build`, `pnpm lint`, and `git diff --check` pass. Lint
+  retains the same eight pre-existing Fast Refresh warnings and has zero errors.
+- Visual status: COMPLETE for the reconciled landing source.

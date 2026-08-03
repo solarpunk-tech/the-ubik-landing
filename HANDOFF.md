@@ -2229,3 +2229,17 @@
 - Visual status: INCOMPLETE. Before evidence is the user's Mintlify editor
   screenshot from 2026-08-03. After evidence is still required from the
   refreshed Mintlify editor; local preview was intentionally not used.
+
+### Mintlify editor runtime repair
+
+- The editor ingested `<OperatorPrototype />` but reported that it could not be
+  rendered. The imported JSX snippet relied on `useState`, while Mintlify only
+  guarantees automatic React hooks in MDX pages.
+- Created branch `cleanup-changes` from the pushed interactive-guide commit and
+  replaced all hook-driven states with native radio inputs and CSS selectors.
+  Ask ubik, Inbox, Tasks, Workflows, and Watch remain interactive without a
+  React hook runtime dependency.
+- `mintlify validate`, `mintlify broken-links`, `mintlify a11y`, and
+  `git diff --check` pass after the repair.
+- Visual status remains INCOMPLETE until the Mintlify editor ingests the new
+  branch and supplies after evidence.

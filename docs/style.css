@@ -542,14 +542,47 @@ a {
   box-sizing: border-box;
 }
 
-.ubik-demo button {
+.ubik-demo button,
+.ubik-demo label {
   color: inherit;
   font: inherit;
 }
 
-.ubik-demo button:focus-visible {
+.ubik-demo button:focus-visible,
+.ubik-demo__state:focus-visible ~ .ubik-demo__tabs {
   outline: 2px solid var(--ubik-blue);
   outline-offset: -2px;
+}
+
+.ubik-demo__state {
+  height: 1px;
+  opacity: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.ubik-demo__panel {
+  display: none;
+}
+
+#operator-start:checked ~ .ubik-demo__panels > [data-state="start"],
+#operator-connected:checked ~ .ubik-demo__panels > [data-state="connected"],
+#operator-artifact:checked ~ .ubik-demo__panels > [data-state="artifact"],
+#inbox-thread:checked ~ .ubik-demo__panels > [data-state="thread"],
+#inbox-tasks:checked ~ .ubik-demo__panels > [data-state="tasks"],
+#inbox-files:checked ~ .ubik-demo__panels > [data-state="files"],
+#tasks-mine:checked ~ .ubik-demo__panels > [data-state="mine"],
+#tasks-team:checked ~ .ubik-demo__panels > [data-state="team"],
+#workflow-library:checked ~ .ubik-demo__panels > [data-state="library"],
+#workflow-live:checked ~ .ubik-demo__panels > [data-state="live"],
+#workflow-map:checked ~ .ubik-demo__panels > [data-state="map"],
+#watch-ask:checked ~ .ubik-demo__panels > [data-state="ask"],
+#watch-inbox:checked ~ .ubik-demo__panels > [data-state="inbox"],
+#watch-tasks:checked ~ .ubik-demo__panels > [data-state="tasks"],
+#watch-workflows:checked ~ .ubik-demo__panels > [data-state="workflows"],
+#watch-memory:checked ~ .ubik-demo__panels > [data-state="memory"],
+#watch-finetuning:checked ~ .ubik-demo__panels > [data-state="finetuning"] {
+  display: block;
 }
 
 .ubik-demo__bar,
@@ -620,7 +653,8 @@ a {
   border-color: var(--ubik-dark-border);
 }
 
-.ubik-demo__tabs button {
+.ubik-demo__tabs button,
+.ubik-demo__tabs label {
   background: transparent;
   border: 0;
   border-right: 1px solid var(--ubik-light-border);
@@ -634,10 +668,28 @@ a {
   text-transform: uppercase;
 }
 
-.dark .ubik-demo__tabs button {
+.dark .ubik-demo__tabs button,
+.dark .ubik-demo__tabs label {
   border-color: var(--ubik-dark-border);
 }
 
+#operator-start:checked ~ .ubik-demo__tabs label[for="operator-start"],
+#operator-connected:checked ~ .ubik-demo__tabs label[for="operator-connected"],
+#operator-artifact:checked ~ .ubik-demo__tabs label[for="operator-artifact"],
+#inbox-thread:checked ~ .ubik-demo__tabs label[for="inbox-thread"],
+#inbox-tasks:checked ~ .ubik-demo__tabs label[for="inbox-tasks"],
+#inbox-files:checked ~ .ubik-demo__tabs label[for="inbox-files"],
+#tasks-mine:checked ~ .ubik-demo__tabs label[for="tasks-mine"],
+#tasks-team:checked ~ .ubik-demo__tabs label[for="tasks-team"],
+#workflow-library:checked ~ .ubik-demo__tabs label[for="workflow-library"],
+#workflow-live:checked ~ .ubik-demo__tabs label[for="workflow-live"],
+#workflow-map:checked ~ .ubik-demo__tabs label[for="workflow-map"],
+#watch-ask:checked ~ .ubik-demo__tabs label[for="watch-ask"],
+#watch-inbox:checked ~ .ubik-demo__tabs label[for="watch-inbox"],
+#watch-tasks:checked ~ .ubik-demo__tabs label[for="watch-tasks"],
+#watch-workflows:checked ~ .ubik-demo__tabs label[for="watch-workflows"],
+#watch-memory:checked ~ .ubik-demo__tabs label[for="watch-memory"],
+#watch-finetuning:checked ~ .ubik-demo__tabs label[for="watch-finetuning"],
 .ubik-demo__tabs button.is-active {
   background: var(--ubik-blue);
   color: #ffffff;
@@ -758,7 +810,9 @@ a {
 }
 
 .ubik-demo__suggestions button,
-.ubik-demo__team-grid button {
+.ubik-demo__suggestions label,
+.ubik-demo__team-grid button,
+.ubik-demo__team-grid label {
   background: var(--ubik-light-surface);
   border: 0;
   cursor: pointer;
@@ -768,7 +822,9 @@ a {
 }
 
 .dark .ubik-demo__suggestions button,
-.dark .ubik-demo__team-grid button {
+.dark .ubik-demo__suggestions label,
+.dark .ubik-demo__team-grid button,
+.dark .ubik-demo__team-grid label {
   background: var(--ubik-dark-surface);
 }
 
@@ -825,6 +881,10 @@ a {
   background: var(--ubik-blue);
   border-color: var(--ubik-blue);
   color: #ffffff;
+}
+
+.ubik-demo__action {
+  display: inline-block;
 }
 
 .ubik-demo__action span {

@@ -2196,3 +2196,36 @@
     `output/playwright/decision-intelligence-width-after-mobile.png`.
 - User approved this accumulated local direction for a push to `main` and a
   production Netlify deployment after this annotation fix.
+
+## 2026-08-03 Mintlify interactive product guide
+
+- Target repository: `solarpunk-tech/the-ubik-landing`.
+- Target branch: `admin-mcp/read-watch-journeys-a653373` (PR 21).
+- Preserved the Mintlify dashboard editor commit `8c82e459c38bf4c61fd760bebce88a602bfd2873`
+  before applying this pass.
+- Replaced screenshot-led Read pages with reusable interactive JSX surfaces in
+  `docs/snippets/product-prototypes.jsx` for Ask ubik, Inbox, Tasks, Workflows,
+  and the Watch journey.
+- Compressed public navigation to seven entries: Start; four Read pages; one
+  stateful Watch page; and Workspace basics under Help.
+- Deleted five redundant Watch child pages and added redirects from their old
+  URLs to `/getting-started/watch`.
+- Removed all public `coming soon` copy and all product screenshot references.
+  Product screenshots remain historical source material only.
+- Applied the canonical `ubik-design` contract: Noto Sans and IBM Plex Mono,
+  zero radii, hairline borders, paper `#FBFAF7`, ink `#10182B`, shell
+  `#F4F2EC`, well `#F2F0EA`, muted ink-blue `#35426B`, action blue `#315CF4`,
+  border `#BFCEE8`, and dark background `#0B1220`.
+- Audited public docs for visible `Ubik`, `UBIK`, `coming soon`, em dashes, en
+  dashes, and `/images/product/` references; none remain.
+- Validation passes from `docs/`: `mintlify validate`, `mintlify broken-links`,
+  and `mintlify a11y`. All 13 MDX files pass accessibility checks; canonical
+  blue meets WCAG AA but not AAA against the configured surfaces.
+- The remote Mintlify deployment check was skipped and the existing Netlify
+  preview checks failed before this pass, which explains a stale editor
+  preview. Do not claim visual completion until the editor refreshes this
+  branch and a new screenshot confirms the seven-entry nav and interactive
+  states.
+- Visual status: INCOMPLETE. Before evidence is the user's Mintlify editor
+  screenshot from 2026-08-03. After evidence is still required from the
+  refreshed Mintlify editor; local preview was intentionally not used.

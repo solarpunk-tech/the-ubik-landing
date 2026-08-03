@@ -2,24 +2,18 @@
 title: "Inbox"
 description: "Read the source thread, inspect the context that changes the decision, then move the work."
 icon: "inbox"
+mode: "wide"
 ---
 
-Inbox keeps the source message central. Context and actions stay close without replacing the conversation.
+import { InboxPrototype } from "/snippets/product-prototypes.jsx";
 
-<Frame caption="Evidence-first Inbox: thread list, source message, context tabs, and operator actions in one view.">
-  <img src="/images/product/inbox-evidence-first.png" alt="ubik Inbox showing a rate-confirmation thread, its source messages, context tabs, and reply actions" />
-</Frame>
+The message stays central. Tasks, files, and prepared actions remain one click away.
 
-Read the message before its summary. Open Tasks, Waiting for, Files, or Links only when they can change the reply, owner, or next move.
+<InboxPrototype />
 
-| Signal | Move |
-| :--- | :--- |
-| A reply is safe and supported | Reply |
-| Another person owns the decision | Assign |
-| The thread needs comparison or synthesis | Ask ubik |
-| Evidence or an external owner is missing | Wait |
+Read the thread before its summary. Open context only when it can change the reply, owner, or next move.
 
 <Columns cols={2}>
   <Card title="Ask about this thread" icon="message-square" href="/workflows/ask-ubik" />
-  <Card title="Watch Inbox" icon="play" href="/getting-started/watch/inbox" />
+  <Card title="Carry it into Tasks" icon="list-checks" href="/workflows/tasks" />
 </Columns>

@@ -2,46 +2,18 @@
 title: "Ask ubik"
 description: "Name the task, attach the context that can change it, and review the resulting artifact."
 icon: "message-square"
+mode: "wide"
 ---
 
-Name the task, attach the sources that can change the answer, then review the evidence before acting.
+import { OperatorPrototype } from "/snippets/product-prototypes.jsx";
 
-<Tabs>
-  <Tab title="Start" icon="message-square">
-    <Frame caption="Begin with organization knowledge, a file, or one of the suggested operator tasks.">
-      <img src="/images/product/ask-operator-start.png" alt="Ask ubik composer with organization knowledge, files, and suggested operator tasks" />
-    </Frame>
-  </Tab>
-  <Tab title="Connected apps" icon="blocks">
-    <Frame caption="The daily brief prompt attaches GitHub, Notion, and Slack before it runs.">
-      <img src="/images/product/ask-operator-connected.png" alt="Ask ubik composer with GitHub, Notion, and Slack attached to a daily morning brief prompt" />
-    </Frame>
-  </Tab>
-</Tabs>
+Name the work before adding context. Ask for sources, dates, owner, uncertainty, and the next move.
 
-## Artifacts
+<OperatorPrototype />
 
-<Tabs>
-  <Tab title="Morning brief" icon="https://www.google.com/s2/favicons?domain=notion.so&sz=64">
-    | Reads | Creates | Review |
-    | :--- | :--- | :--- |
-    | GitHub, Notion, Slack | Work grouped by source, risk, and first action | Urgent items and the top three moves |
-  </Tab>
-  <Tab title="Slack catch-up" icon="https://www.google.com/s2/favicons?domain=slack.com&sz=64">
-    | Reads | Creates | Review |
-    | :--- | :--- | :--- |
-    | Selected Slack channels | Decisions, mentions, unanswered questions | Sensitive or unclear threads |
-  </Tab>
-  <Tab title="PR review" icon="https://www.google.com/s2/favicons?domain=github.com&sz=64">
-    | Reads | Creates | Review |
-    | :--- | :--- | :--- |
-    | GitHub pull requests and checks | Queue ordered by risk, status, and owner | Failing checks and blocked releases |
-  </Tab>
-</Tabs>
-
-Ask for sources, dates, owner, uncertainty, and the next move. Open the cited context before sending a reply or changing another system.
+The artifact keeps each source and proposed action visible. Open the cited context before sending a reply or changing another system.
 
 <Columns cols={2}>
   <Card title="Open Ask ubik" icon="arrow-up-right" href="https://app.theubik.com" />
-  <Card title="Watch the lesson" icon="play" href="/getting-started/watch" />
+  <Card title="Watch all six states" icon="play" href="/getting-started/watch" />
 </Columns>

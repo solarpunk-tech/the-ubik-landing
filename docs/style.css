@@ -1,29 +1,37 @@
 :root {
-  --ubik-blue: #385fe8;
-  --ubik-blue-strong: #4d70f0;
-  --ubik-light-bg: #f7f9fc;
+  --ubik-blue: #315cf4;
+  --ubik-blue-strong: #315cf4;
+  --ubik-light-bg: #fbfaf7;
   --ubik-light-surface: #ffffff;
-  --ubik-light-border: #d7dde8;
-  --ubik-light-text: #101725;
-  --ubik-light-muted: #5f6b7c;
-  --ubik-dark-bg: #0e1014;
-  --ubik-dark-surface: #14171d;
-  --ubik-dark-border: #2c313b;
-  --ubik-dark-text: #f0f4fa;
-  --ubik-dark-muted: #b2bac8;
+  --ubik-light-shell: #f4f2ec;
+  --ubik-light-well: #f2f0ea;
+  --ubik-light-border: #bfcee8;
+  --ubik-light-border-strong: #9db2d6;
+  --ubik-light-text: #10182b;
+  --ubik-light-muted: #35426b;
+  --ubik-dark-bg: #0b1220;
+  --ubik-dark-surface: #131c2e;
+  --ubik-dark-shell: #0e1626;
+  --ubik-dark-well: #16213a;
+  --ubik-dark-border: #2a3a5c;
+  --ubik-dark-text: #f4f6fb;
+  --ubik-dark-muted: #a9b7da;
+  --ubik-ok: #08783d;
+  --ubik-attention: #8a6d00;
+  --ubik-critical: #c42b2b;
   --ubik-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Design palette mirrors the ubik-webapp tokens. Use these for status
    * labels, handoff chips, and any tonal callouts. */
-  --palette-primary: hsl(227 81% 56%);
-  --palette-success: hsl(145 65% 40%);
-  --palette-support: hsl(47 100% 57%);
-  --palette-destructive: hsl(0 72% 51%);
-  --palette-foreground: hsl(227 65% 11%);
-  --palette-shell: hsl(227 50% 97%);
-  --palette-well: hsl(227 60% 96%);
-  --palette-muted: hsl(227 100% 98%);
-  --palette-border: hsl(0 0% 90%);
+  --palette-primary: #315cf4;
+  --palette-success: #08783d;
+  --palette-support: #f0c328;
+  --palette-destructive: #c42b2b;
+  --palette-foreground: #10182b;
+  --palette-shell: #f4f2ec;
+  --palette-well: #f2f0ea;
+  --palette-muted: #eef1f7;
+  --palette-border: #bfcee8;
 }
 
 html,
@@ -500,6 +508,765 @@ a {
 
   [data-component-part="tab-button"] {
     white-space: normal !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Interactive product prototypes. These consume the exact ubik-design token
+ * contract: paper, ink, shell, card, well, rule blue, zero radius, no shadow.
+ * ------------------------------------------------------------------------- */
+
+.ubik-demo {
+  background: var(--ubik-light-shell);
+  border: 1px solid var(--ubik-light-border-strong);
+  color: var(--ubik-light-text);
+  font-family: "Noto Sans", ui-sans-serif, system-ui, sans-serif;
+  margin: 1.5rem 0;
+  overflow: hidden;
+}
+
+.dark .ubik-demo {
+  --ubik-attention: #f5ce4b;
+  --ubik-blue: #5b82ff;
+  --ubik-critical: #e5565b;
+  --ubik-ok: #2fa968;
+  background: var(--ubik-dark-shell);
+  border-color: var(--ubik-dark-border);
+  color: var(--ubik-dark-text);
+}
+
+.ubik-demo *,
+.ubik-demo *::before,
+.ubik-demo *::after {
+  border-radius: 0 !important;
+  box-sizing: border-box;
+}
+
+.ubik-demo button {
+  color: inherit;
+  font: inherit;
+}
+
+.ubik-demo button:focus-visible {
+  outline: 2px solid var(--ubik-blue);
+  outline-offset: -2px;
+}
+
+.ubik-demo__bar,
+.ubik-demo__artifact-head,
+.ubik-demo__thread-head {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ubik-demo__bar {
+  background: var(--ubik-light-surface);
+  border-bottom: 1px solid var(--ubik-light-border);
+  min-height: 3.25rem;
+  padding: 0.75rem 1rem;
+}
+
+.dark .ubik-demo__bar {
+  background: var(--ubik-dark-surface);
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-demo__identity {
+  font-size: 0.9rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.ubik-demo__status,
+.ubik-demo__eyebrow,
+.ubik-demo__source,
+.ubik-demo__badge,
+.ubik-demo__kpis span,
+.ubik-demo__flow span {
+  font-family: var(--ubik-mono);
+  font-size: 0.67rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ubik-demo__status {
+  align-items: center;
+  color: var(--ubik-light-muted);
+  display: inline-flex;
+  gap: 0.4rem;
+}
+
+.dark .ubik-demo__status {
+  color: var(--ubik-dark-muted);
+}
+
+.ubik-demo__status i {
+  background: var(--ubik-ok);
+  display: inline-block;
+  height: 0.45rem;
+  width: 0.45rem;
+}
+
+.ubik-demo__tabs {
+  background: var(--ubik-light-surface);
+  border-bottom: 1px solid var(--ubik-light-border);
+  display: flex;
+  overflow-x: auto;
+}
+
+.dark .ubik-demo__tabs {
+  background: var(--ubik-dark-surface);
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-demo__tabs button {
+  background: transparent;
+  border: 0;
+  border-right: 1px solid var(--ubik-light-border);
+  cursor: pointer;
+  flex: 0 0 auto;
+  font-family: var(--ubik-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  min-height: 2.5rem;
+  padding: 0.65rem 0.9rem;
+  text-transform: uppercase;
+}
+
+.dark .ubik-demo__tabs button {
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-demo__tabs button.is-active {
+  background: var(--ubik-blue);
+  color: #ffffff;
+}
+
+.dark .ubik-demo__tabs button.is-active,
+.dark .ubik-demo__action,
+.dark .ubik-demo__actions button.is-primary {
+  color: var(--ubik-dark-bg);
+}
+
+.ubik-demo__body,
+.ubik-demo__thread {
+  padding: 1rem;
+}
+
+.ubik-demo__eyebrow {
+  color: var(--ubik-blue);
+  margin: 0 0 0.75rem;
+}
+
+.ubik-demo__sourcebar,
+.ubik-demo__chips,
+.ubik-demo__actions,
+.ubik-watch__sources,
+.ubik-watch__meter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ubik-demo__sourcebar span,
+.ubik-demo__chip {
+  align-items: center;
+  background: var(--ubik-light-surface);
+  border: 1px solid var(--ubik-light-border);
+  display: inline-flex;
+  font-family: var(--ubik-mono);
+  font-size: 0.68rem;
+  gap: 0.45rem;
+  min-height: 2rem;
+  padding: 0.35rem 0.55rem;
+}
+
+.dark .ubik-demo__sourcebar span,
+.dark .ubik-demo__chip {
+  background: var(--ubik-dark-surface);
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-demo__sourcebar span.is-active {
+  background: var(--ubik-blue);
+  border-color: var(--ubik-blue);
+  color: #ffffff;
+}
+
+.ubik-demo__chip > span {
+  align-items: center;
+  background: var(--ubik-light-text);
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 0.58rem;
+  height: 1.1rem;
+  justify-content: center;
+  width: 1.1rem;
+}
+
+.dark .ubik-demo__chip > span {
+  background: var(--ubik-dark-text);
+  color: var(--ubik-dark-bg);
+}
+
+.ubik-demo__composer {
+  background: var(--ubik-light-well);
+  border: 1px solid var(--ubik-light-border);
+  color: var(--ubik-light-muted);
+  font-family: var(--ubik-mono);
+  font-size: 0.75rem;
+  line-height: 1.65;
+  margin-top: 0.75rem;
+  min-height: 6.75rem;
+  padding: 0.85rem;
+}
+
+.dark .ubik-demo__composer {
+  background: var(--ubik-dark-well);
+  border-color: var(--ubik-dark-border);
+  color: var(--ubik-dark-muted);
+}
+
+.ubik-demo__composer.is-filled {
+  color: var(--ubik-light-text);
+}
+
+.dark .ubik-demo__composer.is-filled {
+  color: var(--ubik-dark-text);
+}
+
+.ubik-demo__suggestions,
+.ubik-demo__team-grid,
+.ubik-demo__kpis {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 0.75rem;
+}
+
+.ubik-demo__suggestions,
+.ubik-demo__team-grid {
+  background: var(--ubik-light-border);
+  border: 1px solid var(--ubik-light-border);
+}
+
+.dark .ubik-demo__suggestions,
+.dark .ubik-demo__team-grid {
+  background: var(--ubik-dark-border);
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-demo__suggestions button,
+.ubik-demo__team-grid button {
+  background: var(--ubik-light-surface);
+  border: 0;
+  cursor: pointer;
+  min-height: 5rem;
+  padding: 0.7rem;
+  text-align: left;
+}
+
+.dark .ubik-demo__suggestions button,
+.dark .ubik-demo__team-grid button {
+  background: var(--ubik-dark-surface);
+}
+
+.ubik-demo__suggestions b,
+.ubik-demo__suggestions span,
+.ubik-demo__team-grid span,
+.ubik-demo__team-grid b,
+.ubik-demo__team-grid small {
+  display: block;
+}
+
+.ubik-demo__suggestions b,
+.ubik-demo__team-grid span,
+.ubik-demo__team-grid small {
+  color: var(--ubik-light-muted);
+  font-family: var(--ubik-mono);
+  font-size: 0.64rem;
+}
+
+.dark .ubik-demo__suggestions b,
+.dark .ubik-demo__team-grid span,
+.dark .ubik-demo__team-grid small {
+  color: var(--ubik-dark-muted);
+}
+
+.ubik-demo__suggestions span,
+.ubik-demo__team-grid b {
+  font-size: 0.8rem;
+  margin-top: 1rem;
+}
+
+.ubik-demo__team-grid small {
+  margin-top: 0.45rem;
+  text-transform: uppercase;
+}
+
+.ubik-demo__team-grid small.is-live {
+  color: var(--ubik-ok);
+}
+
+.ubik-demo__action,
+.ubik-demo__actions button {
+  background: var(--ubik-light-surface);
+  border: 1px solid var(--ubik-light-border-strong);
+  cursor: pointer;
+  font-family: var(--ubik-mono) !important;
+  font-size: 0.7rem !important;
+  margin-top: 0.75rem;
+  padding: 0.6rem 0.75rem;
+}
+
+.ubik-demo__action,
+.ubik-demo__actions button.is-primary {
+  background: var(--ubik-blue);
+  border-color: var(--ubik-blue);
+  color: #ffffff;
+}
+
+.ubik-demo__action span {
+  margin-left: 1.5rem;
+}
+
+.ubik-demo__artifact-head strong,
+.ubik-demo__thread-head strong {
+  font-size: 1rem;
+}
+
+.ubik-demo__badge {
+  border: 1px solid currentColor;
+  display: inline-flex;
+  padding: 0.2rem 0.4rem;
+}
+
+.ubik-demo__badge.is-ready,
+.ubik-demo__badge.is-closed {
+  color: var(--ubik-ok);
+}
+
+.ubik-demo__badge.is-watch,
+.ubik-demo__badge.is-waiting {
+  color: var(--ubik-attention);
+}
+
+.ubik-demo__badge.is-critical {
+  color: var(--ubik-critical);
+}
+
+.ubik-demo__badge.is-open {
+  color: var(--ubik-blue);
+}
+
+.ubik-demo__rows {
+  border: 1px solid var(--ubik-light-border);
+  margin-top: 0.75rem;
+}
+
+.dark .ubik-demo__rows {
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-demo__row {
+  align-items: center;
+  background: var(--ubik-light-surface);
+  border-bottom: 1px solid var(--ubik-light-border);
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: minmax(5rem, 0.65fr) minmax(0, 1.8fr) minmax(5rem, 0.65fr);
+  min-height: 2.75rem;
+  padding: 0.55rem 0.7rem;
+}
+
+.dark .ubik-demo__row {
+  background: var(--ubik-dark-surface);
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-demo__row:last-child {
+  border-bottom: 0;
+}
+
+.ubik-demo__row b {
+  font-size: 0.76rem;
+}
+
+.ubik-demo__row > span:last-child {
+  color: var(--ubik-light-muted);
+  font-family: var(--ubik-mono);
+  font-size: 0.66rem;
+  text-align: right;
+}
+
+.dark .ubik-demo__row > span:last-child {
+  color: var(--ubik-dark-muted);
+}
+
+.ubik-demo__inbox {
+  display: grid;
+  grid-template-columns: minmax(11rem, 0.75fr) minmax(0, 1.7fr);
+}
+
+.ubik-demo__thread-list {
+  border-right: 1px solid var(--ubik-light-border);
+}
+
+.dark .ubik-demo__thread-list {
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-demo__thread-list button {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--ubik-light-border);
+  cursor: pointer;
+  display: block;
+  min-height: 4.2rem;
+  padding: 0.75rem;
+  text-align: left;
+  width: 100%;
+}
+
+.dark .ubik-demo__thread-list button {
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-demo__thread-list button.is-selected {
+  background: #e9efff;
+  border-left: 3px solid var(--ubik-blue);
+}
+
+.dark .ubik-demo__thread-list button.is-selected {
+  background: #1c2c52;
+}
+
+.ubik-demo__thread-list b,
+.ubik-demo__thread-list span,
+.ubik-demo__thread-head span {
+  display: block;
+}
+
+.ubik-demo__thread-list b {
+  font-size: 0.75rem;
+}
+
+.ubik-demo__thread-list span,
+.ubik-demo__thread-head span {
+  color: var(--ubik-light-muted);
+  font-family: var(--ubik-mono);
+  font-size: 0.63rem;
+  margin-top: 0.35rem;
+}
+
+.dark .ubik-demo__thread-list span,
+.dark .ubik-demo__thread-head span {
+  color: var(--ubik-dark-muted);
+}
+
+.ubik-demo__thread .ubik-demo__tabs {
+  border: 1px solid var(--ubik-light-border);
+  margin-top: 0.75rem;
+}
+
+.dark .ubik-demo__thread .ubik-demo__tabs {
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-demo__message,
+.ubik-demo__mini-list {
+  background: var(--ubik-light-well);
+  border: 1px solid var(--ubik-light-border);
+  border-top: 0;
+  min-height: 8rem;
+  padding: 0.8rem;
+}
+
+.dark .ubik-demo__message,
+.dark .ubik-demo__mini-list {
+  background: var(--ubik-dark-well);
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-demo__message p {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.ubik-demo__message span {
+  color: var(--ubik-light-muted);
+  display: block;
+  font-family: var(--ubik-mono);
+  font-size: 0.64rem;
+  margin-top: 2rem;
+}
+
+.dark .ubik-demo__message span {
+  color: var(--ubik-dark-muted);
+}
+
+.ubik-demo__mini-list {
+  display: grid;
+  font-size: 0.72rem;
+  gap: 0.45rem 1rem;
+  grid-template-columns: auto 1fr;
+}
+
+.ubik-demo__mini-list span {
+  color: var(--ubik-light-muted);
+  font-family: var(--ubik-mono);
+}
+
+.dark .ubik-demo__mini-list span {
+  color: var(--ubik-dark-muted);
+}
+
+.ubik-demo__actions {
+  justify-content: flex-end;
+}
+
+.ubik-demo__kpis {
+  background: var(--ubik-light-border);
+  border-bottom: 1px solid var(--ubik-light-border);
+  margin-top: 0;
+}
+
+.dark .ubik-demo__kpis {
+  background: var(--ubik-dark-border);
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-demo__kpis > div {
+  background: var(--ubik-light-surface);
+  min-height: 5rem;
+  padding: 0.75rem;
+}
+
+.dark .ubik-demo__kpis > div {
+  background: var(--ubik-dark-surface);
+}
+
+.ubik-demo__kpis span,
+.ubik-demo__kpis strong {
+  display: block;
+}
+
+.ubik-demo__kpis span {
+  color: var(--ubik-light-muted);
+}
+
+.dark .ubik-demo__kpis span {
+  color: var(--ubik-dark-muted);
+}
+
+.ubik-demo__kpis strong {
+  font-family: var(--ubik-mono);
+  font-size: 1.45rem;
+  margin-top: 0.75rem;
+}
+
+.ubik-demo__flow {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.ubik-demo__flow > div {
+  background: var(--ubik-light-surface);
+  border: 1px solid var(--ubik-light-border);
+  min-height: 7rem;
+  padding: 0.7rem;
+  position: relative;
+}
+
+.dark .ubik-demo__flow > div {
+  background: var(--ubik-dark-surface);
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-demo__flow > div:not(:last-child)::after {
+  color: var(--ubik-blue);
+  content: "→";
+  position: absolute;
+  right: -0.55rem;
+  top: 45%;
+  z-index: 2;
+}
+
+.ubik-demo__flow span,
+.ubik-demo__flow b,
+.ubik-demo__flow small {
+  display: block;
+}
+
+.ubik-demo__flow span {
+  color: var(--ubik-blue);
+}
+
+.ubik-demo__flow b {
+  font-size: 0.76rem;
+  margin-top: 1.1rem;
+}
+
+.ubik-demo__flow small {
+  color: var(--ubik-light-muted);
+  font-size: 0.66rem;
+  line-height: 1.45;
+  margin-top: 0.45rem;
+}
+
+.dark .ubik-demo__flow small {
+  color: var(--ubik-dark-muted);
+}
+
+.ubik-watch__stage {
+  display: grid;
+  grid-template-columns: minmax(13rem, 0.7fr) minmax(0, 1.3fr);
+  min-height: 18rem;
+}
+
+.ubik-watch__copy,
+.ubik-watch__visual {
+  padding: 1.25rem;
+}
+
+.ubik-watch__copy {
+  border-right: 1px solid var(--ubik-light-border);
+}
+
+.dark .ubik-watch__copy {
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-watch__copy > span {
+  color: var(--ubik-blue);
+  font-family: var(--ubik-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+}
+
+.ubik-watch__copy strong {
+  display: block;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-top: 4rem;
+}
+
+.ubik-watch__copy p {
+  color: var(--ubik-light-muted);
+  font-size: 0.78rem;
+  line-height: 1.55;
+  margin: 0.75rem 0 0;
+}
+
+.dark .ubik-watch__copy p {
+  color: var(--ubik-dark-muted);
+}
+
+.ubik-watch__visual {
+  align-content: center;
+  background: var(--ubik-light-well);
+  display: grid;
+  gap: 0.75rem;
+}
+
+.dark .ubik-watch__visual {
+  background: var(--ubik-dark-well);
+}
+
+.ubik-watch__prompt,
+.ubik-watch__result,
+.ubik-watch__mail,
+.ubik-watch__sources span,
+.ubik-watch__meter span {
+  background: var(--ubik-light-surface);
+  border: 1px solid var(--ubik-light-border);
+  padding: 0.75rem;
+}
+
+.dark .ubik-watch__prompt,
+.dark .ubik-watch__result,
+.dark .ubik-watch__mail,
+.dark .ubik-watch__sources span,
+.dark .ubik-watch__meter span {
+  background: var(--ubik-dark-surface);
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-watch__prompt,
+.ubik-watch__result,
+.ubik-watch__sources span,
+.ubik-watch__meter span {
+  font-family: var(--ubik-mono);
+  font-size: 0.7rem;
+}
+
+.ubik-watch__result {
+  border-color: var(--ubik-blue);
+  color: var(--ubik-blue);
+}
+
+.ubik-watch__mail b,
+.ubik-watch__mail span {
+  display: block;
+}
+
+.ubik-watch__mail span {
+  color: var(--ubik-light-muted);
+  font-size: 0.7rem;
+  margin-top: 0.4rem;
+}
+
+.dark .ubik-watch__mail span {
+  color: var(--ubik-dark-muted);
+}
+
+@media (max-width: 720px) {
+  .ubik-demo__suggestions,
+  .ubik-demo__team-grid,
+  .ubik-demo__kpis,
+  .ubik-demo__flow,
+  .ubik-demo__inbox,
+  .ubik-watch__stage {
+    grid-template-columns: 1fr;
+  }
+
+  .ubik-demo__thread-list,
+  .ubik-watch__copy {
+    border-bottom: 1px solid var(--ubik-light-border);
+    border-right: 0;
+  }
+
+  .dark .ubik-demo__thread-list,
+  .dark .ubik-watch__copy {
+    border-color: var(--ubik-dark-border);
+  }
+
+  .ubik-demo__row {
+    grid-template-columns: 1fr;
+  }
+
+  .ubik-demo__row > span:last-child {
+    text-align: left;
+  }
+
+  .ubik-demo__flow > div {
+    min-height: 5.5rem;
+  }
+
+  .ubik-demo__flow > div:not(:last-child)::after {
+    bottom: -0.65rem;
+    left: 50%;
+    right: auto;
+    top: auto;
+    transform: rotate(90deg);
+  }
+
+  .ubik-watch__copy strong {
+    margin-top: 2rem;
   }
 }
 

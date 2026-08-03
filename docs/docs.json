@@ -13,9 +13,9 @@
     "dark": "/images/favicon-dark.png"
   },
   "colors": {
-    "primary": "#385FE8",
-    "light": "#5F7EFF",
-    "dark": "#4D70F0"
+    "primary": "#315CF4",
+    "light": "#5B82FF",
+    "dark": "#315CF4"
   },
   "appearance": {
     "default": "system",
@@ -36,8 +36,8 @@
   },
   "background": {
     "color": {
-      "light": "#F7F9FC",
-      "dark": "#0E1014"
+      "light": "#FBFAF7",
+      "dark": "#0B1220"
     }
   },
   "styling": {
@@ -139,7 +139,27 @@
     },
     {
       "source": "/getting-started/watch/meetings",
-      "destination": "/getting-started/watch/workflows"
+      "destination": "/getting-started/watch"
+    },
+    {
+      "source": "/getting-started/watch/inbox",
+      "destination": "/getting-started/watch"
+    },
+    {
+      "source": "/getting-started/watch/tasks",
+      "destination": "/getting-started/watch"
+    },
+    {
+      "source": "/getting-started/watch/workflows",
+      "destination": "/getting-started/watch"
+    },
+    {
+      "source": "/getting-started/watch/trade-memory",
+      "destination": "/getting-started/watch"
+    },
+    {
+      "source": "/getting-started/watch/finetuning",
+      "destination": "/getting-started/watch"
     },
     {
       "source": "/getting-started/sign-in",
@@ -147,7 +167,7 @@
     },
     {
       "source": "/getting-started/how-ubik-ai-works",
-      "destination": "/getting-started/watch/trade-memory"
+      "destination": "/getting-started/watch"
     },
     {
       "source": "/getting-started/vs-other-llms",
@@ -191,12 +211,7 @@
       {
         "group": "Watch",
         "pages": [
-          "getting-started/watch",
-          "getting-started/watch/inbox",
-          "getting-started/watch/tasks",
-          "getting-started/watch/workflows",
-          "getting-started/watch/trade-memory",
-          "getting-started/watch/finetuning"
+          "getting-started/watch"
         ]
       },
       {

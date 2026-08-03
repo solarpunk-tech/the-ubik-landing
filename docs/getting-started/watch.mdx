@@ -1,23 +1,17 @@
 ---
-title: "Ask ubik"
-description: "Watch a suggested task attach its connected apps and become a reviewable artifact."
-icon: "message-square"
+title: "Watch"
+description: "Switch between six product states without opening six pages."
+icon: "play"
+mode: "wide"
 ---
 
-<div className="ubik-lesson-head">
-  <span>01 / 06 · Ask ubik</span>
-  <a href="/workflows/ask-ubik">Read</a>
-</div>
+import { WatchPrototype } from "/snippets/product-prototypes.jsx";
 
-<Tabs>
-  <Tab title="Start" icon="message-square">
-    <Frame><img src="/images/product/ask-operator-start.png" alt="Ask ubik before a suggested task is selected" /></Frame>
-  </Tab>
-  <Tab title="Apps connected" icon="blocks">
-    <Frame><img src="/images/product/ask-operator-connected.png" alt="Ask ubik after GitHub, Notion, and Slack are attached" /></Frame>
-  </Tab>
-</Tabs>
+Choose a state. The lesson changes in place.
 
-The click fills the task and attaches the apps that can change its answer.
+<WatchPrototype />
 
-<Card title="Next: Inbox" icon="arrow-right" href="/getting-started/watch/inbox" />
+<Columns cols={2}>
+  <Card title="Read the product surfaces" icon="book-open" href="/workflows/ask-ubik" />
+  <Card title="Plan a workflow" icon="calendar" href="https://calendar.app.google/frJjo2U6qdBdgZ1w9" />
+</Columns>

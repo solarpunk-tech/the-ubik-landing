@@ -16,12 +16,7 @@
 
 ## Watch
 
-- [Ask ubik](https://docs.theubik.com/getting-started/watch.md): See a suggested task attach connected apps.
-- [Inbox](https://docs.theubik.com/getting-started/watch/inbox.md): See a source thread stay central while context remains close.
-- [Tasks](https://docs.theubik.com/getting-started/watch/tasks.md): See obligations grouped by owner and closure evidence.
-- [Workflows](https://docs.theubik.com/getting-started/watch/workflows.md): See a library choice open into a live operating queue.
-- [Trade memory](https://docs.theubik.com/getting-started/watch/trade-memory.md): See prior decisions and evidence return for the next question.
-- [Finetuning](https://docs.theubik.com/getting-started/watch/finetuning.md): Turn reviewed examples and failures into a tested workflow update.
+- [Six-state walkthrough](https://docs.theubik.com/getting-started/watch.md): Switch between Ask ubik, Inbox, Tasks, Workflows, Trade memory, and Finetuning without opening another page.
 
 ## Settings
 

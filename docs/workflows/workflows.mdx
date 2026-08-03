@@ -1,42 +1,26 @@
 ---
 title: "Workflows"
-description: "Map two or three operating loops in Week 1, ship one reviewed workflow, then measure its result."
+description: "Map two or three operating loops in Week 1, run one for a week, then compare its result with the baseline."
 icon: "workflow"
+mode: "wide"
 ---
 
-Workflows turn a repeated operating loop into a visible contract: inputs, checks, alerts, owner decisions, reviewed writes, and the result to measure.
+import { WorkflowPrototype } from "/snippets/product-prototypes.jsx";
 
-<Tabs>
-  <Tab title="Library" icon="layout-grid">
-    <Frame caption="Choose a team, then open one operating loop.">
-      <img src="/images/product/workflow-library.png" alt="Workflow library grouped across sales, operations, documentation, logistics, finance, and quality" />
-    </Frame>
-  </Tab>
-  <Tab title="Live workflow" icon="activity">
-    <Frame caption="A Packaging SLA workflow running with queue, status, owner, and deadline visible.">
-      <img src="/images/product/packaging-sla-live.png" alt="Live Packaging SLA tracker with queue totals, status chart, owner, and critical deadline" />
-    </Frame>
-  </Tab>
-  <Tab title="Workflow map" icon="route">
-    <Frame caption="One planning loop mapped from customer inputs to checked state, alerts, and weekly action.">
-      <img src="/images/product/planning-intelligence-map.png" alt="Planning intelligence workflow from customer inputs through checks and alerts to a reviewed weekly action" />
-    </Frame>
-  </Tab>
-</Tabs>
+Workflows make inputs, checks, alerts, owner decisions, reviewed writes, and the measured result visible in one contract.
 
-## Week 1: map
+<WorkflowPrototype />
 
-Shubhranshu and Hemanth map two or three workflows across the people who supply the input, check it, act on exceptions, and own the result. The first map records the current source, decision rule, review boundary, handoff, and failure state.
+## Week 1
+
+Shubhranshu and Hemanth map two or three loops across the people who supply the input, check it, act on exceptions, and own the result.
 
 <Steps>
-  <Step title="Map">Trace two or three loops across sales, operations, logistics, finance, documentation, and quality.</Step>
-  <Step title="Choose">Pick the loop where source data, owner, and outcome can be checked.</Step>
-  <Step title="Run for one week">Connect the required systems and put each customer promise or system write behind review.</Step>
+  <Step title="Map">Trace the source, decision rule, review boundary, handoff, and failure state.</Step>
+  <Step title="Choose">Pick one loop whose source, owner, and result can be checked.</Step>
+  <Step title="Run for one week">Connect the required systems and keep customer promises or system writes behind review.</Step>
   <Step title="Update with founders">Review misses and edge cases with Shubhranshu and Hemanth, then revise the workflow contract.</Step>
-  <Step title="Measure">Compare the agreed baseline with the live result: response time, overdue work, SLA misses, review load, or another metric chosen for that workflow.</Step>
+  <Step title="Measure">Compare the agreed baseline with response time, overdue work, SLA misses, review load, or the metric chosen for that workflow.</Step>
 </Steps>
 
-<Columns cols={2}>
-  <Card title="Plan the first workflow" icon="calendar" href="https://calendar.app.google/frJjo2U6qdBdgZ1w9" />
-  <Card title="Watch Workflows" icon="play" href="/getting-started/watch/workflows" />
-</Columns>
+<Card title="Plan the first workflow" icon="calendar" href="https://calendar.app.google/frJjo2U6qdBdgZ1w9" />

@@ -25,14 +25,14 @@ Use this visible structure:
 Keep these out of the main sidebar:
 
 - Sign in. The app owns authentication.
-- Coming soon pages.
+- Future product pages.
 - Users and access.
 - Generic product comparisons.
 - Separate admin, component, logo, and reference-workflow sections.
 
 Link settings from the relevant instruction. End Good operator habits with two actions: `Open settings` and `Talk to founders` or `Raise a request`. The second action uses the approved calendar or support URL.
 
-Read is the compact product reference plus the Week 1 workflow playbook. Watch is a six-lesson sequence: Ask ubik, Inbox, Tasks, Workflows, Trade Memory, and Finetuning. Each Watch page shows one lesson, its position, one clip or state transition, and Previous or Next. Do not duplicate the Read copy below the media.
+Read is the compact product reference plus the Week 1 workflow playbook. Watch is one page with six switchable states: Ask ubik, Inbox, Tasks, Workflows, Trade Memory, and Finetuning. Old Watch lesson URLs redirect to that page.
 
 Use one root navigation pattern. Mintlify permits groups, tabs, anchors, dropdowns, and nesting, but more controls do not make a small guide easier to scan. Groups are enough here. Use a group `root` only when its title must open a real overview. Disable inherited directory cards when the page already supplies its own choices.
 
@@ -42,7 +42,7 @@ When a file moves, add a `redirects` entry in `docs.json`. Run the broken-link c
 
 ### Getting started
 
-Use two sentences at most. Sentence one says what ubik keeps together. Sentence two offers Read and Watch. The two cards are the only body controls.
+Use one sentence, one interactive product prototype, and Read or Watch links. The prototype must show a state change that screenshots cannot.
 
 ### Read lesson
 
@@ -56,15 +56,14 @@ Use this order:
 
 The four operator habits are source-first review, named ownership, explicit approval, and closure evidence. Workspace basics becomes this short habits page. It is not a tour of every navigation item.
 
-### Watch lesson
+### Watch
 
 Use this order:
 
-1. Lesson number and title.
-2. Read or Watch switch.
-3. One clip, loop, or two-state control.
-4. One sentence that names the state change.
-5. Previous and Next.
+1. Keep all six lessons on one page.
+2. Use one keyboard-accessible switcher.
+3. Change the lesson copy and product state in place.
+4. Keep old lesson routes redirected to the switcher.
 
 ### Week 1 workflow playbook
 
@@ -78,6 +77,12 @@ Describe the forward-deployed sequence, not a generic automation catalogue:
 Show the workflow library as a compact snapshot. A selected card may open a screenshot or a dedicated detail page. Distinguish green `live` workflows from blue `designed` workflows with text as well as color. The workflow detail must name inputs, checks, alerts, the human decision, and the resulting artifact.
 
 ## Components and media
+
+### ubik-design parity
+
+Interactive product surfaces live in `/snippets/product-prototypes.jsx`; pages import them instead of flattening the interface into screenshots. Their CSS must consume the canonical `ubik-design` values: paper `#FBFAF7`, ink `#10182B`, shell `#F4F2EC`, well `#F2F0EA`, action blue `#315CF4`, dark action blue `#5B82FF`, rule blue `#BFCEE8`, Noto Sans, IBM Plex Mono, zero radius, and no shadow outside overlays.
+
+Each prototype needs keyboard-accessible controls, a useful initial state without interaction, and a mobile layout. Keep product copy inside the component lowercase for `ubik`.
 
 Prefer Mintlify's native MDX components. They inherit the theme, survive Mintlify updates, and remain readable in source form.
 
@@ -161,7 +166,7 @@ npx --yes mintlify@latest broken-links --check-anchors --check-redirects --check
 npx --yes mintlify@latest a11y
 ```
 
-Then check the branch preview at desktop and mobile widths. Review light and dark themes, every sidebar label, Read or Watch links, tabs, media, action buttons, Previous or Next, and redirected routes. The source checks prove that the build is valid. The branch preview proves that the guide reads and behaves correctly.
+Then check the branch preview at desktop and mobile widths. Review light and dark themes, every sidebar label, the prototype controls, action buttons, and redirected routes. The source checks prove that the build is valid. The branch preview proves that the guide reads and behaves correctly.
 
 ## Common mistakes
 

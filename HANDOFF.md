@@ -2291,3 +2291,25 @@
   lowercase copy audit, and `git diff --check` pass after the change.
 - Visual status remains INCOMPLETE until the connected Mintlify editor renders
   the updated branch and the user supplies an after screenshot.
+
+### Production publication and visual verification
+
+- Fixed Mintlify JSX snippet compilation by moving `StateTabs`, `AppChip`, and
+  product-surface data into the exported component closures. Mintlify was
+  compiling exported snippets independently, so module-level helpers appeared
+  as missing MDX components even though CLI validation passed.
+- Published commit `3a0bb138609dc4da05cae2594092faddb4d448ca` to both
+  `cleanup-changes` and production `main`. Mintlify Activity reports the update
+  as **Successful** and identifies the same commit as the live source.
+- Production checks passed at `https://docs.theubik.com`: the Getting started
+  Operator and product-surface prototypes render, the flat Watch Inbox route
+  returns a real lesson rather than a 404, and neither page contains a component
+  render error.
+- Before evidence: the user's Mintlify editor screenshots from 2026-08-03,
+  including the `<OperatorPrototype /> could not be rendered` state.
+- After evidence: `/tmp/ubik-docs-production-3a0bb13.png` and
+  `/tmp/ubik-docs-watch-inbox-production-3a0bb13.png`.
+- Visual delta: broken component placeholders are replaced by working native
+  product-state controls; the compact Start/Read/Watch/Help navigation is live;
+  and Watch Inbox loads its video lesson with working previous/next navigation.
+- Visual status: COMPLETE for this publication pass.

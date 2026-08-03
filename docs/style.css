@@ -190,6 +190,58 @@ a {
   color: var(--ubik-dark-text);
 }
 
+.ubik-tuning-loop {
+  border: 1px solid var(--ubik-light-border);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1.5rem 0;
+}
+
+.dark .ubik-tuning-loop {
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-tuning-loop > div {
+  background: var(--ubik-light-surface);
+  border-right: 1px solid var(--ubik-light-border);
+  padding: 1rem;
+}
+
+.dark .ubik-tuning-loop > div {
+  background: var(--ubik-dark-surface);
+  border-color: var(--ubik-dark-border);
+}
+
+.ubik-tuning-loop > div:last-child {
+  border-right: 0;
+}
+
+.ubik-tuning-loop span,
+.ubik-tuning-loop strong {
+  display: block;
+}
+
+.ubik-tuning-loop span {
+  color: var(--ubik-blue);
+  font-family: var(--ubik-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+.ubik-tuning-loop strong {
+  margin-top: 1.5rem;
+}
+
+.ubik-tuning-loop p {
+  color: var(--ubik-light-muted);
+  font-size: 0.82rem;
+  margin: 0.45rem 0 0;
+}
+
+.dark .ubik-tuning-loop p {
+  color: var(--ubik-dark-muted);
+}
+
 .ubik-mode-switch {
   border: 1px solid var(--ubik-light-border);
   display: inline-flex;
@@ -458,6 +510,23 @@ a {
 
   .ubik-proof-grid {
     grid-template-columns: 1fr;
+  }
+
+  .ubik-tuning-loop {
+    grid-template-columns: 1fr;
+  }
+
+  .ubik-tuning-loop > div {
+    border-bottom: 1px solid var(--ubik-light-border);
+    border-right: 0;
+  }
+
+  .dark .ubik-tuning-loop > div {
+    border-bottom-color: var(--ubik-dark-border);
+  }
+
+  .ubik-tuning-loop > div:last-child {
+    border-bottom: 0;
   }
 
   .ubik-proof {

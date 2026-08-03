@@ -11,9 +11,24 @@ Tasks groups obligations by owner and evidence. External owners can act by email
 
 <TasksPrototype />
 
+## Product UI
+
+<Frame caption="Open, waiting, and closed work with counterparty, evidence, and completion receipts visible.">
+  <img src="/images/product/tasks-obligations.png" alt="ubik Tasks board grouped by open, waiting, and completed obligations" />
+</Frame>
+
 Open means your team owes the move. Waiting names the outside owner. Closed keeps the reason or receipt.
+
+| State | Meaning |
+| :--- | :--- |
+| Open | Your team owes the next move |
+| Waiting | A buyer, supplier, or another owner owes it |
+| Probably closed | Evidence suggests the work moved |
+| Closed today | A reason or receipt proves completion |
+
+<div className="ubik-panel">External owners can act by email. They do not need a ubik seat.</div>
 
 <Columns cols={2}>
   <Card title="Trace the source in Inbox" icon="inbox" href="/workflows/inbox" />
-  <Card title="Map the repeated loop" icon="workflow" href="/workflows/workflows" />
+  <Card title="Watch Tasks" icon="play" href="/getting-started/watch/tasks" />
 </Columns>

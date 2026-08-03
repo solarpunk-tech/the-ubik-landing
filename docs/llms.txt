@@ -16,7 +16,12 @@
 
 ## Watch
 
-- [Six-state walkthrough](https://docs.theubik.com/getting-started/watch.md): Switch between Ask ubik, Inbox, Tasks, Workflows, Trade memory, and Finetuning without opening another page.
+- [Ask ubik](https://docs.theubik.com/getting-started/watch.md): Watch a suggested task attach its connected apps and become a reviewable artifact.
+- [Inbox](https://docs.theubik.com/getting-started/watch/inbox.md): Move from one source thread to the evidence and action it needs.
+- [Tasks](https://docs.theubik.com/getting-started/watch/tasks.md): Separate work your team owes, work another owner owes, and work closed with proof.
+- [Workflows](https://docs.theubik.com/getting-started/watch/workflows.md): Move from the workflow library to a live queue and mapped operating loop.
+- [Trade memory](https://docs.theubik.com/getting-started/watch/trade-memory.md): Reopen a prior decision with its evidence and handoff.
+- [Finetuning](https://docs.theubik.com/getting-started/watch/finetuning.md): Turn reviewed examples and failures into a tested update.
 
 ## Settings
 

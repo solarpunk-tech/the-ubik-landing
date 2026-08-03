@@ -32,7 +32,7 @@ Keep these out of the main sidebar:
 
 Link settings from the relevant instruction. End Good operator habits with two actions: `Open settings` and `Talk to founders` or `Raise a request`. The second action uses the approved calendar or support URL.
 
-Read is the compact product reference plus the Week 1 workflow playbook. Watch is one page with six switchable states: Ask ubik, Inbox, Tasks, Workflows, Trade Memory, and Finetuning. Old Watch lesson URLs redirect to that page.
+Read is the compact product reference plus the Week 1 workflow playbook. Watch is six short lessons: Ask ubik, Inbox, Tasks, Workflows, Trade Memory, and Finetuning. Each lesson keeps one primary visual, one operating point, and Back or Next navigation.
 
 Use one root navigation pattern. Mintlify permits groups, tabs, anchors, dropdowns, and nesting, but more controls do not make a small guide easier to scan. Groups are enough here. Use a group `root` only when its title must open a real overview. Disable inherited directory cards when the page already supplies its own choices.
 
@@ -42,7 +42,7 @@ When a file moves, add a `redirects` entry in `docs.json`. Run the broken-link c
 
 ### Getting started
 
-Use one sentence, one interactive product prototype, and Read or Watch links. The prototype must show a state change that screenshots cannot.
+Use one sentence, one interactive product prototype, one product-state screenshot pair, and Read or Watch links. The prototype shows a state change; the screenshots preserve parity with the working product.
 
 ### Read lesson
 
@@ -60,10 +60,11 @@ The four operator habits are source-first review, named ownership, explicit appr
 
 Use this order:
 
-1. Keep all six lessons on one page.
-2. Use one keyboard-accessible switcher.
-3. Change the lesson copy and product state in place.
-4. Keep old lesson routes redirected to the switcher.
+1. Keep one lesson per page.
+2. Lead with one screenshot, two-state tab set, or short product clip.
+3. Explain one operating point in one or two sentences.
+4. End with Back and Next cards.
+5. Keep the full lesson sequence inside the Watch navigation group.
 
 ### Week 1 workflow playbook
 
@@ -80,7 +81,7 @@ Show the workflow library as a compact snapshot. A selected card may open a scre
 
 ### ubik-design parity
 
-Interactive product surfaces live in `/snippets/product-prototypes.jsx`; pages import them instead of flattening the interface into screenshots. Their CSS must consume the canonical `ubik-design` values: paper `#FBFAF7`, ink `#10182B`, shell `#F4F2EC`, well `#F2F0EA`, action blue `#315CF4`, dark action blue `#5B82FF`, rule blue `#BFCEE8`, Noto Sans, IBM Plex Mono, zero radius, and no shadow outside overlays.
+Interactive product surfaces live in `/snippets/product-prototypes.jsx`; Read pages pair them with current product screenshots. Their CSS must consume the canonical `ubik-design` values: paper `#FBFAF7`, ink `#10182B`, shell `#F4F2EC`, well `#F2F0EA`, action blue `#315CF4`, dark action blue `#5B82FF`, rule blue `#BFCEE8`, Noto Sans, IBM Plex Mono, zero radius, and no shadow outside overlays.
 
 Each prototype needs keyboard-accessible controls, a useful initial state without interaction, and a mobile layout. Keep product copy inside the component lowercase for `ubik`.
 

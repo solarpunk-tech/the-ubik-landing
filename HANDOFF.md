@@ -2243,3 +2243,25 @@
   `git diff --check` pass after the repair.
 - Visual status remains INCOMPLETE until the Mintlify editor ingests the new
   branch and supplies after evidence.
+
+### Product visuals and Watch lessons restored
+
+- Kept the CSS-native interactive components and restored every product image
+  under `docs/images/product/` to an appropriate current page.
+- Getting started and Ask ubik now show both composer screenshots. Ask ubik also
+  restores the Morning brief, Slack catch-up, and PR review artifact examples.
+- Inbox now pairs the interactive surface with the evidence-first thread and
+  meeting follow-through frames. Tasks restores the full obligations board.
+- Workflows now pairs its interactive rendition with Library, Live workflow,
+  and Workflow map screenshot tabs before the Week 1 founder-led playbook.
+- Watch is again six short pages: Ask ubik, Inbox, Tasks, Workflows, Trade
+  memory, and Finetuning. Only the Watch group grew; Start, Read, and Help retain
+  the compact navigation contract.
+- Inbox and Trade memory use the existing hosted product clips. Both clip and
+  poster endpoints returned HTTP 200 before inclusion.
+- `llms.txt` and `MINTLIFY_AUTHORING.md` now match the restored lesson structure.
+- Validation passes: Mintlify build, broken links, accessibility across 18 MDX
+  files, JSON parsing, and `git diff --check`.
+- Visual status remains INCOMPLETE until the Mintlify editor renders this branch
+  and supplies after screenshots. Do not substitute a local preview because the
+  user reviews through the connected Mintlify editor.

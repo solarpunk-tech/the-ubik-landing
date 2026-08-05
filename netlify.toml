@@ -32,6 +32,11 @@
   status = 301
 
 [[redirects]]
+  from = "/ubik-workspace-admin-guide.html"
+  to = "/google-workspace-admin-guide"
+  status = 301
+
+[[redirects]]
   from = "/guide"
   to = "https://docs.theubik.com"
   status = 302

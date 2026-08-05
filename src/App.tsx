@@ -14,6 +14,7 @@ const HowItWorks = lazy(() => import("@/pages/HowItWorks"));
 const Blog = lazy(() => import("@/pages/Blog"));
 const Pricing = lazy(() => import("@/pages/Pricing"));
 const Download = lazy(() => import("@/pages/Download"));
+const GoogleWorkspaceAdminGuide = lazy(() => import("@/pages/GoogleWorkspaceAdminGuide"));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -63,6 +64,7 @@ export default function App() {
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/download" element={<Download />} />
+          <Route path="/google-workspace-admin-guide" element={<GoogleWorkspaceAdminGuide />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<Blog />} />
           <Route path="*" element={<Index />} />

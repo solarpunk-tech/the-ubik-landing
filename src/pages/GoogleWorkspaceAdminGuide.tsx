@@ -163,12 +163,8 @@ export default function GoogleWorkspaceAdminGuide() {
           <div className="mx-auto max-w-3xl">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <h1 className="text-4xl font-semibold leading-tight sm:text-5xl">
-                Approve{" "}
-                <span className="inline-flex items-center gap-2 align-baseline">
-                  <span className="inline-block size-[0.6em] shrink-0 bg-primary" aria-hidden />
-                  ubik
-                </span>{" "}
-                as a Google Workspace Administrator
+                Approve <span className="inline-block size-[0.5em] shrink-0 bg-primary" aria-hidden />
+                ubik as a Google Workspace Administrator
               </h1>
               <Button variant="outline" size="sm" onClick={copyLink} className="shrink-0">
                 <LinkIcon data-icon="inline-start" aria-hidden />

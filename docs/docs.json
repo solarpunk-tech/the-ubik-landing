@@ -204,8 +204,11 @@
         "pages": [
           "workflows/ask-ubik",
           "workflows/inbox",
+          "workflows/gmail",
+          "workflows/outlook",
           "workflows/tasks",
-          "workflows/workflows"
+          "workflows/workflows",
+          "workflows/business-central"
         ]
       },
       {

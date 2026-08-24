@@ -1,0 +1,53 @@
+---
+title: "D365 Business Central"
+description: "Connect Microsoft Dynamics 365 Business Central so ubik can read your environments."
+icon: "database"
+---
+
+## Connecting Business Central to ubik
+
+Ubik connects to your Business Central environments through a Microsoft-registered application. Reconnecting (or connecting for the first time) covers every environment configured for your organization in one step — Production, and any sandbox or staging environments alike.
+
+### Step 1 — Connect
+
+Most users can do this directly.
+
+<Steps>
+  <Step title="Open the Business Central integration">Log in to your ubik dashboard and go to the Business Central integration section.</Step>
+  <Step title='Click "Connect" (or "Reconnect")'>Start the connection for Business Central.</Step>
+  <Step title="Sign in with Microsoft">You'll be redirected to a Microsoft sign-in page — log in with your Business Central account.</Step>
+  <Step title="Approve access">You'll see a permissions screen asking you to approve access for "ubik d365." Click **Accept**.</Step>
+  <Step title="Confirm">You're redirected back to ubik automatically. This covers all environments configured for your organization in one step.</Step>
+</Steps>
+
+<Warning>
+  If the approval step shows **"Need admin approval"** instead of an Accept button, your organization's security policy requires an administrator to pre-approve new applications. Skip to Step 2 below.
+</Warning>
+
+### Step 2 — For your IT administrator
+
+Only needed if Step 1 gets blocked by an admin-approval wall.
+
+Have a **Global Administrator** or **Application Administrator** at your organization do the following:
+
+<Steps>
+  <Step title="Open the tenant consent link">
+    Replace `{your-tenant-id}` with your organization's Microsoft tenant ID or domain, then sign in with an admin account:
+
+    ```
+    https://login.microsoftonline.com/{your-tenant-id}/adminconsent?client_id=6782c600-2f55-4352-8581-332b4858b797&redirect_uri=https://ubik-d365-finance-zz6bdx6djq-el.a.run.app/v1/dynamics365bc/oauth/callback
+    ```
+  </Step>
+  <Step title="Consent on behalf of your organization">Check the box for "Consent on behalf of your organization" and click **Accept**.</Step>
+  <Step title="Confirm">The page may land on a plain confirmation screen afterward — that's expected, nothing further is needed there.</Step>
+</Steps>
+
+Once done, anyone at your organization — including non-admins — can complete Step 1 above without hitting the approval wall.
+
+<Accordion title="Why this extra step might be needed" icon="circle-help">
+  Ubik's Business Central integration is a newer Microsoft-registered application that hasn't yet completed Microsoft's publisher verification — a standard safeguard some organizations enforce for new apps, unrelated to your account or data.
+</Accordion>
+
+### What happens next
+
+Data sync picks back up automatically on the next scheduled run after you reconnect. Contact your ubik representative if you'd like it triggered sooner.

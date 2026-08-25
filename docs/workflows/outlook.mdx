@@ -1,0 +1,64 @@
+---
+title: "Microsoft Outlook"
+description: "Sign in with Microsoft 365, then connect Outlook so ubik can read mail and calendar context."
+icon: "calendar-check"
+---
+
+## Signing in with Microsoft
+
+<Steps>
+  <Step title="Go to the ubik login page">Open the ubik sign-in screen.</Step>
+  <Step title='Click "Continue with Microsoft"'>The browser goes to Microsoft's sign-in screen.</Step>
+  <Step title="Sign into your Microsoft 365 account">Enter your work account credentials.</Step>
+  <Step title="Approve access (first time only)">A basic consent screen appears — name, email, profile. Click **Accept**.</Step>
+  <Step title="You're back in ubik">You're redirected back into ubik, already signed in.</Step>
+</Steps>
+
+## Connecting Outlook / Microsoft 365 to ubik
+
+For most people, this is a one-click step.
+
+<Steps>
+  <Step title="Open Integrations">In ubik, go to Integrations.</Step>
+  <Step title='Click "Connect Outlook"'>Start the connection from the Integrations page.</Step>
+  <Step title="Sign in">Use your Microsoft 365 work account.</Step>
+  <Step title="Review permissions">ubik requests read/organize mail, send on your behalf, calendar, and contacts. Click **Accept**.</Step>
+  <Step title="Confirm">You're redirected back to ubik, now showing **Connected**.</Step>
+</Steps>
+
+<Warning>
+  If you instead see **"Need admin approval,"** your organization's Microsoft 365 settings require IT to approve new apps before anyone can use them. This is a normal Microsoft setting many companies have turned on, and it only needs to happen once for your whole company — after that, every employee connects with the steps above.
+</Warning>
+
+### For your IT admin: one-time approval
+
+Covers everyone in your organization.
+
+**Who needs to do this:** someone who specifically holds one of these roles in your Microsoft 365 tenant — Global Administrator, Privileged Role Administrator, Cloud Application Administrator, or Application Administrator. General IT access isn't enough; it has to be one of these exact roles. Not sure who that is at your company? Check **Microsoft Entra admin center → Identity → Roles and administrators**.
+
+<Steps>
+  <Step title="Open a private/incognito browser window">This avoids an existing session interfering with the approval.</Step>
+  <Step title="Sign in with the admin account">Use an account holding one of the roles above.</Step>
+  <Step title="Open the tenant consent link">
+    Replace `yourcompany.com` with your own company's Microsoft domain:
+
+    ```
+    https://login.microsoftonline.com/yourcompany.com/adminconsent?client_id=f47f0c0a-59de-4350-9ff5-be1efb384e75&redirect_uri=https://ubik.solarpunk.technology/api/v1/auth/microsoft/adminconsent/callback
+    ```
+  </Step>
+  <Step title="Review and accept">You'll see a screen listing exactly what ubik is requesting access to (mail, calendar, contacts, basic sign-in). Review it, then click **Accept**.</Step>
+  <Step title="Confirm">Landing on "✅ Consent Granted" means it's done. Every employee at your company can now connect Outlook with the simple one-click steps above — no further admin action needed.</Step>
+</Steps>
+
+### One more setting worth checking, right after
+
+Go to **Microsoft Entra admin center → Identity → Applications → Enterprise applications → search "ubik" → Properties → "Assignment required."**
+
+<Tabs>
+  <Tab title="No" icon="circle-check">
+    Nothing further needed — everyone in the tenant can connect.
+  </Tab>
+  <Tab title="Yes" icon="user-plus">
+    Only people explicitly added can use ubik. Go to **Users and groups → Add user/group** and add whoever needs access.
+  </Tab>
+</Tabs>

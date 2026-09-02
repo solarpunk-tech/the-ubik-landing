@@ -113,7 +113,18 @@ const sections: Section[] = [
     ]
   },
   {
-    title: "9. Retention",
+    title: "9. Ubik Capture mobile application",
+    paragraphs: [
+      "Ubik Capture is our Android application for customer floor staff to photograph paper production records so that office teams can review them. The application is available only to users invited by a Ubik customer and is used under that customer's agreement with us; when you use it, we process the data described here as a processor on that customer's behalf.",
+      "Camera: the application requests the CAMERA permission solely to photograph production sheets. Photographs are taken only when you press the capture control, are stored on the device only until they are uploaded, and are then transmitted over an encrypted connection to Ubik's servers, where they are stored in your organisation's workspace and shown to authorised office users of that organisation. We do not access your photo library, and we do not use photographs for advertising, profiling, or training general-purpose AI models.",
+      "Account: sign-in uses your organisation's Google or Microsoft account, and we hold your name, work email, organisation, and role to authenticate you and to attribute captured records to you. A session token is stored on the device so that you stay signed in; signing out or uninstalling the application removes it.",
+      "Capture metadata: with each photograph we record the facility, line, production date, and sheet type you enter, the time of capture, and a perceptual fingerprint of the image that is used only to flag duplicate photographs of the same sheet.",
+      "Diagnostics: the application may send crash and error reports (device model, operating system version, application version, and the error itself) so that we can keep it working. These reports do not include your photographs.",
+      "We do not show advertising in the application, do not sell personal information, and do not share it with third parties other than the subprocessors described in section 7. Retention follows the controlling customer's instructions and section 10; you can request deletion of your captured records through your organisation or by contacting founders@theubik.com."
+    ]
+  },
+  {
+    title: "10. Retention",
     paragraphs: [
       "We retain personal data only as long as necessary for the purposes above or as required by law.",
       "When we act as a processor, deletion and return follow the customer's instructions and our DPA."
@@ -131,20 +142,20 @@ const sections: Section[] = [
     }
   },
   {
-    title: "10. Cookies and analytics",
+    title: "11. Cookies and analytics",
     paragraphs: [
       "We use a small number of cookies and similar technologies. Strictly-necessary cookies for authentication/session and UI state are always set. Analytics are provided by PostHog, which we operate controller-side and configure to strip IP addresses and not send user IDs, emails or stable organisation IDs.",
       "See our Cookie & Tracker Inventory for the full list and our handling of consent and the Global Privacy Control (GPC) signal."
     ]
   },
   {
-    title: "11. Security",
+    title: "12. Security",
     paragraphs: [
       "We implement technical and organisational measures appropriate to the risk, including encryption in transit and at rest, access controls and least privilege, managed infrastructure on GCP, device management for workforce endpoints, logging and monitoring. See the TOMs annex in our DPA. No method of transmission or storage is fully secure; we cannot guarantee absolute security."
     ]
   },
   {
-    title: "12. Your rights",
+    title: "13. Your rights",
     paragraphs: [
       "Depending on your location, you may have rights to access, correct, delete, restrict or object to processing, port your data, and withdraw consent. Under the GDPR you may also lodge a complaint with a supervisory authority. Under the India DPDP Act you have rights of access, correction, completion, erasure, grievance redressal and nomination.",
       <>
@@ -164,13 +175,13 @@ const sections: Section[] = [
     ]
   },
   {
-    title: "13. Children",
+    title: "14. Children",
     paragraphs: [
       "Ubik is a business product not directed to children. We do not knowingly collect personal data from children. Under the India DPDP Act, processing of children's data requires verifiable parental consent; we do not knowingly process such data."
     ]
   },
   {
-    title: "14. Changes to this notice",
+    title: "15. Changes to this notice",
     paragraphs: [
       "We may update this notice from time to time. Material changes will be communicated by email and/or in-product notice, and the version and effective date will change."
     ]
@@ -248,7 +259,7 @@ export default function Privacy() {
           </div>
 
           <section className="mt-12 border bg-card p-5">
-            <h2 className="text-2xl font-semibold">15. Contact</h2>
+            <h2 className="text-2xl font-semibold">16. Contact</h2>
             <div className="mt-4 grid gap-3 text-sm leading-6 text-foreground/72 dark:text-foreground/82">
               <p>Solarpunk Technology - 6/A/1 Sunder Baug Towers, Makarpura Road, Opposite Hazira, Pratapnagar, Vadodara, Gujarat, India</p>
               <p>Privacy contact: founders@theubik.com</p>

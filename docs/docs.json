@@ -170,10 +170,6 @@
       "destination": "/getting-started/watch"
     },
     {
-      "source": "/getting-started/vs-other-llms",
-      "destination": "/"
-    },
-    {
       "source": "/admin/users-and-access",
       "destination": "/getting-started/workspace-basics"
     },
@@ -225,7 +221,8 @@
       {
         "group": "Help",
         "pages": [
-          "getting-started/workspace-basics"
+          "getting-started/workspace-basics",
+          "getting-started/vs-other-llms"
         ]
       }
     ]

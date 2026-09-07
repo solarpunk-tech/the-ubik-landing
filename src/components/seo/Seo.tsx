@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { JsonLd } from "./JsonLd";
 
 type SeoProps = {
   title: string;
@@ -19,6 +20,25 @@ const SITE_ORIGIN = "https://theubik.com";
 /** og:image must be absolute — several scrapers will not resolve "/og-image.png". */
 const absoluteUrl = (value: string) =>
   value.startsWith("http") ? value : `${SITE_ORIGIN}${value.startsWith("/") ? "" : "/"}${value}`;
+
+// A canonical entity block, rendered on every page. "Ubik" collides with the
+// Philip K. Dick novel and a handful of unrelated products (search console
+// data shows queries for "ubik cube", "ubik game", "ubik band" landing on
+// this domain's impressions); Google and AI crawlers have no signal that
+// this is the trade-ops company without one consistent entity declaration
+// repeated everywhere. `disambiguatingDescription` is schema.org's field for
+// exactly this: telling a crawler what this entity is not.
+const ORGANIZATION_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Ubik",
+  alternateName: ["Ubik AI", "Ubik App"],
+  url: SITE_ORIGIN,
+  logo: `${SITE_ORIGIN}/icon-512.png`,
+  description: "Ubik is the agentic operating system for perishable trade, built by Solarpunk Technology.",
+  disambiguatingDescription:
+    "Ubik, the software product for perishable food importers and exporters at theubik.com. Not the 1969 Philip K. Dick novel, and not any other unrelated product or company also named Ubik."
+};
 
 export function Seo({ title, description, canonical = "https://theubik.com/", image, imageAlt, type = "website" }: SeoProps) {
   useEffect(() => {
@@ -43,5 +63,5 @@ export function Seo({ title, description, canonical = "https://theubik.com/", im
     document.querySelector('link[rel="canonical"]')?.setAttribute("href", canonical);
   }, [canonical, description, image, imageAlt, title, type]);
 
-  return null;
+  return <JsonLd data={ORGANIZATION_JSON_LD} />;
 }

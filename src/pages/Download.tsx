@@ -1,18 +1,25 @@
-import { type MouseEvent, useEffect, useMemo, useState } from "react";
+import { type MouseEvent, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
   AppleLogoIcon,
   CaretDownIcon,
   CheckCircleIcon,
+  ClockCounterClockwiseIcon,
   DownloadSimpleIcon,
   EnvelopeSimpleIcon,
+  GooglePlayLogoIcon,
   HardDrivesIcon,
+  InfoIcon,
+  MicrophoneIcon,
   ShieldWarningIcon,
   WindowsLogoIcon
 } from "@phosphor-icons/react";
-import { MatrixField } from "@/components/landing/MatrixField";
 import { PageShell } from "@/components/landing/PageShell";
 import { Seo } from "@/components/seo/Seo";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { useDownloadLinks } from "@/lib/use-download-links";
 import { detectOS, type OS } from "@/lib/use-detected-os";
 import { trackEvent } from "@/lib/posthog";
@@ -29,6 +36,25 @@ type DownloadOption = {
   chip: string;
   explainer: string;
 };
+
+type MobileOption = {
+  id: "windows_store" | "google_play";
+  label: string;
+  storeUrl: string | null;
+};
+
+const mobileOptions: MobileOption[] = [
+  {
+    id: "windows_store",
+    label: "Windows Store",
+    storeUrl: null
+  },
+  {
+    id: "google_play",
+    label: "Google Play",
+    storeUrl: null
+  }
+];
 
 const downloadOptions: DownloadOption[] = [
   {
@@ -77,19 +103,16 @@ const windowsSteps = [
 
 const proofCards = [
   {
+    kicker: "Guest list",
     title: "Doesn't join meetings.",
     copy: "ubik Meetings stays on your desktop, so there is no extra bot in the guest list.",
     visual: "participants"
   },
   {
+    kicker: "Screen share",
     title: "Invisible to screen share.",
     copy: "Keep the helper window outside shared screens while it tracks meeting context locally.",
     visual: "screen"
-  },
-  {
-    title: "Follows your workflow.",
-    copy: "Move the widget near the notes, spreadsheet, or call window you are already using.",
-    visual: "widget"
   }
 ] as const;
 
@@ -142,14 +165,14 @@ const preReadSources = [
   { label: "Calendar", detail: "Agenda, attendees, and timing", domain: "calendar.google.com" }
 ];
 
-function isDesktopInstallDevice() {
-  if (typeof window === "undefined") return true;
+const screenShareRows = [
+  { surface: "Your screen", detail: "Helper window with meeting context", state: "Visible" },
+  { surface: "Shared screen", detail: "Only the window you chose to share", state: "Hidden" },
+  { surface: "Recording", detail: "No Ubik overlay in the captured frame", state: "Hidden" }
+];
 
-  const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
-  const hasHover = window.matchMedia("(hover: hover)").matches;
-  const wideEnough = window.matchMedia("(min-width: 1024px)").matches;
-  return hasFinePointer && hasHover && wideEnough;
-}
+const kickerClass =
+  "font-mono text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-foreground/60 dark:text-foreground/70";
 
 function getInitialChoice(requested: string | null): DownloadChoice {
   if (requested === "windows") return "windows";
@@ -167,191 +190,296 @@ function getDownloadHref(choice: DownloadChoice, links: ReturnType<typeof useDow
   return links.mac_arm64;
 }
 
-function MeetingNotificationCard() {
-  const [active, setActive] = useState(0);
-  const current = notifications[active];
+// Faithful to the actual desktop app's floating strip (ubik-meetings repo,
+// Chip.jsx / tokens.js "C" — the compact-surface design tier): flat corners,
+// #315CF4 action blue, #10182B ink, #35426B ink-blue secondary text, a
+// #BFCEE8 hairline border, and an 8px square mark that is ALWAYS blue — state
+// lives in the controls, never the mark. This illustration is light-only by
+// the same rule the real strip follows, independent of the site's theme.
+const STRIP = {
+  ink: "#10182B",
+  sub: "#35426B",
+  border: "#BFCEE8",
+  well: "#F2F0EA",
+  blue: "#315CF4",
+  red: "#C42B2B"
+};
+
+// A soft, drifting grain fills the whitespace the strip sits in — the same
+// backdrop the fig. 1 well would otherwise be a flat block of colour.
+// WebGPU-only, loaded on demand (dynamic import, so browsers without
+// `navigator.gpu` never fetch it) and it degrades to the flat STRIP.well
+// background on any failure: unsupported browser, a blocklisted GPU, reduced
+// motion, or the async init rejecting.
+const GRAIN_SHADER = `
+struct Params { time: f32, texel: vec2f }
+@group(0) @binding(0) var<uniform> params: Params;
+
+fn hash(p: vec2f) -> f32 {
+  var p3 = fract(vec3f(p.xyx) * 0.1031);
+  p3 += dot(p3, p3.yzx + 33.33);
+  return fract((p3.x + p3.y) * p3.z);
+}
+
+@fragment fn fs_main(@location(0) uv: vec2f) -> @location(0) vec4f {
+  let cell = floor(uv / max(params.texel, vec2f(0.0009)) * 0.4);
+  let grain = hash(cell + floor(params.time * 8.0));
+  let drift = sin(uv.x * 5.0 + params.time * 0.35) * 0.5 + 0.5;
+  let vignette = smoothstep(0.95, 0.1, distance(uv, vec2f(0.5, 0.55)));
+  let base = vec3f(0.949, 0.941, 0.918);
+  let tint = vec3f(0.192, 0.361, 0.957);
+  let amount = (grain * 0.05 + drift * 0.02) * vignette;
+  return vec4f(mix(base, tint, amount), 1.0);
+}
+`;
+
+function LiveStripBackdrop() {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActive((value) => (value + 1) % notifications.length);
-    }, 4200);
+    if (typeof navigator === "undefined" || !("gpu" in navigator)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    return () => window.clearInterval(timer);
+    let cancelled = false;
+    let stop: (() => void) | null = null;
+    let gpuHandle: { dispose: () => void } | null = null;
+
+    void (async () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const { init, surface, effect, clock, frameLoop } = await import("vgpu");
+      const gpu = await init();
+      if (cancelled) {
+        gpu.dispose();
+        return;
+      }
+      gpuHandle = gpu;
+      const canvasSurface = surface(gpu, canvas, { dpr: [1, 2] });
+      const grain = effect(gpu, GRAIN_SHADER, {
+        set: { params: { time: 0, texel: canvasSurface.texelSize } }
+      });
+      canvasSurface.onResize(() => {
+        grain.set({ params: { texel: canvasSurface.texelSize } });
+      });
+      const time = clock(gpu);
+      const handle = frameLoop(
+        gpu,
+        (frame) => {
+          grain.set({ params: { time: time.time } });
+          frame.pass(canvasSurface, grain);
+        },
+        { fps: 30 }
+      );
+      stop = () => handle.stop();
+    })().catch(() => {
+      // WebGPU can be present but still fail to init (blocklisted GPU, no
+      // adapter) — the flat STRIP.well colour underneath is the fallback, so
+      // a rejected promise here is silently fine.
+    });
+
+    return () => {
+      cancelled = true;
+      stop?.();
+      gpuHandle?.dispose();
+    };
   }, []);
 
-  return (
-    <div className="relative mx-auto w-full max-w-[24rem] border bg-card text-left text-foreground shadow-lg shadow-primary/10">
-      <div className="absolute -right-2 -top-2 flex size-6 items-center justify-center bg-primary font-mono text-[0.64rem] font-semibold text-primary-foreground">
-        {notifications.length}
-      </div>
-      <div className="grid h-20 grid-cols-[4px_1fr_auto_auto] overflow-hidden">
-        <div className="grid gap-1 py-1.5">
-          {notifications.map((notification, index) => (
-            <button
-              key={notification.id}
-              type="button"
-              aria-label={`Show ${notification.title}`}
-              aria-pressed={index === active}
-              onClick={() => setActive(index)}
-              className={index === active ? "bg-primary" : "bg-primary/20 transition-colors hover:bg-primary/40"}
-            />
-          ))}
-        </div>
-        <div key={current.id} className="flex min-w-0 flex-col justify-center gap-1.5 px-3 motion-safe:animate-notification-fade">
-          <div className="flex min-w-0 items-center gap-2">
-            <span className={current.id === "alert" ? "size-2 shrink-0 bg-destructive" : "size-2 shrink-0 bg-primary"} aria-hidden />
-            <p className="truncate text-sm font-semibold">{current.title}</p>
-          </div>
-          <p className="font-mono text-[0.68rem] text-foreground/66 dark:text-foreground/78">
-            {current.meta} <span className="text-primary">{current.signal}</span>
-          </p>
-        </div>
-        <button type="button" className="flex items-center gap-2 border-l px-3 text-xs font-semibold transition-colors hover:bg-muted">
-          <img src={favicon(current.domain)} alt="" className="size-5" />
-          {current.cta}
-        </button>
-        <button type="button" aria-label="Meeting actions" className="flex w-10 items-center justify-center border-l text-foreground/66 transition-colors hover:bg-muted hover:text-foreground">
-          <CaretDownIcon aria-hidden />
-        </button>
-      </div>
-    </div>
-  );
+  return <canvas ref={canvasRef} className="absolute inset-0 size-full" aria-hidden />;
 }
 
-function PreReadPreviewCard() {
-  return (
-    <div className="border bg-card p-5 text-foreground shadow-lg shadow-primary/10">
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex items-start gap-3">
-          <span className="mt-1 size-3 shrink-0 bg-primary" aria-hidden />
-          <div>
-            <p className="text-sm font-semibold">Pre-read preview</p>
-            <p className="mt-1 text-xs leading-5 text-foreground/62 dark:text-foreground/76">
-              Context Ubik can prepare before you join.
-            </p>
-          </div>
-        </div>
-        <span className="border border-primary/30 bg-primary/8 px-2 py-1 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-primary">
-          Coming soon
-        </span>
-      </div>
-      <div className="mt-4 grid gap-2">
-        {preReadSources.map((source) => (
-          <div key={source.label} className="grid grid-cols-[auto_1fr] items-center gap-3 border-t pt-2">
-            <img src={favicon(source.domain)} alt="" className="size-5" />
-            <div className="min-w-0">
-              <p className="truncate text-xs font-semibold">{source.label}</p>
-              <p className="truncate text-[0.68rem] text-foreground/62 dark:text-foreground/76">{source.detail}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+function LiveStrip() {
+  const [recording, setRecording] = useState(false);
+  const [seconds, setSeconds] = useState(0);
 
-function FloatingWidget() {
+  useEffect(() => {
+    const cycle = window.setInterval(() => setRecording((value) => !value), 5200);
+    return () => window.clearInterval(cycle);
+  }, []);
+
+  useEffect(() => {
+    if (!recording) {
+      setSeconds(0);
+      return;
+    }
+    const tick = window.setInterval(() => setSeconds((value) => value + 1), 1000);
+    return () => window.clearInterval(tick);
+  }, [recording]);
+
+  const mm = String(Math.floor(seconds / 60)).padStart(2, "0");
+  const ss = String(seconds % 60).padStart(2, "0");
+
   return (
-    <div className="inline-flex border bg-card shadow-lg shadow-primary/10">
-      <div className="flex w-12 flex-col items-center gap-3 px-3 py-4">
-        <span className="size-3 bg-primary" aria-hidden />
-        <div className="flex h-7 items-end gap-1">
-          {[0, 1, 2].map((index) => (
+    <div className="m-0">
+      <div
+        className="relative flex justify-center overflow-hidden rounded-none py-12 sm:py-16"
+        style={{ background: STRIP.well }}
+      >
+        <LiveStripBackdrop />
+        <div
+          className="group relative z-10 inline-flex h-[34px] items-stretch bg-white shadow-[0px_2px_10px_0px_hsl(0_0%_0%/0.06),0px_4px_6px_-1px_hsl(0_0%_0%/0.06)]"
+          style={{ border: `1px solid ${STRIP.border}` }}
+        >
+          <span className="flex items-center px-3">
+            <span className="block size-2 shrink-0" style={{ background: STRIP.blue }} aria-hidden />
+          </span>
+          <span className="my-2 w-px" style={{ background: STRIP.border }} aria-hidden />
+          <span
+            className="flex items-center gap-1.5 px-3 font-mono text-[0.62rem] font-medium"
+            style={{ color: STRIP.sub }}
+          >
+            <MicrophoneIcon className="size-3" aria-hidden />
+            ask ubik
+          </span>
+          <span className="my-2 w-px" style={{ background: STRIP.border }} aria-hidden />
+          <span
+            className="flex items-center gap-1.5 px-3 font-mono text-[0.62rem] font-semibold transition-colors duration-150"
+            style={{ color: recording ? STRIP.red : STRIP.blue }}
+          >
             <span
-              key={index}
-              className="w-1 bg-emerald-500 motion-safe:animate-meeting-bar"
-              style={{ height: `${index === 1 ? 18 : 10}px`, animationDelay: `${index * 180}ms` }}
+              className={recording ? "block size-1.5 animate-pulse" : "block size-1.5"}
+              style={{ background: recording ? STRIP.red : STRIP.blue }}
               aria-hidden
             />
-          ))}
+            {recording ? `REC ${mm}:${ss}` : "Record"}
+          </span>
+          <div className="grid grid-cols-[0fr] transition-[grid-template-columns] duration-200 ease-out group-hover:grid-cols-[1fr]">
+            <div className="overflow-hidden">
+              <div
+                className="flex h-full items-center gap-1 pl-2 pr-2.5 opacity-0 transition-opacity duration-150 group-hover:opacity-100"
+                style={{ borderLeft: `1px solid ${STRIP.border}` }}
+              >
+                <span className="flex size-6 items-center justify-center" style={{ color: STRIP.sub }} aria-hidden>
+                  <CaretDownIcon className="size-3.5" />
+                </span>
+                <span className="flex size-6 items-center justify-center" style={{ color: STRIP.sub }} aria-hidden>
+                  <ClockCounterClockwiseIcon className="size-3.5" />
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  );
+}
+
+function SpecimenHeader({ label, note }: { label: string; note?: string }) {
+  return (
+    <div className="flex items-center justify-between gap-3 border-b bg-muted/40 px-4 py-2.5">
+      <span className={kickerClass}>{label}</span>
+      {note ? <span className="font-mono text-[0.66rem] text-foreground/60 dark:text-foreground/72">{note}</span> : null}
+    </div>
+  );
+}
+
+function NotificationRail() {
+  return (
+    <Card className="gap-0 py-0">
+      <CardContent className="p-0">
+        <SpecimenHeader label="Desktop alerts" note={`${notifications.length} queued`} />
+        <ul className="divide-y">
+          {notifications.map((notification) => (
+            <li key={notification.id} className="grid grid-cols-[auto_1fr_auto] items-center gap-3 px-4 py-3">
+              <img src={favicon(notification.domain)} alt="" className="size-5" />
+              <div className="min-w-0">
+                <p className="truncate text-sm font-medium text-foreground">{notification.title}</p>
+                <p className="truncate font-mono text-[0.68rem] text-foreground/62 dark:text-foreground/76">
+                  {notification.meta} <span className="text-primary">{notification.signal}</span>
+                </p>
+              </div>
+              <Badge variant="outline" className="font-mono text-[0.64rem] uppercase tracking-[0.1em]">
+                {notification.cta}
+              </Badge>
+            </li>
+          ))}
+        </ul>
+      </CardContent>
+    </Card>
+  );
+}
+
+function PreReadPanel() {
+  return (
+    <Card className="gap-0 py-0">
+      <CardContent className="p-0">
+        <SpecimenHeader label="Pre-read preview" />
+        <div className="flex items-start justify-between gap-4 border-b px-4 py-3">
+          <p className="text-sm leading-6 text-foreground/72 dark:text-foreground/82">
+            Context Ubik can assemble before you join.
+          </p>
+          <Badge
+            variant="outline"
+            className="shrink-0 border-primary/30 bg-primary/5 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-primary"
+          >
+            Coming soon
+          </Badge>
+        </div>
+        <dl className="divide-y">
+          {preReadSources.map((source) => (
+            <div key={source.label} className="grid grid-cols-[auto_1fr] items-center gap-3 px-4 py-3">
+              <img src={favicon(source.domain)} alt="" className="size-5" />
+              <div className="min-w-0">
+                <dt className="truncate text-sm font-medium text-foreground">{source.label}</dt>
+                <dd className="m-0 truncate text-xs text-foreground/62 dark:text-foreground/76">{source.detail}</dd>
+              </div>
+            </div>
+          ))}
+        </dl>
+      </CardContent>
+    </Card>
   );
 }
 
 function ProofVisual({ visual }: { visual: (typeof proofCards)[number]["visual"] }) {
   if (visual === "participants") {
     return (
-      <div className="grid gap-3">
-        <div className="flex items-center justify-between">
-          <p className="text-sm font-semibold">Participant roster</p>
-          <span className="inline-flex items-center gap-1 border border-primary/20 bg-primary/8 px-2 py-1 text-[0.65rem] font-semibold text-primary">
+      <div>
+        <div className="flex items-center justify-between gap-3 border-b bg-muted/40 px-4 py-2.5">
+          <span className={kickerClass}>Participant roster</span>
+          <span className="inline-flex items-center gap-1 font-mono text-[0.64rem] font-semibold uppercase tracking-[0.1em] text-primary">
             <CheckCircleIcon weight="fill" aria-hidden />
-            No bot detected
+            No bot
           </span>
         </div>
-        {rosterSurfaces.map((surface) => (
-          <div key={surface.label} className="grid grid-cols-[auto_1fr_auto] items-center gap-3 border-t pt-2">
-            <span className="flex size-7 items-center justify-center border bg-background">
+        <ul className="divide-y">
+          {rosterSurfaces.map((surface) => (
+            <li key={surface.label} className="grid grid-cols-[auto_1fr_auto] items-center gap-3 px-4 py-2.5">
               <img src={favicon(surface.domain)} alt="" className="size-4" />
-            </span>
-            <div className="min-w-0">
-              <p className="truncate text-xs font-semibold">{surface.label}</p>
-              <p className="truncate text-[0.65rem] text-foreground/60 dark:text-foreground/72">{surface.detail}</p>
-            </div>
-            <span className="text-[0.65rem] text-foreground/60 dark:text-foreground/72">Local</span>
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  if (visual === "screen") {
-    return (
-      <div className="relative h-full min-h-52 overflow-hidden">
-        <div className="absolute inset-y-0 left-0 w-[54%] border-2 border-emerald-500 bg-card p-4 dark:bg-card/80">
-          <span className="bg-primary px-2 py-1 text-[0.66rem] font-semibold text-primary-foreground">Visible to you</span>
-          <div className="mt-5 space-y-2 text-xs">
-            <p className="font-semibold text-primary">AI Response</p>
-            <p className="leading-5 text-foreground/70 dark:text-foreground/82">Flag missing PO context before the reply is approved.</p>
-          </div>
-        </div>
-        <div className="absolute inset-y-0 left-[50%] w-px bg-foreground/60" />
-        <div className="absolute inset-y-0 right-0 w-[50%] bg-muted/70 p-4 dark:bg-muted/35">
-          <span className="float-right bg-primary px-2 py-1 text-[0.66rem] font-semibold text-primary-foreground">Invisible to others</span>
-        </div>
-        <div className="absolute bottom-3 left-8 right-8 border bg-background/85 p-4 shadow-lg backdrop-blur">
-          <div className="space-y-2">
-            <span className="block h-2 w-3/4 bg-muted" />
-            <span className="block h-2 w-2/3 bg-muted" />
-            <span className="block h-2 w-5/6 bg-muted" />
-            <span className="block h-2 w-1/2 bg-muted" />
-          </div>
-        </div>
+              <div className="min-w-0">
+                <p className="truncate text-xs font-medium text-foreground">{surface.label}</p>
+                <p className="truncate text-[0.68rem] text-foreground/62 dark:text-foreground/76">{surface.detail}</p>
+              </div>
+              <span className="font-mono text-[0.62rem] uppercase tracking-[0.1em] text-foreground/60 dark:text-foreground/72">
+                Local
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
 
   return (
-    <div className="grid h-full min-h-52 content-center gap-5">
-      <div className="relative mx-auto w-full max-w-xs border bg-card p-3 text-foreground">
-        <div className="grid grid-cols-2 gap-2">
-          <div className="aspect-[4/3] bg-background/18 dark:bg-muted/70" />
-          <div className="aspect-[4/3] bg-primary/70" />
-        </div>
-        <div className="mt-3 h-8 bg-background/10 dark:bg-muted/70" />
-        <div className="absolute bottom-4 right-4 flex border border-background/35 bg-background/12 backdrop-blur dark:border-border dark:bg-background/90">
-          <div className="grid w-8 place-items-center border-r border-background/25 py-2 dark:border-border">
-            <span className="size-2 bg-primary" aria-hidden />
-          </div>
-          <div className="grid gap-1.5 p-2">
-            {[HardDrivesIcon, EnvelopeSimpleIcon, ShieldWarningIcon].map((Icon, index) => (
-              <span key={index} className="flex h-6 w-28 items-center gap-2 border border-background/20 bg-background/12 px-2 dark:border-border dark:bg-muted/50">
-                <Icon className="size-3.5 text-foreground" aria-hidden />
-                <span className="h-1.5 flex-1 bg-background/70 dark:bg-foreground/60" />
-              </span>
-            ))}
-          </div>
-        </div>
+    <div>
+      <div className="flex items-center justify-between gap-3 border-b bg-muted/40 px-4 py-2.5">
+        <span className={kickerClass}>Share surface</span>
+        <span className="font-mono text-[0.66rem] text-foreground/60 dark:text-foreground/72">local only</span>
       </div>
-      <div className="mx-auto flex items-center gap-2">
-        {["command", "up", "down", "left", "right"].map((key) => (
-          <span key={key} className="flex h-10 min-w-10 items-center justify-center border bg-card px-3 text-xs font-semibold shadow-sm">
-            {key === "command" ? "⌘" : key === "up" ? "↑" : key === "down" ? "↓" : key === "left" ? "←" : "→"}
-          </span>
-        ))}
-      </div>
+      <table className="w-full text-left text-xs">
+        <tbody>
+          {screenShareRows.map((row) => (
+            <tr key={row.surface} className="border-b last:border-0">
+              <td className="px-4 py-3 align-top">
+                <p className="font-medium text-foreground">{row.surface}</p>
+                <p className="mt-1 text-[0.68rem] leading-5 text-foreground/62 dark:text-foreground/76">{row.detail}</p>
+              </td>
+              <td className="whitespace-nowrap px-4 py-3 align-top font-mono text-[0.62rem] uppercase tracking-[0.1em] text-foreground/70 dark:text-foreground/80">
+                {row.state}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -361,7 +489,6 @@ export default function Download() {
   const [params] = useSearchParams();
   const [selectedId, setSelectedId] = useState<DownloadChoice>(() => getInitialChoice(params.get("os")));
   const [showInstallGuide, setShowInstallGuide] = useState(false);
-  const [canInstallDesktop, setCanInstallDesktop] = useState(isDesktopInstallDevice);
 
   const selected = downloadOptions.find((option) => option.id === selectedId) ?? downloadOptions[0];
   const steps = selected.os === "windows" ? windowsSteps : macSteps;
@@ -370,22 +497,6 @@ export default function Download() {
     if (links.loading) return "Loading latest release...";
     return links.version ? `Version ${links.version}` : "Latest desktop release";
   }, [links.loading, links.version]);
-
-  useEffect(() => {
-    const queries = [
-      window.matchMedia("(pointer: fine)"),
-      window.matchMedia("(hover: hover)"),
-      window.matchMedia("(min-width: 1024px)")
-    ];
-
-    const updateInstallEligibility = () => setCanInstallDesktop(isDesktopInstallDevice());
-    updateInstallEligibility();
-
-    queries.forEach((query) => query.addEventListener("change", updateInstallEligibility));
-    return () => {
-      queries.forEach((query) => query.removeEventListener("change", updateInstallEligibility));
-    };
-  }, []);
 
   function handleDownloadClick(event: MouseEvent<HTMLAnchorElement>, option: DownloadOption) {
     if (links.loading) {
@@ -405,153 +516,183 @@ export default function Download() {
       />
       <main className="relative overflow-hidden">
         <section className="meetings-brand-hero relative border-b">
-          <MatrixField variant="hero" density="medium" seed="download-meetings-hero" />
-          <div className="container-page relative z-10 py-16 sm:py-20 lg:py-24">
-            <div className="mx-auto max-w-4xl text-center">
-              <h1 className="text-5xl font-semibold leading-[1.02] sm:text-6xl lg:text-7xl">
-                ubik Meetings stays with you, not inside the call.
+          <div className="container-page relative z-10 py-14 sm:py-16">
+            <div>
+              <h1 className="text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
+                Your meetings, remembered. No bot in the room.
               </h1>
-              <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-primary-foreground/84 sm:text-lg">
-                A private desktop companion for meeting alerts, reviewed notes, and the work context operators need before the next action moves.
-              </p>
-              {canInstallDesktop ? (
-                <div className="mx-auto mt-8 max-w-4xl">
-                  <div className="grid gap-2 sm:grid-cols-3">
-                    {downloadOptions.map((option) => {
-                      const href = getDownloadHref(option.id, links);
-                      const OptionIcon = option.os === "windows" ? WindowsLogoIcon : AppleLogoIcon;
-                      const isSelected = option.id === selectedId;
-
-                      return (
-                        <a
-                          key={option.id}
-                          href={href}
-                          aria-current={isSelected ? "true" : undefined}
-                          aria-disabled={links.loading}
-                          onClick={(event) => {
-                            setSelectedId(option.id);
-                            handleDownloadClick(event, option);
-                          }}
-                          className={[
-                            "group grid min-h-36 gap-3 border bg-card p-4 text-left text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                            isSelected ? "border-primary shadow-lg shadow-primary/10" : "hover:border-primary/50 hover:bg-muted/40",
-                            links.loading ? "pointer-events-none opacity-60" : "",
-                          ].join(" ")}
-                        >
-                          <span className="flex items-center justify-between gap-3">
-                            <span className="inline-flex items-center gap-2 text-base font-semibold">
-                              <OptionIcon weight="fill" className={isSelected ? "text-primary" : "text-foreground/70"} aria-hidden />
-                              {option.label}
-                            </span>
-                            <span className="border bg-background px-2 py-1 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-foreground/62 dark:text-foreground/76">
-                              {option.chip}
-                            </span>
-                          </span>
-                          <span className="text-sm leading-6 text-foreground/84">{option.explainer}</span>
-                          <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary">
-                            {option.cta}
-                            <DownloadSimpleIcon aria-hidden />
-                          </span>
-                        </a>
-                      );
-                    })}
-                  </div>
-                </div>
-              ) : (
-                <div className="mx-auto mt-8 max-w-xl border bg-card px-5 py-4 text-sm font-medium leading-6 text-foreground shadow-sm">
-                  Open this page on a Mac or Windows desktop to install ubik Meetings.
-                </div>
-              )}
-              <p className="mt-3 text-xs leading-5 text-primary-foreground/76">
-                {canInstallDesktop
-                  ? `${selected.helper} ${versionText} · ${selected.fileLabel}`
-                  : `${versionText} · Desktop installer available for macOS and Windows`}
-              </p>
-              <p className="mx-auto mt-2 max-w-2xl text-xs leading-5 text-primary-foreground/68">
-                Not sure which Mac you have? Open Apple menu, About This Mac. M-series means Apple silicon; Intel means the Intel build.
+              <p className="mt-4 max-w-2xl text-lg leading-8 text-foreground/72 dark:text-foreground/82">
+                ubik Meetings runs quietly on your desktop: it hears the call, captures the decision and the
+                owner, and files both against the deal they belong to. Nothing extra on the guest list.
+                Nothing extra in the recording.
               </p>
             </div>
 
-            <div className="mt-14 grid gap-8 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
-              <div className="order-2 grid content-center gap-8 lg:order-1">
-                <MeetingNotificationCard />
-              </div>
-              <div className="order-1 mx-auto flex flex-col items-center gap-4 lg:order-2">
-                <FloatingWidget />
-                <p className="max-w-36 text-center font-mono text-[0.64rem] font-semibold uppercase tracking-[0.16em] text-primary-foreground/68">
-                  Desktop widget
-                </p>
-              </div>
-              <div className="order-3 grid content-center">
-                <PreReadPreviewCard />
-              </div>
+            <div className="mt-10">
+              <LiveStrip />
             </div>
 
-            <div className="mt-16 grid gap-8 md:grid-cols-3">
-              {proofCards.map((card) => (
-                <article key={card.title} className="grid gap-5">
-                  <div className="min-h-72 border bg-card/60 p-5 dark:bg-card/35">
-                    <div className="h-full border bg-background p-4 text-foreground shadow-sm dark:bg-background/65">
-                      <ProofVisual visual={card.visual} />
+            <p className={`${kickerClass} mt-12`}>Desktop</p>
+            <div className="mt-4 grid gap-px border bg-border sm:grid-cols-3">
+              {downloadOptions.map((option) => {
+                const href = getDownloadHref(option.id, links);
+                const OptionIcon = option.os === "windows" ? WindowsLogoIcon : AppleLogoIcon;
+                const isSelected = option.id === selectedId;
+
+                return (
+                  <div key={option.id} className="flex flex-col gap-3 bg-card p-5">
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="inline-flex items-center gap-2 text-base font-semibold text-foreground">
+                        <OptionIcon
+                          weight="fill"
+                          className={isSelected ? "text-primary" : "text-foreground/70"}
+                          aria-hidden
+                        />
+                        {option.label}
+                      </span>
+                      <Badge variant="outline" className="font-mono text-[0.62rem] uppercase tracking-[0.12em]">
+                        {option.chip}
+                      </Badge>
                     </div>
+                    <p className="text-sm leading-6 text-foreground/72 dark:text-foreground/82">{option.explainer}</p>
+                    <p className="font-mono text-[0.66rem] text-foreground/60 dark:text-foreground/72">
+                      {option.fileLabel}
+                    </p>
+                    <Button asChild size="lg" variant={isSelected ? "default" : "outline"} className="mt-auto w-full">
+                      <a
+                        href={href}
+                        aria-current={isSelected ? "true" : undefined}
+                        aria-disabled={links.loading}
+                        onClick={(event) => {
+                          setSelectedId(option.id);
+                          handleDownloadClick(event, option);
+                        }}
+                        className={links.loading ? "pointer-events-none opacity-60" : undefined}
+                      >
+                        <DownloadSimpleIcon data-icon="inline-start" aria-hidden />
+                        {option.cta}
+                      </a>
+                    </Button>
                   </div>
-                  <div className="meetings-proof-copy">
-                    <h2 className="text-xl font-semibold">{card.title}</h2>
-                    <p className="mt-2 text-base leading-7 text-foreground/72 dark:text-foreground/82">{card.copy}</p>
-                  </div>
-                </article>
-              ))}
+                );
+              })}
             </div>
+            <p className="mt-4 font-mono text-[0.7rem] leading-5 text-foreground/62 dark:text-foreground/76">
+              {versionText} · {selected.fileLabel} · {selected.helper}
+            </p>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-foreground/62 dark:text-foreground/76">
+              Not sure which Mac you have? Open Apple menu, About This Mac. M-series means Apple silicon; Intel
+              means the Intel build.
+            </p>
 
-            <div className="meetings-compatible mt-16 text-center">
-              <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em]">
-                Compatible with every tool
-              </p>
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
-                {compatibleTools.map((tool) => (
-                  <div key={tool.label} className="inline-flex items-center gap-2 text-sm font-medium">
-                    <img src={favicon(tool.domain)} alt="" className="size-4" />
-                    {tool.label}
+            <p className={`${kickerClass} mt-10`}>Mobile</p>
+            <div className="mt-4 grid gap-px border bg-border sm:grid-cols-2">
+              {mobileOptions.map((option) => {
+                const OptionIcon = option.id === "windows_store" ? WindowsLogoIcon : GooglePlayLogoIcon;
+
+                return (
+                  <div key={option.id} className="flex flex-col gap-3 bg-card p-5 opacity-70">
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="inline-flex items-center gap-2 text-base font-semibold text-foreground">
+                        <OptionIcon className="text-foreground/70" aria-hidden />
+                        {option.label}
+                      </span>
+                      <Badge
+                        variant="outline"
+                        className="shrink-0 border-primary/30 bg-primary/5 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-primary"
+                      >
+                        Coming soon
+                      </Badge>
+                    </div>
+                    <Button size="lg" variant="outline" className="mt-auto w-full" disabled aria-disabled="true">
+                      <DownloadSimpleIcon data-icon="inline-start" aria-hidden />
+                      Coming soon
+                    </Button>
                   </div>
-                ))}
-              </div>
+                );
+              })}
             </div>
           </div>
         </section>
 
         <section className="container-page section-y">
-          <div className="mb-10 flex max-w-5xl flex-col gap-3">
-            <h2 className="text-3xl font-semibold sm:text-4xl">
-              {canInstallDesktop ? "Install once. Keep the meeting loop local." : "Install from a desktop when you are ready."}
-            </h2>
-            <p className="max-w-3xl text-foreground/72 dark:text-foreground/82">
-              {canInstallDesktop
-                ? "Use the desktop app for meeting alerts now. As the bridge expands, local spreadsheets, portals, and documents can move into reviewed Ubik workflows without turning every file into cloud clutter."
-                : "ubik Meetings is a Mac and Windows desktop app. Keep this page handy, then reopen it on your workstation to choose the right installer."}
+          <div className="max-w-3xl">
+            <p className={kickerClass}>On your desktop</p>
+            <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">Alerts now, prepared context next.</h2>
+            <p className="mt-3 text-foreground/72 dark:text-foreground/82">
+              The app surfaces what is about to happen and what needs a decision, without pulling you into
+              another window.
             </p>
           </div>
-          <div className="grid gap-px bg-border md:grid-cols-3">
-            {(canInstallDesktop
-              ? steps
-              : [
-                  { n: 1, title: "Use a workstation", copy: "Open this page from the Mac or Windows machine where you want ubik Meetings installed." },
-                  { n: 2, title: "Pick the build", copy: "The desktop page will offer the detected installer first, with a selector for other builds." },
-                  { n: 3, title: "Enable local access", copy: "After installing, allow the requested local permissions so meeting detection can run on-device." }
-                ]
-            ).map(({ n, title, copy }) => (
-              <div key={n} className="bg-background p-5 sm:p-6">
-                <div className="inline-flex size-8 items-center justify-center bg-primary text-sm font-semibold text-primary-foreground">
-                  {n}
+          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+            <NotificationRail />
+            <PreReadPanel />
+          </div>
+        </section>
+
+        <Separator />
+
+        <section className="container-page section-y">
+          <div className="max-w-3xl">
+            <p className={kickerClass}>What it does not do</p>
+            <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">No bot. No overlay in the share. No new window to babysit.</h2>
+          </div>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            {proofCards.map((card) => (
+              <article key={card.title} className="flex flex-col border bg-card">
+                <ProofVisual visual={card.visual} />
+                <div className="mt-auto border-t p-5">
+                  <p className={kickerClass}>{card.kicker}</p>
+                  <h3 className="mt-2 text-lg font-semibold">{card.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{card.copy}</p>
                 </div>
-                <h3 className="mt-4 text-lg font-semibold">{title}</h3>
-                <p className="mt-2 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{copy}</p>
-              </div>
+              </article>
             ))}
           </div>
-          {showInstallGuide ? (
-            <p className="mt-5 text-sm font-medium text-primary">
-              Download started for {selected.label}. Follow the steps above after the installer appears in Downloads.
+
+          <div className="mt-10 border-y py-6">
+            <p className={kickerClass}>Compatible with every tool</p>
+            <div className="mt-4 flex flex-wrap items-center gap-x-8 gap-y-3">
+              {compatibleTools.map((tool) => (
+                <div key={tool.label} className="inline-flex items-center gap-2 text-sm font-medium">
+                  <img src={favicon(tool.domain)} alt="" className="size-4" />
+                  {tool.label}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="container-page pb-16 sm:pb-20">
+          <div className="max-w-3xl">
+            <p className={kickerClass}>Install</p>
+            <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">Install once. Keep the meeting loop local.</h2>
+            <p className="mt-3 text-foreground/72 dark:text-foreground/82">
+              Three steps, then meeting context lands in the same reviewed queue as the rest of your operating
+              memory.
             </p>
+          </div>
+          <ol className="mt-6 flex max-w-3xl flex-col divide-y border-y">
+            {steps.map(({ n, title, copy }) => (
+              <li key={n} className="grid grid-cols-[2rem_1fr] gap-4 py-4">
+                <span className="flex size-8 items-center justify-center border bg-primary/10 font-mono text-sm font-semibold text-primary">
+                  {n}
+                </span>
+                <div className="text-sm leading-6">
+                  <p className="font-medium text-foreground">{title}</p>
+                  <p className="mt-1 text-foreground/72 dark:text-foreground/82">{copy}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          {showInstallGuide ? (
+            <div className="mt-6 flex max-w-3xl gap-3 border border-primary/30 bg-primary/5 p-5">
+              <InfoIcon className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
+              <p className="text-sm leading-6 text-foreground/86">
+                <strong className="text-foreground">Download started for {selected.label}.</strong> Follow the
+                steps above once the installer appears in Downloads.
+              </p>
+            </div>
           ) : null}
         </section>
       </main>

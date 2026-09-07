@@ -31,7 +31,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
     { to: "/pricing", label: t("nav.pricing", { defaultValue: "Pricing" }) },
     { to: "/blog", label: t("nav.journal", { defaultValue: "Trade Notes" }) },
     { to: "/security", label: t("nav.trust", { defaultValue: "Security" }) },
-    { to: downloadHref, label: "ubik Meetings", download: true }
+    { to: downloadHref, label: "Ubik App", download: true }
   ];
 
   function handleLanguageChange(language: string) {
@@ -157,7 +157,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
             <Link to="/legal/cookies">Cookies</Link>
             <Link to="/terms-of-service">{t("nav.terms", { defaultValue: "Terms" })}</Link>
             <Link to="/security">{t("nav.trust", { defaultValue: "Security" })}</Link>
-            <Link to={downloadHref}>ubik Meetings</Link>
+            <Link to={downloadHref}>Ubik App</Link>
             <a href={externalLinks.founderMeeting}>
               {t("footer.contact", { defaultValue: "Talk to founders" })}
             </a>

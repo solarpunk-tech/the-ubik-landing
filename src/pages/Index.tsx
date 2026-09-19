@@ -119,6 +119,8 @@ const teamCompanies: readonly TeamCompany[] = [
   { label: "Costco", domain: "costco.com" },
   { label: "AquaExchange", domain: "aquaexchange.com" },
   { label: "ClearTax", domain: "cleartax.in" },
+  { label: "Arintra", domain: "arintra.com" },
+  { label: "Lumian", domain: "lumian.ai" },
   { label: "Housing", domain: "housing.com" }
 ] as const;
 
@@ -277,9 +279,10 @@ const teamProfiles = [
     linkedin: "https://www.linkedin.com/in/11shubhranshu"
   },
   {
-    name: "Leadership announcement coming soon",
+    name: "Sai Kiran",
     role: "AI/ML & Product Engineering",
-    bio: "Our AI/ML and product engineering leader is working with ubik in stealth. We’ll introduce them when the time is right."
+    bio: "Scaled engineering across mobility, commerce and finance unicorns. Then explored AI-native orgs and built foundation models for healthcare.",
+    linkedin: "https://www.linkedin.com/in/saikiraniitb/"
   }
 ] as const;
 

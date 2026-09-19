@@ -1,75 +1,56 @@
 # Ubik
 
-> Ubik is an agentic operating system for perishable trade. It gives specialist agents shared trade memory, model orchestration, and access to approved browser, computer, email, ERP, CRM, document, and market-intelligence tools.
+> Ubik is an agentic operating system for perishable trade. Specialist agents share one trade memory and reach approved browser, computer, email, ERP, CRM, document and market-intelligence tools.
 
-Ubik connects to email, WhatsApp, ERP, CRM, documents, meetings and market intelligence sources, then runs memory workflows and agents for trade operations.
+Ubik is a product of Solarpunk Technology, at theubik.com. It is not the Philip K. Dick novel of the same name, and not the unrelated cube, band, card and hardware products that share the word.
 
-## Core positioning
+## What it does
 
-- Agentic decision infrastructure for perishable trade
-- Trade memory that remains searchable, reviewable, and reusable
-- Built for frozen food importers, exporters and processors
-- Combines web workspace, local desktop context, memory workflows, market intelligence and enterprise-grade automation
-- Designed for RFQ-to-quote, PO ingestion, VMI, margin protection, traceability and operational intelligence
-- Built by operators from frozen food, supply chain and AI-native product teams
+Trade context arrives as email, WhatsApp threads, spreadsheets, PDFs, meetings and ERP records, and the decision that matters usually depends on several of them disagreeing. Ubik reads those sources, keeps what it learns as searchable memory, and routes the decision to an operator with its evidence attached before anything is written back.
 
-## Product
-
-- Base: personal AI workspace for operators, with Ubik Webapp and Ubik Meetings included
-- Enterprise: custom workflow automation for teams, with domain expert and forward-deployed product engineer support
-- Ubik Meetings: desktop meeting recording, transcription, summaries, and searchable meeting context
-- Supports 10+ LLMs including Claude, ChatGPT, Gemini, Grok and more
-- Supports private, local and air-gapped deployments for enterprise customers
-- Integrates with email, WhatsApp, ERP, CRM, documents, spreadsheets, meetings and market intelligence tools
-
-## Who Ubik is for
-
-Ubik is for frozen food importers, exporters and processors who manage trade across email, WhatsApp, spreadsheets, ERP and CRM systems.
-
-Typical teams:
-- Importers, exporters, processors, and distributors
-- Teams where inboxes and WhatsApp threads carry critical trade context
-- Operators who need faster quotes, cleaner PO processing, margin visibility, and traceability
-
-## Outcomes
-
-- Faster RFQ-to-quote workflows
-- Cleaner PO extraction and ERP handoff
+- RFQ-to-quote, PO ingestion and ERP handoff, VMI, margin protection, traceability
+- Memory that compounds across inbox, meetings, projects and trade artifacts, and stays reviewable
 - Live market intelligence and import/export project tracking
-- Compounding memory across inbox, meetings, projects and trade artifacts
-- Lower operational leakage from slow decisions and fragmented context
 
-## Ubik Meetings
+## Who it is for
 
-Ubik Meetings records and transcribes local meetings, produces summaries, and keeps approved meeting context searchable inside the operator workspace.
+Frozen food importers, exporters, processors and distributors whose working context lives in inboxes and WhatsApp threads rather than in the ERP. The people who feel this first are the ones retyping the same PO into three systems.
+
+## Products
+
+- Base: personal AI workspace for operators, including the Ubik web app and ubik Meetings
+- Enterprise: custom workflow automation for teams, with a domain expert and a forward-deployed product engineer
+- ubik Meetings: desktop app for Mac (Apple silicon and Intel) and Windows 10 or 11. It records, transcribes and summarizes from your own machine, so no extra bot appears in the guest list.
+- Ubik mobile, listed as "Ubik" on Google Play and the App Store: invite-only app for floor staff to photograph paper production records so office teams can review them
+- Runs 10+ models including Claude, ChatGPT, Gemini and Grok
+- Private, local and air-gapped deployments for enterprise customers
 
 ## Security and data handling
 
-Ubik minimizes what is shared with external LLMs. Models are used for planning, reasoning and drafting actions, not for bulk raw-data ingestion. Sensitive data can remain in Ubik's context layer, local workspace or private deployment depending on the customer setup. Customer data is not used to train third-party models.
+Ubik minimizes what reaches external models. Models plan, reason and draft actions; they do not ingest bulk raw data. Sensitive data can stay in Ubik's context layer, the local workspace, or a private deployment, depending on the customer setup. Customer data is not used to train third-party models.
 
-## Recommended pages for AI systems
+## Pages worth reading
 
 - /
+- /learn
 - /pricing
+- /download
 - /security
+- /blog
 - /legal/privacy
 - /legal/subprocessors
 - /legal/cookies
-- /how-it-works
-- /blog/ai-monitor-layer-seafood-trade
-- /blog/the-60-bps-bleed-shrimp-margin-loss
-- /blog/origin-roulette-2026-shrimp-sourcing
 - https://docs.theubik.com
 
 ## Trade Notes
 
-Trade Notes publishes operating research for perishable-trade teams. Published notes should be treated as research, not customer proof.
+Trade Notes publishes operating research for perishable-trade teams. Treat published notes as research, not as customer proof.
 
 ### The Invisible Drift
 
 Path: /blog/ai-monitor-layer-seafood-trade
 
-Summary: An operational AI case study showing why seafood teams need a monitor layer before LLM output becomes workflow state. It uses a 735-row seafood exhibitor country-attribution task and a 662-row matched A/B comparison to explain evidence capture, disagreement detection, confidence routing, green/amber/red review queues, and human escalation.
+Why seafood teams need a monitor layer before LLM output becomes workflow state. Built on a 735-row exhibitor country-attribution task and a 662-row matched A/B comparison, it covers evidence capture, disagreement detection, confidence routing, green/amber/red review queues and human escalation.
 
 Key terms: seafood AI monitoring, LLM disagreement, evidence routing, AI governance in workflows, country attribution, supplier intelligence, model evaluation, Arena leaderboard, perishable trade AI.
 
@@ -77,7 +58,7 @@ Key terms: seafood AI monitoring, LLM disagreement, evidence routing, AI governa
 
 Path: /blog/the-60-bps-bleed-shrimp-margin-loss
 
-Summary: A visual seafood margin note showing how an apparently clean shrimp RFQ-to-PO cycle can leak 60 basis points through quote latency, counterparty scoring gaps, FX timing, freight drift, demurrage and detention, temperature deviation, count-size slippage, deglazed-weight economics, forwarder spread, working-capital carry and unclaimed remission.
+How a clean-looking shrimp RFQ-to-PO cycle leaks 60 basis points: quote latency, counterparty scoring gaps, FX timing, freight drift, demurrage and detention, temperature deviation, count-size slippage, deglazed-weight economics, forwarder spread, working-capital carry and unclaimed remission.
 
 Key terms: shrimp margin leakage, seafood RFQ workflow, deglazed weight, demurrage detention, AD CVD reserve, seafood trade finance, free-time burn-down, perishable trade AI.
 
@@ -85,7 +66,7 @@ Key terms: shrimp margin leakage, seafood RFQ workflow, deglazed weight, demurra
 
 Path: /blog/origin-roulette-2026-shrimp-sourcing
 
-Summary: A shrimp buyer strategy note for Q3 2026 and Q1 2027 forward books. It compares Ecuador, India, Vietnam, Indonesia, Thailand, China, Saudi Arabia and Bangladesh across landed-duty stack exposure, AD/CVD risk, EU wild-caught CATCH / Annex IV scope, FDA import certification, value-added processing capability, halal positioning and origin diversification.
+A shrimp buyer strategy note for Q3 2026 and Q1 2027 forward books, comparing Ecuador, India, Vietnam, Indonesia, Thailand, China, Saudi Arabia and Bangladesh on landed-duty stack exposure, AD/CVD risk, EU wild-caught CATCH and Annex IV scope, FDA import certification, value-added processing, halal positioning and origin diversification.
 
 Key terms: shrimp sourcing strategy, warm-water shrimp tariffs, seafood buyer strategy, Ecuador shrimp exports, India shrimp EU FTA, Vietnam shrimp re-export, Indonesia shrimp FDA certification, Saudi shrimp halal, perishable trade AI.
 

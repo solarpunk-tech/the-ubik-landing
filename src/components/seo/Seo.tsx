@@ -32,9 +32,21 @@ const ORGANIZATION_JSON_LD = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Ubik",
-  alternateName: ["Ubik AI", "Ubik App"],
+  alternateName: ["Ubik AI", "Ubik App", "theubik"],
   url: SITE_ORIGIN,
   logo: `${SITE_ORIGIN}/icon-512.png`,
+  // The description above names Solarpunk Technology in prose; this states the
+  // same link in a field a crawler can actually follow.
+  parentOrganization: {
+    "@type": "Organization",
+    name: "Solarpunk Technology",
+    url: "https://solarpunk.technology"
+  },
+  // `sameAs` is the strongest disambiguation signal in this block and is still
+  // missing. It only works pointing at profiles that verifiably belong to the
+  // company, and the repo has only the founders' personal LinkedIn URLs; a
+  // guessed URL asserts a false identity, which is worse than none. Add the
+  // company LinkedIn (plus Crunchbase/X if they exist) here once confirmed.
   description: "Ubik is the agentic operating system for perishable trade, built by Solarpunk Technology.",
   disambiguatingDescription:
     "Ubik, the software product for perishable food importers and exporters at theubik.com. Not the 1969 Philip K. Dick novel, and not any other unrelated product or company also named Ubik."

@@ -180,7 +180,7 @@ export const ProductSurfacePreview = () => {
       ))}
     </StateTabs>
     <div className="ubik-surface-preview__trust">
-      <span><b>Security</b>SOC 2 Type II and GDPR</span>
+      <span><b>Security</b>Audit trail on every change. SOC 2 in progress.</span>
       <span><b>Private</b>Data never trained on</span>
       <a href="https://theubik.com/download"><b>ubik Meetings</b>Get the desktop app</a>
     </div>

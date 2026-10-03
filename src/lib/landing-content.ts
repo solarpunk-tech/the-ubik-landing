@@ -196,7 +196,7 @@ export const securityCards = [
   {
     icon: LockKeyIcon,
     title: "Bounded model access",
-    copy: "Ubik limits the context sent to external models and supports private deployment requirements for enterprise workflows."
+    copy: "Ubik limits the context sent to external models and keeps sensitive context in its own context layer."
   },
   {
     icon: FingerprintIcon,
@@ -265,21 +265,20 @@ export const faqs: Faq[] = [
   },
   {
     question: "What does Ubik cost?",
-    answer: "Ubik has two public plan types. Base is $100 per month, or $85 per month on annual billing, for one operator who wants a personal AI workspace with Ubik Webapp and Ubik Meetings included. Enterprise is custom for teams running mission-critical workflows across email, WhatsApp, ERP, CRM, market intelligence, and customers. Enterprise pricing is built around value recovered, private deployment needs, onboarding scope, and workflow automation depth.",
+    answer: "Ubik is priced per workflow, not per person. Teammate is $1,000 per month for one production workflow on the full Workspace, with connectors and no user or token limit. Enterprise is custom: platform plus workflows, priced each, with decisions run on your own context graph.",
     paragraphs: [
-      "Ubik has two public plan types.",
-      "Enterprise pricing is built around value recovered, private deployment needs, onboarding scope, and workflow automation depth."
+      "Ubik is priced per workflow, not per person."
     ],
     bullets: [
-      "Base is $100 per month, or $85 per month on annual billing, for one operator who wants a personal AI workspace with Ubik Webapp and Ubik Meetings included.",
-      "Enterprise is custom for teams running mission-critical workflows across email, WhatsApp, ERP, CRM, market intelligence, and customers."
+      "Teammate is $1,000 per month for one production workflow on the full Workspace, with connectors and no user or token limit.",
+      "Enterprise is custom: platform plus workflows, priced each, with decisions run on your own context graph."
     ]
   },
   {
     question: "Is my data safe with Ubik?",
-    answer: "Yes. Ubik has a SOC 2 Type II audit in progress, supports GDPR-compliant handling for EU customers, and is aligned to ISO 27001 controls. Data is encrypted AES-256 at rest and TLS 1.3 in transit. Data residency is available in the US, EU, and APAC. LLM models are called only for planning and action steps, never for training. Role-based permissions, SSO with Okta, Azure AD, and Google Workspace, and audit logging on every action are standard. Your prompts, RFQs, supplier pricing, and margin data never become training input for any third-party model. Contractually guaranteed.",
+    answer: "Yes. Audit trail on every change. SOC 2 in progress. Ubik supports GDPR-compliant handling for EU customers, and is aligned to ISO 27001 controls. Data is encrypted AES-256 at rest and TLS 1.3 in transit. Data residency is available in the US, EU, and APAC. LLM models are called only for planning and action steps, never for training. Role-based permissions, SSO with Okta, Azure AD, and Google Workspace, and audit logging on every action are standard. Your prompts, RFQs, supplier pricing, and margin data never become training input for any third-party model. Contractually guaranteed.",
     paragraphs: [
-      "Yes. Ubik has a SOC 2 Type II audit in progress, supports GDPR-compliant handling for EU customers, and is aligned to ISO 27001 controls.",
+      "Yes. Audit trail on every change. SOC 2 in progress. Ubik supports GDPR-compliant handling for EU customers, and is aligned to ISO 27001 controls.",
       "Your prompts, RFQs, supplier pricing, and margin data never become training input for any third-party model. Contractually guaranteed."
     ],
     bullets: [
@@ -291,20 +290,20 @@ export const faqs: Faq[] = [
   },
   {
     question: "What data is shared with LLMs?",
-    answer: "Ubik minimizes what is sent to external LLMs. Models are used for planning, reasoning and drafting actions, not for bulk raw-data ingestion. Sensitive context like RFQs, supplier pricing, margins, customer names and credentials is kept in Ubik's context layer, local workspace or private deployment depending on the setup. Enterprise customers can configure private, local or air-gapped deployments. Customer data is never used to train third-party models.",
+    answer: "Ubik minimizes what is sent to external LLMs. Models are used for planning, reasoning and drafting actions, not for bulk raw-data ingestion. Sensitive context like RFQs, supplier pricing, margins, customer names and credentials is kept in Ubik's context layer. Customer data is never used to train third-party models.",
     paragraphs: [
       "Ubik minimizes what is sent to external LLMs.",
       "Models are used for planning, reasoning and drafting actions, not for bulk raw-data ingestion.",
-      "Sensitive context like RFQs, supplier pricing, margins, customer names and credentials is kept in Ubik's context layer, local workspace or private deployment depending on the setup.",
-      "Enterprise customers can configure private, local or air-gapped deployments. Customer data is never used to train third-party models."
+      "Sensitive context like RFQs, supplier pricing, margins, customer names and credentials is kept in Ubik's context layer.",
+      "Customer data is never used to train third-party models."
     ]
   },
   {
     question: "Which integrations does Ubik support?",
-    answer: "Ubik connects to over 800 apps. Email: Gmail, Outlook, and Microsoft 365 with admin-approved app access. ERP and accounting: Zoho Books, Zoho Inventory, SAP, NetSuite, QuickBooks. CRM: Salesforce, HubSpot, Zoho CRM. Chat: WhatsApp Business, Slack, Microsoft Teams. Logistics and pricing intelligence: SeaRates, Expana, Maersk, custom carrier portals. Productivity: Google Drive, OneDrive, Dropbox, Notion. If a system has an API or a structured export, we connect it during onboarding. If it does not, our forward-deployed engineer builds the integration in week 2.",
+    answer: "Ubik connects to over 800 apps. Email: Gmail, Outlook, and Microsoft 365 with admin-approved app access. ERP and accounting: Zoho Books, Zoho Inventory, SAP, NetSuite, QuickBooks. CRM: Salesforce, HubSpot, Zoho CRM. Chat: WhatsApp Business, Slack, Microsoft Teams. Logistics and pricing intelligence: SeaRates, Expana, Maersk, custom carrier portals. Productivity: Google Drive, OneDrive, Dropbox, Notion. If a system has an API or a structured export, we connect it during onboarding. If it does not, the engineer on your account builds the integration in week 2.",
     paragraphs: [
       "Ubik connects to over 800 apps.",
-      "If a system has an API or a structured export, we connect it during onboarding. If it does not, our forward-deployed engineer builds the integration in week 2."
+      "If a system has an API or a structured export, we connect it during onboarding. If it does not, the engineer on your account builds the integration in week 2."
     ],
     bullets: [
       "Email: Gmail, Outlook, and Microsoft 365 with admin-approved app access.",
@@ -399,7 +398,7 @@ export const homepageFaqs: Faq[] = [
   {
     question: "What data is shared with AI models?",
     answer:
-      "Ubik minimizes the context sent to external models and uses them for bounded reasoning and drafting steps. Data handling, model access, residency, and private deployment requirements are agreed for each customer setup."
+      "Ubik minimizes the context sent to external models and uses them for bounded reasoning and drafting steps. Data handling, model access, and residency requirements are agreed for each customer setup."
   },
   {
     question: "How does Ubik govern autonomous agent actions?",

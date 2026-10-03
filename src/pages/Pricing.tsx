@@ -70,10 +70,10 @@ const enterpriseFeatures = [
 ];
 
 const replacesRows = [
-  ["Per-seat SaaS, price grows with headcount", "One price per workflow, unlimited users"],
+  ["Per-seat SaaS, price grows with headcount", "One price per workflow, no user or token limit"],
   ["Six-month ERP implementation", "First workflow live in weeks"],
   ["Implementation consultants and transformation decks", "Trade expert and engineer on the account, included"],
-  ["Forward-deployed engineers at day rates", "Workflows configured, not rebuilt, for each customer"],
+  ["Forward-deployed engineers at day rates", "Workflows personalised, not configured or modular"],
   ["Four to seven coordinators chasing emails", "One teammate that chases, checks and prepares the decision"]
 ] as const;
 

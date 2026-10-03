@@ -1,39 +1,72 @@
-import { useEffect, useState } from "react";
-import { ArrowRightIcon, CheckCircleIcon } from "@phosphor-icons/react";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import {
+  AppStoreLogoIcon,
+  AppleLogoIcon,
+  ArrowRightIcon,
+  CheckCircleIcon,
+  DownloadSimpleIcon,
+  GooglePlayLogoIcon,
+  KeyIcon,
+  LockKeyIcon,
+  MicrophoneIcon,
+  PlugsConnectedIcon,
+  WindowsLogoIcon
+} from "@phosphor-icons/react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MatrixField } from "@/components/landing/MatrixField";
+import { MeetingsLiveStrip } from "@/components/landing/MeetingsLiveStrip";
 import { PageShell } from "@/components/landing/PageShell";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Seo } from "@/components/seo/Seo";
-import { brandAssets } from "@/lib/brand";
 import { externalLinks } from "@/lib/links";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/posthog";
 
-const baseFeatures = [
-  "Webapp + ubik Meetings desktop add-on",
-  "2-3 new workflows every month",
-  "Inbox, meetings, market intel and live artifacts",
-  "10+ LLMs with device-held credentials",
-  "Local meeting recorder included"
+const teammateFeatures = [
+  "One production workflow (pick from the library or we build it)",
+  "The full Workspace, including the mobile app for the floor",
+  "Organisational memory",
+  "Email and WhatsApp ingestion",
+  "Connectors for SAP, Oracle, Zoho, NetSuite, Dynamics 365, Salesforce, HubSpot and 100+ more apps, including ERPs with no API",
+  "Human approval on every write",
+  "Unlimited users"
 ];
 
 const enterpriseFeatures = [
-  "Everything in Base",
-  "2-3 new workflows every week",
-  "WhatsApp, email, ERP and CRM automation",
-  "Custom ERP or CRM transition into Ubik",
-  "Maintenance, playbook updates and private controls"
+  "Everything in Teammate",
+  "Multiple workflows",
+  "Custom decision logic on your own context graph: every approval, exception and precedent, reused",
+  "Policy engine and audit trail",
+  "A trade expert and a product engineer on the account"
 ];
 
-const localPills = [
-  "Local meeting recorder",
-  "Desktop context bridge",
-  "Private files are encrypted",
-  "Credentials stay on-device"
+const replacesRows = [
+  ["Per-seat SaaS, price grows with headcount", "One price per workflow, unlimited users"],
+  ["Six-month ERP implementation", "First workflow live in weeks"],
+  ["Implementation consultants and transformation decks", "Trade expert and engineer on the account, included"],
+  ["Forward-deployed engineers at day rates", "Workflows configured, not rebuilt, for each customer"],
+  ["Four to seven coordinators chasing emails", "One teammate that chases, checks and prepares the decision"]
+] as const;
+
+const desktopApps = [
+  { label: "Mac", href: "/download?os=mac", icon: AppleLogoIcon },
+  { label: "Windows", href: "/download?os=windows", icon: WindowsLogoIcon }
+];
+
+const mobileApps = [
+  { label: "iOS", icon: AppStoreLogoIcon },
+  { label: "Android", icon: GooglePlayLogoIcon }
+];
+
+const privacyLabels = [
+  { label: "Local recorder", icon: MicrophoneIcon },
+  { label: "Desktop context bridge", icon: PlugsConnectedIcon },
+  { label: "Encrypted files", icon: LockKeyIcon },
+  { label: "Credentials on-device", icon: KeyIcon }
 ];
 
 const pricingFaqs = [
@@ -41,36 +74,46 @@ const pricingFaqs = [
     question: "What data is shared with LLMs?",
     answer: [
       "Ubik minimizes what is sent to external LLMs. Models are used for planning, reasoning and drafting actions, not for bulk raw-data ingestion.",
-      "Sensitive context like RFQs, supplier pricing, margins, customer names and credentials is kept in Ubik's context layer, local workspace or private deployment depending on the setup.",
-      "Enterprise customers can configure private, local or air-gapped deployments. Customer data is never used to train third-party models."
+      "Sensitive context like RFQs, supplier pricing, margins, customer names and credentials is kept in Ubik's context layer. Customer data is never used to train third-party models."
     ]
   },
   {
-    question: "What does Base cover?",
+    question: "What does Teammate cover?",
     answer: [
-      "Base is the personal AI workspace for one operator. It includes the ubik Webapp, ubik Meetings, local meeting recording, market intelligence projects, live artifacts and 2-3 new workflows every month.",
-      "It is built for individual trade, pricing, meeting and operations work before Ubik becomes a wider workflow layer for the team."
+      "Teammate is one production workflow running on the full Workspace: the mobile app for the floor, organisational memory, email and WhatsApp ingestion, connectors for your ERP, CRM and 100+ more apps, and human approval on every write.",
+      "Everyone on the team can use it. You pay for the workflow, not the people."
     ]
   },
   {
-    question: "How does Enterprise expand Base?",
+    question: "How does Enterprise expand Teammate?",
     answer: [
-      "Enterprise starts with everything in Base, then adds 2-3 new workflows every week across WhatsApp, email, ERP, CRM, documents and customer-facing operations.",
-      "A trade expert and product engineer maintain the workflows, handle custom ERP or CRM transition work, and build the right operating system into Ubik. SSO/SAML, role-based permissions, audit logs and private deployment options are included."
+      "Enterprise starts with everything in Teammate, then adds more workflows, each priced on its own, plus decision briefs for the people who sign.",
+      "Decisions run on your own context graph, so every approval, exception and precedent is kept and reused. It adds a policy engine with an audit trail, and keeps a trade expert and a product engineer on the account."
     ]
   },
   {
     question: "How do credentials and private files work?",
     answer: [
       "Credentials stay on-device. Private files are encrypted. ubik Meetings is designed to bridge desktop context to the Webapp without turning your local machine into a public data lake.",
-      "Enterprise deployments can keep sensitive workflows in private, local or air-gapped environments depending on the security model."
+      "Audit trail on every change. SOC 2 in progress."
     ]
   },
   {
-    question: "Can Base handle trade and market intelligence work?",
+    question: "Why no per-seat pricing?",
     answer: [
-      "Yes. Base supports import/export market intelligence projects, live-updating artifacts, meeting memory, browser workflows and multi-model reasoning across Claude, ChatGPT, Gemini, Grok and more.",
-      "Enterprise takes those same primitives and connects them to shared systems, approvals, audit trails and customer workflows."
+      "Because the floor should use it. A packing supervisor without an email address signs in with a phone number, and we are not charging you for that."
+    ]
+  },
+  {
+    question: "What counts as a workflow?",
+    answer: [
+      "One repeatable job with a defined input, a check, and a human approval, for example yield reconciliation, packaging tracking, export documents or supplier follow-up."
+    ]
+  },
+  {
+    question: "Can we start on Teammate and move to Enterprise?",
+    answer: [
+      "Yes. Enterprise is the same platform with more workflows and decision briefs. Nothing is re-implemented."
     ]
   }
 ];
@@ -93,18 +136,15 @@ function FeatureList({ features, active = false }: { features: string[]; active?
 }
 
 export default function Pricing() {
-  const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
-
   useEffect(() => {
     trackEvent("pricing_viewed");
   }, []);
-  const basePrice = billing === "annual" ? "$85" : "$100";
 
   return (
     <PageShell>
       <Seo
         title="Pricing | Ubik"
-        description="Choose Base for a personal AI workspace or Enterprise for trade workflows across teams, systems and geographies."
+        description="Teammate is $1,000 a month for one AI workflow with unlimited users. Enterprise adds more workflows and decision briefs. Priced per workflow, not per person."
         canonical="https://theubik.com/pricing"
       />
       <JsonLd
@@ -112,10 +152,23 @@ export default function Pricing() {
           "@context": "https://schema.org",
           "@type": "Product",
           name: "Ubik",
-          description: "AI operating workspace for perishable trade operators.",
+          description: "AI operating workspace for perishable trade operators, priced per workflow with unlimited users.",
           offers: [
-            { "@type": "Offer", name: "Base", price: billing === "annual" ? "85" : "100", priceCurrency: "USD", priceSpecification: "Monthly subscription" },
-            { "@type": "Offer", name: "Enterprise", priceCurrency: "USD", description: "Custom pricing" }
+            {
+              "@type": "Offer",
+              name: "Teammate",
+              description: "One production workflow on the full Workspace, unlimited users.",
+              price: "1000",
+              priceCurrency: "USD",
+              priceSpecification: {
+                "@type": "UnitPriceSpecification",
+                price: "1000",
+                priceCurrency: "USD",
+                billingDuration: "P1M",
+                unitText: "workflow"
+              }
+            },
+            { "@type": "Offer", name: "Enterprise", priceCurrency: "USD", description: "Custom: platform plus workflows, priced each." }
           ]
         }}
       />
@@ -123,7 +176,7 @@ export default function Pricing() {
       <main className="pricing-brand-page relative overflow-hidden">
         <MatrixField variant="hero" density="medium" seed="pricing-workspace" />
         <section className="container-page section-y relative z-10">
-          <div className="pricing-brand-hero mb-10 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div className="pricing-brand-hero mb-10">
             <div className="max-w-4xl">
               <Badge variant="outline" className="mb-5">
                 Pricing
@@ -135,57 +188,36 @@ export default function Pricing() {
                 We route each step to the frontier model that can do it and pay for the tokens, so your bill reads the same in a quiet week and a full one.
               </p>
             </div>
-            <div className="grid grid-cols-2 border border-border bg-card p-1 text-sm font-medium">
-              <button
-                type="button"
-                onClick={() => setBilling("monthly")}
-                className={cn("px-4 py-2 transition-colors", billing === "monthly" ? "bg-primary text-primary-foreground" : "text-foreground/72 dark:text-foreground/82 hover:text-foreground")}
-              >
-                Monthly
-              </button>
-              <button
-                type="button"
-                onClick={() => setBilling("annual")}
-                className={cn("px-4 py-2 transition-colors", billing === "annual" ? "bg-primary text-primary-foreground" : "text-foreground/72 dark:text-foreground/82 hover:text-foreground")}
-              >
-                Annual <span className="ml-1 text-[11px]">Save 15%</span>
-              </button>
-            </div>
           </div>
 
           <div className="grid gap-px border border-border bg-border lg:grid-cols-2">
             <Card className="border-0 bg-primary text-primary-foreground">
               <CardHeader className="gap-6 p-6 sm:p-8">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <p className="section-label text-primary-foreground/85">Base</p>
-                    <CardTitle className="mt-3 text-3xl">Base</CardTitle>
-                  </div>
-                  {billing === "annual" ? (
-                    <Badge variant="secondary" className="bg-shell text-primary-foreground">
-                      Save 15%
-                    </Badge>
-                  ) : null}
+                <div>
+                  <p className="section-label text-primary-foreground/85">Teammate</p>
+                  <CardTitle className="mt-3 text-3xl">Teammate</CardTitle>
                 </div>
                 <div>
                   <p className="text-5xl font-semibold">
-                    {basePrice}
+                    $1,000
                     <span className="ml-2 text-base font-medium text-primary-foreground/85">/ month</span>
                   </p>
                   <p className="mt-5 max-w-xl text-primary-foreground/92">
-                    For operators who want a personal AI workspace plus 2-3 new workflows every month.
+                    One AI teammate. One workflow a month. Everything we offer, no seats.
                   </p>
                 </div>
               </CardHeader>
               <CardContent className="grid gap-8 p-6 pt-0 sm:p-8 sm:pt-0">
-                <FeatureList features={baseFeatures} active />
+                <FeatureList features={teammateFeatures} active />
                 <div className="grid gap-3">
                   <Button asChild variant="secondary" size="lg">
-                    <a href={externalLinks.app}>
-                      Try ubik Now <ArrowRightIcon data-icon="inline-end" />
+                    <a href={externalLinks.founderMeeting}>
+                      Start with one workflow <ArrowRightIcon data-icon="inline-end" />
                     </a>
                   </Button>
-                  <p className="text-sm text-primary-foreground/88">Built for one operator. Comes with ubik Meetings included.</p>
+                  <p className="text-sm text-primary-foreground/88">
+                    Priced per workflow, not per person. Add a second workflow when the first one is boring.
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -199,7 +231,7 @@ export default function Pricing() {
                 <div>
                   <p className="text-5xl font-semibold">Custom</p>
                   <p className="mt-5 max-w-xl text-foreground/72 dark:text-foreground/82">
-                    For teams that want 2-3 new workflows every week, maintained across ERP, CRM, email, WhatsApp and custom systems.
+                    Platform plus workflows, priced each. Decision briefs for the people who sign.
                   </p>
                 </div>
               </CardHeader>
@@ -208,47 +240,80 @@ export default function Pricing() {
                 <div className="grid gap-3">
                   <Button asChild size="lg">
                     <a href={externalLinks.founderMeeting}>
-                      Talk to founders <ArrowRightIcon data-icon="inline-end" />
+                      Talk to us <ArrowRightIcon data-icon="inline-end" />
                     </a>
                   </Button>
-                  <p className="text-sm text-foreground/72 dark:text-foreground/82">Built with your operators in 30 days. Priced around value recovered, not seats.</p>
                 </div>
               </CardContent>
             </Card>
+
           </div>
 
-          <section className="mt-8 border border-border bg-card p-5 sm:p-6">
-            <div className="grid gap-5 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
-              <div>
-                <p className="section-label">Free desktop app</p>
-                {/* The wordmark art has its own internal padding, so pairing it with
-                    a text span left "Meetings" floating off the baseline. Stack the
-                    lockup instead and let the rule carry the alignment. */}
-                <h2 className="ubik-meetings-lockup mt-3">
-                  <img src={brandAssets.wordmarkLight} alt="ubik" className="dark:hidden" />
-                  <img src={brandAssets.wordmarkDark} alt="ubik" className="hidden dark:block" />
-                  <span>Meetings</span>
-                </h2>
+          <section className="mt-16" aria-labelledby="pricing-replaces-title">
+            <h2 id="pricing-replaces-title" className="text-2xl font-semibold sm:text-3xl">
+              What this replaces
+            </h2>
+            <table className="mt-6 w-full border-collapse text-left text-sm leading-6 sm:text-base">
+              <thead>
+                <tr className="border-b border-border">
+                  <th scope="col" className="section-label w-1/2 pb-3 pr-6 font-medium">The old way</th>
+                  <th scope="col" className="section-label w-1/2 pb-3 font-medium">Ubik</th>
+                </tr>
+              </thead>
+              <tbody>
+                {replacesRows.map(([oldWay, ubik]) => (
+                  <tr key={oldWay} className="border-b border-border">
+                    <td className="py-4 pr-6 align-top text-foreground/60 dark:text-foreground/70">{oldWay}</td>
+                    <td className="py-4 align-top">
+                      <span className="flex gap-3">
+                        <ArrowRightIcon className="mt-1.5 size-3.5 shrink-0 text-primary" weight="bold" aria-hidden />
+                        <span className="font-medium">{ubik}</span>
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="mt-6 text-foreground/72 dark:text-foreground/82">Coordination used to be a payroll line. Now it is a workflow.</p>
+          </section>
+
+          <section className="mt-16 grid gap-px border border-border bg-border lg:grid-cols-[1.1fr_0.9fr]" aria-labelledby="pricing-apps-title">
+            <MeetingsLiveStrip className="py-10" />
+            <div className="grid content-center gap-6 bg-card p-6 sm:p-8">
+              <h2 id="pricing-apps-title" className="text-2xl font-semibold">Get the apps</h2>
+              <div className="grid grid-cols-2 gap-2">
+                {desktopApps.map(({ label, href, icon: Icon }) => (
+                  <Button key={label} asChild variant="outline" size="lg">
+                    <Link to={href}>
+                      <Icon weight="fill" data-icon="inline-start" aria-hidden />
+                      {label}
+                      <DownloadSimpleIcon data-icon="inline-end" aria-hidden />
+                    </Link>
+                  </Button>
+                ))}
+                {mobileApps.map(({ label, icon: Icon }) => (
+                  <Button key={label} variant="outline" size="lg" disabled aria-disabled="true">
+                    <Icon weight="fill" data-icon="inline-start" aria-hidden />
+                    {label}
+                    <span className="font-mono text-[0.6rem] uppercase tracking-[0.12em]">Soon</span>
+                  </Button>
+                ))}
               </div>
-              <div>
-                <p className="text-sm leading-6 text-foreground/72 dark:text-foreground/82">
-                Records and summarises your meetings on-device, then sits a hotkey away as a desktop overlay that carries the room's context straight into your ubik workspace.
-                </p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {localPills.map((pill) => (
-                    <span key={pill} className="border border-border bg-background px-3 py-2 text-xs font-medium">
-                      {pill}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              <ul className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm text-foreground/72 dark:text-foreground/82">
+                {privacyLabels.map(({ label, icon: Icon }) => (
+                  <li key={label} className="flex items-center gap-2">
+                    <Icon className="size-4 shrink-0 text-primary" aria-hidden />
+                    {label}
+                  </li>
+                ))}
+              </ul>
             </div>
           </section>
 
           <section className="mt-12 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
               <Badge variant="secondary" className="mb-4">
-                Data handling
+                Questions
               </Badge>
               <h2 className="text-3xl font-semibold">LLMs plan and draft. ubik controls the context.</h2>
             </div>

@@ -110,7 +110,7 @@ const sections: TermsSection[] = [
     title: "13. Security and compliance",
     paragraphs: [
       "Ubik maintains administrative, technical, and physical safeguards designed to protect customer information. Security features may include encryption in transit and at rest, access controls, logging, monitoring, vulnerability management, security reviews, incident response procedures, data residency options where applicable, audit logging for product activity, and SSO support where applicable.",
-      "A SOC 2 Type II report is not currently available while the audit is being completed. When available, security reports or compliance materials may be shared under NDA upon request at founders@theubik.com."
+      "Ubik is not SOC 2 certified. SOC 2 is in progress, and no SOC 2 report is currently available. When available, security reports or compliance materials may be shared under NDA upon request at founders@theubik.com."
     ]
   },
   {

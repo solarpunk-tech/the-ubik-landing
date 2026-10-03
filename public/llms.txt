@@ -18,16 +18,15 @@ Frozen food importers, exporters, processors and distributors whose working cont
 
 ## Products
 
-- Base: personal AI workspace for operators, including the Ubik web app and ubik Meetings
-- Enterprise: custom workflow automation for teams, with a domain expert and a forward-deployed product engineer
+- Teammate: $1,000 per month for one production workflow on the full Workspace (including the mobile app for the floor), connectors for ERP, CRM and 100+ more apps, unlimited users. Priced per workflow, not per person.
+- Enterprise: custom. Platform plus workflows, priced each, custom decision logic on the customer's own context graph, policy engine and audit trail, and a trade expert and a product engineer on the account
 - ubik Meetings: desktop app for Mac (Apple silicon and Intel) and Windows 10 or 11. It records, transcribes and summarizes from your own machine, so no extra bot appears in the guest list.
 - Ubik mobile, listed as "Ubik" on Google Play and the App Store: invite-only app for floor staff to photograph paper production records so office teams can review them
 - Runs 10+ models including Claude, ChatGPT, Gemini and Grok
-- Private, local and air-gapped deployments for enterprise customers
 
 ## Security and data handling
 
-Ubik minimizes what reaches external models. Models plan, reason and draft actions; they do not ingest bulk raw data. Sensitive data can stay in Ubik's context layer, the local workspace, or a private deployment, depending on the customer setup. Customer data is not used to train third-party models.
+Ubik minimizes what reaches external models. Models plan, reason and draft actions; they do not ingest bulk raw data. Sensitive data stays in Ubik's context layer. Audit trail on every change. SOC 2 in progress. Customer data is not used to train third-party models.
 
 ## Pages worth reading
 

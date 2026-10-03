@@ -818,15 +818,15 @@ function TradeFlowOntology() {
 
 const deployOptions = [
   {
-    label: "01 / On premises",
-    title: "Your data centre.",
-    copy: "Bare metal or your own Kubernetes. Nothing leaves your perimeter.",
+    label: "01 / Your ERP",
+    title: "Works with what you run.",
+    copy: "Zoho, Dynamics 365 / Business Central, and ERPs with no API.",
     scene: "premises" as const
   },
   {
-    label: "02 / Your cloud",
-    title: "Your VPC.",
-    copy: "AWS, GCP, or Azure, inside your own account.",
+    label: "02 / Your approval",
+    title: "Nothing writes without you.",
+    copy: "Human approval on every write. Audit trail on every change.",
     scene: "cloud" as const
   },
   {
@@ -846,7 +846,7 @@ const deployOptions = [
 const compliancePosture = [
   { label: "GDPR", mark: "EU" },
   { label: "DPDP", mark: "IN" },
-  { label: "SOC 2 Type II", mark: "SOC" }
+  { label: "SOC 2", mark: "SOC" }
 ] as const;
 
 /**
@@ -891,10 +891,10 @@ function DeployProof() {
         <div className="home-deploy-proof">
           <div>
             <p className="founder-company-label">Getting started</p>
-            <h2 id="home-deploy-proof-title" className="home-section-title">Deploy anywhere</h2>
+            <h2 id="home-deploy-proof-title" className="home-section-title">How it runs</h2>
           </div>
           <div>
-            <div className="home-deploy-grid" aria-label="Ubik deployment options">
+            <div className="home-deploy-grid" aria-label="How Ubik runs">
               {deployOptions.map((option) => (
                 <article key={option.label} className={`home-deploy-card is-${option.scene}`}>
                   <p>{option.label}</p>
@@ -1063,10 +1063,10 @@ export default function Index() {
             <div className="closing-cta mt-14">
               <div>
                 <h2 className="home-section-title closing-cta-title">
-                  Priced on <em>outcome</em>, not seats
+                  Priced per <em>workflow</em>, not seats
                 </h2>
                 <p className="closing-cta-copy">
-                  Base plan ships 2-3 new workflows every month. Enterprise ships 2-3 a week along with SSO, local first, mobile integrations.
+                  Teammate is one workflow for $1,000 a month with unlimited users. Enterprise adds more workflows and decision briefs for the people who sign.
                 </p>
               </div>
               <Button asChild size="lg" className="home-primary-action">

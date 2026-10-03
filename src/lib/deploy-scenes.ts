@@ -16,7 +16,7 @@ const ink = (ctx: CanvasRenderingContext2D, value: number) => {
   ctx.strokeStyle = `rgb(${level},${level},${level})`;
 };
 
-/** On premises — a rack row seen head-on, hardware you can walk up to. */
+/** Your ERP: a rack row seen head-on, the systems you already run. */
 const drawPremises: DeploySceneDraw = (ctx, w, h) => {
   const racks = 3;
   const gap = w * 0.045;
@@ -42,7 +42,7 @@ const drawPremises: DeploySceneDraw = (ctx, w, h) => {
   ctx.fillRect(0, h * 0.93, w, h * 0.02);
 };
 
-/** Your cloud — a private cloud wearing a discreet spy hat. */
+/** Your approval: a cloud inside a dashed perimeter, nothing crosses unreviewed. */
 const drawCloud: DeploySceneDraw = (ctx, w, h) => {
   // Dashed private perimeter.
   ink(ctx, 0.48);

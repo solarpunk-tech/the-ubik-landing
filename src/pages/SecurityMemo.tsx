@@ -77,8 +77,8 @@ const reviewChecklist = [
 
 const trustBaselines = [
   {
-    title: "SOC 2 Type II",
-    copy: "Audit track underway for customer trust reviews.",
+    title: "SOC 2",
+    copy: "Audit trail on every change. SOC 2 in progress.",
     status: "In progress"
   },
   {

@@ -265,12 +265,12 @@ export const faqs: Faq[] = [
   },
   {
     question: "What does Ubik cost?",
-    answer: "Ubik is priced per workflow, not per person. Teammate is $1,000 per month for one production workflow on the full Workspace, with connectors and unlimited users. Enterprise is custom: platform plus workflows, priced each, with decisions run on your own context graph.",
+    answer: "Ubik is priced per workflow, not per person. Teammate is $1,000 per month for one production workflow on the full Workspace, with connectors and no user or token limit. Enterprise is custom: platform plus workflows, priced each, with decisions run on your own context graph.",
     paragraphs: [
       "Ubik is priced per workflow, not per person."
     ],
     bullets: [
-      "Teammate is $1,000 per month for one production workflow on the full Workspace, with connectors and unlimited users.",
+      "Teammate is $1,000 per month for one production workflow on the full Workspace, with connectors and no user or token limit.",
       "Enterprise is custom: platform plus workflows, priced each, with decisions run on your own context graph."
     ]
   },

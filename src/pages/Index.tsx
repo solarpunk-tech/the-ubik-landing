@@ -1066,7 +1066,7 @@ export default function Index() {
                   Priced per <em>workflow</em>, not seats
                 </h2>
                 <p className="closing-cta-copy">
-                  Teammate is one workflow for $1,000 a month with unlimited users. Enterprise adds more workflows and decision briefs for the people who sign.
+                  Teammate is one workflow for $1,000 a month with no user or token limit. Enterprise adds more workflows and decision briefs for the people who sign.
                 </p>
               </div>
               <Button asChild size="lg" className="home-primary-action">

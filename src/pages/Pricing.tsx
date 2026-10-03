@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { type ReactNode, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   AppStoreLogoIcon,
@@ -26,14 +26,39 @@ import { externalLinks } from "@/lib/links";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/posthog";
 
-const teammateFeatures = [
+const connectorApps = [
+  ["SAP", "sap.com"],
+  ["Oracle", "oracle.com"],
+  ["Zoho", "zoho.com"],
+  ["NetSuite", "netsuite.com"],
+  ["Dynamics 365", "dynamics.microsoft.com"],
+  ["Salesforce", "salesforce.com"],
+  ["HubSpot", "hubspot.com"]
+] as const;
+
+const favicon = (domain: string) => `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+
+const connectorsFeature = (
+  <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
+    Connectors
+    <span className="flex items-center gap-1">
+      {connectorApps.map(([label, domain]) => (
+        <span key={label} className="flex size-5 items-center justify-center bg-white" title={label}>
+          <img src={favicon(domain)} alt={label} className="size-3.5 object-contain" loading="lazy" />
+        </span>
+      ))}
+    </span>
+    and 100+ more
+  </span>
+);
+
+const teammateFeatures: ReactNode[] = [
   "One production workflow (pick from the library or we build it)",
   "The full Workspace, including the mobile app for the floor",
   "Organisational memory",
   "Email and WhatsApp ingestion",
-  "Connectors for SAP, Oracle, Zoho, NetSuite, Dynamics 365, Salesforce, HubSpot and 100+ more apps, including ERPs with no API",
-  "Human approval on every write",
-  "Unlimited users"
+  connectorsFeature,
+  "No user or token limit"
 ];
 
 const enterpriseFeatures = [
@@ -118,11 +143,11 @@ const pricingFaqs = [
   }
 ];
 
-function FeatureList({ features, active = false }: { features: string[]; active?: boolean }) {
+function FeatureList({ features, active = false }: { features: ReactNode[]; active?: boolean }) {
   return (
     <ul className="grid gap-3 text-sm leading-6">
-      {features.map((feature) => (
-        <li key={feature} className="flex gap-3">
+      {features.map((feature, index) => (
+        <li key={index} className="flex gap-3">
           <CheckCircleIcon
             className={cn("mt-1 size-4 shrink-0", active ? "text-primary-foreground" : "text-primary")}
             weight="bold"
@@ -144,7 +169,7 @@ export default function Pricing() {
     <PageShell>
       <Seo
         title="Pricing | Ubik"
-        description="Teammate is $1,000 a month for one AI workflow with unlimited users. Enterprise adds more workflows and decision briefs. Priced per workflow, not per person."
+        description="Teammate is $1,000 a month for one AI workflow with no user or token limit. Enterprise adds more workflows and decision briefs. Priced per workflow, not per person."
         canonical="https://theubik.com/pricing"
       />
       <JsonLd
@@ -152,12 +177,12 @@ export default function Pricing() {
           "@context": "https://schema.org",
           "@type": "Product",
           name: "Ubik",
-          description: "AI operating workspace for perishable trade operators, priced per workflow with unlimited users.",
+          description: "AI operating workspace for perishable trade operators, priced per workflow with no user or token limit.",
           offers: [
             {
               "@type": "Offer",
               name: "Teammate",
-              description: "One production workflow on the full Workspace, unlimited users.",
+              description: "One production workflow on the full Workspace, no user or token limit.",
               price: "1000",
               priceCurrency: "USD",
               priceSpecification: {
@@ -193,10 +218,7 @@ export default function Pricing() {
           <div className="grid gap-px border border-border bg-border lg:grid-cols-2">
             <Card className="border-0 bg-primary text-primary-foreground">
               <CardHeader className="gap-6 p-6 sm:p-8">
-                <div>
-                  <p className="section-label text-primary-foreground/85">Teammate</p>
-                  <CardTitle className="mt-3 text-3xl">Teammate</CardTitle>
-                </div>
+                <CardTitle className="text-3xl">Teammate</CardTitle>
                 <div>
                   <p className="text-5xl font-semibold">
                     $1,000
@@ -215,19 +237,13 @@ export default function Pricing() {
                       Start with one workflow <ArrowRightIcon data-icon="inline-end" />
                     </a>
                   </Button>
-                  <p className="text-sm text-primary-foreground/88">
-                    Priced per workflow, not per person. Add a second workflow when the first one is boring.
-                  </p>
                 </div>
               </CardContent>
             </Card>
 
             <Card className="border-0 bg-card">
               <CardHeader className="gap-6 p-6 sm:p-8">
-                <div>
-                  <p className="section-label">Enterprise</p>
-                  <CardTitle className="mt-3 text-3xl">Enterprise</CardTitle>
-                </div>
+                <CardTitle className="text-3xl">Enterprise</CardTitle>
                 <div>
                   <p className="text-5xl font-semibold">Custom</p>
                   <p className="mt-5 max-w-xl text-foreground/72 dark:text-foreground/82">

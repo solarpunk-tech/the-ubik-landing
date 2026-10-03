@@ -18,7 +18,7 @@ Frozen food importers, exporters, processors and distributors whose working cont
 
 ## Products
 
-- Teammate: $1,000 per month for one production workflow on the full Workspace (including the mobile app for the floor), connectors for ERP, CRM and 100+ more apps, unlimited users. Priced per workflow, not per person.
+- Teammate: $1,000 per month for one production workflow on the full Workspace (including the mobile app for the floor), connectors for ERP, CRM and 100+ more apps, no user or token limit. Priced per workflow, not per person.
 - Enterprise: custom. Platform plus workflows, priced each, custom decision logic on the customer's own context graph, policy engine and audit trail, and a trade expert and a product engineer on the account
 - ubik Meetings: desktop app for Mac (Apple silicon and Intel) and Windows 10 or 11. It records, transcribes and summarizes from your own machine, so no extra bot appears in the guest list.
 - Ubik mobile, listed as "Ubik" on Google Play and the App Store: invite-only app for floor staff to photograph paper production records so office teams can review them

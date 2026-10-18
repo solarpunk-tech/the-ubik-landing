@@ -37,8 +37,12 @@ export function appLink(cta: string): string {
     const v = incoming.get(key);
     if (v) url.searchParams.set(key, v.slice(0, 200));
   }
-  if (!url.searchParams.has("utm_source")) url.searchParams.set("utm_source", "theubik.com");
-  if (!url.searchParams.has("utm_medium")) url.searchParams.set("utm_medium", "website");
+  // Label the site only when the visitor brought no source of their own;
+  // mixing our medium into their campaign would misattribute it.
+  if (!url.searchParams.has("utm_source")) {
+    url.searchParams.set("utm_source", "theubik.com");
+    url.searchParams.set("utm_medium", "website");
+  }
   url.searchParams.set("utm_content", cta);
   url.searchParams.set("lp", window.location.pathname);
   return url.toString();

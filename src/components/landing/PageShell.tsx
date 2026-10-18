@@ -9,7 +9,8 @@ import { BrandLogo } from "./BrandLogo";
 import { ThemeToggle } from "./ThemeToggle";
 import { SolarpunkCredit } from "./SolarpunkCredit";
 import { ensureLanguage, persistExplicitLanguage, supportedLanguages } from "@/lib/i18n";
-import { externalLinks } from "@/lib/links";
+import { appLink, externalLinks } from "@/lib/links";
+import { trackEvent } from "@/lib/posthog";
 import { cn } from "@/lib/utils";
 
 export function PageShell({ children }: { children: React.ReactNode }) {
@@ -99,7 +100,8 @@ export function PageShell({ children }: { children: React.ReactNode }) {
               ))}
             </select>
             <a
-              href={externalLinks.app}
+              href={appLink("nav_try")}
+              onClick={() => trackEvent("cta_clicked", { cta: "try_ubik", location: "nav" })}
               className="nav-try-link inline-flex h-9 items-center justify-center border border-primary bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               Try ubik Now
@@ -135,7 +137,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
                     )
                   )}
                   <Button asChild onClick={() => setMenuOpen(false)}>
-                    <a href={externalLinks.app}>
+                    <a href={appLink("mobile_nav_try")} onClick={() => trackEvent("cta_clicked", { cta: "try_ubik", location: "mobile_nav" })}>
                       Try ubik Now
                     </a>
                   </Button>

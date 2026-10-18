@@ -5,6 +5,7 @@
 ## Start
 
 - [Getting started](https://docs.theubik.com/index.md): Choose Read or Watch.
+- [What's new](https://docs.theubik.com/changelog.md): Every production release that changes what operators see or do, newest first, filterable by workflow. RSS: https://docs.theubik.com/changelog/rss.xml
 - [Operator habits](https://docs.theubik.com/getting-started/workspace-basics.md): Review sources, owners, writes, and closure evidence; open settings or contact the founders.
 
 ## Read

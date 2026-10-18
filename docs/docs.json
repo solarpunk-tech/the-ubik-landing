@@ -47,6 +47,10 @@
   "navbar": {
     "links": [
       {
+        "label": "What's new",
+        "href": "/changelog"
+      },
+      {
         "label": "Main site",
         "href": "https://theubik.com"
       },

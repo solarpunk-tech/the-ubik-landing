@@ -50,13 +50,22 @@ const cookies: CookieRow[] = [
     consent: "No"
   },
   {
-    name: "ph_* / PostHog cookies (e.g., ph_<key>_posthog)",
+    name: "None on theubik.com (cookieless analytics)",
     provider: "PostHog",
-    purpose: "Product/usage analytics (controller-side)",
+    purpose: "Anonymous visit counts on the marketing site: no cookie or local storage; visitors are a daily-rotating hash computed by PostHog",
+    type: "Analytics (cookieless)",
+    duration: "Nothing stored on your device",
+    personalData: "No: IP not stored, no identifier on your device",
+    consent: "No (nothing is stored on or read from your device)"
+  },
+  {
+    name: "ph_<key>_posthog (app.theubik.com, localStorage)",
+    provider: "PostHog",
+    purpose: "Product analytics linked to your Ubik account, and masked session replays",
     type: "Analytics",
-    duration: "Up to 14 months",
-    personalData: "De-identified: IP stripped, no user/email/stable org ID",
-    consent: "Yes, where required by ePrivacy/local law"
+    duration: "Until you sign out or withdraw consent",
+    personalData: "Yes: pseudonymous account ID, email, name, organisation",
+    consent: "Yes. Set only after you accept. Without consent the app counts usage cookielessly instead"
   },
   {
     name: "Cookie-consent preference",
@@ -117,11 +126,14 @@ export default function Cookies() {
             <h2 className="text-2xl font-semibold">Consent, GPC & analytics handling</h2>
             <div className="mt-4 grid gap-3 leading-7 text-foreground/72 dark:text-foreground/82">
               <p>Strictly-necessary cookies are set without consent because they are required to deliver the service.</p>
-              <p>Analytics (PostHog) is operated controller-side and configured to strip IP addresses and to not capture user IDs, emails or stable organisation IDs, with rotated anonymous IDs. Analytics data is retained for up to 14 months. This control configuration is being verified during web-hardening.</p>
-              <p>Even where analytics data is de-identified, setting analytics cookies or localStorage may require prior consent under the ePrivacy Directive in the EU/UK. Where required, analytics cookies are set only after consent.</p>
+              <p>Analytics are provided by PostHog, which we operate as controller. It runs in three tiers:</p>
+              <p><strong>Service telemetry (signed-in users, no banner):</strong> our servers record what happens in your Ubik account, such as signing in, connecting a mailbox or closing a task, linked to your account and organisation. Nothing is stored on or read from your device for this. Lawful basis: performance of our contract with your organisation and our legitimate interest in running and improving the service. To object, email founders@theubik.com.</p>
+              <p><strong>Cookieless counts (theubik.com, and the app if you have not accepted):</strong> no cookie or local storage. PostHog derives a daily-rotating hash from the request so a visit can be counted, without identifying you or storing anything on your device.</p>
+              <p><strong>Identified analytics and session replay (only if you accept):</strong> the app stores an analytics identifier in local storage, links your activity to your account, and records session replays with all form inputs masked.</p>
+              <p>Client IP addresses are not stored. Analytics data is retained for up to 14 months; session replays for 30 days.</p>
               <p>Global Privacy Control (GPC) signals are treated as an opt-out of analytics/non-essential trackers.</p>
               <p>No advertising / cross-site tracking cookies are used. The product is not directed to children and no child-targeted tracking is used.</p>
-              <p>PostHog uses cookies and/or localStorage. Where localStorage is used instead of cookies, it remains in-scope for consent and transparency and is treated the same as the analytics cookies above.</p>
+              <p>Where PostHog uses localStorage instead of cookies, it is treated the same as a cookie: set only after consent.</p>
             </div>
           </section>
         </article>

@@ -5,7 +5,8 @@ import { HowWorkflowCarousel } from "@/components/landing/HowWorkflowCarousel";
 import { MatrixField } from "@/components/landing/MatrixField";
 import { PageShell } from "@/components/landing/PageShell";
 import { Seo } from "@/components/seo/Seo";
-import { externalLinks } from "@/lib/links";
+import { appLink } from "@/lib/links";
+import { trackEvent } from "@/lib/posthog";
 
 export default function HowItWorks() {
   const [mode, setMode] = useState<"watch" | "read">("watch");
@@ -55,7 +56,7 @@ export default function HowItWorks() {
                 Importers and exporters already have systems of record. ubik adds the memory, ontology, and decision layer that helps teams move from scattered signals to reviewed action.
               </p>
               <Button asChild className="mt-6">
-                <a href={externalLinks.app}>
+                <a href={appLink("how_it_works_try")} onClick={() => trackEvent("cta_clicked", { cta: "try_ubik", location: "how_it_works" })}>
                   Try ubik Now <ArrowRightIcon data-icon="inline-end" />
                 </a>
               </Button>

@@ -10,8 +10,13 @@ export function initPostHog() {
     autocapture: false,
     capture_pageview: false,
     person_profiles: "identified_only",
-    // Cookieless — /try collects email so we avoid persisting anything
-    persistence: "memory",
+    // Cookieless, with no banner: PostHog sets no cookie and writes no
+    // local/session storage. A visitor is a daily-rotating hash computed on
+    // PostHog's servers, so pages within a visit join up (the old
+    // persistence:"memory" minted a new ID on every page load, so no visit
+    // could be followed past its first page). Needs "Cookieless server hash
+    // mode" on in project settings — it is; without it events are dropped.
+    cookieless_mode: "always",
     disable_session_recording: true,
   });
   posthog.register({ surface: "website" });

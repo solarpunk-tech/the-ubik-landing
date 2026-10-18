@@ -19,3 +19,31 @@ export const downloadsFallback = {
   mac_x64:   "https://ubik-meetings.s3.ap-south-1.amazonaws.com/desktop/latest/Ubik-Meeting-x64.dmg",
   windows:   "https://ubik-meetings.s3.ap-south-1.amazonaws.com/desktop/latest/Ubik-Meeting-Setup.exe",
 };
+
+/**
+ * A link into the app that carries where the visitor came from, so a signup
+ * can be attributed without a cookie: the app forwards these params to the
+ * auth service, which records them on the server-side `signup_completed`.
+ * The visitor's own UTMs (from an ad, a LinkedIn post) win; otherwise the
+ * site labels itself. `lp` is the page the CTA was clicked on.
+ */
+const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term"] as const;
+
+export function appLink(cta: string): string {
+  const url = new URL(externalLinks.app);
+  if (typeof window === "undefined") return url.toString();
+  const incoming = new URLSearchParams(window.location.search);
+  for (const key of UTM_KEYS) {
+    const v = incoming.get(key);
+    if (v) url.searchParams.set(key, v.slice(0, 200));
+  }
+  // Label the site only when the visitor brought no source of their own;
+  // mixing our medium into their campaign would misattribute it.
+  if (!url.searchParams.has("utm_source")) {
+    url.searchParams.set("utm_source", "theubik.com");
+    url.searchParams.set("utm_medium", "website");
+  }
+  url.searchParams.set("utm_content", cta);
+  url.searchParams.set("lp", window.location.pathname);
+  return url.toString();
+}

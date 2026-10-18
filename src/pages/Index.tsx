@@ -9,7 +9,7 @@ import { ParticleField } from "@/components/landing/ParticleField";
 import { DitherTile } from "@/components/landing/DitherTile";
 import { pickScene, type HeroScene } from "@/lib/hero-scenes";
 import { featuredBlogPost } from "@/lib/landing-content";
-import { externalLinks } from "@/lib/links";
+import { appLink, externalLinks } from "@/lib/links";
 import { trackEvent } from "@/lib/posthog";
 
 /**
@@ -966,7 +966,7 @@ export default function Index() {
               <p className="mt-7 max-w-xl text-lg leading-8 text-foreground/72">{hero.subhead}</p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <Button asChild size="lg" className="home-primary-action">
-                  <a href={externalLinks.app} onClick={() => trackEvent("cta_clicked", { cta: "try_ubik", location: "hero" })}>
+                  <a href={appLink("hero_try")} onClick={() => trackEvent("cta_clicked", { cta: "try_ubik", location: "hero" })}>
                     See Ubik in your workflow <ArrowRightIcon />
                   </a>
                 </Button>

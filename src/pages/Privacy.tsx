@@ -144,7 +144,7 @@ const sections: Section[] = [
   {
     title: "11. Cookies and analytics",
     paragraphs: [
-      "We use a small number of cookies and similar technologies. Strictly-necessary cookies for authentication/session and UI state are always set. Analytics are provided by PostHog, which we operate controller-side and configure to strip IP addresses and not send user IDs, emails or stable organisation IDs.",
+      "We use a small number of cookies and similar technologies. Strictly-necessary cookies for authentication/session and UI state are always set. Analytics are provided by PostHog, which we operate as controller, in three tiers: server-side service telemetry linked to your account (nothing stored on your device); cookieless counts on theubik.com and in the app when you have not accepted analytics; and, only if you accept, identified product analytics and masked session replays in the app. IP addresses are not stored. See our Cookie & Tracker Inventory for details.",
       "See our Cookie & Tracker Inventory for the full list and our handling of consent and the Global Privacy Control (GPC) signal."
     ]
   },

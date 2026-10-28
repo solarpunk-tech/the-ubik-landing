@@ -20,9 +20,15 @@ const subprocessors: Subprocessor[] = [
   },
   {
     name: "Google Cloud Platform",
-    purpose: "Primary hosting, storage, database (Cloud SQL), analytics warehouse",
+    purpose: "Primary hosting, storage, databases and analytics",
     data: "All customer data",
-    location: "India (asia-south1) and United States (us-central1)"
+    location: "India and United States"
+  },
+  {
+    name: "Amazon Web Services",
+    purpose: "File storage",
+    data: "Customer-uploaded files and document images",
+    location: "India"
   },
   {
     name: "Google Workspace",
@@ -32,14 +38,8 @@ const subprocessors: Subprocessor[] = [
   },
   {
     name: "Zep",
-    purpose: "Graph memory service (Neo4j)",
+    purpose: "Memory service",
     data: "Customer content and derived memory",
-    location: "United States"
-  },
-  {
-    name: "Neo4j",
-    purpose: "Graph database (via Zep)",
-    data: "Customer relationship graphs",
     location: "United States"
   },
   {
@@ -85,6 +85,12 @@ const subprocessors: Subprocessor[] = [
     location: "United States"
   },
   {
+    name: "Aurinko",
+    purpose: "Email and calendar sync",
+    data: "Mailbox and calendar content",
+    location: "United States"
+  },
+  {
     name: "Composio",
     purpose: "Integration gateway",
     data: "Customer data in transit",
@@ -126,7 +132,7 @@ export default function Subprocessors() {
       />
       <main className="container-page section-y">
         <article className="mx-auto max-w-5xl">
-          <p className="text-sm font-medium text-foreground/72 dark:text-foreground/82">Version 1.0 — effective on publication</p>
+          <p className="text-sm font-medium text-foreground/72 dark:text-foreground/82">Version 1.1 — last updated 28 October 2026</p>
           <h1 className="mt-3 text-5xl font-semibold">Subprocessors</h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-foreground/72 dark:text-foreground/82">
             This page lists the third-party subprocessors that Ubik (Solarpunk Technology) engages to process customer personal data or content in delivering the Ubik service.

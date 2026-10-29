@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { SquareLoader } from "@/components/landing/SquareLoader";
 import { trackEvent } from "@/lib/posthog";
 
@@ -15,6 +15,9 @@ const Blog = lazy(() => import("@/pages/Blog"));
 const Pricing = lazy(() => import("@/pages/Pricing"));
 const Download = lazy(() => import("@/pages/Download"));
 const GoogleWorkspaceAdminGuide = lazy(() => import("@/pages/GoogleWorkspaceAdminGuide"));
+const Workflows = lazy(() => import("@/pages/Workflows"));
+const WorkflowPage = lazy(() => import("@/pages/WorkflowPage"));
+const Demo = lazy(() => import("@/pages/Demo"));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -22,6 +25,22 @@ function ScrollToTop() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, [pathname]);
+
+  return null;
+}
+
+/**
+ * Prerendered pages ship their HTML in #prerender and mount React into a
+ * hidden #root. This sits inside the Suspense boundary, so it only commits once
+ * the route's lazy page has loaded; swapping any earlier would flash the
+ * loader over content the visitor was already reading.
+ */
+function RevealApp() {
+  useEffect(() => {
+    document.getElementById("prerender")?.remove();
+    const root = document.getElementById("root");
+    if (root) root.hidden = false;
+  }, []);
 
   return null;
 }
@@ -60,15 +79,21 @@ export default function App() {
           <Route path="/terms-of-service" element={<Terms />} />
           <Route path="/terms-of-service.html" element={<Terms />} />
           <Route path="/security" element={<SecurityMemo />} />
-          <Route path="/learn" element={<HowItWorks />} />
-          <Route path="/how-it-works" element={<HowItWorks />} />
+          <Route path="/platform" element={<HowItWorks />} />
+          <Route path="/learn" element={<Navigate to="/platform" replace />} />
+          <Route path="/how-it-works" element={<Navigate to="/platform" replace />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/workflows" element={<Workflows />} />
+          <Route path="/workflows/:slug" element={<WorkflowPage />} />
+          <Route path="/demo" element={<Demo />} />
+          <Route path="/trade-notes" element={<Navigate to="/blog" replace />} />
           <Route path="/download" element={<Download />} />
           <Route path="/google-workspace-admin-guide" element={<GoogleWorkspaceAdminGuide />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<Blog />} />
           <Route path="*" element={<Index />} />
         </Routes>
+        <RevealApp />
       </Suspense>
     </>
   );

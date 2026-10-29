@@ -1,0 +1,115 @@
+/* The anatomy kit's tokens, mapped onto ubik's: paper is the card, ink is the
+   foreground, and the one lit part (the box on the hook) is the action blue. */
+.port-figure.iso {
+  --anatomy-card: hsl(var(--card));
+  --anatomy-paper: hsl(var(--card));
+  --anatomy-face: hsl(var(--card));
+  --anatomy-top: hsl(var(--card));
+  --anatomy-text: hsl(var(--muted-foreground));
+  --anatomy-strong: hsl(var(--foreground));
+  --anatomy-muted: hsl(var(--muted-foreground) / 0.8);
+  --anatomy-shade-0: hsl(220 34% 84%);
+  --anatomy-shade-1: hsl(220 36% 89%);
+  --anatomy-shade-2: hsl(220 38% 93%);
+  --anatomy-shade-3: hsl(220 40% 96.5%);
+  --anatomy-lit-top: hsl(var(--primary) / 0.16);
+  --anatomy-lit-shade: hsl(var(--primary) / 0.3);
+  --anatomy-hi: hsl(var(--foreground) / 0.86);
+  --anatomy-mid: hsl(var(--foreground) / 0.42);
+  --anatomy-lo: hsl(var(--foreground) / 0.24);
+  --anatomy-faint: hsl(var(--foreground) / 0.13);
+  --anatomy-lit: hsl(var(--primary));
+  --anatomy-halo: hsl(222 40% 40%);
+  --anatomy-halo-opacity: 0.18;
+  --anatomy-dot: hsl(var(--foreground));
+  --anatomy-blue: hsl(var(--primary));
+  --anatomy-mono: "IBM Plex Mono", ui-monospace, monospace;
+  outline: none;
+}
+.dark .port-figure.iso {
+  --anatomy-shade-0: hsl(221 42% 9%);
+  --anatomy-shade-1: hsl(221 40% 11%);
+  --anatomy-shade-2: hsl(221 40% 13.5%);
+  --anatomy-shade-3: hsl(221 40% 16%);
+  --anatomy-top: hsl(221 38% 17.5%);
+  --anatomy-face: hsl(221 38% 17.5%);
+  --anatomy-lit-top: hsl(var(--primary) / 0.32);
+  --anatomy-lit-shade: hsl(var(--primary) / 0.22);
+  --anatomy-hi: hsl(var(--foreground) / 0.82);
+  --anatomy-mid: hsl(var(--foreground) / 0.4);
+  --anatomy-lo: hsl(var(--foreground) / 0.22);
+  --anatomy-faint: hsl(var(--foreground) / 0.12);
+  --anatomy-lit: hsl(var(--primary-on-dark));
+  --anatomy-halo: #000;
+  --anatomy-halo-opacity: 0.5;
+}
+.port-figure .iso-figure { margin: 0; }
+.port-figure .iso-plate {
+  padding: 40px 14px 44px;
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px hsl(var(--border));
+}
+.port-figure .iso-plate-corners { inset: 14px 16px; }
+.port-figure .iso-plate-corner[data-corner="readout"] { color: hsl(var(--primary-text)); }
+.port-figure .port-wheel { fill: var(--anatomy-paper); stroke: var(--anatomy-hi); stroke-width: var(--anatomy-weight); }
+.port-figure .port-arm { fill: none; stroke: var(--anatomy-hi); stroke-width: 2.4px; stroke-linecap: round; }
+.port-figure .port-arm-stripes { fill: none; stroke: var(--anatomy-paper); stroke-width: 1.2px; stroke-dasharray: 2 2; }
+.port-figure .port-lamp > .iso-top,
+.port-figure .port-lamp > .iso-shade { transition: fill 300ms ease; }
+.port-figure [data-on] .port-lamp > .iso-top { fill: hsl(var(--primary)); }
+.port-figure [data-on] .port-lamp > .iso-shade { fill: hsl(var(--primary) / 0.75); }
+.port-figure [data-on] .port-lamp > .iso-edge { stroke: hsl(var(--primary)); }
+.port-figure .port-water > .iso-fill { fill: hsl(var(--primary) / 0.07); }
+.dark .port-figure .port-water > .iso-fill { fill: hsl(var(--primary) / 0.12); }
+
+/* Behind the hero: no ground and no halos, paper matching the page, so the
+   machines stand on the page itself. It fades out under the copy. */
+.port-figure-bg.iso {
+  --anatomy-paper: hsl(var(--background));
+  --anatomy-face: hsl(var(--background));
+  --anatomy-top: hsl(var(--background));
+  --anatomy-shade-0: hsl(var(--background));
+  --anatomy-shade-1: hsl(var(--background));
+  --anatomy-shade-2: hsl(var(--background));
+  --anatomy-shade-3: hsl(var(--background));
+}
+.port-figure-bg .iso-halo { display: none; }
+.port-figure-bg { pointer-events: none; }
+.home-hero-berth {
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  bottom: -6rem;
+  width: min(78rem, 92vw);
+  transform: translateX(-40%);
+  opacity: 0.9;
+  mask-image: linear-gradient(180deg, transparent 0%, black 40%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 40%);
+}
+/* Wide screens: the berth is the hero's floor. The hero grows downward so the
+   crane, ship and gate stand clear below the card instead of behind it. */
+@media (min-width: 1024px) {
+  .home-hero > .container-page { padding-bottom: 17rem; }
+}
+/* Stacked layouts: the card sits low, so the berth rises behind the top right
+   of the hero instead, faint, and fades out before the headline's lines. */
+@media (max-width: 1023px) {
+  .home-hero-berth {
+    top: 0;
+    left: auto;
+    transform: none;
+    right: -38%;
+    bottom: auto;
+    width: 125%;
+    opacity: 0.45;
+    mask-image: linear-gradient(200deg, black 0%, rgb(0 0 0 / 0.5) 35%, transparent 62%);
+    -webkit-mask-image: linear-gradient(200deg, black 0%, rgb(0 0 0 / 0.5) 35%, transparent 62%);
+  }
+}
+
+/* Packing line: the robot arm is a hollow tube, labels are the action blue,
+   a failed scan is marked red. */
+.port-figure .pl-arm { fill: none; stroke: var(--anatomy-hi); stroke-width: 5px; stroke-linecap: round; stroke-linejoin: round; }
+.port-figure .pl-arm-core { fill: none; stroke: var(--anatomy-paper); stroke-width: 2.2px; stroke-linecap: round; stroke-linejoin: round; }
+.port-figure .pl-label { fill: hsl(var(--primary) / 0.22); stroke: hsl(var(--primary)); stroke-width: var(--anatomy-weight); }
+.port-figure .pl-bad { fill: hsl(0 80% 55% / 0.2); stroke: var(--anatomy-red); }

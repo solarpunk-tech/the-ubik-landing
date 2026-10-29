@@ -6,6 +6,7 @@ import {
   LockKeyIcon,
   ShieldCheckIcon
 } from "@phosphor-icons/react";
+import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { Google } from "@/components/ui/svgs/google";
 import { Microsoft } from "@/components/ui/svgs/microsoft";
@@ -44,9 +45,9 @@ const memoBlocks = [
     icon: ShieldCheckIcon
   },
   {
-    title: "Cookieless session telemetry",
+    title: "Cookieless usage analytics",
     copy:
-      "PostHog JS telemetry helps us see product-flow issues without ad cookies. Sensitive prompt and session fields are protected before capture.",
+      "The website and product send usage events to PostHog without ad cookies, so we can see where flows break. Sensitive prompt and session fields are protected before capture. Trade data is never used for advertising.",
     icon: ClipboardTextIcon
   }
 ];
@@ -87,6 +88,11 @@ const trustBaselines = [
     status: "In progress"
   },
   {
+    title: "DPDP",
+    copy: "India's Digital Personal Data Protection Act: consent and data handling in review.",
+    status: "In progress"
+  },
+  {
     title: "ISO 27001",
     copy: "Security controls mapped for certification readiness.",
     status: "In progress"
@@ -107,7 +113,7 @@ const trustBaselines = [
 
 function StatusTicker({ label }: { label: string }) {
   return (
-    <span className="inline-flex w-fit items-center gap-2 border border-support/50 bg-support/15 px-2.5 py-1 font-mono text-[0.64rem] font-semibold uppercase tracking-[0.14em] text-support-foreground">
+    <span className="inline-flex w-fit items-center gap-2 border border-support/50 bg-support/15 px-2.5 py-1 tabular-nums text-[0.64rem] font-semibold text-support-foreground">
       <span className="size-2 animate-pulse bg-support shadow-[0_0_12px_hsl(var(--support)/0.8)]" aria-hidden />
       {label}
     </span>
@@ -161,9 +167,9 @@ export default function SecurityMemo() {
 
             <div className="mb-10 flex flex-col gap-3 sm:flex-row">
               <Button asChild>
-                <a href={externalLinks.founderMeeting}>
-                  Talk to founders <ArrowRightIcon data-icon="inline-end" />
-                </a>
+                <Link to="/demo">
+                  Review access before onboarding <ArrowRightIcon data-icon="inline-end" />
+                </Link>
               </Button>
               <Button onClick={shareMemo} variant="outline">
                 <ClipboardTextIcon data-icon="inline-start" />
@@ -259,6 +265,17 @@ export default function SecurityMemo() {
               </div>
             </section>
 
+            <section className="mt-10 border border-border p-5 text-sm leading-6">
+              <h2 className="text-lg font-semibold">Policies and status</h2>
+              <p className="mt-2 text-foreground/72 dark:text-foreground/82">
+                SOC 2, GDPR, DPDP and ISO 27001 work is in progress. None of them is certified yet. What we
+                process, where and with whom is set out in the{" "}
+                <Link to="/legal/privacy" className="font-semibold text-primary hover:underline">privacy notice</Link>,{" "}
+                <Link to="/legal/subprocessors" className="font-semibold text-primary hover:underline">subprocessor list</Link> and{" "}
+                <Link to="/legal/cookies" className="font-semibold text-primary hover:underline">cookie notice</Link>.
+              </p>
+            </section>
+
             <Card className="relative mt-10 overflow-hidden border-primary/30 bg-primary text-primary-foreground">
               <MatrixField variant="cta" density="medium" seed="security-cta" />
               <CardContent className="relative z-10 flex flex-col gap-5 p-6 md:flex-row md:items-center md:justify-between">
@@ -270,9 +287,9 @@ export default function SecurityMemo() {
                   </p>
                 </div>
                 <Button asChild variant="secondary">
-                  <a href={externalLinks.founderMeeting}>
-                    Talk to founders <ArrowRightIcon data-icon="inline-end" />
-                  </a>
+                  <Link to="/demo">
+                    Review access before onboarding <ArrowRightIcon data-icon="inline-end" />
+                  </Link>
                 </Button>
                 <Button asChild variant="outline" className="border-primary-foreground/50 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
                   <a href={externalLinks.trustCenter} target="_blank" rel="noopener noreferrer">

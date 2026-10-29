@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "preview": "vite preview --host 0.0.0.0",
     "lint": "eslint ."
   },
@@ -51,6 +51,7 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^1.3.0",
     "@eslint/js": "^9.39.2",
     "@playwright/test": "^1.57.0",
     "@tailwindcss/vite": "^4.2.2",

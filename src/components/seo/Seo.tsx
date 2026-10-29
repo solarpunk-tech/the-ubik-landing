@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { JsonLd } from "./JsonLd";
 
 type SeoProps = {
@@ -35,11 +36,11 @@ const ORGANIZATION_JSON_LD = {
   alternateName: ["Ubik AI", "Ubik App", "theubik"],
   url: SITE_ORIGIN,
   logo: `${SITE_ORIGIN}/icon-512.png`,
-  // The description above names Solarpunk Technology in prose; this states the
+  // The description above names Solarpunk Tech Inc. in prose; this states the
   // same link in a field a crawler can actually follow.
   parentOrganization: {
     "@type": "Organization",
-    name: "Solarpunk Technology",
+    name: "Solarpunk Tech Inc.",
     url: "https://solarpunk.technology"
   },
   // `sameAs` is the strongest disambiguation signal in this block and is still
@@ -47,12 +48,33 @@ const ORGANIZATION_JSON_LD = {
   // company, and the repo has only the founders' personal LinkedIn URLs; a
   // guessed URL asserts a false identity, which is worse than none. Add the
   // company LinkedIn (plus Crunchbase/X if they exist) here once confirmed.
-  description: "Ubik is the agentic operating system for perishable trade, built by Solarpunk Technology.",
+  description: "ubik is full-stack intelligence for cross-border trade, built by Solarpunk Tech Inc.",
   disambiguatingDescription:
-    "Ubik, the software product for perishable food importers and exporters at theubik.com. Not the 1969 Philip K. Dick novel, and not any other unrelated product or company also named Ubik."
+    "Ubik, the software product for importers and exporters in cross-border trade at theubik.com. Not the 1969 Philip K. Dick novel, and not any other unrelated product or company also named Ubik."
 };
 
-export function Seo({ title, description, canonical = "https://theubik.com/", image, imageAlt, type = "website" }: SeoProps) {
+export type SsrHead = { title: string; description: string; canonical: string; type: string; image?: string; imageAlt?: string };
+
+// Effects do not run during the build-time render, so the prerender reads the
+// page's head from here instead. Only ever written when there is no window.
+const ssrHeads: SsrHead[] = [];
+
+export function takeSsrHead() {
+  // The page's own <Seo> renders last, so the latest entry wins.
+  const head = ssrHeads.at(-1) ?? null;
+  ssrHeads.length = 0;
+  return head;
+}
+
+export function Seo({ title, description, canonical: canonicalProp, image, imageAlt, type = "website" }: SeoProps) {
+  // Defaulting to the homepage made every page without an explicit canonical
+  // (Learn, Download) declare itself a duplicate of "/".
+  const { pathname } = useLocation();
+  const canonical = canonicalProp ?? `${SITE_ORIGIN}${pathname === "/" ? "/" : pathname.replace(/\/$/, "")}`;
+  if (typeof window === "undefined") {
+    ssrHeads.push({ title, description, canonical, type, image: image && absoluteUrl(image), imageAlt });
+  }
+
   useEffect(() => {
     document.title = title;
     setMeta('meta[name="description"]', "content", description);

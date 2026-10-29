@@ -49,7 +49,7 @@ function LogoMark({ logo, meta, logoPath, wordmarkOnly }: Pick<SourceLogoTilePro
   }
 
   return (
-    <span className="inline-flex size-5 shrink-0 items-center justify-center border border-current/20 text-[11px] font-semibold uppercase">
+    <span className="inline-flex size-5 shrink-0 items-center justify-center border border-current/20 text-[12.5px] font-semibold">
       {meta.slice(0, 2)}
     </span>
   );

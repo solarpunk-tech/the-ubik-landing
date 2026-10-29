@@ -168,7 +168,7 @@ export default function Terms() {
               const spanLast = companyDetails.length % 2 === 1 && index === companyDetails.length - 1;
               return (
                 <div key={label} className={`bg-background p-4 ${spanLast ? "sm:col-span-2" : ""}`}>
-                  <p className="text-xs font-medium uppercase text-foreground/72 dark:text-foreground/82">{label}</p>
+                  <p className="text-xs font-medium text-foreground/72 dark:text-foreground/82">{label}</p>
                   <p className="mt-2 text-sm leading-6">{value}</p>
                 </div>
               );

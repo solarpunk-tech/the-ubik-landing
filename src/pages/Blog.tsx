@@ -238,7 +238,7 @@ function ArticleShell({ post, children }: ArticleShellProps) {
               </p>
               <h1 className="mt-4 text-5xl font-semibold leading-[1.05] sm:text-6xl lg:text-7xl">{post.title}</h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-foreground/72 dark:text-foreground/82">{post.excerpt}</p>
-              <div className="mt-6 flex flex-wrap gap-3 text-xs uppercase tracking-[0.14em] text-foreground/72 dark:text-foreground/82">
+              <div className="mt-6 flex flex-wrap gap-3 text-xs text-foreground/72 dark:text-foreground/82">
                 <span>Last updated {post.updated}</span>
                 <span>/</span>
                 <span>{post.author}</span>
@@ -308,7 +308,7 @@ function OriginRouletteArticle() {
               ["0% base", "Raw 0306.17 MFN duty; not the same as all-in landed duty"]
             ].map(([stat, label]) => (
               <div key={stat} className="bg-card p-4">
-                <p className="font-mono text-2xl text-primary">{stat}</p>
+                <p className="tabular-nums text-2xl text-primary">{stat}</p>
                 <p className="mt-3 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{label}</p>
               </div>
             ))}
@@ -361,7 +361,7 @@ function OriginRouletteArticle() {
       <section className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-px bg-border lg:grid-cols-3">
         {asymmetricBets.map((bet, index) => (
           <div key={bet.title} className="bg-card p-5 sm:p-6">
-            <p className="font-mono text-sm text-primary">BET 0{index + 1}</p>
+            <p className="tabular-nums text-sm text-primary">BET 0{index + 1}</p>
             <h2 className="mt-6 text-2xl font-semibold">{bet.title}</h2>
             <p className="mt-4 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{bet.copy}</p>
           </div>
@@ -412,7 +412,7 @@ function OriginRouletteArticle() {
               className="group grid min-w-0 grid-cols-[2.5rem_minmax(0,1fr)] gap-3 bg-background p-4 transition-colors hover:bg-card"
             >
               <span className="relative flex size-10 items-center justify-center border bg-shell">
-                <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-primary">{source.faviconLabel}</span>
+                <span className="tabular-nums text-[12.5px] text-primary">{source.faviconLabel}</span>
                 <img
                   src={source.favicon}
                   alt=""
@@ -424,7 +424,7 @@ function OriginRouletteArticle() {
                 />
               </span>
               <span className="min-w-0">
-                <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-primary">{source.publisher}</span>
+                <span className="tabular-nums text-[12.5px] text-primary">{source.publisher}</span>
                 <span className="mt-1 flex items-start gap-2 text-sm font-medium text-foreground">
                   <span className="min-w-0">{source.title}</span>
                   <ArrowRightIcon className="mt-0.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-100" aria-hidden />
@@ -554,7 +554,7 @@ export default function Blog() {
                 className="trade-note-card grid gap-6 bg-background p-4 transition-colors hover:bg-shell sm:p-6 md:grid-cols-[minmax(0,1fr)_minmax(13rem,16rem)] md:items-center md:gap-8 md:p-7"
               >
                 <div className="order-2 min-w-0 md:order-1">
-                  <p className="trade-note-card-meta text-xs uppercase tracking-[0.14em] text-foreground/78">
+                  <p className="trade-note-card-meta text-xs text-foreground/78">
                     {post.date} / {post.category}
                   </p>
                   <h2 className="trade-note-card-title mt-5 max-w-xl text-3xl font-semibold">{post.title}</h2>

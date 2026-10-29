@@ -113,7 +113,7 @@ export default function Cookies() {
                     ["Consent required?", item.consent]
                   ].map(([label, value]) => (
                     <div key={`${item.name}-${label}`} className="bg-background p-4">
-                      <p className="text-xs font-medium uppercase text-foreground/72 dark:text-foreground/82 lg:hidden">{label}</p>
+                      <p className="text-xs font-medium text-foreground/72 dark:text-foreground/82 lg:hidden">{label}</p>
                       <p className="mt-1 text-sm leading-6 text-foreground/72 dark:text-foreground/82 lg:mt-0">{value}</p>
                     </div>
                   ))}

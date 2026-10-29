@@ -162,19 +162,19 @@ export default function Subprocessors() {
               {subprocessors.map((item) => (
                 <div key={item.name} className="grid gap-px bg-border md:grid-cols-[1.1fr_1.4fr_1.4fr_0.9fr]">
                   <div className="bg-background p-4">
-                    <p className="text-xs font-medium uppercase text-foreground/72 dark:text-foreground/82 md:hidden">Subprocessor</p>
+                    <p className="text-xs font-medium text-foreground/72 dark:text-foreground/82 md:hidden">Subprocessor</p>
                     <p className="mt-1 font-medium md:mt-0">{item.name}</p>
                   </div>
                   <div className="bg-background p-4">
-                    <p className="text-xs font-medium uppercase text-foreground/72 dark:text-foreground/82 md:hidden">Purpose</p>
+                    <p className="text-xs font-medium text-foreground/72 dark:text-foreground/82 md:hidden">Purpose</p>
                     <p className="mt-1 text-sm leading-6 text-foreground/72 dark:text-foreground/82 md:mt-0">{item.purpose}</p>
                   </div>
                   <div className="bg-background p-4">
-                    <p className="text-xs font-medium uppercase text-foreground/72 dark:text-foreground/82 md:hidden">Data categories</p>
+                    <p className="text-xs font-medium text-foreground/72 dark:text-foreground/82 md:hidden">Data categories</p>
                     <p className="mt-1 text-sm leading-6 text-foreground/72 dark:text-foreground/82 md:mt-0">{item.data}</p>
                   </div>
                   <div className="bg-background p-4">
-                    <p className="text-xs font-medium uppercase text-foreground/72 dark:text-foreground/82 md:hidden">Location</p>
+                    <p className="text-xs font-medium text-foreground/72 dark:text-foreground/82 md:hidden">Location</p>
                     <p className="mt-1 text-sm leading-6 text-foreground/72 dark:text-foreground/82 md:mt-0">{item.location}</p>
                   </div>
                 </div>

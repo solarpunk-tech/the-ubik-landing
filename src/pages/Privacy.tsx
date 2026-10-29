@@ -201,7 +201,7 @@ function LegalTable({ table }: { table: NonNullable<Section["table"]> }) {
           <div key={row.join("|")} className={`grid gap-px bg-border ${row.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
             {row.map((cell, index) => (
               <div key={`${cell}-${index}`} className="bg-background p-4">
-                <p className="text-xs font-medium uppercase text-foreground/72 dark:text-foreground/82 md:hidden">{table.headers[index]}</p>
+                <p className="text-xs font-medium text-foreground/72 dark:text-foreground/82 md:hidden">{table.headers[index]}</p>
                 <p className="mt-1 text-sm leading-6 text-foreground/72 dark:text-foreground/82 md:mt-0">{cell}</p>
               </div>
             ))}
@@ -231,7 +231,7 @@ export default function Privacy() {
           <div className="mt-8 grid gap-px bg-border sm:grid-cols-2">
             {details.map(({ label, value }) => (
               <div key={label} className="bg-background p-4">
-                <p className="text-xs font-medium uppercase text-foreground/72 dark:text-foreground/82">{label}</p>
+                <p className="text-xs font-medium text-foreground/72 dark:text-foreground/82">{label}</p>
                 <p className="mt-2 text-sm leading-6">{value}</p>
               </div>
             ))}

@@ -4,11 +4,8 @@ import {
   AppleLogoIcon,
   CheckCircleIcon,
   DownloadSimpleIcon,
-  EnvelopeSimpleIcon,
   GooglePlayLogoIcon,
-  HardDrivesIcon,
   InfoIcon,
-  ShieldWarningIcon,
   WindowsLogoIcon
 } from "@phosphor-icons/react";
 import { MeetingsLiveStrip } from "@/components/landing/MeetingsLiveStrip";
@@ -170,7 +167,7 @@ const screenShareRows = [
 ];
 
 const kickerClass =
-  "font-mono text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-foreground/60 dark:text-foreground/70";
+  "tabular-nums text-[12.5px] font-medium text-muted-foreground";
 
 function getInitialChoice(requested: string | null): DownloadChoice {
   if (requested === "windows") return "windows";
@@ -192,7 +189,7 @@ function SpecimenHeader({ label, note }: { label: string; note?: string }) {
   return (
     <div className="flex items-center justify-between gap-3 border-b bg-muted/40 px-4 py-2.5">
       <span className={kickerClass}>{label}</span>
-      {note ? <span className="font-mono text-[0.66rem] text-foreground/60 dark:text-foreground/72">{note}</span> : null}
+      {note ? <span className="tabular-nums text-[0.66rem] text-foreground/60 dark:text-foreground/72">{note}</span> : null}
     </div>
   );
 }
@@ -208,11 +205,11 @@ function NotificationRail() {
               <img src={favicon(notification.domain)} alt="" className="size-5" />
               <div className="min-w-0">
                 <p className="truncate text-sm font-medium text-foreground">{notification.title}</p>
-                <p className="truncate font-mono text-[0.68rem] text-foreground/62 dark:text-foreground/76">
+                <p className="truncate tabular-nums text-[0.68rem] text-foreground/62 dark:text-foreground/76">
                   {notification.meta} <span className="text-primary">{notification.signal}</span>
                 </p>
               </div>
-              <Badge variant="outline" className="font-mono text-[0.64rem] uppercase tracking-[0.1em]">
+              <Badge variant="outline" className="tabular-nums text-[0.64rem]">
                 {notification.cta}
               </Badge>
             </li>
@@ -234,7 +231,7 @@ function PreReadPanel() {
           </p>
           <Badge
             variant="outline"
-            className="shrink-0 border-primary/30 bg-primary/5 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-primary"
+            className="shrink-0 border-primary/30 bg-primary/5 tabular-nums text-[0.62rem] text-primary"
           >
             Coming soon
           </Badge>
@@ -261,7 +258,7 @@ function ProofVisual({ visual }: { visual: (typeof proofCards)[number]["visual"]
       <div>
         <div className="flex items-center justify-between gap-3 border-b bg-muted/40 px-4 py-2.5">
           <span className={kickerClass}>Participant roster</span>
-          <span className="inline-flex items-center gap-1 font-mono text-[0.64rem] font-semibold uppercase tracking-[0.1em] text-primary">
+          <span className="inline-flex items-center gap-1 tabular-nums text-[0.64rem] font-semibold text-primary">
             <CheckCircleIcon weight="fill" aria-hidden />
             No bot
           </span>
@@ -274,7 +271,7 @@ function ProofVisual({ visual }: { visual: (typeof proofCards)[number]["visual"]
                 <p className="truncate text-xs font-medium text-foreground">{surface.label}</p>
                 <p className="truncate text-[0.68rem] text-foreground/62 dark:text-foreground/76">{surface.detail}</p>
               </div>
-              <span className="font-mono text-[0.62rem] uppercase tracking-[0.1em] text-foreground/60 dark:text-foreground/72">
+              <span className="tabular-nums text-[0.62rem] text-foreground/60 dark:text-foreground/72">
                 Local
               </span>
             </li>
@@ -288,7 +285,7 @@ function ProofVisual({ visual }: { visual: (typeof proofCards)[number]["visual"]
     <div>
       <div className="flex items-center justify-between gap-3 border-b bg-muted/40 px-4 py-2.5">
         <span className={kickerClass}>Share surface</span>
-        <span className="font-mono text-[0.66rem] text-foreground/60 dark:text-foreground/72">local only</span>
+        <span className="tabular-nums text-[0.66rem] text-foreground/60 dark:text-foreground/72">local only</span>
       </div>
       <table className="w-full text-left text-xs">
         <tbody>
@@ -298,7 +295,7 @@ function ProofVisual({ visual }: { visual: (typeof proofCards)[number]["visual"]
                 <p className="font-medium text-foreground">{row.surface}</p>
                 <p className="mt-1 text-[0.68rem] leading-5 text-foreground/62 dark:text-foreground/76">{row.detail}</p>
               </td>
-              <td className="whitespace-nowrap px-4 py-3 align-top font-mono text-[0.62rem] uppercase tracking-[0.1em] text-foreground/70 dark:text-foreground/80">
+              <td className="whitespace-nowrap px-4 py-3 align-top tabular-nums text-[0.62rem] text-foreground/70 dark:text-foreground/80">
                 {row.state}
               </td>
             </tr>
@@ -375,12 +372,12 @@ export default function Download() {
                         />
                         {option.label}
                       </span>
-                      <Badge variant="outline" className="font-mono text-[0.62rem] uppercase tracking-[0.12em]">
+                      <Badge variant="outline" className="tabular-nums text-[0.62rem]">
                         {option.chip}
                       </Badge>
                     </div>
                     <p className="text-sm leading-6 text-foreground/72 dark:text-foreground/82">{option.explainer}</p>
-                    <p className="font-mono text-[0.66rem] text-foreground/60 dark:text-foreground/72">
+                    <p className="tabular-nums text-[0.66rem] text-foreground/60 dark:text-foreground/72">
                       {option.fileLabel}
                     </p>
                     <Button asChild size="lg" variant={isSelected ? "default" : "outline"} className="mt-auto w-full">
@@ -402,7 +399,7 @@ export default function Download() {
                 );
               })}
             </div>
-            <p className="mt-4 font-mono text-[0.7rem] leading-5 text-foreground/62 dark:text-foreground/76">
+            <p className="mt-4 tabular-nums text-[0.7rem] leading-5 text-foreground/62 dark:text-foreground/76">
               {versionText} · {selected.fileLabel} · {selected.helper}
             </p>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-foreground/62 dark:text-foreground/76">
@@ -424,7 +421,7 @@ export default function Download() {
                       </span>
                       <Badge
                         variant="outline"
-                        className="shrink-0 border-primary/30 bg-primary/5 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-primary"
+                        className="shrink-0 border-primary/30 bg-primary/5 tabular-nums text-[0.62rem] text-primary"
                       >
                         Coming soon
                       </Badge>
@@ -500,7 +497,7 @@ export default function Download() {
           <ol className="mt-6 flex max-w-3xl flex-col divide-y border-y">
             {steps.map(({ n, title, copy }) => (
               <li key={n} className="grid grid-cols-[2rem_1fr] gap-4 py-4">
-                <span className="flex size-8 items-center justify-center border bg-primary/10 font-mono text-sm font-semibold text-primary">
+                <span className="flex size-8 items-center justify-center border bg-primary/10 tabular-nums text-sm font-semibold text-primary">
                   {n}
                 </span>
                 <div className="text-sm leading-6">

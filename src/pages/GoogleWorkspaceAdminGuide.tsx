@@ -23,7 +23,7 @@ const SUPPORT_EMAIL = "shubhranshu@solarpunk.technology";
 
 function Path({ children }: { children: ReactNode }) {
   return (
-    <code className="border bg-muted px-1.5 py-0.5 font-mono text-[0.82em] text-foreground">
+    <code className="border bg-muted px-1.5 py-0.5 tabular-nums text-[0.82em] text-foreground">
       {children}
     </code>
   );
@@ -40,7 +40,7 @@ function CopyField({ value, label }: { value: string; label: string }) {
 
   return (
     <div className="mt-3 flex items-stretch gap-2 border bg-background p-1.5 pl-3 shadow-sm">
-      <code className="flex-1 self-center overflow-x-auto whitespace-nowrap font-mono text-xs sm:text-sm">{value}</code>
+      <code className="flex-1 self-center overflow-x-auto whitespace-nowrap tabular-nums text-xs sm:text-sm">{value}</code>
       <Button type="button" size="sm" variant={copied ? "secondary" : "outline"} onClick={copy} aria-label={`Copy ${label}`}>
         {copied ? "Copied" : "Copy"}
       </Button>
@@ -155,7 +155,7 @@ export default function GoogleWorkspaceAdminGuide() {
         title="ubik | Google Workspace Setup & Security"
         description="Approve ubik in your Google Workspace Admin console, and see exactly what it accesses and why."
         canonical="https://theubik.com/google-workspace-admin-guide"
-        image="/og-image.png"
+        image="/og-image.jpg?v=4"
         imageAlt="ubik: Google Workspace setup and security"
       />
       <main className="relative">
@@ -200,7 +200,7 @@ export default function GoogleWorkspaceAdminGuide() {
               <ol className="mt-6 flex flex-col divide-y border-y">
                 {steps.map((step, index) => (
                   <li key={step.title} className="grid grid-cols-[2rem_1fr] gap-4 py-4">
-                    <span className="flex size-8 items-center justify-center border bg-primary/10 font-mono text-sm font-semibold text-primary">
+                    <span className="flex size-8 items-center justify-center border bg-primary/10 tabular-nums text-sm font-semibold text-primary">
                       {index + 1}
                     </span>
                     <div className="text-sm leading-6">
@@ -236,7 +236,7 @@ export default function GoogleWorkspaceAdminGuide() {
               <div className="mt-6 overflow-x-auto border">
                 <table className="w-full min-w-[640px] text-sm">
                   <thead>
-                    <tr className="border-b bg-muted/50 text-left text-xs uppercase tracking-wide text-foreground/60">
+                    <tr className="border-b bg-muted/50 text-left text-xs tracking-wide text-foreground/60">
                       <th className="px-4 py-3 font-medium">Access</th>
                       <th className="px-4 py-3 font-medium">Scope</th>
                       <th className="px-4 py-3 font-medium">What it&rsquo;s for</th>
@@ -250,13 +250,13 @@ export default function GoogleWorkspaceAdminGuide() {
                             <Icon className="size-4 shrink-0" aria-hidden />
                             {access}
                             {tag ? (
-                              <Badge variant="outline" className="text-[10px] text-emerald-600 dark:text-emerald-400">
+                              <Badge variant="outline" className="text-[12.5px] text-emerald-600 dark:text-emerald-400">
                                 {tag}
                               </Badge>
                             ) : null}
                           </span>
                         </td>
-                        <td className="px-4 py-3 font-mono text-xs whitespace-nowrap text-primary">{scope}</td>
+                        <td className="px-4 py-3 tabular-nums text-xs whitespace-nowrap text-primary">{scope}</td>
                         <td className="px-4 py-3 text-foreground/72 dark:text-foreground/82">{why}</td>
                       </tr>
                     ))}

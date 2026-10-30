@@ -1,6 +1,8 @@
 # Ubik
 
-> Ubik is an agentic operating system for perishable trade. Specialist agents share one trade memory and reach approved browser, computer, email, ERP, CRM, document and market-intelligence tools.
+> Ubik is an AI-native platform for cross-border trade. It reads email, WhatsApp, ERP and documents, flags supplier, shipment and order exceptions, and drafts the next action for the team to approve. Specialist agents share one trade memory, and nothing is written back without human approval.
+
+Last updated: October 2026.
 
 Ubik is a product of Solarpunk Technology, at theubik.com. It is not the Philip K. Dick novel of the same name, and not the unrelated cube, band, card and hardware products that share the word.
 
@@ -12,13 +14,22 @@ Trade context arrives as email, WhatsApp threads, spreadsheets, PDFs, meetings a
 - Memory that compounds across inbox, meetings, projects and trade artifacts, and stays reviewable
 - Live market intelligence and import/export project tracking
 
+## Workflows
+
+Each workflow has a trigger, the evidence behind it, a reviewed action and a recorded outcome. Coverage for a customer's systems is confirmed during scoping.
+
+- Supplier updates (/workflows/supplier-followups): sends each supplier their open POs as a weekly sheet, chases replies, and reads them back as ETD, ETA, container and B/L changes.
+- Document verification (/workflows/shipment-documents): files supplier documents to their PO, checks invoice, packing list, bill of lading and certificates against each other and the order, and drafts the email that fixes what disagrees.
+- Production planning (/workflows/production-planning): tracks each load in the monthly plan against daily production, computes raw material need, flags loads at risk and sends a weekly plant report.
+- Packaging tracker (/workflows/packaging-quality): turns artwork, dieline, label and carton emails into tasks with an owner and a deadline, and follows them across customer, printer and vendor until closed on evidence.
+
 ## Who it is for
 
 Frozen food importers, exporters, processors and distributors whose working context lives in inboxes and WhatsApp threads rather than in the ERP. The people who feel this first are the ones retyping the same PO into three systems.
 
 ## Products
 
-- Teammate: $1,000 per month for one production workflow on the full Workspace (including the mobile app for the floor), connectors for ERP, CRM and 100+ more apps, no user or token limit. Priced per workflow, not per person.
+- Teammate (as of October 2026): $1,000 per month for one production workflow on the full Workspace (including the mobile app for the floor), connectors for ERP, CRM and 100+ more apps, no user or token limit. Priced per workflow, not per person.
 - Enterprise: custom. Platform plus workflows, priced each, custom decision logic on the customer's own context graph, policy engine and audit trail, and a trade expert and a product engineer on the account
 - ubik Meetings: desktop app for Mac (Apple silicon and Intel) and Windows 10 or 11. It records, transcribes and summarizes from your own machine, so no extra bot appears in the guest list.
 - Ubik mobile, listed as "Ubik" on Google Play and the App Store: invite-only app for floor staff to photograph paper production records so office teams can review them
@@ -31,7 +42,9 @@ Ubik minimizes what reaches external models. Models plan, reason and draft actio
 ## Pages worth reading
 
 - /
-- /learn
+- /workflows
+- /demo
+- /platform
 - /pricing
 - /download
 - /security

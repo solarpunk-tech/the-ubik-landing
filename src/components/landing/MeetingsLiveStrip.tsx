@@ -135,7 +135,7 @@ export function MeetingsLiveStrip({ className = "py-12 sm:py-16" }: { className?
           </span>
           <span className="my-2 w-px" style={{ background: STRIP.border }} aria-hidden />
           <span
-            className="flex items-center gap-1.5 px-3 font-mono text-[0.62rem] font-medium"
+            className="flex items-center gap-1.5 px-3 tabular-nums text-[0.62rem] font-medium"
             style={{ color: STRIP.sub }}
           >
             <MicrophoneIcon className="size-3" aria-hidden />
@@ -143,7 +143,7 @@ export function MeetingsLiveStrip({ className = "py-12 sm:py-16" }: { className?
           </span>
           <span className="my-2 w-px" style={{ background: STRIP.border }} aria-hidden />
           <span
-            className="flex items-center gap-1.5 px-3 font-mono text-[0.62rem] font-semibold transition-colors duration-150"
+            className="flex items-center gap-1.5 px-3 tabular-nums text-[0.62rem] font-semibold transition-colors duration-150"
             style={{ color: recording ? STRIP.red : STRIP.blue }}
           >
             <span

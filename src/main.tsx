@@ -13,7 +13,11 @@ import "./index.css";
 initPostHog();
 applyMatrixDrift();
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+const rootElement = document.getElementById("root")!;
+// Keep the prerendered copy on screen until the real page is ready (RevealApp).
+if (document.getElementById("prerender")) rootElement.hidden = true;
+
+ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
     <I18nextProvider i18n={i18n}>
       <BrowserRouter>

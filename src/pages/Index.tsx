@@ -1,105 +1,38 @@
 import { Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
-import { ArrowRightIcon } from "@phosphor-icons/react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { ArrowRightIcon, CheckIcon, DatabaseIcon, FileXlsIcon } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Seo } from "@/components/seo/Seo";
 import { PageShell } from "@/components/landing/PageShell";
-import { ParticleField } from "@/components/landing/ParticleField";
-import { DitherTile } from "@/components/landing/DitherTile";
-import { pickScene, type HeroScene } from "@/lib/hero-scenes";
+import { DiscussButton } from "@/components/landing/DiscussButton";
+import { LiveSquare, SupplierExampleCard } from "@/components/landing/SupplierExampleCard";
+import { AgentRun, type RunStep } from "@/components/landing/motion/AgentRun";
+import {
+  AllocationArtifact,
+  BuyerEmailArtifact,
+  ComplianceBrowserArtifact,
+  ContainerLoadArtifact,
+  PhotoshopArtifact,
+  SupplierCompareArtifact
+} from "@/components/landing/motion/RunArtifacts";
+import { useInView } from "@/lib/use-in-view";
+import { DitherPanel } from "@/components/landing/DitherPanel";
+import { workflowMascots } from "@/lib/workflow-mascots";
+import { PortFigure } from "@/components/landing/port-figure/PortFigure";
+import { WorkflowVisual } from "@/components/landing/WorkflowVisuals";
+import { OwnYourStack } from "@/components/landing/OwnYourStack";
+import { cn } from "@/lib/utils";
 import { featuredBlogPost } from "@/lib/landing-content";
-import { appLink, externalLinks } from "@/lib/links";
+import { appLink } from "@/lib/links";
+import { featuredWorkflowSlugs, workflowPath, type WorkflowCopy as WorkflowPageCopy } from "@/lib/workflows";
 import { trackEvent } from "@/lib/posthog";
-
-/**
- * Hero copy is paired to the hero artwork, so the headline and the picture are
- * making the same point. Keyed by scene id from `hero-scenes`; `?scene=` pins a
- * pair for review. `lead`/`emphasis` split because the last clause is set in
- * brand blue.
- */
-const heroCopy: Record<string, { lead: string; emphasis: string; subhead: string }> = {
-  wave: {
-    lead: "Trade decisions,",
-    emphasis: "together.",
-    subhead:
-      "ubik doesn't just wrap your apps in a chat box. It trains the memory, models and agents that do the work."
-  },
-  ship: {
-    lead: "Trade operators,",
-    emphasis: "unite.",
-    subhead:
-      "ubik clears the manual work so ERPs, inboxes and vendor threads stop running your day."
-  },
-  harvest: {
-    lead: "Every lot,",
-    emphasis: "accounted for.",
-    subhead:
-      "ubik keeps the lot, the spec and the promise attached, so a claim six weeks later still arrives with its evidence."
-  }
-};
 
 /* The loop verb lives on the card chip, not in a caption strip above the grid.
    One occurrence each: the chip labels its own card, so a separate
-   Remember/Reason/Act line would have restated it a second time. */
-const ubikLayers = [
-  [
-    "01",
-    "Remember",
-    "Organisational memory",
-    "Every decision, in your database.",
-    "memory"
-  ],
-  [
-    "02",
-    "Reason",
-    "Operating intelligence",
-    "Models trained on your trade lanes.",
-    "intelligence"
-  ],
-  [
-    "03",
-    "Act",
-    "Agentic workflows",
-    "Humans move out of loops to do better work.",
-    "agents"
-  ]
-] as const;
-
-const workOutputs = [
-  {
-    label: "Vendor replies",
-    status: "4 replied",
-    title: "Packaging vendors replied",
-    copy: "One reviewed update went to every raw-material vendor. Replies are logged against the same programme.",
-    system: "Gmail",
-    view: "reply"
-  },
-  {
-    label: "Shipment tracker",
-    status: "Route found",
-    title: "A faster lane surfaced",
-    copy: "The booked Maersk route stays visible while ubik prices a lower-cost alternative across the same two points.",
-    system: "Carrier + shipment tracker",
-    view: "route"
-  },
-  {
-    label: "Approval",
-    status: "Approved",
-    title: "Manager decisions are in",
-    copy: "Leadership sees what was delegated, who approved it in their ubik, and the trade-off each manager accepted.",
-    system: "Leadership view",
-    view: "approval"
-  },
-  {
-    label: "ETA watch",
-    status: "Monitoring",
-    title: "ETA exceptions stay covered",
-    copy: "The live watch separates healthy promises from shipments that need review before the next buyer update.",
-    system: "Fulfilment · live",
-    view: "eta"
-  }
-] as const;
+   Remember/Reason/Act line would have restated it a second time.
+   Copy lives under home.platform.layers, in this order. */
 
 type TeamCompany = {
   label: string;
@@ -126,798 +59,372 @@ const teamCompanies: readonly TeamCompany[] = [
 
 // Every row carries a list of interchangeable tools rather than one logo: real
 // operators run Gmail *or* Outlook, SAP *or* Oracle *or* Odoo. The source panel
-// cycles them so the stack reads as "whatever you already use".
+// cycles them so the stack reads as "whatever you already use". Visible copy
+// lives under home.workflows.items.<kind>; apps and stats line up by index.
 const workflowTeams = [
   {
     number: "01",
-    team: "Sales Operations",
-    shortTeam: "Sales Ops",
-    sourceLine: "Inbox, chat and CRM",
-    apps: [
-      { label: "Buyer email", alts: ["gmail.com", "outlook.com"], status: "Matched" },
-      { label: "Buyer chat", alts: ["whatsapp.com", "slack.com"], status: "Live" },
-      { label: "CRM promise", alts: ["salesforce.com", "hubspot.com", "odoo.com"], status: "Updated" }
-    ],
+    apps: [["gmail.com", "outlook.com"], ["whatsapp.com", "slack.com"], ["salesforce.com", "hubspot.com", "odoo.com"]],
     entity: "Buyer promise / SO-29481",
     validTime: "29 JUL · 12:00",
     knownTime: "19 JUL · 10:06",
-    memoryLabel: "PROMISE HISTORY",
-    links: ["Buyer", "SKU", "Lane", "Margin"],
-    resultLabel: "PROMISE WATCH",
-    outcomeTitle: "Buyer update",
-    resultTitle: "3 promises recalculated",
-    resultDetail: "Retail buyer replies are ready with the revised ETA attached.",
     kind: "promise",
     chart: "line",
-    stats: [["Ready", "03"], ["At risk", "01"], ["Sent", "07"]]
+    stats: ["03", "01", "07"]
   },
   {
     number: "02",
-    team: "Warehouse & Inventory",
-    shortTeam: "Warehouse & Inventory",
-    sourceLine: "ERP, warehouse and BI",
-    apps: [
-      { label: "ERP stock", alts: ["sap.com", "oracle.com", "zoho.com", "odoo.com"], status: "Synced" },
-      { label: "Warehouse", alts: ["manh.com", "blueyonder.com"], status: "Checked" },
-      { label: "BI dashboard", alts: ["powerbi.microsoft.com", "tableau.com", "metabase.com"], status: "Read" }
-    ],
+    apps: [["sap.com", "oracle.com", "zoho.com", "odoo.com"], ["manh.com", "blueyonder.com"], ["powerbi.microsoft.com", "tableau.com", "metabase.com"]],
     entity: "Lot allocation / LOT-87",
     validTime: "18 JUL · 14:20",
     knownTime: "19 JUL · 08:16",
-    memoryLabel: "ALLOCATION MEMORY",
-    links: ["Lot 87", "Warehouse", "Expiry", "Order"],
-    resultLabel: "LOT READINESS",
-    outcomeTitle: "Allocation plan",
-    resultTitle: "12.4 MT ready",
-    resultDetail: "Four frozen lots across two warehouses can cover the order.",
     kind: "inventory",
     chart: "bars",
-    stats: [["Lots", "04"], ["Warehouses", "02"], ["Shortfall", "0"]]
+    stats: ["04", "02", "0"]
   },
   {
     number: "03",
-    team: "Compliance & Quality",
-    shortTeam: "Compliance & Quality",
-    sourceLine: "Regulator feeds + certificates",
-    apps: [
-      { label: "Import alerts", alts: ["fda.gov", "europa.eu"], status: "Watched" },
-      { label: "Certification", alts: ["bapcertification.org", "asc-aqua.org", "globalgap.org"], status: "Valid" },
-      { label: "Health certificate", alts: ["docusign.com", "adobe.com"], status: "Extracted" }
-    ],
+    apps: [["fda.gov", "europa.eu"], ["bapcertification.org", "asc-aqua.org", "globalgap.org"], ["docusign.com", "adobe.com"]],
     entity: "Health certificate / Lot 87",
     validTime: "17 JUL · 06:00",
     knownTime: "19 JUL · 09:42",
-    memoryLabel: "DOCUMENT INTELLIGENCE",
-    links: ["Lot 87", "Supplier", "Destination", "Certificate"],
-    resultLabel: "LOT TRACEABILITY",
-    outcomeTitle: "Quality release",
-    resultTitle: "12 lots cleared",
-    resultDetail: "Health certificate, BAP proof and FDA lane evidence agree before release.",
     kind: "traceability",
     chart: "heatmap",
-    stats: [["Cleared", "12"], ["Review", "02"], ["Blocked", "00"]]
+    stats: ["12", "02", "00"]
   },
   {
     number: "04",
-    team: "Packaging",
-    shortTeam: "Packaging",
-    sourceLine: "Artwork, specs and policy",
-    apps: [
-      { label: "Artwork files", alts: ["adobe.com", "figma.com"], status: "Extracted" },
-      { label: "Buyer spec", alts: ["dropbox.com", "box.com", "sharepoint.com"], status: "Compared" },
-      { label: "Packaging policy", alts: ["notion.so", "atlassian.com"], status: "Applied" }
-    ],
+    apps: [["/logos/photoshop.svg", "adobe.com"], ["dropbox.com", "box.com", "sharepoint.com"], ["notion.so", "atlassian.com"]],
     entity: "Pack spec / SKU-4471",
     validTime: "21 JUL · 09:00",
     knownTime: "19 JUL · 11:24",
-    memoryLabel: "REVISION CONTROL",
-    links: ["Buyer", "Carton", "Lots", "Rule"],
-    resultLabel: "MATERIAL RULE",
-    outcomeTitle: "Packaging override",
-    resultTitle: "18 lots affected",
-    resultDetail: "The approved carton spec keeps compliant production moving.",
     kind: "override",
     chart: "steps",
-    stats: [["Detected", "18"], ["Reviewed", "18"], ["Cleared", "16"]]
+    stats: ["18", "18", "16"]
   },
   {
     number: "05",
-    team: "Procurement",
-    shortTeam: "Procurement",
-    sourceLine: "Supplier mail and sourcing",
-    apps: [
-      { label: "Supplier email", alts: ["outlook.com", "gmail.com"], status: "Parsed" },
-      { label: "Sourcing", alts: ["coupa.com", "ariba.com", "zycus.com"], status: "Compared" },
-      { label: "Vendor certs", alts: ["docusign.com", "dropbox.com"], status: "Checked" }
-    ],
+    apps: [["outlook.com", "gmail.com"], ["coupa.com", "ariba.com", "zycus.com"], ["docusign.com", "dropbox.com"]],
     entity: "Supplier promise / PKG-2841",
     validTime: "22 JUL · 17:00",
     knownTime: "19 JUL · 14:38",
-    memoryLabel: "SUPPLIER PROJECT",
-    links: ["Vendor", "MOQ", "Material", "Plan"],
-    resultLabel: "VENDOR COMPARISON",
-    outcomeTitle: "Supplier choice",
-    resultTitle: "4 replies matched",
-    resultDetail: "Cost, MOQ, certification, and lead time resolve into one choice.",
     kind: "vendors",
     chart: "funnel",
-    stats: [["Replies", "04"], ["Qualified", "03"], ["Recommended", "01"]]
+    stats: ["04", "03", "01"]
   },
   {
     number: "06",
-    team: "Finance & Logistics",
-    shortTeam: "Finance & Logistics",
-    sourceLine: "Spend, freight and FX",
-    apps: [
-      { label: "Spend", alts: ["ramp.com", "brex.com"], status: "Costs" },
-      { label: "Freight rates", alts: ["maersk.com", "flexport.com"], status: "Compared" },
-      { label: "FX rates", alts: ["xe.com", "wise.com"], status: "Read" }
-    ],
+    apps: [["ramp.com", "brex.com"], ["maersk.com", "flexport.com"], ["xe.com", "wise.com"]],
     entity: "Landed cost / SH-29481",
     validTime: "17 JUL · 16:10",
     knownTime: "19 JUL · 09:52",
-    memoryLabel: "MARGIN MEMORY",
-    links: ["Quote", "Freight", "FX", "Landed cost"],
-    resultLabel: "MARGIN WATCH",
-    outcomeTitle: "Margin approval",
-    resultTitle: "18.4% margin",
-    resultDetail: "Freight, duty and FX land the expedite above the 17.5% approved floor.",
     kind: "margin",
     chart: "stack",
-    stats: [["Current", "18.4%"], ["Floor", "17.5%"], ["Room", "+90 bps"]]
+    stats: ["18.4%", "17.5%", "+90 bps"]
   }
 ] as const;
+
+type WorkflowTeam = (typeof workflowTeams)[number];
+
+type WorkflowCopy = {
+  team: string;
+  shortTeam: string;
+  sourceLine: string;
+  apps: { label: string; status: string }[];
+  memoryLabel: string;
+  links: string[];
+  resultLabel: string;
+  outcomeTitle: string;
+  resultTitle: string;
+  resultDetail: string;
+  stats: string[];
+  run: { steps: RunStep[]; result: string };
+};
+
+type RunLabels = { step: string; agent: string; reads: string; review: string; approve: string; open: string; memory: string; links: string; subagents: string };
 
 /* Bios are background, not job description. What each person does at Ubik is
    already the whole page above them; what a buyer cannot tell from the product
-   is who built it and what they saw before this. */
-const teamProfiles = [
-  {
-    name: "Shubhranshu Jha",
-    role: "Product Design, Ops & GTM",
-    bio: "Fractional operator and venture builder. Raised $10M+ and shipped as much in ARR, pallets and shelves across sustainability, commerce and D2C.",
-    linkedin: "https://www.linkedin.com/in/11shubhranshu"
-  },
-  {
-    name: "Sai Kiran",
-    role: "AI/ML & Product Engineering",
-    bio: "Scaled engineering across mobility, commerce and finance unicorns. Then explored AI-native orgs and built foundation models for healthcare.",
-    linkedin: "https://www.linkedin.com/in/saikiraniitb/"
-  }
-] as const;
-
-const additionalIntegrations = [
-  ["Slack", "slack.com"],
-  ["Microsoft Teams", "teams.microsoft.com"],
-  ["Oracle", "oracle.com"],
-  ["Zoho", "zoho.com"],
-  ["HubSpot", "hubspot.com"],
-  ["Maersk", "maersk.com"],
-  ["Power BI", "powerbi.microsoft.com"],
-  ["NetSuite", "netsuite.com"]
-] as const;
-
-/* sz=128, not 64: the strip renders these at ~38px, and Google was serving
-   16-48px for several domains (Costco 16, ClearTax 22, Airtel 31), so they were
-   upscaled and blurry in both themes. Google returns the largest it has, so
-   asking for 128 is a no-op where the site has nothing bigger. */
-const favicon = (domain: string) => `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+   is who built it and what they saw before this. Role and bio live under
+   home.team.profiles, in this order. */
+const favicon = (domain: string) => (domain.startsWith("/") ? domain : `https://www.google.com/s2/favicons?domain=${domain}&sz=128`);
 const companyLogo = (company: TeamCompany) => company.logo ?? favicon(company.domain ?? "");
 
-/** Canonical LinkedIn glyph — just the mark, no rounded container chrome. */
-function LinkedInMark({ className }: { className?: string }) {
+/** Title on the left, lede on the right: section heads use the full width on desktop. */
+function SectionHead({ id, title, lede, inverse = false }: { id: string; title: string; lede: string; inverse?: boolean }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
-      <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8.02h4.56V24H.22zM8.34 8.02h4.37v2.18h.06c.61-1.15 2.1-2.37 4.32-2.37 4.62 0 5.47 3.04 5.47 7V24h-4.56v-8.13c0-1.94-.03-4.43-2.7-4.43-2.7 0-3.11 2.11-3.11 4.29V24H8.34z" />
-    </svg>
-  );
-}
-
-/**
- * Cycles through interchangeable tools for one source row (Gmail → Outlook,
- * SAP → Oracle → Zoho → Odoo). Each row is offset so the grid never flips in
- * unison, and a single-tool row just renders static.
- */
-function ShufflingLogo({ alts, label }: { alts: readonly string[]; label: string }) {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (alts.length < 2) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setInterval(() => setIndex((c) => (c + 1) % alts.length), 2400);
-    return () => window.clearInterval(timer);
-  }, [alts.length]);
-
-  return (
-    <img
-      key={alts[index]}
-      className="workflow-app-logo"
-      src={favicon(alts[index])}
-      alt={label}
-      loading="lazy"
-    />
-  );
-}
-
-function BulkReplyArtifact() {
-  const vendors = [
-    ["Amcor", "amcor.com", "Film spec + MOQ", "Replied · 14:36"],
-    ["Mondi", "mondigroup.com", "Kraft carton grade", "Replied · 14:37"],
-    ["Berry Global", "berryglobal.com", "Liner allocation", "Replied · 14:38"],
-    ["Sealed Air", "sealedair.com", "Cold-chain pouch", "Replied · 14:38"]
-  ] as const;
-
-  return (
-    <div className="bulk-reply-artifact">
-      <div className="bulk-reply-head"><span>Vendor</span><span>Update</span><span>Status</span></div>
-      {vendors.map(([name, domain, request, status]) => (
-        <div className="bulk-reply-row" key={name}>
-          <span><img src={favicon(domain)} alt="" />{name}</span>
-          <span>{request}</span>
-          <strong><i />{status}</strong>
-        </div>
-      ))}
-      <div className="artifact-nudge"><span>4 replies / 1 reviewed action</span><strong>Written to packaging programme</strong></div>
+    <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-16">
+      <h2 id={id} className={cn("home-section-title !max-w-none", inverse && "text-primary-foreground")}>{title}</h2>
+      <p className={cn("max-w-xl text-lg leading-8 lg:justify-self-end", inverse ? "text-primary-foreground/80" : "text-muted-foreground")}>{lede}</p>
     </div>
   );
 }
 
-function ShipmentRouteArtifact() {
+/** The four workflow pages, each with a live widget for the record it works on. */
+function WorkflowLibrary() {
+  const { t } = useTranslation();
   return (
-    <div className="shipment-route-artifact">
-      <div className="route-canvas">
-        <svg viewBox="0 0 640 220" role="img" aria-label="Booked Maersk route and a dotted lower-cost alternative proposed by Ubik">
-          <path className="route-coast" d="M46 23c41 35 24 72 62 94 27 16 12 52 48 78M584 16c-28 42-14 75-52 98-34 21-17 57-58 87" />
-          <path className="route-current" d="M112 154C220 61 391 55 528 145" />
-          <path className="route-alternate" d="M112 154C233 197 394 194 528 145" />
-          <circle cx="112" cy="154" r="7" />
-          <circle cx="528" cy="145" r="7" />
-        </svg>
-        <span className="route-point is-origin"><strong>Visakhapatnam</strong><small>IN VTZ</small></span>
-        <span className="route-point is-destination"><strong>Newark</strong><small>US EWR</small></span>
-        <span className="route-carrier is-current"><img src={favicon("maersk.com")} alt="" />Maersk · booked</span>
-        <span className="route-carrier is-alternate"><img src={favicon("hapag-lloyd.com")} alt="" />Hapag-Lloyd · alternative</span>
-        <span className="route-ubik-signal"><i />Efficiency found</span>
-      </div>
-      <div className="route-comparison">
-        <div><span>Booked route</span><strong>38 days · $46.2K</strong></div>
-        <div className="is-better"><span>Ubik alternative</span><strong>34 days · $37.8K</strong></div>
-        <p>−4 days <b>and</b> −$8.4K</p>
-      </div>
-    </div>
-  );
-}
-
-/**
- * Deterministic square identicon for the approver avatars.
- *
- * These are fictional operators in a product mockup, so a stock-photo service
- * would be inventing faces for people who don't exist. A generated mark from
- * the same square vocabulary as everything else says "a person" without
- * pretending to be one, and costs no network request.
- */
-function Identicon({ seed }: { seed: string }) {
-  let h = 2166136261;
-  for (let i = 0; i < seed.length; i += 1) {
-    h ^= seed.charCodeAt(i);
-    h = Math.imul(h, 16777619);
-  }
-  const cells: boolean[] = [];
-  // Mirrored 5x5 so it reads as a face-like mark rather than static.
-  for (let y = 0; y < 5; y += 1) {
-    for (let x = 0; x < 3; x += 1) {
-      h ^= h << 13; h ^= h >>> 17; h ^= h << 5;
-      cells[y * 5 + x] = ((h >>> 0) % 100) > 45;
-    }
-    cells[y * 5 + 3] = cells[y * 5 + 1];
-    cells[y * 5 + 4] = cells[y * 5 + 0];
-  }
-  return (
-    <svg className="identicon" viewBox="0 0 5 5" aria-hidden="true" focusable="false">
-      {cells.map((on, i) =>
-        on ? <rect key={i} x={i % 5} y={Math.floor(i / 5)} width="1" height="1" /> : null
-      )}
-    </svg>
-  );
-}
-
-function ApprovalArtifact() {
-  const approvals = [
-    ["AM", "Operations", "Service protected", "Expedite +$3.2K"],
-    ["MR", "Commercial", "Margin above floor", "−60 bps"],
-    ["SI", "Quality", "Lot 87 cleared", "Cert retained"]
-  ] as const;
-
-  return (
-    <div className="approval-artifact">
-      <div className="approval-steps" aria-label="Delegated, reviewed, approved, committed">
-        <i className="is-done" /><i className="is-done" /><i className="is-done" /><i />
-      </div>
-      <div className="approval-step-labels"><span>Delegated</span><span>Reviewed</span><span>Approved</span><span>Committed</span></div>
-      <div className="approval-list">
-        {approvals.map(([initials, role, decision, tradeoff]) => (
-          <div key={role}>
-            <span className="approval-person"><Identicon seed={role} /><b>{initials}</b></span>
-            <p><strong>{role}</strong><small>Approved in their Ubik</small></p>
-            <p><strong>{decision}</strong><small>{tradeoff}</small></p>
-            <span className="approval-check">✓</span>
-          </div>
-        ))}
-      </div>
-      <div className="approval-leadership-note">
-        <span>Leadership readout</span>
-        <strong>Protect the buyer promise. Margin remains 40 bps above floor.</strong>
-      </div>
-    </div>
-  );
-}
-
-function EtaWatchArtifact() {
-  return (
-    <div className="eta-watch-artifact">
-      <div className="eta-metrics">
-        <div><span>Next carrier check</span><strong>02:14</strong></div>
-        <div><span>Promises watched</span><strong>22</strong></div>
-      </div>
-      <div className="eta-stack" aria-label="18 in SLA, 3 watched, 0 breached, 1 pending">
-        <span className="is-ok" style={{ width: "82%" }} />
-        <span className="is-watch" style={{ width: "13%" }} />
-        <span className="is-pending" style={{ width: "5%" }} />
-      </div>
-      <div className="eta-legend">
-        <span><i className="is-ok" />In SLA <strong>18</strong></span>
-        <span><i className="is-watch" />Watch <strong>3</strong></span>
-        <span><i className="is-breach" />Breached <strong>0</strong></span>
-        <span><i className="is-pending" />Pending <strong>1</strong></span>
-      </div>
-      <div className="eta-focus-row">
-        <span><img src={favicon("maersk.com")} alt="" />Maersk / MSK-2841</span>
-        <p><strong>Buyer promise holds</strong><small>Review again if ETA moves ±2 days</small></p>
-        <em>WATCH</em>
-      </div>
-      <div className="artifact-nudge"><span>Next check · 18:00 local</span><strong>3 shipments need no action yet</strong></div>
-    </div>
-  );
-}
-
-function WorkArtifactView({ view }: { view: (typeof workOutputs)[number]["view"] }) {
-  if (view === "reply") return <BulkReplyArtifact />;
-  if (view === "route") return <ShipmentRouteArtifact />;
-  if (view === "approval") return <ApprovalArtifact />;
-  return <EtaWatchArtifact />;
-}
-
-function WorkflowMemoryView({ item }: { item: (typeof workflowTeams)[number] }) {
-  if (item.kind === "traceability") {
-    return (
-      <div className="workflow-memory-view is-extraction">
-        <div className="memory-document">
-          <span>PDF · HEALTH CERTIFICATE</span>
-          <i /><i /><i /><i />
-          <b>OCR + IMAGE EXTRACTION</b>
-        </div>
-        <div className="memory-extracted-fields">
-          <span><b>Lot</b><strong>LOT-87</strong></span>
-          <span><b>Species</b><strong>Vannamei</strong></span>
-          <span><b>Valid from</b><strong>17 JUL</strong></span>
-          <span><b>Evidence</b><strong>Matched</strong></span>
+    <section className="border-b border-border" aria-labelledby="home-workflows-title">
+      <div className="container-page py-16 sm:py-24">
+        <SectionHead id="home-workflows-title" title={t("home.workflows.title")} lede={t("home.workflows.lede")} />
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {featuredWorkflowSlugs.map((slug) => {
+            const item = t(`workflows.items.${slug}`, { returnObjects: true }) as WorkflowPageCopy;
+            return (
+              <Link
+                key={slug}
+                to={workflowPath(slug)}
+                onClick={() => trackEvent("workflow_card_clicked", { workflow: slug, location: "home" })}
+                className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-[box-shadow,border-color] hover:border-border-strong hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <DitherPanel art={workflowMascots[slug]}>
+                  <WorkflowVisual slug={slug} visual={item.visual} className="h-[17.5rem]" />
+                </DitherPanel>
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="text-lg font-semibold tracking-[-0.02em]">{item.name}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-6 text-muted-foreground">{item.summary}</p>
+                  <span className="mt-5 inline-flex items-center gap-2 border-t border-border pt-4 text-[13px] font-medium text-primary-text">
+                    {t("workflows.labels.seeWorkflow")}
+                    <ArrowRightIcon aria-hidden className="transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
-    );
-  }
-
-  if (item.kind === "promise") {
-    return (
-      <div className="workflow-memory-view is-timeline">
-        <div className="memory-timeline">
-          <i /><i /><i className="is-active" /><i />
-          <span className="is-original">19 JUL<br /><b>Buyer promise</b></span>
-          <span className="is-known">29 JUL<br /><b>Revised ETA</b></span>
-        </div>
-        <p><span>WHAT WAS KNOWN</span><strong>Carrier change reached sales at 10:06</strong></p>
-      </div>
-    );
-  }
-
-  if (item.kind === "inventory") {
-    return (
-      <div className="workflow-memory-view is-allocation">
-        <div className="memory-allocation-chart">
-          <span style={{ height: "74%" }}><b>LOT 87</b><i>6.2 MT</i></span>
-          <span style={{ height: "52%" }}><b>LOT 91</b><i>3.8 MT</i></span>
-          <span style={{ height: "31%" }}><b>LOT 94</b><i>2.4 MT</i></span>
-        </div>
-        <div className="memory-allocation-foot"><span>WAREHOUSE A</span><span>WAREHOUSE B</span><strong>12.4 MT READY</strong></div>
-      </div>
-    );
-  }
-
-  if (item.kind === "override") {
-    return (
-      <div className="workflow-memory-view is-revision">
-        {[
-          ["Artwork extracted", "DONE"],
-          ["Destination rule checked", "DONE"],
-          ["Material conflict reviewed", "DONE"],
-          ["Production tracker updated", "LIVE"]
-        ].map(([label, status], index) => (
-          <div key={label}><span>0{index + 1}</span><strong>{label}</strong><em className={status === "LIVE" ? "is-live" : ""}>{status}</em></div>
-        ))}
-      </div>
-    );
-  }
-
-  if (item.kind === "margin") {
-    return (
-      <div className="workflow-memory-view is-margin-chart">
-        <div className="memory-margin-head"><span>LANDED MARGIN</span><strong>18.4%</strong></div>
-        <svg viewBox="0 0 360 120" role="img" aria-label="Margin history remains above the approved floor">
-          <path className="margin-floor" d="M0 88H360" />
-          <path className="margin-line" d="M0 48C42 42 63 57 102 53S159 32 201 45s55 28 91 14 44-23 68-18" />
-          <circle cx="360" cy="41" r="5" />
-        </svg>
-        <div className="memory-margin-foot"><span>17.5% FLOOR</span><strong>EXPEDITE INCLUDED</strong></div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="workflow-memory-view is-project">
-      <div className="memory-project-progress"><span style={{ width: "78%" }} /><b>78% COMPLETE</b></div>
-      {[
-        ["Vendor replies normalised", "4 / 4"],
-        ["MOQ + lead time compared", "DONE"],
-        ["Recommended supplier reviewed", "1 READY"]
-      ].map(([label, status]) => (
-        <div key={label}><i /><strong>{label}</strong><span>{status}</span></div>
-      ))}
-    </div>
+    </section>
   );
 }
 
-/**
- * One visual per team rather than the same five bars everywhere. Vocabulary and
- * palette follow ubik-design's chart tokens: mono-blue stepped series, slate for
- * neutral, green/red for outcome, amber for status only.
- */
-function WorkflowChart({ chart }: { chart: (typeof workflowTeams)[number]["chart"] }) {
-  if (chart === "heatmap") {
-    // Lot grid — most cleared, a couple under review, none blocked.
-    const cells = "b1 s b2 b3 s b1 o s b2 b1 b3 o b2 s a o b1 b3 s b1 o b2 b1 s g b1 o s b2 b3 b1 o b1 s b2 b3".split(" ");
-    return (
-      <div className="wf-chart wf-heatmap" aria-hidden="true">
-        {cells.map((tone, i) => <i key={i} className={`is-${tone}`} />)}
-      </div>
-    );
-  }
+const runArtifacts: Record<WorkflowTeam["kind"], (props: { step: number }) => React.ReactNode> = {
+  promise: BuyerEmailArtifact,
+  inventory: AllocationArtifact,
+  traceability: ComplianceBrowserArtifact,
+  override: PhotoshopArtifact,
+  vendors: SupplierCompareArtifact,
+  margin: ContainerLoadArtifact
+};
 
-  if (chart === "line") {
-    // Promise ETA drift: committed date (blue) against the live forecast (slate).
-    return (
-      <div className="wf-chart wf-line" aria-hidden="true">
-        <svg viewBox="0 0 320 88" preserveAspectRatio="none">
-          <path className="wf-line-series" d="M0 64L40 52L80 58L120 40L160 50L200 33L240 38L280 20L320 26" />
-          <path className="wf-line-baseline" d="M0 76L40 70L80 74L120 62L160 68L200 63L240 66L280 57L320 50" />
-        </svg>
-      </div>
-    );
-  }
-
-  if (chart === "bars") {
-    // Lot quantities across two warehouses; the allocated lot is highlighted.
-    const heights = [34, 52, 41, 68, 47, 83, 61, 96];
-    return (
-      <div className="wf-chart wf-bars" aria-hidden="true">
-        {heights.map((h, i) => (
-          <i key={i} className={i === heights.length - 1 ? "is-peak" : i % 3 === 0 ? "is-b3" : "is-b2"} style={{ height: `${h}%` }} />
-        ))}
-      </div>
-    );
-  }
-
-  if (chart === "steps") {
-    return (
-      <div className="wf-chart wf-steps" aria-hidden="true">
-        <div className="wf-steps-track"><i className="is-done" /><i className="is-done" /><i className="is-now" /><i /></div>
-        <div className="wf-steps-labels"><span>Detected</span><span>Reviewed</span><span>Override</span><span>Cleared</span></div>
-      </div>
-    );
-  }
-
-  if (chart === "stack") {
-    // Margin composition against the approved floor.
-    return (
-      <div className="wf-chart wf-stack" aria-hidden="true">
-        <div className="wf-stack-bar">
-          <span className="is-floor" style={{ width: "74%" }} />
-          <span className="is-room" style={{ width: "16%" }} />
-          <span className="is-rest" style={{ width: "10%" }} />
-        </div>
-        <div className="wf-stack-legend">
-          <span><b className="is-floor" />Floor 17.5%</span>
-          <span><b className="is-room" />Room +90 bps</span>
-        </div>
-      </div>
-    );
-  }
-
-  // funnel — replies narrowing to one recommendation
-  const rows: readonly [string, number, string][] = [
-    ["Replied", 100, "is-b1"],
-    ["Qualified", 74, "is-b2"],
-    ["Shortlist", 46, "is-b3"],
-    ["Chosen", 22, "is-slate"]
-  ];
-  return (
-    <div className="wf-chart wf-funnel" aria-hidden="true">
-      {rows.map(([label, width, tone]) => (
-        <div key={label}><span>{label}</span><i className={tone} style={{ width: `${width}%` }} /></div>
-      ))}
-    </div>
-  );
-}
-
-function WorkflowResult({ item }: { item: (typeof workflowTeams)[number] }) {
-  return (
-    <div className={`workflow-result-widget is-${item.kind}`}>
-      <div className="workflow-result-head"><span>{item.resultLabel}</span><em>LIVE</em></div>
-      <strong className="workflow-result-title">{item.outcomeTitle}</strong>
-      <h3>{item.resultTitle}</h3>
-      <p>{item.resultDetail}</p>
-      <div className="workflow-result-stats">
-        {item.stats.map(([label, value]) => <div key={label}><span>{label}</span><strong>{value}</strong></div>)}
-      </div>
-      <WorkflowChart chart={item.chart} />
-      <div className="workflow-result-foot"><span>REVIEWED BY YOUR TEAM</span><strong>WRITTEN BACK TO MEMORY</strong></div>
-    </div>
-  );
-}
-
-function TradeWorkLedger() {
-  const [active, setActive] = useState(0);
+function TradeFlowOntology({ active, onSelect }: { active: number; onSelect: (index: number) => void }) {
+  const { t } = useTranslation();
   const [isPaused, setIsPaused] = useState(false);
-  const output = workOutputs[active];
-
-  useEffect(() => {
-    if (isPaused) return;
-    const timer = window.setInterval(() => setActive((current) => (current + 1) % workOutputs.length), 3600);
-    return () => window.clearInterval(timer);
-  }, [isPaused]);
+  const item = workflowTeams[active];
+  const copyFor = (kind: WorkflowTeam["kind"]) => t(`home.workflows.items.${kind}`, { returnObjects: true }) as WorkflowCopy;
+  const copy = copyFor(item.kind);
+  const labels = t("home.workflows.run", { returnObjects: true }) as RunLabels;
+  const Artifact = runArtifacts[item.kind];
 
   return (
-    <div className="trade-work-ledger" aria-label="Work Ubik produces after a trade decision">
-      <div className="trade-work-ledger-body">
-        <div className="trade-work-index" role="tablist" aria-label="Produced work">
-          {workOutputs.map((item, index) => (
+    <section id="workflows" className="trade-flow-section scroll-mt-20 border-b border-border">
+      <div className="container-page py-16 sm:py-24">
+        <SectionHead id="home-loop-title" title={t("home.workflows.examplesTitle")} lede={t("home.workflows.examplesLede")} />
+        <div className="mt-10 flex gap-2 overflow-x-auto pb-1" role="tablist" aria-label={t("home.workflows.spineLabel")}>
+          {workflowTeams.map((team, index) => (
             <button
-              key={item.label}
+              key={team.kind}
               type="button"
               role="tab"
               aria-selected={index === active}
-              className={index === active ? "is-active" : undefined}
               onClick={() => {
-                setActive(index);
+                onSelect(index);
                 setIsPaused(true);
               }}
+              className={cn(
+                "inline-flex shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                index === active ? "border-foreground bg-foreground text-background" : "border-border bg-card text-muted-foreground hover:border-border-strong hover:text-foreground"
+              )}
             >
-              <span>0{index + 1}</span>
-              <strong>{item.label}</strong>
-              <em>{item.status}</em>
+              <span className="tabular-nums opacity-60">{team.number}</span>
+              {copyFor(team.kind).team}
             </button>
           ))}
         </div>
-        <article className="trade-work-paper" key={output.label}>
-          <div className="trade-work-paper-topline">
-            <span>{output.system}</span>
-            <strong>{output.status}</strong>
-          </div>
-          <h3>{output.title}</h3>
-          <p>{output.copy}</p>
-          <WorkArtifactView view={output.view} />
-        </article>
+        <AgentRun
+          key={item.kind}
+          className="mt-6"
+          team={copy.team}
+          steps={copy.run.steps}
+          result={copy.run.result}
+          labels={labels}
+          artifact={(step) => <Artifact step={step} />}
+          onDone={isPaused ? undefined : () => onSelect((active + 1) % workflowTeams.length)}
+          apps={item.apps.map((alts) => favicon(alts[0]))}
+        />
       </div>
+    </section>
+  );
+}
+
+type CardCopy = { label?: string; verb?: string; title: string; copy: string };
+
+type PilotWidgetCopy = Record<"pick" | "reads" | "drafts" | "writes" | "afterApproval" | "reviewed" | "live" | "before" | "pilot" | "expand", string>;
+
+const pilotSources = [
+  <img key="gmail" src="/logos/gmail.svg" alt="Gmail" className="size-4" />,
+  <img key="outlook" src="/logos/outlook.svg" alt="Outlook" className="size-4" />,
+  <img key="whatsapp" src="/logos/whatsapp.svg" alt="WhatsApp" className="size-4" />,
+  <DatabaseIcon key="erp" aria-label="ERP" className="size-4 text-primary-text" />,
+  <FileXlsIcon key="sheet" aria-label="Spreadsheet" weight="fill" className="size-4 text-ok-text" />
+];
+
+/** The small picture under each pilot step: what that step actually settles. */
+function PilotWidget({ step, copy, on }: { step: number; copy: PilotWidgetCopy; on: boolean }) {
+  if (step === 0) {
+    return (
+      <div className="grid gap-3">
+        <div className="flex gap-1.5">
+          {pilotSources.map((icon, index) => (
+            <span
+              key={index}
+              className={cn("inline-flex size-8 items-center justify-center rounded-lg border border-border bg-card transition-all duration-500", on ? "opacity-100" : "translate-y-1 opacity-0")}
+              style={{ transitionDelay: `${index * 90}ms` }}
+            >
+              {icon}
+            </span>
+          ))}
+        </div>
+        <span className={cn("inline-flex w-fit items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[12.5px] font-medium text-primary-text transition-opacity duration-500", on ? "opacity-100 delay-500" : "opacity-0")}>
+          <LiveSquare className="size-1.5" />
+          {copy.pick}
+        </span>
+      </div>
+    );
+  }
+  if (step === 1) {
+    const rows: [string, boolean][] = [[copy.reads, true], [copy.drafts, true], [copy.writes, false]];
+    return (
+      <ul className="grid gap-2 text-[13px]">
+        {rows.map(([label, enabled], index) => (
+          <li key={label} className="flex items-center justify-between gap-3">
+            <span className="text-foreground/80">{label}</span>
+            {enabled ? (
+              <span aria-label="On" className={cn("relative h-4 w-7 rounded-full transition-colors duration-300", on ? "bg-primary" : "bg-border")} style={{ transitionDelay: `${300 + index * 200}ms` }}>
+                <span className={cn("absolute top-0.5 size-3 rounded-full bg-white transition-[left] duration-300", on ? "left-3.5" : "left-0.5")} style={{ transitionDelay: `${300 + index * 200}ms` }} />
+              </span>
+            ) : (
+              <span className="rounded-full bg-support/25 px-2 py-0.5 text-[12px] font-medium text-support-text">{copy.afterApproval}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+  if (step === 2) {
+    return (
+      <div className="grid gap-2.5">
+        <div className="grid grid-cols-8 gap-1">
+          {Array.from({ length: 8 }, (_, index) => (
+            <span key={index} className="relative h-5 overflow-hidden rounded-[3px] bg-border/70">
+              <span
+                className={cn("absolute inset-0 flex items-center justify-center bg-ok/80 text-white transition-opacity duration-300", on ? "opacity-100" : "opacity-0")}
+                style={{ transitionDelay: `${400 + index * 160}ms` }}
+              >
+                <CheckIcon weight="bold" className="size-3" />
+              </span>
+            </span>
+          ))}
+        </div>
+        <div className="flex items-center justify-between text-[12.5px] text-muted-foreground">
+          <span className="inline-flex items-center gap-1.5"><LiveSquare className="size-1.5" />{copy.live}</span>
+          <span className="font-medium text-ok-text">{copy.reviewed}</span>
+        </div>
+      </div>
+    );
+  }
+  const bars: [string, string, string][] = [[copy.before, "92%", "bg-foreground/20"], [copy.pilot, "38%", "bg-primary"]];
+  return (
+    <div className="grid gap-2.5">
+      {bars.map(([label, width, tone], index) => (
+        <div key={label} className="grid grid-cols-[3.25rem_1fr] items-center gap-2 text-[12.5px] text-muted-foreground">
+          <span>{label}</span>
+          <span className="h-2.5 rounded-full bg-border/50">
+            <span className={cn("block h-full rounded-full transition-[width] duration-700 ease-out", tone)} style={{ width: on ? width : "0%", transitionDelay: `${400 + index * 300}ms` }} />
+          </span>
+        </div>
+      ))}
+      <span className={cn("ml-[3.75rem] inline-flex w-fit items-center gap-1 rounded-full border border-border bg-card px-2.5 py-0.5 text-[12px] font-medium transition-opacity duration-500", on ? "opacity-100 delay-1000" : "opacity-0")}>
+        {copy.expand}
+        <ArrowRightIcon aria-hidden className="size-3 text-primary-text" />
+      </span>
     </div>
   );
 }
 
-function TradeFlowOntology() {
-  const [active, setActive] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [inView, setInView] = useState(false);
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const item = workflowTeams[active];
-
-  // Only rotate while the panel is actually on screen. On mobile it is taller
-  // than the viewport, so an off-screen tick would swap out the rows the reader
-  // is in the middle of, and land them on a freshly-mounted panel.
-  useEffect(() => {
-    const node = sectionRef.current;
-    if (!node) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { threshold: 0.2 }
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (isPaused || !inView) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setInterval(() => setActive((current) => (current + 1) % workflowTeams.length), 4200);
-    return () => window.clearInterval(timer);
-  }, [isPaused, inView]);
-
+/** One pilot step. Each card watches itself, so on a phone the widgets play as each card arrives. */
+function PilotStep({ step, index, widget }: { step: CardCopy; index: number; widget: PilotWidgetCopy }) {
+  const { ref, inView } = useInView<HTMLLIElement>({ threshold: 0.45 });
   return (
-    <section ref={sectionRef} className="trade-flow-section border-b border-border">
-      <div className="container-page py-16 sm:py-24">
-        <div className="max-w-6xl">
-          <h2 className="home-section-title max-w-4xl">No bots, copilots, or Chief of Staffs</h2>
-          <p className="mt-5 max-w-3xl text-lg font-medium leading-8 text-foreground/78">ubik removes the decision delays that cost you the most margin, time, and revenue.</p>
-        </div>
-        <div className="workflow-memory-stack mt-12">
-          <div className="workflow-team-spine" role="tablist" aria-label="How ubik works across your teams">
-            {workflowTeams.map((team, index) => (
-              <button
-                key={team.team}
-                type="button"
-                role="tab"
-                aria-selected={index === active}
-                className={index === active ? "is-active" : undefined}
-                onClick={() => {
-                  setActive(index);
-                  setIsPaused(true);
-                }}
-              >
-                <span>{team.number}</span><strong>{team.shortTeam}</strong>
-              </button>
-            ))}
-            <i className="workflow-spine-core ubik-core-mark" style={{ left: `${((active + 0.5) / workflowTeams.length) * 100}%` }} aria-hidden="true" />
-          </div>
-          <div className="workflow-memory-panel" key={item.team}>
-            <div className="workflow-orchestration-rail" aria-label="ubik is orchestrating this workflow">
-              <span>ubik IS WORKING</span><i><b className="ubik-core-mark" /></i><em>evidence → memory → action</em>
-            </div>
-            <section className="workflow-sources">
-              <div className="workflow-panel-label"><span>01 / EXISTING SYSTEMS</span><strong>{item.sourceLine}</strong></div>
-              <div className="workflow-app-grid">
-                {item.apps.map((app) => (
-                  <div key={app.label}>
-                    <ShufflingLogo alts={app.alts} label={app.label} />
-                    <strong>{app.label}</strong>
-                    <span>{app.status}</span>
-                  </div>
-                ))}
-              </div>
-            </section>
-            <section className="workflow-memory-record">
-              <div className="workflow-panel-label"><span>02 / {item.memoryLabel}</span><strong>{item.entity}</strong></div>
-              <WorkflowMemoryView item={item} />
-              <div className="workflow-entity-links">
-                <span>LINKED CONTEXT</span>
-                <p>{item.links.map((link) => <b key={link}>{link}</b>)}</p>
-              </div>
-            </section>
-            <section className="workflow-outcome">
-              <div className="workflow-panel-label"><span>03 / REVIEWED OUTPUT</span><strong>{item.outcomeTitle}</strong></div>
-              <WorkflowResult item={item} />
-            </section>
-          </div>
-          <div className="workflow-integration-foot" aria-label="ubik connects with more than one hundred additional tools">
-            <span>AND THE REST OF YOUR STACK</span>
-            <div>
-              {additionalIntegrations.map(([label, domain]) => <img key={label} src={favicon(domain)} alt={label} title={label} />)}
-            </div>
-            <strong>+100 MORE</strong>
+    <li ref={ref} className="relative flex min-w-0 flex-col">
+      <span className={cn("relative z-10 inline-flex size-8 items-center justify-center rounded-lg border text-[12.5px] font-medium tabular-nums transition-colors duration-500", inView ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background text-primary-text")} style={{ transitionDelay: `${index * 250}ms` }}>
+        0{index + 1}
+      </span>
+      <div className="mt-4 flex flex-1 flex-col rounded-2xl border border-border bg-card p-5 shadow-sm">
+        <h3 className="text-xl font-semibold tracking-[-0.02em]">{step.title}</h3>
+        <p className="mt-2 text-sm leading-6 text-muted-foreground">{step.copy}</p>
+        <div className="mt-auto pt-5">
+          <div className="rounded-xl border border-border bg-background p-3.5">
+            <PilotWidget step={index} copy={widget} on={inView} />
           </div>
         </div>
       </div>
-    </section>
+    </li>
   );
 }
 
-const deployOptions = [
-  {
-    label: "01 / Your ERP",
-    title: "Works with what you run.",
-    copy: "Zoho, Dynamics 365 / Business Central, and ERPs with no API.",
-    scene: "premises" as const
-  },
-  {
-    label: "02 / Your approval",
-    title: "Nothing writes without you.",
-    copy: "Human approval on every write. Audit trail on every change.",
-    scene: "cloud" as const
-  },
-  {
-    label: "03 / Managed",
-    title: "We run it.",
-    copy: (
-      <>
-        Frontier speed. No data collection or sharing;
-        <br />
-        never used for training, analytics, or ads.
-      </>
-    ),
-    scene: "managed" as const
-  }
-];
-
-const compliancePosture = [
-  { label: "GDPR", mark: "EU" },
-  { label: "DPDP", mark: "IN" },
-  { label: "SOC 2", mark: "SOC" }
-] as const;
-
-/**
- * The operating loop + the three layers.
- *
- * Same visual system as DeployProof — dithered vector tiles, a hairline
- * three-up grid, a mono label chip per card — so the two read as one design
- * language applied twice, not two competing diagram styles.
- */
-function OperatingLoop() {
+function PilotSteps() {
+  const { t } = useTranslation();
+  const steps = t("home.pilot.steps", { returnObjects: true }) as CardCopy[];
+  const widget = t("home.pilot.widget", { returnObjects: true }) as PilotWidgetCopy;
+  const { ref, inView } = useInView<HTMLOListElement>({ threshold: 0.3 });
   return (
-    <section className="home-layers border-y border-border" aria-labelledby="home-layers-title">
+    <section className="home-pilot border-b border-border" aria-labelledby="home-pilot-title">
       <div className="container-page py-16 sm:py-24">
-        <div className="layer-head">
-          <h2 id="home-layers-title" className="home-section-title">
-            Decision Intelligence for Food
-          </h2>
-          <p className="layer-caption">
-            How ubik helps importers and exporters take decisions in days instead of weeks.
-          </p>
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <h2 id="home-pilot-title" className="home-section-title max-w-3xl">{t("home.pilot.title")}</h2>
+          <div className="flex flex-wrap items-center gap-3">
+            <DiscussButton location="pilot" />
+            <Button asChild variant="outline" size="lg" className="home-secondary-action">
+              <Link to="/pricing">{t("cta.pricing")}</Link>
+            </Button>
+          </div>
         </div>
-
-        <div className="loop-grid" aria-label="The three layers of Ubik's operating loop">
-          {ubikLayers.map(([number, verb, title, copy, scene]) => (
-            <article key={number} className="loop-card">
-              <p>{`${number} / ${verb}`}</p>
-              <DitherTile scene={scene} className="loop-tile" />
-              <h3>{title}</h3>
-              <span>{copy}</span>
-            </article>
+        <ol ref={ref} className="relative mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+          {/* The track the steps sit on; the square walks it once the row is on screen. */}
+          <span aria-hidden className="absolute left-4 right-4 top-4 hidden h-px bg-[linear-gradient(90deg,hsl(var(--border-strong))_50%,transparent_0)] bg-[length:8px_1px] lg:block">
+            {inView ? <LiveSquare className="lane-runner absolute -top-[3px] left-0 size-1.5" /> : null}
+          </span>
+          {steps.map((step, index) => (
+            <PilotStep key={step.title} step={step} index={index} widget={widget} />
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );
 }
 
-function DeployProof() {
+type FaqCopy = { q: string; a: string };
+
+/* Plain <details>: the answers are in the HTML whether or not a reader (or a
+   crawler) opens them, and the same list feeds the FAQPage structured data. */
+function HomeFaq({ items }: { items: FaqCopy[] }) {
+  const { t } = useTranslation();
   return (
-    <section className="home-deploy-section border-b border-border" aria-labelledby="home-deploy-proof-title">
-      <div className="container-page py-16 sm:py-24">
-        <div className="home-deploy-proof">
-          <div>
-            <p className="founder-company-label">Getting started</p>
-            <h2 id="home-deploy-proof-title" className="home-section-title">How it runs</h2>
-          </div>
-          <div>
-            <div className="home-deploy-grid" aria-label="How Ubik runs">
-              {deployOptions.map((option) => (
-                <article key={option.label} className={`home-deploy-card is-${option.scene}`}>
-                  <p>{option.label}</p>
-                  <DitherTile scene={option.scene} className="home-deploy-tile" />
-                  <h3>{option.title}</h3>
-                  <span>{option.copy}</span>
-                </article>
-              ))}
-            </div>
-            <div className="compliance-strip" aria-label="Compliance work in progress">
-              <ul>
-                {compliancePosture.map((mark) => (
-                  <li key={mark.label}>
-                    <span className="compliance-strip-mark" aria-hidden="true">
-                      {mark.mark}
-                    </span>
-                    {mark.label}
-                  </li>
-                ))}
-              </ul>
-              <span className="compliance-strip-note">In progress</span>
-            </div>
-          </div>
+    <section className="home-faq border-t border-border" aria-labelledby="home-faq-title">
+      <div className="container-page grid gap-10 py-16 sm:py-24 lg:grid-cols-[0.7fr_1.3fr]">
+        <h2 id="home-faq-title" className="home-section-title">{t("home.faq.title")}</h2>
+        <div className="border-t border-border">
+          {items.map((item) => (
+            <details key={item.q} className="group border-b border-border py-5">
+              <summary className="cursor-pointer list-none text-lg font-semibold marker:hidden">
+                <span className="flex items-start justify-between gap-6">
+                  {item.q}
+                  <span aria-hidden className="text-primary transition-transform group-open:rotate-45">+</span>
+                </span>
+              </summary>
+              <p className="mt-3 max-w-3xl text-base leading-7 text-foreground/72">{item.a}</p>
+            </details>
+          ))}
         </div>
       </div>
     </section>
@@ -925,22 +432,19 @@ function DeployProof() {
 }
 
 export default function Index() {
-  /* Picked once here rather than inside ParticleField so the headline and the
-     artwork always agree. Falls back to the wave copy for an unknown id. */
-  const [scene] = useState<HeroScene>(() => pickScene());
-  const hero = heroCopy[scene.id] ?? heroCopy.wave;
+  const { t } = useTranslation();
+  const [activeWorkflow, setActiveWorkflow] = useState(0);
+  const scale = t("home.hero.scale", { returnObjects: true }) as { value: string; label: string }[];
+  const faq = t("home.faq.items", { returnObjects: true }) as FaqCopy[];
 
   return (
     <PageShell>
-      {/* Kept identical to the static tags in index.html on purpose. Scrapers
-          that do not run JS (WhatsApp, LinkedIn, Slack, most LLM crawlers) only
-          ever see index.html, so a different title here meant the page had two
-          competing identities depending on who was reading it. */}
       <Seo
-        title="Ubik | Agentic operating system for perishable trade"
-        description="Turn scattered trade signals into reviewed decisions your team can approve, trace, and reuse."
-        image="/og-image.png?v=2"
-        imageAlt="Ubik: trade decisions, together. An agentic operating system for perishable trade."
+        title={t("home.seo.title")}
+        description={t("home.seo.description")}
+        canonical="https://theubik.com/"
+        image="/og-image.jpg?v=4"
+        imageAlt="ubik: decision-making engine for importers and exporters, reading email, conversations and the ERP. An engraving of a harbour quay piled with seafood, dairy, soy, grain and fruit beside a cargo ship."
       />
       <JsonLd
         data={{
@@ -948,70 +452,70 @@ export default function Index() {
           "@type": "SoftwareApplication",
           name: "Ubik",
           applicationCategory: "BusinessApplication",
-          description: "A decision workspace for perishable trade operations.",
-          operatingSystem: "Web"
+          description: t("home.hero.definition"),
+          operatingSystem: "Web",
+          offers: { "@type": "Offer", price: "1000", priceCurrency: "USD", url: "https://theubik.com/pricing" }
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faq.map((item) => ({
+            "@type": "Question",
+            name: item.q,
+            acceptedAnswer: { "@type": "Answer", text: item.a }
+          }))
         }}
       />
 
       <main className="home-minimal overflow-hidden">
-        <ParticleField scene={scene} />
-
-        <section className="home-hero">
-          <div className="home-collision-grid" aria-hidden="true" />
-          <div className="container-page relative z-10 py-16 sm:py-24 lg:min-h-[calc(100svh-4rem)] lg:py-20">
-            <div className="max-w-5xl">
-              <h1 className="home-display max-w-[12ch]">
-                {hero.lead} <em>{hero.emphasis}</em>
+        <section className="home-hero relative overflow-clip">
+          <PortFigure background className="home-hero-berth" />
+          <div className="container-page relative z-10 grid gap-12 pt-16 pb-10 sm:pt-24 sm:pb-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:pt-20 lg:pb-14">
+            <div>
+              {/* Two sentences, so a step down from the one-line display size. */}
+              <h1 className="home-display max-w-[16ch]" style={{ fontSize: "clamp(2.6rem, 5vw, 4.6rem)" }}>
+                {t("home.hero.titleLead")} <em>{t("home.hero.titleEmphasis")}</em>
               </h1>
-              <p className="mt-7 max-w-xl text-lg leading-8 text-foreground/72">{hero.subhead}</p>
+              <p className="mt-7 max-w-xl text-lg leading-8 text-foreground/72">{t("home.hero.lede")}</p>
               <div className="mt-9 flex flex-wrap gap-3">
-                <Button asChild size="lg" className="home-primary-action">
-                  <a href={appLink("hero_try")} onClick={() => trackEvent("cta_clicked", { cta: "try_ubik", location: "hero" })}>
-                    See Ubik in your workflow <ArrowRightIcon />
-                  </a>
-                </Button>
+                <DiscussButton location="hero" />
                 <Button asChild variant="outline" size="lg" className="home-secondary-action">
-                  <a href={externalLinks.founderMeeting}>Talk to the founders</a>
+                  <Link to="/workflows" onClick={() => trackEvent("cta_clicked", { cta: "workflows", location: "hero" })}>
+                    {t("home.hero.example")}
+                  </Link>
                 </Button>
               </div>
-              <div className="mt-14 grid max-w-xl grid-cols-3 border-t border-foreground/18 pt-5">
-                {[['100+', 'containers / year'], ['$25m+', 'trade flow'], ['3 / wk', 'tailored workflows']].map(([value, label]) => (
-                  <div key={value} className="pr-3">
-                    <p className="text-xl font-semibold tracking-tight sm:text-2xl">{value}</p>
-                    <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/72">{label}</p>
-                  </div>
-                ))}
+              <a
+                href={appLink("hero_open_app")}
+                onClick={() => trackEvent("cta_clicked", { cta: "open_app", location: "hero" })}
+                className="mt-4 inline-block text-sm text-foreground/72 underline-offset-4 hover:underline"
+              >
+                {t("cta.openApp")}
+              </a>
+              <div className="mt-12 max-w-xl border-t border-foreground/18 pt-5">
+                <p className="tabular-nums text-[12.5px] text-foreground/72">{t("home.hero.scaleLabel")}</p>
+                <div className="mt-3 grid grid-cols-3">
+                  {scale.map(({ value, label }) => (
+                    <div key={label} className="pr-3">
+                      <p className="text-xl font-semibold tracking-tight sm:text-2xl">{value}</p>
+                      <p className="mt-1 tabular-nums text-[12.5px] text-foreground/72">{label}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
+            <SupplierExampleCard />
           </div>
         </section>
 
-        <OperatingLoop />
-
-        <TradeFlowOntology />
-
-        <section className="home-outcomes bg-shell text-primary-foreground">
-          <div className="container-page py-16 sm:py-24">
-            <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
-              <div>
-                <h2 className="home-section-title text-primary-foreground">Audit decisions, not data</h2>
-                <p className="mt-6 max-w-md text-lg font-medium leading-8 text-primary-foreground">
-                  The best employee you ever had — and this one never leaves.
-                </p>
-              </div>
-              <TradeWorkLedger />
-            </div>
-          </div>
-        </section>
-
-        <DeployProof />
-
-        {/* Tighter top padding: the logo row is a rule-bounded strip and was
-            sitting a full section-gap below the band above it. */}
-        <section className="home-closing">
-          <div className="container-page pb-16 pt-8 sm:pb-24 sm:pt-10">
-            <div className="founder-company-row" aria-label="Companies our team has worked with">
-              <span className="founder-company-label">Over 15+ years</span>
+        {/* Team credentials sit right under the promise, labelled as what they
+            are; customer stories replace or join them only with permission. */}
+        <section className="home-closing border-b border-border">
+          <div className="container-page py-8">
+            <div className="founder-company-row" aria-label={t("home.team.companiesAria")}>
+              <span className="founder-company-label">{t("home.evidence.label")}</span>
               <div className="founder-company-ticker logo-ticker-fade">
                 <div className="logo-ticker-track">
                   {[...teamCompanies, ...teamCompanies].map((company, index) => (
@@ -1023,67 +527,43 @@ export default function Index() {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* Founder quote runs the full column width — it was previously
-                squeezed into the left half of a split grid and clipping the
-                team cards below it. */}
-            <div className="founder-note-grid mt-12">
-              <a className="founder-photo-link" href="https://www.linkedin.com/in/hemanth-thimmasarthi" target="_blank" rel="noreferrer" aria-label="Hemanth Rao on LinkedIn">
-                <img src="/founders/hemanth.png" alt="Hemanth Rao, founder of Ubik" className="founder-note-photo" />
-              </a>
+        <WorkflowLibrary />
+
+        <TradeFlowOntology active={activeWorkflow} onSelect={setActiveWorkflow} />
+
+        <OwnYourStack />
+
+        <PilotSteps />
+
+        <section className="home-closing">
+          <div className="container-page py-16 sm:py-24">
+            <div className="closing-cta">
               <div>
-                <p className="founder-note-quote">“The hard part is not finding another dashboard. It is knowing which decision is safe when the documents, messages, and numbers disagree.”</p>
-                <a className="founder-link mt-5" href="https://www.linkedin.com/in/hemanth-thimmasarthi" target="_blank" rel="noreferrer">
-                  Hemanth Rao · Founder <LinkedInMark />
-                </a>
-              </div>
-            </div>
-
-            <div className="meet-team-strip mt-10">
-              <div className="meet-team-grid">
-                {teamProfiles.map((profile) => (
-                  <article key={profile.name}>
-                    <div>
-                      <span>{profile.role}</span>
-                      {"linkedin" in profile ? (
-                        <a href={profile.linkedin} target="_blank" rel="noreferrer" aria-label={`${profile.name} on LinkedIn`}>
-                          <LinkedInMark />
-                        </a>
-                      ) : (
-                        <span className="team-stealth-label">Stealth</span>
-                      )}
-                    </div>
-                    <h3>{profile.name}</h3>
-                    <p>{profile.bio}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            <div className="closing-cta mt-14">
-              <div>
-                <h2 className="home-section-title closing-cta-title">
-                  Priced per <em>workflow</em>, not seats
-                </h2>
-                <p className="closing-cta-copy">
-                  Teammate is one workflow for $1,000 a month with no user or token limit. Enterprise adds more workflows and decision briefs for the people who sign.
+                <h2 className="home-section-title closing-cta-title">{t("home.closing.title")}</h2>
+                <p className="closing-cta-copy">{t("home.closing.copy")}</p>
+                <p className="mt-3 text-sm text-foreground/60">
+                  {t("home.closing.pricing")}{" "}
+                  <Link to="/pricing" className="font-semibold text-primary hover:underline">{t("cta.pricing")}</Link>
                 </p>
               </div>
-              <Button asChild size="lg" className="home-primary-action">
-                <a href={externalLinks.founderMeeting}>Plan your first workflow <ArrowRightIcon /></a>
-              </Button>
+              <DiscussButton location="closing" />
             </div>
           </div>
         </section>
 
+        <HomeFaq items={faq} />
+
         <section className="home-journal border-t border-border">
           <div className="container-page grid gap-8 py-16 sm:py-24 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
             <div>
-              <h2 className="home-section-title">Trade Notes</h2>
+              <h2 className="home-section-title">{t("home.journal.title")}</h2>
             </div>
             <div className="border-l-2 border-primary pl-6 sm:pl-8">
               <h3 className="max-w-2xl text-2xl font-semibold leading-tight sm:text-3xl">{featuredBlogPost.title}</h3>
-              <Link to="/blog" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">Read latest <ArrowRightIcon /></Link>
+              <Link to="/blog" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">{t("home.journal.readLatest")} <ArrowRightIcon /></Link>
             </div>
           </div>
         </section>

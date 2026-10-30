@@ -1,7 +1,9 @@
 export const externalLinks = {
   app: "https://app.theubik.com",
   docs: "https://docs.theubik.com",
-  founderMeeting: "https://calendar.app.google/frJjo2U6qdBdgZ1w9",
+  founderMeeting: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2GuRhVfhJ65L00sBZhWPLVkabehUda7Wdxw_Y_9F-TkIDBU0GMQK9suJVV_YaZtmgPliXiw7WI",
+  // The same booking page in Google's embeddable form, for the inline calendar on /demo.
+  founderMeetingEmbed: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2GuRhVfhJ65L00sBZhWPLVkabehUda7Wdxw_Y_9F-TkIDBU0GMQK9suJVV_YaZtmgPliXiw7WI?gv=true",
   trustCenter: "https://security.trycomp.ai/?organizationId=org_6942f5b5ad9fe5d196af748b",
   trustCenterOverviewApi: "https://api.trycomp.ai/v1/trust-access/solarpunk-technology/overview",
   trustCenterVendorsApi: "https://api.trycomp.ai/v1/trust-access/solarpunk-technology/vendors"

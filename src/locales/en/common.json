@@ -1,62 +1,1969 @@
 {
-  "page.title": "ubik | Decision Intelligence for Trade Operations",
-  "meta.description": "ubik is a decision intelligence workspace for frozen food importers, exporters, and processors. $25Mn+ in customer aggregate revenue. 100+ containers. Audit trail on every change. SOC 2 in progress.",
-  "nav.product": "Product",
-  "nav.how-it-works": "How it works",
-  "nav.learn": "Learn",
-  "nav.security": "Security",
-  "nav.journal": "Trade Notes",
-  "nav.trust": "Security",
-  "nav.privacy": "Privacy",
-  "nav.terms": "Terms",
-  "hero.eyebrow": "Decision Intelligence for Trade Operations",
-  "hero.h1": "Decision Intelligence for Trade Operations",
-  "hero.lede": "Built for frozen food importers, exporters, and processors moving $25Mn+ or 100+ containers a year. ubik connects your CRM, ERP, email, and WhatsApp, then runs reviewed agent workflows that compress quote cycles and recover margin operators didn't know they were leaking.",
-  "hero.cta.primary": "Try now",
-  "hero.cta.secondary": "Talk to founders",
-  "cta.realise-value": "Try ubik Now",
-  "hero.meta": "Built by Solarpunk Technology · For ops, revenue, and plant-operations teams.",
-  "product.h2": "What ubik does",
-  "product.lede": "ubik is a single workspace that replaces the daily juggle between email, meeting notes, approval chains, project trackers, and dashboards. It reads across your connected tools (Gmail, Google Calendar, Drive, and others you authorize) and surfaces the work that actually needs you.",
-  "card.1.eyebrow": "01 · Inbox",
-  "card.1.h3": "Operator Inbox",
-  "card.1.p": "A prioritized queue of messages, follow-ups, and approvals — grouped by what's blocking revenue, the plant, or the team today.",
-  "card.2.eyebrow": "02 · Meetings",
-  "card.2.h3": "Meetings",
-  "card.2.p": "Pre-meeting briefs, live note capture, and post-meeting action items that flow directly into the inbox and project trackers.",
-  "card.3.eyebrow": "03 · Approvals",
-  "card.3.h3": "Approvals",
-  "card.3.p": "One queue for purchase, packaging, compliance, and finance approvals — with context pulled from the originating thread.",
-  "card.4.eyebrow": "04 · Execution",
-  "card.4.h3": "Projects &amp; Workflows",
-  "card.4.p": "Lightweight projects and repeatable workflows that wire up the recurring operator motions — RFQs, order tracking, renewals, audits.",
-  "card.5.eyebrow": "05 · Intelligence",
-  "card.5.h3": "Know Anything",
-  "card.5.p": "Ask anything about your operation. Ubik pulls from your org knowledge, meetings, and files to answer — with citations.",
-  "card.6.eyebrow": "06 · Agents",
-  "card.6.h3": "Agents",
-  "card.6.p": "Assign repeatable tasks to Ubik agents — draft replies, prep briefs, chase follow-ups, summarize threads — under your review.",
-  "how.h2": "How it works",
-  "step.1.num": "Step 01",
-  "step.1.h3": "Sign in",
-  "step.1.p": "Sign in with Google or Microsoft. Ubik asks only for the scopes it needs to read and draft work for you — you stay in control.",
-  "step.2.num": "Step 02",
-  "step.2.h3": "Connect your stack",
-  "step.2.p": "Authorize the tools your team already runs on — email, calendar, documents. Ubik reads the context it needs; it does not move or copy data outside your workspace.",
-  "step.3.num": "Step 03",
-  "step.3.h3": "Run the day",
-  "step.3.p": "Ubik surfaces what needs you, drafts what it can, and waits for your call on the rest. Every action is logged; nothing ships without your sign-off.",
-  "security.h2": "Security &amp; data use",
-  "security.p1": "Ubik only requests the Google and Microsoft OAuth scopes required to provide the features you enable. We do not sell your data, we do not use it to train third-party models, and you can revoke access at any time from your Google or Microsoft account settings.",
-  "security.p2": "For the full details on what we collect, why, and how long we keep it, see our <a href=\"/privacy-policy.html\">Privacy Notice</a> and <a href=\"/terms-of-service.html\">Terms and Conditions</a>.",
-  "footer.privacy": "Privacy Notice",
-  "footer.terms": "Terms and Conditions",
-  "footer.contact": "Talk to founders",
-  "footer.fineprint": "© {year} Ubik, a product of Solarpunk Technology. All rights reserved.",
-  "nav.try": "Try now",
-  "cto.h2": "Built for CTOs and operators who want fewer tabs, faster decisions.",
-  "cto.lede": "Ubik starts as a guided try-now flow for teams choosing the first workflow to pilot.",
-  "cto.cta.primary": "Try now",
-  "cto.cta.secondary": "Book demo call",
-  "footer.try": "Try now"
+  "nav": {
+    "learn": "Learn",
+    "guide": "Guide",
+    "pricing": "Pricing",
+    "journal": "Trade Notes",
+    "trust": "Security",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "cta": "Request demo",
+    "signIn": "Sign in",
+    "workflows": "Workflows",
+    "platform": "Platform"
+  },
+  "footer": {
+    "contact": "Talk to founders",
+    "workflows": "Workflows",
+    "platform": "Platform",
+    "pricing": "Pricing",
+    "notes": "Trade Notes",
+    "tagline": "AI-native platform for cross-border trade.",
+    "product": "Product",
+    "resources": "Resources",
+    "legal": "Legal",
+    "backedBy": "Backed by",
+    "socTitle": "SOC 2 Type II",
+    "socStatus": "Audit in progress, not yet certified",
+    "socBadge": "In progress",
+    "socLink": "Security and compliance",
+    "company": "Solarpunk Tech Inc., an applied AI lab"
+  },
+  "cta": {
+    "discuss": "Request demo",
+    "pricing": "See pricing",
+    "openApp": "Already a customer? Open the app",
+    "seeWorkflows": "See all workflows",
+    "bookTime": "Pick a time"
+  },
+  "home": {
+    "seo": {
+      "title": "ubik | AI-native platform for cross-border trade",
+      "description": "ubik is an AI-native platform for cross-border trade. Its agents read email, WhatsApp, the ERP and documents, work order changes and exceptions through under your rules, and show every decision."
+    },
+    "hero": {
+      "eyebrow": "AI-native platform for cross-border trade",
+      "titleLead": "AI‑native platform for",
+      "titleEmphasis": "cross‑border trade",
+      "lede": "ubik automates data collection and trade operations, so importers and exporters decide in hours what used to take weeks.",
+      "definition": "ubik is an AI-native platform for cross-border trade. It reads your email, WhatsApp, ERP and documents, works order changes and supplier, shipment and document exceptions through under your rules, and drafts the next action for your team to approve.",
+      "example": "See the workflows",
+      "scaleLabel": "Built for teams moving",
+      "scale": [
+        {
+          "value": "100+",
+          "label": "containers a year"
+        },
+        {
+          "value": "$25M+",
+          "label": "in annual trade"
+        },
+        {
+          "value": "1",
+          "label": "workflow to start"
+        }
+      ],
+      "card": {
+        "breadcrumb": [
+          "Sales desk",
+          "SO-1182"
+        ],
+        "illustrative": "Example",
+        "entity": "SO-1182 · Northbay Foods",
+        "status": "One container short",
+        "columns": [
+          "Field",
+          "Buyer asked",
+          "ERP and plant"
+        ],
+        "rows": [
+          {
+            "field": "Quantity",
+            "po": "3 containers",
+            "supplier": "2 containers",
+            "match": false
+          },
+          {
+            "field": "Ship date",
+            "po": "28 Nov",
+            "supplier": "28 Nov",
+            "match": true
+          },
+          {
+            "field": "Price",
+            "po": "$41.50 / carton",
+            "supplier": "$41.50 / carton",
+            "match": true
+          }
+        ],
+        "sourcesLabel": "Read from",
+        "sources": [
+          {
+            "kind": "whatsapp",
+            "label": "Buyer on WhatsApp, 09:42"
+          },
+          {
+            "kind": "erp",
+            "label": "SO-1182 in ERP"
+          },
+          {
+            "kind": "email",
+            "label": "Plant email, 08:15"
+          }
+        ],
+        "agent": "Checking the buyer’s WhatsApp request against SO-1182 and plant stock",
+        "draftLabel": "Reply for review",
+        "draftTo": "To: Northbay Foods, on WhatsApp",
+        "draftBody": "We can ship 2 containers on 28 Nov at $41.50. The third can follow on 5 Dec. Shall I update SO-1182?",
+        "owner": "Sales review",
+        "edit": "Edit",
+        "approve": "Send reply"
+      }
+    },
+    "buyers": {
+      "title": "Optimise your bloated workflows.",
+      "lede": "ubik already handles over $1B in shipments and more than 10,000 containers across the globe.",
+      "items": [
+        {
+          "id": "importers",
+          "title": "Importers",
+          "workflows": [
+            "supplier-followups",
+            "shipment-documents"
+          ],
+          "lane": [
+            "Ho Chi Minh City",
+            "Los Angeles"
+          ],
+          "signals": [
+            {
+              "source": "whatsapp",
+              "title": "Packing moves to Thursday",
+              "meta": "Supplier · PO-1182",
+              "status": "ETA 14 → 17 Nov",
+              "tone": "warn"
+            },
+            {
+              "source": "gmail",
+              "title": "Invoice shows 400 cartons",
+              "meta": "INV-2207 against PO-1182 (480)",
+              "status": "Mismatch",
+              "tone": "flag"
+            },
+            {
+              "source": "erp",
+              "title": "PO-1182 update drafted",
+              "meta": "ETA and quantity, ready to write back",
+              "status": "Review",
+              "tone": "info"
+            }
+          ]
+        },
+        {
+          "id": "exporters",
+          "title": "Exporters",
+          "workflows": [
+            "production-planning",
+            "packaging-quality"
+          ],
+          "lane": [
+            "Plant 2",
+            "6 buyers"
+          ],
+          "signals": [
+            {
+              "source": "sheet",
+              "title": "Load 7 at 62% with 9 days left",
+              "meta": "Monthly plan · Plant 2",
+              "status": "At risk",
+              "tone": "flag"
+            },
+            {
+              "source": "outlook",
+              "title": "New allergen panel on the 2 kg label",
+              "meta": "Buyer artwork request",
+              "status": "v3 sent",
+              "tone": "info",
+              "file": "photoshop"
+            },
+            {
+              "source": "whatsapp",
+              "title": "Pallet photos for load 5",
+              "meta": "QC · Plant 2",
+              "status": "Cleared",
+              "tone": "ok"
+            }
+          ]
+        }
+      ],
+      "live": "This week"
+    },
+    "workflows": {
+      "title": "Start with one workflow",
+      "lede": "Four workflows running for teams today, each starting from the email, sheet or ERP record you already get",
+      "spineLabel": "How ubik works across your teams",
+      "rail": "ubik is working",
+      "railFlow": "evidence → memory → action",
+      "sources": "01 / Existing systems",
+      "linkedContext": "Linked context",
+      "output": "03 / Reviewed output",
+      "live": "Live",
+      "reviewed": "Reviewed by your team",
+      "written": "Written back to memory",
+      "restOfStack": "And the rest of your stack",
+      "more": "+100 more",
+      "items": {
+        "promise": {
+          "team": "Sales Operations",
+          "shortTeam": "Sales Ops",
+          "sourceLine": "Inbox, chat and CRM",
+          "apps": [
+            {
+              "label": "Buyer email",
+              "status": "Matched"
+            },
+            {
+              "label": "Buyer chat",
+              "status": "Live"
+            },
+            {
+              "label": "CRM promise",
+              "status": "Updated"
+            }
+          ],
+          "memoryLabel": "Promise history",
+          "links": [
+            "Buyer",
+            "SKU",
+            "Lane",
+            "Margin"
+          ],
+          "resultLabel": "Promise watch",
+          "outcomeTitle": "Buyer update",
+          "resultTitle": "3 promises recalculated",
+          "resultDetail": "Retail buyer replies are ready with the revised ETA attached.",
+          "stats": [
+            "Ready",
+            "At risk",
+            "Sent"
+          ],
+          "run": {
+            "steps": [
+              {
+                "icon": "read",
+                "text": "Read 6 buyer emails and 2 chats",
+                "time": "1.8s"
+              },
+              {
+                "icon": "link",
+                "text": "Linked SO-29481 to buyer, SKU and lane",
+                "time": "1.2s"
+              },
+              {
+                "icon": "search",
+                "text": "Found a 3-day ETA slip in the carrier update",
+                "time": "1.6s"
+              },
+              {
+                "icon": "calc",
+                "text": "Recalculated 3 buyer promises",
+                "time": "2.1s"
+              },
+              {
+                "icon": "draft",
+                "text": "Drafted 3 buyer replies with the new ETA",
+                "time": "2.4s"
+              }
+            ],
+            "result": "3 promises recalculated · replies ready"
+          }
+        },
+        "inventory": {
+          "team": "Warehouse & Inventory",
+          "shortTeam": "Warehouse & Inventory",
+          "sourceLine": "ERP, warehouse and BI",
+          "apps": [
+            {
+              "label": "ERP stock",
+              "status": "Synced"
+            },
+            {
+              "label": "Warehouse",
+              "status": "Checked"
+            },
+            {
+              "label": "BI dashboard",
+              "status": "Read"
+            }
+          ],
+          "memoryLabel": "Allocation memory",
+          "links": [
+            "Lot 87",
+            "Warehouse",
+            "Expiry",
+            "Order"
+          ],
+          "resultLabel": "Lot readiness",
+          "outcomeTitle": "Allocation plan",
+          "resultTitle": "12.4 MT ready",
+          "resultDetail": "Four frozen lots across two warehouses can cover the order.",
+          "stats": [
+            "Lots",
+            "Warehouses",
+            "Shortfall"
+          ],
+          "run": {
+            "steps": [
+              {
+                "icon": "read",
+                "text": "Read stock from the ERP and 2 warehouses",
+                "time": "1.9s"
+              },
+              {
+                "icon": "link",
+                "text": "Linked LOT-87 to the order and its expiry",
+                "time": "1.1s"
+              },
+              {
+                "icon": "search",
+                "text": "Checked 4 frozen lots against the order",
+                "time": "1.7s"
+              },
+              {
+                "icon": "calc",
+                "text": "Allocated 12.4 MT across two warehouses",
+                "time": "2.0s"
+              },
+              {
+                "icon": "draft",
+                "text": "Drafted the allocation plan",
+                "time": "1.5s"
+              }
+            ],
+            "result": "12.4 MT ready · plan for approval"
+          }
+        },
+        "traceability": {
+          "team": "Compliance & Quality",
+          "shortTeam": "Compliance & Quality",
+          "sourceLine": "Regulator feeds + certificates",
+          "apps": [
+            {
+              "label": "Import alerts",
+              "status": "Watched"
+            },
+            {
+              "label": "Certification",
+              "status": "Valid"
+            },
+            {
+              "label": "Health certificate",
+              "status": "Extracted"
+            }
+          ],
+          "memoryLabel": "Document intelligence",
+          "links": [
+            "Lot 87",
+            "Supplier",
+            "Destination",
+            "Certificate"
+          ],
+          "resultLabel": "Lot traceability",
+          "outcomeTitle": "Quality release",
+          "resultTitle": "12 lots cleared",
+          "resultDetail": "Health certificate, BAP proof and FDA lane evidence agree before release.",
+          "stats": [
+            "Cleared",
+            "Review",
+            "Blocked"
+          ],
+          "run": {
+            "steps": [
+              {
+                "icon": "read",
+                "text": "Read 12 health certificates and import alerts",
+                "time": "2.2s"
+              },
+              {
+                "icon": "link",
+                "text": "Linked Lot 87 to supplier and destination",
+                "time": "1.0s"
+              },
+              {
+                "icon": "search",
+                "text": "Matched certificates to BAP and FDA records",
+                "time": "1.9s"
+              },
+              {
+                "icon": "flag",
+                "text": "Flagged 2 lots for review",
+                "time": "0.8s"
+              },
+              {
+                "icon": "draft",
+                "text": "Drafted the quality release",
+                "time": "1.4s"
+              }
+            ],
+            "result": "12 lots cleared · 2 sent for review"
+          }
+        },
+        "override": {
+          "team": "Packaging",
+          "shortTeam": "Packaging",
+          "sourceLine": "Artwork, specs and policy",
+          "apps": [
+            {
+              "label": "Artwork files",
+              "status": "Extracted"
+            },
+            {
+              "label": "Buyer spec",
+              "status": "Compared"
+            },
+            {
+              "label": "Packaging policy",
+              "status": "Applied"
+            }
+          ],
+          "memoryLabel": "Revision control",
+          "links": [
+            "Buyer",
+            "Carton",
+            "Lots",
+            "Rule"
+          ],
+          "resultLabel": "Material rule",
+          "outcomeTitle": "Packaging override",
+          "resultTitle": "18 lots affected",
+          "resultDetail": "The approved carton spec keeps compliant production moving.",
+          "stats": [
+            "Detected",
+            "Reviewed",
+            "Cleared"
+          ],
+          "run": {
+            "steps": [
+              {
+                "icon": "read",
+                "text": "Read the buyer spec and artwork_v3.psd",
+                "time": "1.6s"
+              },
+              {
+                "icon": "search",
+                "text": "Compared it with the approved carton spec",
+                "time": "1.8s"
+              },
+              {
+                "icon": "flag",
+                "text": "Found 18 lots on the old carton",
+                "time": "0.9s"
+              },
+              {
+                "icon": "link",
+                "text": "Routed the change to packaging and QA",
+                "time": "1.1s"
+              },
+              {
+                "icon": "draft",
+                "text": "Drafted the packaging override",
+                "time": "1.3s"
+              }
+            ],
+            "result": "18 lots affected · override for approval"
+          }
+        },
+        "vendors": {
+          "team": "Procurement",
+          "shortTeam": "Procurement",
+          "sourceLine": "Supplier mail and sourcing",
+          "apps": [
+            {
+              "label": "Supplier email",
+              "status": "Parsed"
+            },
+            {
+              "label": "Sourcing",
+              "status": "Compared"
+            },
+            {
+              "label": "Vendor certs",
+              "status": "Checked"
+            }
+          ],
+          "memoryLabel": "Supplier project",
+          "links": [
+            "Vendor",
+            "MOQ",
+            "Material",
+            "Plan"
+          ],
+          "resultLabel": "Vendor comparison",
+          "outcomeTitle": "Supplier choice",
+          "resultTitle": "4 replies matched",
+          "resultDetail": "Cost, MOQ, certification, and lead time resolve into one choice.",
+          "stats": [
+            "Replies",
+            "Qualified",
+            "Recommended"
+          ],
+          "run": {
+            "steps": [
+              {
+                "icon": "read",
+                "text": "Read 4 supplier replies",
+                "time": "1.5s"
+              },
+              {
+                "icon": "search",
+                "text": "Compared cost, MOQ and lead time",
+                "time": "1.7s"
+              },
+              {
+                "icon": "search",
+                "text": "Checked vendor certificates",
+                "time": "1.2s"
+              },
+              {
+                "icon": "calc",
+                "text": "Ranked 3 qualified suppliers",
+                "time": "1.4s"
+              },
+              {
+                "icon": "draft",
+                "text": "Drafted the supplier recommendation",
+                "time": "1.6s"
+              }
+            ],
+            "result": "4 replies matched · 1 recommended"
+          }
+        },
+        "margin": {
+          "team": "Finance & Logistics",
+          "shortTeam": "Finance & Logistics",
+          "sourceLine": "Spend, freight and FX",
+          "apps": [
+            {
+              "label": "Spend",
+              "status": "Costs"
+            },
+            {
+              "label": "Freight rates",
+              "status": "Compared"
+            },
+            {
+              "label": "FX rates",
+              "status": "Read"
+            }
+          ],
+          "memoryLabel": "Margin memory",
+          "links": [
+            "Quote",
+            "Freight",
+            "FX",
+            "Landed cost"
+          ],
+          "resultLabel": "Margin watch",
+          "outcomeTitle": "Margin approval",
+          "resultTitle": "18.4% margin",
+          "resultDetail": "Freight, duty and FX land the expedite above the 17.5% approved floor.",
+          "stats": [
+            "Current",
+            "Floor",
+            "Room"
+          ],
+          "run": {
+            "steps": [
+              {
+                "icon": "read",
+                "text": "Read spend, freight and FX rates",
+                "time": "1.7s"
+              },
+              {
+                "icon": "calc",
+                "text": "Rebuilt landed cost for SH-29481",
+                "time": "1.9s"
+              },
+              {
+                "icon": "search",
+                "text": "Checked margin against the 17.5% floor",
+                "time": "1.1s"
+              },
+              {
+                "icon": "doc",
+                "text": "Generated the invoice PDF",
+                "time": "1.3s"
+              },
+              {
+                "icon": "draft",
+                "text": "Drafted the margin approval",
+                "time": "1.4s"
+              }
+            ],
+            "result": "18.4% margin · above the floor"
+          }
+        }
+      },
+      "examplesTitle": "Agents run, collaborate and decide.",
+      "examplesLede": "No outsourced intelligence, and no wall of alerts that look urgent and pull your team off the real work.",
+      "status": {
+        "read": "Reading {{count}} sources",
+        "link": "Linking {{links}}",
+        "draft": "Drafting the {{output}}",
+        "ready": "{{output}} ready for review"
+      },
+      "run": {
+        "step": "Step {{n}} of {{total}}",
+        "agent": "ubik agent",
+        "reads": "Reads from",
+        "review": "Review",
+        "approve": "Approve",
+        "open": "Open in ubik",
+        "memory": "Memory",
+        "links": "{{n}} links written",
+        "subagents": "{{n}} subagents"
+      }
+    },
+    "outcomes": {
+      "title": "From scattered evidence to reviewed action.",
+      "lede": "Every output keeps its source, its reviewer and its result attached, so leadership audits decisions, not data.",
+      "ledgerLabel": "Work ubik produces after a trade decision",
+      "memoryLabel": "Linked in memory",
+      "indexLabel": "Produced work",
+      "items": [
+        {
+          "label": "Vendor replies",
+          "status": "4 replied",
+          "title": "Packaging vendors replied",
+          "copy": "One reviewed update went to every raw-material vendor. Replies are logged against the same programme.",
+          "system": "Gmail"
+        },
+        {
+          "label": "Shipment tracker",
+          "status": "Route found",
+          "title": "A faster lane surfaced",
+          "copy": "The booked Maersk route stays visible while ubik prices a lower-cost alternative across the same two points.",
+          "system": "Carrier + shipment tracker"
+        },
+        {
+          "label": "Approval",
+          "status": "Approved",
+          "title": "Manager decisions are in",
+          "copy": "Leadership sees what was delegated, who approved it in their ubik, and the trade-off each manager accepted.",
+          "system": "Leadership view"
+        },
+        {
+          "label": "ETA watch",
+          "status": "Monitoring",
+          "title": "ETA exceptions stay covered",
+          "copy": "The live watch separates healthy promises from shipments that need review before the next buyer update.",
+          "system": "Fulfilment · live"
+        }
+      ]
+    },
+    "platform": {
+      "eyebrow": "Platform",
+      "title": "Your systems hold the records. ubik connects the context.",
+      "caption": "Understand the inputs, controls and responsibility behind every proposed next step.",
+      "flowLabel": "How a proposed action is produced",
+      "flow": [
+        "Approved sources",
+        "Context + memory",
+        "Reviewed action",
+        "Recorded outcome"
+      ],
+      "gridLabel": "The three layers of ubik's operating loop",
+      "layers": [
+        {
+          "verb": "Remember",
+          "title": "Organisational memory",
+          "copy": "Messages, documents and decisions stay linked to the order they belong to."
+        },
+        {
+          "verb": "Reason",
+          "title": "Operating intelligence",
+          "copy": "Records are compared and disagreements flagged, with the evidence shown."
+        },
+        {
+          "verb": "Act",
+          "title": "Reviewed action",
+          "copy": "ubik drafts the next step. A person on your team approves it."
+        }
+      ],
+      "link": "See how ubik works",
+      "map": {
+        "label": "How one supplier discrepancy connects across your systems",
+        "illustrative": "Example",
+        "systems": [
+          "Email",
+          "WhatsApp",
+          "ERP",
+          "Shared drive",
+          "Plant reports",
+          "Team notes"
+        ],
+        "records": [
+          "PO-2481",
+          "Supplier confirmation",
+          "Bill of lading",
+          "Health certificate",
+          "Production 70%",
+          "ETA 18 Nov"
+        ],
+        "discrepancy": "480 vs 400 cartons",
+        "draft": "Follow-up drafted",
+        "review": "Procurement review"
+      }
+    },
+    "controls": {
+      "eyebrow": "Deployment",
+      "title": "Own your data and intelligence.",
+      "lede": "Run ubik where your data already lives. The memory it builds and the models it runs stay in your environment.",
+      "options": [
+        {
+          "id": "premises",
+          "label": "On premises",
+          "title": "In your data center.",
+          "copy": "Self-host on bare metal or your own Kubernetes.",
+          "boundary": "Your data center",
+          "out": "No data out"
+        },
+        {
+          "id": "cloud",
+          "label": "Your cloud",
+          "title": "In your VPC.",
+          "copy": "Deploy to AWS, GCP or Azure inside your own account.",
+          "boundary": "Your VPC",
+          "out": "Stays in your account"
+        },
+        {
+          "id": "local",
+          "label": "Local",
+          "title": "On your laptop.",
+          "copy": "The full stack on one workstation, for offline or sensitive work.",
+          "boundary": "Your workstation",
+          "out": "Works offline"
+        }
+      ],
+      "stack": [
+        "Agents",
+        "Memory",
+        "Models"
+      ],
+      "systems": [
+        "Email",
+        "WhatsApp",
+        "ERP",
+        "Documents"
+      ],
+      "team": "Your team",
+      "complianceLabel": "Compliance work in progress",
+      "securityLink": "Review access and security"
+    },
+    "pilot": {
+      "title": "Choose the bottleneck. Prove the first workflow.",
+      "lede": "Success is defined with your team before anything expands.",
+      "widget": {
+        "pick": "Supplier updates",
+        "reads": "Reads",
+        "drafts": "Drafts",
+        "writes": "Writes",
+        "afterApproval": "After approval",
+        "reviewed": "Reviewed",
+        "live": "Live on your threads",
+        "before": "Before",
+        "pilot": "Pilot",
+        "expand": "Expand"
+      },
+      "steps": [
+        {
+          "title": "Map the work",
+          "copy": "One process that eats your team’s week, and where its inputs live."
+        },
+        {
+          "title": "Agree the scope",
+          "copy": "What ubik reads, what it drafts, and who approves each write."
+        },
+        {
+          "title": "Run a controlled pilot",
+          "copy": "One workflow on your real threads, every action reviewed."
+        },
+        {
+          "title": "Review the result",
+          "copy": "Compare it with how the work ran before, then decide what expands."
+        }
+      ]
+    },
+    "team": {
+      "companiesLabel": "Team experience, before ubik",
+      "companiesAria": "Companies our team worked at before ubik",
+      "quote": "“The hard part is not finding another dashboard. It is knowing which decision is safe when the documents, messages, and numbers disagree.”",
+      "founder": "Hemanth Rao · Founder",
+      "founderPhotoAlt": "Hemanth Rao, founder of ubik",
+      "profiles": [
+        {
+          "role": "Product Design, Ops & GTM",
+          "bio": "Fractional operator and venture builder. Raised $10M+ and shipped as much in ARR, pallets and shelves across sustainability, commerce and D2C."
+        },
+        {
+          "role": "AI/ML & Product Engineering",
+          "bio": "Scaled engineering across mobility, commerce and finance unicorns. Then explored AI-native orgs and built foundation models for healthcare."
+        }
+      ]
+    },
+    "faq": {
+      "title": "Practical questions, answered.",
+      "items": [
+        {
+          "q": "What is ubik?",
+          "a": "ubik is an AI operations workspace for perishable food trade. It reads your email, WhatsApp, ERP and documents, flags supplier, shipment and order exceptions, and drafts the next action for your team to approve."
+        },
+        {
+          "q": "Who is ubik for?",
+          "a": "Importers, exporters and traders, typically teams moving 100+ containers or $25M+ in trade a year, where email and WhatsApp carry most of the operating work."
+        },
+        {
+          "q": "Will ubik replace our ERP?",
+          "a": "No. Your ERP and CRM stay the source of truth. ubik works around them, including Zoho, Dynamics 365 Business Central and ERPs with no API. The read and write touchpoints for your workflow are agreed during scoping, and nothing is written back without approval."
+        },
+        {
+          "q": "What can ubik do without an operator?",
+          "a": "It reads, compares, monitors and drafts. Sending a message or writing to another system waits for a named person on your team to approve, and every change is recorded in an audit trail. The exact permissions, including when a workflow pauses or escalates, are agreed per workflow during scoping."
+        },
+        {
+          "q": "What happens to our data?",
+          "a": "Your trade data is never sold, shared for advertising, or used to train third-party models. The website and product use cookieless PostHog analytics for usage events, with sensitive prompt and session fields protected before capture. The security note, subprocessor list and privacy notice set out what is processed and where."
+        },
+        {
+          "q": "What access does ubik need?",
+          "a": "Only what the chosen workflow needs: the approved inboxes, folders, files or systems. Your admin grants it through Google Workspace or Microsoft 365 and can revoke it at any time."
+        },
+        {
+          "q": "Which tools does ubik connect to?",
+          "a": "Gmail, Outlook, WhatsApp, Dynamics 365 Business Central and Zoho, plus CRMs and other tools through connectors. The systems for your workflow are confirmed during scoping."
+        },
+        {
+          "q": "Do we need an ERP to use ubik?",
+          "a": "No. Many teams start from email, WhatsApp and documents. ubik connects to an ERP where the workflow justifies it, including Zoho, Dynamics 365 Business Central and ERPs with no API."
+        },
+        {
+          "q": "How much integration work is involved?",
+          "a": "It depends on the workflow. Most start with an approved inbox and the documents the workflow needs; ERP or CRM access is added only where it is required. Setup effort and prerequisites are confirmed during scoping, before the pilot starts."
+        },
+        {
+          "q": "How much does ubik cost?",
+          "a": "Pricing is per workflow, with no user or token limit, and is agreed once the first workflow is scoped. Request a demo and we will walk through it with you."
+        },
+        {
+          "q": "How do we start?",
+          "a": "Pick one workflow. We map it with your team, agree the scope and approvals, then run it as a controlled pilot. Success is defined before the pilot starts, and nothing expands until it is met."
+        }
+      ]
+    },
+    "journal": {
+      "title": "Trade Notes",
+      "readLatest": "Read latest"
+    },
+    "evidence": {
+      "label": "Before ubik, our team ran operations, trade desks and the software behind them at"
+    },
+    "closing": {
+      "title": "Find the bottleneck worth automating first.",
+      "copy": "Walk through one live process with our team. Leave with an outline of the first workflow and the information it needs.",
+      "pricing": "Priced per workflow, with no user or token limit."
+    }
+  },
+  "pricing": {
+    "seo": {
+      "title": "Pricing | Ubik",
+      "description": "ubik is priced per workflow, not per person, with no user or token limit. Enterprise adds more workflows and decision briefs."
+    },
+    "badge": "Pricing",
+    "titleLead": "The best models,",
+    "titleEmphasis": "without the meter running.",
+    "lede": "We route each step to the frontier model that can do it and pay for the tokens, so your bill reads the same in a quiet week and a full one.",
+    "teammate": {
+      "connectors": "Connectors",
+      "connectorsMore": "and 100+ more"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "price": "Custom",
+      "summary": "Platform plus workflows, priced each. Decision briefs for the people who sign.",
+      "features": [
+        "Multiple workflows",
+        "Custom decision logic on your own context graph: every approval, exception and precedent, reused",
+        "Policy engine and audit trail",
+        "A trade expert and a product engineer on the account"
+      ],
+      "cta": "Talk to us"
+    },
+    "replaces": {
+      "title": "Only pay for outcomes.",
+      "oldWay": "The old way",
+      "ubik": "Ubik",
+      "rows": [
+        {
+          "old": "Per-seat SaaS, price grows with headcount",
+          "new": "One price per workflow, no user or token limit"
+        },
+        {
+          "old": "Six-month ERP implementation",
+          "new": "Scoped around the systems you already run"
+        },
+        {
+          "old": "Implementation consultants and transformation decks",
+          "new": "Trade expert and engineer on the account, included"
+        },
+        {
+          "old": "Forward-deployed engineers at day rates",
+          "new": "Workflows personalised, not configured or modular"
+        },
+        {
+          "old": "Four to seven coordinators chasing emails",
+          "new": "One teammate that chases, checks and prepares the decision"
+        }
+      ],
+      "closing": "Coordination used to be a payroll line. Now it is a workflow."
+    },
+    "apps": {
+      "title": "ubik lives where your work is.",
+      "soon": "Soon",
+      "privacy": [
+        "Local recorder",
+        "Desktop context bridge",
+        "Encrypted files",
+        "Credentials on-device"
+      ]
+    },
+    "faq": {
+      "badge": "Questions",
+      "title": "LLMs plan and draft. ubik controls the context.",
+      "items": [
+        {
+          "q": "What data is shared with LLMs?",
+          "a": [
+            "Ubik minimizes what is sent to external LLMs. Models are used for planning, reasoning and drafting actions, not for bulk raw-data ingestion.",
+            "Sensitive context like RFQs, supplier pricing, margins, customer names and credentials is kept in Ubik's context layer. Customer data is never used to train third-party models."
+          ]
+        },
+        {
+          "q": "What does a workflow include?",
+          "a": [
+            "One production workflow on the full Workspace: the mobile app for the floor, organisational memory, email and WhatsApp ingestion, connectors for your ERP, CRM and 100+ more apps, and an audit trail on every write.",
+            "Everyone on the team can use it. You pay for the workflow, not the people."
+          ]
+        },
+        {
+          "q": "What happens after the first workflow?",
+          "a": [
+            "More workflows, each priced on its own, plus decision briefs for the people who sign.",
+            "Decisions run on your own context graph, so every approval, exception and precedent is kept and reused, with a policy engine, an audit trail, and a trade expert and a product engineer on the account."
+          ]
+        },
+        {
+          "q": "How do credentials and private files work?",
+          "a": [
+            "Credentials stay on-device. Private files are encrypted. ubik Meetings is designed to bridge desktop context to the Webapp without turning your local machine into a public data lake.",
+            "Audit trail on every change. SOC 2 in progress."
+          ]
+        },
+        {
+          "q": "Why no per-seat pricing?",
+          "a": [
+            "Because the floor should use it. A packing supervisor without an email address signs in with a phone number, and we are not charging you for that."
+          ]
+        },
+        {
+          "q": "What counts as a workflow?",
+          "a": [
+            "One repeatable job with a defined input, a check, and a human approval, for example yield reconciliation, packaging tracking, export documents or supplier follow-up."
+          ]
+        }
+      ]
+    },
+    "start": {
+      "name": "Start with one workflow",
+      "price": "A month, free",
+      "summary": "Hand ubik your hardest workflow. It runs end to end with your team, on your own inbox and files. After the month, pricing is per workflow, with no user or token limit.",
+      "cta": "Request demo"
+    }
+  },
+  "learn": {
+    "documents": {
+      "eyebrow": "Document verification",
+      "title": "Every document, in every version, checked.",
+      "lede": "Vendors resend the same document as PDFs, photos, spreadsheets and ZIP files. ubik reads each version, keeps the latest and checks it against the order.",
+      "grid": {
+        "documents": [
+          "Purchase order",
+          "Proforma invoice",
+          "Sales contract",
+          "Letter of credit",
+          "Commercial invoice",
+          "Packing list",
+          "Bill of lading",
+          "Sea waybill",
+          "Booking",
+          "Shipping instructions",
+          "VGM",
+          "Origin certificate",
+          "Health certificate",
+          "Catch certificate",
+          "Phyto certificate",
+          "Fumigation",
+          "Insurance",
+          "Inspection report",
+          "Lab report",
+          "Weight certificate",
+          "Export declaration",
+          "Import entry",
+          "ISF filing",
+          "Arrival notice",
+          "Delivery order",
+          "Freight invoice",
+          "Debit note",
+          "Credit note",
+          "Bank draft",
+          "Payment advice",
+          "Quality claim",
+          "Temperature log",
+          "Container release",
+          "Gate pass",
+          "Warehouse receipt",
+          "Certificate of analysis"
+        ],
+        "flags": [
+          {
+            "index": 5,
+            "text": "Packing list: net weight differs from the commercial invoice"
+          },
+          {
+            "index": 12,
+            "text": "Health certificate: lot number missing from the bill of lading"
+          }
+        ],
+        "count": "{{docs}} documents · {{versions}} versions",
+        "review": "{{flags}} sent for review",
+        "reading": "Reading {{name}}",
+        "kept": "Kept {{name}} · older version linked as evidence",
+        "done": "All {{docs}} checked against PO-2481"
+      }
+    },
+    "apps": {
+      "eyebrow": "Connected apps",
+      "title": "One record, whichever system it came from.",
+      "lede": "ubik connects to the mail, chat, ERP and files your team already uses. When they disagree, it picks one record by a rule you set and keeps the rest as evidence.",
+      "groups": [
+        "Mail and chat",
+        "ERP and books",
+        "Files and sheets",
+        "Carriers and portals"
+      ],
+      "commonLabel": "Memory every trading team ends up needing",
+      "nodeLabel": "Memory",
+      "ruleLabel": "Rule",
+      "selected": "Selected",
+      "evidence": "Evidence",
+      "linkedLabel": "Linked to",
+      "nodes": [
+        {
+          "id": "bl",
+          "name": "Bill of lading",
+          "ref": "PO-2481",
+          "rule": "The forwarder's latest copy wins over manual entries.",
+          "sources": [
+            {
+              "app": "Zoho Books",
+              "value": "MSK-2841 · draft",
+              "time": "Tue 09:12"
+            },
+            {
+              "app": "Gmail · forwarder",
+              "value": "MSK-2841 · OBL v3",
+              "time": "Tue 11:40"
+            },
+            {
+              "app": "Google Sheets",
+              "value": "MSK-2814",
+              "time": "Mon 18:05"
+            }
+          ],
+          "pick": 1,
+          "note": "Sheet has MSK-2814. Flagged to the sheet owner.",
+          "links": [
+            "PO-2481",
+            "SO-1182",
+            "INV-2481"
+          ]
+        },
+        {
+          "id": "eta",
+          "name": "Arrival date",
+          "ref": "MSK-2841",
+          "rule": "The carrier's latest notice wins over the booking.",
+          "sources": [
+            {
+              "app": "Gmail · booking",
+              "value": "9 Nov",
+              "time": "Fri 16:20"
+            },
+            {
+              "app": "WhatsApp · agent",
+              "value": "“10 or 11 Nov”",
+              "time": "Tue 08:02"
+            },
+            {
+              "app": "Maersk",
+              "value": "12 Nov",
+              "time": "Wed 07:30"
+            }
+          ],
+          "pick": 2,
+          "note": "Buyer promised 10 Nov. Revised date drafted for approval.",
+          "links": [
+            "MSK-2841",
+            "SO-1182",
+            "Buyer B-204"
+          ]
+        },
+        {
+          "id": "price",
+          "name": "Agreed price",
+          "ref": "SO-1182",
+          "rule": "The signed contract wins over chat.",
+          "sources": [
+            {
+              "app": "WhatsApp · buyer",
+              "value": "USD 7.60/kg ok?",
+              "time": "Mon 21:14"
+            },
+            {
+              "app": "DocuSign",
+              "value": "USD 7.80/kg",
+              "time": "Tue 10:05"
+            },
+            {
+              "app": "Zoho Books",
+              "value": "USD 7.80/kg",
+              "time": "Tue 10:31"
+            }
+          ],
+          "pick": 1,
+          "note": "Chat counter-offer never confirmed. Left out of the invoice.",
+          "links": [
+            "SO-1182",
+            "INV-2481",
+            "Contract C-77"
+          ]
+        }
+      ],
+      "common": [
+        "Bill of lading",
+        "Arrival date",
+        "Agreed price",
+        "Approved artwork",
+        "Buyer spec",
+        "Lot certificate",
+        "Payment terms",
+        "Container number"
+      ]
+    },
+    "seo": {
+      "title": "How ubik works | AI-native platform for cross-border trade",
+      "description": "How ubik reads your inbox, WhatsApp, ERP and documents, flags what changed, and drafts the next step for your team to approve."
+    },
+    "eyebrow": "Platform",
+    "title": "How ubik works.",
+    "lede": "Your systems keep the records. ubik reads them together, flags what changed and drafts the next step. A person on your team approves it.",
+    "pace": {
+      "title": "Five jobs, as they run in the product.",
+      "lede": "Pick one to see it."
+    },
+    "access": {
+      "eyebrow": "Access and responsibility",
+      "title": "What ubik reads, drafts and writes.",
+      "items": [
+        {
+          "label": "Reads",
+          "copy": "Approved inboxes, WhatsApp, folders, files and ERP or CRM records, scoped to the workflow."
+        },
+        {
+          "label": "Drafts",
+          "copy": "Replies, requests, summaries, tasks and ERP-ready entries, each with the records that informed it."
+        },
+        {
+          "label": "Writes",
+          "copy": "Only after a named person approves. Every write is logged with its source, reviewer and time."
+        }
+      ],
+      "failTitle": "When inputs are missing or stale",
+      "fail": [
+        "ubik stops and asks when an input is missing.",
+        "A draft is refreshed if its source changes before approval.",
+        "A failed send keeps the draft so it can be retried."
+      ]
+    },
+    "workflowsTitle": "See it on a real job",
+    "cta": "Review your first workflow"
+  },
+  "workflows": {
+    "seo": {
+      "title": "Workflows | ubik for cross-border trade",
+      "description": "Supplier updates, document verification, production planning and the packaging tracker: the workflows ubik runs for importers and exporters today."
+    },
+    "eyebrow": "Workflows",
+    "title": "Workflows that run in the product today.",
+    "lede": "Each one starts from the email, sheet or ERP record your team already gets, and ends with the next step done or waiting for approval.",
+    "labels": {
+      "all": "All workflows",
+      "steps": "How it runs",
+      "outputs": "What your team gets",
+      "related": "Other workflows",
+      "open": "Open workflow",
+      "seeWorkflow": "See the workflow",
+      "connects": "Connects to",
+      "more": "+{{n}} more",
+      "moreNote": "reaches these too, from the same chat."
+    },
+    "items": {
+      "supplier-followups": {
+        "name": "Supplier updates",
+        "audience": "Procurement and import operations",
+        "seoTitle": "Supplier updates | ubik",
+        "seoDescription": "ubik sends each supplier their open POs as a weekly sheet, chases replies, and shows only what changed: ETD, ETA, container and B/L.",
+        "summary": "A weekly sheet to every supplier. Replies read back as changes.",
+        "lede": "Each supplier gets their open POs as a sheet every week. ubik chases the reply, reads it back and shows you only what changed.",
+        "steps": [
+          {
+            "title": "Send",
+            "copy": "Each supplier gets their open POs from the ERP as a weekly sheet."
+          },
+          {
+            "title": "Chase",
+            "copy": "No reply? Reminders and escalations go out on your schedule."
+          },
+          {
+            "title": "Read",
+            "copy": "The reply is read back. ETD, ETA, container and B/L changes show as before and after."
+          },
+          {
+            "title": "Ask",
+            "copy": "Select the unclear POs and ask the supplier in one email."
+          }
+        ],
+        "outputs": [
+          "A weekly change report for your team",
+          "Every supplier reply on record",
+          "Clarifications sent from your own mailbox"
+        ],
+        "stats": [
+          {
+            "value": "1 sheet",
+            "label": "Per supplier each week, with only their open POs"
+          },
+          {
+            "value": "2 levels",
+            "label": "Of escalation after the reminder, on the hours you set"
+          },
+          {
+            "value": "4 fields",
+            "label": "ETD, ETA, container and B/L, reported only when they change"
+          }
+        ],
+        "cta": "Request demo",
+        "visual": {
+          "subject": "Weekly schedule · Work in progress",
+          "to": "To: 6 suppliers",
+          "attachment": "Harbour-Seafoods-WIP.xlsx",
+          "repliesLabel": "Replies read",
+          "status": "Received",
+          "changes": [
+            {
+              "po": "PO-2481",
+              "field": "ETD",
+              "from": "14 Nov",
+              "to": "18 Nov"
+            },
+            {
+              "po": "PO-2486",
+              "field": "Production",
+              "from": "50%",
+              "to": "70%"
+            },
+            {
+              "po": "PO-2490",
+              "field": "Container",
+              "from": "—",
+              "to": "MSKU 4821930"
+            }
+          ]
+        }
+      },
+      "shipment-documents": {
+        "name": "Document verification",
+        "audience": "Import documents team",
+        "seoTitle": "Document verification | ubik",
+        "seoDescription": "ubik files supplier documents to their PO, checks invoice, packing list, bill of lading and certificates against each other and the order, and drafts the email to fix what disagrees.",
+        "summary": "Every document for a PO, checked against the others and the order.",
+        "lede": "ubik files each supplier document to its PO, checks it against the other documents and the order, and drafts the email that fixes what disagrees.",
+        "steps": [
+          {
+            "title": "File",
+            "copy": "Supplier emails are filed to the right PO from the documents themselves."
+          },
+          {
+            "title": "Check",
+            "copy": "Invoice, packing list, B/L and certificates are compared field by field, and against the PO."
+          },
+          {
+            "title": "Fix",
+            "copy": "ubik drafts the email to the supplier or broker. You edit it and send."
+          },
+          {
+            "title": "Approve",
+            "copy": "A manager approves the PO, then the bill is created in your ERP."
+          }
+        ],
+        "outputs": [
+          "A live checklist of what arrived and what is missing",
+          "Each disagreement with the documents behind it",
+          "The bill in Zoho, created from the checked invoice after a preview"
+        ],
+        "stats": [
+          {
+            "value": "1,169",
+            "label": "Emails to the documents inbox, read and sorted"
+          },
+          {
+            "value": "99",
+            "label": "Filed to their PO with no one sorting them"
+          },
+          {
+            "value": "7",
+            "label": "Cross-document checks run by rules, not a model"
+          }
+        ],
+        "statsNote": "Last 30 days at one US importer, to 29 October 2026.",
+        "cta": "Request demo",
+        "visual": {
+          "po": "PO-2481",
+          "stage": "Sailed",
+          "labels": {
+            "received": "Received",
+            "missing": "Missing",
+            "partial": "Partial"
+          },
+          "docs": [
+            {
+              "name": "Commercial invoice",
+              "state": "received"
+            },
+            {
+              "name": "Packing list",
+              "state": "received"
+            },
+            {
+              "name": "Bill of lading",
+              "state": "received"
+            },
+            {
+              "name": "Health certificate",
+              "state": "received"
+            },
+            {
+              "name": "ISF worksheet",
+              "state": "partial"
+            },
+            {
+              "name": "Certificate of origin",
+              "state": "missing"
+            }
+          ],
+          "finding": {
+            "severity": "Blocker",
+            "owner": "Supplier to fix",
+            "text": "Invoice arithmetic does not hold: 12,400 kg × $4.10 = $50,840. The invoice says $51,300."
+          },
+          "action": "Chase missing documents",
+          "send": "Send email",
+          "invoice": "Invoice-PO-2481.pdf"
+        }
+      },
+      "production-planning": {
+        "name": "Production planning",
+        "audience": "Planning and production",
+        "seoTitle": "Production planning | ubik",
+        "seoDescription": "Upload the monthly production plan. ubik tracks every load against daily production, computes raw material need, flags loads at risk and sends the weekly plant report.",
+        "summary": "The monthly plan, against what the plant actually produced.",
+        "lede": "Upload the month’s plan. ubik tracks every load against daily production, flags the ones at risk and sends the plant report.",
+        "steps": [
+          {
+            "title": "Upload",
+            "copy": "The monthly plan is read and kept as a version you can restore."
+          },
+          {
+            "title": "Compute",
+            "copy": "Raw material need per load, from what is planned and what is left."
+          },
+          {
+            "title": "Track",
+            "copy": "Daily production from the ERP moves each load: Safe, Watch, At risk, Critical."
+          },
+          {
+            "title": "Report",
+            "copy": "A weekly report goes to each plant. Stalled loads land in Follow-up."
+          }
+        ],
+        "outputs": [
+          "Load risk for the whole month",
+          "Raw material required, in MT",
+          "A weekly report for each plant"
+        ],
+        "stats": [
+          {
+            "value": "856",
+            "label": "Production records checked against the month’s plan"
+          },
+          {
+            "value": "43",
+            "label": "Orders in production that were not in the plan"
+          },
+          {
+            "value": "4",
+            "label": "Risk levels per load: Safe, Watch, At risk, Critical"
+          }
+        ],
+        "statsNote": "October 2026 plan at one processing plant.",
+        "cta": "Request demo",
+        "visual": {
+          "title": "November plan · Plant 2",
+          "reportLabel": "Weekly report",
+          "report": "plant-2-2026-11-planning.xlsx",
+          "loads": [
+            {
+              "id": "Load 12",
+              "progress": 100,
+              "risk": "Finished"
+            },
+            {
+              "id": "Load 13",
+              "progress": 92,
+              "risk": "Watch",
+              "note": "92% produced, no container for 5 days"
+            },
+            {
+              "id": "Load 14",
+              "progress": 48,
+              "risk": "At risk",
+              "note": "Short 3.2 MT of raw material"
+            },
+            {
+              "id": "Load 15",
+              "progress": 20,
+              "risk": "Safe"
+            }
+          ]
+        }
+      },
+      "packaging-quality": {
+        "name": "Packaging tracker",
+        "audience": "Packaging and artwork",
+        "seoTitle": "Packaging tracker | ubik",
+        "seoDescription": "ubik turns artwork, dieline, label and carton emails into tasks with an owner and a deadline, follows them across customer, printer and vendor, and closes them on evidence.",
+        "summary": "Every artwork, label and carton request, tracked from email to done.",
+        "lede": "ubik turns packaging emails into tasks with an owner and a deadline, follows them across customer, printer and vendor, and closes them on evidence.",
+        "steps": [
+          {
+            "title": "Catch",
+            "copy": "Artwork, dieline, label and carton requests are picked out of the inbox."
+          },
+          {
+            "title": "Own",
+            "copy": "Each becomes a task with an owner, a deadline and who the next move is on."
+          },
+          {
+            "title": "Chase",
+            "copy": "Waiting on the customer? You are prompted to chase at 3 and 7 working days."
+          },
+          {
+            "title": "Close",
+            "copy": "Closed when the final file or reply arrives. Reopened if the customer writes back."
+          }
+        ],
+        "outputs": [
+          "One list of open packaging work per owner",
+          "Escalation before a deadline slips",
+          "A record of how every request closed"
+        ],
+        "stats": [
+          {
+            "value": "448",
+            "label": "Packaging tasks tracked from email"
+          },
+          {
+            "value": "186",
+            "label": "Closed on evidence or by their owner"
+          },
+          {
+            "value": "4,028",
+            "label": "Email threads read in full"
+          }
+        ],
+        "statsNote": "Last 30 days at one US importer, to 29 October 2026.",
+        "cta": "Request demo",
+        "visual": {
+          "task": "Master carton label · 2 kg bag",
+          "owner": "Owner: Priya",
+          "thread": [
+            {
+              "from": "Customer",
+              "text": "New allergen line on the 2 kg master carton.",
+              "file": ""
+            },
+            {
+              "from": "You",
+              "text": "Artwork attached for approval.",
+              "file": "MC-label-2kg_v2.psd"
+            },
+            {
+              "from": "Customer",
+              "text": "Move the lot code above the barcode.",
+              "file": ""
+            },
+            {
+              "from": "You",
+              "text": "Revised artwork attached.",
+              "file": "MC-label-2kg_v3.psd"
+            }
+          ],
+          "status": "Waiting on customer",
+          "chase": "Chase · day 3",
+          "sla": [
+            "On track",
+            "L1",
+            "L2",
+            "Critical"
+          ],
+          "slaActive": 1
+        }
+      },
+      "export-shipments": {
+        "name": "Export shipments",
+        "audience": "Export documentation team",
+        "seoTitle": "Export shipments | ubik",
+        "seoDescription": "ubik matches carrier and forwarder email to each export shipment, moves it through 15 stages on evidence, and drafts booking, SI and draft B/L emails for approval.",
+        "summary": "Every export shipment, staged by what has arrived.",
+        "lede": "ubik reads booking, SI, VGM and draft B/L mail, moves each shipment through 15 stages on evidence alone, and drafts the next email for you to approve.",
+        "steps": [
+          {
+            "title": "Read",
+            "copy": "Carrier and forwarder mail is matched to the shipment by booking and container number."
+          },
+          {
+            "title": "Check",
+            "copy": "The draft B/L is compared with the SI, field by field."
+          },
+          {
+            "title": "Draft",
+            "copy": "The correction goes to the forwarder once you approve it."
+          },
+          {
+            "title": "Move",
+            "copy": "A shipment changes stage when the evidence lands. Nobody drags the card."
+          }
+        ],
+        "outputs": [
+          "One board of every shipment, by stage and health",
+          "Who each shipment is waiting on, and the next action",
+          "Every outbound email approved before it goes"
+        ],
+        "stats": [
+          {
+            "value": "15",
+            "label": "Stages from loading ready to closed"
+          },
+          {
+            "value": "0.92",
+            "label": "Confidence below which an email waits for a person"
+          },
+          {
+            "value": "6",
+            "label": "Kinds of email drafted, from booking request to document set"
+          }
+        ],
+        "cta": "Request demo"
+      },
+      "production-reconciliation": {
+        "name": "Production reconciliation",
+        "audience": "Plant and finance",
+        "seoTitle": "Production reconciliation | ubik",
+        "seoDescription": "ubik reads a plant's daily grading, value addition and soaking reports, checks yields against your policy, asks the plant about every gap and sends the tallying report once all three are approved.",
+        "summary": "Three plant reports a day, tallied, every gap asked and answered.",
+        "lede": "Each plant sends its grading, value addition and soaking reports. ubik reads them cell by cell, tests every yield against your policy and drafts the question for each gap.",
+        "steps": [
+          {
+            "title": "Read",
+            "copy": "Each figure is kept with the cell it came from."
+          },
+          {
+            "title": "Check",
+            "copy": "Yields are tested against the policy you set. A miss becomes a finding."
+          },
+          {
+            "title": "Ask",
+            "copy": "You pick the findings and send the drafted question. The plant's reply is read back."
+          },
+          {
+            "title": "Tally",
+            "copy": "Once all three reports are approved, the grade-wise tallying report goes to the plant."
+          }
+        ],
+        "outputs": [
+          "Findings with root cause, corrective action, owner and due date",
+          "A grade-wise tallying sheet per plant per day",
+          "An approval trail for every report"
+        ],
+        "stats": [
+          {
+            "value": "3",
+            "label": "Reports per plant per day"
+          },
+          {
+            "value": "4",
+            "label": "Fields read back from the plant's reply"
+          },
+          {
+            "value": "All 3",
+            "label": "Reports approved before the tallying report can go"
+          }
+        ],
+        "cta": "Request demo"
+      },
+      "production-sheets": {
+        "name": "Production sheets",
+        "audience": "Plant floor and office",
+        "seoTitle": "Production sheets | ubik",
+        "seoDescription": "Operators photograph handwritten production sheets. ubik reads them with two OCR engines, checks the arithmetic, routes doubtful cells back to the operator and publishes approved figures.",
+        "summary": "Handwritten floor sheets in, approved figures out.",
+        "lede": "Operators photograph the handwritten sheet. Two OCR engines read it, its own arithmetic checks it, a manager approves it, and the figures land in your data warehouse.",
+        "steps": [
+          {
+            "title": "Snap",
+            "copy": "Each sheet is photographed against the slot it is owed for."
+          },
+          {
+            "title": "Read",
+            "copy": "Two engines read every cell, and the rows have to add up."
+          },
+          {
+            "title": "Fix",
+            "copy": "Cells that fail the sum or split the engines go back to the operator, worst first."
+          },
+          {
+            "title": "Approve",
+            "copy": "A manager approves, every correction carries a reason, and the figures publish."
+          }
+        ],
+        "outputs": [
+          "What each shift owes, and what is still due",
+          "Every corrected cell, with who changed it and why",
+          "Approved figures in your data warehouse"
+        ],
+        "stats": [
+          {
+            "value": "2",
+            "label": "OCR engines read every sheet"
+          },
+          {
+            "value": "3",
+            "label": "Kinds of flagged cell, fixed worst first"
+          },
+          {
+            "value": "0",
+            "label": "Confidence scores shown to operators. They see the cell."
+          }
+        ],
+        "cta": "Request demo"
+      },
+      "replenishment": {
+        "name": "Replenishment",
+        "audience": "Purchasing and inventory",
+        "seoTitle": "Replenishment | ubik",
+        "seoDescription": "ubik combines ERP stock, open POs, your forecast and supplier ETAs into a reorder call per item: reorder, no order, shortage, excess or watch. A person approves; nothing goes to suppliers.",
+        "summary": "What to reorder, from stock, forecast and what is already at sea.",
+        "lede": "ubik reads ERP stock and open POs, your forecast and the ETAs suppliers report, and queues one call per item for a person to approve.",
+        "steps": [
+          {
+            "title": "Read",
+            "copy": "Stock and open POs from the ERP, the forecast sheet, ETAs from supplier updates."
+          },
+          {
+            "title": "Recommend",
+            "copy": "Each item gets a call: Reorder, No order, Shortage, Excess or Watch."
+          },
+          {
+            "title": "Adjust",
+            "copy": "Approve as recommended, or change the quantity and approve that."
+          },
+          {
+            "title": "Draft",
+            "copy": "Approval writes the action: how many containers, how many cases, for when."
+          }
+        ],
+        "outputs": [
+          "A reorder call for every item, with the numbers behind it",
+          "Adjusted quantities with the reason kept",
+          "Action drafts your team places"
+        ],
+        "stats": [
+          {
+            "value": "5",
+            "label": "Calls per item, from Reorder to Watch"
+          },
+          {
+            "value": "3",
+            "label": "Sources read: ERP, forecast, supplier ETAs"
+          },
+          {
+            "value": "0",
+            "label": "Orders sent to suppliers by ubik. A person places them."
+          }
+        ],
+        "cta": "Request demo"
+      },
+      "customer-planning": {
+        "name": "Customer planning",
+        "audience": "Sales and planning",
+        "seoTitle": "Customer planning | ubik",
+        "seoDescription": "ubik joins production status and unissued sales orders per customer, flags late and unissued orders, and sends a weekly order-book brief when an admin turns it on.",
+        "summary": "Every open order, per customer, against what the plant made.",
+        "lede": "ubik joins production status with the sales orders not yet issued, customer by customer, flags what is late and sends the weekly order-book brief once you switch it on.",
+        "steps": [
+          {
+            "title": "Join",
+            "copy": "Production status and the order book, per customer."
+          },
+          {
+            "title": "Flag",
+            "copy": "Late orders, missing containers and unissued sales orders surface first."
+          },
+          {
+            "title": "Brief",
+            "copy": "The weekly order-book brief, previewed before anything goes."
+          },
+          {
+            "title": "Switch on",
+            "copy": "Off until an admin turns it on. Preview never sends."
+          }
+        ],
+        "outputs": [
+          "One view per customer of every open order",
+          "Late and unissued orders, flagged",
+          "A Monday brief for sales and planning"
+        ],
+        "stats": [
+          {
+            "value": "2",
+            "label": "Sources joined: production status and the order book"
+          },
+          {
+            "value": "Weekly",
+            "label": "Order-book brief, every Monday"
+          },
+          {
+            "value": "Off",
+            "label": "Until an admin turns the brief on"
+          }
+        ],
+        "cta": "Request demo"
+      },
+      "ceo-control-panel": {
+        "name": "CEO control panel",
+        "audience": "Founders and CEOs",
+        "seoTitle": "CEO control panel | ubik",
+        "seoDescription": "A nightly snapshot of Business Central turned into exceptions, payment promises and a 07:00 brief in French or English. Acknowledge, snooze or resolve each one.",
+        "summary": "Last night's books as exceptions and promises, before 7 am.",
+        "lede": "Every night ubik snapshots Business Central, lists what is new or worse since yesterday, tracks who promised to pay, and sends a 07:00 brief in French or English.",
+        "steps": [
+          {
+            "title": "Snapshot",
+            "copy": "Business Central, every night."
+          },
+          {
+            "title": "Compare",
+            "copy": "Collections: who promised, who missed, who disputes, who is silent."
+          },
+          {
+            "title": "Brief",
+            "copy": "A 07:00 email in French or English, off until you switch it on."
+          },
+          {
+            "title": "Decide",
+            "copy": "Acknowledge, snooze or resolve. Worse tomorrow means it comes back."
+          }
+        ],
+        "outputs": [
+          "Exceptions marked new, worsened or reminder",
+          "Every payment promise, kept or missed",
+          "A morning brief that fits on a phone screen"
+        ],
+        "stats": [
+          {
+            "value": "07:00",
+            "label": "Brief, Paris time, in French or English"
+          },
+          {
+            "value": "3",
+            "label": "Kinds of exception: new, worsened, reminder"
+          },
+          {
+            "value": "4",
+            "label": "Collection states, from promised to disputed"
+          }
+        ],
+        "cta": "Request demo"
+      },
+      "csr-monitor": {
+        "name": "CSR monitor",
+        "audience": "Sustainability and compliance",
+        "seoTitle": "CSR monitor | ubik",
+        "seoDescription": "ubik monitors regulation, peer claims and certificate expiry, grades each source, keeps title-only sources out of stated fact and writes a weekly CSR memo.",
+        "summary": "Regulators, peers and certificates, read weekly and never overstated.",
+        "lede": "ubik watches the regulators, peers and certification bodies you name, grades every source it reads, and writes a weekly memo that never states a headline it could not open.",
+        "steps": [
+          {
+            "title": "Watch",
+            "copy": "The regulators and trade press you choose, searched every week."
+          },
+          {
+            "title": "Grade",
+            "copy": "A source read only by its headline is never stated as fact."
+          },
+          {
+            "title": "Track",
+            "copy": "Certificates per plant and supplier, with the days left."
+          },
+          {
+            "title": "Memo",
+            "copy": "A weekly memo of what to act on, shared by link."
+          }
+        ],
+        "outputs": [
+          "Regulatory changes with the source graded",
+          "Peer claims checked against what they published",
+          "Certificates sorted by days to expiry"
+        ],
+        "stats": [
+          {
+            "value": "1",
+            "label": "Model call per memo. Severity and actions are rules."
+          },
+          {
+            "value": "3",
+            "label": "Monitors: regulation, peers, certificates"
+          },
+          {
+            "value": "Medium",
+            "label": "Highest severity a headline-only source can reach"
+          }
+        ],
+        "cta": "Request demo"
+      },
+      "packaging-specs": {
+        "name": "Packaging specifications",
+        "audience": "Packaging and procurement",
+        "seoTitle": "Packaging specifications | ubik",
+        "seoDescription": "A packaging register from country to supplier to SKU to layer, with photos and a completeness check per SKU and supplier.",
+        "summary": "Every pack layer per SKU, per supplier, per country, with the photo.",
+        "lede": "One register of packaging, from country to supplier to SKU to each layer, with the photo that proves it and a completeness check that names what is missing.",
+        "steps": [
+          {
+            "title": "Register",
+            "copy": "Country, supplier, SKU, then every packaging layer."
+          },
+          {
+            "title": "Check",
+            "copy": "Each layer needs a spec and a photo. Gaps show by layer."
+          },
+          {
+            "title": "Fill",
+            "copy": "Photos and specs from the supplier's mail attach to the right layer."
+          },
+          {
+            "title": "Export",
+            "copy": "A spec sheet per SKU, complete or clearly not."
+          }
+        ],
+        "outputs": [
+          "One register across countries and suppliers",
+          "Completeness per SKU and per supplier",
+          "A spec sheet per SKU"
+        ],
+        "stats": [
+          {
+            "value": "4",
+            "label": "Levels: country, supplier, SKU, layer"
+          },
+          {
+            "value": "2",
+            "label": "Things every layer needs: a spec and a photo"
+          },
+          {
+            "value": "1",
+            "label": "Register for every country you buy from"
+          }
+        ],
+        "cta": "Request demo"
+      }
+    }
+  },
+  "demo": {
+    "seo": {
+      "title": "Request a demo | ubik",
+      "description": "Thirty minutes with the ubik founders on your hardest workflow. If it fits, ubik runs it with your team for a month, free."
+    },
+    "eyebrow": "Request a demo",
+    "title": "Hand ubik your hardest workflow",
+    "lede": "Thirty minutes with the founders on the work that eats a coordinator's week. If it fits, ubik runs it with your team for a month, free, on your own inbox and files.",
+    "steps": [
+      {
+        "title": "The call",
+        "copy": "One process, walked through: the inputs, the people, the systems and where it breaks."
+      },
+      {
+        "title": "The scope",
+        "copy": "What ubik owns, who signs off and what success looks like, agreed before day one."
+      },
+      {
+        "title": "The month",
+        "copy": "ubik runs it end to end on your inbox, WhatsApp and files. You keep it if it worked."
+      }
+    ],
+    "proof": "Over $1B in shipments and 10,000+ containers handled across the globe.",
+    "bookTitle": "Pick a time",
+    "bookFallback": "Calendar not loading? Open it in a new tab",
+    "privacy": "Booking shares your name and email with us through Google Calendar.",
+    "privacyLink": "Privacy notice",
+    "faqTitle": "Questions",
+    "faq": [
+      {
+        "q": "What does the free month include?",
+        "a": "One workflow, run end to end on your own inbox, files and systems, with a trade expert and an engineer from our team on the account."
+      },
+      {
+        "q": "How is ubik priced after that?",
+        "a": "Per workflow, with no user or token limit. The price is agreed once the first workflow is scoped, so it reflects the work, not your headcount."
+      },
+      {
+        "q": "What access does ubik need?",
+        "a": "Only what the workflow needs: the approved inboxes, folders, files or systems. Your admin grants it through Google Workspace or Microsoft 365 and can revoke it at any time."
+      },
+      {
+        "q": "Is our data used to train models?",
+        "a": "No. Your trade data is never sold, shared for advertising or used to train third-party models."
+      }
+    ],
+    "bookFallbackShort": "Open in a new tab"
+  }
 }

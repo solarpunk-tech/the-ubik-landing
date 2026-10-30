@@ -3,127 +3,127 @@
 @import "shadcn/tailwind.css";
 @import "./components/dotmatrix-loader.css";
 @import "@fontsource-variable/noto-sans";
-@import "@fontsource-variable/montserrat";
 @import "@fontsource/ibm-plex-mono/latin-400.css";
 @import "@fontsource/ibm-plex-mono/latin-600.css";
 
+/* ---------------------------------------------------------------------------
+   TOKENS — ubik-design canon (tokens.css on origin/main), as HSL triplets
+   because this stylesheet composes them as hsl(var(--x) / alpha).
+   Paper #FBFAF7, ink #10182B, action blue #315CF4, rule blue #BFCEE8,
+   shadcn radius 0.625rem. Secondary text is ink-blue #35426B, never grey.
+   --------------------------------------------------------------------------- */
 :root {
   color-scheme: light;
-  --background: 42 36% 96%;
-  --foreground: 25 25% 14%;
-  --card: 42 45% 99%;
-  --card-foreground: 25 25% 14%;
-  --popover: 42 45% 99%;
-  --popover-foreground: 25 25% 14%;
-  --primary: 227 81% 56%;
-  --primary-foreground: 42 45% 99%;
-  --secondary: 38 28% 90%;
-  --secondary-foreground: 25 25% 14%;
-  --muted: 38 22% 88%;
-  --muted-foreground: 25 12% 38%;
-  --accent: 17 71% 43%;
-  --accent-foreground: 42 45% 99%;
-  --destructive: 0 72% 51%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 28 20% 72%;
-  --input: 28 20% 72%;
-  --ring: 227 81% 56%;
-  --support: 38 80% 48%;
-  --support-foreground: 25 25% 14%;
-  /* Text-safe variants. --support and --primary are *fill* colors; neither can
-     carry small text where it lands. Measured on this palette:
-       --support        on paper  = 2.33:1  --support-text   on paper = 5.56:1
-       --primary        on shell  = 2.41:1  --primary-on-dark on shell = 7.35:1
-     Mirrors ubik-design's --attention-text / dark-theme --accent-foreground. */
-  --support-text: 47 100% 24%;
-  --primary-on-dark: 224 100% 83%;
-  /* Action blue clears 4.5:1 on paper but only reaches 4.41:1 on the tan
-     --secondary surface. Use this for small blue text on that tier (5.15:1). */
-  --primary-text: 227 72% 52%;
-  --shell: 30 24% 18%;
-  /* Header/footer chrome only. One fixed value, not redefined in .dark, so the
-     bars read as the same black band in both themes instead of dark mode's
-     --shell (already near-black) stacking even darker on an already-dark page. */
-  --chrome: 28 22% 14%;
-  --well: 38 28% 90%;
-  --well-foreground: 25 25% 14%;
-  --radius: 0;
-  --sidebar-background: 224 38% 10%;
-  --sidebar-foreground: 210 40% 98%;
-  --sidebar-primary: 227 81% 56%;
-  --sidebar-primary-foreground: 210 40% 98%;
-  --sidebar-accent: 224 34% 15%;
-  --sidebar-accent-foreground: 210 40% 98%;
-  --sidebar-border: 218 23% 29%;
-  --sidebar-ring: 227 81% 56%;
-  --chart-1: hsl(227 81% 56%);
-  --chart-2: hsl(212 100% 47%);
-  --chart-3: hsl(49 100% 56%);
-  --chart-4: hsl(42 98% 46%);
-  --chart-5: hsl(35 92% 33%);
-  --sidebar: 224 38% 10%;
+  --background: 45 33.3% 97.6%;
+  --foreground: 222 45.8% 11.6%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 45.8% 11.6%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 45.8% 11.6%;
+  --primary: 227 89.9% 57.5%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 220 36% 95.1%;
+  --secondary-foreground: 222 45.8% 11.6%;
+  --muted: 45 23.5% 86.7%;
+  --muted-foreground: 226 33.8% 31.4%;
+  --accent: 224 100% 95.7%;
+  --accent-foreground: 222 45.8% 11.6%;
+  --destructive: 0 64% 46.9%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 218 47.1% 82.9%;
+  --border-strong: 218 47.2% 62.2%;
+  --input: 218 47.1% 82.9%;
+  --ring: 227 89.9% 57.5%;
+  --ok: 148 87.5% 25.1%;
+  --ok-text: 148 87.5% 25.1%;
+  /* --support is canon --attention: a marker fill that can't carry text. */
+  --support: 46 87% 54.9%;
+  --support-foreground: 222 45.8% 11.6%;
+  --support-text: 47 100% 27.1%;
+  --primary-on-dark: 224 100% 83.1%;
+  /* Small blue text on the pale tiers (--secondary, --muted). */
+  --primary-text: 227 70.9% 51.6%;
+  /* The landing's ink band: the dark sections and their white text. Canon's
+     own --shell is a light chrome tier; the band is ink so the rhythm of
+     light and dark sections survives in canon colours. */
+  --shell: 222 45.8% 11.6%;
+  --chrome: 222 45.8% 11.6%;
+  --well: 45 23.5% 93.3%;
+  --well-foreground: 226 33.8% 31.4%;
+  --radius: 0.625rem;
+  --sidebar-background: 0 0% 100%;
+  --sidebar-foreground: 222 45.8% 11.6%;
+  --sidebar-primary: 227 89.9% 57.5%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 224 100% 95.7%;
+  --sidebar-accent-foreground: 227 89.9% 57.5%;
+  --sidebar-border: 218 47.1% 82.9%;
+  --sidebar-ring: 227 89.9% 57.5%;
+  --sidebar: 0 0% 100%;
+  --chart-1: #315cf4;
+  --chart-2: #6e8cf6;
+  --chart-3: #afc0f5;
+  --chart-4: #c42b2b;
+  --chart-5: #55617b;
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
 }
 
-/* ---------------------------------------------------------------------------
-   DARK THEME
-   Same palette lifted for contrast, not a separate identity: warm paper
-   inverts to a warm near-black, ink inverts to warm off-white, and the action
-   blue lifts (#5B82FF territory) so it can carry text on dark the way it
-   carries text on paper. The particle field reads --primary at runtime, so
-   the falling squares pick this up on their own.
-   --------------------------------------------------------------------------- */
+/* DARK THEME — canon dark: deep navy, near-white ink. The action blue stays
+   the light value because --primary-foreground is also the text on the ink
+   bands; blue TEXT on dark uses --primary-text instead. */
 .dark {
   color-scheme: dark;
-  --background: 26 16% 9%;
-  --foreground: 40 30% 94%;
-  --card: 26 14% 12%;
-  --card-foreground: 40 30% 94%;
-  --popover: 26 14% 12%;
-  --popover-foreground: 40 30% 94%;
-  /* Brand blue and its label stay identical to light mode on purpose.
-     --primary-foreground does double duty across this codebase: it is the
-     label on blue fills *and* the text colour on every dark --shell band.
-     Those two wants diverge if the blue lifts, and the shell bands (many)
-     would go dark-on-dark. Holding both fixed keeps every existing pairing
-     valid and keeps the particle squares the same blue in both themes. */
-  --primary: 227 81% 56%;
-  --primary-foreground: 42 45% 99%;
-  --secondary: 28 12% 17%;
-  --secondary-foreground: 40 30% 94%;
-  --muted: 28 12% 17%;
-  --muted-foreground: 36 16% 72%;
-  --accent: 17 65% 55%;
-  --accent-foreground: 26 30% 8%;
-  --destructive: 0 66% 60%;
-  --destructive-foreground: 40 30% 94%;
-  --border: 30 12% 28%;
-  --input: 30 12% 28%;
-  --ring: 227 81% 56%;
-  --support: 40 85% 60%;
-  --support-foreground: 26 30% 8%;
-  /* On this canvas the amber and blue swap roles: amber can carry text
-     directly, and the blue no longer needs a darkened text variant. */
-  --support-text: 42 90% 68%;
-  --primary-on-dark: 224 100% 83%;
-  --primary-text: 227 100% 76%;
-  /* The shell band stays the darkest tier so the light/dark rhythm survives. */
-  --shell: 26 20% 6%;
-  --well: 28 12% 17%;
-  --well-foreground: 40 30% 94%;
-  --sidebar-background: 26 20% 6%;
-  --sidebar-foreground: 40 30% 94%;
-  --sidebar-primary: 227 81% 56%;
-  --sidebar-primary-foreground: 42 45% 99%;
-  --sidebar-accent: 28 12% 17%;
-  --sidebar-accent-foreground: 40 30% 94%;
-  --sidebar-border: 30 12% 28%;
-  --sidebar-ring: 227 81% 56%;
-  --chart-1: hsl(227 81% 56%);
-  --chart-2: hsl(212 100% 62%);
-  --chart-3: hsl(49 100% 66%);
-  --chart-4: hsl(42 98% 60%);
-  --chart-5: hsl(35 85% 52%);
-  --sidebar: 26 20% 6%;
+  --background: 220 48.8% 8.4%;
+  --foreground: 223 46.7% 97.1%;
+  --card: 220 41.5% 12.7%;
+  --card-foreground: 223 46.7% 97.1%;
+  --popover: 220 41.5% 12.7%;
+  --popover-foreground: 223 46.7% 97.1%;
+  --primary: 227 89.9% 57.5%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 221 40.7% 17.8%;
+  --secondary-foreground: 223 46.7% 97.1%;
+  --muted: 223 40.4% 18.4%;
+  --muted-foreground: 223 39.8% 75.9%;
+  --accent: 222 49.1% 21.6%;
+  --accent-foreground: 223 46.7% 97.1%;
+  --destructive: 358 73.3% 61.8%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 221 37.3% 26.3%;
+  --border-strong: 220 40.2% 45.9%;
+  --input: 221 37.3% 26.3%;
+  --ring: 226 100% 74.7%;
+  --ok: 148 56.5% 42.4%;
+  --ok-text: 149 53% 54.9%;
+  --support: 46 87% 54.9%;
+  --support-foreground: 222 45.8% 11.6%;
+  --support-text: 46 89.5% 62.7%;
+  --primary-on-dark: 224 100% 83.1%;
+  --primary-text: 226 100% 74.7%;
+  --shell: 220 46.2% 10.2%;
+  --well: 222 45% 15.7%;
+  --well-foreground: 223 45.7% 82%;
+  --sidebar-background: 220 46.2% 10.2%;
+  --sidebar-foreground: 223 46.7% 97.1%;
+  --sidebar-primary: 226 100% 74.7%;
+  --sidebar-primary-foreground: 220 48.8% 8.4%;
+  --sidebar-accent: 222 49.1% 21.6%;
+  --sidebar-accent-foreground: 224 100% 83.1%;
+  --sidebar-border: 221 37.3% 26.3%;
+  --sidebar-ring: 226 100% 74.7%;
+  --sidebar: 220 46.2% 10.2%;
+  --chart-1: #5b82ff;
+  --chart-2: #7e9dff;
+  --chart-3: #a9c0ff;
+  --chart-4: #e5565b;
+  --chart-5: #8a97b4;
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.25);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.7);
 }
 
 @custom-variant dark (&:is(.dark *));
@@ -173,7 +173,12 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
   --font-sans: "Noto Sans Variable", sans-serif;
-  --font-heading: "Montserrat Variable", "Noto Sans Variable", sans-serif;
+  --font-heading: "Noto Sans Variable", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --color-ok: hsl(var(--ok));
+  --color-ok-text: hsl(var(--ok-text));
+  --color-border-strong: hsl(var(--border-strong));
+  --color-primary-text: hsl(var(--primary-text));
 }
 
 @layer base {
@@ -187,15 +192,15 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    background-image: linear-gradient(180deg, hsl(38 32% 91%) 0%, hsl(var(--background)) 9rem, hsl(var(--background)) 100%);
+    letter-spacing: -0.01em;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    font-family: "Montserrat Variable", "Noto Sans Variable", sans-serif;
-    letter-spacing: 0;
+    font-family: "Noto Sans Variable", sans-serif;
+    letter-spacing: -0.02em;
   }
 
   ::selection {
@@ -227,12 +232,13 @@
     display: none;
   }
 
+  /* Canon label: 12.5px sentence case, ink-blue. Not uppercase, not mono. */
   .section-label {
-    @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground/70 dark:text-foreground/82;
+    @apply text-[12.5px] font-medium tracking-normal text-muted-foreground;
   }
 
   .surface-card {
-    @apply border border-border/70 bg-card shadow-sm;
+    @apply rounded-xl border border-border bg-card shadow-sm;
   }
 
   .surface-well {
@@ -457,7 +463,7 @@
   }
 
   .solarpunk-credit {
-    font-family: "IBM Plex Mono", monospace;
+    font-family: inherit; font-variant-numeric: tabular-nums;
     @apply flex items-center justify-center gap-2 border border-transparent px-2 py-1 text-center text-xs font-medium text-foreground/70 transition-colors hover:border-border hover:bg-background hover:text-foreground dark:text-foreground/80;
   }
 
@@ -763,8 +769,8 @@
     position: absolute;
     right: 1.25rem;
     bottom: 1rem;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 0.6875rem;
+    font-family: inherit; font-variant-numeric: tabular-nums;
+    font-size: 0.78125rem;
     color: hsl(var(--foreground) / 0.7);
   }
 
@@ -859,11 +865,10 @@
   .model-router-item span {
     margin-top: 0.24rem;
     display: block;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 0.6875rem;
+    font-family: inherit; font-variant-numeric: tabular-nums;
+    font-size: 0.78125rem;
     line-height: 1.35;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0;
     color: hsl(var(--primary));
   }
 
@@ -888,10 +893,9 @@
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 0.6875rem;
-    letter-spacing: 0.075em;
-    text-transform: uppercase;
+    font-family: inherit; font-variant-numeric: tabular-nums;
+    font-size: 0.78125rem;
+    letter-spacing: 0;
     color: hsl(var(--primary));
   }
 
@@ -1012,7 +1016,7 @@
   }
 
   .rail-chat-header > span:last-child {
-    font-family: "IBM Plex Mono", monospace;
+    font-family: inherit; font-variant-numeric: tabular-nums;
     font-size: 0.72rem;
     color: hsl(var(--primary));
   }
@@ -1125,10 +1129,9 @@
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 0.6875rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-family: inherit; font-variant-numeric: tabular-nums;
+    font-size: 0.78125rem;
+    letter-spacing: 0;
     color: hsl(var(--primary));
   }
 
@@ -1163,10 +1166,9 @@
   .rail-verify-stack span,
   .rail-data-table span,
   .rail-logic-card span {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 0.6875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    font-family: inherit; font-variant-numeric: tabular-nums;
+    font-size: 0.78125rem;
+    letter-spacing: 0;
     color: hsl(var(--foreground) / 0.7);
   }
 
@@ -1193,8 +1195,8 @@
 
   .rail-data-table i {
     justify-self: end;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 0.6875rem;
+    font-family: inherit; font-variant-numeric: tabular-nums;
+    font-size: 0.78125rem;
     font-style: normal;
     color: hsl(var(--primary));
   }
@@ -1204,7 +1206,7 @@
     border: 1px solid hsl(var(--border));
     background: hsl(var(--shell));
     padding: 0.85rem;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: inherit; font-variant-numeric: tabular-nums;
     font-size: 0.82rem;
     color: hsl(var(--foreground));
   }
@@ -1224,9 +1226,8 @@
   }
 
   .rail-decision-card span {
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 0.6875rem;
-    text-transform: uppercase;
+    font-family: inherit; font-variant-numeric: tabular-nums;
+    font-size: 0.78125rem;
     color: hsl(var(--primary));
   }
 
@@ -1268,9 +1269,8 @@
     margin-top: 0.85rem;
     border-left: 2px solid hsl(var(--primary));
     padding-left: 0.75rem;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 0.6875rem;
-    text-transform: uppercase;
+    font-family: inherit; font-variant-numeric: tabular-nums;
+    font-size: 0.78125rem;
     color: hsl(var(--primary));
   }
 
@@ -1309,7 +1309,7 @@
 
   .rail-timer-clock {
     margin-top: 0.9rem;
-    font-family: "IBM Plex Mono", monospace;
+    font-family: inherit; font-variant-numeric: tabular-nums;
     font-size: 3.6rem;
     font-weight: 700;
     color: hsl(var(--primary));
@@ -1348,9 +1348,8 @@
   .rail-confirm-grid span {
     background: hsl(var(--card));
     padding: 0.85rem;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 0.6875rem;
-    text-transform: uppercase;
+    font-family: inherit; font-variant-numeric: tabular-nums;
+    font-size: 0.78125rem;
     color: hsl(var(--primary));
   }
 
@@ -1481,6 +1480,8 @@
     }
   }
 }
+
+.nav-try-link { border-radius: 0.5rem; }
 
 .nav-try-link:hover {
   border-color: #05070d !important;
@@ -1670,8 +1671,8 @@
 }
 
 .workflow-receipt span {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   color: hsl(var(--primary-foreground) / 0.6);
 }
 
@@ -1716,10 +1717,9 @@
 }
 
 .system-tool span {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   font-weight: 650;
-  text-transform: uppercase;
 }
 
 .system-readout {
@@ -1736,9 +1736,8 @@
 }
 
 .system-readout-row span {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
-  text-transform: uppercase;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   color: hsl(var(--primary-foreground) / 0.6);
 }
 
@@ -1806,8 +1805,8 @@
 .model-router-stack span {
   max-width: 100%;
   overflow: hidden;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   color: hsl(var(--foreground) / 0.7);
@@ -2049,11 +2048,10 @@
 }
 
 .home-kicker {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0;
   color: hsl(var(--foreground) / 0.7);
 }
 
@@ -2061,16 +2059,18 @@
   color: hsl(var(--primary-foreground));
 }
 
+/* Canon display: Noto Sans at a lighter weight than the old Montserrat
+   setting, tracked in, so large type reads calm rather than heavy. */
 .home-display,
 .home-section-title {
-  font-family: "Montserrat Variable", "Noto Sans Variable", sans-serif;
-  letter-spacing: -0.055em;
+  font-family: "Noto Sans Variable", sans-serif;
+  letter-spacing: -0.035em;
 }
 
 .home-display {
   font-size: clamp(3.2rem, 7vw, 6.4rem);
-  font-weight: 620;
-  line-height: 0.92;
+  font-weight: 500;
+  line-height: 1.02;
 }
 
 .home-display em {
@@ -2079,23 +2079,23 @@
 }
 
 .home-section-title {
-  max-width: 13ch;
-  font-size: clamp(2.15rem, 4.2vw, 4.1rem);
-  font-weight: 620;
-  line-height: 0.98;
+  max-width: 16ch;
+  font-size: clamp(2.1rem, 4vw, 3.6rem);
+  font-weight: 500;
+  line-height: 1.05;
 }
 
 .home-primary-action {
-  border-radius: 0;
+  border-radius: calc(var(--radius) * 0.8);
   background: hsl(var(--primary));
   color: hsl(var(--primary-foreground));
   box-shadow: none;
 }
 
-.home-primary-action:hover { background: hsl(227 81% 46%); }
+.home-primary-action:hover { background: hsl(227 70.9% 51.6%); }
 
 .home-secondary-action {
-  border-radius: 0;
+  border-radius: calc(var(--radius) * 0.8);
   border-color: hsl(var(--foreground) / 0.48);
   color: hsl(var(--foreground));
 }
@@ -2119,25 +2119,24 @@
   gap: 1rem;
   border-bottom: 1px solid hsl(var(--foreground));
   padding: 0.8rem 1rem;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
+  letter-spacing: 0;
 }
 
 .trade-control-topline span:last-child { color: hsl(var(--primary)); }
 .trade-control-title { padding: 2.2rem 1.25rem 1.8rem; }
-.trade-control-title p { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.trade-control-title p { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; letter-spacing: 0; color: hsl(var(--foreground) / 0.7); }
 .trade-control-title h2 { margin-top: 0.6rem; max-width: 11ch; font-size: clamp(1.75rem, 3vw, 2.75rem); font-weight: 620; line-height: 1; letter-spacing: -0.04em; }
 .trade-control-data { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid hsl(var(--border)); }
 .trade-control-data > div { min-height: 5.6rem; border-right: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); padding: 0.85rem 1rem; }
 .trade-control-data > div:nth-child(2n) { border-right: 0; }
-.trade-control-data span, .trade-control-recommendation > span { display: block; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.trade-control-data span, .trade-control-recommendation > span { display: block; font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; letter-spacing: 0; color: hsl(var(--foreground) / 0.7); }
 .trade-control-data strong { display: block; margin-top: 0.45rem; font-size: 0.8rem; line-height: 1.25; }
 .trade-control-recommendation { margin: 1rem; padding: 1rem; background: hsl(var(--foreground)); color: hsl(var(--primary-foreground)); }
 .trade-control-recommendation > span { color: hsl(var(--primary)); }
 .trade-control-recommendation > p { margin-top: 0.65rem; font-size: 0.96rem; font-weight: 560; line-height: 1.45; }
-.trade-control-evidence { display: flex; align-items: center; gap: 0.4rem; margin-top: 1rem; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; color: hsl(var(--primary-foreground) / 0.64); }
+.trade-control-evidence { display: flex; align-items: center; gap: 0.4rem; margin-top: 1rem; font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; color: hsl(var(--primary-foreground) / 0.64); }
 .trade-control-recommendation svg { color: hsl(var(--primary)); }
 
 .hero-integration-visual {
@@ -2194,7 +2193,7 @@
 .hero-app-field img { mix-blend-mode: multiply; }
 .hero-app-field img { filter: saturate(1.15) contrast(1.18); }
 .hero-app-field > span > svg { color: hsl(var(--primary)); }
-.hero-app-field small { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; }
+.hero-app-field small { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; font-weight: 700; }
 
 .hero-role-rail {
   position: absolute;
@@ -2206,10 +2205,10 @@
   align-items: center;
   gap: 0.65rem;
   color: hsl(var(--foreground) / 0.7);
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
 }
 
 .hero-role-rail.is-leadership { top: 5%; }
@@ -2271,10 +2270,10 @@
   min-height: 2.5rem;
   padding: 0.55rem 0.7rem;
   border-bottom: 1px solid hsl(var(--primary-foreground) / 0.18);
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0;
 }
 
 .trade-agent-mark {
@@ -2306,7 +2305,7 @@
 .trade-queue-result::after { content: ""; position: absolute; right: -1.15rem; bottom: -1.75rem; width: 5rem; height: 5rem; border: 1px solid hsl(var(--primary) / 0.4); transform: rotate(45deg); }
 .trade-queue-result > div { position: relative; z-index: 1; }
 .trade-queue-result strong { display: block; color: hsl(var(--primary-foreground)); font-size: 0.75rem; font-weight: 750; line-height: 1.2; }
-.trade-queue-result p { margin: 0.18rem 0 0; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-weight: 600; line-height: 1.35; letter-spacing: 0.015em; color: hsl(var(--primary-foreground) / 0.72); }
+.trade-queue-result p { margin: 0.18rem 0 0; font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; font-weight: 600; line-height: 1.35; letter-spacing: 0; color: hsl(var(--primary-foreground) / 0.72); }
 .trade-queue-working-dot { position: relative; z-index: 1; display: block; width: 1.8rem; height: 1.8rem; overflow: hidden; border: 1px solid hsl(var(--primary) / 0.4); background: hsl(var(--primary) / 0.08); }
 .trade-queue-working-dot::before, .trade-queue-working-dot::after { content: ""; position: absolute; top: 50%; width: 0.22rem; height: 0.22rem; background: hsl(var(--primary) / 0.45); transform: translateY(-50%); }
 .trade-queue-working-dot::before { left: 0.18rem; animation: working-trail 1.45s linear infinite; }
@@ -2392,8 +2391,8 @@
    standard action blue only once active. */
 .trade-work-index button > span {
   grid-row: span 2;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   color: hsl(var(--primary-on-dark));
 }
 
@@ -2415,16 +2414,116 @@
    faded 0.64 colour — an effective 0.40 alpha on the dark shell, which is
    unreadable. Set the colour outright instead of multiplying alphas. */
 .trade-work-index button em {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   font-style: normal;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  letter-spacing: 0;
   color: hsl(var(--primary-foreground) / 0.78);
 }
 
 .trade-work-index button.is-active em {
   color: hsl(var(--foreground) / 0.7);
+}
+
+/* The paper column: the memory graph band, then the output it produced. */
+.trade-work-stage {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  background: hsl(var(--background));
+}
+
+.memory-shuffle {
+  position: relative;
+  height: 6.25rem;
+  margin: 0 clamp(1.2rem, 3vw, 2rem);
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+.memory-shuffle svg { position: absolute; inset: 0; overflow: visible; }
+
+.memory-shuffle line {
+  stroke: hsl(var(--foreground) / 0.12);
+  stroke-width: 1;
+}
+
+.memory-shuffle line.is-linked {
+  stroke: hsl(var(--primary));
+  stroke-width: 1.5;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: memory-link 520ms 640ms cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.memory-shuffle-runner { fill: hsl(var(--primary)); }
+
+.memory-shuffle-label {
+  position: absolute;
+  top: 0.55rem;
+  right: 0;
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+  color: hsl(var(--foreground) / 0.5);
+}
+
+.memory-node {
+  position: absolute;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+}
+
+/* Idle memory is a dot; the three nodes behind this output open into labelled chips. */
+.memory-node i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  transform: translate(-50%, -50%);
+  background: hsl(var(--foreground) / 0.28);
+  transition: opacity 200ms ease;
+}
+
+.memory-node b {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  height: 1.7rem;
+  padding: 0 0.6rem;
+  border: 1px solid hsl(var(--primary) / 0.35);
+  border-radius: 999px;
+  background: hsl(var(--card));
+  box-shadow: 0 1px 2px hsl(var(--foreground) / 0.06);
+  font-size: 0.71875rem;
+  font-weight: 560;
+  white-space: nowrap;
+  color: hsl(var(--foreground));
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 260ms ease, transform 420ms cubic-bezier(.22,1,.36,1);
+}
+
+.memory-node b img,
+.memory-node b svg { width: 0.85rem; height: 0.85rem; flex-shrink: 0; }
+.memory-node b svg { color: hsl(var(--primary-text)); }
+
+.memory-node.is-on i { opacity: 0; }
+.memory-node.is-on b { opacity: 1; transform: scale(1); transition-delay: 380ms; }
+
+/* Platform page: the ledger runs full width, so the memory band gets room to move. */
+@media (min-width: 640px) {
+  .trade-work-ledger.is-wide .trade-work-ledger-body { grid-template-columns: minmax(11rem, 15rem) minmax(0, 1fr); }
+}
+.memory-shuffle.is-wide { height: 11.5rem; }
+.memory-shuffle.is-wide .memory-node i { opacity: 0; }
+.memory-shuffle.is-wide .memory-node b { opacity: 0.5; transform: scale(0.78); border-color: hsl(var(--border)); box-shadow: none; }
+.memory-shuffle.is-wide .memory-node.is-on b { opacity: 1; transform: scale(1.08); border-color: hsl(var(--primary) / 0.45); box-shadow: 0 2px 10px hsl(var(--primary) / 0.14); }
+
+@keyframes memory-link { to { stroke-dashoffset: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .memory-shuffle line.is-linked { animation: none; stroke-dashoffset: 0; }
+  .memory-node b { transition: none; }
 }
 
 .trade-work-paper {
@@ -2441,10 +2540,9 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
+  letter-spacing: 0;
 }
 
 .trade-work-paper-topline span {
@@ -2489,10 +2587,9 @@
 
 .bulk-reply-head {
   padding: 0 0.7rem 0.45rem;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
+  letter-spacing: 0;
   color: hsl(var(--foreground) / 0.7);
 }
 
@@ -2525,8 +2622,8 @@
   align-items: center;
   justify-content: flex-end;
   gap: 0.35rem;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   color: hsl(151 86% 25%);
 }
 
@@ -2542,10 +2639,9 @@
   gap: 1rem;
   padding-top: 0.65rem;
   border-top: 1px solid hsl(var(--border));
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
+  letter-spacing: 0;
   color: hsl(var(--foreground) / 0.7);
 }
 
@@ -2601,15 +2697,14 @@
 .route-ubik-signal {
   position: absolute;
   z-index: 1;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: inherit; font-variant-numeric: tabular-nums;
 }
 
 .route-point {
   bottom: 1rem;
   display: grid;
   gap: 0.1rem;
-  font-size: 0.6875rem;
-  text-transform: uppercase;
+  font-size: 0.78125rem;
 }
 
 .route-point small {
@@ -2646,9 +2741,8 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.6875rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-size: 0.78125rem;
+  letter-spacing: 0;
   color: hsl(var(--primary));
 }
 
@@ -2677,10 +2771,9 @@
 
 .route-comparison span {
   display: block;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
+  letter-spacing: 0;
   color: hsl(var(--foreground) / 0.7);
 }
 
@@ -2698,8 +2791,8 @@
 .route-comparison > p {
   display: grid;
   align-content: center;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   font-weight: 600;
 }
 
@@ -2722,10 +2815,9 @@
   display: flex;
   justify-content: space-between;
   margin-top: 0.4rem;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
+  letter-spacing: 0;
   color: hsl(var(--foreground) / 0.7);
 }
 
@@ -2756,8 +2848,8 @@
      this chip white-on-white in dark mode. Shell is the dark tier in both. */
   background: hsl(var(--shell));
   color: hsl(var(--primary-foreground));
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
 }
 
 .approval-person .identicon {
@@ -2785,9 +2877,8 @@
 
 .approval-list p strong { font-size: 0.75rem; }
 .approval-list p small {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
-  text-transform: uppercase;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   color: hsl(var(--foreground) / 0.7);
 }
 
@@ -2810,10 +2901,9 @@
 
 .approval-leadership-note span {
   display: block;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
+  letter-spacing: 0;
   color: hsl(var(--primary));
 }
 
@@ -2836,17 +2926,16 @@
 
 .eta-metrics span {
   display: block;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
+  letter-spacing: 0;
   color: hsl(var(--foreground) / 0.7);
 }
 
 .eta-metrics strong {
   display: block;
   margin-top: 0.18rem;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: inherit; font-variant-numeric: tabular-nums;
   font-size: 1.2rem;
   letter-spacing: -0.05em;
 }
@@ -2886,8 +2975,8 @@
 }
 
 .eta-legend strong {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
 }
 
 .eta-focus-row {
@@ -2929,8 +3018,8 @@
   padding: 0.25rem 0.4rem;
   border: 1px solid hsl(var(--support));
   color: hsl(var(--support-text));
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   font-style: normal;
 }
 
@@ -2951,8 +3040,8 @@
 
 .trade-work-commit p {
   justify-self: end;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   color: hsl(var(--primary-foreground) / 0.6);
 }
 
@@ -3009,7 +3098,7 @@
 .ontology-stage-list { display: grid; grid-template-rows: repeat(8, 1fr); border-right: 1px solid hsl(var(--border)); }
 .ontology-stage-list button { display: grid; grid-template-columns: 1.75rem minmax(0, 1fr) auto; align-items: center; gap: 0.45rem; min-height: 3.55rem; padding: 0.7rem 0.8rem; border: 0; border-bottom: 1px solid hsl(var(--border)); background: transparent; color: hsl(var(--foreground)); text-align: left; cursor: pointer; transition: background 180ms ease, color 180ms ease; }
 .ontology-stage-list button:last-child { border-bottom: 0; }
-.ontology-stage-list span, .ontology-stage-list em, .ontology-workbench-topline, .ontology-artifact-copy > span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.07em; text-transform: uppercase; }
+.ontology-stage-list span, .ontology-stage-list em, .ontology-workbench-topline, .ontology-artifact-copy > span { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; letter-spacing: 0; }
 .ontology-stage-list span { color: hsl(var(--primary)); }
 .ontology-stage-list strong { font-size: 0.82rem; font-weight: 700; }
 .ontology-stage-list em { font-style: normal; color: hsl(var(--foreground) / 0.7); }
@@ -3030,7 +3119,7 @@
 .ontology-artifact-copy > span { color: hsl(var(--primary)); }
 .ontology-artifact-copy h3 { max-width: 19ch; margin-top: 0.65rem; font-size: clamp(1.15rem, 2vw, 1.7rem); font-weight: 680; line-height: 1.06; letter-spacing: -0.025em; }
 .ontology-artifact-copy p { max-width: 30ch; margin-top: 0.8rem; font-size: 0.84rem; font-weight: 600; line-height: 1.5; color: hsl(var(--foreground)); }
-.ontology-artifact-copy > strong { display: block; max-width: 28ch; margin-top: 1.15rem; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; line-height: 1.6; letter-spacing: 0.04em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.ontology-artifact-copy > strong { display: block; max-width: 28ch; margin-top: 1.15rem; font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; line-height: 1.6; letter-spacing: 0; color: hsl(var(--foreground) / 0.7); }
 .ontology-artifact-shape { position: relative; align-self: stretch; min-height: 10rem; overflow: hidden; border: 1px solid hsl(var(--foreground)); background: hsl(var(--background)); }
 .ontology-artifact-shape > div { height: 100%; }
 
@@ -3039,20 +3128,20 @@
 .ontology-source-card img { width: 1.8rem; height: 1.8rem; object-fit: contain; }
 .ontology-source-card span { display: grid; }
 .ontology-source-card b, .ontology-source-card strong { font-size: 0.75rem; }
-.ontology-source-card small, .ontology-source-card em, .ontology-source-card p span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-style: normal; letter-spacing: 0.06em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.ontology-source-card small, .ontology-source-card em, .ontology-source-card p span { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; font-style: normal; letter-spacing: 0; color: hsl(var(--foreground) / 0.7); }
 .ontology-source-card p { display: grid; grid-template-columns: auto 1fr auto 1fr; gap: 0.45rem; align-items: baseline; margin-top: 1rem; }
 
 .ontology-temporal-card { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 1rem; align-items: stretch; padding: 1.15rem; }
 .ontology-temporal-card > div { display: grid; align-content: center; gap: 0.55rem; }
 .ontology-temporal-card > i { width: 1px; background: hsl(var(--foreground)); }
-.ontology-temporal-card span, .ontology-temporal-card small { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-style: normal; letter-spacing: 0.06em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.ontology-temporal-card span, .ontology-temporal-card small { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; font-style: normal; letter-spacing: 0; color: hsl(var(--foreground) / 0.7); }
 .ontology-temporal-card strong { font-size: clamp(0.9rem, 1.4vw, 1.2rem); }
 .ontology-temporal-card > div:last-child strong { color: hsl(var(--primary)); }
 
 .ontology-graph-card { position: relative; min-height: 11rem; }
 .ontology-graph-card::before, .ontology-graph-card::after { content: ""; position: absolute; inset: 50% 11%; height: 1px; background: hsl(var(--foreground) / 0.35); }
 .ontology-graph-card::after { inset: 14% 50%; width: 1px; height: auto; }
-.ontology-graph-card i { position: absolute; z-index: 1; min-width: 4rem; padding: 0.4rem 0.55rem; border: 1px solid hsl(var(--foreground)); background: hsl(var(--background)); font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-style: normal; text-align: center; text-transform: uppercase; }
+.ontology-graph-card i { position: absolute; z-index: 1; min-width: 4rem; padding: 0.4rem 0.55rem; border: 1px solid hsl(var(--foreground)); background: hsl(var(--background)); font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; font-style: normal; text-align: center; }
 .ontology-graph-card .is-centre { top: calc(50% - 0.9rem); left: calc(50% - 2.5rem); min-width: 5rem; background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); border-color: hsl(var(--primary)); }
 .ontology-graph-card .is-buyer { top: 12%; left: 7%; }.ontology-graph-card .is-lot { top: 12%; right: 7%; }
 .ontology-graph-card .is-lane { bottom: 12%; left: 7%; }.ontology-graph-card .is-programme { right: 7%; bottom: 12%; }
@@ -3060,29 +3149,29 @@
 
 .ontology-conflict-card { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.85rem; align-content: center; padding: 1.15rem; }
 .ontology-conflict-card > div { display: grid; gap: 0.35rem; padding: 0.85rem; border: 1px solid hsl(var(--border)); }
-.ontology-conflict-card span, .ontology-conflict-card small { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.ontology-conflict-card span, .ontology-conflict-card small { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; letter-spacing: 0; color: hsl(var(--foreground) / 0.7); }
 .ontology-conflict-card > em { align-self: center; font-size: 1.4rem; font-style: normal; color: hsl(var(--primary)); }
 .ontology-conflict-card > p { grid-column: 1 / -1; padding-top: 0.75rem; border-top: 1px solid hsl(var(--foreground)); font-size: 0.75rem; font-weight: 700; }
 .ontology-conflict-card > p i { display: inline-block; width: 0.55rem; height: 0.55rem; margin-right: 0.35rem; background: hsl(var(--primary)); }
 
 .ontology-impact-card { display: grid; grid-template-columns: 1fr 1fr; align-content: center; padding: 1.15rem; }
 .ontology-impact-card span { display: grid; gap: 0.45rem; min-height: 4.1rem; padding: 0.75rem; border: 1px solid hsl(var(--border)); font-size: 0.75rem; font-weight: 700; }
-.ontology-impact-card b { align-self: end; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.05em; color: hsl(var(--primary)); }
+.ontology-impact-card b { align-self: end; font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; letter-spacing: 0; color: hsl(var(--primary)); }
 
 .ontology-brief-card { display: grid; align-content: center; padding: 1.35rem; background: hsl(var(--shell)); color: hsl(var(--primary-foreground)); }
-.ontology-brief-card > span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.08em; color: hsl(var(--primary)); }
+.ontology-brief-card > span { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; letter-spacing: 0; color: hsl(var(--primary)); }
 .ontology-brief-card h4 { margin-top: 0.7rem; font-size: clamp(1rem, 1.6vw, 1.35rem); line-height: 1.12; }
 .ontology-brief-card p { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1rem; }
-.ontology-brief-card p > * { padding: 0.35rem 0.5rem; border: 1px solid hsl(var(--primary-foreground) / 0.35); font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-style: normal; text-transform: uppercase; }
+.ontology-brief-card p > * { padding: 0.35rem 0.5rem; border: 1px solid hsl(var(--primary-foreground) / 0.35); font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; font-style: normal; }
 .ontology-brief-card p b { background: hsl(var(--primary)); border-color: hsl(var(--primary)); }
 
 .ontology-review-card, .ontology-memory-card { display: grid; align-content: center; padding: 1.15rem; }
 .ontology-review-card > div, .ontology-memory-card > div { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 0.65rem; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid hsl(var(--border)); }
-.ontology-review-card > div > span, .ontology-memory-card > div > span { display: grid; place-items: center; width: 1.65rem; height: 1.65rem; background: hsl(var(--foreground)); color: hsl(var(--background)); font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; }
+.ontology-review-card > div > span, .ontology-memory-card > div > span { display: grid; place-items: center; width: 1.65rem; height: 1.65rem; background: hsl(var(--foreground)); color: hsl(var(--background)); font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; }
 .ontology-review-card p, .ontology-memory-card p { display: grid; }
 .ontology-review-card small, .ontology-memory-card small { font-size: 0.75rem; color: hsl(var(--foreground) / 0.7); }
-.ontology-review-card em, .ontology-memory-card em { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-style: normal; color: hsl(var(--primary)); }
-.ontology-review-card > p { margin-top: 0.8rem; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; line-height: 1.5; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.ontology-review-card em, .ontology-memory-card em { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; font-style: normal; color: hsl(var(--primary)); }
+.ontology-review-card > p { margin-top: 0.8rem; font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; line-height: 1.5; color: hsl(var(--foreground) / 0.7); }
 
 @keyframes ontology-core { 0%, 100% { transform: scale(.58) rotate(0); opacity: .62; } 50% { transform: scale(1) rotate(90deg); opacity: 1; } }
 @keyframes ontology-artifact-in { from { transform: translateY(6px) scale(.985); } to { transform: translateY(0) scale(1); } }
@@ -3138,7 +3227,7 @@
 }
 
 .workflow-team-spine button:last-of-type { border-right: 0; }
-.workflow-team-spine button span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; color: hsl(var(--primary)); }
+.workflow-team-spine button span { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; color: hsl(var(--primary)); }
 .workflow-team-spine button strong { max-width: 13ch; font-size: 0.75rem; line-height: 1.25; }
 .workflow-team-spine button.is-active { background: hsl(var(--shell)); color: hsl(var(--primary-foreground)); }
 /* Active button flips to the dark shell, so its step number needs the lifted blue. */
@@ -3184,11 +3273,10 @@
   border-bottom: 1px solid hsl(var(--foreground));
   background: hsl(var(--shell));
   color: hsl(var(--primary-foreground));
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .workflow-orchestration-rail > i {
@@ -3257,11 +3345,10 @@
 .workflow-result-head,
 .workflow-result-foot,
 .workflow-integration-foot {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   font-weight: 700;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .workflow-panel-label span { color: hsl(var(--primary)); }
@@ -3283,8 +3370,8 @@
   border: 1px solid hsl(var(--primary));
   background: hsl(var(--primary) / 0.08);
   color: hsl(var(--primary));
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   font-style: normal;
   font-weight: 800;
   line-height: 1;
@@ -3301,7 +3388,7 @@
 }
 
 .workflow-app-grid strong { font-size: 0.75rem; }
-.workflow-app-grid span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.workflow-app-grid span { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; color: hsl(var(--foreground) / 0.7); }
 
 .workflow-time-grid {
   display: grid;
@@ -3312,7 +3399,7 @@
 
 .workflow-time-grid > div { display: grid; align-content: center; gap: 0.65rem; min-height: 9.8rem; padding: 0.85rem; }
 .workflow-time-grid > div:first-child { border-right: 1px solid hsl(var(--foreground)); }
-.workflow-time-grid span, .workflow-time-grid small { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.05em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.workflow-time-grid span, .workflow-time-grid small { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; letter-spacing: 0; color: hsl(var(--foreground) / 0.7); }
 .workflow-time-grid strong { font-size: clamp(0.8rem, 1.2vw, 1rem); line-height: 1.15; }
 .workflow-time-grid > div:last-child strong { color: hsl(var(--primary)); }
 
@@ -3330,14 +3417,14 @@
 
 .workflow-memory-view.is-extraction { display: grid; grid-template-columns: 0.86fr 1.14fr; }
 .memory-document { display: grid; align-content: center; gap: 0.42rem; padding: 0.75rem; border-right: 1px solid hsl(var(--foreground)); }
-.memory-document > span, .memory-document > b { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.05em; }
+.memory-document > span, .memory-document > b { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; letter-spacing: 0; }
 .memory-document > i { display: block; height: 0.28rem; background: hsl(var(--foreground) / 0.14); }
 .memory-document > i:nth-of-type(2) { width: 82%; }.memory-document > i:nth-of-type(3) { width: 91%; }.memory-document > i:nth-of-type(4) { width: 67%; }
 .memory-document > b { margin-top: 0.45rem; color: hsl(var(--primary)); }
 .memory-extracted-fields { display: grid; grid-template-columns: repeat(2, 1fr); }
 .memory-extracted-fields > span { display: grid; align-content: center; gap: 0.3rem; padding: 0.55rem; border-right: 1px solid hsl(var(--border)); border-bottom: 1px solid hsl(var(--border)); }
 .memory-extracted-fields > span:nth-child(2n) { border-right: 0; }.memory-extracted-fields > span:nth-last-child(-n+2) { border-bottom: 0; }
-.memory-extracted-fields b { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.memory-extracted-fields b { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; color: hsl(var(--foreground) / 0.7); }
 .memory-extracted-fields strong { font-size: 0.75rem; }
 
 .workflow-memory-view.is-timeline { display: grid; align-content: center; padding: 0.95rem; }
@@ -3345,28 +3432,28 @@
 .memory-timeline::before { content: ""; position: absolute; right: 0; left: 0; height: 1px; background: hsl(var(--foreground) / 0.38); }
 .memory-timeline > i { position: relative; z-index: 1; justify-self: center; width: 0.42rem; height: 0.42rem; border: 1px solid hsl(var(--foreground)); border-radius: 50%; background: hsl(var(--background)); }
 .memory-timeline > i.is-active { width: 0.72rem; height: 0.72rem; border-radius: 0; border-color: hsl(var(--primary)); background: hsl(var(--primary)); box-shadow: 0 0 0 0.26rem hsl(var(--primary) / 0.14); }
-.memory-timeline > span { position: absolute; top: 3.65rem; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; line-height: 1.45; color: hsl(var(--foreground) / 0.7); }
+.memory-timeline > span { position: absolute; top: 3.65rem; font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; line-height: 1.45; color: hsl(var(--foreground) / 0.7); }
 .memory-timeline > span b { color: hsl(var(--foreground)); }.memory-timeline .is-original { left: 0; }.memory-timeline .is-known { right: 0; text-align: right; }
 .workflow-memory-view.is-timeline > p { display: grid; gap: 0.3rem; padding-top: 0.65rem; border-top: 1px solid hsl(var(--border)); }
-.workflow-memory-view.is-timeline > p span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; color: hsl(var(--primary)); }.workflow-memory-view.is-timeline > p strong { font-size: 0.75rem; }
+.workflow-memory-view.is-timeline > p span { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; color: hsl(var(--primary)); }.workflow-memory-view.is-timeline > p strong { font-size: 0.75rem; }
 
 .workflow-memory-view.is-allocation { display: grid; grid-template-rows: 1fr auto; padding: 0.85rem 0.85rem 0; }
 .memory-allocation-chart { display: flex; align-items: end; gap: 0.55rem; min-height: 7rem; border-bottom: 1px solid hsl(var(--foreground)); }
 .memory-allocation-chart > span { display: grid; align-content: end; flex: 1; min-height: 2rem; padding: 0.4rem; background: hsl(var(--foreground)); color: hsl(var(--background)); }
 .memory-allocation-chart > span:last-child { background: hsl(var(--primary)); }
-.memory-allocation-chart b, .memory-allocation-chart i, .memory-allocation-foot { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-style: normal; }
+.memory-allocation-chart b, .memory-allocation-chart i, .memory-allocation-foot { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; font-style: normal; }
 .memory-allocation-chart i { color: hsl(var(--primary-foreground) / 0.68); }
 .memory-allocation-foot { display: flex; justify-content: space-between; gap: 0.45rem; padding: 0.6rem 0; }.memory-allocation-foot strong { color: hsl(var(--primary)); }
 
 .workflow-memory-view.is-revision { display: grid; }
 .workflow-memory-view.is-revision > div, .workflow-memory-view.is-project > div:not(.memory-project-progress) { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr) auto; align-items: center; gap: 0.55rem; padding: 0.6rem 0.7rem; border-bottom: 1px solid hsl(var(--border)); }
 .workflow-memory-view.is-revision > div:last-child, .workflow-memory-view.is-project > div:last-child { border-bottom: 0; }
-.workflow-memory-view.is-revision span, .workflow-memory-view.is-revision em, .workflow-memory-view.is-project span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-style: normal; color: hsl(var(--foreground) / 0.7); }
+.workflow-memory-view.is-revision span, .workflow-memory-view.is-revision em, .workflow-memory-view.is-project span { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; font-style: normal; color: hsl(var(--foreground) / 0.7); }
 .workflow-memory-view.is-revision strong, .workflow-memory-view.is-project strong { font-size: 0.75rem; }
 .workflow-memory-view.is-revision em { color: hsl(var(--primary)); }.workflow-memory-view.is-revision em.is-live { padding: 0.2rem 0.3rem; background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
 
 .workflow-memory-view.is-margin-chart { display: grid; padding: 0.8rem; }
-.memory-margin-head, .memory-margin-foot { display: flex; align-items: baseline; justify-content: space-between; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; }
+.memory-margin-head, .memory-margin-foot { display: flex; align-items: baseline; justify-content: space-between; font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; }
 .memory-margin-head strong { font-size: 1rem; color: hsl(var(--primary)); }
 .workflow-memory-view.is-margin-chart svg { width: 100%; height: 6rem; overflow: visible; }
 .margin-floor { fill: none; stroke: hsl(var(--foreground) / 0.32); stroke-width: 1; stroke-dasharray: 3 4; }.margin-line { fill: none; stroke: hsl(var(--primary)); stroke-width: 3; }.workflow-memory-view.is-margin-chart circle { fill: hsl(var(--primary)); }
@@ -3375,7 +3462,7 @@
 .workflow-memory-view.is-project { display: grid; align-content: start; }
 .memory-project-progress { position: relative; height: 2.45rem; border-bottom: 1px solid hsl(var(--foreground)); background: hsl(var(--foreground) / 0.07); }
 .memory-project-progress > span { display: block; height: 100%; background: hsl(var(--primary)); }
-.memory-project-progress > b { position: absolute; top: 0.85rem; right: 0.65rem; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; color: hsl(var(--foreground)); mix-blend-mode: multiply; }
+.memory-project-progress > b { position: absolute; top: 0.85rem; right: 0.65rem; font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; color: hsl(var(--foreground)); mix-blend-mode: multiply; }
 .workflow-memory-view.is-project > div:not(.memory-project-progress) { grid-template-columns: 0.55rem minmax(0, 1fr) auto; }
 .workflow-memory-view.is-project i { width: 0.45rem; height: 0.45rem; background: hsl(var(--primary)); }
 
@@ -3394,7 +3481,7 @@
 .workflow-result-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 1.1rem; border-block: 1px solid hsl(var(--border)); }
 .workflow-result-stats > div { display: grid; gap: 0.35rem; padding: 0.65rem 0.35rem; border-right: 1px solid hsl(var(--border)); }
 .workflow-result-stats > div:last-child { border-right: 0; }
-.workflow-result-stats span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.workflow-result-stats span { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; color: hsl(var(--foreground) / 0.7); }
 .workflow-result-stats strong { font-size: 0.8rem; }
 
 /* ---------------------------------------------------------------------------
@@ -3432,7 +3519,7 @@
 .wf-steps-track i { flex: 1; height: 4px; background: hsl(var(--foreground) / 0.16); }
 .wf-steps-track i.is-done { background: hsl(var(--primary)); }
 .wf-steps-track i.is-now { background: hsl(var(--support)); }
-.wf-steps-labels { display: flex; justify-content: space-between; margin-top: 0.45rem; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.wf-steps-labels { display: flex; justify-content: space-between; margin-top: 0.45rem; font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; letter-spacing: 0; color: hsl(var(--foreground) / 0.7); }
 
 /* stack — margin against the approved floor */
 .wf-stack-bar { display: flex; height: 1.5rem; border: 1px solid hsl(var(--foreground)); overflow: hidden; }
@@ -3440,7 +3527,7 @@
 .wf-stack-bar .is-floor { background: hsl(var(--primary)); }
 .wf-stack-bar .is-room { background: hsl(147 88% 25%); }
 .wf-stack-bar .is-rest { background: hsl(var(--foreground) / 0.12); }
-.wf-stack-legend { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; margin-top: 0.5rem; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.wf-stack-legend { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; margin-top: 0.5rem; font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; letter-spacing: 0; color: hsl(var(--foreground) / 0.7); }
 .wf-stack-legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
 .wf-stack-legend b { width: 0.55rem; height: 0.55rem; }
 .wf-stack-legend .is-floor { background: hsl(var(--primary)); }
@@ -3449,7 +3536,7 @@
 /* funnel — replies narrowing to one choice */
 .wf-funnel { display: grid; gap: 0.32rem; }
 .wf-funnel > div { display: grid; grid-template-columns: 5.2rem minmax(0, 1fr); align-items: center; gap: 0.5rem; }
-.wf-funnel span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.wf-funnel span { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; letter-spacing: 0; color: hsl(var(--foreground) / 0.7); }
 .wf-funnel i { height: 0.85rem; background: hsl(var(--primary)); }
 .workflow-result-foot { display: flex; justify-content: space-between; gap: 0.75rem; margin-top: auto; padding-top: 0.7rem; border-top: 1px solid hsl(var(--border)); font-size: 0.75rem; }
 .workflow-result-foot strong { color: hsl(var(--primary-text)); }
@@ -3509,26 +3596,26 @@
 .operator-proof-ticker::before { left: 0; background: linear-gradient(90deg, hsl(var(--background)), transparent); }
 .operator-proof-ticker::after { right: 0; background: linear-gradient(270deg, hsl(var(--background)), transparent); }
 .operator-proof-ticker > div { display: flex; width: max-content; gap: 2.4rem; animation: operator-proof-ticker 20s linear infinite; }
-.operator-proof-ticker span { white-space: nowrap; font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.1em; color: hsl(var(--foreground) / 0.7); }
+.operator-proof-ticker span { white-space: nowrap; font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; font-weight: 600; letter-spacing: 0; color: hsl(var(--foreground) / 0.7); }
 @keyframes operator-proof-ticker { to { transform: translateX(-50%); } }
 
+/* Label on its own line above the ticker at every width, so the sentence reads
+   whole and the logos get the full row. */
 .founder-company-row {
   display: grid;
-  grid-template-columns: minmax(8rem, 0.18fr) minmax(0, 1fr);
-  gap: clamp(1rem, 2vw, 2rem);
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
   width: 100%;
-  padding: 2.15rem 0;
+  padding: 2.75rem 0 2.5rem;
 }
 
 .founder-company-label {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: clamp(0.6875rem, 0.8vw, 0.76rem);
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0;
   line-height: 1.35;
-  text-transform: uppercase;
-  color: hsl(var(--foreground));
+  color: hsl(var(--muted-foreground));
 }
 
 .founder-company-ticker { width: 100%; overflow: hidden; }
@@ -3567,11 +3654,10 @@
 }
 
 .founder-company-ticker small {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: inherit; font-variant-numeric: tabular-nums;
   font-size: 0.76rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: 0;
   color: hsl(var(--foreground));
 }
 
@@ -3688,11 +3774,10 @@
 }
 
 .ubik-meetings-lockup span {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: inherit; font-variant-numeric: tabular-nums;
   font-size: 0.8rem;
   font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  letter-spacing: 0;
   color: hsl(var(--foreground) / 0.7);
 }
 
@@ -3813,15 +3898,12 @@
   justify-content: center;
   gap: 0.6rem 1.1rem;
   margin-top: 1.25rem;
-  padding: 0.9rem 1rem;
-  border: 1px dashed hsl(var(--foreground) / 0.28);
 }
 
 .compliance-strip-note {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
+  letter-spacing: 0;
   color: hsl(var(--foreground) / 0.7);
 }
 
@@ -3842,14 +3924,11 @@
   gap: 0.45rem;
   padding: 0.35rem 0.65rem;
   border: 1px solid hsl(var(--foreground) / 0.3);
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
-  /* 0.55 alpha is intentional here: these are aspirational, and the muted
-     treatment is the signal — but the dashed border and the "In progress"
-     note already carry that, so the text itself stays legible (0.55 measured
-     3.5:1, below AA). */
+  letter-spacing: 0;
+  /* Badges only; the status of each lives on /security. */
   color: hsl(var(--foreground) / 0.72);
 }
 
@@ -3883,12 +3962,11 @@
   z-index: 1;
   padding: 0.55rem 0.7rem;
   border: 1px solid hsl(var(--primary) / 0.28);
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0;
   line-height: 1;
-  text-transform: uppercase;
   color: hsl(var(--primary));
 }
 
@@ -3945,7 +4023,7 @@
 .meet-team-grid article { min-width: 0; padding: 1.35rem 1.5rem 1.45rem; }
 .meet-team-grid article + article { border-left: 1px solid hsl(var(--foreground) / 0.22); }
 .meet-team-grid article > div { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-.meet-team-grid article > div > span { font-family: "IBM Plex Mono", monospace; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: hsl(var(--foreground) / 0.7); }
+.meet-team-grid article > div > span { font-family: inherit; font-variant-numeric: tabular-nums; font-size: 0.78125rem; font-weight: 700; letter-spacing: 0; color: hsl(var(--foreground) / 0.7); }
 .meet-team-grid article a { display: grid; place-items: center; width: 1.4rem; height: 1.4rem; color: hsl(var(--primary)); }
 .meet-team-grid article a svg { width: 0.95rem; height: 0.95rem; }
 .meet-team-grid article a:hover { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
@@ -3966,8 +4044,6 @@
   .trade-control-sheet { box-shadow: 8px 8px 0 hsl(var(--foreground)); }
   .home-section-title { max-width: 15ch; }
   .founder-note-grid { grid-template-columns: 4.5rem minmax(0, 1fr); gap: 1rem; }
-  .founder-company-row { grid-template-columns: 1fr; gap: 0.8rem; }
-  .founder-company-label { max-width: 24rem; }
   .meet-team-grid { grid-template-columns: 1fr; }
   .meet-team-grid article + article { border-top: 1px solid hsl(var(--foreground) / 0.22); border-left: 0; }
   .closing-cta { grid-template-columns: 1fr; }
@@ -4020,8 +4096,8 @@
 }
 
 .site-header.is-scrolled .site-language {
-  border-color: hsl(var(--primary-foreground) / 0.25);
-  background: hsl(var(--primary-foreground) / 0.08);
+  border-color: hsl(var(--primary-foreground) / 0.16);
+  background: transparent;
   color: hsl(var(--primary-foreground));
 }
 
@@ -4046,14 +4122,15 @@
 /* Like every other control in the header, this has to flip with the band it
    sits on or it goes invisible against its own background. */
 .site-header .theme-toggle {
-  border: 1px solid hsl(var(--foreground) / 0.25);
-  background: hsl(var(--foreground) / 0.04);
+  border: 1px solid hsl(var(--foreground) / 0.14);
+  border-radius: 0.5rem;
+  background: transparent;
   color: hsl(var(--foreground));
 }
 
 .site-header.is-scrolled .theme-toggle {
-  border-color: hsl(var(--primary-foreground) / 0.25);
-  background: hsl(var(--primary-foreground) / 0.08);
+  border-color: hsl(var(--primary-foreground) / 0.16);
+  background: transparent;
   color: hsl(var(--primary-foreground));
 }
 
@@ -4092,9 +4169,8 @@
   justify-content: space-between;
   border-bottom: 1px solid hsl(var(--primary-foreground) / 0.18);
   padding: 0.75rem 0.9rem;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
-  text-transform: uppercase;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
 }
 
 .post-ai-queue-header i {
@@ -4127,9 +4203,8 @@
 }
 
 .post-ai-queue-body span {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
-  text-transform: uppercase;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   color: hsl(var(--foreground) / 0.7);
 }
 
@@ -4197,8 +4272,8 @@
 }
 
 .agent-spawn-list span {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   color: hsl(var(--primary-foreground) / 0.6);
 }
 
@@ -4229,9 +4304,8 @@
 
 .agent-tool-rail span {
   max-width: 100%;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
-  text-transform: uppercase;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
 }
 
 /* Multi-system composer */
@@ -4283,8 +4357,8 @@
   place-items: center;
   background: hsl(var(--primary-foreground));
   color: hsl(var(--primary));
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   font-style: normal;
 }
 
@@ -4311,9 +4385,8 @@
 
 .system-selection > span,
 .system-combination-result > span {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
-  text-transform: uppercase;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   color: hsl(var(--foreground) / 0.7);
 }
 
@@ -4393,8 +4466,8 @@
   min-height: 3rem;
   place-items: center;
   background: hsl(var(--card));
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   color: hsl(var(--foreground) / 0.7);
 }
 
@@ -4840,12 +4913,11 @@
   z-index: 1;
   padding: 0.55rem 0.7rem;
   border: 1px solid hsl(var(--primary) / 0.28);
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.6875rem;
+  font-family: inherit; font-variant-numeric: tabular-nums;
+  font-size: 0.78125rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0;
   line-height: 1;
-  text-transform: uppercase;
   color: hsl(var(--primary));
 }
 
@@ -4922,3 +4994,300 @@
 /* Added after the generated sweep above, so listed explicitly: the layer-row
    numbers paint text with raw --primary and need the lifted blue on dark. */
 .dark .loop-card > p { color: hsl(var(--primary-text)); }
+
+/* ---------------------------------------------------------------------------
+   Stage — a faint action-blue haze behind a product mockup, and only there.
+   Not a page gradient: the section around it stays plain paper.
+   --------------------------------------------------------------------------- */
+.home-stage { isolation: isolate; }
+.home-stage::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -12% -18% -6% -14%;
+  pointer-events: none;
+  background:
+    radial-gradient(42% 46% at 62% 38%, hsl(var(--primary) / 0.24), transparent 72%),
+    radial-gradient(34% 38% at 22% 78%, hsl(var(--primary) / 0.14), transparent 72%);
+  filter: blur(28px);
+}
+.dark .home-stage::before { opacity: 0.8; }
+
+/* The blue square is the only thing that moves. Static under reduced motion. */
+.live-square { animation: live-square 1.6s var(--ease-out, ease-out) infinite; }
+@keyframes live-square {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.8); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .live-square { animation: none; }
+}
+
+/* Product tour on /platform: every step visible at once. The tabs were a
+   horizontal scroller of 13rem cards inside a 56rem column, so steps 4 and 5
+   were clipped off the right edge on desktop. Now a grid that wraps. */
+.workflow-showcase { border-radius: calc(var(--radius) * 1.4); }
+.workflow-tabs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  overflow: visible;
+}
+.workflow-tab {
+  min-width: 0;
+  flex: none;
+  border-bottom: 1px solid hsl(var(--background) / 0.16);
+}
+.workflow-tab strong { font-size: 0.95rem; line-height: 1.3; }
+.workflow-product-media video,
+.workflow-product-media img { display: block; }
+@media (min-width: 1024px) {
+  .workflow-active-grid { grid-template-columns: 0.6fr 1.4fr; }
+}
+.workflow-copy h3 { font-size: clamp(1.4rem, 2.1vw, 1.9rem); font-weight: 550; letter-spacing: -0.025em; line-height: 1.15; }
+/* The recordings include the browser's tab and bookmark bars; crop to the product. */
+.workflow-product-media { overflow: hidden; }
+.workflow-product-media video { object-position: 50% 100%; transform: scale(1.14); transform-origin: 50% 100%; }
+
+/* The square travelling a trade lane. */
+.lane-runner { animation: lane-run 3.2s var(--ease-in-out, ease-in-out) infinite alternate; }
+@keyframes lane-run { from { left: 0; } to { left: calc(100% - 0.5rem); } }
+@media (prefers-reduced-motion: reduce) { .lane-runner { animation: none; } }
+
+/* Expertise strip: the sentence ends in "at", so it sits above the logos it
+   leads into, centred, with room on both sides of the ticker. */
+.founder-company-row { grid-template-columns: 1fr; gap: 1.5rem; padding: 2.75rem 0 2.5rem; }
+.founder-company-row .founder-company-label {
+  max-width: none;
+  justify-self: center;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--muted-foreground));
+}
+/* Subagents fanned out on the running step, and the newest memory node. */
+.run-fanout { display: inline-flex; gap: 3px; }
+.run-fanout i { width: 4px; height: 4px; background: hsl(var(--primary)); animation: run-fanout 900ms ease-in-out infinite; }
+@keyframes run-fanout { 0%, 100% { opacity: .3; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-2px); } }
+.memory-node-new { animation: memory-node-new 1s ease-out infinite; }
+@keyframes memory-node-new { 0% { box-shadow: 0 0 0 0 hsl(var(--primary) / .6); } 100% { box-shadow: 0 0 0 6px hsl(var(--primary) / 0); } }
+@media (prefers-reduced-motion: reduce) { .run-fanout i, .memory-node-new { animation: none; } }
+/* The segment for the step in progress fills over the step's duration. */
+.run-segment-fill { animation: run-segment 1.15s linear forwards; }
+@keyframes run-segment { from { width: 0%; } to { width: 100%; } }
+
+/* Footer engraving: an alpha mask painted in the brand blue. */
+.port-engraving { aspect-ratio: 2400 / 973; }
+.port-engraving-ink { background: hsl(var(--primary)); opacity: 0; transition: opacity 600ms ease; }
+.port-engraving-ink.is-loaded {
+  opacity: 1;
+  -webkit-mask: url("/footer/port.webp") center bottom / cover no-repeat;
+  mask: url("/footer/port.webp") center bottom / cover no-repeat;
+}
+.dark .port-engraving-ink { background: hsl(var(--primary-text)); }
+
+/* Own your data and intelligence: the deployment drawing. */
+.own-stack-drawing { animation: work-paper-in 420ms cubic-bezier(.22,1,.36,1); }
+.own-stack-drawing text { font-family: inherit; }
+.own-stack-label { font-size: 11.5px; font-weight: 600; fill: hsl(var(--foreground)); }
+.own-stack-node { font-size: 11.5px; font-weight: 550; fill: hsl(var(--foreground)); }
+.own-stack-core { font-family: "IBM Plex Mono", ui-monospace, monospace !important; font-size: 17px; font-weight: 600; fill: hsl(var(--background)); }
+.own-stack-layer { font-size: 11.5px; font-weight: 550; fill: hsl(var(--background)); }
+.own-stack-out { font-size: 11px; fill: hsl(var(--muted-foreground)); }
+.own-led { animation: own-led 1.6s ease-in-out infinite; }
+.own-anat-label { font-family: "IBM Plex Mono", ui-monospace, monospace !important; font-size: 9.5px; letter-spacing: 0.08em; fill: hsl(var(--muted-foreground)); }
+.own-anat-strong { fill: hsl(var(--foreground)); font-weight: 600; }
+.own-anat-accent { fill: hsl(var(--primary-text)); }
+.own-comet { fill: none; stroke: hsl(var(--primary)); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 6 100; animation: own-comet 2.4s linear infinite; }
+.own-comet-tail { stroke-width: 2; opacity: 0.3; stroke-dasharray: 16 100; animation-name: own-comet-tail; }
+@keyframes own-comet-tail { from { stroke-dashoffset: 116; } to { stroke-dashoffset: 0; } }
+@keyframes own-comet { from { stroke-dashoffset: 106; } to { stroke-dashoffset: -10; } }
+@keyframes own-led { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+@media (prefers-reduced-motion: reduce) { .own-stack-drawing, .own-led, .own-comet { animation: none; } .own-comet { display: none; } }
+
+/* Platform: one shipment's documents as the files they arrived as (DocumentVersions). */
+.doc-version-cell {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: calc(var(--radius) * 0.8);
+  background: hsl(var(--card));
+  color: hsl(var(--foreground) / 0.55);
+  transition: border-color 200ms, background-color 200ms, color 200ms, box-shadow 200ms;
+}
+.doc-version-cell.is-read { border-color: hsl(var(--primary) / 0.45); background: hsl(var(--primary) / 0.06); color: hsl(var(--foreground)); }
+.doc-version-cell.is-flag { border-color: hsl(var(--destructive) / 0.8); background: hsl(var(--destructive) / 0.08); color: hsl(var(--foreground)); }
+.doc-version-cell.is-current { border-color: hsl(var(--primary)); box-shadow: 0 0 0 1px hsl(var(--primary)); color: hsl(var(--foreground)); }
+.doc-version-cell.is-new { animation: doc-version-arrive 1100ms ease-out; }
+.doc-version-file {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.66rem;
+  line-height: 1rem;
+  color: hsl(var(--muted-foreground));
+  animation: doc-version-name 360ms ease-out;
+}
+.doc-version-token { font-weight: 600; color: hsl(var(--primary-text, var(--primary))); }
+.doc-version-pill {
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 0 0.3rem;
+  border-radius: 3px;
+  background: hsl(var(--primary) / 0.12);
+  font-size: 0.6rem;
+  font-weight: 600;
+  line-height: 1rem;
+  font-variant-numeric: tabular-nums;
+  color: hsl(var(--primary-text, var(--primary)));
+}
+.doc-versions-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid hsl(var(--border));
+  font-size: 0.8125rem;
+}
+.doc-versions-cursor { animation: doc-versions-blink 900ms steps(2, jump-none) infinite; }
+@keyframes doc-version-arrive {
+  0% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.7); transform: translateY(-3px); }
+  100% { box-shadow: 0 0 0 10px hsl(var(--primary) / 0); transform: none; }
+}
+@keyframes doc-version-name { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes doc-versions-blink { to { opacity: 0.3; } }
+@media (prefers-reduced-motion: reduce) {
+  .doc-version-cell.is-new, .doc-version-file, .doc-versions-cursor { animation: none; }
+}
+
+/* Platform: connected apps and the record ubik keeps when they disagree (ConnectedMemory). */
+.memory-rule {
+  position: relative;
+  display: grid;
+  gap: 0.15rem;
+  overflow: hidden;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid hsl(var(--primary) / 0.3);
+  border-radius: 0.75rem;
+  background: hsl(var(--primary) / 0.05);
+}
+.memory-rule.is-running::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 35%;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.18), transparent);
+  animation: memory-rule-scan 1100ms ease-in-out;
+}
+.memory-source { animation: memory-source-in 420ms ease-out both; }
+.memory-badge { animation: memory-badge-in 260ms ease-out; }
+.memory-link-chip { opacity: 0; }
+.memory-link-chip.is-on { animation: memory-badge-in 320ms ease-out both; }
+@keyframes memory-rule-scan { from { transform: translateX(-100%); } to { transform: translateX(300%); } }
+@keyframes memory-source-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes memory-badge-in { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .memory-source, .memory-badge, .memory-link-chip.is-on, .memory-rule.is-running::after { animation: none; }
+  .memory-link-chip { opacity: 1; }
+}
+
+/* Header Workflows menu: the trigger keeps the nav-link look; the open state matches hover. */
+.nav-menu-trigger[data-state="open"] { border-color: #345bea; background-color: #345bea !important; color: #ffffff !important; }
+.nav-menu-panel { left: 0; z-index: 50; }
+
+/* Workflow page prototype (DocVerifyRun): rows land in order, the active step fills a bar. */
+.run-row { animation: memory-source-in 420ms ease-out both; }
+.run-progress { animation: run-progress linear forwards; transform: scaleX(0); }
+@keyframes run-progress { to { transform: scaleX(1); } }
+@media (prefers-reduced-motion: reduce) { .run-row, .run-progress { animation: none; } }
+
+/* Hero freight field: faded out under the headline, full strength behind the product card. */
+.freight-field {
+  mask-image: linear-gradient(90deg, transparent 0%, rgb(0 0 0 / 0.18) 30%, rgb(0 0 0 / 0.9) 62%, black 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgb(0 0 0 / 0.18) 30%, rgb(0 0 0 / 0.9) 62%, black 100%);
+}
+@media (max-width: 1023px) {
+  .freight-field { mask-image: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / 0.5) 60%, black 100%); -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgb(0 0 0 / 0.5) 60%, black 100%); }
+}
+
+/* Platform ledger, split: the four outputs run across the top as tabs with a
+   progress rule; memory lights up in the dark panel on the left; the work it
+   produced sits on paper on the right. Stacks below 1024px. */
+.trade-work-ledger.is-split { background: hsl(var(--shell)); }
+.is-split .trade-work-index {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid hsl(var(--primary-foreground) / 0.18);
+}
+.is-split .trade-work-index button { position: relative; min-height: 4.4rem; padding: 0.9rem 1rem; }
+.is-split .trade-work-index button.is-active { padding-left: 1rem; }
+.trade-work-progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background: hsl(var(--primary));
+  animation: trade-work-progress 4400ms linear forwards;
+}
+@keyframes trade-work-progress { to { width: 100%; } }
+.trade-work-split {
+  display: grid;
+  grid-template-columns: minmax(18rem, 0.82fr) minmax(0, 1.18fr);
+  gap: 1px;
+  background: hsl(var(--primary-foreground) / 0.18);
+}
+.trade-work-memory {
+  position: relative;
+  min-height: 30rem;
+  background:
+    radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.16), transparent 62%),
+    hsl(var(--shell));
+}
+.trade-work-memory .memory-shuffle { position: absolute; inset: 2.2rem 0.75rem 1.2rem; height: auto; margin: 0; border: 0; }
+.memory-shuffle.is-dark .memory-shuffle-label { top: -1.4rem; left: 0.25rem; right: auto; color: hsl(var(--primary-foreground) / 0.5); }
+.memory-shuffle.is-dark line { stroke: hsl(var(--primary-foreground) / 0.09); }
+.memory-shuffle.is-dark line.is-linked {
+  stroke: hsl(var(--primary-on-dark));
+  stroke-width: 2;
+  filter: drop-shadow(0 0 4px hsl(var(--primary) / 0.9));
+}
+.memory-shuffle.is-dark .memory-shuffle-runner { fill: hsl(var(--primary-on-dark)); filter: drop-shadow(0 0 6px hsl(var(--primary))); }
+.memory-shuffle.is-dark .memory-node i { background: hsl(var(--primary-foreground) / 0.35); }
+.memory-shuffle.is-dark.is-column .memory-node i { opacity: 0; }
+.memory-shuffle.is-dark .memory-node b {
+  border-color: hsl(var(--primary-foreground) / 0.14);
+  background: hsl(var(--primary-foreground) / 0.04);
+  color: hsl(var(--primary-foreground) / 0.62);
+  box-shadow: none;
+}
+.memory-shuffle.is-dark.is-column .memory-node b {
+  opacity: 0.75;
+  transform: scale(0.86);
+  border-color: hsl(var(--primary-foreground) / 0.14);
+  background: hsl(var(--primary-foreground) / 0.04);
+  color: hsl(var(--primary-foreground) / 0.62);
+  box-shadow: none;
+}
+.memory-shuffle.is-dark .memory-node b svg { color: hsl(var(--primary-on-dark)); }
+.memory-shuffle.is-dark .memory-node.is-on b {
+  opacity: 1;
+  transform: scale(1.12);
+  border-color: hsl(var(--primary-on-dark));
+  background: hsl(var(--primary));
+  color: #fff;
+  box-shadow: 0 0 0 4px hsl(var(--primary) / 0.18), 0 0 28px hsl(var(--primary) / 0.65);
+}
+.memory-shuffle.is-dark .memory-node.is-on b svg { color: #fff; }
+@media (max-width: 1023px) {
+  .is-split .trade-work-index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .trade-work-split { grid-template-columns: 1fr; }
+  .trade-work-memory { min-height: 14rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .trade-work-progress { animation: none; width: 100%; }
+}

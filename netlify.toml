@@ -31,9 +31,33 @@
   to = "/legal/privacy"
   status = 301
 
+# A malformed link somewhere (markdown with the closing paren swallowed into
+# the URL) sent ~44 visits in 90 days to the homepage instead of the policy.
+[[redirects]]
+  from = "/privacy-policy)"
+  to = "/legal/privacy"
+  status = 301
+
 [[redirects]]
   from = "/ubik-workspace-admin-guide.html"
   to = "/google-workspace-admin-guide"
+  status = 301
+
+# Paths from the workbook's proposed sitemap that live under existing URLs,
+# so a link written from that plan still lands on the right page.
+[[redirects]]
+  from = "/learn"
+  to = "/platform"
+  status = 301
+
+[[redirects]]
+  from = "/how-it-works"
+  to = "/platform"
+  status = 301
+
+[[redirects]]
+  from = "/trade-notes"
+  to = "/blog"
   status = 301
 
 [[redirects]]
@@ -48,7 +72,16 @@
   status = 302
   force = true
 
+# Prerendered routes are served from their own dist/<route>/index.html (files
+# win over this rule). Everything else gets the bare shell, not the
+# prerendered homepage, so an unknown path never shows homepage copy under
+# its own URL.
+[[redirects]]
+  from = "/workflows/order-promises"
+  to = "/workflows/production-planning"
+  status = 301
+
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/spa.html"
   status = 200

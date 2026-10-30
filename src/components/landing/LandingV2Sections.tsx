@@ -456,7 +456,7 @@ const railSteps: RailStep[] = [
 ];
 
 function SectionEyebrow({ children }: { children: ReactNode }) {
-  return <span className="font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-foreground/72 dark:text-foreground/82">{children}</span>;
+  return <span className="tabular-nums text-[12.5px] font-medium text-foreground/72 dark:text-foreground/82">{children}</span>;
 }
 
 function FaviconImg({ src, alt = "" }: { src: string; alt?: string }) {
@@ -465,7 +465,7 @@ function FaviconImg({ src, alt = "" }: { src: string; alt?: string }) {
 
 function PerishableTradeChip({ category }: { category: string }) {
   return (
-    <div className="trade-chip inline-flex items-center gap-2 border bg-background px-2.5 py-2 font-mono text-[11px] uppercase tracking-[0.08em] shadow-sm">
+    <div className="trade-chip inline-flex items-center gap-2 border bg-background px-2.5 py-2 tabular-nums text-[12.5px] shadow-sm">
       <span className="trade-chip-pulse" aria-hidden="true" />
       <span className="text-foreground/72 dark:text-foreground/82">Built for perishable trade</span>
       <span className="h-3 w-px bg-border" aria-hidden="true" />
@@ -523,8 +523,8 @@ export function LandingV2Hero() {
               ["2 wk", "workflow live"]
             ].map(([stat, label]) => (
               <div key={stat} className="border-r border-primary-foreground/25 px-3 py-3 last:border-r-0">
-                <p className="font-mono text-lg font-semibold leading-none sm:text-xl">{stat}</p>
-                <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/58">{label}</p>
+                <p className="tabular-nums text-lg font-semibold leading-none sm:text-xl">{stat}</p>
+                <p className="mt-1 tabular-nums text-[12.5px] text-foreground/58">{label}</p>
               </div>
             ))}
           </div>
@@ -546,7 +546,7 @@ export function LandingV2Hero() {
         <div className="hero-queue-panel border bg-card text-foreground shadow-lg">
           <div className="flex items-center justify-between gap-4 border-b bg-shell px-[1.125rem] py-[0.875rem]">
             <h4 className="text-[13px] font-semibold">Operating queue · tuesday 09:14 ist</h4>
-            <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.06em] text-foreground/72 dark:text-foreground/82 before:size-1.5 before:animate-pulse before:bg-green-500 before:content-['']">
+            <span className="inline-flex items-center gap-2 tabular-nums text-[12.5px] text-foreground/72 dark:text-foreground/82 before:size-1.5 before:animate-pulse before:bg-green-500 before:content-['']">
               live
             </span>
           </div>
@@ -567,12 +567,12 @@ export function LandingV2Hero() {
                   </span>
                   <div>
                     <div className="text-[13px] font-medium leading-[1.35]">{row.title}</div>
-                    <div className={cn("mt-0.5 flex items-center gap-2 font-mono text-[11px] tracking-[0.04em]", active ? "text-primary-foreground/95" : "text-foreground/72 dark:text-foreground/82")}>
+                    <div className={cn("mt-0.5 flex items-center gap-2 tabular-nums text-[12.5px]", active ? "text-primary-foreground/95" : "text-foreground/72 dark:text-foreground/82")}>
                       {row.metaIcons?.map((icon) => <FaviconImg key={icon} src={icon} />)}
                       <span>{row.meta}</span>
                     </div>
                   </div>
-                  <span className={cn("whitespace-nowrap font-mono text-[11px] font-medium tracking-[0.02em]", active ? "text-primary-foreground/95" : "text-foreground")}>
+                  <span className={cn("whitespace-nowrap tabular-nums text-[12.5px] font-medium", active ? "text-primary-foreground/95" : "text-foreground")}>
                     {row.stat}
                   </span>
                 </div>
@@ -581,11 +581,11 @@ export function LandingV2Hero() {
           </div>
 
           <div className="flex items-center justify-between gap-4 border-t bg-card px-[1.125rem] py-3">
-            <span className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.04em] text-primary">
+            <span className="inline-flex items-center gap-2 tabular-nums text-[12.5px] text-primary">
               <span className="size-1.5 animate-pulse bg-primary" />
               <span>ubik · drafting buyer reply · {thinkTime.toFixed(1)}s</span>
             </span>
-            <span className="font-mono text-[11px] tracking-[0.04em] text-foreground/72 dark:text-foreground/82">auto-refresh · 12s</span>
+            <span className="tabular-nums text-[12.5px] text-foreground/72 dark:text-foreground/82">auto-refresh · 12s</span>
           </div>
         </div>
       </div>
@@ -608,17 +608,17 @@ const tradeCaseStudy: CaseStudyFragment[] = [
     fragment: (
       <div className="grid gap-px border bg-border sm:grid-cols-2">
         <div className="bg-card p-3">
-          <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/72 dark:text-foreground/82">connected apps</div>
+          <div className="mb-2 tabular-nums text-[12.5px] text-foreground/72 dark:text-foreground/82">connected apps</div>
           <div className="flex flex-wrap gap-1.5">
             {["gmail.com", "salesforce.com", "maersk.com"].map((domain) => (
-              <span key={domain} className="inline-flex items-center gap-1.5 border bg-background px-2 py-1 font-mono text-[11px] uppercase tracking-[0.04em]">
+              <span key={domain} className="inline-flex items-center gap-1.5 border bg-background px-2 py-1 tabular-nums text-[12.5px]">
                 <FaviconImg src={favicon(domain)} /> {domain.split(".")[0]}
               </span>
             ))}
           </div>
         </div>
         <div className="bg-card p-3">
-          <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/72 dark:text-foreground/82">market signal</div>
+          <div className="mb-2 tabular-nums text-[12.5px] text-foreground/72 dark:text-foreground/82">market signal</div>
           <div className="flex items-center gap-2 text-[12px] font-medium"><GraphIcon className="size-4 text-primary" /> North Atlantic lane stable</div>
         </div>
       </div>
@@ -632,10 +632,10 @@ const tradeCaseStudy: CaseStudyFragment[] = [
       <div className="border bg-card">
         <div className="grid grid-cols-[24px_1fr_auto] items-center gap-2.5 px-3 py-3">
           <span className="inline-flex size-6 items-center justify-center bg-primary/10"><FishIcon className="size-4 text-primary" /></span>
-          <div><div className="text-[12px] font-medium">Frozen goods RFQ · 12.4 MT · CIF NJ</div><div className="font-mono text-[11px] text-foreground/72 dark:text-foreground/82">recommended quote · buyer context attached</div></div>
-          <span className="font-mono text-[11px] font-semibold text-primary">₹2.4L</span>
+          <div><div className="text-[12px] font-medium">Frozen goods RFQ · 12.4 MT · CIF NJ</div><div className="tabular-nums text-[12.5px] text-foreground/72 dark:text-foreground/82">recommended quote · buyer context attached</div></div>
+          <span className="tabular-nums text-[12.5px] font-semibold text-primary">₹2.4L</span>
         </div>
-        <div className="flex items-center gap-2 border-t bg-shell px-3 py-2 font-mono text-[11px] uppercase tracking-[0.05em] text-green-700 dark:text-green-300"><FlagIcon className="size-3.5" /> margin 18.4% · guardrail 17.5%</div>
+        <div className="flex items-center gap-2 border-t bg-shell px-3 py-2 tabular-nums text-[12.5px] text-green-700 dark:text-green-300"><FlagIcon className="size-3.5" /> margin 18.4% · guardrail 17.5%</div>
       </div>
     )
   },
@@ -645,13 +645,13 @@ const tradeCaseStudy: CaseStudyFragment[] = [
     body: "The quote is ready to commit with the PO fields mapped for the next system handoff. Human review stays in the loop.",
     fragment: (
       <div className="border bg-card p-3">
-        <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/72 dark:text-foreground/82">PO fields · example order</div>
-        <div className="grid grid-cols-2 gap-2 text-[11px]">
+        <div className="mb-2 tabular-nums text-[12.5px] text-foreground/72 dark:text-foreground/82">PO fields · example order</div>
+        <div className="grid grid-cols-2 gap-2 text-[12.5px]">
           {[["SKU", "HS 0306.17"], ["quantity", "12.4 MT"], ["terms", "CIF NJ"], ["ERP", "Zoho mapped"]].map(([label, value]) => (
-            <div key={label} className="border bg-background px-2.5 py-2"><div className="font-mono text-[11px] uppercase text-foreground/60">{label}</div><div className="mt-1 font-medium">{value}</div></div>
+            <div key={label} className="border bg-background px-2.5 py-2"><div className="tabular-nums text-[12.5px] text-foreground/60">{label}</div><div className="mt-1 font-medium">{value}</div></div>
           ))}
         </div>
-        <div className="mt-2 flex items-center gap-2 bg-shell px-2.5 py-2 font-mono text-[11px] uppercase tracking-[0.05em] text-foreground"><CheckCircleIcon className="size-3.5 text-green-400" /> approved · ready to send</div>
+        <div className="mt-2 flex items-center gap-2 bg-shell px-2.5 py-2 tabular-nums text-[12.5px] text-foreground"><CheckCircleIcon className="size-3.5 text-green-400" /> approved · ready to send</div>
       </div>
     )
   },
@@ -661,9 +661,9 @@ const tradeCaseStudy: CaseStudyFragment[] = [
     body: "The decision, its evidence, and every system handoff stay attached for the next shipment.",
     fragment: (
       <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 border bg-card p-4">
-        <div><div className="font-mono text-[11px] uppercase tracking-[0.08em] text-foreground/60">signal</div><div className="mt-1 text-2xl font-semibold">Buyer RFQ</div><div className="font-mono text-[11px] text-foreground/72 dark:text-foreground/82">email + trade context</div></div>
+        <div><div className="tabular-nums text-[12.5px] text-foreground/60">signal</div><div className="mt-1 text-2xl font-semibold">Buyer RFQ</div><div className="tabular-nums text-[12.5px] text-foreground/72 dark:text-foreground/82">email + trade context</div></div>
         <ArrowRightIcon className="size-5 text-primary" />
-        <div className="text-right"><div className="font-mono text-[11px] uppercase tracking-[0.08em] text-primary">reviewed action</div><div className="mt-1 text-2xl font-semibold text-primary">Quote ready</div><div className="font-mono text-[11px] text-foreground/72 dark:text-foreground/82">evidence attached</div></div>
+        <div className="text-right"><div className="tabular-nums text-[12.5px] text-primary">reviewed action</div><div className="mt-1 text-2xl font-semibold text-primary">Quote ready</div><div className="tabular-nums text-[12.5px] text-foreground/72 dark:text-foreground/82">evidence attached</div></div>
       </div>
     )
   }
@@ -681,27 +681,27 @@ function SignalInsightCanvas() {
   return (
     <div className="case-insight relative overflow-hidden border-y border-border/80 bg-card">
       <div className="flex flex-wrap items-center justify-between gap-3 border-b bg-shell px-3 py-2.5">
-        <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.08em]">
+        <div className="flex items-center gap-2 tabular-nums text-[12.5px]">
           <span className="size-1.5 bg-primary" />
           <span>joined insight · example RFQ</span>
         </div>
-        <span className="font-mono text-[11px] text-primary">4 sources · 1 memory thread</span>
+        <span className="tabular-nums text-[12.5px] text-primary">4 sources · 1 memory thread</span>
       </div>
 
       <div className="grid lg:grid-cols-[0.72fr_1.4fr_0.78fr]">
         <div className="border-b p-3 lg:border-b-0 lg:border-r">
-          <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/55">ontology in context</p>
+          <p className="tabular-nums text-[12.5px] text-foreground/55">ontology in context</p>
           <svg viewBox="0 0 220 170" className="mt-3 h-[170px] w-full" role="img" aria-label="Ontology map linking one RFQ to buyer, SKU, lane, and margin">
             <path d="M110 82 L47 34 M110 82 L173 34 M110 82 L47 136 M110 82 L173 136" className="fill-none stroke-primary/35 stroke-[1.5]" />
             <g className="fill-card stroke-primary stroke-[1.5]"><rect x="82" y="57" width="56" height="50" /><circle cx="47" cy="34" r="13" /><circle cx="173" cy="34" r="13" /><circle cx="47" cy="136" r="13" /><circle cx="173" cy="136" r="13" /></g>
-            <g className="fill-foreground font-mono text-[11px]"><text x="110" y="79" textAnchor="middle">RFQ</text><text x="110" y="91" textAnchor="middle" className="fill-primary">28471</text><text x="47" y="17" textAnchor="middle">BUYER</text><text x="173" y="17" textAnchor="middle">SKU</text><text x="47" y="159" textAnchor="middle">LANE</text><text x="173" y="159" textAnchor="middle">MARGIN</text></g>
+            <g className="fill-foreground tabular-nums text-[12.5px]"><text x="110" y="79" textAnchor="middle">RFQ</text><text x="110" y="91" textAnchor="middle" className="fill-primary">28471</text><text x="47" y="17" textAnchor="middle">BUYER</text><text x="173" y="17" textAnchor="middle">SKU</text><text x="47" y="159" textAnchor="middle">LANE</text><text x="173" y="159" textAnchor="middle">MARGIN</text></g>
           </svg>
-          <p className="mt-1 text-[11px] leading-5 text-foreground/65">One request. Four linked entities. One explainable decision.</p>
+          <p className="mt-1 text-[12.5px] leading-5 text-foreground/65">One request. Four linked entities. One explainable decision.</p>
         </div>
 
         <div className="border-b p-3 lg:border-b-0 lg:border-r">
           <div className="flex items-start justify-between gap-3">
-            <div><p className="font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/55">margin by comparable quote</p><p className="mt-1 text-lg font-semibold">18.4% <span className="font-mono text-[11px] font-normal text-green-600">+0.9pp above guardrail</span></p></div>
+            <div><p className="tabular-nums text-[12.5px] text-foreground/55">margin by comparable quote</p><p className="mt-1 text-lg font-semibold">18.4% <span className="tabular-nums text-[12.5px] font-normal text-green-600">+0.9pp above guardrail</span></p></div>
             <GraphIcon className="size-4 text-primary" />
           </div>
           <svg viewBox="0 0 420 185" className="mt-5 h-[185px] w-full" role="img" aria-label="Margin trend from joined historical quotes">
@@ -710,22 +710,22 @@ function SignalInsightCanvas() {
             <path d="M28 126 L66 118 L104 130 L142 100 L180 108 L218 82 L256 91 L294 64 L332 72 L370 42 L410 51 L410 158 L28 158 Z" fill="rgba(58, 88, 230, 0.08)" />
             <line x1={28 + activePoint * 38.2} x2={28 + activePoint * 38.2} y1="20" y2="158" className="stroke-primary/55 stroke-[1] stroke-dasharray-[3_3]" />
             <circle cx={28 + activePoint * 38.2} cy={activePoint === 10 ? 51 : activePoint === 9 ? 42 : activePoint === 7 ? 64 : 82} r="5" className="fill-primary stroke-background stroke-2" />
-            <g className="fill-foreground/50 font-mono text-[11px]"><text x="28" y="174">-90d</text><text x="198" y="174">-30d</text><text x="382" y="174">today</text></g>
+            <g className="fill-foreground/50 tabular-nums text-[12.5px]"><text x="28" y="174">-90d</text><text x="198" y="174">-30d</text><text x="382" y="174">today</text></g>
           </svg>
-          <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[11px] text-foreground/60"><span><i className="mr-1 inline-block size-1.5 bg-primary" />historical quotes</span><span><i className="mr-1 inline-block size-1.5 border border-primary" />current RFQ</span></div>
+          <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 tabular-nums text-[12.5px] text-foreground/60"><span><i className="mr-1 inline-block size-1.5 bg-primary" />historical quotes</span><span><i className="mr-1 inline-block size-1.5 border border-primary" />current RFQ</span></div>
         </div>
 
         <div className="p-3">
-          <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/55">insight</p>
+          <p className="tabular-nums text-[12.5px] text-foreground/55">insight</p>
           <p className="mt-3 text-xl font-semibold leading-tight">Hold the quote at <span className="text-primary">$3.42/kg.</span></p>
-          <p className="mt-3 text-[11px] leading-5 text-foreground/68">Margin clears the guardrail because the lane recovered 6 days and the last approved floor was recalled from memory.</p>
-          <div className="mt-5 border-l-2 border-primary bg-shell px-3 py-2.5"><p className="font-mono text-[11px] uppercase tracking-[0.08em] text-primary">why ubik says this</p><p className="mt-1 text-[11px] leading-5">2 comparable quotes · 1 WhatsApp commitment · 1 spreadsheet floor</p></div>
+          <p className="mt-3 text-[12.5px] leading-5 text-foreground/68">Margin clears the guardrail because the lane recovered 6 days and the last approved floor was recalled from memory.</p>
+          <div className="mt-5 border-l-2 border-primary bg-shell px-3 py-2.5"><p className="tabular-nums text-[12.5px] text-primary">why ubik says this</p><p className="mt-1 text-[12.5px] leading-5">2 comparable quotes · 1 WhatsApp commitment · 1 spreadsheet floor</p></div>
         </div>
       </div>
 
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t bg-shell px-3 py-2.5">
-        <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/55">memory recalled</span>
-        {sourceMarks.map(([domain, label]) => <span key={domain} className="inline-flex items-center gap-1.5 font-mono text-[11px] text-foreground/70"><FaviconImg src={favicon(domain)} />{label}</span>)}
+        <span className="tabular-nums text-[12.5px] text-foreground/55">memory recalled</span>
+        {sourceMarks.map(([domain, label]) => <span key={domain} className="inline-flex items-center gap-1.5 tabular-nums text-[12.5px] text-foreground/70"><FaviconImg src={favicon(domain)} />{label}</span>)}
       </div>
     </div>
   );
@@ -740,31 +740,31 @@ function MemoryJoinCanvas() {
   ];
   return (
     <div className="case-insight overflow-hidden border-y border-border/80 bg-card">
-      <div className="flex items-center justify-between border-b bg-shell px-3 py-2.5"><span className="font-mono text-[11px] uppercase tracking-[0.08em]">memory join · 4 signals</span><span className="font-mono text-[11px] text-primary">thread → example RFQ</span></div>
+      <div className="flex items-center justify-between border-b bg-shell px-3 py-2.5"><span className="tabular-nums text-[12.5px]">memory join · 4 signals</span><span className="tabular-nums text-[12.5px] text-primary">thread → example RFQ</span></div>
       <div className="grid lg:grid-cols-[1.25fr_0.75fr]">
         <div className="p-3 lg:border-r">
-          <div className="mb-3 flex items-center justify-between"><p className="font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/55">same entity, different systems</p><span className="inline-flex items-center gap-1 font-mono text-[11px] text-green-600"><span className="size-1.5 bg-green-500" />synced</span></div>
+          <div className="mb-3 flex items-center justify-between"><p className="tabular-nums text-[12.5px] text-foreground/55">same entity, different systems</p><span className="inline-flex items-center gap-1 tabular-nums text-[12.5px] text-green-600"><span className="size-1.5 bg-green-500" />synced</span></div>
           <div className="relative border-l border-primary/35 pl-4">
             {rows.map(([time, source, copy, kind]) => (
               <div key={source} className="relative grid grid-cols-[3.2rem_5.3rem_1fr] items-start gap-2 border-b py-3 last:border-b-0">
                 <span className="absolute -left-[1.3rem] top-4 size-2 border border-primary bg-card" />
-                <span className="font-mono text-[11px] text-foreground/50">{time}</span>
-                <span className={cn("font-mono text-[11px] uppercase tracking-[0.06em]", kind === "memory" ? "text-primary" : "text-foreground/60")}>{source}</span>
-                <span className="text-[11px] leading-5">{copy}</span>
+                <span className="tabular-nums text-[12.5px] text-foreground/50">{time}</span>
+                <span className={cn("tabular-nums text-[12.5px]", kind === "memory" ? "text-primary" : "text-foreground/60")}>{source}</span>
+                <span className="text-[12.5px] leading-5">{copy}</span>
               </div>
             ))}
           </div>
         </div>
         <div className="border-t bg-shell/60 p-3 lg:border-t-0">
-          <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/55">what memory changes</p>
+          <p className="tabular-nums text-[12.5px] text-foreground/55">what memory changes</p>
           <div className="mt-5 space-y-4">
-            <div><p className="text-2xl font-semibold text-primary">3.20/kg</p><p className="font-mono text-[11px] uppercase text-foreground/55">recalled floor</p></div>
-            <div className="border-l-2 border-primary px-3"><p className="text-[12px] font-medium">“Floor must stay under $3.20/kg.”</p><p className="mt-1 font-mono text-[11px] text-foreground/55">Buyer · WhatsApp · prior commitment</p></div>
-            <p className="text-[11px] leading-5 text-foreground/65">Ubik does not just retrieve the email. It resolves the buyer, shipment, SKU, and prior commitment into one working context.</p>
+            <div><p className="text-2xl font-semibold text-primary">3.20/kg</p><p className="tabular-nums text-[12.5px] text-foreground/55">recalled floor</p></div>
+            <div className="border-l-2 border-primary px-3"><p className="text-[12px] font-medium">“Floor must stay under $3.20/kg.”</p><p className="mt-1 tabular-nums text-[12.5px] text-foreground/55">Buyer · WhatsApp · prior commitment</p></div>
+            <p className="text-[12.5px] leading-5 text-foreground/65">Ubik does not just retrieve the email. It resolves the buyer, shipment, SKU, and prior commitment into one working context.</p>
           </div>
         </div>
       </div>
-      <div className="border-t bg-shell px-3 py-2.5 font-mono text-[11px] uppercase tracking-[0.08em] text-foreground"><span className="text-green-300">memory updated</span> · example buyer / RFQ / floor-price</div>
+      <div className="border-t bg-shell px-3 py-2.5 tabular-nums text-[12.5px] text-foreground"><span className="text-green-300">memory updated</span> · example buyer / RFQ / floor-price</div>
     </div>
   );
 }
@@ -772,12 +772,12 @@ function MemoryJoinCanvas() {
 function ApprovalArtifactCanvas() {
   return (
     <div className="case-insight overflow-hidden border-y border-border/80 bg-shell text-foreground">
-      <div className="flex items-center justify-between border-b border-foreground/15 px-3 py-2.5"><span className="font-mono text-[11px] uppercase tracking-[0.08em]">approval artifact · ready to commit</span><span className="text-[11px] text-green-300">guardrail passed</span></div>
+      <div className="flex items-center justify-between border-b border-foreground/15 px-3 py-2.5"><span className="tabular-nums text-[12.5px]">approval artifact · ready to commit</span><span className="text-[12.5px] text-green-300">guardrail passed</span></div>
       <div className="grid lg:grid-cols-[1fr_0.8fr]">
-        <div className="p-4 lg:border-r lg:border-foreground/15"><div className="flex items-end justify-between gap-4"><div><p className="font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/55">buyer reply</p><p className="mt-2 text-xl font-semibold">Quote cleared the margin guardrail.</p></div><span className="font-mono text-[11px] text-green-300">ready for review</span></div><p className="mt-4 max-w-md text-[11px] leading-5 text-foreground/65">The draft includes the margin proof, available inventory, and the linked prior commitment.</p><div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[11px] uppercase text-foreground/55"><span>source proof attached</span><span>undo window 8s</span><span>human approval required</span></div></div>
-        <div className="p-4"><p className="font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/55">commit map</p><div className="mt-4 grid gap-2">{[["SKU", "HS 0306.17"], ["Qty", "12.4 MT"], ["Terms", "CIF NJ"], ["ERP", "Zoho · ready"]].map(([key, value]) => <div key={key} className="flex items-center justify-between border-b border-foreground/15 py-2 font-mono text-[11px]"><span className="text-foreground/50">{key}</span><span>{value}</span></div>)}</div></div>
+        <div className="p-4 lg:border-r lg:border-foreground/15"><div className="flex items-end justify-between gap-4"><div><p className="tabular-nums text-[12.5px] text-foreground/55">buyer reply</p><p className="mt-2 text-xl font-semibold">Quote cleared the margin guardrail.</p></div><span className="tabular-nums text-[12.5px] text-green-300">ready for review</span></div><p className="mt-4 max-w-md text-[12.5px] leading-5 text-foreground/65">The draft includes the margin proof, available inventory, and the linked prior commitment.</p><div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 tabular-nums text-[12.5px] text-foreground/55"><span>source proof attached</span><span>undo window 8s</span><span>human approval required</span></div></div>
+        <div className="p-4"><p className="tabular-nums text-[12.5px] text-foreground/55">commit map</p><div className="mt-4 grid gap-2">{[["SKU", "HS 0306.17"], ["Qty", "12.4 MT"], ["Terms", "CIF NJ"], ["ERP", "Zoho · ready"]].map(([key, value]) => <div key={key} className="flex items-center justify-between border-b border-foreground/15 py-2 tabular-nums text-[12.5px]"><span className="text-foreground/50">{key}</span><span>{value}</span></div>)}</div></div>
       </div>
-      <div className="flex items-center gap-2 border-t border-foreground/15 px-3 py-2.5 font-mono text-[11px] uppercase tracking-[0.08em] text-green-300"><CheckCircleIcon className="size-3.5" /> all fields mapped · awaiting operator approval</div>
+      <div className="flex items-center gap-2 border-t border-foreground/15 px-3 py-2.5 tabular-nums text-[12.5px] text-green-300"><CheckCircleIcon className="size-3.5" /> all fields mapped · awaiting operator approval</div>
     </div>
   );
 }
@@ -785,13 +785,13 @@ function ApprovalArtifactCanvas() {
 function OutcomeTimelineCanvas() {
   return (
     <div className="case-insight overflow-hidden border-y border-border/80 bg-card">
-      <div className="border-b bg-shell px-3 py-2.5 font-mono text-[11px] uppercase tracking-[0.08em]">outcome · trade memory written</div>
+      <div className="border-b bg-shell px-3 py-2.5 tabular-nums text-[12.5px]">outcome · trade memory written</div>
       <div className="grid items-center gap-4 p-4 sm:grid-cols-[0.8fr_auto_0.8fr]">
-        <div><p className="font-mono text-[11px] uppercase tracking-[0.1em] text-foreground/55">request</p><p className="mt-1 text-3xl font-semibold">Buyer RFQ</p><p className="mt-1 text-[11px] text-foreground/60">email, documents, prior commitments</p></div>
+        <div><p className="tabular-nums text-[12.5px] text-foreground/55">request</p><p className="mt-1 text-3xl font-semibold">Buyer RFQ</p><p className="mt-1 text-[12.5px] text-foreground/60">email, documents, prior commitments</p></div>
         <div className="relative hidden h-px w-full bg-primary/45 sm:block"><span className="absolute -top-1.5 left-1/2 size-3 -translate-x-1/2 rotate-45 border border-primary bg-card" /></div>
-        <div className="sm:text-right"><p className="font-mono text-[11px] uppercase tracking-[0.1em] text-primary">reviewed action</p><p className="mt-1 text-3xl font-semibold text-primary">Quote ready</p><p className="mt-1 text-[11px] text-foreground/60">evidence attached, systems mapped</p></div>
+        <div className="sm:text-right"><p className="tabular-nums text-[12.5px] text-primary">reviewed action</p><p className="mt-1 text-3xl font-semibold text-primary">Quote ready</p><p className="mt-1 text-[12.5px] text-foreground/60">evidence attached, systems mapped</p></div>
       </div>
-      <div className="grid border-t bg-shell sm:grid-cols-3"><div className="border-b p-3 sm:border-b-0 sm:border-r"><p className="font-mono text-[11px] uppercase text-foreground/55">decision</p><p className="mt-1 text-[11px] font-medium">Quote approved</p></div><div className="border-b p-3 sm:border-b-0 sm:border-r"><p className="font-mono text-[11px] uppercase text-foreground/55">system</p><p className="mt-1 text-[11px] font-medium">PO fields mapped</p></div><div className="p-3"><p className="font-mono text-[11px] uppercase text-foreground/55">memory</p><p className="mt-1 text-[11px] font-medium text-primary">Evidence remains searchable</p></div></div>
+      <div className="grid border-t bg-shell sm:grid-cols-3"><div className="border-b p-3 sm:border-b-0 sm:border-r"><p className="tabular-nums text-[12.5px] text-foreground/55">decision</p><p className="mt-1 text-[12.5px] font-medium">Quote approved</p></div><div className="border-b p-3 sm:border-b-0 sm:border-r"><p className="tabular-nums text-[12.5px] text-foreground/55">system</p><p className="mt-1 text-[12.5px] font-medium">PO fields mapped</p></div><div className="p-3"><p className="tabular-nums text-[12.5px] text-foreground/55">memory</p><p className="mt-1 text-[12.5px] font-medium text-primary">Evidence remains searchable</p></div></div>
     </div>
   );
 }
@@ -824,7 +824,7 @@ export function LandingV2CaseStudy() {
             <div className="flex gap-2 overflow-x-auto lg:grid lg:gap-0 lg:overflow-visible">
               {tradeCaseStudy.map((step, index) => (
                 <button key={step.eyebrow} type="button" onClick={() => setActiveIndex(index)} className={cn("case-study-step min-w-[8.5rem] border-b-2 px-2 py-3 text-left transition-colors lg:min-w-0", index === activeIndex ? "border-primary text-foreground" : "border-transparent text-foreground/55 hover:text-foreground")}>
-                  <span className="block font-mono text-[11px] uppercase tracking-[0.1em] text-primary">0{index + 1}</span>
+                  <span className="block tabular-nums text-[12.5px] text-primary">0{index + 1}</span>
                   <span className="mt-1 block text-[12px] font-medium">{step.eyebrow.replace(/^\d+\s*·\s*/, "")}</span>
                 </button>
               ))}
@@ -837,10 +837,10 @@ export function LandingV2CaseStudy() {
               <motion.div key={active.eyebrow} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.24, ease: "easeOut" }} className="relative z-10">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-primary">stage 0{activeIndex + 1} · {active.eyebrow.replace(/^\d+\s*·\s*/, "")}</p>
+                    <p className="tabular-nums text-[12.5px] text-primary">stage 0{activeIndex + 1} · {active.eyebrow.replace(/^\d+\s*·\s*/, "")}</p>
                     <h3 className="mt-2 max-w-[32rem] text-2xl font-semibold leading-[1.08] sm:text-3xl">{active.title}</h3>
                   </div>
-                  <span className="hidden border-l-2 border-primary bg-shell px-3 py-2 font-mono text-[11px] uppercase tracking-[0.08em] text-primary sm:block">human review</span>
+                  <span className="hidden border-l-2 border-primary bg-shell px-3 py-2 tabular-nums text-[12.5px] text-primary sm:block">human review</span>
                 </div>
                 <div className="mt-7"><CaseStudyInsightCanvas stage={activeIndex} /></div>
               </motion.div>
@@ -858,14 +858,14 @@ export function LandingV2CaseStudy() {
               ].map(([label, done]) => (
                 <div key={String(label)} className="relative pb-5 last:pb-0">
                   <span className={cn("absolute -left-[1.3rem] top-0 size-2 border", done ? "border-primary bg-primary" : "border-border bg-background")} />
-                  <p className={cn("font-mono text-[11px] uppercase tracking-[0.08em]", done ? "text-primary" : "text-foreground/45")}>{label}</p>
-                  <p className="mt-1 text-[11px] leading-5 text-foreground/65">{done ? "logged in the trace" : "waiting for next handoff"}</p>
+                  <p className={cn("tabular-nums text-[12.5px]", done ? "text-primary" : "text-foreground/45")}>{label}</p>
+                  <p className="mt-1 text-[12.5px] leading-5 text-foreground/65">{done ? "logged in the trace" : "waiting for next handoff"}</p>
                 </div>
               ))}
             </div>
           </aside>
         </div>
-        <div className="mt-4 flex items-center justify-between gap-4"><span className="font-mono text-[11px] uppercase tracking-[0.08em] text-foreground/60">Four stages · one evidence trail</span><div className="flex gap-1.5" aria-hidden="true">{tradeCaseStudy.map((step, index) => <span key={step.eyebrow} className={cn("size-1.5", index === activeIndex ? "bg-primary" : "bg-foreground/25")} />)}</div></div>
+        <div className="mt-4 flex items-center justify-between gap-4"><span className="tabular-nums text-[12.5px] text-foreground/60">Four stages · one evidence trail</span><div className="flex gap-1.5" aria-hidden="true">{tradeCaseStudy.map((step, index) => <span key={step.eyebrow} className={cn("size-1.5", index === activeIndex ? "bg-primary" : "bg-foreground/25")} />)}</div></div>
       </div>
     </section>
   );
@@ -878,7 +878,7 @@ export function LandingV2FounderStatement() {
       <div className="container-page relative z-10 grid gap-8 lg:grid-cols-[12rem_1fr] lg:items-start">
         <div className="founder-photo-stack">
           <img src="/founders/hemanth.png" alt="Hemanth Rao, founder of Ubik" className="size-32 border object-cover grayscale" loading="eager" />
-          <span className="font-mono text-[11px] uppercase tracking-[0.1em]">Hemanth Rao</span>
+          <span className="tabular-nums text-[12.5px]">Hemanth Rao</span>
         </div>
         <figure className="founder-proof-copy max-w-[62rem]">
           <blockquote className="text-2xl font-medium leading-[1.18] tracking-[-0.02em] sm:text-3xl">
@@ -1031,7 +1031,7 @@ function RailStepPanel({ item }: { item: RailStep }) {
     return (
       <div className="rail-chat-console">
         <div className="rail-chat-header">
-          <span className={cn("inline-flex w-fit items-center gap-1.5 px-2.5 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.06em]", railToneClasses[item.pill.tone])}>
+          <span className={cn("inline-flex w-fit items-center gap-1.5 px-2.5 py-1 tabular-nums text-[12.5px] font-medium", railToneClasses[item.pill.tone])}>
             <item.pill.icon className="size-3" />
             {chat.status}
           </span>
@@ -1231,7 +1231,7 @@ export function LandingV2HowSection() {
                     index === activeStep && "border-t-primary bg-shell"
                   )}
                 >
-                  <div className="font-mono text-[11px] font-medium tracking-[0.06em] text-foreground/72 dark:text-foreground/82">{item.time}</div>
+                  <div className="tabular-nums text-[12.5px] font-medium text-foreground/72 dark:text-foreground/82">{item.time}</div>
                   <div className="mt-1 text-[12px] font-medium leading-[1.4]">{item.title}</div>
                 </button>
                 {index === activeStep ? (
@@ -1255,7 +1255,7 @@ export function LandingV2HowSection() {
                   index === activeStep && "bg-shell border-t-primary"
                 )}
               >
-                <div className="font-mono text-[11px] font-medium tracking-[0.06em] text-foreground/72 dark:text-foreground/82">{item.time}</div>
+                <div className="tabular-nums text-[12.5px] font-medium text-foreground/72 dark:text-foreground/82">{item.time}</div>
                 <div className="mt-1 text-[12px] font-medium leading-[1.4]">{item.title}</div>
               </button>
             ))}
@@ -1325,11 +1325,11 @@ export function LandingV2WhatUbikDoes() {
                 <span className="inline-flex size-9 items-center justify-center border bg-muted text-primary">
                   <item.icon className="size-[18px]" />
                 </span>
-                <span className="ml-auto font-mono text-[11px] uppercase tracking-[0.12em] text-foreground/72 dark:text-foreground/82">{item.num}</span>
+                <span className="ml-auto tabular-nums text-[12.5px] text-foreground/72 dark:text-foreground/82">{item.num}</span>
               </div>
               <h3 className="text-[1.0625rem] font-semibold tracking-[-0.018em]">{item.title}</h3>
               <p className="text-[13px] leading-[1.6] text-foreground/72 dark:text-foreground/82">{item.body}</p>
-              <span className="mt-2 inline-flex items-center border-l-2 border-primary bg-shell px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.06em] text-primary">
+              <span className="mt-2 inline-flex items-center border-l-2 border-primary bg-shell px-3 py-1.5 tabular-nums text-[12.5px] text-primary">
                 {item.handoff}
               </span>
             </div>

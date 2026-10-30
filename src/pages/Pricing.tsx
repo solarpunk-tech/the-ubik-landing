@@ -1,4 +1,5 @@
 import { type ReactNode, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import {
   AppStoreLogoIcon,
@@ -13,16 +14,15 @@ import {
   PlugsConnectedIcon,
   WindowsLogoIcon
 } from "@phosphor-icons/react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MatrixField } from "@/components/landing/MatrixField";
+import { PackingLineFigure } from "@/components/landing/iso-scenes/scenes";
 import { MeetingsLiveStrip } from "@/components/landing/MeetingsLiveStrip";
 import { PageShell } from "@/components/landing/PageShell";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Seo } from "@/components/seo/Seo";
-import { externalLinks } from "@/lib/links";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/posthog";
 
@@ -38,9 +38,9 @@ const connectorApps = [
 
 const favicon = (domain: string) => `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
 
-const connectorsFeature = (
+const ConnectorsFeature = ({ label, more }: { label: string; more: string }) => (
   <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
-    Connectors
+    {label}
     <span className="flex items-center gap-1">
       {connectorApps.map(([label, domain]) => (
         <span key={label} className="flex size-5 items-center justify-center bg-white" title={label}>
@@ -48,34 +48,9 @@ const connectorsFeature = (
         </span>
       ))}
     </span>
-    and 100+ more
+    {more}
   </span>
 );
-
-const teammateFeatures: ReactNode[] = [
-  "One production workflow (pick from the library or we build it)",
-  "The full Workspace, including the mobile app for the floor",
-  "Organisational memory",
-  "Email and WhatsApp ingestion",
-  connectorsFeature,
-  "No user or token limit"
-];
-
-const enterpriseFeatures = [
-  "Everything in Teammate",
-  "Multiple workflows",
-  "Custom decision logic on your own context graph: every approval, exception and precedent, reused",
-  "Policy engine and audit trail",
-  "A trade expert and a product engineer on the account"
-];
-
-const replacesRows = [
-  ["Per-seat SaaS, price grows with headcount", "One price per workflow, no user or token limit"],
-  ["Six-month ERP implementation", "First workflow live in weeks"],
-  ["Implementation consultants and transformation decks", "Trade expert and engineer on the account, included"],
-  ["Forward-deployed engineers at day rates", "Workflows personalised, not configured or modular"],
-  ["Four to seven coordinators chasing emails", "One teammate that chases, checks and prepares the decision"]
-] as const;
 
 const desktopApps = [
   { label: "Mac", href: "/download?os=mac", icon: AppleLogoIcon },
@@ -92,55 +67,6 @@ const privacyLabels = [
   { label: "Desktop context bridge", icon: PlugsConnectedIcon },
   { label: "Encrypted files", icon: LockKeyIcon },
   { label: "Credentials on-device", icon: KeyIcon }
-];
-
-const pricingFaqs = [
-  {
-    question: "What data is shared with LLMs?",
-    answer: [
-      "Ubik minimizes what is sent to external LLMs. Models are used for planning, reasoning and drafting actions, not for bulk raw-data ingestion.",
-      "Sensitive context like RFQs, supplier pricing, margins, customer names and credentials is kept in Ubik's context layer. Customer data is never used to train third-party models."
-    ]
-  },
-  {
-    question: "What does Teammate cover?",
-    answer: [
-      "Teammate is one production workflow running on the full Workspace: the mobile app for the floor, organisational memory, email and WhatsApp ingestion, connectors for your ERP, CRM and 100+ more apps, and human approval on every write.",
-      "Everyone on the team can use it. You pay for the workflow, not the people."
-    ]
-  },
-  {
-    question: "How does Enterprise expand Teammate?",
-    answer: [
-      "Enterprise starts with everything in Teammate, then adds more workflows, each priced on its own, plus decision briefs for the people who sign.",
-      "Decisions run on your own context graph, so every approval, exception and precedent is kept and reused. It adds a policy engine with an audit trail, and keeps a trade expert and a product engineer on the account."
-    ]
-  },
-  {
-    question: "How do credentials and private files work?",
-    answer: [
-      "Credentials stay on-device. Private files are encrypted. ubik Meetings is designed to bridge desktop context to the Webapp without turning your local machine into a public data lake.",
-      "Audit trail on every change. SOC 2 in progress."
-    ]
-  },
-  {
-    question: "Why no per-seat pricing?",
-    answer: [
-      "Because the floor should use it. A packing supervisor without an email address signs in with a phone number, and we are not charging you for that."
-    ]
-  },
-  {
-    question: "What counts as a workflow?",
-    answer: [
-      "One repeatable job with a defined input, a check, and a human approval, for example yield reconciliation, packaging tracking, export documents or supplier follow-up."
-    ]
-  },
-  {
-    question: "Can we start on Teammate and move to Enterprise?",
-    answer: [
-      "Yes. Enterprise is the same platform with more workflows and decision briefs. Nothing is re-implemented."
-    ]
-  }
 ];
 
 function FeatureList({ features, active = false }: { features: ReactNode[]; active?: boolean }) {
@@ -160,7 +86,20 @@ function FeatureList({ features, active = false }: { features: ReactNode[]; acti
   );
 }
 
+type FaqCopy = { q: string; a: string[] };
+
 export default function Pricing() {
+  const { t } = useTranslation();
+  const list = <T,>(key: string) => t(key, { returnObjects: true }) as T;
+  // One offer: the first workflow free for a month, priced per workflow after.
+  const enterpriseFeatures: ReactNode[] = [
+    ...list<string[]>("pricing.enterprise.features").filter((feature) => !feature.startsWith("Everything in")),
+    <ConnectorsFeature key="connectors" label={t("pricing.teammate.connectors")} more={t("pricing.teammate.connectorsMore")} />
+  ];
+  const replacesRows = list<{ old: string; new: string }[]>("pricing.replaces.rows");
+  const privacyText = list<string[]>("pricing.apps.privacy");
+  const pricingFaqs = list<FaqCopy[]>("pricing.faq.items");
+
   useEffect(() => {
     trackEvent("pricing_viewed");
   }, []);
@@ -168,8 +107,8 @@ export default function Pricing() {
   return (
     <PageShell>
       <Seo
-        title="Pricing | Ubik"
-        description="Teammate is $1,000 a month for one AI workflow with no user or token limit. Enterprise adds more workflows and decision briefs. Priced per workflow, not per person."
+        title={t("pricing.seo.title")}
+        description={t("pricing.seo.description")}
         canonical="https://theubik.com/pricing"
       />
       <JsonLd
@@ -179,22 +118,20 @@ export default function Pricing() {
           name: "Ubik",
           description: "AI operating workspace for perishable trade operators, priced per workflow with no user or token limit.",
           offers: [
-            {
-              "@type": "Offer",
-              name: "Teammate",
-              description: "One production workflow on the full Workspace, no user or token limit.",
-              price: "1000",
-              priceCurrency: "USD",
-              priceSpecification: {
-                "@type": "UnitPriceSpecification",
-                price: "1000",
-                priceCurrency: "USD",
-                billingDuration: "P1M",
-                unitText: "workflow"
-              }
-            },
-            { "@type": "Offer", name: "Enterprise", priceCurrency: "USD", description: "Custom: platform plus workflows, priced each." }
+            { "@type": "Offer", name: "First workflow", price: "0", priceCurrency: "USD", description: "One workflow run end to end for a month, free; then priced per workflow with no user or token limit." }
           ]
+        }}
+      />
+
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: pricingFaqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.q,
+            acceptedAnswer: { "@type": "Answer", text: faq.a.join(" ") }
+          }))
         }}
       />
 
@@ -204,50 +141,26 @@ export default function Pricing() {
           <div className="pricing-brand-hero mb-10">
             <div className="max-w-4xl">
               <Badge variant="outline" className="mb-5">
-                Pricing
+                {t("pricing.badge")}
               </Badge>
               <h1 className="text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">
-                The best models, <span className="text-primary">without the meter running.</span>
+                {t("pricing.titleLead")} <span className="text-primary">{t("pricing.titleEmphasis")}</span>
               </h1>
               <p className="mt-5 max-w-3xl text-lg leading-8 text-primary-foreground/84">
-                We route each step to the frontier model that can do it and pay for the tokens, so your bill reads the same in a quiet week and a full one.
+                {t("pricing.lede")}
               </p>
             </div>
           </div>
 
-          <div className="grid gap-px border border-border bg-border lg:grid-cols-2">
-            <Card className="border-0 bg-primary text-primary-foreground">
-              <CardHeader className="gap-6 p-6 sm:p-8">
-                <CardTitle className="text-3xl">Teammate</CardTitle>
+          <div className="grid gap-px overflow-hidden rounded-xl border border-border bg-border">
+            <Card className="relative border-0 bg-card">
+              <PackingLineFigure className="pointer-events-none absolute top-2 right-2 hidden w-[27rem] lg:block xl:w-[31rem]" />
+              <CardHeader className="relative gap-6 p-6 sm:p-8">
+                <CardTitle className="text-3xl">{t("pricing.start.name")}</CardTitle>
                 <div>
-                  <p className="text-5xl font-semibold">
-                    $1,000
-                    <span className="ml-2 text-base font-medium text-primary-foreground/85">/ month</span>
-                  </p>
-                  <p className="mt-5 max-w-xl text-primary-foreground/92">
-                    One AI teammate. One workflow a month. Everything we offer, no seats.
-                  </p>
-                </div>
-              </CardHeader>
-              <CardContent className="grid gap-8 p-6 pt-0 sm:p-8 sm:pt-0">
-                <FeatureList features={teammateFeatures} active />
-                <div className="grid gap-3">
-                  <Button asChild variant="secondary" size="lg">
-                    <a href={externalLinks.founderMeeting}>
-                      Start with one workflow <ArrowRightIcon data-icon="inline-end" />
-                    </a>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 bg-card">
-              <CardHeader className="gap-6 p-6 sm:p-8">
-                <CardTitle className="text-3xl">Enterprise</CardTitle>
-                <div>
-                  <p className="text-5xl font-semibold">Custom</p>
+                  <p className="text-5xl font-semibold">{t("pricing.start.price")}</p>
                   <p className="mt-5 max-w-xl text-foreground/72 dark:text-foreground/82">
-                    Platform plus workflows, priced each. Decision briefs for the people who sign.
+                    {t("pricing.start.summary")}
                   </p>
                 </div>
               </CardHeader>
@@ -255,9 +168,9 @@ export default function Pricing() {
                 <FeatureList features={enterpriseFeatures} />
                 <div className="grid gap-3">
                   <Button asChild size="lg">
-                    <a href={externalLinks.founderMeeting}>
-                      Talk to us <ArrowRightIcon data-icon="inline-end" />
-                    </a>
+                    <Link to="/demo" onClick={() => trackEvent("cta_clicked", { cta: "request_demo", location: "pricing_start" })}>
+                      {t("pricing.start.cta")} <ArrowRightIcon data-icon="inline-end" />
+                    </Link>
                   </Button>
                 </div>
               </CardContent>
@@ -267,17 +180,17 @@ export default function Pricing() {
 
           <section className="mt-16" aria-labelledby="pricing-replaces-title">
             <h2 id="pricing-replaces-title" className="text-2xl font-semibold sm:text-3xl">
-              What this replaces
+              {t("pricing.replaces.title")}
             </h2>
             <table className="mt-6 w-full border-collapse text-left text-sm leading-6 sm:text-base">
               <thead>
                 <tr className="border-b border-border">
-                  <th scope="col" className="section-label w-1/2 pb-3 pr-6 font-medium">The old way</th>
-                  <th scope="col" className="section-label w-1/2 pb-3 font-medium">Ubik</th>
+                  <th scope="col" className="section-label w-1/2 pb-3 pr-6 font-medium">{t("pricing.replaces.oldWay")}</th>
+                  <th scope="col" className="section-label w-1/2 pb-3 font-medium">{t("pricing.replaces.ubik")}</th>
                 </tr>
               </thead>
               <tbody>
-                {replacesRows.map(([oldWay, ubik]) => (
+                {replacesRows.map(({ old: oldWay, new: ubik }) => (
                   <tr key={oldWay} className="border-b border-border">
                     <td className="py-4 pr-6 align-top text-foreground/60 dark:text-foreground/70">{oldWay}</td>
                     <td className="py-4 align-top">
@@ -290,13 +203,13 @@ export default function Pricing() {
                 ))}
               </tbody>
             </table>
-            <p className="mt-6 text-foreground/72 dark:text-foreground/82">Coordination used to be a payroll line. Now it is a workflow.</p>
+            <p className="mt-6 text-foreground/72 dark:text-foreground/82">{t("pricing.replaces.closing")}</p>
           </section>
 
-          <section className="mt-16 grid gap-px border border-border bg-border lg:grid-cols-[1.1fr_0.9fr]" aria-labelledby="pricing-apps-title">
+          <section className="mt-16 grid gap-px overflow-hidden rounded-xl border border-border bg-border lg:grid-cols-[1.1fr_0.9fr]" aria-labelledby="pricing-apps-title">
             <MeetingsLiveStrip className="py-10" />
             <div className="grid content-center gap-6 bg-card p-6 sm:p-8">
-              <h2 id="pricing-apps-title" className="text-2xl font-semibold">Get the apps</h2>
+              <h2 id="pricing-apps-title" className="text-2xl font-semibold">{t("pricing.apps.title")}</h2>
               <div className="grid grid-cols-2 gap-2">
                 {desktopApps.map(({ label, href, icon: Icon }) => (
                   <Button key={label} asChild variant="outline" size="lg">
@@ -311,15 +224,15 @@ export default function Pricing() {
                   <Button key={label} variant="outline" size="lg" disabled aria-disabled="true">
                     <Icon weight="fill" data-icon="inline-start" aria-hidden />
                     {label}
-                    <span className="font-mono text-[0.6rem] uppercase tracking-[0.12em]">Soon</span>
+                    <span className="tabular-nums text-[0.6rem]">{t("pricing.apps.soon")}</span>
                   </Button>
                 ))}
               </div>
               <ul className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm text-foreground/72 dark:text-foreground/82">
-                {privacyLabels.map(({ label, icon: Icon }) => (
+                {privacyLabels.map(({ label, icon: Icon }, index) => (
                   <li key={label} className="flex items-center gap-2">
                     <Icon className="size-4 shrink-0 text-primary" aria-hidden />
-                    {label}
+                    {privacyText[index] ?? label}
                   </li>
                 ))}
               </ul>
@@ -329,24 +242,29 @@ export default function Pricing() {
           <section className="mt-12 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
               <Badge variant="secondary" className="mb-4">
-                Questions
+                {t("pricing.faq.badge")}
               </Badge>
-              <h2 className="text-3xl font-semibold">LLMs plan and draft. ubik controls the context.</h2>
+              <h2 className="text-3xl font-semibold">{t("pricing.faq.title")}</h2>
             </div>
-            <Accordion type="single" collapsible className="w-full">
+            {/* Native <details>, not the Radix accordion: Radix drops closed
+                answers from the DOM, so crawlers and AI agents never saw them. */}
+            <div className="w-full border-t border-border">
               {pricingFaqs.map((faq) => (
-                <AccordionItem key={faq.question} value={faq.question}>
-                  <AccordionTrigger>{faq.question}</AccordionTrigger>
-                  <AccordionContent>
-                    <div className="grid gap-4 border-l border-border pl-4 text-sm leading-7 text-foreground/72 dark:text-foreground/82">
-                      {faq.answer.map((paragraph) => (
-                        <p key={paragraph}>{paragraph}</p>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
+                <details key={faq.q} className="group border-b border-border py-4">
+                  <summary className="cursor-pointer list-none font-medium marker:hidden">
+                    <span className="flex items-start justify-between gap-6">
+                      {faq.q}
+                      <span aria-hidden className="text-primary transition-transform group-open:rotate-45">+</span>
+                    </span>
+                  </summary>
+                  <div className="mt-3 grid gap-4 border-l border-border pl-4 text-sm leading-7 text-foreground/72 dark:text-foreground/82">
+                    {faq.a.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                </details>
               ))}
-            </Accordion>
+            </div>
           </section>
         </section>
       </main>

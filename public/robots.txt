@@ -26,6 +26,21 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: meta-webindexer
+Allow: /
+
 User-agent: CCBot
 Allow: /
 

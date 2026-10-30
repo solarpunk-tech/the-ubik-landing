@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from "motion/react";
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { howWorkflows } from "@/lib/landing-content";
-import { externalLinks } from "@/lib/links";
 import { cn } from "@/lib/utils";
 
 type HowWorkflowCarouselProps = {
@@ -67,7 +67,7 @@ export function HowWorkflowCarousel({ compact = false }: HowWorkflowCarouselProp
                   transition={{ type: "spring", stiffness: 420, damping: 38 }}
                 />
               ) : null}
-              <span className="relative z-10 font-mono text-[11px] uppercase">0{index + 1} · {workflow.eyebrow}</span>
+              <span className="relative z-10 tabular-nums text-[12.5px]">0{index + 1} · {workflow.eyebrow}</span>
               <strong className="relative z-10">{workflow.title}</strong>
             </button>
           ))}
@@ -84,8 +84,7 @@ export function HowWorkflowCarousel({ compact = false }: HowWorkflowCarouselProp
           transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="workflow-copy">
-            <p className="font-mono text-[11px] uppercase text-primary-foreground/55">Agent workflow</p>
-            <h3>{active.outcome}</h3>
+            <h3 className="!mt-0">{active.outcome}</h3>
             <ol className="workflow-receipt">
               {active.steps.map((step, index) => (
                 <li key={step}>
@@ -96,9 +95,9 @@ export function HowWorkflowCarousel({ compact = false }: HowWorkflowCarouselProp
             </ol>
             {!compact ? (
               <Button asChild variant="outline" className="mt-6 border-primary-foreground/70 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
-                <a href={externalLinks.founderMeeting}>
-                  Automate my workflows <ArrowRightIcon data-icon="inline-end" />
-                </a>
+                <Link to="/demo">
+                  Request demo <ArrowRightIcon data-icon="inline-end" />
+                </Link>
               </Button>
             ) : null}
           </div>

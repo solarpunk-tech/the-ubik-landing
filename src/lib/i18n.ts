@@ -26,6 +26,14 @@ const localeByLang = Object.entries(localeLoaders).reduce<
   return acc;
 }, {});
 
+/**
+ * Off until the translated pages ship with their own URLs. While it is off the
+ * site renders English for everyone: the switcher is hidden and the browser
+ * language is not consulted, so a Spanish or Dutch browser cannot land on a
+ * half-translated page. The translation job keeps es/pt/nl current either way.
+ */
+export const LANGUAGE_SWITCHER_ENABLED = false;
+
 export const LANGUAGE_STORAGE_KEY = "ubik-lang";
 export const LANGUAGE_EXPLICIT_STORAGE_KEY = "ubik-lang-explicit";
 export const supportedLanguages = Object.keys(localeByLang).sort();
@@ -56,7 +64,7 @@ function clearStoredLanguage() {
 }
 
 function migrateStoredLanguage() {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined" || !LANGUAGE_SWITCHER_ENABLED) return;
 
   const explicitLanguage = localStorage.getItem(LANGUAGE_EXPLICIT_STORAGE_KEY);
   const storedLanguage = localStorage.getItem(LANGUAGE_STORAGE_KEY)?.split("-")[0];
@@ -82,10 +90,12 @@ export function persistExplicitLanguage(language: string) {
 
 migrateStoredLanguage();
 
+if (LANGUAGE_SWITCHER_ENABLED) i18n.use(LanguageDetector);
+
 i18n
-  .use(LanguageDetector)
   .use(initReactI18next)
   .init({
+    ...(LANGUAGE_SWITCHER_ENABLED ? {} : { lng: "en" }),
     resources: { en: { common: en } },
     partialBundledLanguages: true,
     supportedLngs: supportedLanguages,
@@ -94,6 +104,7 @@ i18n
     fallbackLng: "en",
     defaultNS: "common",
     interpolation: { escapeValue: false },
+    showSupportNotice: false,
     detection: {
       order: ["localStorage", "cookie", "navigator"],
       caches: [],

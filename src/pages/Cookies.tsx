@@ -88,9 +88,9 @@ export default function Cookies() {
       />
       <main className="container-page section-y">
         <article className="mx-auto max-w-6xl">
-          <p className="text-sm font-medium text-foreground/72 dark:text-foreground/82">Version 1.0 — effective on publication</p>
+          <p className="text-sm font-medium text-muted-foreground">Version 1.0 — effective on publication</p>
           <h1 className="mt-3 text-5xl font-semibold">Cookie & Tracker Inventory</h1>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-foreground/72 dark:text-foreground/82">
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
             This inventory covers the Ubik web app at app.theubik.com and the marketing site at theubik.com.
           </p>
 
@@ -113,8 +113,8 @@ export default function Cookies() {
                     ["Consent required?", item.consent]
                   ].map(([label, value]) => (
                     <div key={`${item.name}-${label}`} className="bg-background p-4">
-                      <p className="text-xs font-medium text-foreground/72 dark:text-foreground/82 lg:hidden">{label}</p>
-                      <p className="mt-1 text-sm leading-6 text-foreground/72 dark:text-foreground/82 lg:mt-0">{value}</p>
+                      <p className="text-xs font-medium text-muted-foreground lg:hidden">{label}</p>
+                      <p className="mt-1 text-sm leading-6 text-muted-foreground lg:mt-0">{value}</p>
                     </div>
                   ))}
                 </div>
@@ -124,7 +124,7 @@ export default function Cookies() {
 
           <section className="mt-10 border bg-card p-5">
             <h2 className="text-2xl font-semibold">Consent, GPC & analytics handling</h2>
-            <div className="mt-4 grid gap-3 leading-7 text-foreground/72 dark:text-foreground/82">
+            <div className="mt-4 grid gap-3 leading-7 text-muted-foreground">
               <p>Strictly-necessary cookies are set without consent because they are required to deliver the service.</p>
               <p>Analytics are provided by PostHog, which we operate as controller. It runs in three tiers:</p>
               <p><strong>Service telemetry (signed-in users, no banner):</strong> our servers record what happens in your Ubik account, such as signing in, connecting a mailbox or closing a task, linked to your account and organisation. Nothing is stored on or read from your device for this. Lawful basis: performance of our contract with your organisation and our legitimate interest in running and improving the service. To object, email founders@theubik.com.</p>

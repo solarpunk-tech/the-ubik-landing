@@ -1,9 +1,11 @@
 export type BlogTemplate = "market-intelligence" | "workflow" | "founder-thesis" | "visual-analysis";
 
-export type BlogCategorySlug = "seafood" | "agri" | "dairy" | "poultry";
+export type BlogCategorySlug = "food" | "seafood" | "agri" | "dairy" | "poultry";
 
 export type BlogCategory = {
   slug: BlogCategorySlug;
+  /** A label sits under its parent category: Seafood is a label of Food. */
+  parent?: BlogCategorySlug;
   label: string;
   description: string;
   emptyState: string;

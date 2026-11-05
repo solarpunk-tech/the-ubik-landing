@@ -349,7 +349,7 @@ export const faqs: Faq[] = [
       "The active pipeline spans enterprise food and perishables operators. Active operator count is 30+ across 4 companies."
     ],
     bullets: [
-      "A large US shrimp importer.",
+      "A large US food importer.",
       "A top-5 French importer.",
       "A Canadian pilot.",
       "An Indian contract customer.",

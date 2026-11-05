@@ -43,9 +43,9 @@ const ink = (name: string, alpha = 1) => `hsl(var(--${name}) / ${alpha})`;
  * it is open-weights models you host.
  */
 const modelSets: Record<DeployOption["id"], [string, string][]> = {
-  cloud: [["CLAUDE", "anthropic.com"], ["GEMINI", "gemini.google.com"], ["GPT", "openai.com"]],
-  premises: [["LLAMA", "meta.com"], ["MISTRAL", "mistral.ai"], ["DEEPSEEK", "deepseek.com"]],
-  local: [["LLAMA", "meta.com"], ["MISTRAL", "mistral.ai"], ["DEEPSEEK", "deepseek.com"]]
+  cloud: [["Claude", "anthropic.com"], ["Gemini", "gemini.google.com"], ["GPT", "openai.com"]],
+  premises: [["Llama", "meta.com"], ["Mistral", "mistral.ai"], ["DeepSeek", "deepseek.com"]],
+  local: [["Llama", "meta.com"], ["Mistral", "mistral.ai"], ["DeepSeek", "deepseek.com"]]
 };
 const CHIP = { x: 372, y: 238, w: 96, h: 18, gap: 6 };
 
@@ -92,7 +92,7 @@ function PerimeterDrawing({ option, copy, animate }: { option: DeployOption; cop
   const models = modelSets[option.id];
   const chipWires = models.map((_, index) => `M${MODELS.x + MODELS.s} ${MODELS.y + MODELS.s / 2} H${CHIP.x - 10} V${CHIP.y + index * (CHIP.h + CHIP.gap) + CHIP.h / 2} H${CHIP.x}`);
   const wires = [...inWires, memWire, modelWire, teamWire, ...chipWires];
-  const outWords = option.out.toUpperCase().split(" ");
+  const outWords = option.out.split(" ");
   const half = Math.ceil(outWords.length / 2);
   const outLines: [string, string | undefined] = outWords.length > 2 ? [outWords.slice(0, half).join(" "), outWords.slice(half).join(" ")] : [outWords.join(" "), undefined];
   const sysIcons = [
@@ -111,9 +111,9 @@ function PerimeterDrawing({ option, copy, animate }: { option: DeployOption; cop
       </defs>
       <rect width="640" height="360" fill="url(#own-dots)" />
 
-      <text x="40" y="30" className="own-anat-label">YOUR DATA</text>
+      <text x="40" y="30" className="own-anat-label">Your data</text>
       {copy.systems.map((label, index) => (
-        <Tile key={label} x={40} y={SYS_Y[index] - 24} s={48} label={label.toUpperCase()}>
+        <Tile key={label} x={40} y={SYS_Y[index] - 24} s={48} label={label}>
           {sysIcons[index]}
         </Tile>
       ))}
@@ -122,7 +122,7 @@ function PerimeterDrawing({ option, copy, animate }: { option: DeployOption; cop
       <rect x={BOX.x} y={BOX.y} width={BOX.w} height={BOX.h} fill={ink("background", 0.82)} stroke={ink("foreground", 0.35)} strokeDasharray={option.id === "cloud" ? "5 4" : undefined} rx={laptop ? 8 : 0} />
       {laptop ? <path d={`M${BOX.x - 24} ${BOX.y + BOX.h + 6} h${BOX.w + 48} l-14 14 h${-(BOX.w + 20)} z`} fill={ink("muted")} stroke={ink("foreground", 0.3)} /> : null}
       <rect x={BOX.x + 12} y={BOX.y - 7} width={option.boundary.length * 7.4 + 16} height="14" fill={ink("background")} />
-      <text x={BOX.x + 20} y={BOX.y + 4} className="own-anat-label own-anat-strong">{option.boundary.toUpperCase()}</text>
+      <text x={BOX.x + 20} y={BOX.y + 4} className="own-anat-label own-anat-strong">{option.boundary}</text>
       {option.id === "cloud"
         ? ["aws.amazon.com", "cloud.google.com", "azure.microsoft.com"].map((domain, index) => (
             <g key={domain} transform={`translate(${BOX.x + BOX.w - 84 + index * 26} ${BOX.y + 12})`}>
@@ -142,7 +142,7 @@ function PerimeterDrawing({ option, copy, animate }: { option: DeployOption; cop
 
       {/* Prior context: memory feeds back into the agents. */}
       <path d={`M${MEMORY.x + MEMORY.s / 2} ${MEMORY.y} V72 H${AGENTS.x + AGENTS.s / 2} V${AGENTS.y}`} fill="none" stroke={ink("primary", 0.6)} strokeDasharray="3 3" />
-      <text x={(AGENTS.x + MEMORY.x + MEMORY.s) / 2} y="67" textAnchor="middle" className="own-anat-label own-anat-accent">PRIOR CONTEXT</text>
+      <text x={(AGENTS.x + MEMORY.x + MEMORY.s) / 2} y="67" textAnchor="middle" className="own-anat-label own-anat-accent">Prior context</text>
 
       {wires.map((d) => (
         <g key={d}>
@@ -156,11 +156,11 @@ function PerimeterDrawing({ option, copy, animate }: { option: DeployOption; cop
         </g>
       ))}
 
-      <Tile x={AGENTS.x} y={AGENTS.y} s={AGENTS.s} label="UBIK" sub={copy.stack[0].toUpperCase()} filled>
+      <Tile x={AGENTS.x} y={AGENTS.y} s={AGENTS.s} label="ubik" sub={copy.stack[0]} filled>
         {icons.grid}
       </Tile>
-      <Tile x={MEMORY.x} y={MEMORY.y} s={MEMORY.s} label={copy.stack[1].toUpperCase()}>{icons.memory}</Tile>
-      <Tile x={MODELS.x} y={MODELS.y} s={MODELS.s} label="PRIVATE" sub="INFERENCE">{icons.models}</Tile>
+      <Tile x={MEMORY.x} y={MEMORY.y} s={MEMORY.s} label={copy.stack[1]}>{icons.memory}</Tile>
+      <Tile x={MODELS.x} y={MODELS.y} s={MODELS.s} label="Private" sub="inference">{icons.models}</Tile>
       {models.map(([name, domain], index) => {
         const y = CHIP.y + index * (CHIP.h + CHIP.gap);
         return (
@@ -172,7 +172,7 @@ function PerimeterDrawing({ option, copy, animate }: { option: DeployOption; cop
           </g>
         );
       })}
-      <Tile x={TEAM.x} y={TEAM.y} s={TEAM.s} label={copy.team.toUpperCase()}>{icons.team}</Tile>
+      <Tile x={TEAM.x} y={TEAM.y} s={TEAM.s} label={copy.team}>{icons.team}</Tile>
 
       {/* The line out is cut. */}
       <path d={outWire} fill="none" stroke={ink("destructive", 0.55)} strokeDasharray="4 4" />
@@ -205,9 +205,7 @@ export function OwnYourStack() {
       <div className="container-page py-16 sm:py-24">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-14">
           <div>
-            <p className="founder-company-label">{copy.eyebrow}</p>
             <h2 id="home-deploy-proof-title" className="home-section-title">{copy.title}</h2>
-            <p className="mt-5 max-w-md text-lg leading-8 text-muted-foreground">{copy.lede}</p>
             <div className="mt-8 grid gap-2" role="tablist" aria-label={copy.eyebrow}>
               {copy.options.map((item, index) => (
                 <button
@@ -220,14 +218,13 @@ export function OwnYourStack() {
                     setPaused(true);
                   }}
                   className={cn(
-                    "grid grid-cols-[2rem_1fr] items-baseline gap-x-2 rounded-xl border px-4 py-3 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                    "block rounded-xl border px-4 py-3 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                     index === active ? "border-primary/50 bg-card shadow-sm" : "border-transparent hover:bg-card/60"
                   )}
                 >
-                  <span className="text-[12.5px] tabular-nums text-primary-text">0{index + 1}</span>
                   <span>
                     <span className="block text-[12.5px] font-medium text-muted-foreground">{item.label}</span>
-                    <span className={cn("block text-lg font-semibold tracking-[-0.02em]", index !== active && "text-muted-foreground")}>{item.title}</span>
+                    <span className={cn("block text-lg font-semibold", index !== active && "text-muted-foreground")}>{item.title}</span>
                     {index === active ? <span className="mt-1 block text-sm leading-6 text-muted-foreground">{item.copy}</span> : null}
                   </span>
                 </button>

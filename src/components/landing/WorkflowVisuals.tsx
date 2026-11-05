@@ -114,7 +114,7 @@ function DocumentCheck({ v, className }: { v: DocumentCheckVisual; className?: s
             <span className={cn("inline-flex size-4 shrink-0 items-center justify-center rounded-[4px] border", step > index ? "border-transparent bg-muted" : "border-border")}>
               {step > index ? docIcon[doc.state] : null}
             </span>
-            <span className={cn("truncate", step > index ? "text-foreground" : "text-muted-foreground/70")}>{doc.name}</span>
+            <span className={cn("truncate", step > index ? "text-foreground" : "text-muted-foreground")}>{doc.name}</span>
           </li>
         ))}
       </ul>

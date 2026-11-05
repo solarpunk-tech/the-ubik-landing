@@ -14,7 +14,7 @@ import { PortIsland } from "./PortIsland";
 import { DotWordmark } from "./DotWordmark";
 import { SocBadge } from "./SocBadge";
 import { ensureLanguage, LANGUAGE_SWITCHER_ENABLED, persistExplicitLanguage, supportedLanguages } from "@/lib/i18n";
-import { appLink, externalLinks } from "@/lib/links";
+import { externalLinks } from "@/lib/links";
 import { trackEvent } from "@/lib/posthog";
 import { cn } from "@/lib/utils";
 
@@ -104,13 +104,6 @@ export function PageShell({ children }: { children: React.ReactNode }) {
               ))}
             </select>
             )}
-            <a
-              href={appLink("nav_sign_in")}
-              onClick={() => trackEvent("cta_clicked", { cta: "open_app", location: "nav" })}
-              className="nav-link text-sm max-sm:!hidden"
-            >
-              {t("nav.signIn")}
-            </a>
             <Link
               to="/demo"
               onClick={() => trackEvent("cta_clicked", { cta: "discuss_workflow", location: "nav" })}
@@ -142,13 +135,6 @@ export function PageShell({ children }: { children: React.ReactNode }) {
                       {item.label}
                     </Link>
                   ))}
-                  <a
-                    href={appLink("mobile_nav_sign_in")}
-                    onClick={() => trackEvent("cta_clicked", { cta: "open_app", location: "mobile_nav" })}
-                    className="border-b py-4 text-sm font-medium"
-                  >
-                    {t("nav.signIn")}
-                  </a>
                   <Button asChild className="mt-4" onClick={() => setMenuOpen(false)}>
                     <Link to="/demo" onClick={() => trackEvent("cta_clicked", { cta: "discuss_workflow", location: "mobile_nav" })}>
                       {t("nav.cta")}

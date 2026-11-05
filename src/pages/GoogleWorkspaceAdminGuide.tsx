@@ -171,7 +171,7 @@ export default function GoogleWorkspaceAdminGuide() {
                 Copy link
               </Button>
             </div>
-            <p className="mt-4 max-w-2xl text-lg leading-8 text-foreground/72 dark:text-foreground/82">
+            <p className="mt-4 max-w-2xl text-lg leading-8 text-muted-foreground">
               A two-minute, admin-only step that removes the &ldquo;unverified app&rdquo; warning when your
               team connects Gmail, Calendar, and Contacts.
             </p>
@@ -180,7 +180,7 @@ export default function GoogleWorkspaceAdminGuide() {
 
             <div className="flex gap-3 border border-support/40 bg-support/10 p-5">
               <WarningIcon className="mt-0.5 size-5 shrink-0 text-support" aria-hidden />
-              <p className="text-sm leading-6 text-foreground/86">
+              <p className="text-sm leading-6 text-foreground">
                 <strong className="text-foreground">Why users see a warning today.</strong> ubik is
                 completing Google&rsquo;s app-verification review. Until it clears, first connections show
                 &ldquo;Google hasn&rsquo;t verified this app.&rdquo; Marking ubik <strong>Trusted</strong> removes
@@ -190,7 +190,7 @@ export default function GoogleWorkspaceAdminGuide() {
 
             <section className="mt-12">
               <h2 className="text-2xl font-semibold">Set up in the Admin console</h2>
-              <p className="mt-2 text-foreground/72 dark:text-foreground/82">
+              <p className="mt-2 text-muted-foreground">
                 Sign in to{" "}
                 <a href="https://admin.google.com" className="text-primary underline underline-offset-2">
                   admin.google.com
@@ -205,19 +205,19 @@ export default function GoogleWorkspaceAdminGuide() {
                     </span>
                     <div className="text-sm leading-6">
                       <p className="font-medium text-foreground">{step.title}</p>
-                      <div className="mt-1 text-foreground/72 dark:text-foreground/82">{step.body}</div>
+                      <div className="mt-1 text-muted-foreground">{step.body}</div>
                       {step.copy ? <CopyField value={step.copy} label="client ID" /> : null}
                     </div>
                   </li>
                 ))}
               </ol>
-              <p className="mt-5 text-sm text-foreground/72 dark:text-foreground/82">
+              <p className="mt-5 text-sm text-muted-foreground">
                 That&rsquo;s it — the warning clears within minutes for whoever this applies to.
               </p>
 
               <div className="mt-6 flex gap-3 border border-primary/30 bg-primary/5 p-5">
                 <InfoIcon className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
-                <p className="text-sm leading-6 text-foreground/86">
+                <p className="text-sm leading-6 text-foreground">
                   <strong className="text-foreground">Does Trusted mean full access? No.</strong> It only
                   clears the warning for the scopes ubik already requests, below — an app can never receive
                   a scope it doesn&rsquo;t ask for. To keep other apps least-privilege, leave them Restricted
@@ -230,13 +230,13 @@ export default function GoogleWorkspaceAdminGuide() {
 
             <section>
               <h2 className="text-2xl font-semibold">What ubik accesses — and why</h2>
-              <p className="mt-2 text-foreground/72 dark:text-foreground/82">
+              <p className="mt-2 text-muted-foreground">
                 The minimum scope each connected feature needs. Nothing more.
               </p>
               <div className="mt-6 overflow-x-auto border">
                 <table className="w-full min-w-[640px] text-sm">
                   <thead>
-                    <tr className="border-b bg-muted/50 text-left text-xs tracking-wide text-foreground/60">
+                    <tr className="border-b bg-muted/50 text-left text-xs tracking-wide text-muted-foreground">
                       <th className="px-4 py-3 font-medium">Access</th>
                       <th className="px-4 py-3 font-medium">Scope</th>
                       <th className="px-4 py-3 font-medium">What it&rsquo;s for</th>
@@ -257,7 +257,7 @@ export default function GoogleWorkspaceAdminGuide() {
                           </span>
                         </td>
                         <td className="px-4 py-3 tabular-nums text-xs whitespace-nowrap text-primary">{scope}</td>
-                        <td className="px-4 py-3 text-foreground/72 dark:text-foreground/82">{why}</td>
+                        <td className="px-4 py-3 text-muted-foreground">{why}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -266,7 +266,7 @@ export default function GoogleWorkspaceAdminGuide() {
 
               <div className="mt-6 flex gap-3 border border-emerald-600/30 bg-emerald-500/10 p-5">
                 <CheckCircleIcon className="mt-0.5 size-5 shrink-0 text-emerald-600 dark:text-emerald-400" aria-hidden />
-                <p className="text-sm leading-6 text-foreground/86">
+                <p className="text-sm leading-6 text-foreground">
                   <strong className="text-foreground">Nothing happens without a person.</strong> ubik never
                   sends mail or touches a calendar on its own — every send and every change goes out only
                   after a user reviews and approves it.
@@ -278,7 +278,7 @@ export default function GoogleWorkspaceAdminGuide() {
 
             <section>
               <h2 className="text-2xl font-semibold">Security &amp; data handling</h2>
-              <p className="mt-2 text-foreground/72 dark:text-foreground/82">
+              <p className="mt-2 text-muted-foreground">
                 A summary for security review. Full detail in our{" "}
                 <Link to="/legal/privacy" className="text-primary underline underline-offset-2">
                   Privacy Policy
@@ -295,7 +295,7 @@ export default function GoogleWorkspaceAdminGuide() {
                     {dataSpec.map(({ term, detail }) => (
                       <div key={term} className="grid gap-1 px-5 py-4 sm:grid-cols-[11rem_1fr] sm:gap-4">
                         <dt className="text-sm font-medium text-foreground">{term}</dt>
-                        <dd className="m-0 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{detail}</dd>
+                        <dd className="m-0 text-sm leading-6 text-muted-foreground">{detail}</dd>
                       </div>
                     ))}
                   </dl>
@@ -303,7 +303,7 @@ export default function GoogleWorkspaceAdminGuide() {
               </Card>
             </section>
 
-            <p className="mt-10 text-sm text-foreground/60">
+            <p className="mt-10 text-sm text-muted-foreground">
               Questions about this approval? Reach us at{" "}
               <a href={`mailto:${SUPPORT_EMAIL}`} className="text-primary underline underline-offset-2">
                 {SUPPORT_EMAIL}

@@ -66,9 +66,9 @@ export default function Try() {
           <div className="flex flex-col gap-6">
             <Badge variant="secondary" className="w-fit">Founder-led rollout</Badge>
             <h1 className="text-5xl font-semibold leading-tight">
-              Try ubik Now.
+              Try ubik now
             </h1>
-            <p className="text-lg leading-8 text-foreground/72 dark:text-foreground/82">
+            <p className="text-lg leading-8 text-muted-foreground">
               The v1 journey is an early-access request for teams that want to pilot a sales
               follow-up, PO review, shipment exception, approval packet, or ERP-ready handoff
               before expanding.
@@ -119,11 +119,11 @@ export default function Try() {
                     <TabsTrigger value="plus">Plus</TabsTrigger>
                     <TabsTrigger value="enterprise">Enterprise</TabsTrigger>
                   </TabsList>
-                  <TabsContent value="free" className="text-sm text-foreground/72 dark:text-foreground/82">One workspace, one operator queue.</TabsContent>
-                  <TabsContent value="plus" className="text-sm text-foreground/72 dark:text-foreground/82">
+                  <TabsContent value="free" className="text-sm text-muted-foreground">One workspace, one operator queue.</TabsContent>
+                  <TabsContent value="plus" className="text-sm text-muted-foreground">
                     One live pilot for inquiries, purchase orders, logistics exceptions, or quality packets.
                   </TabsContent>
-                  <TabsContent value="enterprise" className="text-sm text-foreground/72 dark:text-foreground/82">
+                  <TabsContent value="enterprise" className="text-sm text-muted-foreground">
                     Founder-led rollout with security review, admin approval, data boundaries, and ERP handoff.
                   </TabsContent>
                 </Tabs>

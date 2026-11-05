@@ -135,7 +135,7 @@ export function AgentRun({
           ) : null}
           <p
             className={cn(
-              "min-w-0 flex-1 truncate text-lg font-medium tracking-[-0.02em]",
+              "min-w-0 flex-1 truncate text-lg font-medium",
               !done && "opacity-80",
             )}
           >

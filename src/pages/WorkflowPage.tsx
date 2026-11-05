@@ -56,7 +56,7 @@ export default function WorkflowPage() {
             {(item.stats ?? []).map((stat) => (
               <div key={stat.label} className="bg-background p-5 sm:p-6">
                 <dt className="sr-only">{stat.label}</dt>
-                <dd className="text-3xl font-semibold tracking-[-0.03em] tabular-nums text-primary-text sm:text-4xl">{stat.value}</dd>
+                <dd className="text-3xl font-semibold tabular-nums text-primary-text sm:text-4xl">{stat.value}</dd>
                 <dd className="mt-2 text-sm leading-6 text-muted-foreground">{stat.label}</dd>
               </div>
             ))}
@@ -73,7 +73,7 @@ export default function WorkflowPage() {
 
         <section className="container-page grid gap-10 py-14 sm:py-20 lg:grid-cols-[1fr_1fr] lg:items-start">
           <div>
-            <h2 className="text-2xl font-semibold tracking-[-0.02em]">{label("outputs")}</h2>
+            <h2 className="text-2xl font-semibold">{label("outputs")}</h2>
             <ul className="mt-6 grid gap-3">
               {item.outputs.map((output) => (
                 <li key={output} className="flex items-start gap-3 text-base">

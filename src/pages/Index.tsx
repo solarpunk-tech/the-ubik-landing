@@ -18,8 +18,7 @@ import {
   SupplierCompareArtifact
 } from "@/components/landing/motion/RunArtifacts";
 import { useInView } from "@/lib/use-in-view";
-import { DitherPanel } from "@/components/landing/DitherPanel";
-import { workflowMascots } from "@/lib/workflow-mascots";
+import { VisualPanel } from "@/components/landing/VisualPanel";
 import { PortFigure } from "@/components/landing/port-figure/PortFigure";
 import { WorkflowVisual } from "@/components/landing/WorkflowVisuals";
 import { OwnYourStack } from "@/components/landing/OwnYourStack";
@@ -150,14 +149,9 @@ type RunLabels = { step: string; agent: string; reads: string; review: string; a
 const favicon = (domain: string) => (domain.startsWith("/") ? domain : `https://www.google.com/s2/favicons?domain=${domain}&sz=128`);
 const companyLogo = (company: TeamCompany) => company.logo ?? favicon(company.domain ?? "");
 
-/** Title on the left, lede on the right: section heads use the full width on desktop. */
-function SectionHead({ id, title, lede, inverse = false }: { id: string; title: string; lede: string; inverse?: boolean }) {
-  return (
-    <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-16">
-      <h2 id={id} className={cn("home-section-title !max-w-none", inverse && "text-primary-foreground")}>{title}</h2>
-      <p className={cn("max-w-xl text-lg leading-8 lg:justify-self-end", inverse ? "text-primary-foreground/80" : "text-muted-foreground")}>{lede}</p>
-    </div>
-  );
+/** Section heads are the title alone: the content under it does the explaining. */
+function SectionHead({ id, title, inverse = false }: { id: string; title: string; inverse?: boolean }) {
+  return <h2 id={id} className={cn("home-section-title !max-w-none", inverse && "text-primary-foreground")}>{title}</h2>;
 }
 
 /** The four workflow pages, each with a live widget for the record it works on. */
@@ -166,7 +160,7 @@ function WorkflowLibrary() {
   return (
     <section className="border-b border-border" aria-labelledby="home-workflows-title">
       <div className="container-page py-16 sm:py-24">
-        <SectionHead id="home-workflows-title" title={t("home.workflows.title")} lede={t("home.workflows.lede")} />
+        <SectionHead id="home-workflows-title" title={t("home.workflows.title")} />
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {featuredWorkflowSlugs.map((slug) => {
             const item = t(`workflows.items.${slug}`, { returnObjects: true }) as WorkflowPageCopy;
@@ -177,11 +171,11 @@ function WorkflowLibrary() {
                 onClick={() => trackEvent("workflow_card_clicked", { workflow: slug, location: "home" })}
                 className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-[box-shadow,border-color] hover:border-border-strong hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <DitherPanel art={workflowMascots[slug]}>
+                <VisualPanel>
                   <WorkflowVisual slug={slug} visual={item.visual} className="h-[17.5rem]" />
-                </DitherPanel>
+                </VisualPanel>
                 <div className="flex flex-1 flex-col p-5">
-                  <h3 className="text-lg font-semibold tracking-[-0.02em]">{item.name}</h3>
+                  <h3 className="text-lg font-semibold">{item.name}</h3>
                   <p className="mt-2 flex-1 text-sm leading-6 text-muted-foreground">{item.summary}</p>
                   <span className="mt-5 inline-flex items-center gap-2 border-t border-border pt-4 text-[13px] font-medium text-primary-text">
                     {t("workflows.labels.seeWorkflow")}
@@ -218,7 +212,7 @@ function TradeFlowOntology({ active, onSelect }: { active: number; onSelect: (in
   return (
     <section id="workflows" className="trade-flow-section scroll-mt-20 border-b border-border">
       <div className="container-page py-16 sm:py-24">
-        <SectionHead id="home-loop-title" title={t("home.workflows.examplesTitle")} lede={t("home.workflows.examplesLede")} />
+        <SectionHead id="home-loop-title" title={t("home.workflows.examplesTitle")} />
         <div className="mt-10 flex gap-2 overflow-x-auto pb-1" role="tablist" aria-label={t("home.workflows.spineLabel")}>
           {workflowTeams.map((team, index) => (
             <button
@@ -235,7 +229,6 @@ function TradeFlowOntology({ active, onSelect }: { active: number; onSelect: (in
                 index === active ? "border-foreground bg-foreground text-background" : "border-border bg-card text-muted-foreground hover:border-border-strong hover:text-foreground"
               )}
             >
-              <span className="tabular-nums opacity-60">{team.number}</span>
               {copyFor(team.kind).team}
             </button>
           ))}
@@ -297,7 +290,7 @@ function PilotWidget({ step, copy, on }: { step: number; copy: PilotWidgetCopy; 
       <ul className="grid gap-2 text-[13px]">
         {rows.map(([label, enabled], index) => (
           <li key={label} className="flex items-center justify-between gap-3">
-            <span className="text-foreground/80">{label}</span>
+            <span className="text-muted-foreground">{label}</span>
             {enabled ? (
               <span aria-label="On" className={cn("relative h-4 w-7 rounded-full transition-colors duration-300", on ? "bg-primary" : "bg-border")} style={{ transitionDelay: `${300 + index * 200}ms` }}>
                 <span className={cn("absolute top-0.5 size-3 rounded-full bg-white transition-[left] duration-300", on ? "left-3.5" : "left-0.5")} style={{ transitionDelay: `${300 + index * 200}ms` }} />
@@ -360,7 +353,7 @@ function PilotStep({ step, index, widget }: { step: CardCopy; index: number; wid
         0{index + 1}
       </span>
       <div className="mt-4 flex flex-1 flex-col rounded-2xl border border-border bg-card p-5 shadow-sm">
-        <h3 className="text-xl font-semibold tracking-[-0.02em]">{step.title}</h3>
+        <h3 className="text-xl font-semibold">{step.title}</h3>
         <p className="mt-2 text-sm leading-6 text-muted-foreground">{step.copy}</p>
         <div className="mt-auto pt-5">
           <div className="rounded-xl border border-border bg-background p-3.5">
@@ -422,7 +415,7 @@ function HomeFaq({ items }: { items: FaqCopy[] }) {
                   <span aria-hidden className="text-primary transition-transform group-open:rotate-45">+</span>
                 </span>
               </summary>
-              <p className="mt-3 max-w-3xl text-base leading-7 text-foreground/72">{item.a}</p>
+              <p className="mt-3 max-w-3xl text-base leading-7 text-muted-foreground">{item.a}</p>
             </details>
           ))}
         </div>
@@ -444,7 +437,7 @@ export default function Index() {
         description={t("home.seo.description")}
         canonical="https://theubik.com/"
         image="/og-image.jpg?v=4"
-        imageAlt="ubik: decision-making engine for importers and exporters, reading email, conversations and the ERP. An engraving of a harbour quay piled with seafood, dairy, soy, grain and fruit beside a cargo ship."
+        imageAlt="ubik: decision-making engine for importers and exporters, reading email, conversations and the ERP. An engraving of a harbour quay piled with food cargo, dairy, soy, grain and fruit beside a cargo ship."
       />
       <JsonLd
         data={{
@@ -478,7 +471,7 @@ export default function Index() {
               <h1 className="home-display max-w-[16ch]" style={{ fontSize: "clamp(2.6rem, 5vw, 4.6rem)" }}>
                 {t("home.hero.titleLead")} <em>{t("home.hero.titleEmphasis")}</em>
               </h1>
-              <p className="mt-7 max-w-xl text-lg leading-8 text-foreground/72">{t("home.hero.lede")}</p>
+              <p className="mt-7 max-w-xl text-lg leading-8 text-muted-foreground">{t("home.hero.lede")}</p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <DiscussButton location="hero" />
                 <Button asChild variant="outline" size="lg" className="home-secondary-action">
@@ -490,17 +483,17 @@ export default function Index() {
               <a
                 href={appLink("hero_open_app")}
                 onClick={() => trackEvent("cta_clicked", { cta: "open_app", location: "hero" })}
-                className="mt-4 inline-block text-sm text-foreground/72 underline-offset-4 hover:underline"
+                className="mt-4 inline-block text-sm text-muted-foreground underline-offset-4 hover:underline"
               >
                 {t("cta.openApp")}
               </a>
               <div className="mt-12 max-w-xl border-t border-foreground/18 pt-5">
-                <p className="tabular-nums text-[12.5px] text-foreground/72">{t("home.hero.scaleLabel")}</p>
+                <p className="tabular-nums text-[12.5px] text-muted-foreground">{t("home.hero.scaleLabel")}</p>
                 <div className="mt-3 grid grid-cols-3">
                   {scale.map(({ value, label }) => (
                     <div key={label} className="pr-3">
                       <p className="text-xl font-semibold tracking-tight sm:text-2xl">{value}</p>
-                      <p className="mt-1 tabular-nums text-[12.5px] text-foreground/72">{label}</p>
+                      <p className="mt-1 tabular-nums text-[12.5px] text-muted-foreground">{label}</p>
                     </div>
                   ))}
                 </div>
@@ -543,8 +536,7 @@ export default function Index() {
             <div className="closing-cta">
               <div>
                 <h2 className="home-section-title closing-cta-title">{t("home.closing.title")}</h2>
-                <p className="closing-cta-copy">{t("home.closing.copy")}</p>
-                <p className="mt-3 text-sm text-foreground/60">
+                <p className="mt-3 text-sm text-muted-foreground">
                   {t("home.closing.pricing")}{" "}
                   <Link to="/pricing" className="font-semibold text-primary hover:underline">{t("cta.pricing")}</Link>
                 </p>

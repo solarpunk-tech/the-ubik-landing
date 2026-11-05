@@ -12,7 +12,7 @@ import { MarginLeakArticle } from "@/components/blog/MarginLeakVisuals";
 import { DecisionTreeTable, OriginFlowMap, OriginPortraitRail, TariffDifferentialMatrix } from "@/components/blog/OriginRouletteVisuals";
 import { PageShell } from "@/components/landing/PageShell";
 import { SharePostPanel } from "@/components/landing/SharePostPanel";
-import { TradeNoteBitmatrix } from "@/components/landing/TradeNoteBitmatrix";
+import { MarginBleedFigure, MonitorGateFigure, OriginRouletteFigure } from "@/components/landing/iso-scenes/scenes";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Seo } from "@/components/seo/Seo";
 import { Button } from "@/components/ui/button";
@@ -24,6 +24,7 @@ import {
   getBlogCategory,
   getBlogPostBySlug,
   getBlogPostCategorySlugs,
+  getBlogPostCategoryTrail,
   marginLeakPost,
   originRoulettePost,
   type BlogCategorySlug,
@@ -132,14 +133,10 @@ function TradeNotesNewsletter({ source }: { source: string }) {
   }
 
   return (
-    <section className="trade-notes-newsletter border bg-card p-5 text-foreground sm:p-6 dark:bg-shell dark:text-primary-foreground">
+    <section className="trade-notes-newsletter rounded-xl border bg-card p-5 text-foreground sm:p-6 dark:bg-shell dark:text-primary-foreground">
       <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(18rem,26rem)] md:items-center">
         <div>
-          <p className="section-label text-foreground/70 dark:text-primary-foreground/72">Trade Notes</p>
-          <h2 className="mt-3 text-3xl font-semibold text-foreground dark:text-primary-foreground">Subscribe to the field notes.</h2>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-foreground/72 dark:text-foreground/82">
-            Market reads, workflow notes, and reviewed automation lessons for perishable trade operators.
-          </p>
+          <h2 className="mt-3 text-3xl font-semibold text-foreground dark:text-primary-foreground">Subscribe to the field notes</h2>
         </div>
         <form onSubmit={handleSubmit} noValidate className="grid gap-3 border bg-background p-4 shadow-sm">
           <label htmlFor={`trade-notes-email-${source.replace(/[^a-z0-9]/gi, "-")}`} className="text-sm font-semibold">
@@ -166,7 +163,7 @@ function TradeNotesNewsletter({ source }: { source: string }) {
               {status === "submitting" ? "Subscribing..." : "Subscribe"}
             </Button>
           </div>
-          <p className="text-xs leading-5 text-foreground/58 dark:text-foreground/72">
+          <p className="text-xs leading-5 text-muted-foreground">
             We use your email to send Trade Notes and product-relevant operator updates. You can unsubscribe any time. Read Ubik&apos;s{" "}
             <Link to="/legal/privacy" className="font-medium text-primary underline-offset-4 hover:underline">
               Privacy Notice
@@ -227,18 +224,18 @@ function ArticleShell({ post, children }: ArticleShellProps) {
       />
       <JsonLd data={jsonLd} />
       <main className="trade-notes-article container-page section-y">
-        <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-foreground/72 dark:text-foreground/82 hover:text-foreground">
+        <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
           <ArrowLeftIcon aria-hidden /> Trade Notes
         </Link>
         <article className="mt-10 grid gap-10 xl:grid-cols-[minmax(0,1fr)_16rem] xl:items-start">
           <div className="min-w-0">
             <header className="max-w-4xl">
               <p className="section-label">
-                {post.date} / {post.category}
+                {post.date} / {getBlogPostCategoryTrail(post)} / {post.category}
               </p>
               <h1 className="mt-4 text-5xl font-semibold leading-[1.05] sm:text-6xl lg:text-7xl">{post.title}</h1>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-foreground/72 dark:text-foreground/82">{post.excerpt}</p>
-              <div className="mt-6 flex flex-wrap gap-3 text-xs text-foreground/72 dark:text-foreground/82">
+              <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">{post.excerpt}</p>
+              <div className="mt-6 flex flex-wrap gap-3 text-xs text-muted-foreground">
                 <span>Last updated {post.updated}</span>
                 <span>/</span>
                 <span>{post.author}</span>
@@ -270,7 +267,7 @@ function ArticleSection({ id, title, children }: { id: string; title: string; ch
   return (
     <section id={id} className="scroll-mt-24 border-t py-8 sm:py-10">
       <h2 className="text-3xl font-semibold">{title}</h2>
-      <div className="mt-5 grid gap-4 text-base leading-8 text-foreground/72 dark:text-foreground/82">{children}</div>
+      <div className="mt-5 grid gap-4 text-base leading-8 text-muted-foreground">{children}</div>
     </section>
   );
 }
@@ -278,11 +275,10 @@ function ArticleSection({ id, title, children }: { id: string; title: string; ch
 function TemplatePlaceholder({ template }: { template: BlogPost["template"] }) {
   return (
     <div className="mt-10 border bg-card p-6">
-      <p className="section-label">Template reserved</p>
       <h2 className="mt-3 text-3xl font-semibold">
         {template === "workflow" ? "Workflow article template" : template === "founder-thesis" ? "Founder thesis template" : "Market intelligence template"}
       </h2>
-      <p className="mt-4 max-w-2xl text-base leading-8 text-foreground/72 dark:text-foreground/82">
+      <p className="mt-4 max-w-2xl text-base leading-8 text-muted-foreground">
         This renderer is kept for the next researched Trade Note. It preserves the article chrome, metadata, share flow, and responsive layout without shipping placeholder copy publicly.
       </p>
     </div>
@@ -295,8 +291,8 @@ function OriginRouletteArticle() {
       <section className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-px bg-border lg:grid-cols-[0.86fr_1.14fr]">
         <div className="min-w-0 bg-card p-5 sm:p-6">
           <p className="section-label">Trade-desk note / 7 May 2026</p>
-          <h2 className="mt-5 text-3xl font-semibold">Buyer strategy for Q3 2026 and Q1 2027 books.</h2>
-          <p className="mt-5 text-base leading-8 text-foreground/72 dark:text-foreground/82">
+          <h2 className="mt-5 text-3xl font-semibold">Buyer strategy for Q3 2026 and Q1 2027 books</h2>
+          <p className="mt-5 text-base leading-8 text-muted-foreground">
             Fifteen months ago, the shrimp desk carried three assumptions: the U.S. would take every kilo, Ecuador’s cost edge would narrow, and value-added processing was a side quest. All three broke. The origin mix now turns on tariff gates, certification depth, disease windows, and which product can clear the destination at the lowest landed cost with the least forward-book risk.
           </p>
         </div>
@@ -309,11 +305,11 @@ function OriginRouletteArticle() {
             ].map(([stat, label]) => (
               <div key={stat} className="bg-card p-4">
                 <p className="tabular-nums text-2xl text-primary">{stat}</p>
-                <p className="mt-3 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{label}</p>
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">{label}</p>
               </div>
             ))}
           </div>
-          <div className="mt-5 border bg-shell p-4 text-sm leading-6 text-foreground/72 dark:text-foreground/82">
+          <div className="mt-5 border bg-shell p-4 text-sm leading-6 text-muted-foreground">
             The buyer question is no longer “is there enough shrimp?” It is “which shrimp clears the regulatory gate, keeps the landed-cost curve sane, and does not trap the book in one origin’s policy risk?”
           </div>
         </div>
@@ -363,7 +359,7 @@ function OriginRouletteArticle() {
           <div key={bet.title} className="bg-card p-5 sm:p-6">
             <p className="tabular-nums text-sm text-primary">BET 0{index + 1}</p>
             <h2 className="mt-6 text-2xl font-semibold">{bet.title}</h2>
-            <p className="mt-4 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{bet.copy}</p>
+            <p className="mt-4 text-sm leading-6 text-muted-foreground">{bet.copy}</p>
           </div>
         ))}
       </section>
@@ -373,7 +369,7 @@ function OriginRouletteArticle() {
           <div key={title} className="bg-background p-5 sm:p-6">
             <WarningDiamondIcon className="text-primary" size={24} aria-hidden />
             <h2 className="mt-6 text-2xl font-semibold">{title}</h2>
-            <p className="mt-4 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{copy}</p>
+            <p className="mt-4 text-sm leading-6 text-muted-foreground">{copy}</p>
           </div>
         ))}
       </section>
@@ -386,7 +382,7 @@ function OriginRouletteArticle() {
                 <CheckCircleIcon className="mt-1 shrink-0 text-primary" aria-hidden />
                 <div>
                   <h3 className="text-xl font-semibold">{claim}</h3>
-                  <p className="mt-3 text-base leading-8 text-foreground/72 dark:text-foreground/82">{answer}</p>
+                  <p className="mt-3 text-base leading-8 text-muted-foreground">{answer}</p>
                 </div>
               </div>
             </div>
@@ -399,7 +395,7 @@ function OriginRouletteArticle() {
           <SealCheckIcon className="text-primary" aria-hidden />
           <p className="section-label">Source and limitation note</p>
         </div>
-        <p className="mt-4 max-w-3xl text-sm leading-6 text-foreground/72 dark:text-foreground/82">
+        <p className="mt-4 max-w-3xl text-sm leading-6 text-muted-foreground">
           This note is a buyer-strategy synthesis, not legal advice or a live customs ruling. Tariffs, ADD/CVD cash deposits, import alerts, and certification requirements can change without matching the cadence of public trade articles.
         </p>
         <div className="mt-5 grid gap-px bg-border md:grid-cols-2">
@@ -429,7 +425,7 @@ function OriginRouletteArticle() {
                   <span className="min-w-0">{source.title}</span>
                   <ArrowRightIcon className="mt-0.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-100" aria-hidden />
                 </span>
-                <span className="mt-2 block text-xs leading-5 text-foreground/72 dark:text-foreground/82">{source.note}</span>
+                <span className="mt-2 block text-xs leading-5 text-muted-foreground">{source.note}</span>
               </span>
             </a>
           ))}
@@ -464,13 +460,12 @@ function BlogNotFound() {
         canonical="https://theubik.com/blog"
       />
       <main className="trade-notes-empty container-page section-y">
-        <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-foreground/72 dark:text-foreground/82 hover:text-foreground">
+        <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
           <ArrowLeftIcon aria-hidden /> Trade Notes
         </Link>
         <div className="mt-10 max-w-2xl border bg-card p-6">
-          <p className="section-label">Missing field note</p>
-          <h1 className="mt-4 text-4xl font-semibold">This Trade Note is not published.</h1>
-          <p className="mt-5 text-base leading-8 text-foreground/72 dark:text-foreground/82">
+          <h1 className="mt-4 text-4xl font-semibold">This Trade Note is not published</h1>
+          <p className="mt-5 text-base leading-8 text-muted-foreground">
             The blog route is live, but this slug does not match a published Ubik Trade Note.
           </p>
           <Link to="/blog" className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary">
@@ -481,6 +476,37 @@ function BlogNotFound() {
     </PageShell>
   );
 }
+
+function CategoryTab({ to, active, children }: { to: string; active: boolean; children: React.ReactNode }) {
+  return (
+    <Link
+      to={to}
+      aria-current={active ? "page" : undefined}
+      className={`border-b-2 pb-1 text-sm font-semibold transition-colors ${active ? "border-primary text-foreground" : "border-transparent text-muted-foreground hover:text-foreground"}`}
+    >
+      {children}
+    </Link>
+  );
+}
+
+/** Commodity labels inside a category: pills, the way the product shows a status. */
+function CategoryLabel({ to, active, children }: { to: string; active: boolean; children: React.ReactNode }) {
+  return (
+    <Link
+      to={to}
+      aria-current={active ? "page" : undefined}
+      className={`rounded-full px-2.5 py-0.5 text-[12px] font-medium transition-colors ${active ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:bg-shell"}`}
+    >
+      {children}
+    </Link>
+  );
+}
+
+const noteFigures: Record<string, (props: { className?: string }) => React.ReactNode> = {
+  [aiMonitorPost.slug]: MonitorGateFigure,
+  [marginLeakPost.slug]: MarginBleedFigure,
+  [originRoulettePost.slug]: OriginRouletteFigure
+};
 
 export default function Blog() {
   const { slug } = useParams();
@@ -504,6 +530,7 @@ export default function Blog() {
     ? (requestedCategory as BlogCategorySlug)
     : null;
   const categoryMetadata = activeCategory ? getBlogCategory(activeCategory) : null;
+  const topCategories = blogCategories.filter((category) => !category.parent);
   const filteredPosts = activeCategory
     ? blogPosts.filter((post) => getBlogPostCategorySlugs(post).includes(activeCategory))
     : blogPosts;
@@ -512,75 +539,73 @@ export default function Blog() {
     <PageShell>
       <Seo
         title="Ubik Trade Notes"
-        description="Buyer strategy notes on perishable operations, shrimp sourcing, reviewed automation, and the operator layer above existing systems."
+        description="Buyer strategy notes on food trade operations, sourcing, reviewed automation, and the operator layer above existing systems."
         canonical="https://theubik.com/blog"
       />
-      <main className="trade-notes-page container-page section-y">
-        <div className="mb-8 border-b pb-6">
-          <p className="section-label">Browse the desk</p>
-          <nav aria-label="Trade Notes categories" className="mt-4 flex flex-wrap gap-2">
-            <Link
-              to="/blog"
-              aria-current={activeCategory === null ? "page" : undefined}
-              className={`border px-3 py-2 text-sm font-medium transition-colors hover:bg-shell ${
-                activeCategory === null ? "border-primary bg-primary text-primary-foreground" : "bg-background"
-              }`}
-            >
-              All notes
-            </Link>
-            {blogCategories.map((category) => (
-              <Link
-                key={category.slug}
-                to={`/blog?category=${category.slug}`}
-                aria-current={activeCategory === category.slug ? "page" : undefined}
-                className={`border px-3 py-2 text-sm font-medium transition-colors hover:bg-shell ${
-                  activeCategory === category.slug ? "border-primary bg-primary text-primary-foreground" : "bg-background"
-                }`}
-              >
-                {category.label}
-              </Link>
-            ))}
-          </nav>
-          <p className="mt-4 max-w-2xl text-sm leading-6 text-foreground/72 dark:text-foreground/82">
-            {categoryMetadata?.description ?? "Field notes on perishable trade, operations, and reviewed automation."}
-          </p>
-        </div>
+      <main className="trade-notes-page">
+        <section className="border-b border-border">
+          <div className="container-page pt-16 pb-10 sm:pt-24 sm:pb-12">
+            <h1 className="home-display">Trade Notes</h1>
+            <nav aria-label="Trade Notes categories" className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <CategoryTab to="/blog" active={activeCategory === null}>All notes</CategoryTab>
+              {topCategories.map((parent) => (
+                <div key={parent.slug} className="flex flex-wrap items-center gap-2">
+                  <CategoryTab to={`/blog?category=${parent.slug}`} active={activeCategory === parent.slug}>
+                    {parent.label}
+                  </CategoryTab>
+                  {blogCategories
+                    .filter((category) => category.parent === parent.slug)
+                    .map((category) => (
+                      <CategoryLabel key={category.slug} to={`/blog?category=${category.slug}`} active={activeCategory === category.slug}>
+                        {category.label}
+                      </CategoryLabel>
+                    ))}
+                </div>
+              ))}
+            </nav>
+          </div>
+        </section>
+        <div className="container-page py-12 sm:py-16">
         {filteredPosts.length ? (
-          <div className="grid gap-px bg-border">
-            {filteredPosts.map((post) => (
-              <Link
-                key={post.slug}
-                to={`/blog/${post.slug}`}
-                className="trade-note-card grid gap-6 bg-background p-4 transition-colors hover:bg-shell sm:p-6 md:grid-cols-[minmax(0,1fr)_minmax(13rem,16rem)] md:items-center md:gap-8 md:p-7"
-              >
-                <div className="order-2 min-w-0 md:order-1">
-                  <p className="trade-note-card-meta text-xs text-foreground/78">
-                    {post.date} / {post.category}
-                  </p>
-                  <h2 className="trade-note-card-title mt-5 max-w-xl text-3xl font-semibold">{post.title}</h2>
-                  <p className="trade-note-card-excerpt mt-4 max-w-xl text-base leading-7 text-foreground/88">{post.excerpt}</p>
-                  <span className="trade-note-card-link mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary">
-                    Read field note <ArrowRightIcon aria-hidden />
-                  </span>
-                </div>
-                <div className="order-1 flex justify-center md:order-2 md:justify-end">
-                  <div className="trade-note-illustration-frame aspect-square w-full max-w-[14rem] p-2 sm:p-3">
-                    <TradeNoteBitmatrix
-                      variant={post.slug === originRoulettePost.slug ? "roulette" : post.slug === marginLeakPost.slug ? "bleed" : "drift"}
-                      className="h-full w-full"
-                    />
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {filteredPosts.map((post) => {
+              const Figure = noteFigures[post.slug] ?? MonitorGateFigure;
+              const labels = getBlogPostCategorySlugs(post)
+                .map((slug) => getBlogCategory(slug))
+                .filter((category) => category?.parent);
+              return (
+                <Link
+                  key={post.slug}
+                  to={`/blog/${post.slug}`}
+                  className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-[box-shadow,border-color] hover:border-border-strong hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  <div className="border-b border-border bg-background">
+                    <Figure className="h-[15rem] w-full" />
                   </div>
-                </div>
-              </Link>
-            ))}
+                  <div className="flex flex-1 flex-col p-5 sm:p-6">
+                    <div className="flex flex-wrap items-center gap-2 text-[12.5px] text-muted-foreground">
+                      <span className="tabular-nums">{post.date}</span>
+                      <span aria-hidden>·</span>
+                      <span>{post.category}</span>
+                      {labels.map((label) => (
+                        <span key={label!.slug} className="rounded-full bg-muted px-2 py-0.5 text-[11.5px] font-medium text-muted-foreground">
+                          {label!.label}
+                        </span>
+                      ))}
+                    </div>
+                    <h2 className="mt-3 flex-1 text-xl font-semibold leading-snug">{post.title}</h2>
+                    <span className="mt-5 inline-flex items-center gap-2 border-t border-border pt-4 text-[13px] font-medium text-primary-text">
+                      Read field note
+                      <ArrowRightIcon aria-hidden className="transition-transform group-hover:translate-x-1" />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         ) : (
-          <div className="border bg-card p-6 sm:p-8">
-            <p className="section-label">Category coming soon</p>
-            <h2 className="mt-3 text-3xl font-semibold">{categoryMetadata?.emptyState}</h2>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-foreground/72 dark:text-foreground/82">
-              We’ll add researched notes here when they are ready. For now, browse the published Seafood notes or return to all Trade Notes.
-            </p>
+          <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
+            <h2 className="text-2xl font-semibold">{categoryMetadata?.emptyState}</h2>
             <Link to="/blog" className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary">
               View published notes <ArrowRightIcon aria-hidden />
             </Link>
@@ -588,6 +613,7 @@ export default function Blog() {
         )}
         <div className="mt-10">
           <TradeNotesNewsletter source="theubik.com/blog" />
+        </div>
         </div>
       </main>
     </PageShell>

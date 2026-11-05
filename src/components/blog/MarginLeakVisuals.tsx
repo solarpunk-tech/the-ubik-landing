@@ -73,7 +73,7 @@ function FigurePair({
     <figure className="overflow-hidden border bg-shell">
       <img src={light} alt={alt} className="aspect-[16/9] w-full object-cover dark:hidden" loading="lazy" />
       <img src={dark} alt={alt} className="hidden aspect-[16/9] w-full object-cover dark:block" loading="lazy" />
-      <figcaption className="border-t bg-background p-4 text-xs leading-5 text-foreground/72 dark:text-foreground/82">{caption}</figcaption>
+      <figcaption className="border-t bg-background p-4 text-xs leading-5 text-muted-foreground">{caption}</figcaption>
     </figure>
   );
 }
@@ -189,7 +189,7 @@ function WaterfallChart({ activeIndex }: { activeIndex: number }) {
 
         <g transform={`translate(${innerWidth - 230}, ${innerHeight - 106})`}>
           <rect width="220" height="84" className="fill-background stroke-border" />
-          <text x="14" y="24" className="fill-muted-foreground font-mono text-[11px] uppercase tracking-[0.14em]">
+          <text x="14" y="24" className="fill-muted-foreground font-mono text-[11px]">
             Active leak
           </text>
           <text x="14" y="50" className="fill-foreground text-sm font-semibold">
@@ -265,13 +265,13 @@ export function MarginLeakScrolly() {
           <div className="bg-background p-4">
             <p className="section-label">Active leak</p>
             <p className="mt-3 font-mono text-3xl text-primary">-{activeNode.bps} bps</p>
-            <p className="mt-2 text-xs uppercase tracking-[0.14em] text-foreground/72 dark:text-foreground/82">
+            <p className="mt-2 text-xs text-muted-foreground">
               {marginLabel(activeNode.remainingCents)} margin left
             </p>
           </div>
           <div className="bg-background p-4">
             <h3 className="text-xl font-semibold">{activeNode.label}</h3>
-            <p className="mt-2 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{activeNode.control}</p>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">{activeNode.control}</p>
           </div>
         </div>
       </div>
@@ -279,20 +279,20 @@ export function MarginLeakScrolly() {
         <div className="sticky top-0 z-20 border bg-background/95 p-4 shadow-sm backdrop-blur lg:hidden">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-primary">
+              <p className="font-mono text-[11px] text-primary">
                 Leak {String(activeIndex + 1).padStart(2, "0")} / {String(leakNodes.length).padStart(2, "0")}
               </p>
               <h3 className="mt-2 text-lg font-semibold">{activeNode.label}</h3>
             </div>
             <div className="shrink-0 text-right">
               <p className="font-mono text-2xl text-primary">-{activeNode.bps}</p>
-              <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-foreground/72 dark:text-foreground/82">bps</p>
+              <p className="font-mono text-[11px] text-muted-foreground">bps</p>
             </div>
           </div>
           <div className="mt-4">
             <LeakProgressStrip activeIndex={activeIndex} />
           </div>
-          <p className="mt-3 text-xs leading-5 text-foreground/72 dark:text-foreground/82">
+          <p className="mt-3 text-xs leading-5 text-muted-foreground">
             {marginLabel(activeNode.remainingCents)} margin left. {activeNode.control}
           </p>
         </div>
@@ -308,7 +308,7 @@ export function MarginLeakScrolly() {
             )}
             >
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-primary">
+              <p className="font-mono text-xs text-primary">
                 {String(index + 1).padStart(2, "0")} / {categoryLabel[node.category]}
               </p>
               <p className="font-mono text-sm text-foreground">-{node.bps} bps -&gt; {marginLabel(node.remainingCents)}</p>
@@ -323,9 +323,9 @@ export function MarginLeakScrolly() {
               </div>
             </div>
             <h3 className="mt-4 text-2xl font-semibold">{node.label}</h3>
-            <p className="mt-3 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{node.description}</p>
+            <p className="mt-3 text-sm leading-6 text-muted-foreground">{node.description}</p>
             <p className="mt-4 border-t pt-3 text-sm leading-6">
-              <span className="font-medium text-foreground">Control:</span> <span className="text-foreground/72 dark:text-foreground/82">{node.control}</span>
+              <span className="font-medium text-foreground">Control:</span> <span className="text-muted-foreground">{node.control}</span>
             </p>
           </div>
         ))}
@@ -339,9 +339,8 @@ export function MarginLeakArticle() {
     <div className="mt-10 grid min-w-0 grid-cols-[minmax(0,1fr)] gap-8">
       <section className="grid min-w-0 gap-px bg-border lg:grid-cols-[0.84fr_1.16fr]">
         <div className="bg-card p-5 sm:p-6">
-          <p className="section-label">Unit economics / seafood import desk</p>
-          <h2 className="mt-5 text-3xl font-semibold">The market did not blow up. The handoffs did.</h2>
-          <p className="mt-5 text-base leading-8 text-foreground/72 dark:text-foreground/82">
+          <h2 className="mt-5 text-3xl font-semibold">The market held up, the handoffs didn’t</h2>
+          <p className="mt-5 text-base leading-8 text-muted-foreground">
             The example is one anonymized 40-foot reefer of farmed vannamei, HLSO 21/25, ex-India to a U.S. East Coast buyer. Planned gross margin was 10.00 cents on the revenue dollar. The desk still leaked 60 basis points across ordinary execution nodes.
           </p>
         </div>
@@ -350,11 +349,11 @@ export function MarginLeakArticle() {
             {heroStats.map(([stat, label]) => (
               <div key={stat} className="bg-card p-4">
                 <p className="font-mono text-2xl text-primary">{stat}</p>
-                <p className="mt-3 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{label}</p>
+                <p className="mt-3 text-sm leading-6 text-muted-foreground">{label}</p>
               </div>
             ))}
           </div>
-          <div className="mt-5 border bg-shell p-4 text-sm leading-6 text-foreground/72 dark:text-foreground/82">
+          <div className="mt-5 border bg-shell p-4 text-sm leading-6 text-muted-foreground">
             None of the leaks screamed in month-end P&L. They hid in lower conversion, freight accrual noise, quality deductions, and other landed cost.
           </div>
         </div>
@@ -386,7 +385,7 @@ export function MarginLeakArticle() {
           <div key={title} className="bg-card p-5 sm:p-6">
             <Icon className="text-primary" size={26} aria-hidden />
             <h2 className="mt-6 text-2xl font-semibold">{title}</h2>
-            <p className="mt-4 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{copy}</p>
+            <p className="mt-4 text-sm leading-6 text-muted-foreground">{copy}</p>
           </div>
         ))}
       </section>
@@ -400,7 +399,7 @@ export function MarginLeakArticle() {
 
       <section id="where-ai-helps" className="scroll-mt-24 border-t py-8 sm:py-10">
         <h2 className="text-3xl font-semibold">Where AI actually moves the needle</h2>
-        <div className="mt-5 grid gap-4 text-base leading-8 text-foreground/72 dark:text-foreground/82">
+        <div className="mt-5 grid gap-4 text-base leading-8 text-muted-foreground">
           <p>
             Not by calling next month’s shrimp price. The high-ROI work is dull: RFQ triage, HS-code guardrails, AD/CVD prompts, document consistency checks, count-size normalization, deglazed-weight claim prep, and free-time exception queues.
           </p>
@@ -415,8 +414,8 @@ export function MarginLeakArticle() {
           <div key={patch.title} className="bg-background p-5">
             <p className="font-mono text-xs text-primary">PATCH {String(index + 1).padStart(2, "0")}</p>
             <h3 className="mt-5 text-xl font-semibold">{patch.title}</h3>
-            <p className="mt-4 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{patch.copy}</p>
-            <p className="mt-5 border-t pt-3 font-mono text-[11px] uppercase tracking-[0.12em] text-foreground/72 dark:text-foreground/82">{patch.nodes}</p>
+            <p className="mt-4 text-sm leading-6 text-muted-foreground">{patch.copy}</p>
+            <p className="mt-5 border-t pt-3 font-mono text-[11px] text-muted-foreground">{patch.nodes}</p>
           </div>
         ))}
       </section>
@@ -433,7 +432,7 @@ export function MarginLeakArticle() {
           <SealCheckIcon className="text-primary" aria-hidden />
           <p className="section-label">Source and limitation note</p>
         </div>
-        <p className="mt-4 max-w-3xl text-sm leading-6 text-foreground/72 dark:text-foreground/82">
+        <p className="mt-4 max-w-3xl text-sm leading-6 text-muted-foreground">
           This note is an operating synthesis, not legal advice, customs guidance, or an audited industry benchmark. Public data are strongest on freight, remedies, port performance, standards, and short-weight enforcement; RFQ latency and counterparty leakage remain desk-estimate ranges.
         </p>
         <div className="mt-5 grid gap-px bg-border md:grid-cols-2">
@@ -446,7 +445,7 @@ export function MarginLeakArticle() {
               className="group grid min-w-0 grid-cols-[2.5rem_minmax(0,1fr)] gap-3 bg-background p-4 transition-colors hover:bg-card"
             >
               <span className="relative flex size-10 items-center justify-center border bg-shell">
-                <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-primary">{source.faviconLabel}</span>
+                <span className="font-mono text-[11px] text-primary">{source.faviconLabel}</span>
                 <img
                   src={source.favicon}
                   alt=""
@@ -458,12 +457,12 @@ export function MarginLeakArticle() {
                 />
               </span>
               <span className="min-w-0">
-                <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-primary">{source.publisher}</span>
+                <span className="font-mono text-[11px] text-primary">{source.publisher}</span>
                 <span className="mt-1 flex items-start gap-2 text-sm font-medium text-foreground">
                   <span className="min-w-0">{source.title}</span>
                   <ArrowRightIcon className="mt-0.5 shrink-0 opacity-0 transition-opacity group-hover:opacity-100" aria-hidden />
                 </span>
-                <span className="mt-2 block text-xs leading-5 text-foreground/72 dark:text-foreground/82">{source.note}</span>
+                <span className="mt-2 block text-xs leading-5 text-muted-foreground">{source.note}</span>
               </span>
             </a>
           ))}
@@ -475,7 +474,7 @@ export function MarginLeakArticle() {
           <ChartLineDownIcon className="text-primary" aria-hidden />
           <p className="section-label">Operating takeaway</p>
         </div>
-        <h2 className="mt-4 max-w-3xl text-3xl font-semibold">Price the file with five live controls: quote clock, free time, deglazed weight, remedy reserve, and tenor.</h2>
+        <h2 className="mt-4 max-w-3xl text-3xl font-semibold">Price the file with five live controls: quote clock, free time, deglazed weight, remedy reserve, and tenor</h2>
       </section>
     </div>
   );

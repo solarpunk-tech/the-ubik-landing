@@ -146,7 +146,7 @@ export default function Pricing() {
               <h1 className="text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">
                 {t("pricing.titleLead")} <span className="text-primary">{t("pricing.titleEmphasis")}</span>
               </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-primary-foreground/84">
+              <p className="mt-5 max-w-3xl text-lg leading-8 text-primary-foreground">
                 {t("pricing.lede")}
               </p>
             </div>
@@ -159,7 +159,7 @@ export default function Pricing() {
                 <CardTitle className="text-3xl">{t("pricing.start.name")}</CardTitle>
                 <div>
                   <p className="text-5xl font-semibold">{t("pricing.start.price")}</p>
-                  <p className="mt-5 max-w-xl text-foreground/72 dark:text-foreground/82">
+                  <p className="mt-5 max-w-xl text-muted-foreground">
                     {t("pricing.start.summary")}
                   </p>
                 </div>
@@ -192,7 +192,7 @@ export default function Pricing() {
               <tbody>
                 {replacesRows.map(({ old: oldWay, new: ubik }) => (
                   <tr key={oldWay} className="border-b border-border">
-                    <td className="py-4 pr-6 align-top text-foreground/60 dark:text-foreground/70">{oldWay}</td>
+                    <td className="py-4 pr-6 align-top text-muted-foreground">{oldWay}</td>
                     <td className="py-4 align-top">
                       <span className="flex gap-3">
                         <ArrowRightIcon className="mt-1.5 size-3.5 shrink-0 text-primary" weight="bold" aria-hidden />
@@ -203,7 +203,7 @@ export default function Pricing() {
                 ))}
               </tbody>
             </table>
-            <p className="mt-6 text-foreground/72 dark:text-foreground/82">{t("pricing.replaces.closing")}</p>
+            <p className="mt-6 text-muted-foreground">{t("pricing.replaces.closing")}</p>
           </section>
 
           <section className="mt-16 grid gap-px overflow-hidden rounded-xl border border-border bg-border lg:grid-cols-[1.1fr_0.9fr]" aria-labelledby="pricing-apps-title">
@@ -228,7 +228,7 @@ export default function Pricing() {
                   </Button>
                 ))}
               </div>
-              <ul className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm text-foreground/72 dark:text-foreground/82">
+              <ul className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm text-muted-foreground">
                 {privacyLabels.map(({ label, icon: Icon }, index) => (
                   <li key={label} className="flex items-center gap-2">
                     <Icon className="size-4 shrink-0 text-primary" aria-hidden />
@@ -257,7 +257,7 @@ export default function Pricing() {
                       <span aria-hidden className="text-primary transition-transform group-open:rotate-45">+</span>
                     </span>
                   </summary>
-                  <div className="mt-3 grid gap-4 border-l border-border pl-4 text-sm leading-7 text-foreground/72 dark:text-foreground/82">
+                  <div className="mt-3 grid gap-4 border-l border-border pl-4 text-sm leading-7 text-muted-foreground">
                     {faq.a.map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
                     ))}

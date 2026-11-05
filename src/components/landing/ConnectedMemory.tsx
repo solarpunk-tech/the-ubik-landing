@@ -83,15 +83,13 @@ export function ConnectedMemory() {
   return (
     <section className="bg-shell text-primary-foreground" aria-labelledby="platform-apps-title">
       <div ref={ref} className="container-page py-16 sm:py-24">
-        <p className="founder-company-label !text-primary-foreground/70">{copy.eyebrow}</p>
         <h2 id="platform-apps-title" className="home-section-title !max-w-4xl text-primary-foreground">{copy.title}</h2>
-        <p className="mt-5 max-w-2xl text-lg leading-8 text-primary-foreground/80">{copy.lede}</p>
 
         <div className="mt-10 grid gap-10 lg:mt-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
           <div className="grid content-start gap-6">
             {appGroups.map((group, groupIndex) => (
               <div key={copy.groups[groupIndex]}>
-                <p className="text-[12.5px] font-medium text-primary-foreground/60">{copy.groups[groupIndex]}</p>
+                <p className="text-[12.5px] font-medium text-primary-foreground">{copy.groups[groupIndex]}</p>
                 <ul className="mt-2 flex flex-wrap gap-1.5">
                   {group.map(([name, src]) => {
                     const isSource = sourceApps.includes(name);
@@ -105,7 +103,7 @@ export function ConnectedMemory() {
                             ? "border-primary-foreground bg-primary-foreground font-medium text-foreground shadow-[0_0_0_3px_hsl(var(--primary)/0.55)]"
                             : isSource
                               ? "border-primary-foreground/45 bg-primary-foreground/[0.08] text-primary-foreground"
-                              : "border-primary-foreground/12 text-primary-foreground/65"
+                              : "border-primary-foreground/12 text-primary-foreground"
                         )}
                       >
                         <img
@@ -122,13 +120,13 @@ export function ConnectedMemory() {
             ))}
 
             <div className="border-t border-primary-foreground/12 pt-5">
-              <p className="text-[12.5px] font-medium text-primary-foreground/60">{copy.commonLabel}</p>
+              <p className="text-[12.5px] font-medium text-primary-foreground">{copy.commonLabel}</p>
               <ul className="mt-2 flex flex-wrap gap-1.5" role="tablist" aria-label={copy.commonLabel}>
                 {copy.common.map((name) => {
                   const index = copy.nodes.findIndex((item) => item.name === name);
                   if (index < 0) {
                     return (
-                      <li key={name} className="rounded-full border border-dashed border-primary-foreground/20 px-2.5 py-1 text-[12.5px] text-primary-foreground/60">
+                      <li key={name} className="rounded-full border border-dashed border-primary-foreground/20 px-2.5 py-1 text-[12.5px] text-primary-foreground">
                         {name}
                       </li>
                     );
@@ -177,7 +175,7 @@ function MemoryCard({ node, copy, phase }: { node: MemoryNode; copy: AppsCopy; p
       </div>
 
       <div className={cn("memory-rule mt-4", phase === 1 && "is-running")}>
-        <span className="text-[11px] font-semibold uppercase tracking-[0.06em] text-primary-text">{copy.ruleLabel}</span>
+        <span className="text-[11px] font-semibold text-primary-text">{copy.ruleLabel}</span>
         <span className="text-[13px] leading-5">{node.rule}</span>
       </div>
 

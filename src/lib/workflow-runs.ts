@@ -373,8 +373,8 @@ export const workflowRuns: Record<WorkflowSlug, WorkflowRunData> = {
         kind: "list",
         title: "Flagged cells",
         rows: [
-          { title: "Row 14 · 26/30 count", meta: "Operator: 376, from the sheet", pill: ok("Fixed") },
-          { title: "Row 15 · 31/40 count", meta: "Operator: no fish in this grade today", pill: ok("Fixed") }
+          { title: "Row 14 · W240 count", meta: "Operator: 376, from the sheet", pill: ok("Fixed") },
+          { title: "Row 15 · W320 count", meta: "Operator: no kernels in this grade today", pill: ok("Fixed") }
         ],
         side: { title: "Order", items: [{ label: "Failed arithmetic", before: bad("1"), after: ok("0") }, { label: "Engines disagree", before: warn("1"), after: ok("0") }, { label: "Empty cell", before: warn("1"), after: ok("0") }] }
       },
@@ -430,7 +430,7 @@ export const workflowRuns: Record<WorkflowSlug, WorkflowRunData> = {
         checks: ["All three reports approved", "Plant's explanation accepted", "Figures unchanged since the draft"],
         button: "Send to plant",
         done: "Sent to plant",
-        side: { title: "Attachment", icon: Excel, rows: [["File", "Plant1_Vannamei_Grade_Wise_Tallying_29-10.xlsx"], ["Grades", "14"]], button: "Preview", done: "Attached" }
+        side: { title: "Attachment", icon: Excel, rows: [["File", "Plant1_Cashew_Grade_Wise_Tallying_29-10.xlsx"], ["Grades", "14"]], button: "Preview", done: "Attached" }
       }
     ]
   },
@@ -454,17 +454,17 @@ export const workflowRuns: Record<WorkflowSlug, WorkflowRunData> = {
         title: "Recommendation queue",
         columns: ["Item", "On hand", "On the water", "8-week need"],
         rows: [
-          { cells: ["Vannamei 26/30 · 2 kg", "1,200", "800", "3,900"], verdict: bad("Reorder"), flag: 3 },
-          { cells: ["Vannamei 31/40 · 2 kg", "2,600", "1,600", "3,700"], verdict: muted("No order") },
+          { cells: ["Cashew W240 · 2 kg", "1,200", "800", "3,900"], verdict: bad("Reorder"), flag: 3 },
+          { cells: ["Cashew W320 · 2 kg", "2,600", "1,600", "3,700"], verdict: muted("No order") },
           { cells: ["Black tiger 16/20 · 1 kg", "300", "0", "320"], verdict: warn("Watch") },
           { cells: ["PD tail-on 21/25", "4,100", "1,200", "2,400"], verdict: warn("Excess") }
         ],
-        finding: { severity: "Shortage", text: "26/30 runs out in week 49 unless a container ships by 20 Nov.", owner: "Purchasing" }
+        finding: { severity: "Shortage", text: "W240 runs out in week 49 unless a container ships by 20 Nov.", owner: "Purchasing" }
       },
       {
         kind: "approve",
         title: "Approve adjusted",
-        badge: "26/30 · 2 kg",
+        badge: "W240 · 2 kg",
         checks: ["Recommended: 2 containers, 3,200 cases", "Adjusted to 2 containers, 3,000 cases", "Reason: buyer moved 200 cases to December"],
         button: "Approve adjusted",
         done: "Approved · action draft written"
@@ -472,7 +472,7 @@ export const workflowRuns: Record<WorkflowSlug, WorkflowRunData> = {
       {
         kind: "draft",
         to: "Purchasing team",
-        subject: "Action draft · Vannamei 26/30 · 2 kg",
+        subject: "Action draft · Cashew W240 · 2 kg",
         body: ["Prepare 2 containers, 3,000 cases, for week 49 arrival.", "Supplier: Supplier 214. Latest ETD reported: 18 Nov."],
         note: "Nothing is sent to suppliers. A person places the order.",
         send: "Copy draft",
@@ -500,8 +500,8 @@ export const workflowRuns: Record<WorkflowSlug, WorkflowRunData> = {
         title: "Northbay Foods · open orders",
         columns: ["AZ#", "SO#", "Item", "Produced"],
         rows: [
-          { cells: ["AZ-5521", "SO-1182", "26/30 · 2 kg", "96%"], verdict: warn("No container") , flag: 3 },
-          { cells: ["AZ-5530", "SO-1190", "31/40 · 2 kg", "40%"], verdict: bad("Late"), flag: 3 },
+          { cells: ["AZ-5521", "SO-1182", "W240 · 2 kg", "96%"], verdict: warn("No container") , flag: 3 },
+          { cells: ["AZ-5530", "SO-1190", "W320 · 2 kg", "40%"], verdict: bad("Late"), flag: 3 },
           { cells: ["AZ-5533", "—", "16/20 · 1 kg", "0%"], verdict: muted("SO not issued") }
         ],
         finding: { tone: "warn", severity: "Insight", text: "Two Northbay orders are behind the ship date the buyer was given.", owner: "Sales" }
@@ -582,8 +582,8 @@ export const workflowRuns: Record<WorkflowSlug, WorkflowRunData> = {
         title: "Regulatory monitor",
         rows: [
           { icon: appIcons.Exa, title: "EU deforestation regulation, guidance update", meta: "europa.eu · full text", pill: ok("Fact") },
-          { icon: appIcons.Exa, title: "Fishery improvement project closes in Andhra", meta: "Trade press · snippet", pill: ok("Fact") },
-          { icon: appIcons.Exa, title: "Retailer to drop farmed shrimp, says headline", meta: "Title only, page behind a login", pill: warn("Unverified") }
+          { icon: appIcons.Exa, title: "Cashew processing cluster expands in Kollam", meta: "Trade press · snippet", pill: ok("Fact") },
+          { icon: appIcons.Exa, title: "Retailer to drop imported cashews, says headline", meta: "Title only, page behind a login", pill: warn("Unverified") }
         ]
       },
       {
@@ -629,12 +629,12 @@ export const workflowRuns: Record<WorkflowSlug, WorkflowRunData> = {
         rows: [
           { title: "France", meta: "6 suppliers · 41 SKUs", pill: ok("Country") },
           { title: "Supplier 214", meta: "12 SKUs", pill: ok("Supplier") },
-          { title: "Vannamei 26/30 · 2 kg", meta: "4 layers", pill: ok("SKU") }
+          { title: "Cashew W240 · 2 kg", meta: "4 layers", pill: ok("SKU") }
         ]
       },
       {
         kind: "compare",
-        title: "Vannamei 26/30 · 2 kg · layers",
+        title: "Cashew W240 · 2 kg · layers",
         columns: ["Layer", "Spec", "Photo"],
         rows: [
           { cells: ["Inner bag", "PE 80 µm, 2 kg", "inner_bag.jpg"], verdict: ok("Complete") },
@@ -651,12 +651,12 @@ export const workflowRuns: Record<WorkflowSlug, WorkflowRunData> = {
           { icon: Gmail, title: "master_ctn_front.jpg", meta: "From Supplier 214, Tue", pill: ok("Attached") },
           { icon: Gmail, title: "pallet_pattern.pdf", meta: "From Supplier 214, Tue", pill: ok("Attached") }
         ],
-        side: { title: "Completeness", items: [{ label: "Vannamei 26/30 · 2 kg", before: warn("50%"), after: ok("100%") }, { label: "Supplier 214", before: warn("74%"), after: ok("82%") }] }
+        side: { title: "Completeness", items: [{ label: "Cashew W240 · 2 kg", before: warn("50%"), after: ok("100%") }, { label: "Supplier 214", before: warn("74%"), after: ok("82%") }] }
       },
       {
         kind: "approve",
         title: "Spec sheet",
-        badge: "26/30 · 2 kg",
+        badge: "W240 · 2 kg",
         checks: ["Four layers, each with a spec", "A photo for every layer", "Supplier and country on record"],
         button: "Export",
         done: "Exported"

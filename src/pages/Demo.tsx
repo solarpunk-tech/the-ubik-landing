@@ -26,21 +26,20 @@ export default function Demo() {
       <main className="relative overflow-clip">
         <section className="container-page relative z-10 grid gap-10 pt-14 pb-16 sm:pt-20 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 lg:pb-24">
           <div>
-            <p className="section-label">{t("demo.eyebrow")}</p>
             <h1 className="mt-4 max-w-[14ch] text-4xl font-semibold leading-[1.05] sm:text-5xl">{t("demo.title")}</h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-foreground/72 dark:text-foreground/82">{t("demo.lede")}</p>
+            <p className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground">{t("demo.lede")}</p>
             <ol className="mt-10 grid max-w-xl gap-5">
               {steps.map((step, index) => (
                 <li key={step.title} className="grid grid-cols-[2rem_1fr] gap-x-3">
                   <span className="tabular-nums pt-0.5 text-sm text-primary-text">0{index + 1}</span>
                   <div>
                     <p className="font-semibold">{step.title}</p>
-                    <p className="mt-1 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{step.copy}</p>
+                    <p className="mt-1 text-sm leading-6 text-muted-foreground">{step.copy}</p>
                   </div>
                 </li>
               ))}
             </ol>
-            <p className="mt-10 flex max-w-xl items-center gap-2.5 border-t border-border pt-5 text-sm text-foreground/72 dark:text-foreground/82">
+            <p className="mt-10 flex max-w-xl items-center gap-2.5 border-t border-border pt-5 text-sm text-muted-foreground">
               <span aria-hidden className="size-1.5 shrink-0 bg-primary" />
               {t("demo.proof")}
             </p>
@@ -54,7 +53,7 @@ export default function Demo() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackEvent("cta_clicked", { cta: "book_session_tab", location: "demo" })}
-                className="inline-flex items-center gap-1.5 text-xs text-foreground/60 underline-offset-4 hover:underline"
+                className="inline-flex items-center gap-1.5 text-xs text-muted-foreground underline-offset-4 hover:underline"
               >
                 <span className="hidden sm:inline">{t("demo.bookFallback")}</span>
                 <span className="sm:hidden">{t("demo.bookFallbackShort")}</span>
@@ -67,7 +66,7 @@ export default function Demo() {
               className="block h-[46rem] w-full border-0 bg-white sm:h-[44rem]"
               onLoad={() => trackEvent("booking_calendar_loaded", { location: "demo" })}
             />
-            <p className="border-t border-border px-5 py-3 text-xs leading-5 text-foreground/60">
+            <p className="border-t border-border px-5 py-3 text-xs leading-5 text-muted-foreground">
               {t("demo.privacy")} <Link to="/legal/privacy" className="underline underline-offset-2">{t("demo.privacyLink")}</Link>
             </p>
           </div>
@@ -84,9 +83,9 @@ export default function Demo() {
               <details key={item.q} className="group py-4">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium [&::-webkit-details-marker]:hidden">
                   {item.q}
-                  <CaretDownIcon aria-hidden className="size-4 shrink-0 text-foreground/60 transition-transform group-open:rotate-180" />
+                  <CaretDownIcon aria-hidden className="size-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" />
                 </summary>
-                <p className="mt-3 max-w-2xl text-sm leading-6 text-foreground/72 dark:text-foreground/82">{item.a}</p>
+                <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">{item.a}</p>
               </details>
             ))}
           </div>

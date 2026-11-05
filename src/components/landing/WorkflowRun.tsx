@@ -276,7 +276,7 @@ export function WorkflowRun({ slug, steps, title }: { slug: WorkflowSlug; steps:
   return (
     <div ref={ref} className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:gap-12">
       <div>
-        <h2 className="text-2xl font-semibold tracking-[-0.02em]">{title}</h2>
+        <h2 className="text-2xl font-semibold">{title}</h2>
         <ol className="mt-6 grid gap-2" role="tablist" aria-label={title}>
           {steps.map((step, index) => (
             <li key={step.title}>
@@ -296,7 +296,7 @@ export function WorkflowRun({ slug, steps, title }: { slug: WorkflowSlug; steps:
               >
                 <span className="tabular-nums text-[12.5px] font-medium text-primary-text">0{index + 1}</span>
                 <span>
-                  <span className={cn("block text-lg font-semibold tracking-[-0.02em]", index !== active && "text-muted-foreground")}>{step.title}</span>
+                  <span className={cn("block text-lg font-semibold", index !== active && "text-muted-foreground")}>{step.title}</span>
                   {index === active ? <span className="mt-1 block text-sm leading-6 text-muted-foreground">{step.copy}</span> : null}
                 </span>
                 {index === active && !paused && !reducedMotion ? (

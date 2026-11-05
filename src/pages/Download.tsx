@@ -99,13 +99,13 @@ const windowsSteps = [
 const proofCards = [
   {
     kicker: "Guest list",
-    title: "Doesn't join meetings.",
+    title: "Doesn't join meetings",
     copy: "ubik Meetings stays on your desktop, so there is no extra bot in the guest list.",
     visual: "participants"
   },
   {
     kicker: "Screen share",
-    title: "Invisible to screen share.",
+    title: "Invisible to screen share",
     copy: "Keep the helper window outside shared screens while it tracks meeting context locally.",
     visual: "screen"
   }
@@ -189,7 +189,7 @@ function SpecimenHeader({ label, note }: { label: string; note?: string }) {
   return (
     <div className="flex items-center justify-between gap-3 border-b bg-muted/40 px-4 py-2.5">
       <span className={kickerClass}>{label}</span>
-      {note ? <span className="tabular-nums text-[0.66rem] text-foreground/60 dark:text-foreground/72">{note}</span> : null}
+      {note ? <span className="tabular-nums text-[0.66rem] text-muted-foreground">{note}</span> : null}
     </div>
   );
 }
@@ -205,7 +205,7 @@ function NotificationRail() {
               <img src={favicon(notification.domain)} alt="" className="size-5" />
               <div className="min-w-0">
                 <p className="truncate text-sm font-medium text-foreground">{notification.title}</p>
-                <p className="truncate tabular-nums text-[0.68rem] text-foreground/62 dark:text-foreground/76">
+                <p className="truncate tabular-nums text-[0.68rem] text-muted-foreground">
                   {notification.meta} <span className="text-primary">{notification.signal}</span>
                 </p>
               </div>
@@ -226,7 +226,7 @@ function PreReadPanel() {
       <CardContent className="p-0">
         <SpecimenHeader label="Pre-read preview" />
         <div className="flex items-start justify-between gap-4 border-b px-4 py-3">
-          <p className="text-sm leading-6 text-foreground/72 dark:text-foreground/82">
+          <p className="text-sm leading-6 text-muted-foreground">
             Context Ubik can assemble before you join.
           </p>
           <Badge
@@ -242,7 +242,7 @@ function PreReadPanel() {
               <img src={favicon(source.domain)} alt="" className="size-5" />
               <div className="min-w-0">
                 <dt className="truncate text-sm font-medium text-foreground">{source.label}</dt>
-                <dd className="m-0 truncate text-xs text-foreground/62 dark:text-foreground/76">{source.detail}</dd>
+                <dd className="m-0 truncate text-xs text-muted-foreground">{source.detail}</dd>
               </div>
             </div>
           ))}
@@ -269,9 +269,9 @@ function ProofVisual({ visual }: { visual: (typeof proofCards)[number]["visual"]
               <img src={favicon(surface.domain)} alt="" className="size-4" />
               <div className="min-w-0">
                 <p className="truncate text-xs font-medium text-foreground">{surface.label}</p>
-                <p className="truncate text-[0.68rem] text-foreground/62 dark:text-foreground/76">{surface.detail}</p>
+                <p className="truncate text-[0.68rem] text-muted-foreground">{surface.detail}</p>
               </div>
-              <span className="tabular-nums text-[0.62rem] text-foreground/60 dark:text-foreground/72">
+              <span className="tabular-nums text-[0.62rem] text-muted-foreground">
                 Local
               </span>
             </li>
@@ -285,7 +285,7 @@ function ProofVisual({ visual }: { visual: (typeof proofCards)[number]["visual"]
     <div>
       <div className="flex items-center justify-between gap-3 border-b bg-muted/40 px-4 py-2.5">
         <span className={kickerClass}>Share surface</span>
-        <span className="tabular-nums text-[0.66rem] text-foreground/60 dark:text-foreground/72">local only</span>
+        <span className="tabular-nums text-[0.66rem] text-muted-foreground">local only</span>
       </div>
       <table className="w-full text-left text-xs">
         <tbody>
@@ -293,9 +293,9 @@ function ProofVisual({ visual }: { visual: (typeof proofCards)[number]["visual"]
             <tr key={row.surface} className="border-b last:border-0">
               <td className="px-4 py-3 align-top">
                 <p className="font-medium text-foreground">{row.surface}</p>
-                <p className="mt-1 text-[0.68rem] leading-5 text-foreground/62 dark:text-foreground/76">{row.detail}</p>
+                <p className="mt-1 text-[0.68rem] leading-5 text-muted-foreground">{row.detail}</p>
               </td>
-              <td className="whitespace-nowrap px-4 py-3 align-top tabular-nums text-[0.62rem] text-foreground/70 dark:text-foreground/80">
+              <td className="whitespace-nowrap px-4 py-3 align-top tabular-nums text-[0.62rem] text-muted-foreground">
                 {row.state}
               </td>
             </tr>
@@ -341,9 +341,9 @@ export default function Download() {
           <div className="container-page relative z-10 py-14 sm:py-16">
             <div>
               <h1 className="text-4xl font-semibold leading-tight sm:text-5xl lg:text-6xl">
-                Your meetings, remembered. No bot in the room.
+                Your meetings, remembered, with no bot in the room
               </h1>
-              <p className="mt-4 max-w-2xl text-lg leading-8 text-foreground/72 dark:text-foreground/82">
+              <p className="mt-4 max-w-2xl text-lg leading-8 text-muted-foreground">
                 ubik Meetings runs quietly on your desktop: it hears the call, captures the decision and the
                 owner, and files both against the deal they belong to. Nothing extra on the guest list.
                 Nothing extra in the recording.
@@ -367,7 +367,7 @@ export default function Download() {
                       <span className="inline-flex items-center gap-2 text-base font-semibold text-foreground">
                         <OptionIcon
                           weight="fill"
-                          className={isSelected ? "text-primary" : "text-foreground/70"}
+                          className={isSelected ? "text-primary" : "text-muted-foreground"}
                           aria-hidden
                         />
                         {option.label}
@@ -376,8 +376,8 @@ export default function Download() {
                         {option.chip}
                       </Badge>
                     </div>
-                    <p className="text-sm leading-6 text-foreground/72 dark:text-foreground/82">{option.explainer}</p>
-                    <p className="tabular-nums text-[0.66rem] text-foreground/60 dark:text-foreground/72">
+                    <p className="text-sm leading-6 text-muted-foreground">{option.explainer}</p>
+                    <p className="tabular-nums text-[0.66rem] text-muted-foreground">
                       {option.fileLabel}
                     </p>
                     <Button asChild size="lg" variant={isSelected ? "default" : "outline"} className="mt-auto w-full">
@@ -399,10 +399,10 @@ export default function Download() {
                 );
               })}
             </div>
-            <p className="mt-4 tabular-nums text-[0.7rem] leading-5 text-foreground/62 dark:text-foreground/76">
+            <p className="mt-4 tabular-nums text-[0.7rem] leading-5 text-muted-foreground">
               {versionText} · {selected.fileLabel} · {selected.helper}
             </p>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-foreground/62 dark:text-foreground/76">
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
               Not sure which Mac you have? Open Apple menu, About This Mac. M-series means Apple silicon; Intel
               means the Intel build.
             </p>
@@ -416,7 +416,7 @@ export default function Download() {
                   <div key={option.id} className="flex flex-col gap-3 bg-card p-5 opacity-70">
                     <div className="flex items-start justify-between gap-3">
                       <span className="inline-flex items-center gap-2 text-base font-semibold text-foreground">
-                        <OptionIcon className="text-foreground/70" aria-hidden />
+                        <OptionIcon className="text-muted-foreground" aria-hidden />
                         {option.label}
                       </span>
                       <Badge
@@ -439,12 +439,7 @@ export default function Download() {
 
         <section className="container-page section-y">
           <div className="max-w-3xl">
-            <p className={kickerClass}>On your desktop</p>
-            <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">Alerts now, prepared context next.</h2>
-            <p className="mt-3 text-foreground/72 dark:text-foreground/82">
-              The app surfaces what is about to happen and what needs a decision, without pulling you into
-              another window.
-            </p>
+            <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">Alerts now, prepared context next</h2>
           </div>
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
             <NotificationRail />
@@ -456,17 +451,15 @@ export default function Download() {
 
         <section className="container-page section-y">
           <div className="max-w-3xl">
-            <p className={kickerClass}>What it does not do</p>
-            <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">No bot. No overlay in the share. No new window to babysit.</h2>
+            <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">No bot, no overlay in the share, no new window to babysit</h2>
           </div>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
             {proofCards.map((card) => (
               <article key={card.title} className="flex flex-col border bg-card">
                 <ProofVisual visual={card.visual} />
                 <div className="mt-auto border-t p-5">
-                  <p className={kickerClass}>{card.kicker}</p>
                   <h3 className="mt-2 text-lg font-semibold">{card.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{card.copy}</p>
+                  <p className="mt-2 text-sm leading-6 text-muted-foreground">{card.copy}</p>
                 </div>
               </article>
             ))}
@@ -487,12 +480,7 @@ export default function Download() {
 
         <section className="container-page pb-16 sm:pb-20">
           <div className="max-w-3xl">
-            <p className={kickerClass}>Install</p>
-            <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">Install once. Keep the meeting loop local.</h2>
-            <p className="mt-3 text-foreground/72 dark:text-foreground/82">
-              Three steps, then meeting context lands in the same reviewed queue as the rest of your operating
-              memory.
-            </p>
+            <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">Install once. Keep the meeting loop local</h2>
           </div>
           <ol className="mt-6 flex max-w-3xl flex-col divide-y border-y">
             {steps.map(({ n, title, copy }) => (
@@ -502,7 +490,7 @@ export default function Download() {
                 </span>
                 <div className="text-sm leading-6">
                   <p className="font-medium text-foreground">{title}</p>
-                  <p className="mt-1 text-foreground/72 dark:text-foreground/82">{copy}</p>
+                  <p className="mt-1 text-muted-foreground">{copy}</p>
                 </div>
               </li>
             ))}
@@ -510,7 +498,7 @@ export default function Download() {
           {showInstallGuide ? (
             <div className="mt-6 flex max-w-3xl gap-3 border border-primary/30 bg-primary/5 p-5">
               <InfoIcon className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
-              <p className="text-sm leading-6 text-foreground/86">
+              <p className="text-sm leading-6 text-foreground">
                 <strong className="text-foreground">Download started for {selected.label}.</strong> Follow the
                 steps above once the installer appears in Downloads.
               </p>

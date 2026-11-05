@@ -350,7 +350,7 @@ function EtaWatchArtifact() {
       <div className="eta-focus-row">
         <span><img src={favicon("maersk.com")} alt="" />Maersk / MSK-2841</span>
         <p><strong>Buyer promise holds</strong><small>Review again if ETA moves ±2 days</small></p>
-        <em>WATCH</em>
+        <em>Watch</em>
       </div>
       <div className="artifact-nudge"><span>Next check · 18:00 local</span><strong>3 shipments need no action yet</strong></div>
     </div>

@@ -126,9 +126,9 @@ export default function Subprocessors() {
       />
       <main className="container-page section-y">
         <article className="mx-auto max-w-5xl">
-          <p className="text-sm font-medium text-foreground/72 dark:text-foreground/82">Version 1.0 — effective on publication</p>
+          <p className="text-sm font-medium text-muted-foreground">Version 1.0 — effective on publication</p>
           <h1 className="mt-3 text-5xl font-semibold">Subprocessors</h1>
-          <p className="mt-6 max-w-3xl text-lg leading-8 text-foreground/72 dark:text-foreground/82">
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
             This page lists the third-party subprocessors that Ubik (Solarpunk Technology) engages to process customer personal data or content in delivering the Ubik service.
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -141,7 +141,7 @@ export default function Subprocessors() {
 
           <section className="mt-10 border bg-card p-5">
             <h2 className="text-2xl font-semibold">Change notification</h2>
-            <div className="mt-4 grid gap-3 leading-7 text-foreground/72 dark:text-foreground/82">
+            <div className="mt-4 grid gap-3 leading-7 text-muted-foreground">
               <p>
                 When we intend to add or replace a subprocessor, we will provide affected customers with at least 30 days’ advance notice before the new subprocessor begins processing customer data. Notifications are published on our Trust Center and sent by email to affected customers.
               </p>
@@ -162,27 +162,27 @@ export default function Subprocessors() {
               {subprocessors.map((item) => (
                 <div key={item.name} className="grid gap-px bg-border md:grid-cols-[1.1fr_1.4fr_1.4fr_0.9fr]">
                   <div className="bg-background p-4">
-                    <p className="text-xs font-medium text-foreground/72 dark:text-foreground/82 md:hidden">Subprocessor</p>
+                    <p className="text-xs font-medium text-muted-foreground md:hidden">Subprocessor</p>
                     <p className="mt-1 font-medium md:mt-0">{item.name}</p>
                   </div>
                   <div className="bg-background p-4">
-                    <p className="text-xs font-medium text-foreground/72 dark:text-foreground/82 md:hidden">Purpose</p>
-                    <p className="mt-1 text-sm leading-6 text-foreground/72 dark:text-foreground/82 md:mt-0">{item.purpose}</p>
+                    <p className="text-xs font-medium text-muted-foreground md:hidden">Purpose</p>
+                    <p className="mt-1 text-sm leading-6 text-muted-foreground md:mt-0">{item.purpose}</p>
                   </div>
                   <div className="bg-background p-4">
-                    <p className="text-xs font-medium text-foreground/72 dark:text-foreground/82 md:hidden">Data categories</p>
-                    <p className="mt-1 text-sm leading-6 text-foreground/72 dark:text-foreground/82 md:mt-0">{item.data}</p>
+                    <p className="text-xs font-medium text-muted-foreground md:hidden">Data categories</p>
+                    <p className="mt-1 text-sm leading-6 text-muted-foreground md:mt-0">{item.data}</p>
                   </div>
                   <div className="bg-background p-4">
-                    <p className="text-xs font-medium text-foreground/72 dark:text-foreground/82 md:hidden">Location</p>
-                    <p className="mt-1 text-sm leading-6 text-foreground/72 dark:text-foreground/82 md:mt-0">{item.location}</p>
+                    <p className="text-xs font-medium text-muted-foreground md:hidden">Location</p>
+                    <p className="mt-1 text-sm leading-6 text-muted-foreground md:mt-0">{item.location}</p>
                   </div>
                 </div>
               ))}
             </div>
           </section>
 
-          <section className="mt-10 grid gap-3 leading-7 text-foreground/72 dark:text-foreground/82">
+          <section className="mt-10 grid gap-3 leading-7 text-muted-foreground">
             <h2 className="text-2xl font-semibold text-foreground">Transfers</h2>
             <p>
               For transfers to US-based subprocessors, Ubik relies on the EU Standard Contractual Clauses (SCCs, Modules 2 and 3) together with a Data Processing Agreement per subprocessor. See our Privacy Notice and Data Processing Agreement for detail.

@@ -114,8 +114,8 @@ export function PhotoshopArtifact({ step }: { step: number }) {
         <div className="grid place-items-center bg-[#535353] p-4">
           <div className="relative aspect-[4/3] w-full max-w-[15rem] rounded-sm bg-[#f4efe4] p-3 text-[#10182b] shadow-xl">
             <p className="text-[13px] font-bold tracking-tight">HARBOUR FOODS</p>
-            <p className="text-[10px]">Frozen vannamei · 2 kg</p>
-            <p className={cn("mt-1 rounded-[2px] text-[9px] leading-3", step >= 1 ? "bg-[#fff3c4] outline outline-1 outline-[#e0b400]" : "")}>Contains: crustaceans. Packed in a facility that handles fish.</p>
+            <p className="text-[10px]">Cashew kernels W240 · 2 kg</p>
+            <p className={cn("mt-1 rounded-[2px] text-[9px] leading-3", step >= 1 ? "bg-[#fff3c4] outline outline-1 outline-[#e0b400]" : "")}>Contains: tree nuts (cashew). Packed in a facility that handles peanuts.</p>
             <span
               className="absolute left-3 text-[9px] font-semibold tabular-nums transition-all duration-700"
               style={{ top: moved ? "58%" : "84%" }}
@@ -242,14 +242,14 @@ export function ComplianceBrowserArtifact({ step }: { step: number }) {
   const tabs: BrowserTab[] = [
     { icon: <img src={favicon("fda.gov")} alt="" className="size-3.5" />, title: "FDA import alerts", url: "accessdata.fda.gov/cms_ia/importalert" },
     { icon: <img src={favicon("food.ec.europa.eu")} alt="" className="size-3.5" />, title: "RASFF Window", url: "webgate.ec.europa.eu/rasff-window" },
-    { icon: <img src={favicon("bapcertification.org")} alt="" className="size-3.5" />, title: "BAP registry", url: "bapcertification.org/Producers" },
+    { icon: <img src={favicon("brcgs.com")} alt="" className="size-3.5" />, title: "BRCGS directory", url: "brcgs.com/directory" },
     { icon: <FilePdfIcon className="size-3.5 text-destructive" />, title: "Lot 87.pdf", url: "ubik / evidence / Lot 87 / health-certificate.pdf" }
   ];
   const active = Math.min(step, 3);
   const fields = [
     ["Lot", "87", true],
     ["Establishment no.", "EST-4471", true],
-    ["Species", "Litopenaeus vannamei", true],
+    ["Product", "Cashew kernels W240", true],
     ["Issue date", "14 Oct 2026", false]
   ] as const;
   return (
@@ -257,18 +257,18 @@ export function ComplianceBrowserArtifact({ step }: { step: number }) {
       <div key={active} className="grid gap-1.5 p-4 text-[12.5px] [animation:work-paper-in_340ms_cubic-bezier(.22,1,.36,1)]">
         {active === 0 ? (
           <>
-            <p className="mb-1 text-[11.5px] text-muted-foreground">Seafood alerts · searched for EST-4471 and 12 lots</p>
-            <CheckRow label="Decomposition and histamine" detail="Detention without physical examination" state="clear" />
-            <CheckRow label="Aquaculture drug residues" detail="Shrimp and prawns" state="scan" />
-            <CheckRow label="Filth and salmonella" detail="Frozen seafood" state="idle" />
+            <p className="mb-1 text-[11.5px] text-muted-foreground">Import alerts · searched for EST-4471 and 12 lots</p>
+            <CheckRow label="Aflatoxin above limit" detail="Detention without physical examination" state="clear" />
+            <CheckRow label="Salmonella" detail="Tree nuts and kernels" state="scan" />
+            <CheckRow label="Filth and insect damage" detail="Dried nuts" state="idle" />
           </>
         ) : null}
         {active === 1 ? (
           <>
-            <p className="mb-1 text-[11.5px] text-muted-foreground">Notifications · crustaceans · last 90 days</p>
-            <CheckRow label="Sulphite above limit" detail="Border rejection · another exporter" state="clear" />
-            <CheckRow label="Veterinary residue" detail="Alert · another exporter" state="clear" />
-            <CheckRow label="Temperature abuse" detail="Information notice" state="scan" />
+            <p className="mb-1 text-[11.5px] text-muted-foreground">Notifications · nuts · last 90 days</p>
+            <CheckRow label="Ochratoxin A above limit" detail="Border rejection · another exporter" state="clear" />
+            <CheckRow label="Pesticide residue" detail="Alert · another exporter" state="clear" />
+            <CheckRow label="Moisture and mould" detail="Information notice" state="scan" />
           </>
         ) : null}
         {active === 2 ? (
@@ -278,9 +278,9 @@ export function ComplianceBrowserArtifact({ step }: { step: number }) {
               <span className="rounded-full bg-ok/15 px-2 py-0.5 text-[11.5px] font-medium text-ok-text">Certified</span>
             </div>
             <div className="mt-3 grid grid-cols-2 gap-2 text-[12px]">
-              <span className="text-muted-foreground">Programme</span><span>BAP processing plant</span>
+              <span className="text-muted-foreground">Programme</span><span>BRCGS Food Safety</span>
               <span className="text-muted-foreground">Valid to</span><span className="tabular-nums">Mar 2027</span>
-              <span className="text-muted-foreground">Species</span><span>Vannamei shrimp</span>
+              <span className="text-muted-foreground">Product</span><span>Cashew kernels</span>
             </div>
           </div>
         ) : null}
@@ -302,7 +302,7 @@ export function ComplianceBrowserArtifact({ step }: { step: number }) {
           </>
         ) : null}
       </div>
-      <span className={cn("absolute bottom-4 right-4 inline-flex rotate-[-8deg] items-center gap-1 rounded-md border-2 border-ok-text px-2 py-1 text-[12px] font-bold tracking-[0.12em] text-ok-text transition-all duration-500", step >= 5 ? "scale-100 opacity-90" : "scale-125 opacity-0")}>
+      <span className={cn("absolute bottom-4 right-4 inline-flex rotate-[-8deg] items-center gap-1 rounded-md border-2 border-ok-text px-2 py-1 text-[12px] font-bold text-ok-text transition-all duration-500", step >= 5 ? "scale-100 opacity-90" : "scale-125 opacity-0")}>
         <SealCheckIcon weight="fill" className="size-4" /> 12 CLEARED
       </span>
     </Browser>

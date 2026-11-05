@@ -70,7 +70,7 @@ function FigurePair({
     <figure className="overflow-hidden border bg-shell">
       <img src={light} alt={alt} className={cn("w-full object-contain dark:hidden", aspect)} loading="eager" decoding="async" />
       <img src={dark} alt={alt} className={cn("hidden w-full object-contain dark:block", aspect)} loading="eager" decoding="async" />
-      <figcaption className="border-t bg-background p-4 text-xs leading-5 text-foreground/72 dark:text-foreground/82">{caption}</figcaption>
+      <figcaption className="border-t bg-background p-4 text-xs leading-5 text-muted-foreground">{caption}</figcaption>
     </figure>
   );
 }
@@ -92,7 +92,7 @@ function LeaderboardBenchmarkPanel({
             <span className="size-2 bg-primary" aria-hidden />
             Snapshot as of May 29, 2026
           </div>
-          <p className="text-sm leading-6 text-foreground/72 dark:text-foreground/82">{useCase.description}</p>
+          <p className="text-sm leading-6 text-muted-foreground">{useCase.description}</p>
         </div>
         <div className="h-[22rem] min-w-0 sm:h-[26rem]">
           <EvilBarChart
@@ -120,11 +120,11 @@ function LeaderboardBenchmarkPanel({
       <div className="grid gap-px bg-border">
         {rows.slice(0, 3).map((row) => (
           <div key={row.model} className="bg-background p-4">
-            <p className="font-mono text-xs uppercase tracking-[0.14em] text-primary">
+            <p className="font-mono text-xs text-primary">
               Arena rank {row.arenaRank} / {row.provider}
             </p>
             <h3 className="mt-3 text-lg font-semibold">{row.model}</h3>
-            <p className="mt-2 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{row.bestUse}</p>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">{row.bestUse}</p>
           </div>
         ))}
       </div>
@@ -136,7 +136,7 @@ function ProviderFavicon({ name, domain }: { name: string; domain: string }) {
   return (
     <span className="inline-flex items-center gap-2 border bg-background px-3 py-2 text-xs font-medium">
       <span className="relative flex size-6 items-center justify-center border bg-shell">
-        <span className="font-mono text-[11px] uppercase text-primary">{name.slice(0, 2)}</span>
+        <span className="font-mono text-[11px] text-primary">{name.slice(0, 2)}</span>
         <img
           src={`https://www.google.com/s2/favicons?domain=${domain}&sz=64`}
           alt=""
@@ -191,9 +191,8 @@ function MonitorDeck() {
   return (
     <section className="grid min-w-0 gap-5 border bg-card p-4 sm:p-5 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
       <div>
-        <p className="section-label">Swipe / click monitor deck</p>
-        <h2 className="mt-3 text-3xl font-semibold">Evidence routing should feel like moving one decision card at a time.</h2>
-        <p className="mt-4 text-sm leading-6 text-foreground/72 dark:text-foreground/82">
+        <h2 className="mt-3 text-3xl font-semibold">Evidence routing should feel like moving one decision card at a time</h2>
+        <p className="mt-4 text-sm leading-6 text-muted-foreground">
           The old static evidence chain becomes an operator control: advance the card, inspect the evidence question, then decide whether the row moves, waits, or escalates.
         </p>
         <div className="mt-6 hidden gap-2 md:grid">
@@ -232,16 +231,16 @@ function MonitorDeck() {
         <div className="monitor-deck-card min-h-[28rem] border bg-background p-5 shadow-sm sm:p-6">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-primary">{active.kicker}</p>
+              <p className="font-mono text-xs text-primary">{active.kicker}</p>
               <h3 className="mt-5 max-w-xl text-3xl font-semibold">{active.title}</h3>
             </div>
             <span className="monitor-deck-chip flex size-12 shrink-0 items-center justify-center border bg-shell text-primary">
               <Icon size={24} aria-hidden />
             </span>
           </div>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-foreground/72 dark:text-foreground/82">{active.copy}</p>
+          <p className="mt-6 max-w-2xl text-base leading-8 text-muted-foreground">{active.copy}</p>
           <div className="mt-8 border bg-shell p-4">
-            <p className="font-mono text-xs uppercase tracking-[0.14em] text-primary">Operator question</p>
+            <p className="font-mono text-xs text-primary">Operator question</p>
             <p className="mt-3 text-xl font-semibold">{active.operatorQuestion}</p>
           </div>
           <div className="mt-6 grid grid-cols-6 gap-1" aria-hidden>
@@ -283,7 +282,7 @@ function LeaderboardSnapshot() {
         <div>
           <p className="section-label">Arena snapshot / as of May 29, 2026</p>
           <h2 className="mt-4 max-w-3xl text-3xl font-semibold">
-            The public leaderboard is the shortlist. The trade workflow score decides the router.
+            The public leaderboard makes the shortlist, the trade workflow score picks the router
           </h2>
         </div>
         <a href="https://arena.ai/leaderboard/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border bg-background px-4 py-2 text-sm font-medium hover:bg-shell">
@@ -295,7 +294,7 @@ function LeaderboardSnapshot() {
           <ProviderFavicon key={provider.name} {...provider} />
         ))}
       </div>
-      <p className="mt-5 max-w-3xl text-sm leading-6 text-foreground/72 dark:text-foreground/82">
+      <p className="mt-5 max-w-3xl text-sm leading-6 text-muted-foreground">
         Recreated from the free public Arena leaderboard view, then remapped for seafood operators: evidence work, routing work, and overall fit for messy supplier files. The point is not to crown one model. It is to make frontier intelligences easy to assign to the right job.
       </p>
       <div className="mt-5 grid gap-2 lg:hidden" role="tablist" aria-label="Arena use cases">
@@ -311,7 +310,7 @@ function LeaderboardSnapshot() {
                 activeUseCaseId === useCase.id ? "border-primary bg-primary/10" : "bg-background hover:bg-shell"
               )}
             >
-              <span className="block font-mono text-[11px] uppercase tracking-[0.12em] text-primary">{useCase.kicker}</span>
+              <span className="block font-mono text-[11px] text-primary">{useCase.kicker}</span>
               <span className="mt-2 block text-sm font-semibold">{useCase.label}</span>
             </button>
             {activeUseCaseId === useCase.id ? (
@@ -333,7 +332,7 @@ function LeaderboardSnapshot() {
               activeUseCaseId === useCase.id ? "border-primary bg-primary/10" : "bg-background hover:bg-shell"
             )}
           >
-            <span className="block font-mono text-[11px] uppercase tracking-[0.12em] text-primary">{useCase.kicker}</span>
+            <span className="block font-mono text-[11px] text-primary">{useCase.kicker}</span>
             <span className="mt-2 block text-sm font-semibold">{useCase.label}</span>
           </button>
         ))}
@@ -361,7 +360,7 @@ function SourceLinks() {
             aria-label={`Open ${source.publisher}: ${source.title}`}
           >
             <span className="relative flex size-6 items-center justify-center border bg-shell">
-              <span className="font-mono text-[11px] uppercase text-primary">{source.publisher.slice(0, 2)}</span>
+              <span className="font-mono text-[11px] text-primary">{source.publisher.slice(0, 2)}</span>
               <img
                 src={`https://www.google.com/s2/favicons?domain=${source.domain}&sz=64`}
                 alt=""
@@ -377,9 +376,9 @@ function SourceLinks() {
               <span className="block aspect-[16/9] overflow-hidden border bg-shell">
                 <img src={source.image} alt="" className="h-full w-full object-contain" loading="lazy" />
               </span>
-              <span className="mt-3 block font-mono text-[11px] uppercase tracking-[0.12em] text-primary">{source.publisher}</span>
+              <span className="mt-3 block font-mono text-[11px] text-primary">{source.publisher}</span>
               <span className="mt-1 block text-sm font-semibold text-foreground">{source.title}</span>
-              <span className="mt-2 block text-xs leading-5 text-foreground/72 dark:text-foreground/82">{source.note}</span>
+              <span className="mt-2 block text-xs leading-5 text-muted-foreground">{source.note}</span>
             </span>
           </a>
         ))}
@@ -393,9 +392,8 @@ export function AiMonitorLayerArticle() {
     <div className="mt-10 grid min-w-0 grid-cols-[minmax(0,1fr)] gap-8">
       <section className="grid min-w-0 gap-px bg-border lg:grid-cols-[0.86fr_1.14fr]">
         <div className="bg-card p-5 sm:p-6">
-          <p className="section-label">Case study / seafood entity enrichment</p>
-          <h2 className="mt-5 text-3xl font-semibold">The failure mode was not a bad answer. It was unsupported confidence entering work.</h2>
-          <p className="mt-5 text-base leading-8 text-foreground/72 dark:text-foreground/82">
+          <h2 className="mt-5 text-3xl font-semibold">The failure mode was not a bad answer. It was unsupported confidence entering work</h2>
+          <p className="mt-5 text-base leading-8 text-muted-foreground">
             We gave two AI workflows the same seafood exhibitor list and asked for the headquarters or primary operating country. The task looked like enrichment. In practice, it tested whether AI could preserve enough evidence to be trusted inside routing, segmentation, compliance, and outreach.
           </p>
         </div>
@@ -405,11 +403,11 @@ export function AiMonitorLayerArticle() {
               <div key={metric.value} className="bg-card p-4">
                 <p className="font-mono text-3xl text-primary">{metric.value}</p>
                 <p className="mt-3 text-sm font-medium leading-6">{metric.label}</p>
-                <p className="mt-3 text-xs leading-5 text-foreground/72 dark:text-foreground/82">{metric.note}</p>
+                <p className="mt-3 text-xs leading-5 text-muted-foreground">{metric.note}</p>
               </div>
             ))}
           </div>
-          <div className="mt-5 border bg-shell p-4 text-sm leading-6 text-foreground/72 dark:text-foreground/82">
+          <div className="mt-5 border bg-shell p-4 text-sm leading-6 text-muted-foreground">
             Adoption gets easier when the system explains where to trust, where to verify, and where to stop. That is the monitor layer.
           </div>
         </div>
@@ -417,7 +415,7 @@ export function AiMonitorLayerArticle() {
 
       <section id="reasoning-leakage" className="scroll-mt-24 border-t py-8 sm:py-10">
         <h2 className="text-3xl font-semibold">From margin leakage to reasoning leakage</h2>
-        <div className="mt-5 grid gap-4 text-base leading-8 text-foreground/72 dark:text-foreground/82">
+        <div className="mt-5 grid gap-4 text-base leading-8 text-muted-foreground">
           <p>
             The earlier margin note showed how quiet handoff errors erode a seafood file. This note is the AI version: a plausible country tag, missing source context, or overconfident inference can bend routing before anyone sees the weakness.
           </p>
@@ -447,7 +445,7 @@ export function AiMonitorLayerArticle() {
 
       <section id="operator-layer" className="scroll-mt-24 border-t py-8 sm:py-10">
         <h2 className="text-3xl font-semibold">What this means for seafood operators</h2>
-        <div className="mt-5 grid gap-4 text-base leading-8 text-foreground/72 dark:text-foreground/82">
+        <div className="mt-5 grid gap-4 text-base leading-8 text-muted-foreground">
           <p>
             The lesson is not that every task needs two LLMs. The lesson is that every AI-assisted decision needs a monitor appropriate to its risk. Low-risk enrichment can move with agreement and evidence. Medium-risk workflows need disagreement queues. High-risk workflows need direct source traceability and human sign-off.
           </p>
@@ -469,7 +467,7 @@ export function AiMonitorLayerArticle() {
           <span className="size-2.5 bg-primary" aria-hidden />
           <p className="section-label">Final takeaway</p>
         </div>
-        <h2 className="mt-4 max-w-3xl text-3xl font-semibold">AI transformation gets practical when frontier models meet forward-deployed trade expertise.</h2>
+        <h2 className="mt-4 max-w-3xl text-3xl font-semibold">AI transformation gets practical when frontier models meet forward-deployed trade expertise</h2>
         <div className="mt-6 grid gap-px bg-border sm:grid-cols-3">
           {[
             ["Route the model", "Use the right frontier intelligence for research, extraction, exception review, planning, customer updates, or compliance support."],
@@ -478,7 +476,7 @@ export function AiMonitorLayerArticle() {
           ].map(([title, copy]) => (
             <div key={title} className="bg-background p-4">
               <h3 className="text-base font-semibold">{title}</h3>
-              <p className="mt-3 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{copy}</p>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">{copy}</p>
             </div>
           ))}
         </div>

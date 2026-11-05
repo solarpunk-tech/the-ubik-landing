@@ -10,25 +10,35 @@ import type { BlogCategory, BlogCategorySlug, BlogPost } from "@/lib/blog/types"
 
 export const blogCategories: BlogCategory[] = [
   {
+    slug: "food",
+    label: "Food",
+    description: "Sourcing, margin, and workflow notes from the food trade desk.",
+    emptyState: "Published food Trade Notes will appear here."
+  },
+  {
     slug: "seafood",
+    parent: "food",
     label: "Seafood",
     description: "Sourcing, margin, and workflow notes from the seafood trade desk.",
     emptyState: "Published seafood Trade Notes will appear here."
   },
   {
     slug: "agri",
+    parent: "food",
     label: "Agri",
     description: "Trade notes for agricultural supply chains.",
     emptyState: "No Agri Trade Notes are published yet."
   },
   {
     slug: "dairy",
+    parent: "food",
     label: "Dairy",
     description: "Trade notes for dairy operators and buyers.",
     emptyState: "No Dairy Trade Notes are published yet."
   },
   {
     slug: "poultry",
+    parent: "food",
     label: "Poultry",
     description: "Trade notes for poultry supply chains.",
     emptyState: "No Poultry Trade Notes are published yet."
@@ -45,8 +55,17 @@ export function getBlogPostCategorySlugs(post: BlogPost): BlogCategorySlug[] {
     return post.categorySlugs;
   }
 
+  // Every Trade Note is filed under Food; the commodity is a label inside it.
   const searchablePostText = [post.category, post.title, post.excerpt, post.seoTitle, post.seoDescription].join(" ");
-  return seafoodSignals.test(searchablePostText) ? ["seafood"] : [];
+  return seafoodSignals.test(searchablePostText) ? ["food", "seafood"] : ["food"];
+}
+
+/** "Food · Seafood": the post's category and its labels, for card and article meta. */
+export function getBlogPostCategoryTrail(post: BlogPost) {
+  return getBlogPostCategorySlugs(post)
+    .map((slug) => getBlogCategory(slug)?.label)
+    .filter(Boolean)
+    .join(" · ");
 }
 
 export function getBlogCategory(slug: BlogCategorySlug) {

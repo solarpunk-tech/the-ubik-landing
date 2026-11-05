@@ -121,7 +121,7 @@
       }
     },
     "buyers": {
-      "title": "Optimise your bloated workflows.",
+      "title": "Optimise your bloated workflows",
       "lede": "ubik already handles over $1B in shipments and more than 10,000 containers across the globe.",
       "items": [
         {
@@ -604,7 +604,7 @@
           }
         }
       },
-      "examplesTitle": "Agents run, collaborate and decide.",
+      "examplesTitle": "Agents run, collaborate and decide",
       "examplesLede": "No outsourced intelligence, and no wall of alerts that look urgent and pull your team off the real work.",
       "status": {
         "read": "Reading {{count}} sources",
@@ -625,7 +625,7 @@
       }
     },
     "outcomes": {
-      "title": "From scattered evidence to reviewed action.",
+      "title": "From scattered evidence to reviewed action",
       "lede": "Every output keeps its source, its reviewer and its result attached, so leadership audits decisions, not data.",
       "ledgerLabel": "Work ubik produces after a trade decision",
       "memoryLabel": "Linked in memory",
@@ -663,7 +663,7 @@
     },
     "platform": {
       "eyebrow": "Platform",
-      "title": "Your systems hold the records. ubik connects the context.",
+      "title": "Your systems hold the records, ubik connects the context",
       "caption": "Understand the inputs, controls and responsibility behind every proposed next step.",
       "flowLabel": "How a proposed action is produced",
       "flow": [
@@ -717,13 +717,13 @@
     },
     "controls": {
       "eyebrow": "Deployment",
-      "title": "Own your data and intelligence.",
+      "title": "Own your data and intelligence",
       "lede": "Run ubik where your data already lives. The memory it builds and the models it runs stay in your environment.",
       "options": [
         {
           "id": "premises",
           "label": "On premises",
-          "title": "In your data center.",
+          "title": "In your data center",
           "copy": "Self-host on bare metal or your own Kubernetes.",
           "boundary": "Your data center",
           "out": "No data out"
@@ -731,7 +731,7 @@
         {
           "id": "cloud",
           "label": "Your cloud",
-          "title": "In your VPC.",
+          "title": "In your VPC",
           "copy": "Deploy to AWS, GCP or Azure inside your own account.",
           "boundary": "Your VPC",
           "out": "Stays in your account"
@@ -739,7 +739,7 @@
         {
           "id": "local",
           "label": "Local",
-          "title": "On your laptop.",
+          "title": "On your laptop",
           "copy": "The full stack on one workstation, for offline or sensitive work.",
           "boundary": "Your workstation",
           "out": "Works offline"
@@ -761,7 +761,7 @@
       "securityLink": "Review access and security"
     },
     "pilot": {
-      "title": "Choose the bottleneck. Prove the first workflow.",
+      "title": "Choose the bottleneck, prove the first workflow",
       "lede": "Success is defined with your team before anything expands.",
       "widget": {
         "pick": "Supplier updates",
@@ -812,7 +812,7 @@
       ]
     },
     "faq": {
-      "title": "Practical questions, answered.",
+      "title": "Practical questions, answered",
       "items": [
         {
           "q": "What is ubik?",
@@ -868,7 +868,7 @@
       "label": "Before ubik, our team ran operations, trade desks and the software behind them at"
     },
     "closing": {
-      "title": "Find the bottleneck worth automating first.",
+      "title": "Find the bottleneck worth automating first",
       "copy": "Walk through one live process with our team. Leave with an outline of the first workflow and the information it needs.",
       "pricing": "Priced per workflow, with no user or token limit."
     }
@@ -880,7 +880,7 @@
     },
     "badge": "Pricing",
     "titleLead": "The best models,",
-    "titleEmphasis": "without the meter running.",
+    "titleEmphasis": "without the meter running",
     "lede": "We route each step to the frontier model that can do it and pay for the tokens, so your bill reads the same in a quiet week and a full one.",
     "teammate": {
       "connectors": "Connectors",
@@ -899,7 +899,7 @@
       "cta": "Talk to us"
     },
     "replaces": {
-      "title": "Only pay for outcomes.",
+      "title": "Only pay for outcomes",
       "oldWay": "The old way",
       "ubik": "Ubik",
       "rows": [
@@ -927,7 +927,7 @@
       "closing": "Coordination used to be a payroll line. Now it is a workflow."
     },
     "apps": {
-      "title": "ubik lives where your work is.",
+      "title": "ubik lives where your work is",
       "soon": "Soon",
       "privacy": [
         "Local recorder",
@@ -938,7 +938,7 @@
     },
     "faq": {
       "badge": "Questions",
-      "title": "LLMs plan and draft. ubik controls the context.",
+      "title": "LLMs plan and draft, ubik controls the context",
       "items": [
         {
           "q": "What data is shared with LLMs?",
@@ -992,7 +992,7 @@
   "learn": {
     "documents": {
       "eyebrow": "Document verification",
-      "title": "Every document, in every version, checked.",
+      "title": "Every document, in every version, checked",
       "lede": "Vendors resend the same document as PDFs, photos, spreadsheets and ZIP files. ubik reads each version, keeps the latest and checks it against the order.",
       "grid": {
         "documents": [
@@ -1052,7 +1052,7 @@
     },
     "apps": {
       "eyebrow": "Connected apps",
-      "title": "One record, whichever system it came from.",
+      "title": "One record, whichever system it came from",
       "lede": "ubik connects to the mail, chat, ERP and files your team already uses. When they disagree, it picks one record by a rule you set and keeps the rest as evidence.",
       "groups": [
         "Mail and chat",
@@ -1174,15 +1174,15 @@
       "description": "How ubik reads your inbox, WhatsApp, ERP and documents, flags what changed, and drafts the next step for your team to approve."
     },
     "eyebrow": "Platform",
-    "title": "How ubik works.",
+    "title": "How ubik works",
     "lede": "Your systems keep the records. ubik reads them together, flags what changed and drafts the next step. A person on your team approves it.",
     "pace": {
-      "title": "Five jobs, as they run in the product.",
+      "title": "Five jobs, as they run in the product",
       "lede": "Pick one to see it."
     },
     "access": {
       "eyebrow": "Access and responsibility",
-      "title": "What ubik reads, drafts and writes.",
+      "title": "What ubik reads, drafts and writes",
       "items": [
         {
           "label": "Reads",
@@ -1213,7 +1213,7 @@
       "description": "Supplier updates, document verification, production planning and the packaging tracker: the workflows ubik runs for importers and exporters today."
     },
     "eyebrow": "Workflows",
-    "title": "Workflows that run in the product today.",
+    "title": "Workflows that run in the product today",
     "lede": "Each one starts from the email, sheet or ERP record your team already gets, and ends with the next step done or waiting for approval.",
     "labels": {
       "all": "All workflows",
@@ -1275,7 +1275,7 @@
         "visual": {
           "subject": "Weekly schedule · Work in progress",
           "to": "To: 6 suppliers",
-          "attachment": "Harbour-Seafoods-WIP.xlsx",
+          "attachment": "Harbour-Foods-WIP.xlsx",
           "repliesLabel": "Replies read",
           "status": "Received",
           "changes": [
@@ -1681,7 +1681,7 @@
           },
           {
             "value": "0",
-            "label": "Confidence scores shown to operators. They see the cell."
+            "label": "Confidence scores shown to operators: they see the cell"
           }
         ],
         "cta": "Request demo"
@@ -1727,7 +1727,7 @@
           },
           {
             "value": "0",
-            "label": "Orders sent to suppliers by ubik. A person places them."
+            "label": "Orders sent to suppliers by ubik: a person places them"
           }
         ],
         "cta": "Request demo"
@@ -1857,7 +1857,7 @@
         "stats": [
           {
             "value": "1",
-            "label": "Model call per memo. Severity and actions are rules."
+            "label": "Model call per memo: severity and actions are rules"
           },
           {
             "value": "3",

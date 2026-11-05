@@ -29,8 +29,7 @@ export function ProductSurface() {
         <section className="bg-card p-5">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="section-label">Your source systems</p>
-              <h3 className="mt-2 text-xl font-semibold">Keep your stack.</h3>
+              <h3 className="mt-2 text-xl font-semibold">Keep your stack</h3>
             </div>
             <DotmSquare6 size={32} dotSize={4} aria-label="Source systems scanning" />
           </div>
@@ -44,9 +43,8 @@ export function ProductSurface() {
         <section className="relative bg-primary p-5 text-primary-foreground">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="section-label text-primary-foreground">Ubik</p>
-              <h3 className="mt-2 text-xl font-semibold text-primary-foreground">Trade intelligence personalised.</h3>
-              <p className="mt-1 text-sm text-primary-foreground/80">Read, match, prioritize.</p>
+              <h3 className="mt-2 text-xl font-semibold text-primary-foreground">Trade intelligence personalised</h3>
+              <p className="mt-1 text-sm text-primary-foreground">Read, match, prioritize.</p>
             </div>
             <DotmCircular4 size={36} dotSize={5} color="hsl(var(--primary-foreground))" aria-label="Operator layer scanning" />
           </div>
@@ -76,8 +74,7 @@ export function ProductSurface() {
         <section className="bg-card p-5">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="section-label">Reviewed output</p>
-              <h3 className="mt-2 text-xl font-semibold">Review before it moves.</h3>
+              <h3 className="mt-2 text-xl font-semibold">Review before it moves</h3>
             </div>
             <DotmCircular5 size={34} dotSize={4.5} aria-label="Reviewed output sweep" />
           </div>
@@ -92,7 +89,7 @@ export function ProductSurface() {
                   )}
                   <div>
                     <p className="font-medium">{item.label}</p>
-                    <p className="mt-2 text-sm leading-6 text-foreground/72 dark:text-foreground/82">{item.value}</p>
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.value}</p>
                   </div>
                 </div>
               </div>

@@ -201,8 +201,8 @@ function LegalTable({ table }: { table: NonNullable<Section["table"]> }) {
           <div key={row.join("|")} className={`grid gap-px bg-border ${row.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
             {row.map((cell, index) => (
               <div key={`${cell}-${index}`} className="bg-background p-4">
-                <p className="text-xs font-medium text-foreground/72 dark:text-foreground/82 md:hidden">{table.headers[index]}</p>
-                <p className="mt-1 text-sm leading-6 text-foreground/72 dark:text-foreground/82 md:mt-0">{cell}</p>
+                <p className="text-xs font-medium text-muted-foreground md:hidden">{table.headers[index]}</p>
+                <p className="mt-1 text-sm leading-6 text-muted-foreground md:mt-0">{cell}</p>
               </div>
             ))}
           </div>
@@ -222,16 +222,16 @@ export default function Privacy() {
       />
       <main className="container-page section-y">
         <article className="mx-auto max-w-4xl">
-          <p className="text-sm font-medium text-foreground/72 dark:text-foreground/82">Version 1.0 — effective on publication</p>
+          <p className="text-sm font-medium text-muted-foreground">Version 1.0 — effective on publication</p>
           <h1 className="mt-3 text-5xl font-semibold">Privacy Notice</h1>
-          <p className="mt-6 text-lg leading-8 text-foreground/72 dark:text-foreground/82">
+          <p className="mt-6 text-lg leading-8 text-muted-foreground">
             This notice explains how Ubik handles personal data across our website, app, desktop product, and customer workflows.
           </p>
 
           <div className="mt-8 grid gap-px bg-border sm:grid-cols-2">
             {details.map(({ label, value }) => (
               <div key={label} className="bg-background p-4">
-                <p className="text-xs font-medium text-foreground/72 dark:text-foreground/82">{label}</p>
+                <p className="text-xs font-medium text-muted-foreground">{label}</p>
                 <p className="mt-2 text-sm leading-6">{value}</p>
               </div>
             ))}
@@ -241,7 +241,7 @@ export default function Privacy() {
             {sections.map(({ title, paragraphs, bullets, table }) => (
               <section key={title}>
                 <h2 className="text-2xl font-semibold">{title}</h2>
-                <div className="mt-4 grid gap-3 leading-7 text-foreground/72 dark:text-foreground/82">
+                <div className="mt-4 grid gap-3 leading-7 text-muted-foreground">
                   {paragraphs?.map((paragraph, index) => (
                     <p key={typeof paragraph === "string" ? paragraph : `paragraph-${index}`}>{paragraph}</p>
                   ))}
@@ -260,7 +260,7 @@ export default function Privacy() {
 
           <section className="mt-12 border bg-card p-5">
             <h2 className="text-2xl font-semibold">16. Contact</h2>
-            <div className="mt-4 grid gap-3 text-sm leading-6 text-foreground/72 dark:text-foreground/82">
+            <div className="mt-4 grid gap-3 text-sm leading-6 text-muted-foreground">
               <p>Solarpunk Technology - 6/A/1 Sunder Baug Towers, Makarpura Road, Opposite Hazira, Pratapnagar, Vadodara, Gujarat, India</p>
               <p>Privacy contact: founders@theubik.com</p>
               <p>India Grievance Officer (DPDP): Shubhranshu Jha, COO/CPO - founders@theubik.com</p>

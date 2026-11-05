@@ -85,7 +85,7 @@ export const monitorSteps: MonitorStep[] = [
   {
     id: "source",
     kicker: "01 / Source file",
-    title: "Start with the messy operating object.",
+    title: "Start with the messy operating object",
     copy:
       "The input was a 735-row seafood exhibitor list. The field looked simple: infer the headquarters or primary operating country. In seafood, that can mean farm, processor, exporter, group HQ, sales office, or distributor signal.",
     operatorQuestion: "What does this field change downstream?",
@@ -94,7 +94,7 @@ export const monitorSteps: MonitorStep[] = [
   {
     id: "parallel",
     kicker: "02 / Parallel extraction",
-    title: "Run more than one path when the decision matters.",
+    title: "Run more than one path when the decision matters",
     copy:
       "One extraction path produced broad coverage. A web-first path produced an independent view. The value was not a winner-loser scoreboard; it was conflict visibility.",
     operatorQuestion: "Do two systems fail in the same direction?",
@@ -103,7 +103,7 @@ export const monitorSteps: MonitorStep[] = [
   {
     id: "disagreement",
     kicker: "03 / Disagreement",
-    title: "Treat disagreement as a queue, not a bug.",
+    title: "Treat disagreement as a queue, not a bug",
     copy:
       "The comparison found 309 agreements and 167 disagreements where both systems resolved a country. Those rows became the highest-value review queue because conflict was concentrated, inspectable, and actionable.",
     operatorQuestion: "Which rows deserve scarce review time?",
@@ -112,7 +112,7 @@ export const monitorSteps: MonitorStep[] = [
   {
     id: "evidence",
     kicker: "04 / Evidence capture",
-    title: "Confidence without evidence is not operational state.",
+    title: "Confidence without evidence is not operational state",
     copy:
       "A confident country tag is still weak if it cannot show whether the source proves headquarters, operating base, exporter origin, or only a sales presence. The monitor asks for source type before it lets the answer move.",
     operatorQuestion: "What does the source actually prove?",
@@ -121,7 +121,7 @@ export const monitorSteps: MonitorStep[] = [
   {
     id: "routing",
     kicker: "05 / Green, amber, red",
-    title: "Add friction only where the workflow needs it.",
+    title: "Add friction only where the workflow needs it",
     copy:
       "The monitor converted raw answers into green, amber, and red routing. That keeps low-risk rows moving while forcing review on ambiguity, drift, and missing evidence.",
     operatorQuestion: "Can this answer become a decision now?",
@@ -130,7 +130,7 @@ export const monitorSteps: MonitorStep[] = [
   {
     id: "learning",
     kicker: "06 / Learning loop",
-    title: "Corrections become operating memory.",
+    title: "Corrections become operating memory",
     copy:
       "The durable layer is not the model call. It is the monitor that remembers failure clusters: English-law suffix overreach, sales-market confusion, distributor geography, and unsupported country drift.",
     operatorQuestion: "What should the system catch next time?",

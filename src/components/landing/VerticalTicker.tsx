@@ -1,11 +1,11 @@
-import { BowlFoodIcon, CowIcon, FishSimpleIcon, ForkKnifeIcon, SnowflakeIcon } from "@phosphor-icons/react";
+import { BowlFoodIcon, CowIcon, ForkKnifeIcon, SnowflakeIcon } from "@phosphor-icons/react";
 
 type VerticalTickerProps = {
   items: string[];
 };
 
 const tickerIcons = {
-  "Live for Global Frozen Food": FishSimpleIcon,
+  "Live for Global Frozen Food": SnowflakeIcon,
   "Testing for Meat": ForkKnifeIcon,
   "Testing for Dairy": CowIcon,
   "Testing for Frozen Veggies": SnowflakeIcon

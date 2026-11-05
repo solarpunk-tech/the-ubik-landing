@@ -232,7 +232,7 @@ export function FreightField({ className }: { className?: string }) {
 
   return (
     <div ref={ref} aria-hidden className={cn("freight-field pointer-events-none absolute inset-0", className)}>
-      <canvas ref={canvasRef} className="h-full w-full text-primary/60 dark:text-primary-text/55" />
+      <canvas ref={canvasRef} className="h-full w-full text-primary/60 dark:text-primary-text" />
     </div>
   );
 }

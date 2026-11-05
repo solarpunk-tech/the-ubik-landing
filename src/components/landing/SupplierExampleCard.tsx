@@ -35,7 +35,7 @@ export function LiveSquare({ className }: { className?: string }) {
 /** The lowercase wordmark with its square, as genui's `.ubik-word` draws it. */
 export function UbikWord({ className }: { className?: string }) {
   return (
-    <span className={cn("inline-flex items-center gap-1 font-semibold tracking-[-0.02em]", className)}>
+    <span className={cn("inline-flex items-center gap-1 font-semibold", className)}>
       ubik
       <span aria-hidden className="inline-block size-[0.4em] translate-y-[0.1em] bg-primary" />
     </span>

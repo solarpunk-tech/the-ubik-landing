@@ -1,45 +1,38 @@
 import { useEffect, useState } from "react";
-import { DOWNLOAD_MANIFEST_URL, downloadsFallback } from "./links";
+import { DOWNLOAD_MANIFEST_URL, downloads } from "./links";
 
 export interface DownloadLinks {
+  /** Empty until the manifest is read; empty forever if the fetch fails (e.g. CORS). */
   version: string;
-  mac_arm64: string;
-  mac_x64: string;
+  mac: string;
   windows: string;
-  loading: boolean;
 }
 
 /**
- * Fetches the latest.json manifest from S3 and returns live download URLs.
- * Falls back to downloadsFallback silently if the fetch fails.
- * The manifest is written by the production GitHub Actions workflow on every release.
+ * Installer links are constant aliases, so they are correct from first paint.
+ * Only the version label comes from the manifest, and it stays blank if the
+ * fetch fails rather than showing anything stale.
  */
 export function useDownloadLinks(): DownloadLinks {
-  const [links, setLinks] = useState<DownloadLinks>({
-    ...downloadsFallback,
-    loading: true,
-  });
+  const [version, setVersion] = useState("");
 
   useEffect(() => {
+    let cancelled = false;
     fetch(DOWNLOAD_MANIFEST_URL, { cache: "no-store" })
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();
       })
       .then((data) => {
-        setLinks({
-          version:   data.version               ?? downloadsFallback.version,
-          mac_arm64: data.downloads?.mac_arm64  ?? downloadsFallback.mac_arm64,
-          mac_x64:   data.downloads?.mac_x64    ?? downloadsFallback.mac_x64,
-          windows:   data.downloads?.windows    ?? downloadsFallback.windows,
-          loading:   false,
-        });
+        if (!cancelled && typeof data?.version === "string") setVersion(data.version);
       })
       .catch(() => {
-        // Manifest unreachable — use fallback values so the page still works.
-        setLinks((prev) => ({ ...prev, loading: false }));
+        // Manifest unreachable: keep the blank label; links still work.
       });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  return links;
+  return { version, ...downloads };
 }

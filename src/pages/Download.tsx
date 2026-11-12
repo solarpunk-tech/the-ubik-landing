@@ -19,7 +19,7 @@ import { useDownloadLinks } from "@/lib/use-download-links";
 import { detectOS, type OS } from "@/lib/use-detected-os";
 import { trackEvent } from "@/lib/posthog";
 
-type DownloadChoice = "mac_arm64" | "mac_x64" | "windows";
+type DownloadChoice = "mac" | "windows";
 
 type DownloadOption = {
   id: DownloadChoice;
@@ -53,24 +53,14 @@ const mobileOptions: MobileOption[] = [
 
 const downloadOptions: DownloadOption[] = [
   {
-    id: "mac_arm64",
+    id: "mac",
     os: "mac",
-    label: "Mac (M-series)",
+    label: "Mac",
     cta: "Download for Mac",
-    helper: "Recommended for Macs with M1, M2, M3, M4, or newer Apple silicon chips.",
-    fileLabel: "Ubik-Meeting-arm64.dmg",
-    chip: "Apple silicon",
-    explainer: "Most Macs sold since late 2020 use Apple silicon. Choose this if your Mac model mentions M1, M2, M3, M4, or newer."
-  },
-  {
-    id: "mac_x64",
-    os: "mac",
-    label: "Mac (Intel)",
-    cta: "Download for Mac",
-    helper: "Use this for older Intel-based Macs.",
-    fileLabel: "Ubik-Meeting-x64.dmg",
-    chip: "Intel",
-    explainer: "Choose this if About This Mac says Processor: Intel, or if it is an older pre-M-series Mac."
+    helper: "One universal build for Apple silicon and Intel Macs.",
+    fileLabel: "Ubik-universal.dmg",
+    chip: "Apple silicon + Intel",
+    explainer: "Works on every Mac, whether it has an M-series chip or an Intel processor. No need to pick."
   },
   {
     id: "windows",
@@ -78,7 +68,7 @@ const downloadOptions: DownloadOption[] = [
     label: "Windows",
     cta: "Download for Windows",
     helper: "For Windows 10 and Windows 11 workstations.",
-    fileLabel: "Ubik-Meeting-Setup.exe",
+    fileLabel: "Ubik-Setup.exe",
     chip: "Windows 10+",
     explainer: "Choose this for Windows 10 or Windows 11 laptops and desktops."
   }
@@ -91,7 +81,7 @@ const macSteps = [
 ];
 
 const windowsSteps = [
-  { n: 1, title: "Open the installer", copy: "Open Ubik-Meeting-Setup.exe from your Downloads folder." },
+  { n: 1, title: "Open the installer", copy: "Open Ubik-Setup.exe from your Downloads folder." },
   { n: 2, title: "Complete the wizard", copy: "Follow the setup wizard and approve the Windows install prompt." },
   { n: 3, title: "Launch from Start", copy: "Open Ubik from Start and allow the requested local permissions." }
 ];
@@ -171,8 +161,8 @@ const kickerClass =
 
 function getInitialChoice(requested: string | null): DownloadChoice {
   if (requested === "windows") return "windows";
-  if (requested === "mac") return "mac_arm64";
-  return detectOS() === "windows" ? "windows" : "mac_arm64";
+  if (requested === "mac") return "mac";
+  return detectOS() === "windows" ? "windows" : "mac";
 }
 
 function favicon(domain: string, size = 64) {
@@ -181,8 +171,7 @@ function favicon(domain: string, size = 64) {
 
 function getDownloadHref(choice: DownloadChoice, links: ReturnType<typeof useDownloadLinks>) {
   if (choice === "windows") return links.windows;
-  if (choice === "mac_x64") return links.mac_x64;
-  return links.mac_arm64;
+  return links.mac;
 }
 
 function SpecimenHeader({ label, note }: { label: string; note?: string }) {
@@ -316,16 +305,10 @@ export default function Download() {
   const steps = selected.os === "windows" ? windowsSteps : macSteps;
 
   const versionText = useMemo(() => {
-    if (links.loading) return "Loading latest release...";
     return links.version ? `Version ${links.version}` : "Latest desktop release";
-  }, [links.loading, links.version]);
+  }, [links.version]);
 
   function handleDownloadClick(event: MouseEvent<HTMLAnchorElement>, option: DownloadOption) {
-    if (links.loading) {
-      event.preventDefault();
-      return;
-    }
-
     setShowInstallGuide(true);
     trackEvent("download_clicked", { os: option.os, build: option.id, version: links.version });
   }
@@ -355,7 +338,7 @@ export default function Download() {
             </div>
 
             <p className={`${kickerClass} mt-12`}>Desktop</p>
-            <div className="mt-4 grid gap-px border bg-border sm:grid-cols-3">
+            <div className="mt-4 grid gap-px border bg-border sm:grid-cols-2">
               {downloadOptions.map((option) => {
                 const href = getDownloadHref(option.id, links);
                 const OptionIcon = option.os === "windows" ? WindowsLogoIcon : AppleLogoIcon;
@@ -384,12 +367,10 @@ export default function Download() {
                       <a
                         href={href}
                         aria-current={isSelected ? "true" : undefined}
-                        aria-disabled={links.loading}
                         onClick={(event) => {
                           setSelectedId(option.id);
                           handleDownloadClick(event, option);
                         }}
-                        className={links.loading ? "pointer-events-none opacity-60" : undefined}
                       >
                         <DownloadSimpleIcon data-icon="inline-start" aria-hidden />
                         {option.cta}
@@ -401,10 +382,6 @@ export default function Download() {
             </div>
             <p className="mt-4 tabular-nums text-[0.7rem] leading-5 text-muted-foreground">
               {versionText} · {selected.fileLabel} · {selected.helper}
-            </p>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
-              Not sure which Mac you have? Open Apple menu, About This Mac. M-series means Apple silicon; Intel
-              means the Intel build.
             </p>
 
             <p className={`${kickerClass} mt-10`}>Mobile</p>

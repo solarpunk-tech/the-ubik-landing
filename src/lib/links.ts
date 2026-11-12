@@ -9,17 +9,18 @@ export const externalLinks = {
   trustCenterVendorsApi: "https://api.trycomp.ai/v1/trust-access/solarpunk-technology/vendors"
 };
 
-// Fetched at runtime by useDownloadLinks() — no-cache so every page load
-// picks up the latest production release automatically.
-export const DOWNLOAD_MANIFEST_URL =
-  "https://ubik-meetings.s3.ap-south-1.amazonaws.com/desktop/latest/latest.json";
+const TAURI_BASE = "https://ubik-meetings.s3.ap-south-1.amazonaws.com/desktop/tauri";
 
-// Shown while the manifest is loading or if the fetch fails.
-export const downloadsFallback = {
-  version: "",
-  mac_arm64: "https://ubik-meetings.s3.ap-south-1.amazonaws.com/desktop/latest/Ubik-Meeting-arm64.dmg",
-  mac_x64:   "https://ubik-meetings.s3.ap-south-1.amazonaws.com/desktop/latest/Ubik-Meeting-x64.dmg",
-  windows:   "https://ubik-meetings.s3.ap-south-1.amazonaws.com/desktop/latest/Ubik-Meeting-Setup.exe",
+// Updater manifest for the current Tauri build. Only its top-level `version`
+// is used (for the label); its `platforms.*.url` are updater archives, not
+// installers, so they are never linked.
+export const DOWNLOAD_MANIFEST_URL = `${TAURI_BASE}/latest.json`;
+
+// Stable aliases the release workflow overwrites on every release. These are
+// the installer links; they never depend on the manifest fetch succeeding.
+export const downloads = {
+  mac: `${TAURI_BASE}/Ubik-universal.dmg`,
+  windows: `${TAURI_BASE}/Ubik-Setup.exe`,
 };
 
 /**

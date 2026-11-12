@@ -59,16 +59,6 @@
           "label": "Trade",
           "value": "$25M+",
           "note": "in annual trade"
-        },
-        {
-          "label": "Traceability",
-          "value": "24 hours",
-          "note": "to hand the FDA your traceability records under FSMA 204"
-        },
-        {
-          "label": "Seafood imports",
-          "value": "10 Jan 2026",
-          "note": "EU catch certificates became mandatory"
         }
       ],
       "card": {

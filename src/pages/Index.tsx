@@ -19,6 +19,7 @@ import {
 } from "@/components/landing/motion/RunArtifacts";
 import { useInView } from "@/lib/use-in-view";
 import { VisualPanel } from "@/components/landing/VisualPanel";
+import { CountUp } from "@/components/landing/CountUp";
 import { HeroJourney } from "@/components/landing/iso-scenes/HeroJourney";
 import { WorkflowVisual } from "@/components/landing/WorkflowVisuals";
 import { OwnYourStack } from "@/components/landing/OwnYourStack";
@@ -494,11 +495,11 @@ export default function Index() {
 
           <div className="container-page relative z-10 pb-12 pt-6 sm:pb-16">
             {/* Static stat strip: label, big light number, one line of context. Dashed hairlines, no motion. */}
-            <dl className="grid border-y border-dashed border-border sm:grid-cols-2 lg:grid-cols-4">
+            <dl className="grid border-y border-dashed border-border sm:grid-cols-2">
               {scale.map(({ value, label, note }) => (
-                <div key={label} className="relative flex flex-col border-dashed border-border px-6 py-7 md:px-8 max-sm:[&:not(:first-child)]:border-t sm:[&:nth-child(even)]:border-l sm:[&:nth-child(n+3)]:border-t lg:[&:not(:first-child)]:border-l lg:[&:nth-child(n+3)]:border-t-0">
+                <div key={label} className="relative flex flex-col border-dashed border-border px-6 py-8 max-sm:[&:not(:first-child)]:border-t sm:[&:nth-child(even)]:border-l md:px-8">
                   <dt className="text-sm text-muted-foreground">{label}</dt>
-                  <dd className="mt-1 text-4xl font-light tracking-tight tabular-nums">{value}</dd>
+                  <dd className="mt-1 text-5xl font-bold tracking-tight tabular-nums sm:text-6xl"><CountUp value={value} /></dd>
                   <dd className="mt-2 text-sm text-muted-foreground">{note}</dd>
                 </div>
               ))}

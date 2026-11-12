@@ -3610,9 +3610,9 @@
 .founder-company-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 1.25rem;
+  gap: 2.25rem;
   width: 100%;
-  padding: 2.75rem 0 2.5rem;
+  padding: 3rem 0;
 }
 
 .founder-company-label {
@@ -5061,7 +5061,7 @@
 
 /* Expertise strip: the sentence ends in "at", so it sits above the logos it
    leads into, centred, with room on both sides of the ticker. */
-.founder-company-row { grid-template-columns: 1fr; gap: 1.5rem; padding: 2.75rem 0 2.5rem; }
+.founder-company-row { grid-template-columns: 1fr; gap: 2.25rem; padding: 3rem 0; }
 .founder-company-row .founder-company-label {
   max-width: none;
   justify-self: center;

@@ -493,11 +493,10 @@ export default function Index() {
           </div>
 
           <div className="container-page relative z-10 pb-12 pt-6 sm:pb-16">
-            <p className="tabular-nums text-[12.5px] text-muted-foreground">{t("home.hero.scaleLabel")}</p>
             {/* Static stat strip: label, big light number, one line of context. Dashed hairlines, no motion. */}
-            <dl className="mt-3 grid divide-dashed divide-border border-y border-dashed border-border sm:grid-cols-2 sm:divide-x">
+            <dl className="grid border-y border-dashed border-border sm:grid-cols-2 lg:grid-cols-4">
               {scale.map(({ value, label, note }) => (
-                <div key={label} className="relative flex flex-col px-6 py-7 md:px-8">
+                <div key={label} className="relative flex flex-col border-dashed border-border px-6 py-7 md:px-8 max-sm:[&:not(:first-child)]:border-t sm:[&:nth-child(even)]:border-l sm:[&:nth-child(n+3)]:border-t lg:[&:not(:first-child)]:border-l lg:[&:nth-child(n+3)]:border-t-0">
                   <dt className="text-sm text-muted-foreground">{label}</dt>
                   <dd className="mt-1 text-4xl font-light tracking-tight tabular-nums">{value}</dd>
                   <dd className="mt-2 text-sm text-muted-foreground">{note}</dd>

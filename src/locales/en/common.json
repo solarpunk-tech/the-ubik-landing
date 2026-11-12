@@ -48,27 +48,17 @@
       "lede": "ERP runs the floor. ubik runs the trade: one owner, one record, across every department and stakeholder.",
       "definition": "ubik is an AI-native platform for cross-border trade. It reads your email, WhatsApp, ERP and documents, works order changes and supplier, shipment and document exceptions through under your rules, and drafts the next action for your team to approve.",
       "example": "See the workflows",
-      "scaleLabel": "What one record changes",
+      "scaleLabel": "Built for teams moving",
       "scale": [
         {
-          "value": "Hours",
-          "label": "not weeks, to decide on a change",
-          "kicker": "Speed"
-        },
-        {
-          "value": "1",
-          "label": "record per shipment, shared by every department",
-          "kicker": "Ownership"
-        },
-        {
+          "label": "Volume",
           "value": "100+",
-          "label": "containers a year",
-          "kicker": "Built for teams moving"
+          "note": "containers a year"
         },
         {
+          "label": "Trade",
           "value": "$25M+",
-          "label": "in annual trade",
-          "kicker": "Built for teams moving"
+          "note": "in annual trade"
         }
       ],
       "card": {
@@ -128,12 +118,44 @@
         "approve": "Send reply"
       },
       "journey": {
-        "pond": "Harvest lot logged at the pond",
-        "line": "Packing checked against the buyer's spec",
-        "booking": "Booking, bill of lading and invoice matched",
-        "ship": "Buyer sees the ETA on the same record",
-        "customs": "Import duty paid, release confirmed",
-        "delivered": "Delivered. POD in, invoice closed"
+        "origin": {
+          "shrimp": {
+            "team": "Procurement team",
+            "action": "Harvest lot 0412 traced, supplier PO matched"
+          },
+          "farm": {
+            "team": "Procurement team",
+            "action": "Grain lot 2291 graded, contract price locked"
+          },
+          "pharma": {
+            "team": "Procurement team",
+            "action": "API batch 7731 CoA verified, PO released"
+          },
+          "packaging": {
+            "team": "Procurement team",
+            "action": "Resin lot 5520 received, PO closed"
+          }
+        },
+        "line": {
+          "team": "Quality team",
+          "action": "Pack spec checked against the buyer's PO"
+        },
+        "booking": {
+          "team": "Logistics team",
+          "action": "Booking, BL and invoice matched, PO closed"
+        },
+        "ship": {
+          "team": "Sales team",
+          "action": "Buyer sees the ETA on the same record"
+        },
+        "customs": {
+          "team": "Compliance team",
+          "action": "Import duty paid, release confirmed"
+        },
+        "delivered": {
+          "team": "Warehouse team",
+          "action": "Goods receipt posted, invoice closed"
+        }
       }
     },
     "buyers": {

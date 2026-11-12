@@ -98,33 +98,96 @@ const ground = (() => {
   }
   const road = (x0: number, x1: number) =>
     solidSvg(slabOf({ x: x0, y: 38, w: x1 - x0, d: 11, r: 0 }, 0, 0.4, P, 2), { tone: "lo", flat: true }) + lineSvg(lineOnTop([x0, 43.5], [x1, 43.5], 0.4, P), { tone: "lo", dashed: true });
-  const ponds: Plan[] = [
-    { x: 6, y: 8, w: 54, d: 30, r: 7 },
-    { x: 6, y: 46, w: 54, d: 24, r: 6 }
-  ];
-  const pondSvg = ponds
-    .map((pond) => solidSvg(slabOf(pond, 0, 0.6, P, 6), { tone: "lo", flat: true, className: "port-water" }) + [4, 8].map((r) => lineSvg(planOutline(insetPlan(pond, r), 0.6, P, 6), { tone: "faint" })).join(""))
-    .join("");
-  return land + water + waves.join("") + road(150, 362) + road(520, 724) + pondSvg;
+  return land + water + waves.join("") + road(150, 362) + road(520, 724);
 })();
 
 /* ---------- static parts ---------- */
 
 const STATIC: Drawn[] = [];
 
-// Pond farm: aerators on both ponds, a feed shed, and the harvest crates stacked on the bank between.
-for (const [cx, cy] of [[28, 22], [44, 56], [20, 58]] as const) {
-  STATIC.push({
-    box: [cx - 3, cy - 3, 0, cx + 3, cy + 3, 6],
-    svg: solidSvg(cylinder(cx, cy, 3, 0.6, 2, P, 18, 0.3), { tone: "hi" }) + lineSvg(pathOf([at([cx - 5, cy, 3]), at([cx + 5, cy, 3])]) + pathOf([at([cx, cy - 5, 3]), at([cx, cy + 5, 3])]), { tone: "mid" })
-  });
+/* ---------- where the goods start: one part of the scene that changes per page load ---------- */
+
+export const ORIGINS = ["shrimp", "farm", "pharma", "packaging"] as const;
+export type Origin = (typeof ORIGINS)[number];
+
+const cyl = (cx: number, cy: number, r: number, z: number, h: number, style: SolidStyle = { tone: "hi" }, inner = ""): Drawn => ({
+  box: [cx - r, cy - r, z, cx + r, cy + r, z + h],
+  svg: solidSvg(cylinder(cx, cy, r, z, h, P, 24, 0.3), { ...style, inner })
+});
+const pad = (plan: Plan) => solidSvg(slabOf(plan, 0, 0.5, P, 2), { tone: "lo", flat: true }) + lineSvg(planOutline(insetPlan(plan, 2), 0.5, P, 2), { tone: "faint" });
+const crateAt = (cx: number, cy: number, cz: number, size = 6, h = 5): Drawn => {
+  const crate: Plan = { x: cx, y: cy, w: size, d: size, r: 0 };
+  return item(crate, cz, h, { tone: "hi" }, 0.3, lineSvg(sideSeam(crate, cz + h / 2, P, 2), { tone: "faint" }));
+};
+
+function originOf(kind: Origin): { ground: string; items: Drawn[] } {
+  const items: Drawn[] = [];
+  let ground = "";
+  if (kind === "shrimp") {
+    // Two ponds with aerators, a feed shed, and the harvest crates stacked on the bank.
+    const ponds: Plan[] = [
+      { x: 6, y: 8, w: 54, d: 30, r: 7 },
+      { x: 6, y: 46, w: 54, d: 24, r: 6 }
+    ];
+    ground = ponds.map((pond) => solidSvg(slabOf(pond, 0, 0.6, P, 6), { tone: "lo", flat: true, className: "port-water" }) + [4, 8].map((r) => lineSvg(planOutline(insetPlan(pond, r), 0.6, P, 6), { tone: "faint" })).join("")).join("");
+    for (const [cx, cy] of [[28, 22], [44, 56], [20, 58]] as const) {
+      items.push({
+        box: [cx - 3, cy - 3, 0, cx + 3, cy + 3, 6],
+        svg: solidSvg(cylinder(cx, cy, 3, 0.6, 2, P, 18, 0.3), { tone: "hi" }) + lineSvg(pathOf([at([cx - 5, cy, 3]), at([cx + 5, cy, 3])]) + pathOf([at([cx, cy - 5, 3]), at([cx, cy + 5, 3])]), { tone: "mid" })
+      });
+    }
+    const SHED: Plan = { x: 64, y: 50, w: 12, d: 14, r: 0.4 };
+    items.push(item(SHED, 0, 9, { tone: "hi" }, 0.4, lineSvg(sideSeam(SHED, 7, P, 2), { tone: "faint" })));
+    for (const [cx, cy, cz] of [[64, 12, 0], [71, 12, 0], [64, 20, 0], [71, 20, 0], [67.5, 16, 5], [64, 28, 0], [71, 28, 0]] as const) items.push(crateAt(cx, cy, cz));
+  } else if (kind === "farm") {
+    // Two crop plots in rows, a barn, grain silos and hay bales.
+    const plots: Plan[] = [
+      { x: 4, y: 6, w: 56, d: 30, r: 1 },
+      { x: 4, y: 44, w: 56, d: 30, r: 1 }
+    ];
+    ground = plots
+      .map((plot) => {
+        const rows: string[] = [];
+        for (let ry = plot.y + 3; ry < plot.y + plot.d - 1; ry += 3.4) rows.push(lineOnTop([plot.x + 2, ry], [plot.x + plot.w - 2, ry], 0.5, P));
+        return solidSvg(slabOf(plot, 0, 0.5, P, 2), { tone: "lo", flat: true }) + lineSvg(rows.join(""), { tone: "mid" });
+      })
+      .join("");
+    const BARN: Plan = { x: 64, y: 50, w: 16, d: 20, r: 0.4 };
+    items.push(item(BARN, 0, 10, { tone: "hi" }, 0.4, lineSvg(sideSeam(BARN, 6, P, 2), { tone: "faint" })));
+    items.push(item({ x: 63, y: 49, w: 18, d: 22, r: 0.4 }, 10, 2.4, { tone: "mid" }, 0.4));
+    items.push(cyl(70, 14, 4.2, 0, 24, { tone: "hi" }, lineSvg(sideSeam({ x: 65.8, y: 9.8, w: 8.4, d: 8.4, r: 4.2 }, 12, P, 12), { tone: "faint" })));
+    items.push(cyl(70, 27, 4.2, 0, 19));
+    for (const [bx, by] of [[66, 38], [72, 38], [69, 43]] as const) items.push(cyl(bx, by, 2.6, 0, 4, { tone: "mid" }));
+  } else if (kind === "pharma") {
+    // A paved site: three reactor vessels piped together, a cleanroom, and crates of finished vials.
+    ground = pad({ x: 2, y: 4, w: 78, d: 72, r: 1 });
+    const pipe = pathOf([at([20, 18, 26]), at([20, 18, 33]), at([60, 18, 33]), at([60, 18, 20])]);
+    items.push(cyl(20, 18, 6, 0, 26, { tone: "hi" }, lineSvg(sideSeam({ x: 14, y: 12, w: 12, d: 12, r: 6 }, 9, P, 12) + sideSeam({ x: 14, y: 12, w: 12, d: 12, r: 6 }, 17, P, 12), { tone: "faint" })));
+    items.push(cyl(40, 18, 6, 0, 26, { tone: "hi" }, lineSvg(sideSeam({ x: 34, y: 12, w: 12, d: 12, r: 6 }, 9, P, 12) + sideSeam({ x: 34, y: 12, w: 12, d: 12, r: 6 }, 17, P, 12), { tone: "faint" })));
+    items.push(cyl(60, 18, 5, 0, 20, { tone: "hi" }, lineSvg(sideSeam({ x: 55, y: 13, w: 10, d: 10, r: 5 }, 10, P, 12), { tone: "faint" })));
+    items.push({ box: [20, 17.5, 33, 60, 18.5, 33.4], svg: lineSvg(pipe, { tone: "mid" }) });
+    const CLEAN: Plan = { x: 8, y: 44, w: 40, d: 26, r: 0.5 };
+    items.push(item(CLEAN, 0, 12, { tone: "hi" }, 0.5, lineSvg(sideSeam(CLEAN, 8, P, 2), { tone: "faint" }) + dotsSvg([14, 22, 30, 38].map((wx) => at([wx, 70, 7])), { size: 0.9, tone: "mid" })));
+    for (const [cx, cy, cz] of [[54, 50, 0], [61, 50, 0], [54, 57, 0], [61, 57, 0], [57.5, 53.5, 5]] as const) items.push(crateAt(cx, cy, cz, 6, 5));
+  } else {
+    // Packaging: paper rolls stacked in tiers, resin silos, and pallet stacks of cartons.
+    ground = pad({ x: 2, y: 4, w: 78, d: 72, r: 1 });
+    for (const [rx, ry] of [[12, 14], [22, 14], [32, 14], [12, 26], [22, 26], [32, 26]] as const) items.push(cyl(rx, ry, 4.2, 0, 9, { tone: "hi" }, lineSvg(sideSeam({ x: rx - 4.2, y: ry - 4.2, w: 8.4, d: 8.4, r: 4.2 }, 4.5, P, 12), { tone: "faint" })));
+    for (const [rx, ry] of [[17, 20], [27, 20]] as const) items.push(cyl(rx, ry, 4.2, 9, 9, { tone: "hi" }));
+    items.push(cyl(60, 16, 5, 0, 30, { tone: "hi" }, lineSvg(sideSeam({ x: 55, y: 11, w: 10, d: 10, r: 5 }, 20, P, 12), { tone: "faint" })));
+    items.push(cyl(72, 16, 5, 0, 24));
+    for (const [px, py, tiers] of [[10, 50, 3], [21, 50, 2], [10, 61, 2], [21, 61, 3], [34, 56, 3]] as const) {
+      for (let k = 0; k < tiers; k++) items.push(crateAt(px, py, k * 6, 9, 6));
+    }
+  }
+  return { ground, items };
 }
-const SHED: Plan = { x: 64, y: 50, w: 12, d: 14, r: 0.4 };
-STATIC.push(item(SHED, 0, 9, { tone: "hi" }, 0.4, lineSvg(sideSeam(SHED, 7, P, 2), { tone: "faint" })));
-for (const [cx, cy, cz] of [[64, 12, 0], [71, 12, 0], [64, 20, 0], [71, 20, 0], [67.5, 16, 5], [64, 28, 0], [71, 28, 0]] as const) {
-  const crate: Plan = { x: cx, y: cy, w: 6, d: 6, r: 0 };
-  STATIC.push(item(crate, cz, 5, { tone: "hi" }, 0.3, lineSvg(sideSeam(crate, cz + 2.5, P, 2), { tone: "faint" })));
-}
+const ORIGIN_CACHE = new Map<Origin, { ground: string; items: Drawn[] }>();
+const originFor = (kind: Origin) => {
+  let cached = ORIGIN_CACHE.get(kind);
+  if (!cached) ORIGIN_CACHE.set(kind, (cached = originOf(kind)));
+  return cached;
+};
 
 // Plant: the hall with dock doors on its front, roof units and a chimney.
 const HALL: Plan = { x: 84, y: 6, w: 72, d: 30, r: 0.5 };
@@ -439,27 +502,36 @@ export interface Callout {
   from: number;
   to: number;
   point: Point3;
-  kicker: string;
-  /** i18n key under home.hero.journey. */
+  /** Domains of the apps this team already works in; shown as favicons. */
+  apps: string[];
+  /** i18n key under home.hero.journey, holding `team` and `action`. */
   key: string;
 }
 
-export const CALLOUTS: Callout[] = [
-  { id: "pond", from: 0.6, to: 4.8, point: [34, 24, 4], kicker: "Sourcing", key: "pond" },
-  { id: "line", from: 3.2, to: 7.6, point: [118, 30, 30], kicker: "Quality", key: "line" },
-  { id: "booking", from: 8.4, to: 12.2, point: [334, 43, 12], kicker: "Logistics", key: "booking" },
-  { id: "ship", from: 12.6, to: 17.2, point: [400, 42, 26], kicker: "Sales", key: "ship" },
-  { id: "customs", from: 20.0, to: 24.0, point: [512, 42, 28], kicker: "Customs", key: "customs" },
-  { id: "delivered", from: 25.2, to: 29.4, point: [650, 38, 22], kicker: "Warehouse", key: "delivered" }
+const ORIGIN_APPS: Record<Origin, string[]> = {
+  shrimp: ["whatsapp.com", "zoho.com"],
+  farm: ["whatsapp.com", "sap.com"],
+  pharma: ["sap.com", "veeva.com"],
+  packaging: ["gmail.com", "zoho.com"]
+};
+
+export const calloutsFor = (origin: Origin): Callout[] => [
+  { id: "origin", from: 0.6, to: 4.8, point: [34, 24, 4], apps: ORIGIN_APPS[origin], key: `origin.${origin}` },
+  { id: "line", from: 3.2, to: 7.6, point: [118, 30, 30], apps: ["gmail.com", "sap.com"], key: "line" },
+  { id: "booking", from: 8.4, to: 12.2, point: [334, 43, 12], apps: ["maersk.com", "gmail.com"], key: "booking" },
+  { id: "ship", from: 12.6, to: 17.2, point: [400, 42, 26], apps: ["whatsapp.com", "gmail.com"], key: "ship" },
+  { id: "customs", from: 20.0, to: 24.0, point: [512, 42, 28], apps: ["dhl.com", "gmail.com"], key: "customs" },
+  { id: "delivered", from: 25.2, to: 29.4, point: [650, 38, 22], apps: ["zoho.com", "sap.com"], key: "delivered" }
 ];
 
 export const calloutPx = (c: Callout) => at(c.point);
 
 /* ---------- the frame ---------- */
 
-export function frame(t: number) {
+export function frame(t: number, origin: Origin = ORIGINS[0]) {
   const [cam] = cameraAt(t);
-  const margin = 140;
+  const margin = 420;
+  const start = originFor(origin);
   const visible = (item: Drawn) => {
     const [x0, , x1] = screenRect(item.box, P);
     return x1 >= cam - margin && x0 <= cam + WINDOW + margin;
@@ -479,6 +551,7 @@ export function frame(t: number) {
   }
   const items = [
     ...STATIC,
+    ...start.items,
     ...line.items,
     ...ship(t),
     ...truckSvg(a),
@@ -487,7 +560,7 @@ export function frame(t: number) {
     ...craneRig(crane2(t), [462, 566]),
     ...cont
   ].filter(visible);
-  return ground + painted(items, P) + line.beam + (cam < at([ARM_X + 20, 40, 0])[0] ? arm(t) : "");
+  return ground + start.ground + painted(items, P) + line.beam + (cam < at([ARM_X + 20, 40, 0])[0] ? arm(t) : "");
 }
 
 /** The frame the server and reduced motion show: the box mid-lift at the first quay. */

@@ -1,19 +1,20 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "@/lib/iso/iso.css";
 import "@/components/landing/port-figure/port-figure.css";
 import "./hero-journey.css";
 import { asksForStillness, useInView } from "@/lib/iso/react/live";
-import { CALLOUTS, LOOP, STILL, VIEW_H, WINDOW, calloutPx, cameraAt, frame } from "./hero-journey";
+import { LOOP, ORIGINS, STILL, VIEW_H, WINDOW, calloutPx, calloutsFor, cameraAt, frame, type Origin } from "./hero-journey";
 
 const FADE = 0.55;
 const visibility = (t: number, from: number, to: number) => Math.min(Math.max((t - from) / FADE, 0), Math.max((to - t) / FADE, 0), 1);
+const favicon = (domain: string) => `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
 
 /**
- * The hero's long scene: a pond farm, the plant, a ship, a far port and the
- * distribution warehouse, shown through a camera that pans with the box. The
- * Ubik callouts are HTML pinned to world points, so their text stays crisp at
- * any width. Runs only on screen at 30 fps; reduced motion shows one still.
+ * The hero's long scene, shown through a camera that pans with the box. The
+ * first part (where the goods start) changes on each page load, to show the
+ * same flow for shrimp, crops, pharma or packaging. Callouts are HTML pinned
+ * to world points. Runs only on screen at 30 fps; reduced motion shows one still.
  */
 export function HeroJourney({ className }: { className?: string }) {
   const { t: tr } = useTranslation();
@@ -22,9 +23,15 @@ export function HeroJourney({ className }: { className?: string }) {
   const layer = useRef<SVGGElement>(null);
   const tags = useRef<(HTMLDivElement | null)[]>([]);
   const inView = useInView(stage);
-  const first = useMemo(() => frame(STILL), []);
-  const anchors = useMemo(() => CALLOUTS.map(calloutPx), []);
   const win = useRef(WINDOW);
+  // The server and first paint use the first origin; the client then picks one at random.
+  const [origin, setOrigin] = useState<Origin>(ORIGINS[0]);
+  useEffect(() => {
+    setOrigin(ORIGINS[Math.floor(Math.random() * ORIGINS.length)]);
+  }, []);
+  const callouts = useMemo(() => calloutsFor(origin), [origin]);
+  const first = useMemo(() => frame(STILL, origin), [origin]);
+  const anchors = useMemo(() => callouts.map(calloutPx), [callouts]);
 
   useEffect(() => {
     const pin = (time: number) => {
@@ -32,7 +39,7 @@ export function HeroJourney({ className }: { className?: string }) {
       const [cam, camY] = cameraAt(time, w);
       svg.current?.setAttribute("viewBox", `${cam.toFixed(1)} ${camY.toFixed(1)} ${w.toFixed(1)} ${VIEW_H}`);
       const box = stage.current?.clientWidth ?? 0;
-      CALLOUTS.forEach((c, i) => {
+      callouts.forEach((c, i) => {
         const node = tags.current[i];
         if (!node) return;
         const v = visibility(time, c.from, c.to);
@@ -53,16 +60,17 @@ export function HeroJourney({ className }: { className?: string }) {
       const width = stage.current?.clientWidth ?? 0;
       if (width) win.current = Math.min(WINDOW, Math.max(300, width / 1.35));
     };
+    const clockRef = { current: STILL };
     measure();
     const watch = new ResizeObserver(() => {
       measure();
       pin(clockRef.current);
     });
     if (stage.current) watch.observe(stage.current);
-    const clockRef = { current: STILL };
     pin(STILL);
     const group = layer.current;
-    if (!group || !inView || asksForStillness()) return;
+    if (group) group.innerHTML = frame(STILL, origin);
+    if (!group || !inView || asksForStillness()) return () => watch.disconnect();
     let clock = STILL;
     let last = 0;
     let since = 0;
@@ -75,7 +83,7 @@ export function HeroJourney({ className }: { className?: string }) {
       since += dt;
       if (since >= 1 / 30) {
         since = 0;
-        group.innerHTML = frame(clock);
+        group.innerHTML = frame(clock, origin);
         pin(clock);
       }
       handle = requestAnimationFrame(tick);
@@ -85,18 +93,27 @@ export function HeroJourney({ className }: { className?: string }) {
       cancelAnimationFrame(handle);
       watch.disconnect();
     };
-  }, [inView, anchors]);
+  }, [inView, callouts, anchors, origin]);
 
   return (
     <div ref={stage} className={["iso port-figure port-figure-bg hero-journey", className].filter(Boolean).join(" ")} aria-hidden>
       <svg ref={svg} className="iso-svg" viewBox={`0 0 ${WINDOW} ${VIEW_H}`} focusable="false">
         <g ref={layer} dangerouslySetInnerHTML={{ __html: first }} />
       </svg>
-      {CALLOUTS.map((c, i) => (
-        <div key={c.id} ref={(node) => { tags.current[i] = node; }} className="hero-journey-tag" style={{ opacity: 0 }}>
-          <span className="hero-journey-mark" aria-hidden>ubik<i /></span>
-          <span className="hero-journey-kicker">{c.kicker}</span>
-          <span>{tr(`home.hero.journey.${c.key}`)}</span>
+      {callouts.map((c, i) => (
+        <div key={c.id + origin} ref={(node) => { tags.current[i] = node; }} className="hero-journey-tag" style={{ opacity: 0 }}>
+          <span className="hero-journey-apps">
+            {c.apps.map((domain) => (
+              <img key={domain} src={favicon(domain)} alt="" width={18} height={18} loading="eager" />
+            ))}
+          </span>
+          <span className="hero-journey-copy">
+            <span className="hero-journey-head">
+              <strong>{tr(`home.hero.journey.${c.key}.team`)}</strong>
+              <span className="hero-journey-mark" />
+            </span>
+            <span className="hero-journey-action">{tr(`home.hero.journey.${c.key}.action`)}</span>
+          </span>
         </div>
       ))}
     </div>

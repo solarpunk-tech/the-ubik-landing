@@ -20,7 +20,6 @@ import {
 import { useInView } from "@/lib/use-in-view";
 import { VisualPanel } from "@/components/landing/VisualPanel";
 import { HeroJourney } from "@/components/landing/iso-scenes/HeroJourney";
-import { Card } from "@/components/ui/card";
 import { WorkflowVisual } from "@/components/landing/WorkflowVisuals";
 import { OwnYourStack } from "@/components/landing/OwnYourStack";
 import { cn } from "@/lib/utils";
@@ -428,7 +427,7 @@ function HomeFaq({ items }: { items: FaqCopy[] }) {
 export default function Index() {
   const { t } = useTranslation();
   const [activeWorkflow, setActiveWorkflow] = useState(0);
-  const scale = t("home.hero.scale", { returnObjects: true }) as { value: string; label: string; kicker?: string }[];
+  const scale = t("home.hero.scale", { returnObjects: true }) as { value: string; label: string; note: string }[];
   const faq = t("home.faq.items", { returnObjects: true }) as FaqCopy[];
 
   return (
@@ -464,7 +463,7 @@ export default function Index() {
       />
 
       <main className="home-minimal overflow-hidden">
-        <section className="home-hero relative overflow-clip">
+        <section className="home-hero relative">
           <div className="container-page relative z-10 pt-16 sm:pt-24">
             <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
               <h1 className="home-display" style={{ fontSize: "clamp(2.6rem, 5.6vw, 4.8rem)" }}>
@@ -489,21 +488,22 @@ export default function Index() {
             </div>
           </div>
 
-          <div className="container-page relative z-0 mt-10 sm:mt-14">
+          <div className="container-page relative z-20 mt-10 sm:mt-14">
             <HeroJourney />
           </div>
 
-          <div className="container-page relative z-10 pb-12 sm:pb-16">
+          <div className="container-page relative z-10 pb-12 pt-6 sm:pb-16">
             <p className="tabular-nums text-[12.5px] text-muted-foreground">{t("home.hero.scaleLabel")}</p>
-            <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {scale.map(({ value, label, kicker }) => (
-                <Card key={label} className="gap-2 rounded-xl px-5 py-5 shadow-xs">
-                  {kicker ? <p className="tabular-nums text-[12px] font-medium text-muted-foreground">{kicker}</p> : null}
-                  <p className="text-3xl font-semibold tracking-tight">{value}</p>
-                  <p className="text-sm leading-5 text-muted-foreground">{label}</p>
-                </Card>
+            {/* Static stat strip: label, big light number, one line of context. Dashed hairlines, no motion. */}
+            <dl className="mt-3 grid divide-dashed divide-border border-y border-dashed border-border sm:grid-cols-2 sm:divide-x">
+              {scale.map(({ value, label, note }) => (
+                <div key={label} className="relative flex flex-col px-6 py-7 md:px-8">
+                  <dt className="text-sm text-muted-foreground">{label}</dt>
+                  <dd className="mt-1 text-4xl font-light tracking-tight tabular-nums">{value}</dd>
+                  <dd className="mt-2 text-sm text-muted-foreground">{note}</dd>
+                </div>
               ))}
-            </div>
+            </dl>
           </div>
         </section>
 

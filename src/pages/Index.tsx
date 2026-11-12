@@ -7,7 +7,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Seo } from "@/components/seo/Seo";
 import { PageShell } from "@/components/landing/PageShell";
 import { DiscussButton } from "@/components/landing/DiscussButton";
-import { LiveSquare, SupplierExampleCard } from "@/components/landing/SupplierExampleCard";
+import { LiveSquare } from "@/components/landing/SupplierExampleCard";
 import { AgentRun, type RunStep } from "@/components/landing/motion/AgentRun";
 import {
   AllocationArtifact,
@@ -19,7 +19,8 @@ import {
 } from "@/components/landing/motion/RunArtifacts";
 import { useInView } from "@/lib/use-in-view";
 import { VisualPanel } from "@/components/landing/VisualPanel";
-import { PortFigure } from "@/components/landing/port-figure/PortFigure";
+import { HeroJourney } from "@/components/landing/iso-scenes/HeroJourney";
+import { Card } from "@/components/ui/card";
 import { WorkflowVisual } from "@/components/landing/WorkflowVisuals";
 import { OwnYourStack } from "@/components/landing/OwnYourStack";
 import { cn } from "@/lib/utils";
@@ -427,7 +428,7 @@ function HomeFaq({ items }: { items: FaqCopy[] }) {
 export default function Index() {
   const { t } = useTranslation();
   const [activeWorkflow, setActiveWorkflow] = useState(0);
-  const scale = t("home.hero.scale", { returnObjects: true }) as { value: string; label: string }[];
+  const scale = t("home.hero.scale", { returnObjects: true }) as { value: string; label: string; kicker?: string }[];
   const faq = t("home.faq.items", { returnObjects: true }) as FaqCopy[];
 
   return (
@@ -464,15 +465,13 @@ export default function Index() {
 
       <main className="home-minimal overflow-hidden">
         <section className="home-hero relative overflow-clip">
-          <PortFigure background className="home-hero-berth" />
-          <div className="container-page relative z-10 grid gap-12 pt-16 pb-10 sm:pt-24 sm:pb-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:pt-20 lg:pb-14">
-            <div>
-              {/* Two sentences, so a step down from the one-line display size. */}
-              <h1 className="home-display max-w-[16ch]" style={{ fontSize: "clamp(2.6rem, 5vw, 4.6rem)" }}>
+          <div className="container-page relative z-10 pt-16 sm:pt-24">
+            <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+              <h1 className="home-display" style={{ fontSize: "clamp(2.6rem, 5.6vw, 4.8rem)" }}>
                 {t("home.hero.titleLead")} <em>{t("home.hero.titleEmphasis")}</em>
               </h1>
-              <p className="mt-7 max-w-xl text-lg leading-8 text-muted-foreground">{t("home.hero.lede")}</p>
-              <div className="mt-9 flex flex-wrap gap-3">
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">{t("home.hero.lede")}</p>
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <DiscussButton location="hero" />
                 <Button asChild variant="outline" size="lg" className="home-secondary-action">
                   <Link to="/workflows" onClick={() => trackEvent("cta_clicked", { cta: "workflows", location: "hero" })}>
@@ -487,19 +486,24 @@ export default function Index() {
               >
                 {t("cta.openApp")}
               </a>
-              <div className="mt-12 max-w-xl border-t border-foreground/18 pt-5">
-                <p className="tabular-nums text-[12.5px] text-muted-foreground">{t("home.hero.scaleLabel")}</p>
-                <div className="mt-3 grid grid-cols-3">
-                  {scale.map(({ value, label }) => (
-                    <div key={label} className="pr-3">
-                      <p className="text-xl font-semibold tracking-tight sm:text-2xl">{value}</p>
-                      <p className="mt-1 tabular-nums text-[12.5px] text-muted-foreground">{label}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
-            <SupplierExampleCard />
+          </div>
+
+          <div className="container-page relative z-0 mt-10 sm:mt-14">
+            <HeroJourney />
+          </div>
+
+          <div className="container-page relative z-10 pb-12 sm:pb-16">
+            <p className="tabular-nums text-[12.5px] text-muted-foreground">{t("home.hero.scaleLabel")}</p>
+            <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {scale.map(({ value, label, kicker }) => (
+                <Card key={label} className="gap-2 rounded-xl px-5 py-5 shadow-xs">
+                  {kicker ? <p className="tabular-nums text-[12px] font-medium text-muted-foreground">{kicker}</p> : null}
+                  <p className="text-3xl font-semibold tracking-tight">{value}</p>
+                  <p className="text-sm leading-5 text-muted-foreground">{label}</p>
+                </Card>
+              ))}
+            </div>
           </div>
         </section>
 

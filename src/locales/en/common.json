@@ -43,24 +43,32 @@
     },
     "hero": {
       "eyebrow": "AI-native platform for cross-border trade",
-      "titleLead": "AI‑native platform for",
+      "titleLead": "AI teammate for",
       "titleEmphasis": "cross‑border trade",
-      "lede": "ubik automates data collection and trade operations, so importers and exporters decide in hours what used to take weeks.",
+      "lede": "ERP runs the floor. ubik runs the trade: one owner, one record, across every department and stakeholder.",
       "definition": "ubik is an AI-native platform for cross-border trade. It reads your email, WhatsApp, ERP and documents, works order changes and supplier, shipment and document exceptions through under your rules, and drafts the next action for your team to approve.",
       "example": "See the workflows",
-      "scaleLabel": "Built for teams moving",
+      "scaleLabel": "What one record changes",
       "scale": [
         {
-          "value": "100+",
-          "label": "containers a year"
-        },
-        {
-          "value": "$25M+",
-          "label": "in annual trade"
+          "value": "Hours",
+          "label": "not weeks, to decide on a change",
+          "kicker": "Speed"
         },
         {
           "value": "1",
-          "label": "workflow to start"
+          "label": "record per shipment, shared by every department",
+          "kicker": "Ownership"
+        },
+        {
+          "value": "100+",
+          "label": "containers a year",
+          "kicker": "Built for teams moving"
+        },
+        {
+          "value": "$25M+",
+          "label": "in annual trade",
+          "kicker": "Built for teams moving"
         }
       ],
       "card": {
@@ -118,6 +126,14 @@
         "owner": "Sales review",
         "edit": "Edit",
         "approve": "Send reply"
+      },
+      "journey": {
+        "pond": "Harvest lot logged at the pond",
+        "line": "Packing checked against the buyer's spec",
+        "booking": "Booking, bill of lading and invoice matched",
+        "ship": "Buyer sees the ETA on the same record",
+        "customs": "Import duty paid, release confirmed",
+        "delivered": "Delivered. POD in, invoice closed"
       }
     },
     "buyers": {

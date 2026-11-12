@@ -1,0 +1,64 @@
+.hero-journey { position: relative; width: 100%; }
+.hero-journey .iso-svg { display: block; width: 100%; height: auto; }
+/* Callouts: a card chip pinned to a world point by a short leader line. */
+.hero-journey-tag {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  max-width: min(21rem, 60%);
+  padding: 6px 12px 6px 10px;
+  transform: translate(-50%, calc(-100% - 18px + var(--rise, 0px)));
+  border-radius: 10px;
+  background: hsl(var(--card));
+  color: hsl(var(--foreground));
+  font-size: 12.5px;
+  line-height: 1.3;
+  box-shadow: 0 0 0 1px hsl(var(--primary) / 0.28), 0 8px 24px -10px hsl(var(--foreground) / 0.25);
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+.hero-journey-tag::after {
+  content: "";
+  position: absolute;
+  left: calc(50% + var(--lead, 0px));
+  top: 100%;
+  width: 1px;
+  height: 14px;
+  background: hsl(var(--primary) / 0.5);
+}
+.hero-journey-tag::before {
+  content: "";
+  position: absolute;
+  left: calc(50% + var(--lead, 0px) - 2.5px);
+  top: calc(100% + 12px);
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: hsl(var(--primary));
+}
+.hero-journey-mark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  font-weight: 700;
+}
+.hero-journey-mark i { width: 5px; height: 5px; background: hsl(var(--primary)); }
+.hero-journey-kicker {
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary-text, var(--primary)));
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.hero-journey .iso-svg {
+  mask-image: linear-gradient(90deg, transparent 0, black 6%, black 94%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, black 6%, black 94%, transparent 100%);
+}
+@media (max-width: 640px) {
+  .hero-journey-tag { font-size: 11px; max-width: 70%; }
+}

@@ -86,27 +86,6 @@
   mask-image: linear-gradient(180deg, transparent 0%, black 40%);
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 40%);
 }
-/* Wide screens: the berth is the hero's floor. The hero grows downward so the
-   crane, ship and gate stand clear below the card instead of behind it. */
-@media (min-width: 1024px) {
-  .home-hero > .container-page { padding-bottom: 17rem; }
-}
-/* Stacked layouts: the card sits low, so the berth rises behind the top right
-   of the hero instead, faint, and fades out before the headline's lines. */
-@media (max-width: 1023px) {
-  .home-hero-berth {
-    top: 0;
-    left: auto;
-    transform: none;
-    right: -38%;
-    bottom: auto;
-    width: 125%;
-    opacity: 0.45;
-    mask-image: linear-gradient(200deg, black 0%, rgb(0 0 0 / 0.5) 35%, transparent 62%);
-    -webkit-mask-image: linear-gradient(200deg, black 0%, rgb(0 0 0 / 0.5) 35%, transparent 62%);
-  }
-}
-
 /* Packing line: the robot arm is a hollow tube, labels are the action blue,
    a failed scan is marked red. */
 .port-figure .pl-arm { fill: none; stroke: var(--anatomy-hi); stroke-width: 5px; stroke-linecap: round; stroke-linejoin: round; }

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
 const parse = (text: string) => {
-  const match = text.match(/^(\D*)([\d.]+)(.*)$/);
-  return match ? { prefix: match[1], target: Number(match[2]), suffix: match[3] } : null;
+  const match = text.match(/^(\D*)([\d.,]+)(.*)$/);
+  return match ? { prefix: match[1], target: Number(match[2].replace(/,/g, "")), suffix: match[3], grouped: match[2].includes(",") } : null;
 };
 
 /**
@@ -45,7 +45,7 @@ export function CountUp({ value, className }: { value: string; className?: strin
 
   return (
     <span ref={ref} className={className} aria-label={value}>
-      {parts && shown !== null ? `${parts.prefix}${shown}${parts.suffix}` : value}
+      {parts && shown !== null ? `${parts.prefix}${parts.grouped ? shown.toLocaleString("en-US") : shown}${parts.suffix}` : value}
     </span>
   );
 }

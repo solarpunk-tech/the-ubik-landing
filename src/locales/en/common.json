@@ -51,14 +51,14 @@
       "scaleLabel": "Built for teams moving",
       "scale": [
         {
-          "label": "Volume",
-          "value": "100+",
+          "label": "Volume handled",
+          "value": "50,000+",
           "note": "containers a year"
         },
         {
-          "label": "Trade",
-          "value": "$25M+",
-          "note": "in annual trade"
+          "label": "Trade flow run",
+          "value": "$700M+",
+          "note": "in trade a year"
         }
       ],
       "card": {
@@ -237,7 +237,7 @@
       "live": "This week"
     },
     "workflows": {
-      "title": "Start with one workflow",
+      "title": "Equip ubik with workflows, not skills",
       "lede": "Four workflows running for teams today, each starting from the email, sheet or ERP record you already get",
       "spineLabel": "How ubik works across your teams",
       "rail": "ubik is working",
@@ -642,7 +642,7 @@
           }
         }
       },
-      "examplesTitle": "Agents run, collaborate and decide",
+      "examplesTitle": "ubik owns every failure in your data, intelligence and decisions",
       "examplesLede": "No outsourced intelligence, and no wall of alerts that look urgent and pull your team off the real work.",
       "status": {
         "read": "Reading {{count}} sources",
@@ -799,8 +799,7 @@
       "securityLink": "Review access and security"
     },
     "pilot": {
-      "title": "Choose the bottleneck, prove the first workflow",
-      "lede": "Success is defined with your team before anything expands.",
+      "title": "Decades of trade secrets at your fingertips",
       "widget": {
         "pick": "Supplier updates",
         "reads": "Reads",
@@ -815,20 +814,16 @@
       },
       "steps": [
         {
-          "title": "Map the work",
-          "copy": "One process that eats your team’s week, and where its inputs live."
+          "title": "Map the work"
         },
         {
-          "title": "Agree the scope",
-          "copy": "What ubik reads, what it drafts, and who approves each write."
+          "title": "Agree the scope"
         },
         {
-          "title": "Run a controlled pilot",
-          "copy": "One workflow on your real threads, every action reviewed."
+          "title": "Run a controlled pilot"
         },
         {
-          "title": "Review the result",
-          "copy": "Compare it with how the work ran before, then decide what expands."
+          "title": "Review the result"
         }
       ]
     },
@@ -850,51 +845,43 @@
       ]
     },
     "faq": {
-      "title": "Practical questions, answered",
+      "title": "FAQ",
       "items": [
         {
           "q": "What is ubik?",
-          "a": "ubik is an AI operations workspace for perishable food trade. It reads your email, WhatsApp, ERP and documents, flags supplier, shipment and order exceptions, and drafts the next action for your team to approve."
+          "a": "ubik is an AI teammate for cross-border trade that works orders, shipments, documents and supplier updates across email, WhatsApp and your ERP, with one record per shipment."
         },
         {
           "q": "Who is ubik for?",
-          "a": "Importers, exporters and traders, typically teams moving 100+ containers or $25M+ in trade a year, where email and WhatsApp carry most of the operating work."
+          "a": "Importers, exporters and traders in perishable food trade."
         },
         {
-          "q": "Will ubik replace our ERP?",
-          "a": "No. Your ERP and CRM stay the source of truth. ubik works around them, including Zoho, Dynamics 365 Business Central and ERPs with no API. The read and write touchpoints for your workflow are agreed during scoping, and nothing is written back without approval."
+          "q": "Does ubik replace my ERP?",
+          "a": "No, your ERP stays the system of record and ubik works around it, including ERPs with no API."
         },
         {
-          "q": "What can ubik do without an operator?",
-          "a": "It reads, compares, monitors and drafts. Sending a message or writing to another system waits for a named person on your team to approve, and every change is recorded in an audit trail. The exact permissions, including when a workflow pauses or escalates, are agreed per workflow during scoping."
+          "q": "Can ubik send emails or change records on its own?",
+          "a": "No, sending and system writes wait for a named person to approve, and every change is logged."
         },
         {
-          "q": "What happens to our data?",
-          "a": "Your trade data is never sold, shared for advertising, or used to train third-party models. The website and product use cookieless PostHog analytics for usage events, with sensitive prompt and session fields protected before capture. The security note, subprocessor list and privacy notice set out what is processed and where."
-        },
-        {
-          "q": "What access does ubik need?",
-          "a": "Only what the chosen workflow needs: the approved inboxes, folders, files or systems. Your admin grants it through Google Workspace or Microsoft 365 and can revoke it at any time."
+          "q": "Does ubik train AI models on my data?",
+          "a": "No, your trade data is never sold or used to train third-party models."
         },
         {
           "q": "Which tools does ubik connect to?",
-          "a": "Gmail, Outlook, WhatsApp, Dynamics 365 Business Central and Zoho, plus CRMs and other tools through connectors. The systems for your workflow are confirmed during scoping."
+          "a": "Gmail, Outlook, WhatsApp, Zoho, Dynamics 365 Business Central and other CRMs through connectors."
         },
         {
-          "q": "Do we need an ERP to use ubik?",
-          "a": "No. Many teams start from email, WhatsApp and documents. ubik connects to an ERP where the workflow justifies it, including Zoho, Dynamics 365 Business Central and ERPs with no API."
+          "q": "How is ubik priced?",
+          "a": "Per workflow, with no user or token limits."
         },
         {
-          "q": "How much integration work is involved?",
-          "a": "It depends on the workflow. Most start with an approved inbox and the documents the workflow needs; ERP or CRM access is added only where it is required. Setup effort and prerequisites are confirmed during scoping, before the pilot starts."
+          "q": "Is ubik SOC 2 certified?",
+          "a": "Not yet: a SOC 2 Type II audit is in progress."
         },
         {
-          "q": "How much does ubik cost?",
-          "a": "Pricing is per workflow, with no user or token limit, and is agreed once the first workflow is scoped. Request a demo and we will walk through it with you."
-        },
-        {
-          "q": "How do we start?",
-          "a": "Pick one workflow. We map it with your team, agree the scope and approvals, then run it as a controlled pilot. Success is defined before the pilot starts, and nothing expands until it is met."
+          "q": "Does ubik have a desktop app?",
+          "a": "Yes, for Mac and Windows, and it captures meetings locally without adding a bot to the call."
         }
       ]
     },
@@ -903,7 +890,7 @@
       "readLatest": "Read latest"
     },
     "evidence": {
-      "label": "Before ubik, our team ran operations, trade desks and the software behind them at"
+      "label": "Built by people who ran operations, trade desks and trade software at"
     },
     "closing": {
       "title": "Find the bottleneck worth automating first",
@@ -1021,10 +1008,16 @@
       ]
     },
     "start": {
-      "name": "Start with one workflow",
-      "price": "A month, free",
-      "summary": "Hand ubik your hardest workflow. It runs end to end with your team, on your own inbox and files. After the month, pricing is per workflow, with no user or token limit.",
-      "cta": "Request demo"
+      "name": "Make ubik your favourite employee",
+      "price": "Free for 30 days",
+      "summary": "ubik comes with no usage, token or seat limits. Working 24x7 shouldn't come with caveats.",
+      "cta": "Request demo",
+      "features": [
+        "Customise workflows and map them to your daily operations",
+        "Fine-tune ubik on your workspace for your hardest metric: revenue, cost or margin leakage",
+        "Pay only for outcomes and decisions delivered. The software is free.",
+        "A trade expert and a product engineer on the account"
+      ]
     }
   },
   "learn": {

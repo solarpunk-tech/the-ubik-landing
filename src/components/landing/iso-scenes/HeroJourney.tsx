@@ -24,6 +24,9 @@ export function HeroJourney({ className }: { className?: string }) {
   const tags = useRef<(HTMLDivElement | null)[]>([]);
   const inView = useInView(stage);
   const win = useRef(WINDOW);
+  // Until the client has mounted (and its styles applied) the scene stays invisible, so unstyled markup never flashes.
+  const [ready, setReady] = useState(false);
+  useEffect(() => setReady(true), []);
   // The server and first paint use the first origin; the client then picks one at random.
   const [origin, setOrigin] = useState<Origin>(ORIGINS[0]);
   useEffect(() => {
@@ -58,7 +61,7 @@ export function HeroJourney({ className }: { className?: string }) {
     // Narrow screens look through a narrower window, so the scene never shrinks below a readable size.
     const measure = () => {
       const width = stage.current?.clientWidth ?? 0;
-      if (width) win.current = Math.min(WINDOW, Math.max(300, width / 1.35));
+      if (width) win.current = Math.min(WINDOW, Math.max(width < 640 ? 440 : 300, width / (width < 640 ? 0.85 : 1.35)));
     };
     const clockRef = { current: STILL };
     measure();
@@ -96,7 +99,7 @@ export function HeroJourney({ className }: { className?: string }) {
   }, [inView, callouts, anchors, origin]);
 
   return (
-    <div ref={stage} className={["iso port-figure port-figure-bg hero-journey", className].filter(Boolean).join(" ")} aria-hidden>
+    <div ref={stage} className={["iso port-figure port-figure-bg hero-journey", className].filter(Boolean).join(" ")} data-ready={ready ? "" : undefined} aria-hidden>
       <svg ref={svg} className="iso-svg" viewBox={`0 0 ${WINDOW} ${VIEW_H}`} focusable="false">
         <g ref={layer} dangerouslySetInnerHTML={{ __html: first }} />
       </svg>

@@ -1,6 +1,9 @@
 /* The scene overlays its neighbours and is never clipped by its own box. */
 .hero-journey { position: relative; z-index: 20; width: 100%; }
-.hero-journey .iso-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.hero-journey .iso-svg { display: block; width: 100%; height: auto; overflow: visible; opacity: 0; transition: opacity 600ms ease; }
+.hero-journey[data-ready] .iso-svg { opacity: 1; }
+.hero-journey .hero-journey-tag { visibility: hidden; }
+.hero-journey[data-ready] .hero-journey-tag { visibility: visible; }
 
 /* Callouts: a card chip pinned to a world point by a short leader line. */
 .hero-journey-tag {
@@ -63,7 +66,9 @@
 }
 .dark .hero-journey-mark { background-image: url("/logo-wordmark-dark.png"); }
 .hero-journey-action { font-size: 12px; line-height: 1.3; color: hsl(var(--muted-foreground)); }
+/* Phones: one line per callout, no favicons or mark, so the scene stays the subject. */
 @media (max-width: 640px) {
-  .hero-journey-head { font-size: 12px; }
-  .hero-journey-action { font-size: 11.5px; }
+  .hero-journey-tag { max-width: 94%; padding: 6px 10px; gap: 0; }
+  .hero-journey-apps, .hero-journey-head, .hero-journey-mark { display: none; }
+  .hero-journey-action { color: hsl(var(--foreground)); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 }

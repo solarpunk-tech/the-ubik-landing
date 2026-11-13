@@ -44,7 +44,7 @@ fn hash(p: vec2f) -> f32 {
 }
 `;
 
-function LiveStripBackdrop() {
+export function LiveStripBackdrop() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {

@@ -1,11 +1,16 @@
 import type { ReactNode } from "react";
+import { BlueLattice } from "@/components/landing/BlueLattice";
 import { cn } from "@/lib/utils";
 
 /**
- * The picture slot on a workflow card: a flat well behind the product widget.
- * (It used to draw a dither gradient and an ASCII reveal; both went with
- * ubik-design DESIGN.md §7, which rules out dither and ASCII art.)
+ * The picture slot on a workflow card: the product widget with a lattice of
+ * blue dots gathered behind it at the bottom, so the text below stays clear.
  */
-export function VisualPanel({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={cn("relative overflow-hidden bg-secondary/30 p-3", className)}>{children}</div>;
+export function VisualPanel({ children, className, lattice = false }: { children: ReactNode; className?: string; lattice?: boolean }) {
+  if (!lattice) return <div className={cn("relative isolate overflow-hidden p-3", className)}>{children}</div>;
+  return (
+    <BlueLattice edge="bottom" className={cn("p-3", className)}>
+      {children}
+    </BlueLattice>
+  );
 }

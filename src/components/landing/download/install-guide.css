@@ -1,0 +1,65 @@
+/* Install scenes. Transform and opacity only; each scene remounts per step, so
+   its animation plays from the start. Under reduced motion every scene sits at
+   its last frame. */
+.ig-pop { animation: ig-pop 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes ig-pop { from { opacity: 0; transform: translateY(8px) scale(0.97); } to { opacity: 1; transform: none; } }
+
+.ig-cursor { position: absolute; width: 16px; height: 20px; z-index: 5; pointer-events: none; }
+
+/* Disk image: the cursor arrives and double-clicks, the disk pulses. */
+.ig-disk { animation: ig-disk 1800ms ease-out 1400ms both; }
+@keyframes ig-disk { 0% { transform: scale(1); } 20% { transform: scale(0.94); } 40% { transform: scale(1.04); } 100% { transform: scale(1); } }
+.ig-click { left: 8%; top: 70%; animation: ig-click-move 1500ms cubic-bezier(0.3, 0.7, 0.2, 1) both; }
+@keyframes ig-click-move { from { transform: translate(120px, 90px); opacity: 0; } 20% { opacity: 1; } to { transform: translate(52%, -20px); } }
+
+/* Drag ubik onto Applications. */
+.ig-drag { animation: ig-drag 2600ms cubic-bezier(0.5, 0, 0.2, 1) 500ms both; position: relative; z-index: 4; }
+@keyframes ig-drag {
+  0% { transform: translate(0, 0); opacity: 1; }
+  15% { transform: translate(0, -4px) scale(1.06); }
+  78% { transform: translate(var(--dist), -2px) scale(1.06); opacity: 1; }
+  90% { transform: translate(var(--dist), 0) scale(0.8); opacity: 1; }
+  100% { transform: translate(var(--dist), 0) scale(0.5); opacity: 0; }
+}
+.ig-hand { left: 40px; top: 52px; animation: ig-hand 2600ms cubic-bezier(0.5, 0, 0.2, 1) 500ms both; }
+@keyframes ig-hand {
+  0% { transform: translate(0, 0); opacity: 1; }
+  15% { transform: translate(0, -4px); }
+  78% { transform: translate(var(--dist), -2px); opacity: 1; }
+  100% { transform: translate(var(--dist), 0); opacity: 0; }
+}
+.ig-folder { animation: ig-folder 600ms ease-out 2700ms both; }
+@keyframes ig-folder { 0% { transform: scale(1); } 40% { transform: scale(1.12); } 100% { transform: scale(1); } }
+
+/* Toggles flip on, one after another. */
+.ig-toggle { position: relative; display: inline-block; width: 38px; height: 22px; border-radius: 999px; background: hsl(var(--border)); animation: ig-toggle-bg 1ms linear var(--d) forwards; flex-shrink: 0; }
+.ig-toggle > i { position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 999px; background: #fff; box-shadow: 0 1px 2px hsl(0 0% 0% / 0.2); animation: ig-toggle-knob 260ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--d) forwards; }
+@keyframes ig-toggle-bg { to { background: hsl(var(--primary)); } }
+@keyframes ig-toggle-knob { to { transform: translateX(16px); } }
+.ig-allow { animation: ig-pulse 900ms ease-in-out 1900ms 2; }
+@keyframes ig-pulse { 50% { transform: scale(1.08); } }
+
+/* Sign in, model downloads, first dictation lands. */
+.ig-row { opacity: 0; animation: ig-row 380ms ease-out var(--d) forwards; }
+@keyframes ig-row { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.ig-bar { display: block; height: 6px; overflow: hidden; border-radius: 3px; background: hsl(var(--border)); }
+.ig-bar > i { display: block; height: 100%; background: hsl(var(--primary)); transform: scaleX(0); transform-origin: left center; animation: ig-bar var(--bar, 2000ms) cubic-bezier(0.4, 0, 0.2, 1) var(--d, 1100ms) forwards; }
+@keyframes ig-bar { to { transform: scaleX(1); } }
+.ig-row .ig-bar > i { animation-delay: 1100ms; }
+.ig-model-done { opacity: 0; animation: ig-row 300ms ease-out 3200ms forwards; }
+
+/* Windows: Next gets clicked, Start tile gets clicked. */
+.ig-next { animation: ig-press 500ms ease-in-out 1500ms both; }
+@keyframes ig-press { 50% { transform: scale(0.92); } }
+.ig-nextc { right: -6px; bottom: -14px; animation: ig-cursor-in 1400ms cubic-bezier(0.3, 0.7, 0.2, 1) both; }
+.ig-tilec { right: -4px; bottom: -14px; animation: ig-cursor-in 1500ms cubic-bezier(0.3, 0.7, 0.2, 1) 400ms both; }
+@keyframes ig-cursor-in { from { transform: translate(60px, 50px); opacity: 0; } 25% { opacity: 1; } to { transform: none; } }
+.ig-tile { animation: ig-press 500ms ease-in-out 1900ms both; box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ig *, .ig-pop { animation: none !important; opacity: 1 !important; transition: none !important; }
+  .ig-toggle { background: hsl(var(--primary)); }
+  .ig-toggle > i { transform: translateX(16px); }
+  .ig-bar > i { transform: none; }
+  .ig-cursor { display: none; }
+}

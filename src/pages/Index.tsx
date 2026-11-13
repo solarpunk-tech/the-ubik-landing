@@ -19,7 +19,8 @@ import {
 } from "@/components/landing/motion/RunArtifacts";
 import { useInView } from "@/lib/use-in-view";
 import { VisualPanel } from "@/components/landing/VisualPanel";
-import { CountUp } from "@/components/landing/CountUp";
+import { BlueLattice } from "@/components/landing/BlueLattice";
+import { StatCard } from "@/components/landing/StatCard";
 import { HeroJourney } from "@/components/landing/iso-scenes/HeroJourney";
 import { WorkflowVisual } from "@/components/landing/WorkflowVisuals";
 import { OwnYourStack } from "@/components/landing/OwnYourStack";
@@ -84,16 +85,6 @@ const workflowTeams = [
   },
   {
     number: "03",
-    apps: [["fda.gov", "europa.eu"], ["bapcertification.org", "asc-aqua.org", "globalgap.org"], ["docusign.com", "adobe.com"]],
-    entity: "Health certificate / Lot 87",
-    validTime: "17 JUL · 06:00",
-    knownTime: "19 JUL · 09:42",
-    kind: "traceability",
-    chart: "heatmap",
-    stats: ["12", "02", "00"]
-  },
-  {
-    number: "04",
     apps: [["/logos/photoshop.svg", "adobe.com"], ["dropbox.com", "box.com", "sharepoint.com"], ["notion.so", "atlassian.com"]],
     entity: "Pack spec / SKU-4471",
     validTime: "21 JUL · 09:00",
@@ -103,7 +94,7 @@ const workflowTeams = [
     stats: ["18", "18", "16"]
   },
   {
-    number: "05",
+    number: "04",
     apps: [["outlook.com", "gmail.com"], ["coupa.com", "ariba.com", "zycus.com"], ["docusign.com", "dropbox.com"]],
     entity: "Supplier promise / PKG-2841",
     validTime: "22 JUL · 17:00",
@@ -111,6 +102,16 @@ const workflowTeams = [
     kind: "vendors",
     chart: "funnel",
     stats: ["04", "03", "01"]
+  },
+  {
+    number: "05",
+    apps: [["fda.gov", "europa.eu"], ["bapcertification.org", "asc-aqua.org", "globalgap.org"], ["docusign.com", "adobe.com"]],
+    entity: "Health certificate / Lot 87",
+    validTime: "17 JUL · 06:00",
+    knownTime: "19 JUL · 09:42",
+    kind: "traceability",
+    chart: "heatmap",
+    stats: ["12", "02", "00"]
   },
   {
     number: "06",
@@ -170,9 +171,9 @@ function WorkflowLibrary() {
                 key={slug}
                 to={workflowPath(slug)}
                 onClick={() => trackEvent("workflow_card_clicked", { workflow: slug, location: "home" })}
-                className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-[box-shadow,border-color] hover:border-border-strong hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="group relative isolate flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-[box-shadow,border-color] hover:border-border-strong hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <VisualPanel>
+                <VisualPanel lattice>
                   <WorkflowVisual slug={slug} visual={item.visual} className="h-[17.5rem]" />
                 </VisualPanel>
                 <div className="flex flex-1 flex-col p-5">
@@ -250,7 +251,7 @@ function TradeFlowOntology({ active, onSelect }: { active: number; onSelect: (in
   );
 }
 
-type CardCopy = { label?: string; verb?: string; title: string; copy: string };
+type CardCopy = { label?: string; verb?: string; title: string; copy?: string };
 
 type PilotWidgetCopy = Record<"pick" | "reads" | "drafts" | "writes" | "afterApproval" | "reviewed" | "live" | "before" | "pilot" | "expand", string>;
 
@@ -353,15 +354,14 @@ function PilotStep({ step, index, widget }: { step: CardCopy; index: number; wid
       <span className={cn("relative z-10 inline-flex size-8 items-center justify-center rounded-lg border text-[12.5px] font-medium tabular-nums transition-colors duration-500", inView ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background text-primary-text")} style={{ transitionDelay: `${index * 250}ms` }}>
         0{index + 1}
       </span>
-      <div className="mt-4 flex flex-1 flex-col rounded-2xl border border-border bg-card p-5 shadow-sm">
+      <BlueLattice edge="bottom" className="mt-4 flex flex-1 flex-col rounded-2xl border border-border bg-card p-5 shadow-sm">
         <h3 className="text-xl font-semibold">{step.title}</h3>
-        <p className="mt-2 text-sm leading-6 text-muted-foreground">{step.copy}</p>
-        <div className="mt-auto pt-5">
+                <div className="mt-auto pt-5">
           <div className="rounded-xl border border-border bg-background p-3.5">
             <PilotWidget step={index} copy={widget} on={inView} />
           </div>
         </div>
-      </div>
+      </BlueLattice>
     </li>
   );
 }
@@ -374,8 +374,8 @@ function PilotSteps() {
   return (
     <section className="home-pilot border-b border-border" aria-labelledby="home-pilot-title">
       <div className="container-page py-16 sm:py-24">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <h2 id="home-pilot-title" className="home-section-title max-w-3xl">{t("home.pilot.title")}</h2>
+        <div className="flex flex-col gap-6">
+          <h2 id="home-pilot-title" className="home-section-title !max-w-none">{t("home.pilot.title")}</h2>
           <div className="flex flex-wrap items-center gap-3">
             <DiscussButton location="pilot" />
             <Button asChild variant="outline" size="lg" className="home-secondary-action">
@@ -466,11 +466,11 @@ export default function Index() {
       <main className="home-minimal overflow-hidden">
         <section className="home-hero relative border-b border-border">
           <div className="container-page relative z-10 pt-16 sm:pt-24">
-            <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-              <h1 className="home-display" style={{ fontSize: "clamp(2.6rem, 5.6vw, 4.8rem)" }}>
+            <div className="mx-auto flex max-w-3xl flex-col items-center text-center lg:max-w-none">
+              <h1 className="home-display lg:whitespace-nowrap" style={{ fontSize: "clamp(2.6rem, 4.6vw, 4.8rem)" }}>
                 {t("home.hero.titleLead")} <em>{t("home.hero.titleEmphasis")}</em>
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">{t("home.hero.lede")}</p>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground lg:max-w-none lg:whitespace-nowrap">{t("home.hero.lede")}</p>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <DiscussButton location="hero" />
                 <Button asChild variant="outline" size="lg" className="home-secondary-action">
@@ -493,8 +493,17 @@ export default function Index() {
             <HeroJourney />
           </div>
 
-          {/* Team credentials sit between the scene and the numbers, labelled as what they
-              are; customer stories replace or join them only with permission. */}
+          <div className="container-page relative z-10 pb-12 pt-6 sm:pb-16">
+            {/* Stat cards: figures that count up over a dithered gradient. */}
+            <div className="grid gap-4 sm:grid-cols-2">
+              {scale.map(({ value, label, note }, index) => (
+                <StatCard key={label} label={label} value={value} note={note} />
+              ))}
+            </div>
+          </div>
+
+          {/* Team credentials follow the numbers, labelled as what they are; customer stories
+              replace or join them only with permission. */}
           <div className="container-page relative z-10">
             <div className="founder-company-row" aria-label={t("home.team.companiesAria")}>
               <span className="founder-company-label">{t("home.evidence.label")}</span>
@@ -509,19 +518,6 @@ export default function Index() {
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="container-page relative z-10 pb-12 pt-6 sm:pb-16">
-            {/* Static stat strip: label, big light number, one line of context. Dashed hairlines, no motion. */}
-            <dl className="grid border-y border-dashed border-border sm:grid-cols-2">
-              {scale.map(({ value, label, note }) => (
-                <div key={label} className="relative flex flex-col border-dashed border-border px-6 py-8 max-sm:[&:not(:first-child)]:border-t sm:[&:nth-child(even)]:border-l md:px-8">
-                  <dt className="text-sm text-muted-foreground">{label}</dt>
-                  <dd className="mt-1 text-5xl font-bold tracking-tight tabular-nums sm:text-6xl"><CountUp value={value} /></dd>
-                  <dd className="mt-2 text-sm text-muted-foreground">{note}</dd>
-                </div>
-              ))}
-            </dl>
           </div>
         </section>
 

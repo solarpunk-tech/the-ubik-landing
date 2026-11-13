@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { SquareLoader } from "@/components/landing/SquareLoader";
+import { DotLoader } from "@/components/landing/DotLoader";
 import { trackEvent } from "@/lib/posthog";
 
 const Index = lazy(() => import("@/pages/Index"));
@@ -63,7 +63,7 @@ export default function App() {
       <Suspense
         fallback={
           <div className="grid min-h-dvh place-items-center bg-background text-foreground">
-            <SquareLoader size={44} label="Loading page" />
+            <DotLoader />
           </div>
         }
       >

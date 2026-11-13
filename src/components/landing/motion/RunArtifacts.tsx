@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { CheckIcon, FilePdfIcon, FileXlsIcon, PaperPlaneTiltIcon, SealCheckIcon, WarningIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 
@@ -64,37 +64,106 @@ export function BuyerEmailArtifact({ step }: { step: number }) {
   );
 }
 
-/** Warehouse: lots fill the order, warehouse by warehouse, until 12.4 MT is covered. */
+/** A tiny pack artwork: the thing each stock sheet is for. Opens in Photoshop on click. */
+function ArtworkThumb({ live, onOpen, label }: { live: boolean; onOpen: () => void; label: string }) {
+  return (
+    <button
+      type="button"
+      disabled={!live}
+      onClick={onOpen}
+      aria-label={label}
+      className={cn(
+        "relative ml-auto grid h-[22px] w-[30px] shrink-0 place-items-center overflow-hidden rounded-[3px] border border-border bg-[#f4efe4] transition-shadow duration-300",
+        live ? "cursor-pointer ring-2 ring-primary/60 hover:ring-primary" : "pointer-events-none"
+      )}
+    >
+      <span className="absolute inset-x-1 top-1 h-[3px] rounded-sm bg-[#10182b]/80" />
+      <span className="absolute inset-x-1 top-2 h-[2px] rounded-sm bg-[#10182b]/40" />
+      <span className="absolute bottom-1 right-1 h-[5px] w-[9px] bg-[#10182b]/70" />
+    </button>
+  );
+}
+
+type SheetRow = readonly [string, string, string, string];
+
+function Sheet({ title, rows, style, hit, live, onOpen, children }: { title: string; rows: readonly SheetRow[]; style: React.CSSProperties; hit: boolean; live: boolean; onOpen: () => void; children?: ReactNode }) {
+  return (
+    <div className="absolute overflow-hidden rounded-lg border border-border bg-card text-card-foreground shadow-lg transition-all duration-700 ease-out" style={style}>
+      <div className="flex items-center gap-2 border-b border-border bg-background px-2.5 py-1.5 text-[11.5px]">
+        <FileXlsIcon className="size-3.5 shrink-0 text-ok-text" />
+        <span className="truncate text-muted-foreground">{title}</span>
+        <ArtworkThumb live={live} onOpen={onOpen} label={`Open the artwork for ${title} in Photoshop`} />
+      </div>
+      <div className="px-2.5 py-1.5 text-[12px] tabular-nums">
+        <div className="grid grid-cols-[1fr_1.3fr_0.6fr_0.9fr] gap-2 pb-1 text-[11px] text-muted-foreground">
+          <span>Lot</span><span>Warehouse</span><span>MT</span><span>Expiry</span>
+        </div>
+        {rows.map((row) => (
+          <div key={row[0]} className={cn("grid grid-cols-[1fr_1.3fr_0.6fr_0.9fr] gap-2 rounded-sm border-t border-border py-1 transition-colors duration-500", hit && "bg-primary/10")}>
+            <span className="font-medium">{row[0]}</span><span>{row[1]}</span><span>{row[2]}</span><span className="text-muted-foreground">{row[3]}</span>
+          </div>
+        ))}
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Warehouse and inventory: one allocation sheet, then the two warehouse stock
+ * sheets fan out behind it so the lots can be compared row by row. Each sheet
+ * carries its pack artwork; opening one lands in the Photoshop view.
+ */
 export function AllocationArtifact({ step }: { step: number }) {
-  const lots = [
+  const [psd, setPsd] = useState(false);
+  const fan = step >= 3;
+  const hit = step >= 4;
+  const live = step >= 4;
+  const stockA: SheetRow[] = [["LOT-87", "Cold store A", "4.0", "Mar 2027"], ["LOT-91", "Cold store A", "3.2", "Apr 2027"]];
+  const stockB: SheetRow[] = [["LOT-93", "Cold store B", "2.8", "Apr 2027"], ["LOT-96", "Cold store B", "2.4", "May 2027"]];
+  const plan: SheetRow[] = [
     ["LOT-87", "Cold store A", "4.0", "Mar 2027"],
     ["LOT-91", "Cold store A", "3.2", "Apr 2027"],
     ["LOT-93", "Cold store B", "2.8", "Apr 2027"],
     ["LOT-96", "Cold store B", "2.4", "May 2027"]
   ];
-  const allocated = lots.slice(0, Math.max(0, step - 1)).reduce((sum, lot) => sum + Number(lot[2]), 0);
+  const shown = plan.slice(0, Math.max(1, Math.min(4, step)));
+  const allocated = step >= 5 ? 12.4 : shown.slice(0, Math.max(0, step - 1)).reduce((sum, row) => sum + Number(row[2]), 0);
+  if (psd) {
+    return (
+      <div className="relative h-full min-h-[21rem]">
+        <PhotoshopArtifact step={4} />
+        <button type="button" onClick={() => setPsd(false)} className="absolute right-3 top-2 rounded-full bg-white/10 px-2.5 py-1 text-[11.5px] text-white hover:bg-white/20">
+          Back to sheets
+        </button>
+      </div>
+    );
+  }
+  const hidden: React.CSSProperties = { left: "8%", top: "0.5rem", width: "84%", opacity: 0 };
   return (
-    <Window title="Allocation plan · SO-29481.xlsx" badge={<FileXlsIcon className="size-4 text-ok-text" />}>
-      <div className="p-4 text-[13px]">
-        <div className="grid grid-cols-[1fr_1.3fr_0.7fr_0.9fr] gap-2 border-b border-border pb-2 text-[12px] text-muted-foreground">
-          <span>Lot</span><span>Warehouse</span><span>MT</span><span>Expiry</span>
-        </div>
-        {lots.map((lot, index) => (
-          <div key={lot[0]} className={cn("grid grid-cols-[1fr_1.3fr_0.7fr_0.9fr] gap-2 border-b border-border py-2 tabular-nums", show(step >= index + 2))}>
-            <span className="font-medium">{lot[0]}</span><span>{lot[1]}</span><span>{lot[2]}</span><span className="text-muted-foreground">{lot[3]}</span>
-          </div>
-        ))}
-        <div className="mt-4">
-          <div className="flex justify-between text-[12.5px]">
+    <div className="relative h-full min-h-[21rem] overflow-hidden rounded-xl border border-border bg-muted/40">
+      <Sheet title="Cold store A · stock.xlsx" rows={stockA} hit={hit} live={live} onOpen={() => setPsd(true)} style={fan ? { left: "2%", top: "0.75rem", width: "70%", opacity: 1, zIndex: 1 } : hidden} />
+      <Sheet title="Cold store B · stock.xlsx" rows={stockB} hit={hit} live={live} onOpen={() => setPsd(true)} style={fan ? { left: "14%", top: "4.75rem", width: "70%", opacity: 1, zIndex: 2 } : hidden} />
+      <Sheet
+        title="Allocation plan · SO-29481.xlsx"
+        rows={shown}
+        hit={hit}
+        live={live}
+        onOpen={() => setPsd(true)}
+        style={fan ? { left: "28%", top: "8.75rem", width: "70%", zIndex: 3 } : { left: "4%", top: "0.75rem", width: "92%", zIndex: 3 }}
+      >
+        <div className="mt-2">
+          <div className="flex justify-between text-[11.5px]">
             <span className="text-muted-foreground">Allocated</span>
-            <span className="font-semibold tabular-nums">{allocated.toFixed(1)} / 12.4 MT</span>
+            <span className="font-semibold">{allocated.toFixed(1)} / 12.4 MT</span>
           </div>
-          <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-muted">
+          <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-muted">
             <div className="h-full rounded-full bg-chart-1 transition-[width] duration-700" style={{ width: `${(allocated / 12.4) * 100}%` }} />
           </div>
         </div>
-      </div>
-    </Window>
+      </Sheet>
+      {live ? <p className="absolute bottom-2 left-3 z-10 text-[11.5px] text-muted-foreground">Open an artwork to edit it in Photoshop</p> : null}
+    </div>
   );
 }
 

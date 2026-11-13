@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MatrixField } from "@/components/landing/MatrixField";
 import { PackingLineFigure } from "@/components/landing/iso-scenes/scenes";
-import { MeetingsLiveStrip } from "@/components/landing/MeetingsLiveStrip";
+import { StripHero } from "@/components/landing/download/StripHero";
 import { PageShell } from "@/components/landing/PageShell";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Seo } from "@/components/seo/Seo";
@@ -57,9 +57,9 @@ const desktopApps = [
   { label: "Windows", href: "/download?os=windows", icon: WindowsLogoIcon }
 ];
 
-const mobileApps = [
+const mobileApps: { label: string; icon: typeof AppStoreLogoIcon; href?: string }[] = [
   { label: "iOS", icon: AppStoreLogoIcon },
-  { label: "Android", icon: GooglePlayLogoIcon }
+  { label: "Android", icon: GooglePlayLogoIcon, href: "https://play.google.com/store/apps/details?id=technology.solarpunk.ubik.capture" }
 ];
 
 const privacyLabels = [
@@ -93,7 +93,7 @@ export default function Pricing() {
   const list = <T,>(key: string) => t(key, { returnObjects: true }) as T;
   // One offer: the first workflow free for a month, priced per workflow after.
   const enterpriseFeatures: ReactNode[] = [
-    ...list<string[]>("pricing.enterprise.features").filter((feature) => !feature.startsWith("Everything in")),
+    ...list<string[]>("pricing.start.features"),
     <ConnectorsFeature key="connectors" label={t("pricing.teammate.connectors")} more={t("pricing.teammate.connectorsMore")} />
   ];
   const replacesRows = list<{ old: string; new: string }[]>("pricing.replaces.rows");
@@ -139,16 +139,10 @@ export default function Pricing() {
         <MatrixField variant="hero" density="medium" seed="pricing-workspace" />
         <section className="container-page section-y relative z-10">
           <div className="pricing-brand-hero mb-10">
-            <div className="max-w-4xl">
-              <Badge variant="outline" className="mb-5">
-                {t("pricing.badge")}
-              </Badge>
-              <h1 className="text-3xl font-semibold leading-tight sm:text-4xl lg:text-5xl">
+            <div>
+              <h1 className="text-3xl font-semibold leading-tight sm:text-4xl lg:whitespace-nowrap lg:text-5xl">
                 {t("pricing.titleLead")} <span className="text-primary">{t("pricing.titleEmphasis")}</span>
               </h1>
-              <p className="mt-5 max-w-3xl text-lg leading-8 text-primary-foreground">
-                {t("pricing.lede")}
-              </p>
             </div>
           </div>
 
@@ -158,8 +152,8 @@ export default function Pricing() {
               <CardHeader className="relative gap-6 p-6 sm:p-8">
                 <CardTitle className="text-3xl">{t("pricing.start.name")}</CardTitle>
                 <div>
-                  <p className="text-5xl font-semibold">{t("pricing.start.price")}</p>
-                  <p className="mt-5 max-w-xl text-muted-foreground">
+                  <p className="text-5xl font-semibold text-primary-text">{t("pricing.start.price")}</p>
+                  <p className="mt-5 max-w-xl text-muted-foreground lg:max-w-none lg:whitespace-nowrap">
                     {t("pricing.start.summary")}
                   </p>
                 </div>
@@ -207,7 +201,7 @@ export default function Pricing() {
           </section>
 
           <section className="mt-16 grid gap-px overflow-hidden rounded-xl border border-border bg-border lg:grid-cols-[1.1fr_0.9fr]" aria-labelledby="pricing-apps-title">
-            <MeetingsLiveStrip className="py-10" />
+            <StripHero className="min-h-[16rem] h-full" />
             <div className="grid content-center gap-6 bg-card p-6 sm:p-8">
               <h2 id="pricing-apps-title" className="text-2xl font-semibold">{t("pricing.apps.title")}</h2>
               <div className="grid grid-cols-2 gap-2">
@@ -220,13 +214,23 @@ export default function Pricing() {
                     </Link>
                   </Button>
                 ))}
-                {mobileApps.map(({ label, icon: Icon }) => (
-                  <Button key={label} variant="outline" size="lg" disabled aria-disabled="true">
-                    <Icon weight="fill" data-icon="inline-start" aria-hidden />
-                    {label}
-                    <span className="tabular-nums text-[0.6rem]">{t("pricing.apps.soon")}</span>
-                  </Button>
-                ))}
+                {mobileApps.map(({ label, icon: Icon, href }) =>
+                  href ? (
+                    <Button key={label} asChild variant="outline" size="lg">
+                      <a href={href} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("download_clicked", { os: "android", build: "google_play", location: "pricing" })}>
+                        <Icon weight="fill" data-icon="inline-start" aria-hidden />
+                        {label}
+                        <DownloadSimpleIcon data-icon="inline-end" aria-hidden />
+                      </a>
+                    </Button>
+                  ) : (
+                    <Button key={label} variant="outline" size="lg" disabled aria-disabled="true">
+                      <Icon weight="fill" data-icon="inline-start" aria-hidden />
+                      {label}
+                      <span className="tabular-nums text-[0.6rem]">{t("pricing.apps.soon")}</span>
+                    </Button>
+                  )
+                )}
               </div>
               <ul className="grid grid-cols-2 gap-x-4 gap-y-3 text-sm text-muted-foreground">
                 {privacyLabels.map(({ label, icon: Icon }, index) => (

@@ -165,8 +165,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
                 <SocBadge label={t("footer.socBadge")} className="h-14 w-12" />
               </Link>
             </div>
-            <p className="mt-5 max-w-md text-[15px] leading-7 text-muted-foreground">{t("footer.tagline")}</p>
-            <div className="mt-4 flex flex-wrap items-center gap-3 text-[13px] text-muted-foreground">
+            <div className="mt-3 flex flex-wrap items-center gap-3 text-[13px] text-muted-foreground">
               <span className="inline-flex items-center gap-2">
                 {t("footer.backedBy")}
                 <a href="https://www.antler.co" target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 font-semibold text-foreground hover:text-primary-text">

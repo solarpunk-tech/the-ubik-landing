@@ -56,7 +56,7 @@ function SupplierUpdates({ v, className }: { v: SupplierUpdatesVisual; className
   const { ref, step } = useStepper(v.changes.length + 1);
   return (
     <Frame innerRef={ref} className={className}>
-      <div className="flex items-start gap-2.5 rounded-md border border-border bg-background p-2.5">
+      <div className="flex items-start gap-2.5 rounded-md border border-border p-2.5">
         <EnvelopeSimpleIcon className="mt-0.5 size-4 shrink-0 text-primary-text" />
         <div className="min-w-0 flex-1">
           <p className="truncate font-medium">{v.subject}</p>
@@ -72,11 +72,11 @@ function SupplierUpdates({ v, className }: { v: SupplierUpdatesVisual; className
           <LiveSquare className="size-1.5" />
           {v.repliesLabel}
         </span>
-        <span className={cn("rounded-full bg-ok/15 px-2 py-0.5 text-[12px] font-medium text-ok-text", shown(step >= 1))}>{v.status}</span>
+        <span className={cn("inline-flex items-center gap-1.5 text-[12px] font-medium text-ok-text", shown(step >= 1))}><span className="size-1.5 rounded-full bg-ok" />{v.status}</span>
       </div>
       <ul className="grid gap-1.5">
         {v.changes.map((change, index) => (
-          <li key={change.po} className={cn("flex items-center gap-2 rounded-md bg-accent/60 px-2 py-1.5 tabular-nums", shown(step > index + 0))}>
+          <li key={change.po} className={cn("flex items-center gap-2 border-b border-border px-0.5 py-1.5 tabular-nums", shown(step > index + 0))}>
             <span className="shrink-0 font-medium">{change.po}</span>
             <span className="shrink-0 text-muted-foreground">{change.field}</span>
             <span className="ml-auto flex min-w-0 items-center gap-1.5">
@@ -105,8 +105,8 @@ function DocumentCheck({ v, className }: { v: DocumentCheckVisual; className?: s
   return (
     <Frame innerRef={ref} className={className}>
       <div className="flex items-center justify-between gap-2">
-        <span className="rounded-full border border-border px-2 py-0.5 font-medium tabular-nums">{v.po}</span>
-        <span className="rounded-full bg-muted px-2 py-0.5 text-[12px] text-muted-foreground">{v.stage}</span>
+        <span className="font-medium tabular-nums">{v.po}</span>
+        <span className="inline-flex items-center gap-1.5 text-[12px] text-muted-foreground"><span className="size-1.5 rounded-full bg-support" />{v.stage}</span>
       </div>
       <ul className="grid grid-cols-2 gap-x-3 gap-y-1">
         {v.docs.map((doc, index) => (
@@ -118,7 +118,7 @@ function DocumentCheck({ v, className }: { v: DocumentCheckVisual; className?: s
           </li>
         ))}
       </ul>
-      <div className={cn("rounded-md border border-destructive/40 bg-destructive/5 p-2", shown(findingOn))}>
+      <div className={cn("rounded-md border border-destructive/40 p-2", shown(findingOn))}>
         <p className="flex items-center gap-1.5 font-semibold text-destructive">
           <WarningIcon weight="fill" className="size-3.5" /> {v.finding.severity}
           <span className="ml-auto font-normal text-muted-foreground">{v.finding.owner}</span>
@@ -137,11 +137,11 @@ function DocumentCheck({ v, className }: { v: DocumentCheckVisual; className?: s
 }
 
 const riskTone: Record<string, string> = {
-  Finished: "bg-ok/15 text-ok-text",
-  Safe: "bg-ok/15 text-ok-text",
-  Watch: "bg-support/25 text-support-text",
-  "At risk": "bg-destructive/10 text-destructive",
-  Critical: "bg-destructive text-destructive-foreground"
+  Finished: "text-ok-text",
+  Safe: "text-ok-text",
+  Watch: "text-support-text",
+  "At risk": "text-destructive",
+  Critical: "text-destructive"
 };
 const barTone: Record<string, string> = {
   Finished: "bg-ok",
@@ -169,13 +169,13 @@ function Planning({ v, className }: { v: PlanningVisual; className?: string }) {
                   style={{ width: filled ? `${load.progress}%` : "0%" }}
                 />
               </span>
-              <span className={cn("w-16 shrink-0 rounded-full px-1.5 py-0.5 text-center text-[11.5px] font-medium", riskTone[load.risk])}>{load.risk}</span>
+              <span className={cn("w-16 shrink-0 text-right text-[11.5px] font-medium", riskTone[load.risk])}>{load.risk}</span>
             </div>
             {load.note ? <p className={cn("truncate pl-16 text-[12px] text-muted-foreground", shown(step >= 2))}>{load.note}</p> : null}
           </li>
         ))}
       </ul>
-      <div className={cn("mt-auto flex items-center gap-2 rounded-md border border-border bg-background px-2 py-1.5", shown(step >= 2))}>
+      <div className={cn("mt-auto flex items-center gap-2 rounded-md border border-border px-2 py-1.5", shown(step >= 2))}>
         <EnvelopeSimpleIcon className="size-3.5 shrink-0 text-primary-text" />
         <span className="shrink-0 text-muted-foreground">{v.reportLabel}</span>
         <FileXlsIcon className="ml-auto size-3.5 shrink-0 text-ok-text" />
@@ -202,7 +202,7 @@ function Packaging({ v, className }: { v: PackagingVisual; className?: string })
               <span
                 className={cn(
                   "flex min-w-0 max-w-[88%] items-center gap-1.5 rounded-md px-2 py-1",
-                  ours ? "bg-primary/10" : "border border-border bg-background"
+                  ours ? "border border-primary/40" : "border border-border"
                 )}
               >
                 {!ours ? <span className="shrink-0 font-medium">{message.from}</span> : null}
@@ -224,8 +224,8 @@ function Packaging({ v, className }: { v: PackagingVisual; className?: string })
         })}
       </ol>
       <div className={cn("mt-auto flex flex-wrap items-center gap-1.5", shown(step > v.thread.length - 1))}>
-        <span className="rounded-full bg-support/25 px-2 py-0.5 text-[12px] font-medium text-support-text">{v.status}</span>
-        <span className="rounded-full border border-border px-2 py-0.5 text-[12px] font-medium">{v.chase}</span>
+        <span className="inline-flex items-center gap-1.5 text-[12px] font-medium text-support-text"><span className="size-1.5 rounded-full bg-support" />{v.status}</span>
+        <span className="text-[12px] font-medium text-muted-foreground">{v.chase}</span>
         <span className="ml-auto flex gap-0.5" title="SLA">
           {v.sla.map((level, index) => (
             <span key={level} className={cn("h-1.5 w-4 rounded-full", index <= v.slaActive ? (index === 0 ? "bg-ok" : "bg-support") : "bg-muted")} />

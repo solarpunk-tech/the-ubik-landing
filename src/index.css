@@ -185,6 +185,15 @@
   --color-ok-text: hsl(var(--ok-text));
   --color-border-strong: hsl(var(--border-strong));
   --color-primary-text: hsl(var(--primary-text));
+  --color-dither-ink: var(--dither-ink);
+  --color-dither-paper: var(--dither-paper);
+  --color-dither-blue: var(--dither-color-blue);
+  --color-dither-purple: var(--dither-color-purple);
+  --color-dither-green: var(--dither-color-green);
+  --color-dither-pink: var(--dither-color-pink);
+  --color-dither-orange: var(--dither-color-orange);
+  --color-dither-red: var(--dither-color-red);
+  --color-dither-grey: var(--dither-color-grey);
 }
 
 @layer base {
@@ -212,11 +221,37 @@
   ::selection {
     @apply bg-primary text-primary-foreground;
   }
+  :root {
+    --dither-ink: hsl(var(--primary));
+    --dither-paper: hsl(var(--background));
+    --dither-cell: 3px;
+    --dither-color-blue: oklch(0.56 0.18 248);
+    --dither-color-purple: oklch(0.53 0.22 302);
+    --dither-color-green: oklch(0.58 0.15 152);
+    --dither-color-pink: oklch(0.58 0.21 355);
+    --dither-color-orange: oklch(0.64 0.17 52);
+    --dither-color-red: oklch(0.55 0.21 27);
+    --dither-color-grey: oklch(0.55 0 0);
+    --dither-bloom: 0.6;
+  }
+  .dark {
+    --dither-ink: hsl(var(--primary));
+    --dither-paper: hsl(var(--background));
+    --dither-cell: 3px;
+    --dither-color-blue: oklch(0.72 0.14 240);
+    --dither-color-purple: oklch(0.7 0.18 304);
+    --dither-color-green: oklch(0.78 0.17 152);
+    --dither-color-pink: oklch(0.74 0.17 354);
+    --dither-color-orange: oklch(0.79 0.15 62);
+    --dither-color-red: oklch(0.68 0.2 25);
+    --dither-color-grey: oklch(0.66 0 0);
+    --dither-bloom: 1;
+  }
 }
 
 @layer utilities {
   .container-page {
-    @apply mx-auto w-full max-w-[88rem] px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-[88rem] px-4 sm:px-6 lg:px-8 2xl:max-w-[108rem] 2xl:px-10;
   }
 
   .section-y {
@@ -3685,51 +3720,6 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Square loader — the mark orbiting a hairline frame. Zero radius throughout.
-   --------------------------------------------------------------------------- */
-.square-loader {
-  display: inline-grid;
-  place-items: center;
-  width: var(--sq-size, 40px);
-  height: var(--sq-size, 40px);
-}
-
-.square-loader-frame {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 1px solid hsl(var(--foreground) / 0.22);
-}
-
-.square-loader-frame i {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 34%;
-  height: 34%;
-  background: hsl(var(--primary));
-  animation: square-loader-orbit 1.8s cubic-bezier(0.7, 0, 0.3, 1) infinite;
-}
-
-/* Corner to corner, pausing on each — reads as deliberate steps, not a spin. */
-@keyframes square-loader-orbit {
-  0%,   6%  { transform: translate(0, 0); }
-  25%,  31% { transform: translate(194%, 0); }
-  50%,  56% { transform: translate(194%, 194%); }
-  75%,  81% { transform: translate(0, 194%); }
-  100%      { transform: translate(0, 0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .square-loader-frame i { animation: square-loader-pulse 1.6s ease-in-out infinite; }
-  @keyframes square-loader-pulse {
-    0%, 100% { opacity: 0.35; }
-    50%      { opacity: 1; }
-  }
-}
-
-/* ---------------------------------------------------------------------------
    Page particle field. One fixed, viewport-sized canvas that owns every square
    on the page: it forms the hero illustration, falls the length of the document
    as you scroll, and settles into a drift at the footer.
@@ -3793,7 +3783,6 @@
   align-items: center;
   gap: 1.5rem 2.5rem;
   padding-top: 2.25rem;
-  border-top: 1px solid hsl(var(--foreground) / 0.22);
 }
 
 .closing-cta-title {
@@ -4786,7 +4775,6 @@
 .dark .trade-note-illustration-frame {
   color: hsl(var(--primary-foreground) / 0.78);
 }
-
 
 /* ---------------------------------------------------------------------------
    Dark mode: blue as TEXT.

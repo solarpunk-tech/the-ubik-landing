@@ -1,0 +1,168 @@
+/* Desktop tour on /download. Everything moves with transform and opacity only,
+   and everything is still under prefers-reduced-motion: rows sit at their last
+   frame, the progress track is gone and nothing advances on its own. */
+
+.dt-chapter-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.dt-chapter[data-active="true"] .dt-chapter-body {
+  grid-template-rows: 1fr;
+}
+
+.dt-chapter-body > div {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.dt-progress {
+  display: block;
+  height: 2px;
+  overflow: hidden;
+  border-radius: 1px;
+  background: hsl(var(--border));
+}
+
+.dt-progress > i {
+  display: block;
+  height: 100%;
+  background: hsl(var(--primary));
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: dt-fill var(--dt-duration, 7000ms) linear forwards;
+}
+
+.dt-tour[data-paused="true"] .dt-progress > i {
+  animation-play-state: paused;
+}
+
+@keyframes dt-fill {
+  to { transform: scaleX(1); }
+}
+
+/* The desk the shot sits on. */
+.dt-desk {
+  background-color: hsl(var(--secondary));
+  background-image:
+    linear-gradient(hsl(var(--border) / 0.45) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border) / 0.45) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.dt-shot-enter {
+  animation: dt-fade 280ms ease-out both;
+}
+
+@keyframes dt-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* A row arriving: staggered by --i on the element. */
+.dt-rise {
+  opacity: 0;
+  transform: translateY(6px);
+  animation: dt-rise 420ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 260ms + 180ms);
+}
+
+@keyframes dt-rise {
+  to { opacity: 1; transform: none; }
+}
+
+/* A dictated word arriving. */
+.dt-word {
+  opacity: 0;
+  animation: dt-word 160ms ease-out forwards;
+  animation-delay: calc(var(--i, 0) * 120ms + 500ms);
+}
+
+@keyframes dt-word {
+  to { opacity: 1; }
+}
+
+/* The strip's live bars while it listens or records. */
+.dt-bars {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 12px;
+}
+
+.dt-bars > i {
+  display: block;
+  width: 2px;
+  height: 100%;
+  border-radius: 1px;
+  background: hsl(var(--primary));
+  transform-origin: center;
+  animation: dt-bar 900ms ease-in-out infinite alternate;
+}
+
+.dt-bars > i:nth-child(2) { animation-delay: -300ms; }
+.dt-bars > i:nth-child(3) { animation-delay: -600ms; }
+.dt-bars > i:nth-child(4) { animation-delay: -150ms; }
+
+@keyframes dt-bar {
+  from { transform: scaleY(0.3); }
+  to { transform: scaleY(1); }
+}
+
+/* A key held down for the length of a dictation. */
+.dt-key {
+  animation: dt-key 3.6s ease-in-out 300ms both;
+}
+
+@keyframes dt-key {
+  0% { transform: none; box-shadow: 0 2px 0 hsl(var(--border-strong)); }
+  8%, 88% { transform: translateY(2px); box-shadow: 0 0 0 hsl(var(--border-strong)); background: hsl(var(--accent)); }
+  100% { transform: none; box-shadow: 0 2px 0 hsl(var(--border-strong)); }
+}
+
+/* Suggested task ring that fills once it is added. */
+.dt-ring {
+  border: 1.5px dashed hsl(var(--border-strong));
+}
+
+.dt-ring[data-fill="true"] {
+  animation: dt-ring 300ms ease-out forwards;
+  animation-delay: calc(var(--i, 0) * 260ms + 900ms);
+}
+
+@keyframes dt-ring {
+  to { border-style: solid; border-color: hsl(var(--primary)); background: hsl(var(--primary)); }
+}
+
+/* Heatmap cells. */
+.dt-heat > i {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: hsl(var(--primary) / calc(var(--l, 0) * 0.22 + 0.06));
+  opacity: 0;
+  animation: dt-word 220ms ease-out forwards;
+  animation-delay: var(--d, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dt-chapter-body { transition: none; }
+  .dt-progress { display: none; }
+  .dt-shot-enter,
+  .dt-rise,
+  .dt-word,
+  .dt-key,
+  .dt-heat > i,
+  .dt-bars > i {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .dt-ring[data-fill="true"] {
+    animation: none;
+    border-style: solid;
+    border-color: hsl(var(--primary));
+    background: hsl(var(--primary));
+  }
+}

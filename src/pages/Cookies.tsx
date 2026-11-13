@@ -1,3 +1,4 @@
+import { CookieProof } from "@/components/landing/CookieProof";
 import { PageShell } from "@/components/landing/PageShell";
 import { Seo } from "@/components/seo/Seo";
 
@@ -50,6 +51,24 @@ const cookies: CookieRow[] = [
     consent: "No"
   },
   {
+    name: "Language preference cookie (theubik.com)",
+    provider: "Ubik (first-party)",
+    purpose: "Remember the language you chose. Set only when you switch language",
+    type: "Strictly necessary (preference)",
+    duration: "1 year",
+    personalData: "No",
+    consent: "No"
+  },
+  {
+    name: "ubik-theme (theubik.com, localStorage)",
+    provider: "Ubik (first-party)",
+    purpose: "Remember light or dark mode. Stays on your device",
+    type: "Strictly necessary (preference)",
+    duration: "Persistent",
+    personalData: "No",
+    consent: "No"
+  },
+  {
     name: "None on theubik.com (cookieless analytics)",
     provider: "PostHog",
     purpose: "Anonymous visit counts on the marketing site: no cookie or local storage; visitors are a daily-rotating hash computed by PostHog",
@@ -89,10 +108,29 @@ export default function Cookies() {
       <main className="container-page section-y">
         <article className="mx-auto max-w-6xl">
           <p className="text-sm font-medium text-muted-foreground">Version 1.0 — effective on publication</p>
-          <h1 className="mt-3 text-5xl font-semibold">Cookie & Tracker Inventory</h1>
+          <h1 className="mt-3 text-5xl font-semibold">We don&apos;t track you on theubik.com</h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">
-            This inventory covers the Ubik web app at app.theubik.com and the marketing site at theubik.com.
+            No tracking cookies, no advertising trackers and no session recordings. Below is what that looks like, then the full inventory for the marketing site and the Ubik app at app.theubik.com.
           </p>
+
+          <CookieProof />
+
+          <section className="mt-6 grid gap-4 sm:grid-cols-3" aria-label="What we do keep or load">
+            <div className="border bg-card p-5">
+              <p className="text-sm font-semibold">Language choice</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">A small cookie, only if you switch language. Kept for a year so the site remembers it.</p>
+            </div>
+            <div className="border bg-card p-5">
+              <p className="text-sm font-semibold">Light or dark</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">Your theme choice, kept in your browser&apos;s local storage. It never leaves your device.</p>
+            </div>
+            <div className="border bg-card p-5">
+              <p className="text-sm font-semibold">Company logos</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">Many logos load from Google&apos;s favicon service, which receives your IP address and the page you are on.</p>
+            </div>
+          </section>
+
+          <h2 className="mt-14 text-3xl font-semibold">Full inventory</h2>
 
           <section className="mt-10 overflow-hidden border">
             <div className="grid gap-px bg-border">

@@ -21,8 +21,7 @@ const ZEROS = [
 
 /**
  * What a visit to theubik.com tells us, drawn as the data card it would fill:
- * every personal field is a placeholder that stays empty, and only the counted
- * pages are real. Mirrors the settings in src/lib/posthog.ts.
+ * every personal field is a placeholder that stays empty. Mirrors the settings in src/lib/posthog.ts.
  */
 export function CookieProof() {
   return (
@@ -43,21 +42,7 @@ export function CookieProof() {
               <span className="row-start-1 text-sm font-medium text-foreground sm:row-start-auto">{row.verdict}</span>
             </li>
           ))}
-          <li className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-2 border-t pt-5 sm:grid-cols-[12rem_1fr_auto]">
-            <span className="text-sm text-muted-foreground">Which pages were opened</span>
-            <span className="col-span-2 flex flex-wrap gap-2 sm:col-span-1">
-              {["Home", "Pricing", "Download"].map((page) => (
-                <span key={page} className="border px-2 py-0.5 text-xs font-medium text-foreground">
-                  {page}
-                </span>
-              ))}
-            </span>
-            <span className="row-start-1 text-sm font-medium text-primary-text sm:row-start-auto">Counted</span>
-          </li>
         </ul>
-        <p className="mt-6 text-sm leading-6 text-muted-foreground">
-          Pages and button clicks are counted without saying who clicked. Visitors are a hash that changes every day, so a visit cannot be followed from one day to the next.
-        </p>
       </div>
 
       <div className="grid grid-cols-2 gap-4">

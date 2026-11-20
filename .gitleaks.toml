@@ -1,0 +1,23 @@
+# gitleaks configuration (F-415). Used by .github/workflows/secret-scan.yml.
+#
+# Starts from gitleaks' default rules and adds one rule plus an allowlist.
+# Every allowlist entry must say why it is not a secret. A real secret is
+# never allowlisted: rotate it and remove it instead.
+
+title = "the-ubik-landing gitleaks config"
+
+[extend]
+useDefault = true
+
+# The default azure-ad-client-secret rule only accepts [A-Za-z0-9_~.] in the
+# first three characters, so an Entra (Azure AD) client secret that starts with
+# a hyphen slips through. One such secret was committed on 15 Jan 2026 and the
+# default rules did not see it. This rule is the default one with "-" allowed
+# in that prefix.
+[[rules]]
+id = "azure-ad-client-secret-hyphen"
+description = "Azure AD (Entra) client secret, including the hyphen-prefixed form the default rule misses"
+regex = '''(?:^|[\\'"\x60\s>=:(,)])([a-zA-Z0-9_~.-]{3}\dQ~[a-zA-Z0-9_~.-]{31,34})(?:$|[\\'"\x60\s<),])'''
+secretGroup = 1
+entropy = 3
+keywords = ["q~"]

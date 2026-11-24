@@ -152,6 +152,16 @@ Set these runtime environment variables before enabling it in production:
 - `LOOPS_API_KEY`: fallback server-side Loops API key. Never expose this as a `VITE_` variable.
 - `LOOPS_NEWSLETTER_LIST_ID`: optional Loops mailing-list ID for the Trade Notes newsletter/category.
 
+The function logs one JSON line per call (`event: "newsletter.subscribe"`, `request_id`, `status`,
+`outcome`, `loops_status`, `duration_ms`; never the email address) and returns `request_id` in every
+failure body and in the `X-Request-ID` header. The id is Netlify's `x-nf-request-id` when present.
+To find a failed signup, search the function log in Netlify for the reference the visitor quotes.
+
+Site errors (O-36b): with `VITE_POSTHOG_ERRORS=on` at build time, uncaught errors and unhandled
+promise rejections go to PostHog error tracking, cookieless like the page analytics. Off when unset.
+To check a deploy, open any page with `?ph-test-error`: it throws one test error about 1.5 s after
+load, which should appear in PostHog → Error tracking with that page's URL.
+
 ## Project Structure
 
 ```text

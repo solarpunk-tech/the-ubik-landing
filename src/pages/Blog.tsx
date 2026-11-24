@@ -31,7 +31,7 @@ import {
   type BlogPost
 } from "@/lib/blog";
 import { sourceNotes } from "@/lib/blog/origin-roulette";
-import { trackEvent } from "@/lib/posthog";
+import { captureError, trackEvent } from "@/lib/posthog";
 
 type ArticleShellProps = {
   post: BlogPost;
@@ -119,7 +119,18 @@ function TradeNotesNewsletter({ source }: { source: string }) {
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(typeof data.message === "string" ? data.message : "Could not subscribe this email right now.");
+        // The function returns its request id on failure; show it so a reader
+        // who writes in can quote it, and send it with the error report.
+        const requestId = typeof data.request_id === "string" ? data.request_id : "";
+        const base = typeof data.message === "string" ? data.message : "Could not subscribe this email right now.";
+        if (response.status >= 500) {
+          captureError(new Error(`newsletter-subscribe ${response.status}`), {
+            request_id: requestId || undefined,
+            status: response.status,
+            source,
+          });
+        }
+        throw new Error(requestId ? `${base} (reference ${requestId})` : base);
       }
 
       setStatus("success");

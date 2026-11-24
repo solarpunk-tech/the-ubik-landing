@@ -49,12 +49,14 @@ const sections: Section[] = [
     paragraphs: [
       "Account and contact data: name, work email, organisation, role, account identifiers.",
       "Authentication data: identity from Google Workspace or Microsoft OAuth sign-in. We do not store your identity provider password.",
-      "Billing/payment metadata: plan, transaction references and payer details handled by our payment processor. We do not store card numbers.",
+      "Billing/payment metadata: plan, invoices and payment references. We do not store card numbers.",
       "Support communications: messages you send us.",
       "Meeting recordings and transcripts: when you use Ubik's meeting capture, our desktop application records meeting audio and/or video via our recording subprocessor, which transcribes the meeting. Recordings and transcripts are streamed to our backend, stored, and processed by AI models to produce summaries, action items and operational insight.",
       "Ingested customer content: where a customer connects integrations, we ingest content from Google Workspace (Gmail/Drive), Slack, and Zoho ERP - for example purchase orders, invoices, contracts, inventory and CRM data, and the personal data contained within them. Ubik acts as a processor for this content.",
-      "Data collected automatically: product/usage analytics via PostHog, application/session data necessary to operate the service, and device/security data for managed workforce devices.",
-      "LLM prompts and outputs: to deliver AI features, customer content is sent as prompts to large language models and the outputs are returned and stored."
+      "Data collected automatically: product/usage analytics via PostHog, error reports from our website, web application and servers, crash reports from our desktop application, application/session data necessary to operate the service, and device/security data for managed workforce devices. Error and crash reports describe the fault (the page or screen, the error, the application version and a reference id); they are sent to PostHog and are not used to identify you beyond the account they belong to.",
+      "Voice dictation: when you use the microphone to dictate a message, the audio clip is sent to OpenAI for speech-to-text and the text is returned to you. We do not keep the audio clip.",
+      "LLM prompts and outputs: to deliver AI features, customer content is sent as prompts to large language models and the outputs are returned and stored.",
+      "Record of AI calls: for every customer organisation, we keep a record of each call our service makes to an AI model: the prompt, the response, the model used, the time taken, the cost and the outcome. The prompt and response are encrypted with keys managed in Google Cloud Key Management Service and are deleted after 90 days, or sooner where a customer has agreed a shorter period. Solarpunk staff can read them to investigate errors, quality and cost, and every such view is recorded in an audit log. The call details without the prompt or response (model, token counts, cost, timing and status) are kept for up to 400 days. Prompts and responses from customer organisations are not sent to our analytics provider; it receives only the call details."
     ]
   },
   {
@@ -102,7 +104,7 @@ const sections: Section[] = [
     paragraphs: [
       "We share personal data with vendors that help us deliver the service, with our cloud infrastructure provider, and with professional advisers or authorities where legally required. We do not sell personal data.",
       "Our current list of subprocessors is published on our subprocessor page and on our Trust Center. We notify customers of changes per our DPA: 30-day advance notice.",
-      "Primary infrastructure is Google Cloud Platform. AI processing is performed by Anthropic and OpenAI, accessed via OpenRouter, with embeddings by Voyage AI. Recording/transcription is performed by Recall.ai. See the subprocessor list for the full set."
+      "Primary infrastructure is Google Cloud Platform. AI processing is performed mainly through Amazon Web Services (Amazon Bedrock), with Anthropic and OpenAI as alternatives, and embeddings by Voyage AI. Email and calendar sync is performed by Aurinko, and recording/transcription by Recall.ai. Error reports, crash reports and analytics go to PostHog. See the subprocessor list for the full set."
     ]
   },
   {
@@ -135,8 +137,11 @@ const sections: Section[] = [
         ["Meeting recordings & transcripts", "Per customer configuration; default until a deletion request or contract end + 30 days"],
         ["Ingested customer content", "For the term of the customer agreement, then deleted/returned per DPA"],
         ["Account & billing data", "Term of agreement; billing records retained 7 years (tax/accounting)"],
+        ["AI prompts and responses (record of AI calls)", "90 days, encrypted, or shorter where agreed with the customer"],
+        ["AI call details without content (model, tokens, cost, timing, status)", "Up to 400 days"],
+        ["Access log of staff views of AI prompts and responses", "3 years"],
         ["Product analytics (PostHog)", "14 months"],
-        ["Backups", "35 days"],
+        ["Database backups", "Automated backups 7 days; on-demand backups deleted after 14 days"],
         ["Employee data", "Employment tenure + statutory minimum"]
       ]
     }
@@ -144,7 +149,7 @@ const sections: Section[] = [
   {
     title: "11. Cookies and analytics",
     paragraphs: [
-      "We use a small number of cookies and similar technologies. Strictly-necessary cookies for authentication/session and UI state are always set. Analytics are provided by PostHog, which we operate as controller, in three tiers: server-side service telemetry linked to your account (nothing stored on your device); cookieless counts on theubik.com and in the app when you have not accepted analytics; and, only if you accept, identified product analytics and masked session replays in the app. IP addresses are not stored. See our Cookie & Tracker Inventory for details.",
+      "We use a small number of cookies and similar technologies. Strictly-necessary cookies for authentication/session and UI state are always set. Analytics are provided by PostHog, which we operate as controller, in three tiers: server-side service telemetry linked to your account (nothing stored on your device); cookieless counts on theubik.com and in the app when you have not accepted analytics; and, only if you accept, identified product analytics and masked session replays in the app. IP addresses are not stored. Errors on theubik.com are reported to PostHog the same cookieless way, with the page and the error but nothing that identifies you. See our Cookie & Tracker Inventory for details.",
       "See our Cookie & Tracker Inventory for the full list and our handling of consent and the Global Privacy Control (GPC) signal."
     ]
   },
@@ -222,7 +227,7 @@ export default function Privacy() {
       />
       <main className="container-page section-y">
         <article className="mx-auto max-w-4xl">
-          <p className="text-sm font-medium text-muted-foreground">Version 1.0 — effective on publication</p>
+          <p className="text-sm font-medium text-muted-foreground">Version 1.1 — last updated 24 November 2026</p>
           <h1 className="mt-3 text-5xl font-semibold">Privacy Notice</h1>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
             This notice explains how Ubik handles personal data across our website, app, desktop product, and customer workflows.
